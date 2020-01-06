@@ -10,10 +10,6 @@ script for you and provides a thin loading wraper around Stripe.js.
 
 ## Basic Usage
 
-`Stripe` cannot be imported directly because the injected Stripe.js script will
-load asynchronously. Use `loadStripe`, which will resolve once the Stripe.js
-script is loaded.
-
 ```js
 import {loadStripe} from '@stripe/stripe-js';
 
