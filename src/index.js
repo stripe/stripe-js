@@ -46,6 +46,4 @@ const stripePromise = new Promise((resolve, reject) => {
   });
 });
 
-const loadStripe = () => stripePromise;
-
-export default loadStripe;
+export const loadStripe = () => stripePromise;

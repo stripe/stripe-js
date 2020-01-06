@@ -1,4 +1,4 @@
-import loadStripe from '../../../src';
+import {loadStripe} from '../../../src';
 
 (async () => {
   // setup DOM
