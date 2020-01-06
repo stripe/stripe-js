@@ -5,8 +5,8 @@ Import and use [Stripe.js](https://stripe.com/docs/stripe-js) as an ES module.
 [![npm version](https://img.shields.io/npm/v/@stripe/stripe-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/stripe-js)
 
 Stripe.js cannot be bundled with your code; it must be served from
-`https://js.stripe.com/v3`. This module injects the script for you and provides
-a thin loading wraper around Stripe.js.
+**https//js</span>.<span>stripe</span>.<span>com/v3**. This module injects the
+script for you and provides a thin loading wraper around Stripe.js.
 
 ## Basic Usage
 
