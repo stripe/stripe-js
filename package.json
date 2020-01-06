@@ -1,0 +1,49 @@
+{
+  "name": "@stripe/stripe-js",
+  "version": "1.0.0",
+  "description": "Stripe.js loading utility",
+  "main": "dist/stripe.js",
+  "module": "dist/stripe.esm.js",
+  "jsnext:main": "dist/stripe.esm.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src",
+    "build": "yarn lint && yarn rollup -c",
+    "clean": "rimraf dist",
+    "prettier": "prettier './**/*.js' './**/*.css' './**/*.md' --write",
+    "prettier-list-different": "prettier './**/*.js' './**/*.css' './**/*.md' --list-different",
+    "prepublish": "yarn run clean && yarn run build"
+  },
+  "keywords": [
+    "Stripe",
+    "Stripe.js",
+    "Elements"
+  ],
+  "author": "Stripe (https://www.stripe.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stripe/stripe-js.git"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "eslint": "6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.8.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.6.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^2.6.2",
+    "rollup": "^1.27.0",
+    "rollup-plugin-babel": "^4.3.3"
+  }
+}

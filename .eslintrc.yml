@@ -1,0 +1,25 @@
+---
+extends:
+  - airbnb-base
+  # overwrite any rules that may conflict with prettier
+  - prettier
+  - prettier/standard
+parser: 'babel-eslint'
+plugins:
+  - jest
+env:
+  jest/globals: true
+  browser: true
+rules:
+  no-console: 0
+  func-style: 2
+  consistent-return: 2
+  prefer-arrow-callback:
+    - 2
+    - allowNamedFunctions: false
+      allowUnboundThis: false
+  no-unused-vars:
+    - 2
+    - ignoreRestSiblings: true
+  jest/no-disabled-tests: 2
+  jest/no-focused-tests: 2
