@@ -46,4 +46,5 @@ const stripePromise = new Promise((resolve, reject) => {
   });
 });
 
-export const loadStripe = () => stripePromise;
+export const loadStripe = (...args) =>
+  stripePromise.then((Stripe) => Stripe(...args));

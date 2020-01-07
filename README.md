@@ -13,8 +13,7 @@ script for you and provides a thin loading wraper around Stripe.js.
 ```js
 import {loadStripe} from '@stripe/stripe-js';
 
-const Stripe = await loadStripe();
-const stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 ```
 
 We‘ve placed a random API key in the code. Replace it with your
