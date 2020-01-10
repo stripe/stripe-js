@@ -86,7 +86,7 @@ import '@stripe/stripe-js';
 ### Manually include the script tag
 
 Manually add the Stripe.js script tag to the `<head>` of each page on your site.
-If you use `loadStripe`, it will use this script tag rather tha injecting a new 
+If you use `loadStripe`, it will use this script tag rather tha injecting a new
 one.
 
 ```html
