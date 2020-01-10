@@ -21,7 +21,7 @@
   ],
   "author": "Stripe (https://www.stripe.com)",
   "license": "MIT",
-  "hompeage": "https://stripe.com/docs/js",
+  "homepage": "https://stripe.com/docs/js",
   "files": [
     "dist",
     "src"

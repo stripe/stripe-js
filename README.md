@@ -1,7 +1,6 @@
 # ES Module for Stripe.js
 
 Import and use [Stripe.js](https://stripe.com/docs/stripe-js) as an ES module.
-[![build status](https://img.shields.io/travis/stripe/stripe-js/master.svg?style=flat-square)](https://travis-ci.org/stripe/stripe-js)
 [![npm version](https://img.shields.io/npm/v/@stripe/stripe-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/stripe-js)
 
 Stripe.js cannot be bundled with your code; it must be served from
