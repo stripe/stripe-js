@@ -9,7 +9,7 @@ Stripe.js cannot be bundled with your code; it must be served from
 global `Stripe` function provided by the Stripe.js script. If needed, it will
 inject the script for you and provide a loading wrapper.
 
-## Documentation
+## Usage
 
 ### `Stripe()`
 
@@ -36,6 +36,8 @@ We‘ve placed a random API key in the code. Replace it with your
 [actual publishable API keys](https://dashboard.stripe.com/account/apikeys) to
 test this code through your Stripe account.
 
+<br />
+
 ### `loadStripe()`
 
 Use this function if you do not want to mess around with adding `<script>` tags,
@@ -55,6 +57,8 @@ const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 We‘ve placed a random API key in the code. Replace it with your
 [actual publishable API keys](https://dashboard.stripe.com/account/apikeys) to
 test this code through your Stripe account.
+
+<br />
 
 ## Ensuring Stripe.js is available everywhere
 
@@ -89,6 +93,8 @@ one.
 <!-- Somewhere in your site's <head> -->
 <script src="https://js.stripe.com/v3" async></script>
 ```
+
+<br />
 
 ## Stripe.js Documentation
 
