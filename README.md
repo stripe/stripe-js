@@ -7,7 +7,7 @@ Import and use [Stripe.js](https://stripe.com/docs/stripe-js) as an ES module.
 Stripe.js cannot be bundled with your code; it must be served from
 **https//js</span>.<span>stripe</span>.<span>com/v3**. This module wraps the
 global `Stripe` function provided by the Stripe.js script. If needed, it will
-inject the script for you and provide a loading wraper.
+inject the script for you and provide a loading wrapper.
 
 ## Documentation
 
