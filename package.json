@@ -21,10 +21,7 @@
   ],
   "author": "Stripe (https://www.stripe.com)",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/stripe/stripe-js.git"
-  },
+  "hompeage": "https://stripe.com/docs/js",
   "files": [
     "dist",
     "src"

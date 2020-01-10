@@ -22,7 +22,7 @@ each page of your site.
 
 Then import and use Stripe.js as you would any other module. For more
 information on how to use Stripe.js, please refer to the
-[Stripe.js API reference](https://stripe.com/docs/api) or learn to
+[Stripe.js API reference](https://stripe.com/docs/js) or learn to
 [accept a payment](https://stripe.com/docs/payments/accept-a-payment) with
 Stripe.
 
@@ -44,7 +44,7 @@ Use this function if you do not want to mess around with adding `<script>` tags,
 or want to speed up the initial load time on your site. It will inject the
 Stripe.js script tag for you and wait for it to load. For more information on
 how to use Stripe.js once it loads, please refer to the
-[Stripe.js API reference](https://stripe.com/docs/api) or learn to
+[Stripe.js API reference](https://stripe.com/docs/js) or learn to
 [accept a payment](https://stripe.com/docs/payments/accept-a-payment) with
 Stripe.
 
