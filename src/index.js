@@ -51,7 +51,9 @@ const stripePromise = Promise.resolve().then(() => {
 let hasCalledLoadStripe = false;
 export const loadStripe = (...args) => {
   hasCalledLoadStripe = true;
-  return stripePromise.then((Stripe) => Stripe(...args));
+  return stripePromise.then((maybeStripe) =>
+    maybeStripe ? maybeStripe(...args) : null
+  );
 };
 
 const STRIPE_NOT_LOADED_ERROR_TEXT = `Stripe.js has not yet loaded. Instead of calling \`Stripe\` directly, try using the \`loadStripe\` utility from this package.
@@ -74,7 +76,7 @@ const hasUserIncludedScript = () =>
   document.querySelector(`script[src="${V3_URL}"]`) && !hasInjectedScript;
 
 export const Stripe = (...args) => {
-  if (window.Stripe) {
+  if (window && window.Stripe) {
     return window.Stripe(...args);
   }
 
