@@ -1,7 +1,5 @@
 const V3_URL = 'https://js.stripe.com/v3';
 
-let hasInjectedScript = false;
-
 // Execute our own script injection after a tick to give users time to
 // do their own script injection.
 const stripePromise = Promise.resolve().then(() => {
@@ -18,7 +16,6 @@ const stripePromise = Promise.resolve().then(() => {
   let script = document.querySelector(`script[src="${V3_URL}"]`);
 
   if (!script) {
-    hasInjectedScript = true;
     script = document.createElement('script');
     script.src = V3_URL;
 
@@ -48,41 +45,7 @@ const stripePromise = Promise.resolve().then(() => {
   });
 });
 
-let hasCalledLoadStripe = false;
-export const loadStripe = (...args) => {
-  hasCalledLoadStripe = true;
-  return stripePromise.then((maybeStripe) =>
+export const loadStripe = (...args) =>
+  stripePromise.then((maybeStripe) =>
     maybeStripe ? maybeStripe(...args) : null
   );
-};
-
-const STRIPE_NOT_LOADED_ERROR_TEXT = `Stripe.js has not yet loaded. Instead of calling \`Stripe\` directly, try using the \`loadStripe\` utility from this package.
-
-See https://stripe.com/docs/js/including for more information.
-`;
-
-const STRIPE_UNAVAILABLE_ERROR_TEXT = `window.Stripe is not defined. Did you include Stripe.js on your page?
-
-For compliance reasons, Stripe.js must be loaded directly from https://js.stripe.com, and cannot be included in a bundle or hosted yourself. This npm module exists as a convenience, but delegates to window.Stripe.
-
-You can load Stripe.js by using the \`loadStripe\` utility from this package, or by including the following <script> tag on your page:
-
-<script src="${V3_URL}"></script>
-
-See https://stripe.com/docs/js/including for more information.
-`;
-
-const hasUserIncludedScript = () =>
-  document.querySelector(`script[src="${V3_URL}"]`) && !hasInjectedScript;
-
-export const Stripe = (...args) => {
-  if (window && window.Stripe) {
-    return window.Stripe(...args);
-  }
-
-  if (hasCalledLoadStripe || hasUserIncludedScript()) {
-    throw new Error(STRIPE_NOT_LOADED_ERROR_TEXT);
-  }
-
-  throw new Error(STRIPE_UNAVAILABLE_ERROR_TEXT);
-};
