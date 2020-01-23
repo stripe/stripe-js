@@ -49,11 +49,12 @@ loaded on every page, not just your checkout page. This allows Stripe to detect
 anomalous behavior that may be indicative of fraud as customers browse your
 website.
 
-If you are adding the `<script>` tag manually, make sure you do so on every
-page. If you are relying on the script insertion that this module provides, and
-you utilize code splitting or only include your JavaScript app on your checkout
-page, you will need to take extra steps to ensure Stripe.js is available
-everywhere.
+By default, this module will insert a `<script>` tag that loads Stripe.js from
+`https://js.stripe.com`. This happens as a side effect immediately upon
+importing this module. If you utilize code splitting or only include your
+JavaScript app on your checkout page, the Stripe.js script will only be
+available in parts of your site and you will need to take extra steps to ensure
+Stripe.js is available everywhere.
 
 ### Import as a side effect
 
@@ -68,8 +69,8 @@ import '@stripe/stripe-js';
 ### Manually include the script tag
 
 Manually add the Stripe.js script tag to the `<head>` of each page on your site.
-If you use `loadStripe`, it will use this script tag rather than inserting a new
-one.
+If an existing script tag is already present, this module will not insert a new
+one. When you call `loadStripe`, it will use the existing script tag.
 
 ```html
 <!-- Somewhere in your site's <head> -->
