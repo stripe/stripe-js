@@ -10,39 +10,22 @@ function provided by the Stripe.js script as an ES module.
 
 [![npm version](https://img.shields.io/npm/v/@stripe/stripe-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/stripe-js)
 
+## Installation
+
+Use `npm` to install the Stripe.js module:
+
+```sh
+npm install @stripe/stripe-js
+```
+
 ## Usage
-
-### `Stripe`
-
-To use the exported `Stripe` function, first include the Stripe.js script on
-each page of your site.
-
-```html
-<script src="https://js.stripe.com/v3/"></script>
-```
-
-Then import and use Stripe.js as you would any other module.
-
-```js
-import {Stripe} from '@stripe/stripe-js';
-
-const stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
-```
-
-We’ve placed a random API key in this example. Replace it with your
-[actual publishable API keys](https://dashboard.stripe.com/account/apikeys) to
-test this code through your Stripe account.
-
-For more information on how to use Stripe.js, please refer to the
-[Stripe.js API reference](https://stripe.com/docs/js) or learn to
-[accept a payment](https://stripe.com/docs/payments/accept-a-payment) with
-Stripe.
 
 ### `loadStripe`
 
 This function returns a `Promise` that resolves with a newly created `Stripe`
 object once Stripe.js has loaded. If necessary, it will load Stripe.js for you
-by inserting the Stripe.js script tag.
+by inserting the Stripe.js script tag. If you call `loadStripe` in a server
+environment it will resolve to `null`.
 
 ```js
 import {loadStripe} from '@stripe/stripe-js';

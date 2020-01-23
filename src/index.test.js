@@ -96,46 +96,4 @@ describe('Stripe module loader', () => {
       });
     });
   });
-
-  describe('Stripe proxy', () => {
-    it('proxies to window.Stripe when present', () => {
-      const {Stripe} = require('./index');
-      window.Stripe = jest.fn((key) => ({key}));
-
-      expect(Stripe('pk_test_foo')).toEqual({key: 'pk_test_foo'});
-    });
-
-    it('throws when Stripe.js has not yet loaded from a user injected script', () => {
-      const {Stripe} = require('./index');
-      const script = document.createElement('script');
-      script.src = 'https://js.stripe.com/v3';
-      document.body.appendChild(script);
-
-      expect(() => Stripe('pk_test_foo')).toThrow(
-        'Stripe.js has not yet loaded.'
-      );
-    });
-
-    it('throws when Stripe.js has not yet loaded after calling loadStripe', () => {
-      const {loadStripe, Stripe} = require('./index');
-
-      loadStripe();
-
-      expect(() => Stripe('pk_test_foo')).toThrow(
-        'Stripe.js has not yet loaded.'
-      );
-    });
-
-    it('throws when Stripe.js has not been included', () => {
-      const {Stripe} = require('./index');
-
-      return Promise.resolve(() => {
-        // Wait for next tick to validate this error is thrown
-        // even after our own script has been added.
-        expect(() => Stripe('pk_test_foo')).toThrow(
-          'window.Stripe.js is not defined.'
-        );
-      });
-    });
-  });
 });
