@@ -53,8 +53,8 @@ By default, this module will insert a `<script>` tag that loads Stripe.js from
 `https://js.stripe.com`. This happens as a side effect immediately upon
 importing this module. If you utilize code splitting or only include your
 JavaScript app on your checkout page, the Stripe.js script will only be
-available in parts of your site and you will need to take extra steps to ensure
-Stripe.js is available everywhere.
+available in parts of your site. To ensure Stripe.js is available everywhere,
+you can perform either of the following steps:
 
 ### Import as a side effect
 
