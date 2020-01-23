@@ -4,7 +4,7 @@ Use [Stripe.js](https://stripe.com/docs/stripe-js) as an ES module.
 
 **Note**: To be
 [PCI compliant](https://stripe.com/docs/security#validating-pci-compliance), you
-must load Stripe.js directly from `https://js.stripe.com`. You cannot included
+must load Stripe.js directly from `https://js.stripe.com`. You cannot include
 it in a bundle or host it yourself. This package wraps the global `Stripe`
 function provided by the Stripe.js script as an ES module.
 
