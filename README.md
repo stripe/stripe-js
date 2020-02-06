@@ -42,6 +42,24 @@ For more information on how to use Stripe.js once it loads, please refer to the
 [accept a payment](https://stripe.com/docs/payments/accept-a-payment) with
 Stripe.
 
+## TypeScript support
+
+This package includes TypeScript declarations for Stripe.js. We support projects
+using TypeScript versions >= 3.1.
+
+Some methods in Stripe.js accept and return objects from the
+[Stripe API](https://stripe.com/docs/api). The type declarations in
+`@stripe/stripe-js` for these objects in will always track the
+[latest version](https://stripe.com/docs/api/versioning) of the Stripe API. If
+you would like to use these types but are using an older version of the Stripe
+API, we recommend
+[updating to the latest version](https://stripe.com/docs/upgrades#how-can-i-upgrade-my-api),
+or ignoring and overriding the type definitions as necessary.
+
+Note that we may release new [minor and patch](https://semver.org/) versions of
+`@stripe/stripe-js` with small but backwards-incompatible fixes to the type
+declarations. These changes will not affect Stripe.js itself.
+
 ## Ensuring Stripe.js is available everywhere
 
 To best leverage Stripe’s advanced fraud functionality, ensure that Stripe.js is

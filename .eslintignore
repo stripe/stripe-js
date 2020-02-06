@@ -1,1 +1,4 @@
-dist/**/*.js
+dist
+node_modules
+examples
+tests/types

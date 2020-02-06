@@ -5,14 +5,17 @@
   "main": "dist/stripe.js",
   "module": "dist/stripe.esm.js",
   "jsnext:main": "dist/stripe.esm.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "jest",
-    "lint": "eslint src",
-    "build": "yarn lint && yarn rollup -c",
+    "test:versions": "./tests/versions/scripts/test.sh",
+    "test:types": "tsc -p ./tests/types",
+    "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-list-different",
+    "typecheck": "tsc",
+    "build": "yarn clean && yarn rollup -c",
     "clean": "rimraf dist",
-    "prettier": "prettier './**/*.js' './**/*.css' './**/*.md' --write",
-    "prettier-list-different": "prettier './**/*.js' './**/*.css' './**/*.md' --list-different",
-    "prepublish": "yarn run clean && yarn run build"
+    "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
+    "prettier-list-different": "prettier './**/*.{js,ts,md,html,css}' --list-different"
   },
   "keywords": [
     "Stripe",
@@ -24,15 +27,18 @@
   "homepage": "https://stripe.com/docs/js",
   "files": [
     "dist",
-    "src"
+    "src",
+    "types"
   ],
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
+    "@types/jest": "^24.0.25",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
-    "eslint": "6.6.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.8.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.6.3",
@@ -40,7 +46,10 @@
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "rimraf": "^2.6.2",
-    "rollup": "^1.27.0",
-    "rollup-plugin-babel": "^4.3.3"
+    "rollup": "^1.29.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "ts-jest": "^24.3.0",
+    "typescript": "^3.7.4"
   }
 }

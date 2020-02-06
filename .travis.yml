@@ -1,8 +1,10 @@
 language: node_js
-node_js:
-  - '8'
-script:
-  - npm run lint
-  - npm run test
-  - npm run prettier-list-different
+node_js: 'lts/*'
 cache: yarn
+script:
+  - yarn run typecheck
+  - yarn run test
+  - yarn run lint
+  - yarn run build
+  - yarn run test:versions
+  - yarn run test:types

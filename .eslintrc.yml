@@ -1,12 +1,13 @@
 ---
+root: true
 extends:
-  - airbnb-base
-  # overwrite any rules that may conflict with prettier
-  - prettier
-  - prettier/standard
-parser: 'babel-eslint'
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+parser: '@typescript-eslint/parser'
 plugins:
   - jest
+  - '@typescript-eslint'
 env:
   jest/globals: true
   browser: true
@@ -23,4 +24,5 @@ rules:
     - ignoreRestSiblings: true
   jest/no-disabled-tests: 2
   jest/no-focused-tests: 2
-  import/prefer-default-export: 0
+  '@typescript-eslint/no-explicit-any': 0
+  '@typescript-eslint/no-empty-interface': 0

@@ -1,0 +1,436 @@
+///<reference path='./checkout.d.ts' />
+///<reference path='./elements.d.ts' />
+///<reference path='./payment-intents.d.ts' />
+///<reference path='./setup-intents.d.ts' />
+///<reference path='./payment-request.d.ts' />
+///<reference path='./token-and-sources.d.ts' />
+
+declare module '@stripe/stripe-js' {
+  interface Stripe {
+    /////////////////////////////
+    /// Elements
+    ///
+    /// https://stripe.com/docs/js/elements_object
+    /////////////////////////////
+
+    /**
+     * Create an `Elements` instance, which manages a group of elements.
+     */
+    elements(options?: StripeElementsOptions): StripeElements;
+
+    /////////////////////////////
+    /// Checkout
+    ///
+    /// https://stripe.com/docs/js/checkout
+    /////////////////////////////
+
+    /**
+     * Use `stripe.redirectToCheckout` to redirect your customers to [Checkout](https://stripe.com/docs/payments/checkout), a Stripe-hosted page to securely collect payment information.
+     * When the customer completes their purchase, they are redirected back to your website.
+     */
+    redirectToCheckout(
+      options: RedirectToCheckoutOptions
+    ): Promise<never | {error: StripeError}>;
+
+    /////////////////////////////
+    /// Payment Intents
+    ///
+    /// https://stripe.com/docs/js/payment_intents
+    /////////////////////////////
+
+    /**
+     * Use `stripe.confirmCardPayment` when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide and carry out 3DS or other next actions if they are required.
+     *
+     * If you are using [Dynamic 3D Secure](https://stripe.com/docs/payments/3d-secure#three-ds-radar), `stripe.confirmCardPayment` will trigger your Radar rules to execute and may open a dialog for your customer to authenticate their payment.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_card_payment
+     */
+    confirmCardPayment(
+      clientSecret: string,
+      data?: ConfirmCardPaymentData,
+      options?: ConfirmCardPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
+     * Use `stripe.confirmIdealPayment` in the [iDEAL Payments with Payment Methods](https://stripe.com/docs/payments/ideal) flow when the customer submits your payment form.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_ideal_payment
+     */
+    confirmIdealPayment(
+      clientSecret: string,
+      data?: ConfirmIdealPaymentData,
+      options?: ConfirmIdealPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
+     * Use `stripe.confirmSepaDebitPayment` in the [SEPA Direct Debit Payments](https://stripe.com/docs/payments/sepa-debit) with Payment Methods flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
+     * Note that there are some additional requirements to this flow that are not covered in this reference.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/sepa-debit) for more details.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_sepa_debit_payment
+     */
+    confirmSepaDebitPayment(
+      clientSecret: string,
+      data?: ConfirmSepaDebitPaymentData
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
+     * Use `stripe.handleCardAction` in the Payment Intents API [manual confirmation](https://stripe.com/docs/payments/payment-intents/web-manual) flow to handle a [PaymentIntent](https://stripe.com/docs/api/payment_intents) with the `requires_action` status.
+     * It will throw an error if the `PaymentIntent` has a different status.
+     *
+     * Note that `stripe.handleCardAction` may take several seconds to complete.
+     * During that time, you should disable your form from being resubmitted and show a waiting indicator like a spinner.
+     * If you receive an error result, you should be sure to show that error to the customer, re-enable the form, and hide the waiting indicator.
+     *
+     * Additionally, `stripe.handleCardAction` may trigger a [3D Secure](https://stripe.com/docs/payments/3d-secure) authentication challenge.
+     * The authentication challenge requires a context switch that can be hard to follow on a screen-reader.
+     * Ensure that your form is accessible by ensuring that success or error messages are clearly read out.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/handle_card_action
+     */
+    handleCardAction(
+      clientSecret: string
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
+     * Use stripe.createPaymentMethod to convert payment information collected by elements into a [PaymentMethod](https://stripe.com/docs/api/payment_methods) object that you safely pass to your server to use in an API call.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/create_payment_method
+     */
+    createPaymentMethod(
+      paymentMethodData: CreatePaymentMethodData
+    ): Promise<{paymentMethod?: PaymentMethod; error?: StripeError}>;
+
+    /**
+     * Retrieve a [PaymentIntent](https://stripe.com/docs/api/payment_intents) using its [client secret](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret).
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/retrieve_payment_intent
+     */
+    retrievePaymentIntent(
+      clientSecret: string
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /////////////////////////////
+    /// Setup Intents
+    ///
+    /// https://stripe.com/docs/js/setup_intents
+    /////////////////////////////
+
+    /**
+     * Use `stripe.confirmCardSetup` in the [Setup Intents API flow](https://stripe.com/docs/payments/save-and-reuse) when the customer submits your payment form.
+     * When called, it will confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) with `data` you provide and carry out 3DS or other next actions if they are required.
+     *
+     * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     */
+    confirmCardSetup(
+      clientSecret: string,
+      data?: ConfirmCardSetupData,
+      options?: ConfirmCardSetupOptions
+    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+
+    /**
+     * Use `stripe.confirmSepaDebitSetup` in the [SEPA Direct Debit with Setup Intents](https://stripe.com/docs/payments/sepa-debit-setup-intents) flow when the customer submits your payment form.
+     * When called, it will confirm the `SetupIntent` with `data` you provide.
+     * Note that there are some additional requirements to this flow that are not covered in this reference.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/sepa-debit-setup-intents) for more details.
+     *
+     * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     * These use cases are detailed in the sections that follow.
+     */
+    confirmSepaDebitSetup(
+      clientSecret: string,
+      data?: ConfirmSepaDebitSetupData
+    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+
+    /**
+     * Retrieve a [SetupIntent](https://stripe.com/docs/api/setup_intents) using its client secret.
+     *
+     * @docs https://stripe.com/docs/js/setup_intents/retrieve_setup_intent
+     */
+    retrieveSetupIntent(
+      clientSecret: string
+    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+
+    /////////////////////////////
+    /// Payment Request
+    ///
+    /// https://stripe.com/docs/js/payment_request
+    /////////////////////////////
+
+    /**
+     * Use `stripe.paymentRequest` to create a `PaymentRequest` object.
+     * Creating a `PaymentRequest` requires that you configure it with an `options` object.
+     *
+     * In Safari, `stripe.paymentRequest` uses Apple Pay, and in other browsers it uses the [Payment Request API standard](https://www.w3.org/TR/payment-request/).
+     */
+    paymentRequest(options: PaymentRequestOptions): PaymentRequest;
+
+    /////////////////////////////
+    /// Token and Sources
+    ///
+    /// https://stripe.com/docs/js/tokens_sources
+    /////////////////////////////
+
+    /**
+     * Use `stripe.createToken` to convert information collected by card elements into a single-use [Token](https://stripe.com/docs/api#tokens) that you safely pass to your server to use in an API call.
+     *
+     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
+     */
+    createToken(
+      tokenType: StripeCardElement | StripeCardNumberElement,
+      data?: CreateTokenCardData
+    ): Promise<{token?: Token; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createToken` to convert information collected by an `IbanElement` into a single-use [Token](https://stripe.com/docs/api#tokens) that you safely pass to your server to use in an API call.
+     *
+     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=ibanElement
+     */
+    createToken(
+      tokenType: StripeIbanElement,
+      data: CreateTokenIbanData
+    ): Promise<{token?: Token; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createToken` to convert personally identifiable information (PII) into a single-use [Token](https://stripe.com/docs/api#tokens) for account identity verification.
+     *
+     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=pii
+     */
+    createToken(
+      tokenType: 'pii',
+      data: CreateTokenPiiData
+    ): Promise<{token?: Token; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createToken` to convert bank account information into a single-use token that you safely pass to your server to use in an API call.
+     *
+     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=bank_account
+     */
+    createToken(
+      tokenType: 'bank_account',
+      data: CreateTokenBankAccountData
+    ): Promise<{token?: Token; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createToken` to tokenize the recollected CVC for a saved card.
+
+     * First, include the `cvc_update_beta_1` flag when creating an instance of the Stripe object.
+     * Next, render an `CardCvcElement` to collect the data.
+     * Then pass the `CardCvcElement` to `stripe.createToken` to tokenize the collected data.
+     *
+     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=bank_account
+     */
+    createToken(
+      tokenType: 'cvc_update',
+      element?: StripeCardCvcElement
+    ): Promise<{token?: Token; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createSource` to convert payment information collected by elements into a `Source` object that you safely pass to your server to use in an API call.
+     * See the [Sources documentation](https://stripe.com/docs/sources) for more information about sources.
+     */
+    createSource(
+      element: StripeElement,
+      sourceData: CreateSourceData
+    ): Promise<{source?: Source; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createSource` to convert raw payment information into a `Source` object that you safely pass to your server to use in an API call.
+     * See the [Sources documentation](https://stripe.com/docs/sources) for more information about sources.
+     */
+    createSource(
+      sourceData: CreateSourceData
+    ): Promise<{source?: Source; error?: StripeError}>;
+
+    /**
+     * Retrieve a [Source](https://stripe.com/docs/api#sources) using its unique ID and client secret.
+     *
+     * @docs https://stripe.com/docs/js/tokens_sources/retrieve_source
+     */
+    retrieveSource(
+      source: RetrieveSourceParam
+    ): Promise<{source?: Source; error?: StripeError}>;
+  }
+
+  /**
+   * Use `Stripe(publishableKey, options?)` to create an instance of the `Stripe` object.
+   * The Stripe object is your entrypoint to the rest of the Stripe.js SDK.
+   *
+   * Your Stripe publishable [API key](https://stripe.com/docs/keys) is required when calling this function, as it identifies your website to Stripe.
+   *
+   * When you’re ready to accept live payments, replace the test key with your live key in production.
+   * Learn more about how API keys work in [test mode and live mode](https://stripe.com/docs/dashboard#viewing-test-data).
+   */
+  interface StripeConstructor {
+    (
+      /**
+       * Your publishable key.
+       */
+      publishableKey: string,
+
+      /**
+       * Initialization options.
+       */
+      options?: StripeConstructorOptions
+    ): Stripe;
+  }
+
+  interface StripeConstructorOptions {
+    /**
+     * For usage with [Connect](https://stripe.com/docs/connect) only.
+     * Specifying a connected account ID (e.g., `acct_24BFMpJ1svR5A89k`) allows you to perform actions on behalf of that account.
+     */
+    stripeAccount?: string;
+
+    /**
+     * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) used to globally configure localization in Stripe.js.
+     * Setting the locale here will localize error strings for all Stripe.js methods.
+     * It will also configure the locale for [Elements](#element_mount) and [Checkout](https://stripe.com/docs/js/checkout/redirect_to_checkout). Default is `auto` (Stripe detects the locale of the browser).
+     *
+     * Supported values depend on which features you are using.
+     * Checkout supports a slightly different set of locales than the rest of Stripe.js.
+     * If you are planning on using Checkout, make sure to use a [value](#checkout_redirect_to_checkout-options-locale) that it supports.
+     */
+    locale?:
+      | 'auto'
+      | 'ar'
+      | 'da'
+      | 'de'
+      | 'en'
+      | 'es'
+      | 'fi'
+      | 'fr'
+      | 'he'
+      | 'it'
+      | 'ja'
+      | 'lt'
+      | 'lv'
+      | 'ms'
+      | 'nl'
+      | 'no'
+      | 'pl'
+      | 'ru'
+      | 'sv'
+      | 'zh';
+  }
+
+  type StripeErrorType =
+    /**
+     * Failure to connect to Stripe's API.
+     */
+    | 'api_connection_error'
+
+    /**
+     * API errors cover any other type of problem (e.g., a temporary problem with Stripe's servers), and are extremely uncommon.
+     */
+    | 'api_error'
+
+    /**
+     * Failure to properly authenticate yourself in the request.
+     */
+    | 'authentication_error'
+
+    /**
+     * Card errors are the most common type of error you should expect to handle.
+     * They result when the user enters a card that can't be charged for some reason.
+     */
+    | 'card_error'
+
+    /**
+     * Idempotency errors occur when an `Idempotency-Key` is re-used on a request that does not match the first request's API endpoint and parameters.
+     */
+    | 'idempotency_error'
+
+    /**
+     * Invalid request errors arise when your request has invalid parameters.
+     */
+    | 'invalid_request_error'
+
+    /**
+     * Too many requests hit the API too quickly.
+     */
+    | 'rate_limit_error'
+
+    /**
+     * Errors triggered by our client-side libraries when failing to validate fields (e.g., when a card number or expiration date is invalid or incomplete).
+     */
+    | 'validation_error';
+
+  interface StripeError {
+    /**
+     * The type of error.
+     */
+    type: StripeErrorType;
+
+    /**
+     * For card errors, the ID of the failed charge
+     */
+    charge?: string;
+
+    /**
+     * For some errors that could be handled programmatically, a short string indicating the [error code](https://stripe.com/docs/error-codes) reported.
+     */
+    code?: string;
+
+    /**
+     * For card errors resulting from a card issuer decline, a short string indicating the [card issuer’s reason for the decline](https://stripe.com/docs/declines#issuer-declines) if they provide one.
+     */
+    decline_code?: string;
+
+    /**
+     * A URL to more information about the [error code](https://stripe.com/docs/error-codes) reported.
+     */
+    doc_url?: string;
+
+    /**
+     * A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
+     */
+    message?: string;
+
+    /**
+     * If the error is parameter-specific, the parameter related to the error.
+     * For example, you can use this to display a message near the correct form field.
+     */
+    param?: string;
+
+    /**
+     * The `PaymentIntent` object for errors returned on a request involving a `PaymentIntent`.
+     */
+    payment_intent?: PaymentIntent;
+
+    /**
+     * The `PaymentMethod` object for errors returned on a request involving a `PaymentMethod`.
+     */
+    payment_method?: PaymentMethod;
+
+    /**
+     * The `SetupIntent` object for errors returned on a request involving a `SetupIntent`.
+     */
+    setup_intent?: SetupIntent;
+
+    /**
+     * The `Source` object for errors returned on a request involving a `Source`.
+     */
+    source?: Source;
+  }
+}

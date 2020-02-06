@@ -1,11 +1,23 @@
-/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const dispatchScriptEvent = (eventType: string): void => {
+  const script = document.querySelector(
+    'script[src="https://js.stripe.com/v3"]'
+  );
+
+  if (!script) {
+    throw new Error('could not find Stripe.js script element');
+  }
+
+  script.dispatchEvent(new Event(eventType));
+};
 
 describe('Stripe module loader', () => {
   afterEach(() => {
     const script = document.querySelector(
       'script[src="https://js.stripe.com/v3"]'
     );
-    if (script) {
+    if (script && script.parentElement) {
       script.parentElement.removeChild(script);
     }
     delete window.Stripe;
@@ -29,7 +41,7 @@ describe('Stripe module loader', () => {
   it('does not inject the script when Stripe is already loaded', () => {
     require('./index');
 
-    window.Stripe = jest.fn((key) => ({key}));
+    window.Stripe = jest.fn((key) => ({key})) as any;
 
     return new Promise((resolve) => setTimeout(resolve)).then(() => {
       expect(
@@ -58,10 +70,8 @@ describe('Stripe module loader', () => {
       const stripePromise = loadStripe('pk_test_foo');
 
       return new Promise((resolve) => setTimeout(resolve)).then(() => {
-        window.Stripe = jest.fn((key) => ({key}));
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .dispatchEvent(new Event('load'));
+        window.Stripe = jest.fn((key) => ({key})) as any;
+        dispatchScriptEvent('load');
 
         return expect(stripePromise).resolves.toEqual({key: 'pk_test_foo'});
       });
@@ -72,9 +82,7 @@ describe('Stripe module loader', () => {
       const stripePromise = loadStripe('pk_test_foo');
 
       return Promise.resolve().then(() => {
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .dispatchEvent(new Event('error'));
+        dispatchScriptEvent('error');
 
         return expect(stripePromise).rejects.toEqual(
           new Error('Failed to load Stripe.js')
@@ -86,9 +94,7 @@ describe('Stripe module loader', () => {
       const {loadStripe} = require('./index');
       const stripePromise = loadStripe('pk_test_foo');
       return Promise.resolve().then(() => {
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .dispatchEvent(new Event('load'));
+        dispatchScriptEvent('load');
 
         return expect(stripePromise).rejects.toEqual(
           new Error('Failed to load Stripe.js')
