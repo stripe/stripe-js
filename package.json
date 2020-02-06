@@ -15,7 +15,7 @@
     "build": "yarn clean && yarn rollup -c",
     "clean": "rimraf dist",
     "ci": "yarn lint && yarn test && yarn test:versions && yarn test:types && yarn typecheck && yarn build",
-    "prepublish": "yarn install --frozen-lockfile && yarn ci",
+    "prepublish": "yarn ci",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-list-different": "prettier './**/*.{js,ts,md,html,css}' --list-different"
   },
