@@ -2,9 +2,4 @@ language: node_js
 node_js: 'lts/*'
 cache: yarn
 script:
-  - yarn run typecheck
-  - yarn run test
-  - yarn run lint
-  - yarn run build
-  - yarn run test:versions
-  - yarn run test:types
+  - yarn run ci
