@@ -169,6 +169,8 @@ ibanElement.destroy();
 idealBankElement.destroy();
 paymentRequestButtonElement.destroy();
 
+stripe.redirectToCheckout({sessionId: ''});
+
 stripe
   .redirectToCheckout({
     items: [{sku: 'sku_123', quantity: 1}],

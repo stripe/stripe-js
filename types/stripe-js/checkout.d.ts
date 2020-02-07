@@ -1,5 +1,12 @@
 declare module '@stripe/stripe-js' {
-  interface RedirectToCheckoutOptions {
+  interface RedirectToCheckoutServerOptions {
+    /**
+     * The ID of the [Checkout Session](https://stripe.com/docs/api/checkout/sessions) that is used in [Checkout's server integration](https://stripe.com/docs/payments/checkout/one-time).
+     */
+    sessionId: string;
+  }
+
+  interface RedirectToCheckoutClientOptions {
     /**
      * The URL to which Stripe should send customers when payment is complete.
      * If you’d like access to the Checkout Session for the successful payment, read more about it in our guide on [fulfilling your payments with webhooks](https://stripe.com/docs/payments/checkout/fulfillment#webhooks).
@@ -10,11 +17,6 @@ declare module '@stripe/stripe-js' {
      * The URL to which Stripe should send customers when payment is canceled.
      */
     cancelUrl: string;
-
-    /**
-     * The ID of the [Checkout Session](https://stripe.com/docs/api/checkout/sessions) that is used in [Checkout's server integration](https://stripe.com/docs/payments/checkout/one-time).
-     */
-    sessionId?: string;
 
     /**
      * An array of objects representing the items that your customer would like to purchase.
@@ -85,4 +87,8 @@ declare module '@stripe/stripe-js' {
      */
     submitType?: 'auto' | 'book' | 'donate' | 'pay';
   }
+
+  type RedirectToCheckoutOptions =
+    | RedirectToCheckoutServerOptions
+    | RedirectToCheckoutClientOptions;
 }
