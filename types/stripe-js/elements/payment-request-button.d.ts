@@ -64,6 +64,11 @@ declare module '@stripe/stripe-js' {
         height?: number;
       };
     };
+
+    /**
+     * A `PaymentRequest` object used to configure the element.
+     */
+    paymentRequest: PaymentRequest;
   }
 
   interface StripePaymentRequestButtonElementClickEvent {

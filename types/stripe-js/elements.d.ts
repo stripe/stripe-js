@@ -116,10 +116,12 @@ declare module '@stripe/stripe-js' {
 
     /**
      * Creates a `PaymentRequestButtonElement`.
+     *
+     * @docs https://stripe.com/docs/stripe-js/elements/payment-request-button
      */
     create(
       elementType: 'paymentRequestButton',
-      options?: StripePaymentRequestButtonElementOptions
+      options: StripePaymentRequestButtonElementOptions
     ): StripePaymentRequestButtonElement;
 
     /**
