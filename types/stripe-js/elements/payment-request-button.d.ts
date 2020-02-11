@@ -43,7 +43,11 @@ declare module '@stripe/stripe-js' {
      * The styles of an `PaymentRequestButtonElement` can be dynamically changed using `element.update`.
      * This method can be used to simulate CSS media queries that automatically adjust the size of elements when viewed on different devices.
      */
-    update(options: Partial<StripePaymentRequestButtonElementOptions>): void;
+    update(
+      options: Partial<
+        Omit<StripePaymentRequestButtonElementOptions, 'paymentRequest'>
+      >
+    ): void;
   };
 
   interface StripePaymentRequestButtonElementOptions {
