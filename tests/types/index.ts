@@ -1,5 +1,7 @@
 ///<reference path='../../types/index.d.ts' />
 
+import {assert, Has} from 'conditional-type-checks';
+
 /*
  * This code will not run, but will be typechecked as a test.
  */
@@ -144,6 +146,21 @@ const paymentRequestButtonElement = elements.create('paymentRequestButton', {
 const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | null = elements.getElement(
   'paymentRequestButton'
 );
+
+// Make sure that `paymentRequest` is at least optional;
+retrievedPaymentRequestButtonElement!.update({});
+
+type StripePaymentRequestButtonElementUpdateOptions = Parameters<
+  StripePaymentRequestButtonElement['update']
+>[0];
+
+// Check that giving `paymentRequest` options is not allowed
+assert<
+  Has<
+    Required<StripePaymentRequestButtonElementUpdateOptions>,
+    {paymentRequest: PaymentRequest}
+  >
+>(false);
 
 const cardElementType: StripeElementType = 'card';
 const ibanElementType: StripeElementType = 'iban';
