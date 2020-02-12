@@ -5,6 +5,7 @@
 ///<reference path='./elements/iban.d.ts' />
 ///<reference path='./elements/ideal-bank.d.ts' />
 ///<reference path='./elements/payment-request-button.d.ts' />
+///<reference path='./elements/au-bank-account.d.ts' />
 
 declare module '@stripe/stripe-js' {
   interface StripeElements {
@@ -139,7 +140,8 @@ declare module '@stripe/stripe-js' {
     | 'cardCvc'
     | 'iban'
     | 'idealBank'
-    | 'paymentRequestButton';
+    | 'paymentRequestButton'
+    | 'auBankAccount';
 
   type StripeElement =
     | StripeCardElement
@@ -148,7 +150,8 @@ declare module '@stripe/stripe-js' {
     | StripeCardCvcElement
     | StripeIbanElement
     | StripeIdealBankElement
-    | StripePaymentRequestButtonElement;
+    | StripePaymentRequestButtonElement
+    | StripeAuBankAccountElement;
 
   /**
    * Options to create an `Elements` instance with.
