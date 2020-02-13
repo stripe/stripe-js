@@ -3,6 +3,7 @@ declare module '@stripe/stripe-js' {
   type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 
   type CreatePaymentMethodData =
+    | CreatePaymentMethodAuBecsDebitData
     | CreatePaymentMethodCardData
     | CreatePaymentMethodIdealData
     | CreatePaymentMethodFpxData
@@ -50,6 +51,44 @@ declare module '@stripe/stripe-js' {
            * An IBAN account number.
            */
           iban: string;
+        };
+
+    /*
+     * The customer's billing details.
+     * `name` and `email` are required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails & {
+      name: string;
+      email: string;
+    };
+  }
+
+  interface CreatePaymentMethodAuBecsDebitData
+    extends PaymentMethodCreateParams {
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
+    type: 'au_becs_debit';
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
+    au_becs_debit:
+      | StripeAuBankAccountElement
+      | {
+          /**
+           * A BSB number.
+           */
+          bsb_number: string;
+
+          /**
+           * An account number.
+           */
+          account_number: string;
         };
 
     /*
@@ -171,5 +210,25 @@ declare module '@stripe/stripe-js' {
      * Default is `true`.
      */
     handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmAuBecsDebitPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmAuBecsDebitPaymentData extends PaymentIntentConfirmParams {
+    /*
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodAuBecsDebitData, 'type'>;
+
+    /**
+     * To save the BECS Direct Debit account for reuse, set this parameter to `off_session`.
+     * BECS Direct Debit only accepts an `off_session` value for this parameter.
+     */
+    setup_future_usage?: 'off_session';
   }
 }

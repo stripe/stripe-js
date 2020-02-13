@@ -30,6 +30,8 @@ import {
   StripeIdealBankElement,
   StripeFpxBankElement,
   StripeFpxBankElementChangeEvent,
+  StripeAuBankAccountElement,
+  StripeAuBankAccountElementChangeEvent,
   StripePaymentRequestButtonElement,
   StripeElementType,
 } from '@stripe/stripe-js';
@@ -73,6 +75,12 @@ const MY_STYLE: StripeElementStyle = {
     color: '#FFC7EE',
   },
 };
+
+const auBankAccountElement = elements.create('auBankAccount', {});
+
+const retrievedAuBankAccountElement: StripeAuBankAccountElement | null = elements.getElement(
+  'auBankAccount'
+);
 
 const cardElement: StripeCardElement = elements.create('card', {
   classes: {base: '', focus: ''},
@@ -175,9 +183,10 @@ assert<
   >
 >(false);
 
+const auBankElementType: StripeElementType = 'auBankAccount';
 const cardElementType: StripeElementType = 'card';
-const ibanElementType: StripeElementType = 'iban';
 const fpxElementType: StripeElementType = 'fpxBank';
+const ibanElementType: StripeElementType = 'iban';
 
 cardElement.mount('#bogus-container');
 ibanElement.mount('#bogus-container');
@@ -192,11 +201,12 @@ cardElement
     }
   });
 
-fpxBankElement.on('change', (e: StripeFpxBankElementChangeEvent) => {
-  if (e.error) {
-    console.error(e.error.message);
-  }
-});
+auBankAccountElement.on(
+  'change',
+  (e: StripeAuBankAccountElementChangeEvent) => {}
+);
+
+fpxBankElement.on('change', (e: StripeFpxBankElementChangeEvent) => {});
 
 paymentRequestButtonElement.on(
   'click',
@@ -205,6 +215,7 @@ paymentRequestButtonElement.on(
   }
 );
 
+auBankAccountElement.destroy();
 cardElement.destroy();
 cardNumberElement.destroy();
 cardCvcElement.destroy();
@@ -297,6 +308,24 @@ stripe.retrieveSource({id: '', client_secret: ''}).then((result) => {
   console.log(result.source!.type);
 });
 
+stripe.confirmAuBecsDebitPayment('', {
+  payment_method: {
+    au_becs_debit: auBankAccountElement,
+    billing_details: {name: '', email: ''},
+  },
+});
+
+stripe.confirmAuBecsDebitPayment('', {
+  payment_method: {
+    au_becs_debit: {bsb_number: '', account_number: ''},
+    billing_details: {name: '', email: ''},
+  },
+});
+
+stripe.confirmAuBecsDebitPayment('', {payment_method: ''});
+
+stripe.confirmAuBecsDebitPayment('');
+
 stripe
   .confirmCardPayment('', {
     payment_method: {card: cardElement, billing_details: {name: ''}},
@@ -361,6 +390,18 @@ stripe
   .handleCardAction('')
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
+stripe.createPaymentMethod({
+  type: 'au_becs_debit',
+  au_becs_debit: auBankAccountElement,
+  billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+});
+
+stripe.createPaymentMethod({
+  type: 'au_becs_debit',
+  au_becs_debit: {bsb_number: '', account_number: ''},
+  billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+});
+
 stripe
   .createPaymentMethod({
     type: 'card',
@@ -412,6 +453,22 @@ stripe.createPaymentMethod({
 
 stripe.retrievePaymentIntent('{PAYMENT_INTENT_CLIENT_SECRET}');
 
+stripe.confirmAuBecsDebitSetup('', {
+  payment_method: {
+    au_becs_debit: auBankAccountElement,
+    billing_details: {name: '', email: ''},
+  },
+});
+
+stripe.confirmAuBecsDebitSetup('', {payment_method: ''});
+
+stripe.confirmAuBecsDebitSetup('', {
+  payment_method: {
+    au_becs_debit: {bsb_number: '', account_number: ''},
+    billing_details: {name: '', email: ''},
+  },
+});
+
 stripe.confirmCardSetup('', {
   payment_method: {card: cardElement, billing_details: {name: ''}},
 });
@@ -425,13 +482,6 @@ stripe.confirmCardSetup('', {payment_method: {card: {token: ''}}});
 stripe
   .confirmCardSetup('')
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
-
-stripe.confirmSepaDebitSetup('', {
-  payment_method: {
-    sepa_debit: ibanElement,
-    billing_details: {name: '', email: ''},
-  },
-});
 
 stripe.confirmSepaDebitSetup('', {
   payment_method: {

@@ -6,9 +6,35 @@
 ///<reference path='./elements/ideal-bank.d.ts' />
 ///<reference path='./elements/fpx-bank.d.ts' />
 ///<reference path='./elements/payment-request-button.d.ts' />
+///<reference path='./elements/au-bank-account.d.ts' />
+
+import {StripeAuBankAccountElement} from '@stripe/stripe-js';
 
 declare module '@stripe/stripe-js' {
   interface StripeElements {
+    /////////////////////////////
+    /// auBankAccount
+    /////////////////////////////
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Creates an `AuBankAccountElement`.
+     */
+    create(
+      elementType: 'auBankAccount',
+      options?: StripeAuBankAccountElementOptions
+    ): StripeAuBankAccountElement;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'auBankAccount'): StripeAuBankAccountElement | null;
+
     /////////////////////////////
     /// card
     /////////////////////////////
@@ -151,6 +177,7 @@ declare module '@stripe/stripe-js' {
   }
 
   type StripeElementType =
+    | 'auBankAccount'
     | 'card'
     | 'cardNumber'
     | 'cardExpiry'
@@ -161,13 +188,14 @@ declare module '@stripe/stripe-js' {
     | 'paymentRequestButton';
 
   type StripeElement =
+    | StripeAuBankAccountElement
     | StripeCardElement
     | StripeCardNumberElement
     | StripeCardExpiryElement
     | StripeCardCvcElement
+    | StripeFpxBankElement
     | StripeIbanElement
     | StripeIdealBankElement
-    | StripeFpxBankElement
     | StripePaymentRequestButtonElement;
 
   /**
