@@ -206,7 +206,7 @@ declare module '@stripe/stripe-js' {
     ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
 
     /**
-     * Use `stripe.confirmBecsDebitSetup` in the [SEPA Direct Debit with Setup Intents](https://stripe.com/docs/payments/sepa-debit-setup-intents) flow when the customer submits your payment form.
+     * Use `stripe.confirmSepaDebitSetup` in the [SEPA Direct Debit with Setup Intents](https://stripe.com/docs/payments/sepa-debit-setup-intents) flow when the customer submits your payment form.
      * When called, it will confirm the `SetupIntent` with `data` you provide.
      * Note that there are some additional requirements to this flow that are not covered in this reference.
      * Refer to our [integration guide](https://stripe.com/docs/payments/sepa-debit-setup-intents) for more details.

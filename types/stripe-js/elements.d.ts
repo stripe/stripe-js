@@ -177,6 +177,7 @@ declare module '@stripe/stripe-js' {
   }
 
   type StripeElementType =
+    | 'auBankAccount'
     | 'card'
     | 'cardNumber'
     | 'cardExpiry'
@@ -184,8 +185,7 @@ declare module '@stripe/stripe-js' {
     | 'fpxBank'
     | 'iban'
     | 'idealBank'
-    | 'paymentRequestButton'
-    | 'auBankAccount';
+    | 'paymentRequestButton';
 
   type StripeElement =
     | StripeAuBankAccountElement
