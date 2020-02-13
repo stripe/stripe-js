@@ -4,6 +4,7 @@
 ///<reference path='./elements/card-cvc.d.ts' />
 ///<reference path='./elements/iban.d.ts' />
 ///<reference path='./elements/ideal-bank.d.ts' />
+///<reference path='./elements/fpx-bank.d.ts' />
 ///<reference path='./elements/payment-request-button.d.ts' />
 
 declare module '@stripe/stripe-js' {
@@ -77,6 +78,23 @@ declare module '@stripe/stripe-js' {
     getElement(elementType: 'cardCvc'): StripeCardCvcElement | null;
 
     /////////////////////////////
+    /// fpxBank
+    /////////////////////////////
+
+    /**
+     * Creates an `FpxBankElement`.
+     */
+    create(
+      elementType: 'fpxBank',
+      options?: StripeFpxBankElementOptions
+    ): StripeFpxBankElement;
+
+    /**
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'fpxBank'): StripeFpxBankElement | null;
+
+    /////////////////////////////
     /// iban
     /////////////////////////////
 
@@ -137,6 +155,7 @@ declare module '@stripe/stripe-js' {
     | 'cardNumber'
     | 'cardExpiry'
     | 'cardCvc'
+    | 'fpxBank'
     | 'iban'
     | 'idealBank'
     | 'paymentRequestButton';
@@ -148,6 +167,7 @@ declare module '@stripe/stripe-js' {
     | StripeCardCvcElement
     | StripeIbanElement
     | StripeIdealBankElement
+    | StripeFpxBankElement
     | StripePaymentRequestButtonElement;
 
   /**

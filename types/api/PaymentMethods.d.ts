@@ -29,6 +29,8 @@ declare module '@stripe/stripe-js' {
      */
     customer: string | null;
 
+    fpx?: PaymentMethod.Fpx;
+
     ideal?: PaymentMethod.Ideal;
 
     /**
@@ -151,6 +153,13 @@ declare module '@stripe/stripe-js' {
     }
 
     interface CardPresent {}
+
+    interface Fpx {
+      /**
+       * The customer's bank, if provided.
+       */
+      bank: string | null;
+    }
 
     interface Ideal {
       /**
