@@ -29,8 +29,6 @@ declare module '@stripe/stripe-js' {
      * Updates the options the `IdealBankElement` was initialized with.
      * Updates are merged into the existing configuration.
      *
-     * If you collect certain information in a different part of your interface (e.g., ZIP or postal code), use `element.update` with the appropriate information.
-     *
      * The styles of an `IdealBankElement` can be dynamically changed using `element.update`.
      * This method can be used to simulate CSS media queries that automatically adjust the size of elements when viewed on different devices.
      */
