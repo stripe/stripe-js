@@ -8,7 +8,7 @@ declare module '@stripe/stripe-js' {
     on(
       eventType: 'change',
       handler: (event: StripeAuBankAccountElementChangeEvent) => any
-    ): void;
+    ): StripeAuBankAccountElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
@@ -28,8 +28,6 @@ declare module '@stripe/stripe-js' {
     /**
      * Updates the options the `AuBankAccountElement` was initialized with.
      * Updates are merged into the existing configuration.
-     *
-     * If you collect certain information in a different part of your interface (e.g., ZIP or postal code), use `element.update` with the appropriate information.
      *
      * The styles of an `AuBankAccountElement` can be dynamically changed using `element.update`.
      * This method can be used to simulate CSS media queries that automatically adjust the size of elements when viewed on different devices.

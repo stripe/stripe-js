@@ -29,6 +29,8 @@ declare module '@stripe/stripe-js' {
      */
     customer: string | null;
 
+    fpx?: PaymentMethod.Fpx;
+
     ideal?: PaymentMethod.Ideal;
 
     /**
@@ -50,6 +52,23 @@ declare module '@stripe/stripe-js' {
   }
 
   namespace PaymentMethod {
+    interface AuBecsDebit {
+      /**
+       * Bank State Branch
+       */
+      bsb_number: string | null;
+
+      /**
+       * Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+       */
+      fingerprint: string | null;
+
+      /**
+       * Last four characters of the account number.
+       */
+      last4: string | null;
+    }
+
     interface BillingDetails {
       /**
        * Billing address.
@@ -99,7 +118,7 @@ declare module '@stripe/stripe-js' {
       exp_year: number;
 
       /**
-       * Uniquely identifies this particular card number. You can use this attribute to check whether two customers who've signed up with you are using the same card number, for example.
+       * Uniquely identifies this particular card number. You can use this attribute to check whether two customers who've signed up with you are using the same card number.
        */
       fingerprint?: string | null;
 
@@ -151,6 +170,13 @@ declare module '@stripe/stripe-js' {
     }
 
     interface CardPresent {}
+
+    interface Fpx {
+      /**
+       * The customer's bank.
+       */
+      bank: string;
+    }
 
     interface Ideal {
       /**

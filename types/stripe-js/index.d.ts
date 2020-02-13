@@ -39,6 +39,26 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Use `stripe.confirmAuBecsDebitPayment` in the [BECS Direct Debit Payments](https://stripe.com/docs/payments/payment-methods/au-becs-debit) with Payment Methods flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
+     * Note that there are some additional requirements to this flow that are not covered in this reference.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/payment-methods/au-becs-debit-quickstart-payment-intents) for more details.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_au_becs_debit_payment
+     */
+    confirmAuBecsDebitPayment(
+      clientSecret: string,
+      data?: ConfirmAuBecsDebitPaymentData
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
      * Use `stripe.confirmCardPayment` when the customer submits your payment form.
      * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide and carry out 3DS or other next actions if they are required.
      *
@@ -54,6 +74,23 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmCardPaymentData,
       options?: ConfirmCardPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
+     * Use `stripe.confirmFpxPayment` in the [FPX Payments with Payment Methods](https://stripe.com/docs/payments/fpx#web) flow when the customer submits your payment form.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_fpx_payment
+     */
+    confirmFpxPayment(
+      clientSecret: string,
+      data?: ConfirmFpxPaymentData,
+      options?: ConfirmFpxPaymentOptions
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /**
@@ -133,12 +170,34 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Use `stripe.confirmAuBecsDebitSetup` in the [BECS Direct Debit with Setup Intents](https://stripe.com/docs/payments/payment-methods/au-becs-debit-quickstart-setup-intents) flow when the customer submits your payment form.
+     * When called, it will confirm the `SetupIntent` with `data` you provide.
+     * Note that there are some additional requirements to this flow that are not covered in this reference.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/payment-methods/au-becs-debit-quickstart-setup-intents) for more details.
+     *
+     * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/setup_intents/confirm_au_becs_debit_setup
+     */
+    confirmAuBecsDebitSetup(
+      clientSecret: string,
+      data?: ConfirmAuBecsDebitSetupData
+    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+
+    /**
      * Use `stripe.confirmCardSetup` in the [Setup Intents API flow](https://stripe.com/docs/payments/save-and-reuse) when the customer submits your payment form.
      * When called, it will confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) with `data` you provide and carry out 3DS or other next actions if they are required.
      *
      * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
      * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
      * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/setup_intents/confirm_card_setup
      */
     confirmCardSetup(
       clientSecret: string,
@@ -147,7 +206,7 @@ declare module '@stripe/stripe-js' {
     ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
 
     /**
-     * Use `stripe.confirmSepaDebitSetup` in the [SEPA Direct Debit with Setup Intents](https://stripe.com/docs/payments/sepa-debit-setup-intents) flow when the customer submits your payment form.
+     * Use `stripe.confirmBecsDebitSetup` in the [SEPA Direct Debit with Setup Intents](https://stripe.com/docs/payments/sepa-debit-setup-intents) flow when the customer submits your payment form.
      * When called, it will confirm the `SetupIntent` with `data` you provide.
      * Note that there are some additional requirements to this flow that are not covered in this reference.
      * Refer to our [integration guide](https://stripe.com/docs/payments/sepa-debit-setup-intents) for more details.
@@ -155,7 +214,8 @@ declare module '@stripe/stripe-js' {
      * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
      * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
      * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
-     * These use cases are detailed in the sections that follow.
+     *
+     * @docs https://stripe.com/docs/js/setup_intents/confirm_sepa_debit_setup
      */
     confirmSepaDebitSetup(
       clientSecret: string,

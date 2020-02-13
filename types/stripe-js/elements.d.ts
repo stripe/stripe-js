@@ -4,11 +4,37 @@
 ///<reference path='./elements/card-cvc.d.ts' />
 ///<reference path='./elements/iban.d.ts' />
 ///<reference path='./elements/ideal-bank.d.ts' />
+///<reference path='./elements/fpx-bank.d.ts' />
 ///<reference path='./elements/payment-request-button.d.ts' />
 ///<reference path='./elements/au-bank-account.d.ts' />
 
+import {StripeAuBankAccountElement} from '@stripe/stripe-js';
+
 declare module '@stripe/stripe-js' {
   interface StripeElements {
+    /////////////////////////////
+    /// auBankAccount
+    /////////////////////////////
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Creates an `AuBankAccountElement`.
+     */
+    create(
+      elementType: 'auBankAccount',
+      options?: StripeAuBankAccountElementOptions
+    ): StripeAuBankAccountElement;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'auBankAccount'): StripeAuBankAccountElement | null;
+
     /////////////////////////////
     /// card
     /////////////////////////////
@@ -78,6 +104,23 @@ declare module '@stripe/stripe-js' {
     getElement(elementType: 'cardCvc'): StripeCardCvcElement | null;
 
     /////////////////////////////
+    /// fpxBank
+    /////////////////////////////
+
+    /**
+     * Creates an `FpxBankElement`.
+     */
+    create(
+      elementType: 'fpxBank',
+      options: StripeFpxBankElementOptions
+    ): StripeFpxBankElement;
+
+    /**
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'fpxBank'): StripeFpxBankElement | null;
+
+    /////////////////////////////
     /// iban
     /////////////////////////////
 
@@ -138,20 +181,22 @@ declare module '@stripe/stripe-js' {
     | 'cardNumber'
     | 'cardExpiry'
     | 'cardCvc'
+    | 'fpxBank'
     | 'iban'
     | 'idealBank'
     | 'paymentRequestButton'
     | 'auBankAccount';
 
   type StripeElement =
+    | StripeAuBankAccountElement
     | StripeCardElement
     | StripeCardNumberElement
     | StripeCardExpiryElement
     | StripeCardCvcElement
+    | StripeFpxBankElement
     | StripeIbanElement
     | StripeIdealBankElement
-    | StripePaymentRequestButtonElement
-    | StripeAuBankAccountElement;
+    | StripePaymentRequestButtonElement;
 
   /**
    * Options to create an `Elements` instance with.
