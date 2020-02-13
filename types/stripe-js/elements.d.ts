@@ -86,7 +86,7 @@ declare module '@stripe/stripe-js' {
      */
     create(
       elementType: 'fpxBank',
-      options?: StripeFpxBankElementOptions
+      options: StripeFpxBankElementOptions
     ): StripeFpxBankElement;
 
     /**

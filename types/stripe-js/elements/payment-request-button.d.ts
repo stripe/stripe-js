@@ -8,7 +8,7 @@ declare module '@stripe/stripe-js' {
     on(
       eventType: 'click',
       handler: (event: StripePaymentRequestButtonElementClickEvent) => any
-    ): void;
+    ): StripePaymentRequestButtonElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.

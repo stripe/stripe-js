@@ -8,7 +8,7 @@ declare module '@stripe/stripe-js' {
     on(
       eventType: 'change',
       handler: (event: StripeCardExpiryElementChangeEvent) => any
-    ): void;
+    ): StripeCardExpiryElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.

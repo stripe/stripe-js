@@ -8,7 +8,7 @@ declare module '@stripe/stripe-js' {
     on(
       eventType: 'change',
       handler: (event: StripeCardCvcElementChangeEvent) => any
-    ): void;
+    ): StripeCardCvcElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
