@@ -135,7 +135,7 @@ declare module '@stripe/stripe-js' {
    */
   interface ConfirmFpxPaymentOptions {
     /*
-     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/ideal#handle-redirect), or if you want to defer next action handling until later (e.g. for use in the [PaymentRequest API](https://stripe.com/docs/payments/ideal#handle-redirect)).
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/fpx#handle-redirect).
      * Default is `true`.
      */
     handleActions?: boolean;
@@ -167,7 +167,7 @@ declare module '@stripe/stripe-js' {
    */
   interface ConfirmIdealPaymentOptions {
     /*
-     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/ideal#handle-redirect), or if you want to defer next action handling until later (e.g. for use in the [PaymentRequest API](https://stripe.com/docs/payments/ideal#handle-redirect)).
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/ideal#handle-redirect).
      * Default is `true`.
      */
     handleActions?: boolean;
