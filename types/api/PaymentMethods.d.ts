@@ -156,9 +156,9 @@ declare module '@stripe/stripe-js' {
 
     interface Fpx {
       /**
-       * The customer's bank, if provided.
+       * The customer's bank.
        */
-      bank: string | null;
+      bank: string;
     }
 
     interface Ideal {

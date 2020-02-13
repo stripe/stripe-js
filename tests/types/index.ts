@@ -380,11 +380,6 @@ stripe.createPaymentMethod({
 
 stripe.createPaymentMethod({
   type: 'fpx',
-  fpx: {},
-});
-
-stripe.createPaymentMethod({
-  type: 'fpx',
   fpx: {bank: ''},
 });
 

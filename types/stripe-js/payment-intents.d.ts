@@ -23,7 +23,7 @@ declare module '@stripe/stripe-js' {
           /**
            * The customer's bank.
            */
-          bank?: string;
+          bank: string;
         };
   }
 
