@@ -28,6 +28,8 @@ import {
   CustomFontSource,
   StripeIbanElement,
   StripeIdealBankElement,
+  StripeFpxBankElement,
+  StripeFpxBankElementChangeEvent,
   StripePaymentRequestButtonElement,
   StripeElementType,
 } from '@stripe/stripe-js';
@@ -111,6 +113,17 @@ const retrievedCardCvcElement: StripeCardCvcElement | null = elements.getElement
   'cardCvc'
 );
 
+const fpxBankElement = elements.create('fpxBank', {
+  style: MY_STYLE,
+  value: '',
+  accountHolderType: 'individual',
+  classes: {webkitAutoFill: ''},
+});
+
+const retrievedFpxBankElement: StripeFpxBankElement | null = elements.getElement(
+  'fpxBank'
+);
+
 const ibanElement = elements.create('iban', {supportedCountries: ['']});
 
 const retrievedIbanElement: StripeIbanElement | null = elements.getElement(
@@ -164,6 +177,7 @@ assert<
 
 const cardElementType: StripeElementType = 'card';
 const ibanElementType: StripeElementType = 'iban';
+const fpxElementType: StripeElementType = 'fpxBank';
 
 cardElement.mount('#bogus-container');
 ibanElement.mount('#bogus-container');
@@ -178,6 +192,12 @@ cardElement
     }
   });
 
+fpxBankElement.on('change', (e: StripeFpxBankElementChangeEvent) => {
+  if (e.error) {
+    console.error(e.error.message);
+  }
+});
+
 paymentRequestButtonElement.on(
   'click',
   (e: StripePaymentRequestButtonElementClickEvent) => {
@@ -189,6 +209,7 @@ cardElement.destroy();
 cardNumberElement.destroy();
 cardCvcElement.destroy();
 cardExpiryElement.destroy();
+fpxBankElement.destroy();
 ibanElement.destroy();
 idealBankElement.destroy();
 paymentRequestButtonElement.destroy();
@@ -292,6 +313,19 @@ stripe.confirmCardPayment('');
 
 stripe.confirmCardPayment('');
 
+stripe.confirmFpxPayment('', {
+  payment_method: {fpx: fpxBankElement},
+  return_url: window.location.href,
+});
+
+stripe.confirmFpxPayment('', {payment_method: ''});
+
+stripe.confirmFpxPayment('', {payment_method: ''}, {handleActions: false});
+
+stripe.confirmFpxPayment('', {payment_method: {fpx: {bank: ''}}});
+
+stripe.confirmFpxPayment('');
+
 stripe.confirmIdealPayment('', {
   payment_method: {ideal: idealBankElement},
   return_url: window.location.href,
@@ -338,6 +372,16 @@ stripe
       console.log(result.paymentMethod.id);
     }
   });
+
+stripe.createPaymentMethod({
+  type: 'fpx',
+  fpx: fpxBankElement,
+});
+
+stripe.createPaymentMethod({
+  type: 'fpx',
+  fpx: {bank: ''},
+});
 
 stripe.createPaymentMethod({
   type: 'ideal',
