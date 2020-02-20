@@ -6,8 +6,6 @@ declare module '@stripe/stripe-js' {
     publishableKey: string,
     options?: StripeConstructorOptions | undefined
   ) => Promise<Stripe | null>;
-
-  const Stripe: StripeConstructor;
 }
 
 interface Window {
