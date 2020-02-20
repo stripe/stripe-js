@@ -39,6 +39,12 @@ import {
 const stripePromise: Promise<Stripe | null> = loadStripe('');
 const stripeConnectPromise = loadStripe('', {stripeAccount: '', locale: 'en'});
 
+type TypeModule = typeof import('@stripe/stripe-js');
+type SrcModule = typeof import('../../src/index');
+
+assert<Has<TypeModule, SrcModule>>(true);
+assert<Has<SrcModule, TypeModule>>(true);
+
 declare const stripe: Stripe;
 
 const OPEN_SANS: CssFontSource = {
