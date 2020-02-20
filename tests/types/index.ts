@@ -42,8 +42,8 @@ const stripeConnectPromise = loadStripe('', {stripeAccount: '', locale: 'en'});
 type TypeModule = typeof import('@stripe/stripe-js');
 type SrcModule = typeof import('../../src/index');
 
-assert<Has<TypeModule, SrcModule>>(true);
-assert<Has<SrcModule, TypeModule>>(true);
+import('../../src/index').then((srcModule: TypeModule) => {});
+import('@stripe/stripe-js').then((typeModule: SrcModule) => {});
 
 declare const stripe: Stripe;
 
