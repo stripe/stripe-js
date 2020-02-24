@@ -13,8 +13,9 @@ export default [
       ts({
         tsconfigOverride: {exclude: ['**/*.test.ts']},
       }),
-      babel(),
-      // TODO: terser
+      babel({
+        extensions: ['.ts', '.js', '.tsx', '.jsx'],
+      }),
     ],
   },
 ];
