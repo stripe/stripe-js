@@ -363,6 +363,11 @@ declare module '@stripe/stripe-js' {
     stripeAccount?: string;
 
     /**
+     * Override your account's [API version](https://stripe.com/docs/api/versioning).
+     */
+    apiVersion?: string;
+
+    /**
      * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) used to globally configure localization in Stripe.js.
      * Setting the locale here will localize error strings for all Stripe.js methods.
      * It will also configure the locale for [Elements](#element_mount) and [Checkout](https://stripe.com/docs/js/checkout/redirect_to_checkout). Default is `auto` (Stripe detects the locale of the browser).
