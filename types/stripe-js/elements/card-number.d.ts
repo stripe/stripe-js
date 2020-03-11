@@ -47,6 +47,17 @@ declare module '@stripe/stripe-js' {
      * Default is false.
      */
     disabled?: boolean;
+
+    /**
+     * Show a card brand icon in the Element.
+     * Default is `false`.
+     */
+    showIcon?: boolean;
+
+    /**
+     * Appearance of the brand icon in the Element.
+     */
+    iconStyle?: 'default' | 'solid';
   }
 
   interface StripeCardNumberElementChangeEvent
