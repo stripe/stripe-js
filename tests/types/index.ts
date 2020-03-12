@@ -108,7 +108,11 @@ const retrievedCardElement: StripeCardElement | null = elements.getElement(
 
 const cardNumberElement: StripeCardNumberElement = elements.create(
   'cardNumber',
-  {style: MY_STYLE}
+  {
+    style: MY_STYLE,
+    showIcon: true,
+    iconStyle: 'solid',
+  }
 );
 
 const retrievedCardNumberElement: StripeCardNumberElement | null = elements.getElement(
