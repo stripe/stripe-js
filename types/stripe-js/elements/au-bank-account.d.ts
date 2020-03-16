@@ -26,6 +26,11 @@ declare module '@stripe/stripe-js' {
     on(eventType: 'blur', handler: () => any): StripeAuBankAccountElement;
 
     /**
+     * Triggered when the escape key is pressed within the element.
+     */
+    on(eventType: 'escape', handler: () => any): StripeAuBankAccountElement;
+
+    /**
      * Updates the options the `AuBankAccountElement` was initialized with.
      * Updates are merged into the existing configuration.
      *
