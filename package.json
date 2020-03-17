@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "test:versions": "./tests/versions/scripts/test.sh",
-    "test:types": "tsc -p ./tests/types",
+    "test:types": "tsc -p ./tests/types && jest --roots '<rootDir>/tests/types'",
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-list-different",
     "typecheck": "tsc",
     "build": "yarn clean && yarn rollup -c",

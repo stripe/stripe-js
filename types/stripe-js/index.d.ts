@@ -252,16 +252,6 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
-     * Use `stripe.createToken` to convert information collected by card elements into a single-use [Token](https://stripe.com/docs/api#tokens) that you safely pass to your server to use in an API call.
-     *
-     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
-     */
-    createToken(
-      tokenType: StripeCardElement | StripeCardNumberElement,
-      data?: CreateTokenCardData
-    ): Promise<{token?: Token; error?: StripeError}>;
-
-    /**
      * Use `stripe.createToken` to convert information collected by an `IbanElement` into a single-use [Token](https://stripe.com/docs/api#tokens) that you safely pass to your server to use in an API call.
      *
      * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=ibanElement
@@ -269,6 +259,16 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: StripeIbanElement,
       data: CreateTokenIbanData
+    ): Promise<{token?: Token; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createToken` to convert information collected by card elements into a single-use [Token](https://stripe.com/docs/api#tokens) that you safely pass to your server to use in an API call.
+     *
+     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
+     */
+    createToken(
+      tokenType: StripeCardElement | StripeCardNumberElement,
+      data?: CreateTokenCardData
     ): Promise<{token?: Token; error?: StripeError}>;
 
     /**
