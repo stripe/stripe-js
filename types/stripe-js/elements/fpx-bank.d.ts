@@ -26,6 +26,11 @@ declare module '@stripe/stripe-js' {
     on(eventType: 'blur', handler: () => any): StripeFpxBankElement;
 
     /**
+     * Triggered when the escape key is pressed within the element.
+     */
+    on(eventType: 'escape', handler: () => any): StripeFpxBankElement;
+
+    /**
      * Updates the options the `FpxBankElement` was initialized with.
      * Updates are merged into the existing configuration.
      *

@@ -26,6 +26,11 @@ declare module '@stripe/stripe-js' {
     on(eventType: 'blur', handler: () => any): StripeCardNumberElement;
 
     /**
+     * Triggered when the escape key is pressed within the element.
+     */
+    on(eventType: 'escape', handler: () => any): StripeCardNumberElement;
+
+    /**
      * Updates the options the `CardNumberElement` was initialized with.
      * Updates are merged into the existing configuration.
      *
