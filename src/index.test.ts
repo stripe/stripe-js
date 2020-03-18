@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const dispatchScriptEvent = (eventType: string): void => {
-  const script = document.querySelector(
+  const injectedScript = document.querySelector(
     'script[src="https://js.stripe.com/v3"]'
   );
 
-  if (!script) {
+  if (!injectedScript) {
     throw new Error('could not find Stripe.js script element');
   }
 
-  script.dispatchEvent(new Event(eventType));
+  injectedScript.dispatchEvent(new Event(eventType));
 };
 
 describe('Stripe module loader', () => {
   afterEach(() => {
     const script = document.querySelector(
-      'script[src="https://js.stripe.com/v3"]'
+      'script[src="https://js.stripe.com/v3"], script[src="https://js.stripe.com/v3/"]'
     );
     if (script && script.parentElement) {
       script.parentElement.removeChild(script);
@@ -50,17 +50,37 @@ describe('Stripe module loader', () => {
     });
   });
 
-  it('does not inject a duplicate script when one is already present', () => {
-    require('./index');
+  describe('does not inject a duplicate script when one is already present', () => {
+    test('when the script does not have a trailing slash', () => {
+      require('./index');
 
-    const script = document.createElement('script');
-    script.src = 'https://js.stripe.com/v3';
-    document.body.appendChild(script);
+      const script = document.createElement('script');
+      script.src = 'https://js.stripe.com/v3';
+      document.body.appendChild(script);
 
-    return new Promise((resolve) => setTimeout(resolve)).then(() => {
-      expect(
-        document.querySelectorAll('script[src="https://js.stripe.com/v3"]')
-      ).toHaveLength(1);
+      return Promise.resolve().then(() => {
+        expect(
+          document.querySelectorAll(
+            'script[src="https://js.stripe.com/v3"], script[src="https://js.stripe.com/v3/"]'
+          )
+        ).toHaveLength(1);
+      });
+    });
+
+    test('when the script has a trailing slash', () => {
+      require('./index');
+
+      const script = document.createElement('script');
+      script.src = 'https://js.stripe.com/v3/';
+      document.body.appendChild(script);
+
+      return Promise.resolve().then(() => {
+        expect(
+          document.querySelectorAll(
+            'script[src="https://js.stripe.com/v3"], script[src="https://js.stripe.com/v3/"]'
+          )
+        ).toHaveLength(1);
+      });
     });
   });
 
