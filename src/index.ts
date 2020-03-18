@@ -36,7 +36,9 @@ const stripePromise: Promise<StripeConstructor | null> = Promise.resolve().then(
     }
 
     const script: HTMLScriptElement =
-      document.querySelector(`script[src="${V3_URL}"]`) || injectScript();
+      document.querySelector(
+        `script[src="${V3_URL}"], script[src="${V3_URL}/"]`
+      ) || injectScript();
 
     return new Promise((resolve, reject) => {
       script.addEventListener('load', () => {
