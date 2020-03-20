@@ -13,6 +13,10 @@ declare module '@stripe/stripe-js' {
       eventType: 'click',
       handler: (event: StripePaymentRequestButtonElementClickEvent) => any
     ): StripePaymentRequestButtonElement;
+    off(
+      eventType: 'click',
+      handler?: (event: StripePaymentRequestButtonElementClickEvent) => any
+    ): StripePaymentRequestButtonElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
@@ -24,6 +28,10 @@ declare module '@stripe/stripe-js' {
     once(
       eventType: 'ready',
       handler: () => any
+    ): StripePaymentRequestButtonElement;
+    off(
+      eventType: 'ready',
+      handler?: () => any
     ): StripePaymentRequestButtonElement;
 
     /**
@@ -37,6 +45,10 @@ declare module '@stripe/stripe-js' {
       eventType: 'focus',
       handler: () => any
     ): StripePaymentRequestButtonElement;
+    off(
+      eventType: 'focus',
+      handler?: () => any
+    ): StripePaymentRequestButtonElement;
 
     /**
      * Triggered when the element loses focus.
@@ -48,6 +60,10 @@ declare module '@stripe/stripe-js' {
     once(
       eventType: 'blur',
       handler: () => any
+    ): StripePaymentRequestButtonElement;
+    off(
+      eventType: 'blur',
+      handler?: () => any
     ): StripePaymentRequestButtonElement;
 
     /**
