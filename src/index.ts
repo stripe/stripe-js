@@ -45,7 +45,7 @@ const stripePromise: Promise<StripeConstructor | null> = Promise.resolve().then(
         if (window.Stripe) {
           resolve(window.Stripe);
         } else {
-          reject(new Error('Failed to load Stripe.js'));
+          reject(new Error('Stripe.js not available'));
         }
       });
 
