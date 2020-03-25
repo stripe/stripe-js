@@ -391,9 +391,12 @@ declare module '@stripe/stripe-js' {
       | 'lt'
       | 'lv'
       | 'ms'
+      | 'nb'
       | 'nl'
       | 'no'
       | 'pl'
+      | 'pt'
+      | 'pt-BR'
       | 'ru'
       | 'sv'
       | 'zh';

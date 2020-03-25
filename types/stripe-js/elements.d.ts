@@ -229,8 +229,10 @@ declare module '@stripe/stripe-js' {
       | 'ms'
       | 'nb'
       | 'nl'
+      | 'no'
       | 'pl'
       | 'pt'
+      | 'pt-BR'
       | 'ru'
       | 'sv'
       | 'zh';
