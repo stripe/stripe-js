@@ -73,10 +73,12 @@ declare module '@stripe/stripe-js' {
       | 'fr'
       | 'it'
       | 'ja'
+      | 'ms'
       | 'nb'
       | 'nl'
       | 'pl'
       | 'pt'
+      | 'pt-BR'
       | 'sv'
       | 'zh';
 
