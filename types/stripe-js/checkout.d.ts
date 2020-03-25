@@ -60,6 +60,18 @@ declare module '@stripe/stripe-js' {
     billingAddressCollection?: 'auto' | 'required';
 
     /**
+     * Provides configuration for Checkout to collect a shipping address from a customer.
+     */
+    shippingAddressCollection?: {
+      /**
+       * An array of two-letter ISO country codes representing which countries
+       * Checkout should provide as options for shipping locations. The codes are
+       * expected to be uppercase. Unsupported country codes: AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI.
+       */
+      allowedCountries: string[];
+    };
+
+    /**
      * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) of the locale to display Checkout in.
      * Default is `auto` (Stripe detects the locale of the browser).
      */
