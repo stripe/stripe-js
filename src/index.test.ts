@@ -85,6 +85,12 @@ describe('Stripe module loader', () => {
   });
 
   describe('loadStripe', () => {
+    let consoleWarnSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      consoleWarnSpy = jest.spyOn(console, 'warn');
+    });
+
     it('resolves loadStripe with Stripe object', () => {
       const {loadStripe} = require('./index');
       const stripePromise = loadStripe('pk_test_foo');
@@ -101,12 +107,32 @@ describe('Stripe module loader', () => {
       const {loadStripe} = require('./index');
       const stripePromise = loadStripe('pk_test_foo');
 
-      return Promise.resolve().then(() => {
+      return Promise.resolve().then(async () => {
         dispatchScriptEvent('error');
 
-        return expect(stripePromise).rejects.toEqual(
+        await expect(stripePromise).rejects.toEqual(
           new Error('Failed to load Stripe.js')
         );
+        expect(console.warn).not.toHaveBeenCalled();
+      });
+    });
+
+    it('does not cause unhandled rejects when the script fails', () => {
+      const consoleWarnCalled = new Promise((resolve) => {
+        consoleWarnSpy.mockImplementation(resolve);
+      });
+
+      require('./index');
+
+      return Promise.resolve().then(async () => {
+        dispatchScriptEvent('error');
+
+        expect(await consoleWarnCalled).toEqual(
+          new Error('Failed to load Stripe.js')
+        );
+
+        // Turn the task loop to make sure jest's unhandled promise rejection handler didn't trigger
+        return new Promise((resolve) => setImmediate(resolve));
       });
     });
 
@@ -117,7 +143,7 @@ describe('Stripe module loader', () => {
         dispatchScriptEvent('load');
 
         return expect(stripePromise).rejects.toEqual(
-          new Error('Failed to load Stripe.js')
+          new Error('Stripe.js not available')
         );
       });
     });
