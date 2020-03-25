@@ -85,41 +85,59 @@ describe('Stripe module loader', () => {
   });
 
   describe('loadStripe', () => {
-    it('resolves loadStripe with Stripe object', () => {
-      const {loadStripe} = require('./index');
-      const stripePromise = loadStripe('pk_test_foo');
-
-      return new Promise((resolve) => setTimeout(resolve)).then(() => {
-        window.Stripe = jest.fn((key) => ({key})) as any;
-        dispatchScriptEvent('load');
-
-        return expect(stripePromise).resolves.toEqual({key: 'pk_test_foo'});
-      });
+    beforeEach(() => {
+      jest.spyOn(console, 'warn').mockReturnValue();
     });
 
-    it('rejects when the script fails', () => {
+    it('resolves loadStripe with Stripe object', async () => {
       const {loadStripe} = require('./index');
       const stripePromise = loadStripe('pk_test_foo');
 
-      return Promise.resolve().then(() => {
-        dispatchScriptEvent('error');
+      await new Promise((resolve) => setTimeout(resolve));
+      window.Stripe = jest.fn((key) => ({key})) as any;
+      dispatchScriptEvent('load');
 
-        return expect(stripePromise).rejects.toEqual(
-          new Error('Failed to load Stripe.js')
-        );
-      });
+      return expect(stripePromise).resolves.toEqual({key: 'pk_test_foo'});
     });
 
-    it('rejects when Stripe is not added to the window for some reason', () => {
+    it('rejects when the script fails', async () => {
       const {loadStripe} = require('./index');
       const stripePromise = loadStripe('pk_test_foo');
-      return Promise.resolve().then(() => {
-        dispatchScriptEvent('load');
 
-        return expect(stripePromise).rejects.toEqual(
-          new Error('Failed to load Stripe.js')
-        );
-      });
+      await Promise.resolve();
+      dispatchScriptEvent('error');
+
+      await expect(stripePromise).rejects.toEqual(
+        new Error('Failed to load Stripe.js')
+      );
+
+      expect(console.warn).not.toHaveBeenCalled();
+    });
+
+    it('does not cause unhandled rejects when the script fails', async () => {
+      require('./index');
+
+      await Promise.resolve();
+      dispatchScriptEvent('error');
+
+      // Turn the task loop to make sure the internal promise handler has been invoked
+      await new Promise((resolve) => setImmediate(resolve));
+
+      expect(console.warn).toHaveBeenCalledWith(
+        new Error('Failed to load Stripe.js')
+      );
+    });
+
+    it('rejects when Stripe is not added to the window for some reason', async () => {
+      const {loadStripe} = require('./index');
+      const stripePromise = loadStripe('pk_test_foo');
+
+      await Promise.resolve();
+      dispatchScriptEvent('load');
+
+      return expect(stripePromise).rejects.toEqual(
+        new Error('Stripe.js not available')
+      );
     });
   });
 });

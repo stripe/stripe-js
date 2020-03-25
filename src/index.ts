@@ -56,9 +56,18 @@ const stripePromise: Promise<StripeConstructor | null> = Promise.resolve().then(
   }
 );
 
+let loadCalled = false;
+
+stripePromise.catch((err) => {
+  if (!loadCalled) console.warn(err);
+});
+
 export const loadStripe = (
   ...args: Parameters<StripeConstructor>
-): Promise<StripeInstance | null> =>
-  stripePromise.then((maybeStripe) =>
+): Promise<StripeInstance | null> => {
+  loadCalled = true;
+
+  return stripePromise.then((maybeStripe) =>
     maybeStripe ? maybeStripe(...args) : null
   );
+};
