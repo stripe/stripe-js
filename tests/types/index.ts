@@ -245,6 +245,9 @@ stripe
     items: [{sku: 'sku_123', quantity: 1}],
     successUrl: 'https://your-website.com/success',
     cancelUrl: 'https://your-website.com/canceled',
+    shippingAddressCollection: {
+      allowedCountries: ['EN'],
+    },
   })
   .then((result) => {
     console.error(result.error.message);
