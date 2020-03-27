@@ -10,6 +10,9 @@ yarn init -sy
 
 versions=(
   "next"
+  "beta"
+  "latest"
+  "3.8.3"
   "3.7.4"
   "3.6.3"
   "3.5.1"
