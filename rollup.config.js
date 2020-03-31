@@ -1,6 +1,8 @@
 import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
 import ts from 'rollup-plugin-typescript2';
+import replace from '@rollup/plugin-replace';
+import {version} from './package.json';
 
 export default [
   {
@@ -15,6 +17,9 @@ export default [
       }),
       babel({
         extensions: ['.ts', '.js', '.tsx', '.jsx'],
+      }),
+      replace({
+        _VERSION: JSON.stringify(version),
       }),
     ],
   },

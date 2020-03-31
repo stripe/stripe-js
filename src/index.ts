@@ -2,6 +2,10 @@
 ///<reference path='../types/index.d.ts' />
 import {Stripe as StripeInstance, StripeConstructor} from '@stripe/stripe-js';
 
+// `_VERSION` will be rewritten by `@rollup/plugin-replace` as a string literal
+// containing the package.json version
+declare const _VERSION: string;
+
 const V3_URL = 'https://js.stripe.com/v3';
 
 const injectScript = (): HTMLScriptElement => {
@@ -19,6 +23,14 @@ const injectScript = (): HTMLScriptElement => {
   headOrBody.appendChild(script);
 
   return script;
+};
+
+const registerWrapper = (stripe: any): void => {
+  if (!stripe || !stripe._registerWrapper) {
+    return;
+  }
+
+  stripe._registerWrapper({name: 'stripe-js', version: _VERSION});
 };
 
 // Execute our own script injection after a tick to give users time to
@@ -67,7 +79,13 @@ export const loadStripe = (
 ): Promise<StripeInstance | null> => {
   loadCalled = true;
 
-  return stripePromise.then((maybeStripe) =>
-    maybeStripe ? maybeStripe(...args) : null
-  );
+  return stripePromise.then((maybeStripe) => {
+    if (maybeStripe === null) {
+      return null;
+    }
+
+    const stripe = maybeStripe(...args);
+    registerWrapper(stripe);
+    return stripe;
+  });
 };
