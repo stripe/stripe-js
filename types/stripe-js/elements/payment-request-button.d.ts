@@ -63,7 +63,7 @@ declare module '@stripe/stripe-js' {
         /**
          * The height of the Payment Request Button.
          */
-        height?: number;
+        height?: string;
       };
     };
 
