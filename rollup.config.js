@@ -1,8 +1,20 @@
 import babel from 'rollup-plugin-babel';
-import pkg from './package.json';
 import ts from 'rollup-plugin-typescript2';
 import replace from '@rollup/plugin-replace';
-import {version} from './package.json';
+
+import pkg from './package.json';
+
+const PLUGINS = [
+  ts({
+    tsconfigOverride: {exclude: ['**/*.test.ts']},
+  }),
+  babel({
+    extensions: ['.ts', '.js', '.tsx', '.jsx'],
+  }),
+  replace({
+    _VERSION: JSON.stringify(pkg.version),
+  }),
+];
 
 export default [
   {
@@ -11,16 +23,11 @@ export default [
       {file: pkg.main, format: 'cjs'},
       {file: pkg.module, format: 'es'},
     ],
-    plugins: [
-      ts({
-        tsconfigOverride: {exclude: ['**/*.test.ts']},
-      }),
-      babel({
-        extensions: ['.ts', '.js', '.tsx', '.jsx'],
-      }),
-      replace({
-        _VERSION: JSON.stringify(version),
-      }),
-    ],
+    plugins: PLUGINS,
+  },
+  {
+    input: 'src/pure.ts',
+    output: [{file: 'dist/pure.js', format: 'cjs'}],
+    plugins: PLUGINS,
   },
 ];
