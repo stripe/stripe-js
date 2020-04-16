@@ -51,14 +51,10 @@ $commit_titles
 EOF
 )"
 
-  local release_url=$(hub release create -em "$release_notes" "$current_version")
-
-  cat << EOF
-Created GitHub release:
-
-    $release_url
-EOF
-
+  echo "Creating GitHub release"
+  echo ""
+  echo -n "    "
+  hub release create -em "$release_notes" "$current_version"
 }
 
 create_github_release_fallback() {
