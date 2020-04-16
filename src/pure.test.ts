@@ -6,15 +6,16 @@ const SCRIPT_SELECTOR =
 describe('pure module', () => {
   afterEach(() => {
     const script = document.querySelector(SCRIPT_SELECTOR);
-
     if (script && script.parentElement) {
       script.parentElement.removeChild(script);
     }
+
+    delete window.Stripe;
+    jest.resetModules();
   });
 
   test('does not inject the script if loadStripe is not called', async () => {
     require('./pure');
-    await Promise.resolve();
 
     expect(document.querySelector(SCRIPT_SELECTOR)).toBe(null);
   });
@@ -22,7 +23,6 @@ describe('pure module', () => {
   test('it injects the script if loadStripe is called', async () => {
     const {loadStripe} = require('./pure');
     loadStripe('pk_test_foo');
-    await Promise.resolve();
 
     expect(document.querySelector(SCRIPT_SELECTOR)).not.toBe(null);
   });
