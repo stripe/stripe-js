@@ -84,13 +84,14 @@ describe('Stripe module loader', () => {
     });
   });
 
-  describe('loadStripe', () => {
+  describe.each(['./index', './pure'])('loadStripe (%s.ts)', (requirePath) => {
     beforeEach(() => {
+      jest.restoreAllMocks();
       jest.spyOn(console, 'warn').mockReturnValue();
     });
 
     it('resolves loadStripe with Stripe object', async () => {
-      const {loadStripe} = require('./index');
+      const {loadStripe} = require(requirePath);
       const stripePromise = loadStripe('pk_test_foo');
 
       await new Promise((resolve) => setTimeout(resolve));
@@ -101,7 +102,7 @@ describe('Stripe module loader', () => {
     });
 
     it('rejects when the script fails', async () => {
-      const {loadStripe} = require('./index');
+      const {loadStripe} = require(requirePath);
       const stripePromise = loadStripe('pk_test_foo');
 
       await Promise.resolve();
@@ -114,6 +115,20 @@ describe('Stripe module loader', () => {
       expect(console.warn).not.toHaveBeenCalled();
     });
 
+    it('rejects when Stripe is not added to the window for some reason', async () => {
+      const {loadStripe} = require(requirePath);
+      const stripePromise = loadStripe('pk_test_foo');
+
+      await Promise.resolve();
+      dispatchScriptEvent('load');
+
+      return expect(stripePromise).rejects.toEqual(
+        new Error('Stripe.js not available')
+      );
+    });
+  });
+
+  describe('loadStripe (index.ts)', () => {
     it('does not cause unhandled rejects when the script fails', async () => {
       require('./index');
 
@@ -125,18 +140,6 @@ describe('Stripe module loader', () => {
 
       expect(console.warn).toHaveBeenCalledWith(
         new Error('Failed to load Stripe.js')
-      );
-    });
-
-    it('rejects when Stripe is not added to the window for some reason', async () => {
-      const {loadStripe} = require('./index');
-      const stripePromise = loadStripe('pk_test_foo');
-
-      await Promise.resolve();
-      dispatchScriptEvent('load');
-
-      return expect(stripePromise).rejects.toEqual(
-        new Error('Stripe.js not available')
       );
     });
   });

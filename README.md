@@ -95,6 +95,18 @@ one. When you call `loadStripe`, it will use the existing script tag.
 <script src="https://js.stripe.com/v3" async></script>
 ```
 
+### Importing `loadStripe` without side effects
+
+If you would like to use `loadStripe` in your application, but defer loading the
+Stripe.js script until `loadStripe` is first called, use the alternative
+`@stripe/stripe-js/pure` import path:
+
+```
+import {loadStripe} from '@stripe/stripe-js/pure';
+
+// Stripe.js will not be loaded until `loadStripe` is called
+```
+
 ## Stripe.js Documentation
 
 - [Stripe.js Docs](https://stripe.com/docs/stripe-js)
