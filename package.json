@@ -15,7 +15,7 @@
     "build": "yarn clean && yarn rollup -c",
     "clean": "rimraf dist",
     "ci": "yarn lint && yarn test && yarn test:versions && yarn test:types && yarn typecheck && yarn build",
-    "prepublishOnly": "yarn ci",
+    "prepublishOnly": "echo \"\nPlease use ./scripts/publish instead\n\" && exit 1",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-list-different": "prettier './**/*.{js,ts,md,html,css}' --list-different"
   },
