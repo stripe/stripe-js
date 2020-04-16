@@ -31,41 +31,44 @@ const registerWrapper = (stripe: any): void => {
   stripe._registerWrapper({name: 'stripe-js', version: _VERSION});
 };
 
+let stripePromise: Promise<StripeConstructor | null> | null = null;
+
 export const loadScript = (): Promise<StripeConstructor | null> => {
-  // Execute our own script injection after a tick to give users time to
-  // do their own script injection.
-  const stripePromise: Promise<StripeConstructor | null> = Promise.resolve().then(
-    () => {
-      if (typeof window === 'undefined') {
-        // Resolve to null when imported server side. This makes the module
-        // safe to import in an isomorphic code base.
-        return null;
-      }
+  // Ensure that we only attempt to load Stripe.js at most once
+  if (stripePromise !== null) {
+    return stripePromise;
+  }
 
-      if (window.Stripe) {
-        return window.Stripe;
-      }
-
-      const script: HTMLScriptElement =
-        document.querySelector(
-          `script[src="${V3_URL}"], script[src="${V3_URL}/"]`
-        ) || injectScript();
-
-      return new Promise((resolve, reject) => {
-        script.addEventListener('load', () => {
-          if (window.Stripe) {
-            resolve(window.Stripe);
-          } else {
-            reject(new Error('Stripe.js not available'));
-          }
-        });
-
-        script.addEventListener('error', () => {
-          reject(new Error('Failed to load Stripe.js'));
-        });
-      });
+  stripePromise = new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') {
+      // Resolve to null when imported server side. This makes the module
+      // safe to import in an isomorphic code base.
+      resolve(null);
+      return;
     }
-  );
+
+    if (window.Stripe) {
+      resolve(window.Stripe);
+      return;
+    }
+
+    const script: HTMLScriptElement =
+      document.querySelector(
+        `script[src="${V3_URL}"], script[src="${V3_URL}/"]`
+      ) || injectScript();
+
+    script.addEventListener('load', () => {
+      if (window.Stripe) {
+        resolve(window.Stripe);
+      } else {
+        reject(new Error('Stripe.js not available'));
+      }
+    });
+
+    script.addEventListener('error', () => {
+      reject(new Error('Failed to load Stripe.js'));
+    });
+  });
 
   return stripePromise;
 };
