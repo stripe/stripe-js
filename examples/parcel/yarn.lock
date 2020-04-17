@@ -765,6 +765,11 @@
     "@parcel/utils" "^1.11.0"
     physical-cpu-count "^2.0.0"
 
+"@stripe/stripe-js@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.4.0.tgz#287b0fb653d9a34321dfa8b52f8c99b7983f2eda"
+  integrity sha512-ZvrD4s0T2VcZLXIll0eO9YO/Gnr2sgHgycqvSVN5A3ok/USesD9SL6j1vX9wTy7DVbm0vvQQE01Jap6PjP1IVw==
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"

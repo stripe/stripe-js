@@ -18,6 +18,7 @@
     ]
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.4.0",
     "express": "^4.17.1"
   },
   "devDependencies": {

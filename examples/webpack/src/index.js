@@ -1,5 +1,6 @@
+import {loadStripe} from '@stripe/stripe-js';
+
 import './styles.css';
-import {loadStripe} from '../../../src';
 
 (async () => {
   // setup DOM
@@ -13,11 +14,10 @@ import {loadStripe} from '../../../src';
   rootNode.appendChild(form);
 
   // setup Stripe.js and Elements
-  const Stripe = await loadStripe();
-  const stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+  const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
   const elements = stripe.elements();
 
-  // setup Card Element
+  // setup card Element
   const cardElement = elements.create('card', {});
   cardElement.mount(cardWrapper);
 
