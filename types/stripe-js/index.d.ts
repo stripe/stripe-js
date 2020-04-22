@@ -5,6 +5,8 @@
 ///<reference path='./payment-request.d.ts' />
 ///<reference path='./token-and-sources.d.ts' />
 
+import {TokenCreateParams} from '@stripe/stripe-js';
+
 declare module '@stripe/stripe-js' {
   interface Stripe {
     /////////////////////////////
@@ -303,6 +305,26 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: 'cvc_update',
       element?: StripeCardCvcElement
+    ): Promise<{token?: Token; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createToken` to create a single-use token that wraps a user’s legal entity information.
+     * Use this when creating or updating a Connect account.
+     * See the [account tokens documentation](https://stripe.com/docs/connect/account-tokens) to learn more.
+     */
+    createToken(
+      tokenType: 'account',
+      data: TokenCreateParams.Account
+    ): Promise<{token?: Token; error?: StripeError}>;
+
+    /**
+     * Use `stripe.createToken` to create a single-use token that represents the details for a person.
+     * Use this when creating or updating persons associated with a Connect account.
+     * See the [documentation](https://stripe.com/docs/connect/account-tokens) to learn more.
+     */
+    createToken(
+      tokenType: 'person',
+      data: TokenCreateParams.Person
     ): Promise<{token?: Token; error?: StripeError}>;
 
     /**
