@@ -7,14 +7,14 @@
   "jsnext:main": "dist/stripe.esm.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "yarn lint && yarn test:unit && yarn test:versions && yarn test:types && yarn typecheck",
+    "test:unit": "jest",
     "test:versions": "./tests/versions/scripts/test.sh",
     "test:types": "tsc -p ./tests/types && jest --roots '<rootDir>/tests/types'",
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-list-different",
     "typecheck": "tsc",
     "build": "yarn clean && yarn rollup -c",
     "clean": "rimraf dist",
-    "ci": "yarn lint && yarn test && yarn test:versions && yarn test:types && yarn typecheck && yarn build",
     "prepublishOnly": "echo \"\nPlease use ./scripts/publish instead\n\" && exit 1",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-list-different": "prettier './**/*.{js,ts,md,html,css}' --list-different"

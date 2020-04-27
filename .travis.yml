@@ -2,4 +2,5 @@ language: node_js
 node_js: 'lts/*'
 cache: yarn
 script:
-  - yarn run ci
+  - yarn run test
+  - yarn run build
