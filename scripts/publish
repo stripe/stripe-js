@@ -122,7 +122,7 @@ echo "Installing dependencies according to lockfile"
 yarn -s install --frozen-lockfile
 
 echo "Running tests"
-yarn -s run ci
+yarn -s run test
 
 echo "Bumping package.json $RELEASE_TYPE version and tagging commit"
 yarn -s version --$RELEASE_TYPE
