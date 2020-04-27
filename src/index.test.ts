@@ -82,6 +82,30 @@ describe('Stripe module loader', () => {
         ).toHaveLength(1);
       });
     });
+
+    test('ignores non-Stripe.js scripts that start with the v3 url', async () => {
+      const script = document.createElement('script');
+      script.src = 'https://js.stripe.com/v3/futureBundle.js';
+      document.body.appendChild(script);
+
+      require('./index');
+
+      await Promise.resolve();
+
+      expect(
+        document.querySelectorAll('script[src^="https://js.stripe.com/v3"]')
+      ).toHaveLength(2);
+
+      expect(
+        document.querySelector(
+          'script[src="https://js.stripe.com/v3/futureBundle.js"]'
+        )
+      ).not.toBe(null);
+
+      expect(
+        document.querySelector('script[src="https://js.stripe.com/v3"]')
+      ).not.toBe(null);
+    });
   });
 
   describe.each(['./index', './pure'])('loadStripe (%s.ts)', (requirePath) => {

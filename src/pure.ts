@@ -1,8 +1,32 @@
-///<reference path='../types/index.d.ts' />
-import {Stripe as StripeInstance, StripeConstructor} from '@stripe/stripe-js';
-import {loadScript, initStripe} from './shared';
+import {
+  validateLoadParams,
+  loadScript,
+  initStripe,
+  LoadStripe,
+  LoadParams,
+} from './shared';
 
-export const loadStripe = (
-  ...args: Parameters<StripeConstructor>
-): Promise<StripeInstance | null> =>
-  loadScript().then((maybeStripe) => initStripe(maybeStripe, args));
+type SetLoadParams = (params: LoadParams) => void;
+
+let loadParams: null | LoadParams;
+let loadStripeCalled = false;
+
+export const loadStripe: LoadStripe & {setLoadParameters: SetLoadParams} = (
+  ...args
+) => {
+  loadStripeCalled = true;
+
+  return loadScript(loadParams).then((maybeStripe) =>
+    initStripe(maybeStripe, args)
+  );
+};
+
+loadStripe.setLoadParameters = (params): void => {
+  if (loadStripeCalled) {
+    throw new Error(
+      'You cannot change load parameters after calling loadStripe'
+    );
+  }
+
+  loadParams = validateLoadParams(params);
+};

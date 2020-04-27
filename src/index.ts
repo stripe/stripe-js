@@ -1,22 +1,18 @@
-///<reference path='../types/index.d.ts' />
-import {Stripe as StripeInstance, StripeConstructor} from '@stripe/stripe-js';
-import {loadScript, initStripe} from './shared';
+import {loadScript, initStripe, LoadStripe} from './shared';
 
 // Execute our own script injection after a tick to give users time to do their
 // own script injection.
-const stripePromise = Promise.resolve().then(loadScript);
+const stripePromise = Promise.resolve().then(() => loadScript(null));
 
 let loadCalled = false;
 
-stripePromise.catch((err) => {
+stripePromise.catch((err: Error) => {
   if (!loadCalled) {
     console.warn(err);
   }
 });
 
-export const loadStripe = (
-  ...args: Parameters<StripeConstructor>
-): Promise<StripeInstance | null> => {
+export const loadStripe: LoadStripe = (...args) => {
   loadCalled = true;
 
   return stripePromise.then((maybeStripe) => initStripe(maybeStripe, args));
