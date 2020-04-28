@@ -6,6 +6,7 @@
   "module": "dist/stripe.esm.js",
   "jsnext:main": "dist/stripe.esm.js",
   "types": "types/index.d.ts",
+  "typings": "types/index.d.ts",
   "scripts": {
     "test": "yarn lint && yarn test:unit && yarn test:versions && yarn test:types && yarn typecheck",
     "test:unit": "jest",
