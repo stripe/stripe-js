@@ -280,6 +280,20 @@ stripe.createToken('bank_account', {
   account_holder_type: '',
 });
 
+stripe.createToken('account', {
+  individual: {
+    first_name: 'Jane',
+    last_name: 'Doe',
+  },
+  tos_shown_and_accepted: true,
+});
+
+stripe.createToken('person', {
+  first_name: 'Jane',
+  last_name: 'Doe',
+  relationship: {owner: true},
+});
+
 const createSource = async () => {
   const {source, error} = await stripe.createSource(ibanElement, {
     type: 'sepa_debit',

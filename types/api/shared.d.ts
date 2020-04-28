@@ -87,4 +87,41 @@ declare module '@stripe/stripe-js' {
      */
     line1: string;
   }
+
+  interface JapanAddressParam {
+    /**
+     * City or ward.
+     */
+    city?: string;
+
+    /**
+     * Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     */
+    country?: string;
+
+    /**
+     * Block or building number.
+     */
+    line1?: string;
+
+    /**
+     * Building details.
+     */
+    line2?: string;
+
+    /**
+     * Postal code.
+     */
+    postal_code?: string;
+
+    /**
+     * Prefecture.
+     */
+    state?: string;
+
+    /**
+     * Town or cho-me.
+     */
+    town?: string;
+  }
 }
