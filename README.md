@@ -63,9 +63,9 @@ declarations. These changes will not affect Stripe.js itself.
 ## Ensuring Stripe.js is available everywhere
 
 To best leverage Stripe’s advanced fraud functionality, ensure that Stripe.js is
-loaded on every page, not just your checkout page. This allows Stripe to detect
-anomalous behavior that may be indicative of fraud as customers browse your
-website.
+loaded on every page, not just your checkout page. This
+[allows Stripe to detect suspicious behavior](/docs/disputes/prevention/advanced-fraud-detection)
+that may be indicative of fraud as customers browse your website.
 
 By default, this module will insert a `<script>` tag that loads Stripe.js from
 `https://js.stripe.com`. This happens as a side effect immediately upon
@@ -105,7 +105,24 @@ Stripe.js script until `loadStripe` is first called, use the alternative
 import {loadStripe} from '@stripe/stripe-js/pure';
 
 // Stripe.js will not be loaded until `loadStripe` is called
+const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 ```
+
+### Disabling advanced fraud detection signals
+
+If you would like to
+[disable advanced fraud detection](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection#disabling-advanced-fraud-detection)
+altogether, use `loadStripe.setLoadParameters`:
+
+```
+import {loadStripe} from '@stripe/stripe-js/pure';
+
+loadStripe.setLoadParameters({advancedFraudSignals: false})
+const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+```
+
+The `loadStripe.setLoadParameters` function is only available when importing
+`loadStripe` from `@stripe/stripe-js/pure`.
 
 ## Stripe.js Documentation
 

@@ -1,14 +1,46 @@
+///<reference path='../types/index.d.ts' />
 import {Stripe, StripeConstructor} from '@stripe/stripe-js';
+
+export type LoadStripe = (
+  ...args: Parameters<StripeConstructor>
+) => Promise<Stripe | null>;
+
+export interface LoadParams {
+  advancedFraudSignals: boolean;
+}
 
 // `_VERSION` will be rewritten by `@rollup/plugin-replace` as a string literal
 // containing the package.json version
 declare const _VERSION: string;
 
 const V3_URL = 'https://js.stripe.com/v3';
+const V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
+const EXISTING_SCRIPT_MESSAGE =
+  'loadStripe.setLoadParameters was called but an existing Stripe.js script already exists in the document; existing script parameters will be used';
 
-const injectScript = (): HTMLScriptElement => {
+export const findScript = (): HTMLScriptElement | null => {
+  const scripts = document.querySelectorAll<HTMLScriptElement>(
+    `script[src^="${V3_URL}"]`
+  );
+
+  for (let i = 0; i < scripts.length; i++) {
+    const script = scripts[i];
+
+    if (!V3_URL_REGEX.test(script.src)) {
+      continue;
+    }
+
+    return script;
+  }
+
+  return null;
+};
+
+const injectScript = (params: null | LoadParams): HTMLScriptElement => {
+  const queryString =
+    params && !params.advancedFraudSignals ? '?advancedFraudSignals=false' : '';
   const script = document.createElement('script');
-  script.src = V3_URL;
+  script.src = `${V3_URL}${queryString}`;
 
   const headOrBody = document.head || document.body;
 
@@ -33,7 +65,9 @@ const registerWrapper = (stripe: any): void => {
 
 let stripePromise: Promise<StripeConstructor | null> | null = null;
 
-export const loadScript = (): Promise<StripeConstructor | null> => {
+export const loadScript = (
+  params: null | LoadParams
+): Promise<StripeConstructor | null> => {
   // Ensure that we only attempt to load Stripe.js at most once
   if (stripePromise !== null) {
     return stripePromise;
@@ -47,27 +81,39 @@ export const loadScript = (): Promise<StripeConstructor | null> => {
       return;
     }
 
+    if (window.Stripe && params) {
+      console.warn(EXISTING_SCRIPT_MESSAGE);
+    }
+
     if (window.Stripe) {
       resolve(window.Stripe);
       return;
     }
 
-    const script: HTMLScriptElement =
-      document.querySelector(
-        `script[src="${V3_URL}"], script[src="${V3_URL}/"]`
-      ) || injectScript();
+    try {
+      let script = findScript();
 
-    script.addEventListener('load', () => {
-      if (window.Stripe) {
-        resolve(window.Stripe);
-      } else {
-        reject(new Error('Stripe.js not available'));
+      if (script && params) {
+        console.warn(EXISTING_SCRIPT_MESSAGE);
+      } else if (!script) {
+        script = injectScript(params);
       }
-    });
 
-    script.addEventListener('error', () => {
-      reject(new Error('Failed to load Stripe.js'));
-    });
+      script.addEventListener('load', () => {
+        if (window.Stripe) {
+          resolve(window.Stripe);
+        } else {
+          reject(new Error('Stripe.js not available'));
+        }
+      });
+
+      script.addEventListener('error', () => {
+        reject(new Error('Failed to load Stripe.js'));
+      });
+    } catch (error) {
+      reject(error);
+      return;
+    }
   });
 
   return stripePromise;
@@ -84,4 +130,28 @@ export const initStripe = (
   const stripe = maybeStripe(...args);
   registerWrapper(stripe);
   return stripe;
+};
+
+export const validateLoadParams = (params: any): LoadParams => {
+  const errorMessage = `invalid load parameters; expected object of shape
+
+    {advancedFraudSignals: boolean}
+
+but received
+
+    ${JSON.stringify(params)}
+`;
+
+  if (params === null || typeof params !== 'object') {
+    throw new Error(errorMessage);
+  }
+
+  if (
+    Object.keys(params).length === 1 &&
+    typeof params.advancedFraudSignals === 'boolean'
+  ) {
+    return params;
+  }
+
+  throw new Error(errorMessage);
 };
