@@ -215,13 +215,18 @@ declare module '@stripe/stripe-js' {
     locale?:
       | 'auto'
       | 'ar'
+      | 'bg'
+      | 'cs'
       | 'da'
       | 'de'
+      | 'el'
       | 'en'
       | 'es'
+      | 'et'
       | 'fi'
       | 'fr'
       | 'he'
+      | 'id'
       | 'it'
       | 'ja'
       | 'lt'
@@ -234,6 +239,8 @@ declare module '@stripe/stripe-js' {
       | 'pt'
       | 'pt-BR'
       | 'ru'
+      | 'sk'
+      | 'sl'
       | 'sv'
       | 'zh';
   }
