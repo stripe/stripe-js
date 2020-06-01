@@ -22,6 +22,24 @@ declare module '@stripe/stripe-js' {
      * An array of objects representing the items that your customer would like to purchase.
      * These items are shown as line items in the Checkout interface and make up the total amount to be collected by Checkout.
      */
+    lineItems?: Array<{
+      /**
+       * The ID of the price that the customer would like to purchase. SKU or plan IDs may also be used.
+       */
+      price?: string;
+
+      /**
+       * The quantity of units for the item.
+       */
+      quantity?: number;
+    }>;
+
+    /**
+     * An array of objects representing the items that your customer would like to purchase.
+     * These items are shown as line items in the Checkout interface and make up the total amount to be collected by Checkout.
+     *
+     * @deprecated
+     */
     items?: Array<{
       /**
        * The ID of the SKU that the customer would like to purchase
@@ -38,6 +56,11 @@ declare module '@stripe/stripe-js' {
        */
       quantity?: number;
     }>;
+
+    /**
+     * The mode of the Checkout Session. Required if using lineItems.
+     */
+    mode?: 'payment' | 'subscription';
 
     /**
      * A unique string to reference the Checkout session.
