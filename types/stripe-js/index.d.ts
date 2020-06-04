@@ -61,6 +61,23 @@ declare module '@stripe/stripe-js' {
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /**
+     * Use `stripe.confirmBancontactPayment` in the [Bancontact Payments with Payment Methods](https://stripe.com/docs/payments/bancontact#web) flow when the customer submits your payment form.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_bancontact_payment
+     */
+    confirmBancontactPayment(
+      clientSecret: string,
+      data?: ConfirmBancontactPaymentData,
+      options?: ConfirmBancontactPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
      * Use `stripe.confirmCardPayment` when the customer submits your payment form.
      * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide and carry out 3DS or other next actions if they are required.
      *
@@ -76,6 +93,23 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmCardPaymentData,
       options?: ConfirmCardPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
+     * Use `stripe.confirmEpsPayment` in the [EPS Payments with Payment Methods](https://stripe.com/docs/payments/eps#web) flow when the customer submits your payment form.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_eps_payment
+     */
+    confirmEpsPayment(
+      clientSecret: string,
+      data?: ConfirmEpsPaymentData,
+      options?: ConfirmEpsPaymentOptions
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /**
@@ -96,6 +130,23 @@ declare module '@stripe/stripe-js' {
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /**
+     * Use `stripe.confirmGiropayPayment` in the [giropay Payments with Payment Methods](https://stripe.com/docs/payments/giropay#web) flow when the customer submits your payment form.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_giropay_payment
+     */
+    confirmGiropayPayment(
+      clientSecret: string,
+      data?: ConfirmGiropayPaymentData,
+      options?: ConfirmGiropayPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
      * Use `stripe.confirmIdealPayment` in the [iDEAL Payments with Payment Methods](https://stripe.com/docs/payments/ideal) flow when the customer submits your payment form.
      * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
@@ -110,6 +161,23 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmIdealPaymentData,
       options?: ConfirmIdealPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
+     * Use `stripe.confirmP24Payment` in the [Przelewy24 Payments with Payment Methods](https://stripe.com/docs/payments/p24#web) flow when the customer submits your payment form.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_p24_payment
+     */
+    confirmP24Payment(
+      clientSecret: string,
+      data?: ConfirmP24PaymentData,
+      options?: ConfirmP24PaymentOptions
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /**

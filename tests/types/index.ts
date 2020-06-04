@@ -356,6 +356,21 @@ stripe.confirmAuBecsDebitPayment('', {payment_method: ''});
 
 stripe.confirmAuBecsDebitPayment('');
 
+stripe.confirmBancontactPayment('', {
+  payment_method: {billing_details: {name: 'Jenny Rosen'}},
+  return_url: window.location.href,
+});
+
+stripe.confirmBancontactPayment('', {payment_method: ''});
+
+stripe.confirmBancontactPayment(
+  '',
+  {payment_method: ''},
+  {handleActions: false}
+);
+
+stripe.confirmBancontactPayment('');
+
 stripe
   .confirmCardPayment('', {
     payment_method: {card: cardElement, billing_details: {name: ''}},
@@ -372,6 +387,17 @@ stripe.confirmCardPayment('');
 
 stripe.confirmCardPayment('');
 
+stripe.confirmEpsPayment('', {
+  payment_method: {billing_details: {name: 'Jenny Rosen'}},
+  return_url: window.location.href,
+});
+
+stripe.confirmEpsPayment('', {payment_method: ''});
+
+stripe.confirmEpsPayment('', {payment_method: ''}, {handleActions: false});
+
+stripe.confirmEpsPayment('');
+
 stripe.confirmFpxPayment('', {
   payment_method: {fpx: fpxBankElement},
   return_url: window.location.href,
@@ -385,6 +411,17 @@ stripe.confirmFpxPayment('', {payment_method: {fpx: {bank: ''}}});
 
 stripe.confirmFpxPayment('');
 
+stripe.confirmGiropayPayment('', {
+  payment_method: {billing_details: {name: 'Jenny Rosen'}},
+  return_url: window.location.href,
+});
+
+stripe.confirmGiropayPayment('', {payment_method: ''});
+
+stripe.confirmGiropayPayment('', {payment_method: ''}, {handleActions: false});
+
+stripe.confirmGiropayPayment('');
+
 stripe.confirmIdealPayment('', {
   payment_method: {ideal: idealBankElement},
   return_url: window.location.href,
@@ -397,6 +434,17 @@ stripe.confirmIdealPayment('', {payment_method: ''}, {handleActions: false});
 stripe.confirmIdealPayment('', {payment_method: {ideal: {bank: ''}}});
 
 stripe.confirmIdealPayment('');
+
+stripe.confirmP24Payment('', {
+  payment_method: {billing_details: {email: 'jenny@example.com'}},
+  return_url: window.location.href,
+});
+
+stripe.confirmP24Payment('', {payment_method: ''});
+
+stripe.confirmP24Payment('', {payment_method: ''}, {handleActions: false});
+
+stripe.confirmP24Payment('');
 
 stripe.confirmSepaDebitPayment('', {
   payment_method: {
