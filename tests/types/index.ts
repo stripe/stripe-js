@@ -356,6 +356,21 @@ stripe.confirmAuBecsDebitPayment('', {payment_method: ''});
 
 stripe.confirmAuBecsDebitPayment('');
 
+stripe.confirmBancontactPayment('', {
+  payment_method: {billing_details: {name: 'Jenny Rosen'}},
+  return_url: window.location.href,
+});
+
+stripe.confirmBancontactPayment('', {payment_method: ''});
+
+stripe.confirmBancontactPayment(
+  '',
+  {payment_method: ''},
+  {handleActions: false}
+);
+
+stripe.confirmBancontactPayment('');
+
 stripe
   .confirmCardPayment('', {
     payment_method: {card: cardElement, billing_details: {name: ''}},

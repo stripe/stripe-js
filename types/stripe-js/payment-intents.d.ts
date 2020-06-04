@@ -4,10 +4,26 @@ declare module '@stripe/stripe-js' {
 
   type CreatePaymentMethodData =
     | CreatePaymentMethodAuBecsDebitData
+    | CreatePaymentMethodBancontactData
     | CreatePaymentMethodCardData
     | CreatePaymentMethodIdealData
     | CreatePaymentMethodFpxData
     | CreatePaymentMethodSepaDebitData;
+
+  interface CreatePaymentMethodBancontactData
+    extends PaymentMethodCreateParams {
+    type: 'bancontact';
+
+    /*
+     * The customer's billing details.
+     * `name` is required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails & {
+      name: string;
+    };
+  }
 
   interface CreatePaymentMethodCardData extends PaymentMethodCreateParams {
     type: 'card';
@@ -101,6 +117,38 @@ declare module '@stripe/stripe-js' {
       name: string;
       email: string;
     };
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmBancontactPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmBancontactPaymentData extends PaymentIntentConfirmParams {
+    /*
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodBancontactData, 'type'>;
+
+    /**
+     * The url your customer will be directed to after they complete authentication.
+     *
+     * @recommended
+     */
+    return_url?: string;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmBancontactPayment`.
+   */
+  interface ConfirmBancontactPaymentOptions {
+    /*
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/bancontact#handle-redirect).
+     * Default is `true`.
+     */
+    handleActions?: boolean;
   }
 
   /**
