@@ -7,6 +7,7 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodBancontactData
     | CreatePaymentMethodCardData
     | CreatePaymentMethodEpsData
+    | CreatePaymentMethodGiropayData
     | CreatePaymentMethodIdealData
     | CreatePaymentMethodFpxData
     | CreatePaymentMethodSepaDebitData;
@@ -57,6 +58,20 @@ declare module '@stripe/stripe-js' {
            */
           bank: string;
         };
+  }
+
+  interface CreatePaymentMethodGiropayData extends PaymentMethodCreateParams {
+    type: 'giropay';
+
+    /*
+     * The customer's billing details.
+     * `name` is required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails & {
+      name: string;
+    };
   }
 
   interface CreatePaymentMethodIdealData extends PaymentMethodCreateParams {
@@ -270,6 +285,38 @@ declare module '@stripe/stripe-js' {
   interface ConfirmFpxPaymentOptions {
     /*
      * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/fpx#handle-redirect).
+     * Default is `true`.
+     */
+    handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmGiropayPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmGiropayPaymentData extends PaymentIntentConfirmParams {
+    /*
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodGiropayData, 'type'>;
+
+    /**
+     * The url your customer will be directed to after they complete authentication.
+     *
+     * @recommended
+     */
+    return_url?: string;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmGiropayPayment`.
+   */
+  interface ConfirmGiropayPaymentOptions {
+    /*
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/giropay#handle-redirect).
      * Default is `true`.
      */
     handleActions?: boolean;

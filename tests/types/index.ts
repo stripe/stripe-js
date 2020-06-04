@@ -411,6 +411,17 @@ stripe.confirmFpxPayment('', {payment_method: {fpx: {bank: ''}}});
 
 stripe.confirmFpxPayment('');
 
+stripe.confirmGiropayPayment('', {
+  payment_method: {billing_details: {name: 'Jenny Rosen'}},
+  return_url: window.location.href,
+});
+
+stripe.confirmGiropayPayment('', {payment_method: ''});
+
+stripe.confirmGiropayPayment('', {payment_method: ''}, {handleActions: false});
+
+stripe.confirmGiropayPayment('');
+
 stripe.confirmIdealPayment('', {
   payment_method: {ideal: idealBankElement},
   return_url: window.location.href,

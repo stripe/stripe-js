@@ -130,6 +130,23 @@ declare module '@stripe/stripe-js' {
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /**
+     * Use `stripe.confirmGiropayPayment` in the [giropay Payments with Payment Methods](https://stripe.com/docs/payments/giropay#web) flow when the customer submits your payment form.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_giropay_payment
+     */
+    confirmGiropayPayment(
+      clientSecret: string,
+      data?: ConfirmGiropayPaymentData,
+      options?: ConfirmGiropayPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
      * Use `stripe.confirmIdealPayment` in the [iDEAL Payments with Payment Methods](https://stripe.com/docs/payments/ideal) flow when the customer submits your payment form.
      * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
