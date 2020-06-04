@@ -9,6 +9,7 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodEpsData
     | CreatePaymentMethodGiropayData
     | CreatePaymentMethodIdealData
+    | CreatePaymentMethodP24Data
     | CreatePaymentMethodFpxData
     | CreatePaymentMethodSepaDebitData;
 
@@ -85,6 +86,20 @@ declare module '@stripe/stripe-js' {
            */
           bank?: string;
         };
+  }
+
+  interface CreatePaymentMethodP24Data extends PaymentMethodCreateParams {
+    type: 'p24';
+
+    /*
+     * The customer's billing details.
+     * `email` is required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails & {
+      email: string;
+    };
   }
 
   interface CreatePaymentMethodSepaDebitData extends PaymentMethodCreateParams {
@@ -349,6 +364,38 @@ declare module '@stripe/stripe-js' {
   interface ConfirmIdealPaymentOptions {
     /*
      * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/ideal#handle-redirect).
+     * Default is `true`.
+     */
+    handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmP24Payment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmP24PaymentData extends PaymentIntentConfirmParams {
+    /*
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodP24Data, 'type'>;
+
+    /**
+     * The url your customer will be directed to after they complete authentication.
+     *
+     * @recommended
+     */
+    return_url?: string;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmP24Payment`.
+   */
+  interface ConfirmP24PaymentOptions {
+    /*
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/p24#handle-redirect).
      * Default is `true`.
      */
     handleActions?: boolean;
