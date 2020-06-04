@@ -387,6 +387,17 @@ stripe.confirmCardPayment('');
 
 stripe.confirmCardPayment('');
 
+stripe.confirmEpsPayment('', {
+  payment_method: {billing_details: {name: 'Jenny Rosen'}},
+  return_url: window.location.href,
+});
+
+stripe.confirmEpsPayment('', {payment_method: ''});
+
+stripe.confirmEpsPayment('', {payment_method: ''}, {handleActions: false});
+
+stripe.confirmEpsPayment('');
+
 stripe.confirmFpxPayment('', {
   payment_method: {fpx: fpxBankElement},
   return_url: window.location.href,
