@@ -42,6 +42,11 @@ For more information on how to use Stripe.js once it loads, please refer to the
 [accept a payment](https://stripe.com/docs/payments/accept-a-payment) with
 Stripe.
 
+If you have deployed a
+[Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/Security/CSP),
+make sure to
+[include Stripe.js in your directives](https://stripe.com/docs/security/guide#content-security-policy).
+
 ## TypeScript support
 
 This package includes TypeScript declarations for Stripe.js. We support projects
