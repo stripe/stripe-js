@@ -164,6 +164,39 @@ declare module '@stripe/stripe-js' {
     };
   }
 
+  interface CreatePaymentMethodBacsDebitData extends PaymentMethodCreateParams {
+    type: 'bacs_debit';
+
+    bacs_debit: {
+      /**
+       * A sort code.
+       */
+      sort_code: string;
+
+      /**
+       * An account number.
+       */
+      account_number: string;
+    };
+
+    /*
+     * The customer's billing details.
+     * `name`, `email`, and `address` are required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails & {
+      name: string;
+      email: string;
+      address: PaymentMethodCreateParams.BillingDetails.Address & {
+        line1: string;
+        city: string;
+        country: string;
+        postal_code: string;
+      };
+    };
+  }
+
   /**
    * Data to be sent with a `stripe.confirmBancontactPayment` request.
    * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
