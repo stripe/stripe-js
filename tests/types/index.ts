@@ -547,6 +547,24 @@ stripe.confirmAuBecsDebitSetup('', {
   },
 });
 
+stripe.confirmBacsDebitSetup('', {payment_method: ''});
+
+stripe.confirmBacsDebitSetup('', {
+  payment_method: {
+    bacs_debit: {sort_code: '', account_number: ''},
+    billing_details: {
+      name: '',
+      email: '',
+      address: {
+        line1: '',
+        city: '',
+        country: '',
+        postal_code: '',
+      },
+    },
+  },
+});
+
 stripe.confirmCardSetup('', {
   payment_method: {card: cardElement, billing_details: {name: ''}},
 });

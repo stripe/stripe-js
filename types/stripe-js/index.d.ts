@@ -260,6 +260,24 @@ declare module '@stripe/stripe-js' {
     ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
 
     /**
+     * Use `stripe.confirmBacsDebitSetup` in the [Bacs Direct Debit Payments](https://stripe.com/docs/payments/payment-methods/bacs-debit) flow when the customer submits your payment form.
+     * When called, it will confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) with `data` you provide.
+     * Note that there are some additional requirements to this flow that are not covered in this reference.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/payment-methods/bacs-debit) for more details.
+     *
+     * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     * These use cases are detailed in the sections that follow.
+     *
+     * @docs https://stripe.com/docs/js/setup_intents/confirm_bacs_debit_setup
+     */
+    confirmBacsDebitSetup(
+      clientSecret: string,
+      data?: ConfirmBacsDebitSetupData
+    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+
+    /**
      * Use `stripe.confirmCardSetup` in the [Setup Intents API flow](https://stripe.com/docs/payments/save-and-reuse) when the customer submits your payment form.
      * When called, it will confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) with `data` you provide and carry out 3DS or other next actions if they are required.
      *
