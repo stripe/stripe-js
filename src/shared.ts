@@ -26,7 +26,7 @@ export const findScript = (): HTMLScriptElement | null => {
   for (let i = 0; i < scripts.length; i++) {
     const script = scripts[i];
 
-    if (!V3_URL_REGEX.test(script.src)) {
+    if (script instanceof HTMLScriptElement && !V3_URL_REGEX.test(script.src)) {
       continue;
     }
 
