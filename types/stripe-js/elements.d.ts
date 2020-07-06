@@ -222,6 +222,7 @@ declare module '@stripe/stripe-js' {
       | 'el'
       | 'en'
       | 'es'
+      | 'es-419'
       | 'et'
       | 'fi'
       | 'fr'
