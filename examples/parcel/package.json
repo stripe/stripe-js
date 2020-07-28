@@ -25,6 +25,6 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "@stripe/stripe-js": "^1.4.0"
+    "@stripe/stripe-js": "^1.8.0"
   }
 }
