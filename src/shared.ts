@@ -127,7 +127,7 @@ export const initStripe = (
     return null;
   }
 
-  const stripe = maybeStripe(...args);
+  const stripe = maybeStripe.apply(undefined, args);
   registerWrapper(stripe);
   return stripe;
 };
