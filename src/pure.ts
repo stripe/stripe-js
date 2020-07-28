@@ -15,9 +15,10 @@ export const loadStripe: LoadStripe & {setLoadParameters: SetLoadParams} = (
   ...args
 ) => {
   loadStripeCalled = true;
+  const startTime = Date.now();
 
   return loadScript(loadParams).then((maybeStripe) =>
-    initStripe(maybeStripe, args)
+    initStripe(maybeStripe, args, startTime)
   );
 };
 
