@@ -55,12 +55,12 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
   return script;
 };
 
-const registerWrapper = (stripe: any): void => {
+const registerWrapper = (stripe: any, startTime: number): void => {
   if (!stripe || !stripe._registerWrapper) {
     return;
   }
 
-  stripe._registerWrapper({name: 'stripe-js', version: _VERSION});
+  stripe._registerWrapper({name: 'stripe-js', version: _VERSION, startTime});
 };
 
 let stripePromise: Promise<StripeConstructor | null> | null = null;
@@ -121,14 +121,15 @@ export const loadScript = (
 
 export const initStripe = (
   maybeStripe: StripeConstructor | null,
-  args: Parameters<StripeConstructor>
+  args: Parameters<StripeConstructor>,
+  startTime: number
 ): Stripe | null => {
   if (maybeStripe === null) {
     return null;
   }
 
   const stripe = maybeStripe.apply(undefined, args);
-  registerWrapper(stripe);
+  registerWrapper(stripe, startTime);
   return stripe;
 };
 

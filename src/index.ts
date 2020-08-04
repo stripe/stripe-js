@@ -14,6 +14,9 @@ stripePromise.catch((err: Error) => {
 
 export const loadStripe: LoadStripe = (...args) => {
   loadCalled = true;
+  const startTime = Date.now();
 
-  return stripePromise.then((maybeStripe) => initStripe(maybeStripe, args));
+  return stripePromise.then((maybeStripe) =>
+    initStripe(maybeStripe, args, startTime)
+  );
 };
