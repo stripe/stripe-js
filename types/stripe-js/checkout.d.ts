@@ -129,7 +129,9 @@ declare module '@stripe/stripe-js' {
       | 'sl'
       | 'sv'
       | 'tr'
-      | 'zh';
+      | 'zh'
+      | 'zh-HK'
+      | 'zh-TW';
 
     /**
      * Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the **Submit** button.

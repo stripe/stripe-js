@@ -515,7 +515,9 @@ declare module '@stripe/stripe-js' {
       | 'sk'
       | 'sl'
       | 'sv'
-      | 'zh';
+      | 'zh'
+      | 'zh-HK'
+      | 'zh-TW';
   }
 
   type StripeErrorType =
