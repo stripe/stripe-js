@@ -198,6 +198,39 @@ declare module '@stripe/stripe-js' {
     | StripeIdealBankElement
     | StripePaymentRequestButtonElement;
 
+  type StripeElementLocale =
+    | 'auto'
+    | 'ar'
+    | 'bg'
+    | 'cs'
+    | 'da'
+    | 'de'
+    | 'el'
+    | 'en'
+    | 'es'
+    | 'es-419'
+    | 'et'
+    | 'fi'
+    | 'fr'
+    | 'he'
+    | 'id'
+    | 'it'
+    | 'ja'
+    | 'lt'
+    | 'lv'
+    | 'ms'
+    | 'nb'
+    | 'nl'
+    | 'no'
+    | 'pl'
+    | 'pt'
+    | 'pt-BR'
+    | 'ru'
+    | 'sk'
+    | 'sl'
+    | 'sv'
+    | 'zh';
+
   /**
    * Options to create an `Elements` instance with.
    */
@@ -212,38 +245,7 @@ declare module '@stripe/stripe-js' {
      * Default is `auto` (Stripe detects the locale of the browser).
      * Setting the locale does not affect the behavior of postal code validation—a valid postal code for the billing country of the card is still required.
      */
-    locale?:
-      | 'auto'
-      | 'ar'
-      | 'bg'
-      | 'cs'
-      | 'da'
-      | 'de'
-      | 'el'
-      | 'en'
-      | 'es'
-      | 'es-419'
-      | 'et'
-      | 'fi'
-      | 'fr'
-      | 'he'
-      | 'id'
-      | 'it'
-      | 'ja'
-      | 'lt'
-      | 'lv'
-      | 'ms'
-      | 'nb'
-      | 'nl'
-      | 'no'
-      | 'pl'
-      | 'pt'
-      | 'pt-BR'
-      | 'ru'
-      | 'sk'
-      | 'sl'
-      | 'sv'
-      | 'zh';
+    locale?: StripeElementLocale;
   }
 
   /*
