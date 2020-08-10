@@ -484,40 +484,7 @@ declare module '@stripe/stripe-js' {
      * Checkout supports a slightly different set of locales than the rest of Stripe.js.
      * If you are planning on using Checkout, make sure to use a [value](#checkout_redirect_to_checkout-options-locale) that it supports.
      */
-    locale?:
-      | 'auto'
-      | 'ar'
-      | 'bg'
-      | 'cs'
-      | 'da'
-      | 'de'
-      | 'el'
-      | 'en'
-      | 'es'
-      | 'es-419'
-      | 'et'
-      | 'fi'
-      | 'fr'
-      | 'he'
-      | 'id'
-      | 'it'
-      | 'ja'
-      | 'lt'
-      | 'lv'
-      | 'ms'
-      | 'nb'
-      | 'nl'
-      | 'no'
-      | 'pl'
-      | 'pt'
-      | 'pt-BR'
-      | 'ru'
-      | 'sk'
-      | 'sl'
-      | 'sv'
-      | 'zh'
-      | 'zh-HK'
-      | 'zh-TW';
+    locale?: StripeElementLocale | CheckoutLocale;
   }
 
   type StripeErrorType =

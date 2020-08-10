@@ -98,40 +98,7 @@ declare module '@stripe/stripe-js' {
      * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) of the locale to display Checkout in.
      * Default is `auto` (Stripe detects the locale of the browser).
      */
-    locale?:
-      | 'auto'
-      | 'bg'
-      | 'cs'
-      | 'da'
-      | 'de'
-      | 'el'
-      | 'en'
-      | 'es'
-      | 'es-419'
-      | 'et'
-      | 'fi'
-      | 'fr'
-      | 'hu'
-      | 'it'
-      | 'ja'
-      | 'lt'
-      | 'lv'
-      | 'ms'
-      | 'mt'
-      | 'nb'
-      | 'nl'
-      | 'pl'
-      | 'pt'
-      | 'pt-BR'
-      | 'ro'
-      | 'ru'
-      | 'sk'
-      | 'sl'
-      | 'sv'
-      | 'tr'
-      | 'zh'
-      | 'zh-HK'
-      | 'zh-TW';
+    locale?: CheckoutLocale;
 
     /**
      * Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the **Submit** button.
@@ -144,4 +111,42 @@ declare module '@stripe/stripe-js' {
   type RedirectToCheckoutOptions =
     | RedirectToCheckoutServerOptions
     | RedirectToCheckoutClientOptions;
+
+  type CheckoutLocale =
+    | 'auto'
+    | 'bg'
+    | 'cs'
+    | 'da'
+    | 'de'
+    | 'el'
+    | 'en'
+    | 'en-GB'
+    | 'es'
+    | 'es-419'
+    | 'et'
+    | 'fi'
+    | 'fr'
+    | 'fr-CA'
+    | 'hu'
+    | 'id'
+    | 'it'
+    | 'ja'
+    | 'lt'
+    | 'lv'
+    | 'ms'
+    | 'mt'
+    | 'nb'
+    | 'nl'
+    | 'pl'
+    | 'pt'
+    | 'pt-BR'
+    | 'ro'
+    | 'ru'
+    | 'sk'
+    | 'sl'
+    | 'sv'
+    | 'tr'
+    | 'zh'
+    | 'zh-HK'
+    | 'zh-TW';
 }
