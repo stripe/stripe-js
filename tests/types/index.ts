@@ -338,6 +338,19 @@ stripe.retrieveSource({id: '', client_secret: ''}).then((result) => {
   console.log(result.source!.type);
 });
 
+stripe.confirmAlipayPayment('', {
+  payment_method: '',
+  return_url: window.location.href,
+});
+
+stripe.confirmAlipayPayment('', {return_url: window.location.href});
+
+stripe.confirmAlipayPayment('', {payment_method: ''});
+
+stripe.confirmAlipayPayment('', {payment_method: ''}, {handleActions: false});
+
+stripe.confirmAlipayPayment('');
+
 stripe.confirmAuBecsDebitPayment('', {
   payment_method: {
     au_becs_debit: auBankAccountElement,
