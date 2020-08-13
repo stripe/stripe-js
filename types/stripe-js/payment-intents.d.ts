@@ -3,6 +3,7 @@ declare module '@stripe/stripe-js' {
   type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 
   type CreatePaymentMethodData =
+    | CreatePaymentMethodAlipayData
     | CreatePaymentMethodAuBecsDebitData
     | CreatePaymentMethodBancontactData
     | CreatePaymentMethodCardData
@@ -12,6 +13,10 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodP24Data
     | CreatePaymentMethodFpxData
     | CreatePaymentMethodSepaDebitData;
+
+  interface CreatePaymentMethodAlipayData extends PaymentMethodCreateParams {
+    type: 'alipay';
+  }
 
   interface CreatePaymentMethodBancontactData
     extends PaymentMethodCreateParams {
@@ -216,6 +221,38 @@ declare module '@stripe/stripe-js' {
      * @recommended
      */
     return_url?: string;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmAlipayPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmAlipayPaymentData extends PaymentIntentConfirmParams {
+    /*
+     * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodAlipayData, 'type'>;
+
+    /**
+     * The url your customer will be directed to after they complete authentication.
+     *
+     * @recommended
+     */
+    return_url?: string;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmAlipayPayment`.
+   */
+  interface ConfirmAlipayPaymentOptions {
+    /*
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/alipay/accept-a-payment#handle-redirect).
+     * Default is `true`.
+     */
+    handleActions?: boolean;
   }
 
   /**
