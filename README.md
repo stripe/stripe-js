@@ -132,5 +132,5 @@ The `loadStripe.setLoadParameters` function is only available when importing
 ## Stripe.js Documentation
 
 - [Stripe.js Docs](https://stripe.com/docs/stripe-js)
-- [Stripe.js Reference](https://stripe.com/docs/api)
+- [Stripe.js Reference](https://stripe.com/docs/js)
 - [React Stripe.js Docs](https://stripe.com/docs/stripe-js/react)
