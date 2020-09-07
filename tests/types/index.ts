@@ -34,6 +34,7 @@ import {
   StripeAuBankAccountElementChangeEvent,
   StripePaymentRequestButtonElement,
   StripeElementType,
+  StripeCardElementEvent,
 } from '@stripe/stripe-js';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -206,8 +207,12 @@ ibanElement.mount('#bogus-container');
 
 cardElement
   .on('ready', () => {})
-  .on('focus', () => {})
-  .on('blur', () => {})
+  .on('focus', (e: StripeCardElementEvent) => {
+    e.elementType === cardElementType
+  })
+  .on('blur', (e: StripeCardElementEvent) => {
+    e.elementType === cardElementType
+  })
   .on('change', (e: StripeCardElementChangeEvent) => {
     if (e.error) {
       console.error(e.error.message);

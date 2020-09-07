@@ -23,7 +23,7 @@ declare module '@stripe/stripe-js' {
      */
     on(
       eventType: 'focus',
-      handler: () => any
+      handler: (event: StripePaymentRequestButtonElementEvent) => any
     ): StripePaymentRequestButtonElement;
 
     /**
@@ -31,7 +31,7 @@ declare module '@stripe/stripe-js' {
      */
     on(
       eventType: 'blur',
-      handler: () => any
+      handler: (event: StripePaymentRequestButtonElementEvent) => any
     ): StripePaymentRequestButtonElement;
 
     /**
@@ -73,6 +73,7 @@ declare module '@stripe/stripe-js' {
     paymentRequest: PaymentRequest;
   }
 
+  type StripePaymentRequestButtonElementEvent = StripeElementEvent<'paymentRequestButton'>;
   interface StripePaymentRequestButtonElementClickEvent {
     preventDefault: () => void;
   }

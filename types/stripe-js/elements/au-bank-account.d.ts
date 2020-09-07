@@ -18,12 +18,18 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeAuBankAccountElement;
+    on(
+      eventType: 'focus',
+      handler: (event: StripeAuBankAccountElementEvent) => any
+    ): StripeAuBankAccountElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeAuBankAccountElement;
+    on(
+      eventType: 'blur',
+      handler: (event: StripeAuBankAccountElementEvent) => any
+    ): StripeAuBankAccountElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
@@ -63,13 +69,9 @@ declare module '@stripe/stripe-js' {
     disabled?: boolean;
   }
 
+  type StripeAuBankAccountElementEvent = StripeElementEvent<'auBankAccount'>;
   interface StripeAuBankAccountElementChangeEvent
-    extends StripeElementChangeEvent {
-    /**
-     * The type of element that emitted this event.
-     */
-    elementType: 'auBankAccount';
-
+    extends StripeElementChangeEvent<'auBankAccount'> {
     /**
      * The bank name corresponding to the entered BSB.
      */

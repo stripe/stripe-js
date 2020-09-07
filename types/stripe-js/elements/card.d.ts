@@ -18,12 +18,18 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeCardElement;
+    on(
+      eventType: 'focus',
+      handler: (event: StripeCardElementEvent) => any
+    ): StripeCardElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeCardElement;
+    on(
+      eventType: 'blur',
+      handler: (event: StripeCardElementEvent) => any
+    ): StripeCardElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
@@ -76,12 +82,8 @@ declare module '@stripe/stripe-js' {
     disabled?: boolean;
   }
 
-  interface StripeCardElementChangeEvent extends StripeElementChangeEvent {
-    /**
-     * The type of element that emitted this event.
-     */
-    elementType: 'card';
-
+  type StripeCardElementEvent = StripeElementEvent<'card'>;
+  interface StripeCardElementChangeEvent extends StripeElementChangeEvent<'card'> {
     /**
      * An object containing the currently entered `postalCode`.
      */

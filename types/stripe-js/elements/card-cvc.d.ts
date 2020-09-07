@@ -18,12 +18,18 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeCardCvcElement;
+    on(
+      eventType: 'focus',
+      handler: (event: StripeCardCvcElementEvent) => any
+    ): StripeCardCvcElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeCardCvcElement;
+    on(
+      eventType: 'blur',
+      handler: (event: StripeCardCvcElementEvent) => any
+    ): StripeCardCvcElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
@@ -54,10 +60,6 @@ declare module '@stripe/stripe-js' {
     disabled?: boolean;
   }
 
-  interface StripeCardCvcElementChangeEvent extends StripeElementChangeEvent {
-    /**
-     * The type of element that emitted this event.
-     */
-    elementType: 'cardCvc';
-  }
+  type StripeCardCvcElementEvent = StripeElementEvent<'cardCvc'>;
+  type StripeCardCvcElementChangeEvent = StripeElementChangeEvent<'cardCvc'>;
 }

@@ -18,12 +18,18 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeFpxBankElement;
+    on(
+      eventType: 'focus',
+      handler: (event: StripeFpxBankElementEvent) => any
+    ): StripeFpxBankElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeFpxBankElement;
+    on(
+      eventType: 'blur',
+      handler: (event: StripeFpxBankElementEvent) => any
+    ): StripeFpxBankElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
@@ -63,12 +69,8 @@ declare module '@stripe/stripe-js' {
     disabled?: boolean;
   }
 
-  interface StripeFpxBankElementChangeEvent extends StripeElementChangeEvent {
-    /**
-     * The type of element that emitted this event.
-     */
-    elementType: 'fpxBank';
-
+  type StripeFpxBankElementEvent = StripeElementEvent<'fpxBank'>;
+  interface StripeFpxBankElementChangeEvent extends StripeElementChangeEvent<'fpxBank'> {
     /**
      * The selected bank.
      * Can be one of the banks listed in the [FPX guide](https://stripe.com/docs/payments/fpx#bank-reference).

@@ -1,3 +1,5 @@
+import { StripeElementType } from "@stripe/stripe-js";
+
 declare module '@stripe/stripe-js' {
   type StripeElementBase = {
     /**
@@ -228,12 +230,16 @@ declare module '@stripe/stripe-js' {
     webkitAutoFill?: string;
   }
 
-  interface StripeElementChangeEvent {
+  interface StripeElementEvent<ElementType extends StripeElementType> {
     /**
      * The type of element that emitted this event.
      */
-    elementType: StripeElementType;
+    elementType: ElementType;
+  }
 
+  interface StripeElementChangeEvent<
+    ElementType extends StripeElementType = StripeElementType
+  > extends StripeElementEvent<ElementType> {
     /**
      * `true` if the value is empty.
      */

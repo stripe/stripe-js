@@ -18,12 +18,18 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeIdealBankElement;
+    on(
+      eventType: 'focus',
+      handler: (event: StripeIdealBankElementEvent) => any
+    ): StripeIdealBankElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeIdealBankElement;
+    on(
+      eventType: 'blur',
+      handler: (event: StripeIdealBankElementEvent) => any
+    ): StripeIdealBankElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
@@ -69,12 +75,8 @@ declare module '@stripe/stripe-js' {
     disabled?: boolean;
   }
 
-  interface StripeIdealBankElementChangeEvent extends StripeElementChangeEvent {
-    /**
-     * The type of element that emitted this event.
-     */
-    elementType: 'idealBank';
-
+  type StripeIdealBankElementEvent = StripeElementEvent<'idealBank'>
+  interface StripeIdealBankElementChangeEvent extends StripeElementChangeEvent<'idealBank'> {
     /**
      * The selected bank.
      * Can be one of the banks listed in the [iDEAL guide](https://stripe.com/docs/sources/ideal#specifying-customer-bank).

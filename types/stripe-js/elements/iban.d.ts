@@ -18,12 +18,18 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeIbanElement;
+    on(
+      eventType: 'focus',
+      handler: (event: StripeIbanElementEvent) => any
+    ): StripeIbanElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeIbanElement;
+    on(
+      eventType: 'blur',
+      handler: (event: StripeIbanElementEvent) => any
+    ): StripeIbanElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
@@ -67,12 +73,8 @@ declare module '@stripe/stripe-js' {
     disabled?: boolean;
   }
 
-  interface StripeIbanElementChangeEvent extends StripeElementChangeEvent {
-    /**
-     * The type of element that emitted this event.
-     */
-    elementType: 'iban';
-
+  type StripeIbanElementEvent = StripeElementEvent<'iban'>;
+  interface StripeIbanElementChangeEvent extends StripeElementChangeEvent<'iban'> {
     country: string;
 
     bankName: string;
