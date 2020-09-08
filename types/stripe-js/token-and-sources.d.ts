@@ -77,7 +77,7 @@ declare module '@stripe/stripe-js' {
 
     account_number: string;
 
-    account_holder_name: string;
+    account_holder_name?: string;
 
     account_holder_type: string;
   }
