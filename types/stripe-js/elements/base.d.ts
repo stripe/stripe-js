@@ -167,9 +167,9 @@ declare module '@stripe/stripe-js' {
      * The [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) CSS property.
      *
      * Available for the `idealBank` element.
-     * Accepts integer `px` values.
+     * Accepts integer length with `px` unit as values.
      */
-    padding?: number;
+    padding?: string;
 
     /**
      * The [text-decoration](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration) CSS property.
