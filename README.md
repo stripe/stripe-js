@@ -23,8 +23,8 @@ npm install @stripe/stripe-js
 ### `loadStripe`
 
 This function returns a `Promise` that resolves with a newly created `Stripe`
-object once Stripe.js has loaded. It takes the same parameters you normally pass
-when directly
+object once Stripe.js has loaded. It takes the same parameters passed when
+directly
 [initializing a `Stripe` instance](https://stripe.com/docs/js/initializing). If
 necessary, it will load Stripe.js for you by inserting the Stripe.js script tag.
 If you call `loadStripe` in a server environment it will resolve to `null`.
