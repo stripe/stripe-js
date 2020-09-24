@@ -23,9 +23,11 @@ npm install @stripe/stripe-js
 ### `loadStripe`
 
 This function returns a `Promise` that resolves with a newly created `Stripe`
-object once Stripe.js has loaded. If necessary, it will load Stripe.js for you
-by inserting the Stripe.js script tag. If you call `loadStripe` in a server
-environment it will resolve to `null`.
+object once Stripe.js has loaded. It takes the same parameters passed when
+directly
+[initializing a `Stripe` instance](https://stripe.com/docs/js/initializing). If
+necessary, it will load Stripe.js for you by inserting the Stripe.js script tag.
+If you call `loadStripe` in a server environment it will resolve to `null`.
 
 ```js
 import {loadStripe} from '@stripe/stripe-js';
@@ -37,7 +39,7 @@ We’ve placed a random API key in this example. Replace it with your
 [actual publishable API keys](https://dashboard.stripe.com/account/apikeys) to
 test this code through your Stripe account.
 
-For more information on how to use Stripe.js once it loads, please refer to the
+For more information on how to use Stripe.js, please refer to the
 [Stripe.js API reference](https://stripe.com/docs/js) or learn to
 [accept a payment](https://stripe.com/docs/payments/accept-a-payment) with
 Stripe.
