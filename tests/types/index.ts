@@ -48,7 +48,13 @@ type SrcModule = typeof import('../../src/index');
 import('../../src/index').then((srcModule: TypeModule) => {});
 import('@stripe/stripe-js').then((typeModule: SrcModule) => {});
 
-declare const stripe: Stripe;
+const stripe: Stripe = window.Stripe!('pk_123');
+
+const stripeWithBetas: Stripe = window.Stripe!('pk_123', {
+  stripeAccount: '123',
+  locale: 'ar',
+  betas: ['beta_1'],
+});
 
 const OPEN_SANS: CssFontSource = {
   cssSrc: 'https://fonts.googleapis.com/css?family=Open+Sans',

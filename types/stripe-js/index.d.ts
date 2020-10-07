@@ -502,6 +502,14 @@ declare module '@stripe/stripe-js' {
      * If you are planning on using Checkout, make sure to use a [value](#checkout_redirect_to_checkout-options-locale) that it supports.
      */
     locale?: StripeElementLocale | CheckoutLocale;
+
+    /**
+     * Opt-in to prerelease Stripe.js features by passing `betas` when instantiating a `Stripe` object.
+     *
+     * Supported values for the `betas` option can be found in integration guides for prerelease features.
+     * Most users of Stripe.js do not pass this option.
+     */
+    betas?: string[];
   }
 
   type StripeErrorType =
