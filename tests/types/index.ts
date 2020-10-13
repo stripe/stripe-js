@@ -598,6 +598,33 @@ stripe
   .confirmCardSetup('')
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
+stripe
+  .confirmIdealSetup('', {
+    payment_method: {
+      ideal: idealBankElement,
+      billing_details: {
+        name: '',
+        email: '',
+      },
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe.confirmIdealSetup('', {payment_method: ''});
+
+stripe.confirmIdealSetup('', {
+  payment_method: {
+    ideal: {
+      bank: '',
+    },
+    billing_details: {
+      name: '',
+      email: '',
+    },
+  },
+  return_url: '',
+});
+
 stripe.confirmSepaDebitSetup('', {
   payment_method: {
     sepa_debit: ibanElement,
