@@ -483,6 +483,26 @@ stripe.confirmSepaDebitPayment('', {payment_method: ''});
 
 stripe.confirmSepaDebitPayment('');
 
+stripe.confirmSofortPayment('', {
+  payment_method: {
+    sofort: {
+      country: '',
+    },
+    billing_details: {
+      name: '',
+    },
+  },
+  return_url: '',
+});
+
+stripe.confirmSofortPayment('', {
+  payment_method: '',
+});
+
+stripe
+  .confirmSofortPayment('')
+  .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
+
 stripe
   .handleCardAction('')
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
@@ -546,6 +566,12 @@ stripe.createPaymentMethod({
   type: 'sepa_debit',
   sepa_debit: {iban: ''},
   billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+});
+
+stripe.createPaymentMethod({
+  type: 'sofort',
+  sofort: {country: ''},
+  billing_details: {name: ''},
 });
 
 stripe.retrievePaymentIntent('{PAYMENT_INTENT_CLIENT_SECRET}');
@@ -640,6 +666,26 @@ stripe.confirmSepaDebitSetup('', {
     billing_details: {name: '', email: ''},
   },
 });
+
+stripe
+  .confirmSofortSetup('', {
+    payment_method: {
+      sofort: {
+        country: '',
+      },
+      billing_details: {
+        name: '',
+      },
+    },
+    return_url: '',
+  })
+  .then((result: {setupIntent?: SetupIntent}) => null);
+
+stripe.confirmSofortSetup('', {
+  payment_method: '',
+});
+
+stripe.confirmSofortSetup('');
 
 stripe
   .retrieveSetupIntent('')

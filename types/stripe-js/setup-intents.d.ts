@@ -53,6 +53,20 @@ declare module '@stripe/stripe-js' {
   }
 
   /**
+   * Data to be sent with a `stripe.confirmSofortSetup` request.
+   * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmSofortSetupData extends SetupIntentConfirmParams {
+    /*
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodSofortData, 'type'>;
+  }
+
+  /**
    * Data to be sent with a `stripe.confirmAuBecsDebitSetup` request.
    * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
    */
