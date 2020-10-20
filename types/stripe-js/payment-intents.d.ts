@@ -52,6 +52,19 @@ declare module '@stripe/stripe-js' {
     billing_details: PaymentMethodCreateParams.BillingDetails & {
       name: string;
     };
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
+    eps:
+      | StripeEpsBankElement
+      | {
+          /**
+           * The customer's bank
+           */
+          bank?: string;
+        };
   }
 
   interface CreatePaymentMethodFpxData extends PaymentMethodCreateParams {
