@@ -53,10 +53,6 @@ declare module '@stripe/stripe-js' {
       name: string;
     };
 
-    /**
-     * Requires beta access:
-     * Contact [Stripe support](https://support.stripe.com/) for more information.
-     */
     eps:
       | StripeEpsBankElement
       | {

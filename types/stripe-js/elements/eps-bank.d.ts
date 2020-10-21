@@ -51,9 +51,6 @@ declare module '@stripe/stripe-js' {
     iconStyle?: 'default' | 'solid';
 
     /**
-     * Requires beta access:
-     * Contact [Stripe support](https://support.stripe.com/) for more information.
-     *
      * A pre-filled value for the Element.
      * Can be one of the banks listed in the [EPS guide](https://stripe.com/docs/payments/eps/accept-a-payment#bank-values) (e.g., `bank_austria`).
      */
@@ -79,9 +76,6 @@ declare module '@stripe/stripe-js' {
     elementType: 'epsBank';
 
     /**
-     * Requires beta access:
-     * Contact [Stripe support](https://support.stripe.com/) for more information.
-     *
      * A pre-filled value for the Element.
      * Can be one of the banks listed in the [EPS guide](https://stripe.com/docs/payments/eps/accept-a-payment#bank-values) (e.g., `bank_austria`).
      */
