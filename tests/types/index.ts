@@ -269,6 +269,8 @@ stripe
 
 stripe.createToken(cardNumberElement);
 
+stripe.createToken('cvc_update', cardCvcElement);
+
 stripe.createToken('pii', {personal_id_number: ''});
 
 stripe.createToken(ibanElement, {

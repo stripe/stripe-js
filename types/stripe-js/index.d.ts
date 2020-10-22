@@ -448,15 +448,14 @@ declare module '@stripe/stripe-js' {
     /**
      * Use `stripe.createToken` to tokenize the recollected CVC for a saved card.
 
-     * First, include the `cvc_update_beta_1` flag when creating an instance of the Stripe object.
-     * Next, render an `CardCvcElement` to collect the data.
+     * First, render a `CardCvcElement` to collect the data.
      * Then pass the `CardCvcElement` to `stripe.createToken` to tokenize the collected data.
      *
-     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=bank_account
+     * @docs https://stripe.com/docs/js/tokens_sources/create_token?type=cvc_update
      */
     createToken(
       tokenType: 'cvc_update',
-      element?: StripeCardCvcElement
+      element: StripeCardCvcElement
     ): Promise<{token?: Token; error?: StripeError}>;
 
     /**
