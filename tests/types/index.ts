@@ -402,7 +402,10 @@ stripe.confirmCardPayment('', {payment_method: ''}, {handleActions: false});
 
 stripe.confirmCardPayment('', {payment_method: {card: {token: ''}}});
 
-stripe.confirmCardPayment('');
+stripe.confirmCardPayment('', {
+  payment_method: '',
+  payment_method_options: {card: {cvc: cardCvcElement}},
+});
 
 stripe.confirmCardPayment('');
 
