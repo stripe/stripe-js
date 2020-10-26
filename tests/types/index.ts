@@ -28,6 +28,7 @@ import {
   CustomFontSource,
   StripeIbanElement,
   StripeIdealBankElement,
+  StripeEpsBankElement,
   StripeFpxBankElement,
   StripeFpxBankElementChangeEvent,
   StripeAuBankAccountElement,
@@ -189,6 +190,16 @@ const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | 
 
 // Make sure that `paymentRequest` is at least optional;
 retrievedPaymentRequestButtonElement!.update({});
+
+const epsBankElement = elements.create('epsBank', {
+  style: MY_STYLE,
+  value: '',
+  classes: {webkitAutoFill: ''},
+});
+
+const retrievedEpsBankElement: StripeEpsBankElement | null = elements.getElement(
+  'epsBank'
+);
 
 type StripePaymentRequestButtonElementUpdateOptions = Parameters<
   StripePaymentRequestButtonElement['update']
@@ -407,7 +418,18 @@ stripe.confirmCardPayment('');
 stripe.confirmCardPayment('');
 
 stripe.confirmEpsPayment('', {
-  payment_method: {billing_details: {name: 'Jenny Rosen'}},
+  payment_method: {
+    eps: {bank: 'bank_austria'},
+    billing_details: {name: 'Jenny Rosen'},
+  },
+  return_url: window.location.href,
+});
+
+stripe.confirmEpsPayment('', {
+  payment_method: {
+    eps: epsBankElement,
+    billing_details: {name: 'Jenny Rosen'},
+  },
   return_url: window.location.href,
 });
 

@@ -7,6 +7,7 @@
 ///<reference path='./elements/fpx-bank.d.ts' />
 ///<reference path='./elements/payment-request-button.d.ts' />
 ///<reference path='./elements/au-bank-account.d.ts' />
+///<reference path='./elements/eps-bank.d.ts' />
 
 import {StripeAuBankAccountElement} from '@stripe/stripe-js';
 
@@ -121,6 +122,29 @@ declare module '@stripe/stripe-js' {
     getElement(elementType: 'fpxBank'): StripeFpxBankElement | null;
 
     /////////////////////////////
+    /// epsBank
+    /////////////////////////////
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Creates an `EpsBankElement`.
+     */
+    create(
+      elementType: 'epsBank',
+      options: StripeEpsBankElementOptions
+    ): StripeEpsBankElement;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'epsBank'): StripeEpsBankElement | null;
+
+    /////////////////////////////
     /// iban
     /////////////////////////////
 
@@ -182,6 +206,7 @@ declare module '@stripe/stripe-js' {
     | 'cardNumber'
     | 'cardExpiry'
     | 'cardCvc'
+    | 'epsBank'
     | 'fpxBank'
     | 'iban'
     | 'idealBank'
@@ -193,6 +218,7 @@ declare module '@stripe/stripe-js' {
     | StripeCardNumberElement
     | StripeCardExpiryElement
     | StripeCardCvcElement
+    | StripeEpsBankElement
     | StripeFpxBankElement
     | StripeIbanElement
     | StripeIdealBankElement
