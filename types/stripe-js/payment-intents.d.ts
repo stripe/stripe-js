@@ -307,6 +307,21 @@ declare module '@stripe/stripe-js' {
      * @recommended
      */
     payment_method?: string | Omit<CreatePaymentMethodCardData, 'type'>;
+
+    /**
+     * An object containing payment-method-specific configuration to confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with.
+     */
+    payment_method_options?: {
+      /**
+       * Configuration for this card payment.
+       */
+      card: {
+        /**
+         * Use the provided `CardCvcElement` when confirming the PaymentIntent with an existing PaymentMethod.
+         */
+        cvc?: StripeCardCvcElement;
+      };
+    };
   }
 
   /**

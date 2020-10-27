@@ -280,6 +280,8 @@ stripe
 
 stripe.createToken(cardNumberElement);
 
+stripe.createToken('cvc_update', cardCvcElement);
+
 stripe.createToken('pii', {personal_id_number: ''});
 
 stripe.createToken(ibanElement, {
@@ -413,7 +415,10 @@ stripe.confirmCardPayment('', {payment_method: ''}, {handleActions: false});
 
 stripe.confirmCardPayment('', {payment_method: {card: {token: ''}}});
 
-stripe.confirmCardPayment('');
+stripe.confirmCardPayment('', {
+  payment_method: '',
+  payment_method_options: {card: {cvc: cardCvcElement}},
+});
 
 stripe.confirmCardPayment('');
 
