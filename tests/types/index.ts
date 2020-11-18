@@ -481,6 +481,21 @@ stripe.confirmIdealPayment('', {payment_method: {ideal: {bank: ''}}});
 
 stripe.confirmIdealPayment('');
 
+stripe.confirmOxxoPayment('', {payment_method: ''});
+
+stripe.confirmOxxoPayment('', {payment_method: ''}, {handleActions: false});
+
+stripe.confirmOxxoPayment('', {
+  payment_method: {
+    billing_details: {
+      name: '',
+      email: '',
+    },
+  },
+});
+
+stripe.confirmOxxoPayment('');
+
 stripe.confirmP24Payment('', {
   payment_method: {billing_details: {email: 'jenny@example.com'}},
   return_url: window.location.href,

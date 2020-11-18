@@ -103,6 +103,21 @@ declare module '@stripe/stripe-js' {
         };
   }
 
+  interface CreatePaymentMethodOxxoData extends PaymentMethodCreateParams {
+    type: 'oxxo';
+
+    /**
+     * The customer's billing details.
+     * `email` and `name` are required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails & {
+      email: string;
+      name: string;
+    };
+  }
+
   interface CreatePaymentMethodP24Data extends PaymentMethodCreateParams {
     type: 'p24';
 
@@ -479,6 +494,30 @@ declare module '@stripe/stripe-js' {
     /**
      * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/ideal#handle-redirect).
      * Default is `true`.
+     */
+    handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmOxxoPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmOxxoPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodOxxoData, 'type'>;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmOxxoPayment`.
+   */
+  interface ConfirmOxxoPaymentOptions {
+    /**
+     * Set this to `false` if you want to handle next actions yourself. Please refer to our [Stripe OXXO integration guide](https://stripe.com/docs/payments/oxxo) for more info. Default is `true`.
      */
     handleActions?: boolean;
   }
