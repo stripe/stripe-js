@@ -255,6 +255,7 @@ declare module '@stripe/stripe-js' {
     | 'sk'
     | 'sl'
     | 'sv'
+    | 'th'
     | 'zh';
 
   /**
