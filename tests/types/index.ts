@@ -496,6 +496,16 @@ stripe.confirmOxxoPayment('', {
 
 stripe.confirmOxxoPayment('');
 
+stripe.confirmGrabPayPayment('', {return_url: window.location.href});
+
+stripe.confirmGrabPayPayment('');
+
+stripe.confirmGrabPayPayment('', {payment_method: {grabpay: {}}});
+
+stripe.confirmGrabPayPayment('', {payment_method: ''});
+
+stripe.confirmGrabPayPayment('', {payment_method: ''}, {handleActions: false});
+
 stripe.confirmP24Payment('', {
   payment_method: {billing_details: {email: 'jenny@example.com'}},
   return_url: window.location.href,

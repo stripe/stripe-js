@@ -33,6 +33,8 @@ declare module '@stripe/stripe-js' {
 
     fpx?: PaymentMethod.Fpx;
 
+    grabpab?: PaymentMethod.GrabPay;
+
     ideal?: PaymentMethod.Ideal;
 
     /**
@@ -186,6 +188,8 @@ declare module '@stripe/stripe-js' {
        */
       bank: string;
     }
+
+    interface GrabPay {}
 
     interface Ideal {
       /**

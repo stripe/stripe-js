@@ -403,6 +403,20 @@ declare module '@stripe/stripe-js' {
       clientSecret: string
     ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
 
+    /**
+     * Use `stripe.confirmGrabPayPayment` in the [GrabPay payments](https://stripe.com/docs/payments/grabpay) flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents).
+     * Refer to our [integration guide](https://stripe.com/docs/payments/grabpay/accept-a-payment) for more details.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_grabpay_payment
+     */
+
+    confirmGrabPayPayment(
+      clientSecret: string,
+      data?: ConfirmGrabPayPaymentData,
+      options?: ConfirmGrabPayPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
     /////////////////////////////
     /// Payment Request
     ///
