@@ -525,26 +525,6 @@ stripe.confirmSepaDebitPayment('', {payment_method: ''});
 
 stripe.confirmSepaDebitPayment('');
 
-stripe.confirmSofortPayment('', {
-  payment_method: {
-    sofort: {
-      country: '',
-    },
-    billing_details: {
-      name: '',
-    },
-  },
-  return_url: '',
-});
-
-stripe.confirmSofortPayment('', {
-  payment_method: '',
-});
-
-stripe
-  .confirmSofortPayment('')
-  .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
-
 stripe
   .handleCardAction('')
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
@@ -610,12 +590,6 @@ stripe.createPaymentMethod({
   billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
 });
 
-stripe.createPaymentMethod({
-  type: 'sofort',
-  sofort: {country: ''},
-  billing_details: {name: ''},
-});
-
 stripe.retrievePaymentIntent('{PAYMENT_INTENT_CLIENT_SECRET}');
 
 stripe.confirmAuBecsDebitSetup('', {
@@ -666,33 +640,6 @@ stripe
   .confirmCardSetup('')
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe
-  .confirmIdealSetup('', {
-    payment_method: {
-      ideal: idealBankElement,
-      billing_details: {
-        name: '',
-        email: '',
-      },
-    },
-  })
-  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
-
-stripe.confirmIdealSetup('', {payment_method: ''});
-
-stripe.confirmIdealSetup('', {
-  payment_method: {
-    ideal: {
-      bank: '',
-    },
-    billing_details: {
-      name: '',
-      email: '',
-    },
-  },
-  return_url: '',
-});
-
 stripe.confirmSepaDebitSetup('', {
   payment_method: {
     sepa_debit: ibanElement,
@@ -708,26 +655,6 @@ stripe.confirmSepaDebitSetup('', {
     billing_details: {name: '', email: ''},
   },
 });
-
-stripe
-  .confirmSofortSetup('', {
-    payment_method: {
-      sofort: {
-        country: '',
-      },
-      billing_details: {
-        name: '',
-      },
-    },
-    return_url: '',
-  })
-  .then((result: {setupIntent?: SetupIntent}) => null);
-
-stripe.confirmSofortSetup('', {
-  payment_method: '',
-});
-
-stripe.confirmSofortSetup('');
 
 stripe
   .retrieveSetupIntent('')
