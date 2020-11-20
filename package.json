@@ -11,7 +11,7 @@
     "test": "yarn lint && yarn test:unit && yarn test:versions && yarn test:types && yarn typecheck",
     "test:unit": "jest",
     "test:versions": "./tests/versions/scripts/test.sh",
-    "test:types": "tsc -p ./tests/types && jest --roots '<rootDir>/tests/types'",
+    "test:types": "tsc -p ./tests/types",
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-list-different",
     "typecheck": "tsc",
     "build": "yarn clean && yarn rollup -c",
@@ -57,6 +57,6 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-typescript2": "^0.25.3",
     "ts-jest": "^24.3.0",
-    "typescript": "^3.7.4"
+    "typescript": "^4.1.2"
   }
 }

@@ -150,6 +150,13 @@ const retrievedCardCvcElement: StripeCardCvcElement | null = elements.getElement
   'cardCvc'
 );
 
+stripe.createToken(cardElement, {
+  currency: '',
+  name: '',
+  // @ts-expect-error: `extra_property` is not valid
+  extra_property: '',
+});
+
 const fpxBankElement = elements.create('fpxBank', {
   style: MY_STYLE,
   value: '',
@@ -171,6 +178,13 @@ const ibanElement = elements.create('iban', {supportedCountries: ['']});
 const retrievedIbanElement: StripeIbanElement | null = elements.getElement(
   'iban'
 );
+
+// @ts-expect-error: `extra_property` is not valid
+stripe.createToken(ibanElement, {
+  currency: '',
+  account_holder_name: '',
+  extra_property: '',
+});
 
 const idealBankElement = elements.create('idealBank', {
   style: MY_STYLE,
