@@ -71,7 +71,7 @@ declarations. These changes will not affect Stripe.js itself.
 
 To best leverage Stripe’s advanced fraud functionality, ensure that Stripe.js is
 loaded on every page, not just your checkout page. This
-[allows Stripe to detect suspicious behavior](/docs/disputes/prevention/advanced-fraud-detection)
+[allows Stripe to detect suspicious behavior](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection)
 that may be indicative of fraud as customers browse your website.
 
 By default, this module will insert a `<script>` tag that loads Stripe.js from
