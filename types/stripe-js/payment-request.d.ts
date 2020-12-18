@@ -14,6 +14,12 @@ declare module '@stripe/stripe-js' {
     show(): void;
 
     /**
+     * `true` if the browser’s payment interface is showing.
+     * When using the `PaymentRequestButtonElement`, this is called for you automatically.
+     */
+    isShowing: () => boolean;
+
+    /**
      * `PaymentRequest` instances can be updated with an options object.
      *
      * `paymentRequest.update` can only be called when the browser payment interface is not showing.
