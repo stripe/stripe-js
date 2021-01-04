@@ -12,10 +12,14 @@ include it in a bundle or host it yourself. This package wraps the global
 
 ## Installation
 
-Use `npm` to install the Stripe.js module:
+Use `npm` or `yarn` to install the Stripe.js module:
 
 ```sh
 npm install @stripe/stripe-js
+```
+
+```sh
+yarn add @stripe/stripe-js
 ```
 
 ## Usage
@@ -30,7 +34,7 @@ necessary, it will load Stripe.js for you by inserting the Stripe.js script tag.
 If you call `loadStripe` in a server environment it will resolve to `null`.
 
 ```js
-import {loadStripe} from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 ```
@@ -108,8 +112,8 @@ If you would like to use `loadStripe` in your application, but defer loading the
 Stripe.js script until `loadStripe` is first called, use the alternative
 `@stripe/stripe-js/pure` import path:
 
-```
-import {loadStripe} from '@stripe/stripe-js/pure';
+```js
+import { loadStripe } from '@stripe/stripe-js/pure';
 
 // Stripe.js will not be loaded until `loadStripe` is called
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -121,10 +125,10 @@ If you would like to
 [disable advanced fraud detection](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection#disabling-advanced-fraud-detection)
 altogether, use `loadStripe.setLoadParameters`:
 
-```
-import {loadStripe} from '@stripe/stripe-js/pure';
+```js
+import { loadStripe } from '@stripe/stripe-js/pure';
 
-loadStripe.setLoadParameters({advancedFraudSignals: false})
+loadStripe.setLoadParameters({ advancedFraudSignals: false });
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 ```
 
