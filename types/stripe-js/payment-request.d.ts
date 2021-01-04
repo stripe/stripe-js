@@ -30,6 +30,14 @@ declare module '@stripe/stripe-js' {
       eventType: 'token',
       handler: (event: PaymentRequestTokenEvent) => any
     ): this;
+    once(
+      eventType: 'token',
+      handler: (event: PaymentRequestTokenEvent) => any
+    ): this;
+    off(
+      eventType: 'token',
+      handler?: (event: PaymentRequestTokenEvent) => any
+    ): this;
 
     /**
      * Stripe.js automatically creates a `PaymentMethod` after the customer is done interacting with the browser’s payment interface.
@@ -38,6 +46,14 @@ declare module '@stripe/stripe-js' {
     on(
       eventType: 'paymentmethod',
       handler: (event: PaymentRequestPaymentMethodEvent) => any
+    ): this;
+    once(
+      eventType: 'paymentmethod',
+      handler: (event: PaymentRequestPaymentMethodEvent) => any
+    ): this;
+    off(
+      eventType: 'paymentmethod',
+      handler?: (event: PaymentRequestPaymentMethodEvent) => any
     ): this;
 
     /**
@@ -48,6 +64,14 @@ declare module '@stripe/stripe-js' {
       eventType: 'source',
       handler: (event: PaymentRequestSourceEvent) => any
     ): this;
+    once(
+      eventType: 'source',
+      handler: (event: PaymentRequestSourceEvent) => any
+    ): this;
+    off(
+      eventType: 'source',
+      handler?: (event: PaymentRequestSourceEvent) => any
+    ): this;
 
     /**
      * The cancel event is emitted from a `PaymentRequest` when the browser's payment interface is dismissed.
@@ -57,6 +81,8 @@ declare module '@stripe/stripe-js' {
      * If you’re using the cancel event as a hook for canceling the customer’s order, make sure you also refund the payment that you just created.
      */
     on(eventType: 'cancel', handler: () => any): this;
+    once(eventType: 'cancel', handler: () => any): this;
+    off(eventType: 'cancel', handler?: () => any): this;
 
     /**
      * The `shippingaddresschange` event is emitted from a `PaymentRequest` whenever the customer selects a new address in the browser's payment interface.
@@ -65,6 +91,14 @@ declare module '@stripe/stripe-js' {
       eventType: 'shippingaddresschange',
       handler: (event: PaymentRequestShippingAddressEvent) => any
     ): this;
+    once(
+      eventType: 'shippingaddresschange',
+      handler: (event: PaymentRequestShippingAddressEvent) => any
+    ): this;
+    off(
+      eventType: 'shippingaddresschange',
+      handler?: (event: PaymentRequestShippingAddressEvent) => any
+    ): this;
 
     /**
      * The `shippingoptionchange` event is emitted from a `PaymentRequest` whenever the customer selects a new shipping option in the browser's payment interface.
@@ -72,6 +106,14 @@ declare module '@stripe/stripe-js' {
     on(
       eventType: 'shippingoptionchange',
       handler: (event: PaymentRequestShippingOptionEvent) => any
+    ): this;
+    once(
+      eventType: 'shippingoptionchange',
+      handler: (event: PaymentRequestShippingOptionEvent) => any
+    ): this;
+    off(
+      eventType: 'shippingoptionchange',
+      handler?: (event: PaymentRequestShippingOptionEvent) => any
     ): this;
   }
 

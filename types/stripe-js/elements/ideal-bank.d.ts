@@ -9,26 +9,42 @@ declare module '@stripe/stripe-js' {
       eventType: 'change',
       handler: (event: StripeIdealBankElementChangeEvent) => any
     ): StripeIdealBankElement;
+    once(
+      eventType: 'change',
+      handler: (event: StripeIdealBankElementChangeEvent) => any
+    ): StripeIdealBankElement;
+    off(
+      eventType: 'change',
+      handler?: (event: StripeIdealBankElementChangeEvent) => any
+    ): StripeIdealBankElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
     on(eventType: 'ready', handler: () => any): StripeIdealBankElement;
+    once(eventType: 'ready', handler: () => any): StripeIdealBankElement;
+    off(eventType: 'ready', handler?: () => any): StripeIdealBankElement;
 
     /**
      * Triggered when the element gains focus.
      */
     on(eventType: 'focus', handler: () => any): StripeIdealBankElement;
+    once(eventType: 'focus', handler: () => any): StripeIdealBankElement;
+    off(eventType: 'focus', handler?: () => any): StripeIdealBankElement;
 
     /**
      * Triggered when the element loses focus.
      */
     on(eventType: 'blur', handler: () => any): StripeIdealBankElement;
+    once(eventType: 'blur', handler: () => any): StripeIdealBankElement;
+    off(eventType: 'blur', handler?: () => any): StripeIdealBankElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
     on(eventType: 'escape', handler: () => any): StripeIdealBankElement;
+    once(eventType: 'escape', handler: () => any): StripeIdealBankElement;
+    off(eventType: 'escape', handler?: () => any): StripeIdealBankElement;
 
     /**
      * Updates the options the `IdealBankElement` was initialized with.

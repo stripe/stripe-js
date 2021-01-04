@@ -9,26 +9,42 @@ declare module '@stripe/stripe-js' {
       eventType: 'change',
       handler: (event: StripeAuBankAccountElementChangeEvent) => any
     ): StripeAuBankAccountElement;
+    once(
+      eventType: 'change',
+      handler: (event: StripeAuBankAccountElementChangeEvent) => any
+    ): StripeAuBankAccountElement;
+    off(
+      eventType: 'change',
+      handler?: (event: StripeAuBankAccountElementChangeEvent) => any
+    ): StripeAuBankAccountElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
     on(eventType: 'ready', handler: () => any): StripeAuBankAccountElement;
+    once(eventType: 'ready', handler: () => any): StripeAuBankAccountElement;
+    off(eventType: 'ready', handler?: () => any): StripeAuBankAccountElement;
 
     /**
      * Triggered when the element gains focus.
      */
     on(eventType: 'focus', handler: () => any): StripeAuBankAccountElement;
+    once(eventType: 'focus', handler: () => any): StripeAuBankAccountElement;
+    off(eventType: 'focus', handler?: () => any): StripeAuBankAccountElement;
 
     /**
      * Triggered when the element loses focus.
      */
     on(eventType: 'blur', handler: () => any): StripeAuBankAccountElement;
+    once(eventType: 'blur', handler: () => any): StripeAuBankAccountElement;
+    off(eventType: 'blur', handler?: () => any): StripeAuBankAccountElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
     on(eventType: 'escape', handler: () => any): StripeAuBankAccountElement;
+    once(eventType: 'escape', handler: () => any): StripeAuBankAccountElement;
+    off(eventType: 'escape', handler?: () => any): StripeAuBankAccountElement;
 
     /**
      * Updates the options the `AuBankAccountElement` was initialized with.

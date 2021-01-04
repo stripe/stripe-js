@@ -9,26 +9,42 @@ declare module '@stripe/stripe-js' {
       eventType: 'change',
       handler: (event: StripeIbanElementChangeEvent) => any
     ): StripeIbanElement;
+    once(
+      eventType: 'change',
+      handler: (event: StripeIbanElementChangeEvent) => any
+    ): StripeIbanElement;
+    off(
+      eventType: 'change',
+      handler?: (event: StripeIbanElementChangeEvent) => any
+    ): StripeIbanElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
     on(eventType: 'ready', handler: () => any): StripeIbanElement;
+    once(eventType: 'ready', handler: () => any): StripeIbanElement;
+    off(eventType: 'ready', handler?: () => any): StripeIbanElement;
 
     /**
      * Triggered when the element gains focus.
      */
     on(eventType: 'focus', handler: () => any): StripeIbanElement;
+    once(eventType: 'focus', handler: () => any): StripeIbanElement;
+    off(eventType: 'focus', handler?: () => any): StripeIbanElement;
 
     /**
      * Triggered when the element loses focus.
      */
     on(eventType: 'blur', handler: () => any): StripeIbanElement;
+    once(eventType: 'blur', handler: () => any): StripeIbanElement;
+    off(eventType: 'blur', handler?: () => any): StripeIbanElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
     on(eventType: 'escape', handler: () => any): StripeIbanElement;
+    once(eventType: 'escape', handler: () => any): StripeIbanElement;
+    off(eventType: 'escape', handler?: () => any): StripeIbanElement;
 
     /**
      * Updates the options the `IbanElement` was initialized with.

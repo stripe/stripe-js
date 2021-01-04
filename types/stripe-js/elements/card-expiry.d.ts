@@ -9,26 +9,42 @@ declare module '@stripe/stripe-js' {
       eventType: 'change',
       handler: (event: StripeCardExpiryElementChangeEvent) => any
     ): StripeCardExpiryElement;
+    once(
+      eventType: 'change',
+      handler: (event: StripeCardExpiryElementChangeEvent) => any
+    ): StripeCardExpiryElement;
+    off(
+      eventType: 'change',
+      handler?: (event: StripeCardExpiryElementChangeEvent) => any
+    ): StripeCardExpiryElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
     on(eventType: 'ready', handler: () => any): StripeCardExpiryElement;
+    once(eventType: 'ready', handler: () => any): StripeCardExpiryElement;
+    off(eventType: 'ready', handler?: () => any): StripeCardExpiryElement;
 
     /**
      * Triggered when the element gains focus.
      */
     on(eventType: 'focus', handler: () => any): StripeCardExpiryElement;
+    once(eventType: 'focus', handler: () => any): StripeCardExpiryElement;
+    off(eventType: 'focus', handler?: () => any): StripeCardExpiryElement;
 
     /**
      * Triggered when the element loses focus.
      */
     on(eventType: 'blur', handler: () => any): StripeCardExpiryElement;
+    once(eventType: 'blur', handler: () => any): StripeCardExpiryElement;
+    off(eventType: 'blur', handler?: () => any): StripeCardExpiryElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
     on(eventType: 'escape', handler: () => any): StripeCardExpiryElement;
+    once(eventType: 'escape', handler: () => any): StripeCardExpiryElement;
+    off(eventType: 'escape', handler?: () => any): StripeCardExpiryElement;
 
     /**
      * Updates the options the `CardExpiryElement` was initialized with.

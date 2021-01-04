@@ -9,26 +9,42 @@ declare module '@stripe/stripe-js' {
       eventType: 'change',
       handler: (event: StripeCardNumberElementChangeEvent) => any
     ): StripeCardNumberElement;
+    once(
+      eventType: 'change',
+      handler: (event: StripeCardNumberElementChangeEvent) => any
+    ): StripeCardNumberElement;
+    off(
+      eventType: 'change',
+      handler?: (event: StripeCardNumberElementChangeEvent) => any
+    ): StripeCardNumberElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
     on(eventType: 'ready', handler: () => any): StripeCardNumberElement;
+    once(eventType: 'ready', handler: () => any): StripeCardNumberElement;
+    off(eventType: 'ready', handler?: () => any): StripeCardNumberElement;
 
     /**
      * Triggered when the element gains focus.
      */
     on(eventType: 'focus', handler: () => any): StripeCardNumberElement;
+    once(eventType: 'focus', handler: () => any): StripeCardNumberElement;
+    off(eventType: 'focus', handler?: () => any): StripeCardNumberElement;
 
     /**
      * Triggered when the element loses focus.
      */
     on(eventType: 'blur', handler: () => any): StripeCardNumberElement;
+    once(eventType: 'blur', handler: () => any): StripeCardNumberElement;
+    off(eventType: 'blur', handler?: () => any): StripeCardNumberElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
     on(eventType: 'escape', handler: () => any): StripeCardNumberElement;
+    once(eventType: 'escape', handler: () => any): StripeCardNumberElement;
+    off(eventType: 'escape', handler?: () => any): StripeCardNumberElement;
 
     /**
      * Updates the options the `CardNumberElement` was initialized with.

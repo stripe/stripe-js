@@ -9,26 +9,42 @@ declare module '@stripe/stripe-js' {
       eventType: 'change',
       handler: (event: StripeFpxBankElementChangeEvent) => any
     ): StripeFpxBankElement;
+    once(
+      eventType: 'change',
+      handler: (event: StripeFpxBankElementChangeEvent) => any
+    ): StripeFpxBankElement;
+    off(
+      eventType: 'change',
+      handler?: (event: StripeFpxBankElementChangeEvent) => any
+    ): StripeFpxBankElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
     on(eventType: 'ready', handler: () => any): StripeFpxBankElement;
+    once(eventType: 'ready', handler: () => any): StripeFpxBankElement;
+    off(eventType: 'ready', handler?: () => any): StripeFpxBankElement;
 
     /**
      * Triggered when the element gains focus.
      */
     on(eventType: 'focus', handler: () => any): StripeFpxBankElement;
+    once(eventType: 'focus', handler: () => any): StripeFpxBankElement;
+    off(eventType: 'focus', handler?: () => any): StripeFpxBankElement;
 
     /**
      * Triggered when the element loses focus.
      */
     on(eventType: 'blur', handler: () => any): StripeFpxBankElement;
+    once(eventType: 'blur', handler: () => any): StripeFpxBankElement;
+    off(eventType: 'blur', handler?: () => any): StripeFpxBankElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
     on(eventType: 'escape', handler: () => any): StripeFpxBankElement;
+    once(eventType: 'escape', handler: () => any): StripeFpxBankElement;
+    off(eventType: 'escape', handler?: () => any): StripeFpxBankElement;
 
     /**
      * Updates the options the `FpxBankElement` was initialized with.

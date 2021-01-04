@@ -231,6 +231,11 @@ cardElement
     }
   });
 
+const onceHandler = () => {};
+cardElement.once('ready', onceHandler);
+cardElement.off('ready', onceHandler);
+cardElement.off('change');
+
 auBankAccountElement.on(
   'change',
   (e: StripeAuBankAccountElementChangeEvent) => {}
