@@ -9,26 +9,42 @@ declare module '@stripe/stripe-js' {
       eventType: 'change',
       handler: (event: StripeEpsBankElementChangeEvent) => any
     ): StripeEpsBankElement;
+    once(
+      eventType: 'change',
+      handler: (event: StripeEpsBankElementChangeEvent) => any
+    ): StripeEpsBankElement;
+    off(
+      eventType: 'change',
+      handler: (event: StripeEpsBankElementChangeEvent) => any
+    ): StripeEpsBankElement;
 
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
     on(eventType: 'ready', handler: () => any): StripeEpsBankElement;
+    once(eventType: 'ready', handler: () => any): StripeEpsBankElement;
+    off(eventType: 'ready', handler: () => any): StripeEpsBankElement;
 
     /**
      * Triggered when the element gains focus.
      */
     on(eventType: 'focus', handler: () => any): StripeEpsBankElement;
+    once(eventType: 'focus', handler: () => any): StripeEpsBankElement;
+    off(eventType: 'focus', handler: () => any): StripeEpsBankElement;
 
     /**
      * Triggered when the element loses focus.
      */
     on(eventType: 'blur', handler: () => any): StripeEpsBankElement;
+    once(eventType: 'blur', handler: () => any): StripeEpsBankElement;
+    off(eventType: 'blur', handler: () => any): StripeEpsBankElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
     on(eventType: 'escape', handler: () => any): StripeEpsBankElement;
+    once(eventType: 'escape', handler: () => any): StripeEpsBankElement;
+    off(eventType: 'escape', handler: () => any): StripeEpsBankElement;
 
     /**
      * Updates the options the `EpsBankElement` was initialized with.
