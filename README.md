@@ -34,7 +34,7 @@ necessary, it will load Stripe.js for you by inserting the Stripe.js script tag.
 If you call `loadStripe` in a server environment it will resolve to `null`.
 
 ```js
-import { loadStripe } from '@stripe/stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 ```
@@ -113,7 +113,7 @@ Stripe.js script until `loadStripe` is first called, use the alternative
 `@stripe/stripe-js/pure` import path:
 
 ```js
-import { loadStripe } from '@stripe/stripe-js/pure';
+import {loadStripe} from '@stripe/stripe-js/pure';
 
 // Stripe.js will not be loaded until `loadStripe` is called
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -126,9 +126,9 @@ If you would like to
 altogether, use `loadStripe.setLoadParameters`:
 
 ```js
-import { loadStripe } from '@stripe/stripe-js/pure';
+import {loadStripe} from '@stripe/stripe-js/pure';
 
-loadStripe.setLoadParameters({ advancedFraudSignals: false });
+loadStripe.setLoadParameters({advancedFraudSignals: false});
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 ```
 
