@@ -33,7 +33,7 @@ declare module '@stripe/stripe-js' {
 
     fpx?: PaymentMethod.Fpx;
 
-    grabpab?: PaymentMethod.GrabPay;
+    grabpay?: PaymentMethod.GrabPay;
 
     ideal?: PaymentMethod.Ideal;
 
