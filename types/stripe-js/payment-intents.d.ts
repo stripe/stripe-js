@@ -9,6 +9,7 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodCardData
     | CreatePaymentMethodEpsData
     | CreatePaymentMethodGiropayData
+    | CreatePaymentMethodGrabPayData
     | CreatePaymentMethodIdealData
     | CreatePaymentMethodP24Data
     | CreatePaymentMethodFpxData
