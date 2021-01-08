@@ -164,6 +164,20 @@ declare module '@stripe/stripe-js' {
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /**
+     * Use `stripe.confirmGrabPayPayment` in the [GrabPay payments](https://stripe.com/docs/payments/grabpay) flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents).
+     * Refer to our [integration guide](https://stripe.com/docs/payments/grabpay/accept-a-payment) for more details.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_grabpay_payment
+     */
+
+    confirmGrabPayPayment(
+      clientSecret: string,
+      data?: ConfirmGrabPayPaymentData,
+      options?: ConfirmGrabPayPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
      * Use `stripe.confirmIdealPayment` in the [iDEAL Payments with Payment Methods](https://stripe.com/docs/payments/ideal) flow when the customer submits your payment form.
      * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
@@ -402,20 +416,6 @@ declare module '@stripe/stripe-js' {
     retrieveSetupIntent(
       clientSecret: string
     ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
-
-    /**
-     * Use `stripe.confirmGrabPayPayment` in the [GrabPay payments](https://stripe.com/docs/payments/grabpay) flow when the customer submits your payment form.
-     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents).
-     * Refer to our [integration guide](https://stripe.com/docs/payments/grabpay/accept-a-payment) for more details.
-     *
-     * @docs https://stripe.com/docs/js/payment_intents/confirm_grabpay_payment
-     */
-
-    confirmGrabPayPayment(
-      clientSecret: string,
-      data?: ConfirmGrabPayPaymentData,
-      options?: ConfirmGrabPayPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /////////////////////////////
     /// Payment Request
