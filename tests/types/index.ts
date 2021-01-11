@@ -29,6 +29,7 @@ import {
   StripeIbanElement,
   StripeIdealBankElement,
   StripeEpsBankElement,
+  StripeP24BankElement,
   StripeFpxBankElement,
   StripeFpxBankElementChangeEvent,
   StripeAuBankAccountElement,
@@ -199,6 +200,16 @@ const epsBankElement = elements.create('epsBank', {
 
 const retrievedEpsBankElement: StripeEpsBankElement | null = elements.getElement(
   'epsBank'
+);
+
+const p24BankElement = elements.create('p24Bank', {
+  style: MY_STYLE,
+  value: '',
+  classes: {webkitAutoFill: ''},
+});
+
+const retrievedP24BankElement: StripeP24BankElement | null = elements.getElement(
+  'p24Bank'
 );
 
 type StripePaymentRequestButtonElementUpdateOptions = Parameters<
@@ -511,6 +522,49 @@ stripe.confirmP24Payment('', {payment_method: ''});
 stripe.confirmP24Payment('', {payment_method: ''}, {handleActions: false});
 
 stripe.confirmP24Payment('');
+
+stripe.confirmP24Payment('', {
+  payment_method: {
+    p24: {bank: 'ing'},
+    billing_details: {name: 'Jenny Rosen'},
+  },
+  return_url: window.location.href,
+});
+
+stripe.confirmP24Payment('', {
+  payment_method: {
+    p24: p24BankElement,
+    billing_details: {name: 'Jenny Rosen'},
+  },
+  return_url: window.location.href,
+});
+
+stripe.confirmP24Payment('', {
+  payment_method: {
+    p24: {bank: 'ing'},
+    billing_details: {name: 'Jenny Rosen'},
+  },
+  payment_method_options: {
+    p24: {
+      tos_shown_and_accepted: true,
+    }
+  },
+  return_url: window.location.href,
+});
+
+stripe.confirmP24Payment('', {
+  payment_method: {
+    p24: p24BankElement,
+    billing_details: {name: 'Jenny Rosen'},
+  },
+  payment_method_options: {
+    p24: {
+      tos_shown_and_accepted: true,
+    }
+  },
+  return_url: window.location.href,
+});
+
 
 stripe.confirmSepaDebitPayment('', {
   payment_method: {

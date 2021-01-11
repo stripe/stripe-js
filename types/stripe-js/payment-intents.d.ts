@@ -130,6 +130,14 @@ declare module '@stripe/stripe-js' {
     billing_details: PaymentMethodCreateParams.BillingDetails & {
       email: string;
     };
+    p24:
+      | StripeP24BankElement
+      | {
+      /**
+       * The customer's bank.
+       */
+      bank?: string;
+    };
   }
 
   interface CreatePaymentMethodSepaDebitData extends PaymentMethodCreateParams {
@@ -534,6 +542,18 @@ declare module '@stripe/stripe-js' {
      * @recommended
      */
     payment_method?: string | Omit<CreatePaymentMethodP24Data, 'type'>;
+
+    payment_method_options?: {
+      /**
+       * Configuration for this Przelewy24 payment.
+       */
+      p24: {
+        /**
+         * Specify that payer has agreed to the Przelewy24 Terms of Service
+         */
+        tos_shown_and_accepted?: boolean;
+      };
+    };
 
     /**
      * The url your customer will be directed to after they complete authentication.

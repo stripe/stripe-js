@@ -8,6 +8,7 @@
 ///<reference path='./elements/payment-request-button.d.ts' />
 ///<reference path='./elements/au-bank-account.d.ts' />
 ///<reference path='./elements/eps-bank.d.ts' />
+///<reference path='./elements/p24-bank.d.ts' />
 
 import {StripeAuBankAccountElement} from '@stripe/stripe-js';
 
@@ -126,8 +127,6 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
-     * Requires beta access:
-     * Contact [Stripe support](https://support.stripe.com/) for more information.
      *
      * Creates an `EpsBankElement`.
      */
@@ -143,6 +142,25 @@ declare module '@stripe/stripe-js' {
      * Looks up a previously created `Element` by its type.
      */
     getElement(elementType: 'epsBank'): StripeEpsBankElement | null;
+
+    /////////////////////////////
+    /// p24Bank
+    /////////////////////////////
+
+    /**
+     *
+     * Creates an `P24BankElement`.
+     */
+    create(
+      elementType: 'p24Bank',
+      options: StripeP24BankElementOptions
+    ): StripeP24BankElement;
+
+    /**
+     *
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'p24Bank'): StripeP24BankElement | null;
 
     /////////////////////////////
     /// iban
@@ -210,6 +228,7 @@ declare module '@stripe/stripe-js' {
     | 'fpxBank'
     | 'iban'
     | 'idealBank'
+    | 'p24Bank'
     | 'paymentRequestButton';
 
   type StripeElement =
@@ -222,6 +241,7 @@ declare module '@stripe/stripe-js' {
     | StripeFpxBankElement
     | StripeIbanElement
     | StripeIdealBankElement
+    | StripeP24BankElement
     | StripePaymentRequestButtonElement;
 
   type StripeElementLocale =
