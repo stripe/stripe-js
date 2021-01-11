@@ -133,11 +133,11 @@ declare module '@stripe/stripe-js' {
     p24:
       | StripeP24BankElement
       | {
-      /**
-       * The customer's bank.
-       */
-      bank?: string;
-    };
+          /**
+           * The customer's bank.
+           */
+          bank?: string;
+        };
   }
 
   interface CreatePaymentMethodSepaDebitData extends PaymentMethodCreateParams {

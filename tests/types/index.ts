@@ -547,7 +547,7 @@ stripe.confirmP24Payment('', {
   payment_method_options: {
     p24: {
       tos_shown_and_accepted: true,
-    }
+    },
   },
   return_url: window.location.href,
 });
@@ -560,11 +560,10 @@ stripe.confirmP24Payment('', {
   payment_method_options: {
     p24: {
       tos_shown_and_accepted: true,
-    }
+    },
   },
   return_url: window.location.href,
 });
-
 
 stripe.confirmSepaDebitPayment('', {
   payment_method: {
