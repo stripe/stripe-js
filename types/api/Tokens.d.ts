@@ -369,7 +369,7 @@ declare module '@stripe/stripe-js' {
           year: number;
         }
 
-        type PoliticalExposure = 'none' | 'existing'
+        type PoliticalExposure = 'none' | 'existing';
 
         interface Verification {
           /**
