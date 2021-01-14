@@ -304,6 +304,11 @@ declare module '@stripe/stripe-js' {
         phone?: string;
 
         /**
+         * Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
+         */
+        political_exposure?: Individual.PoliticalExposure;
+
+        /**
          * The last four digits of the individual's Social Security Number (U.S. only).
          */
         ssn_last_4?: string;
@@ -363,6 +368,8 @@ declare module '@stripe/stripe-js' {
            */
           year: number;
         }
+
+        type PoliticalExposure = 'none' | 'existing';
 
         interface Verification {
           /**
