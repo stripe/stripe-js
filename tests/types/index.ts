@@ -526,7 +526,7 @@ stripe.confirmP24Payment('');
 stripe.confirmP24Payment('', {
   payment_method: {
     p24: {bank: 'ing'},
-    billing_details: {name: 'Jenny Rosen'},
+    billing_details: {email: 'jenny@example.com'},
   },
   return_url: window.location.href,
 });
@@ -534,7 +534,7 @@ stripe.confirmP24Payment('', {
 stripe.confirmP24Payment('', {
   payment_method: {
     p24: p24BankElement,
-    billing_details: {name: 'Jenny Rosen'},
+    billing_details: {email: 'jenny@example.com'},
   },
   return_url: window.location.href,
 });
@@ -542,7 +542,7 @@ stripe.confirmP24Payment('', {
 stripe.confirmP24Payment('', {
   payment_method: {
     p24: {bank: 'ing'},
-    billing_details: {name: 'Jenny Rosen'},
+    billing_details: {email: 'jenny@example.com'},
   },
   payment_method_options: {
     p24: {
@@ -555,7 +555,7 @@ stripe.confirmP24Payment('', {
 stripe.confirmP24Payment('', {
   payment_method: {
     p24: p24BankElement,
-    billing_details: {name: 'Jenny Rosen'},
+    billing_details: {email: 'jenny@example.com'},
   },
   payment_method_options: {
     p24: {

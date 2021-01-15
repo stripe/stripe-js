@@ -130,7 +130,7 @@ declare module '@stripe/stripe-js' {
     billing_details: PaymentMethodCreateParams.BillingDetails & {
       email: string;
     };
-    p24:
+    p24?:
       | StripeP24BankElement
       | {
           /**
