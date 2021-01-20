@@ -212,8 +212,8 @@ declare module '@stripe/stripe-js' {
     shippingOptions?: PaymentRequestShippingOption[];
 
     /**
-     * An array of payment handler strings.
-     * If no payment handlers are passed, the default payment handler list will be used.
+     * An array of `Wallet` strings.
+     * If no wallets are passed, the default wallet list will be used.
      */
     wallets?: PaymentRequestWallet[];
   }
@@ -266,7 +266,7 @@ declare module '@stripe/stripe-js' {
     amount: number;
   }
 
-  type PaymentRequestWallet = 'googlePay' | 'applePay' | 'browserCard';
+  type PaymentRequestWallet = 'applePay' | 'googlePay' | 'browserCard';
 
   type PaymentRequestCompleteStatus =
     /**
