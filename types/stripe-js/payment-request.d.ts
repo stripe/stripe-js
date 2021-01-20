@@ -1,10 +1,10 @@
 declare module '@stripe/stripe-js' {
   interface PaymentRequest {
     /**
-     * Returns a `Promise` that resolves with an object detailing if a browser payment API is available.
+     * Returns a `Promise` that resolves with an object if a browser payment API is available.
      * If no API is available, it resolves with `null`.
      */
-    canMakePayment(): Promise<CanMakePaymentResult | null>;
+    canMakePayment(): Promise<Record<string, boolean> | null>;
 
     /**
      * Shows the browser’s payment interface.
@@ -123,16 +123,6 @@ declare module '@stripe/stripe-js' {
     ): this;
   }
 
-  interface CanMakePaymentResult {
-    /**
-     * `true` if the browser payment API supports Apple Pay.
-     * In this case, you‘ll want to show a button that conforms to the Apple Pay [Human Interface Guidelines](https://developer.apple.com/apple-pay/web-human-interface-guidelines/).
-     * Note that using the `PaymentRequestButtonElement` is automatically cross-browser.
-     * If you use this `PaymentRequest` object to create a `paymentRequestButton` Element, you don't need to check `applePay` yourself.
-     */
-    applePay: boolean;
-  }
-
   interface PaymentRequestUpdateOptions {
     /**
      * Three character currency code (e.g., `usd`).
@@ -220,6 +210,12 @@ declare module '@stripe/stripe-js' {
      * The first shipping option listed appears in the browser payment interface as the default option.
      */
     shippingOptions?: PaymentRequestShippingOption[];
+
+    /**
+     * An array of payment handler strings.
+     * If no customized payment handlers are passed in, the default payment handler list will be used.
+     */
+    wallets?: PaymentRequestWallet[];
   }
 
   /**
@@ -269,6 +265,8 @@ declare module '@stripe/stripe-js' {
      */
     amount: number;
   }
+
+  type PaymentRequestWallet = 'googlePay' | 'applePay' | 'browserCard';
 
   type PaymentRequestCompleteStatus =
     /**
