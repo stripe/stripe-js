@@ -213,7 +213,7 @@ declare module '@stripe/stripe-js' {
 
     /**
      * An array of payment handler strings.
-     * If no customized payment handlers are passed in, the default payment handler list will be used.
+     * If no payment handlers are passed, the default payment handler list will be used.
      */
     wallets?: PaymentRequestWallet[];
   }
