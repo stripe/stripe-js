@@ -212,7 +212,7 @@ declare module '@stripe/stripe-js' {
     shippingOptions?: PaymentRequestShippingOption[];
 
     /**
-     * An array of `Wallet` strings.
+     * An array of `PaymentRequestWallet` strings.
      * If no wallets are passed, the default wallet list will be used.
      */
     wallets?: PaymentRequestWallet[];
