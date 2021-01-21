@@ -35,6 +35,8 @@ declare module '@stripe/stripe-js' {
 
     ideal?: PaymentMethod.Ideal;
 
+    p24?: PaymentMethod.P24;
+
     /**
      * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
      */
@@ -197,6 +199,13 @@ declare module '@stripe/stripe-js' {
        * The Bank Identifier Code of the customer's bank, if the bank was provided.
        */
       bic: string | null;
+    }
+
+    interface P24 {
+      /**
+       * The customer's bank.
+       */
+      bank: string;
     }
 
     interface SepaDebit {
