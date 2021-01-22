@@ -594,6 +594,15 @@ stripe.createPaymentMethod({
 });
 
 stripe.createPaymentMethod({
+  type: 'grabpay',
+});
+
+stripe.createPaymentMethod({
+  type: 'grabpay',
+  grabpay: {},
+});
+
+stripe.createPaymentMethod({
   type: 'ideal',
   ideal: idealBankElement,
 });

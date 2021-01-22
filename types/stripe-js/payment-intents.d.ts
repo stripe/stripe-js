@@ -97,7 +97,7 @@ declare module '@stripe/stripe-js' {
     /**
      * Can be omitted as there are no GrabPay-specific fields.
      */
-    grabpay: {};
+    grabpay?: {};
   }
 
   interface CreatePaymentMethodIdealData extends PaymentMethodCreateParams {
