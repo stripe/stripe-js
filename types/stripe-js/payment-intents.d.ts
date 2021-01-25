@@ -9,6 +9,7 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodCardData
     | CreatePaymentMethodEpsData
     | CreatePaymentMethodGiropayData
+    | CreatePaymentMethodGrabPayData
     | CreatePaymentMethodIdealData
     | CreatePaymentMethodP24Data
     | CreatePaymentMethodFpxData
@@ -88,6 +89,15 @@ declare module '@stripe/stripe-js' {
     billing_details: PaymentMethodCreateParams.BillingDetails & {
       name: string;
     };
+  }
+
+  interface CreatePaymentMethodGrabPayData extends PaymentMethodCreateParams {
+    type: 'grabpay';
+
+    /**
+     * Can be omitted as there are no GrabPay-specific fields.
+     */
+    grabpay?: {};
   }
 
   interface CreatePaymentMethodIdealData extends PaymentMethodCreateParams {
@@ -470,6 +480,38 @@ declare module '@stripe/stripe-js' {
     /**
      * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/giropay#handle-redirect).
      * Default is `true`.
+     */
+    handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmGrabPayPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmGrabPayPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodGrabPayData, 'type'>;
+
+    /**
+     * The url your customer will be directed to after they complete authentication.
+     *
+     * @recommended
+     */
+    return_url?: string;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmGrabPayPayment`.
+   */
+  interface ConfirmGrabPayPaymentOptions {
+    /**
+     * Set this to `false` if you want to handle next actions yourself. Please refer to our [Stripe GrabPay integration guide](https://stripe.com/docs/payments/grabpay/accept-a-payment)
+     * for more info. Default is `true`.
      */
     handleActions?: boolean;
   }

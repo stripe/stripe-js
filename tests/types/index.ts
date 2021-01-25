@@ -484,6 +484,16 @@ stripe.confirmGiropayPayment('', {payment_method: ''}, {handleActions: false});
 
 stripe.confirmGiropayPayment('');
 
+stripe.confirmGrabPayPayment('', {return_url: window.location.href});
+
+stripe.confirmGrabPayPayment('');
+
+stripe.confirmGrabPayPayment('', {payment_method: {grabpay: {}}});
+
+stripe.confirmGrabPayPayment('', {payment_method: ''});
+
+stripe.confirmGrabPayPayment('', {payment_method: ''}, {handleActions: false});
+
 stripe.confirmIdealPayment('', {
   payment_method: {ideal: idealBankElement},
   return_url: window.location.href,
@@ -639,6 +649,15 @@ stripe.createPaymentMethod({
 stripe.createPaymentMethod({
   type: 'fpx',
   fpx: {bank: ''},
+});
+
+stripe.createPaymentMethod({
+  type: 'grabpay',
+});
+
+stripe.createPaymentMethod({
+  type: 'grabpay',
+  grabpay: {},
 });
 
 stripe.createPaymentMethod({
