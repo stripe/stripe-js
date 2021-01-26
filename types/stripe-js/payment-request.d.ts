@@ -1,8 +1,8 @@
 declare module '@stripe/stripe-js' {
   interface PaymentRequest {
     /**
-     * Returns a `Promise` that resolves with an object if a browser payment API is available.
-     * If no API is available, it resolves with `null`.
+     * Returns a `Promise` that resolves with a truthy value if an enabled wallet is ready to pay.
+     * If no wallet is available, it resolves with `null`.
      */
     canMakePayment(): Promise<Record<string, boolean> | null>;
 
@@ -213,7 +213,10 @@ declare module '@stripe/stripe-js' {
 
     /**
      * An array of `PaymentRequestWallet` strings.
-     * If no wallets are passed, the default wallet list will be used.
+     * 
+     * By default, if no `wallets` option is passed in, all wallets will be enabled.
+     * If you use this property, only wallets passed in will be enabled. 
+     * If an empty array is specified, all wallets will be disabled.
      */
     wallets?: PaymentRequestWallet[];
   }
