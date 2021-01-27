@@ -213,9 +213,9 @@ declare module '@stripe/stripe-js' {
 
     /**
      * An array of `PaymentRequestWallet` strings.
-     * 
+     *
      * By default, if no `wallets` option is passed in, all wallets will be enabled.
-     * If you use this property, only wallets passed in will be enabled. 
+     * If you use this property, only wallets passed in will be enabled.
      * If an empty array is specified, all wallets will be disabled.
      */
     wallets?: PaymentRequestWallet[];
