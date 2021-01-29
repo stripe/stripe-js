@@ -715,6 +715,46 @@ declare module '@stripe/stripe-js' {
 
       statement_descriptor?: string;
     }
+
+    interface SofortCreate {
+      country: string;
+
+      preferred_language?: string;
+    }
+
+    interface IdealCreate {
+      bank?: string;
+    }
+
+    interface BancontactCreate {
+      preferred_language?: string;
+    }
+
+    interface KlarnaCreate {
+      attachment?: string;
+
+      custom_payment_methods: string;
+
+      first_name: string;
+
+      last_name: string;
+
+      locale?: string;
+
+      product: string;
+
+      purchase_country: string;
+
+      shipping_first_name: string;
+
+      shipping_last_name: string;
+
+      shipping_delay: number;
+    }
+
+    interface SepaDebitCreate {
+      iban: string;
+    }
   }
 
   interface SourceCreateParams {
@@ -791,6 +831,31 @@ declare module '@stripe/stripe-js' {
     type?: string;
 
     usage?: SourceCreateParams.Usage;
+
+    /**
+     * Information about the sofort object.
+     */
+    sofort?: Source.SofortCreate;
+
+    /**
+     * Information about the ideal object.
+     */
+    ideal?: Source.IdealCreate;
+
+    /**
+     * Information about the bancontact object.
+     */
+    bancontact?: Source.Bancontact;
+
+    /**
+     * Information about the klarna object.
+     */
+    klarna?: Source.KlarnaCreate;
+
+    /**
+     * Information about the sepa_debit object.
+     */
+    sepa_debit?: Source.SepaDebitCreate;
   }
 
   namespace SourceCreateParams {
