@@ -1,10 +1,10 @@
 declare module '@stripe/stripe-js' {
   interface PaymentRequest {
     /**
-     * Returns a `Promise` that resolves with an object detailing if a browser payment API is available.
-     * If no API is available, it resolves with `null`.
+     * Returns a `Promise` that resolves with a truthy value if an enabled wallet is ready to pay.
+     * If no wallet is available, it resolves with `null`.
      */
-    canMakePayment(): Promise<CanMakePaymentResult | null>;
+    canMakePayment(): Promise<Record<string, boolean> | null>;
 
     /**
      * Shows the browser’s payment interface.
@@ -123,16 +123,6 @@ declare module '@stripe/stripe-js' {
     ): this;
   }
 
-  interface CanMakePaymentResult {
-    /**
-     * `true` if the browser payment API supports Apple Pay.
-     * In this case, you‘ll want to show a button that conforms to the Apple Pay [Human Interface Guidelines](https://developer.apple.com/apple-pay/web-human-interface-guidelines/).
-     * Note that using the `PaymentRequestButtonElement` is automatically cross-browser.
-     * If you use this `PaymentRequest` object to create a `paymentRequestButton` Element, you don't need to check `applePay` yourself.
-     */
-    applePay: boolean;
-  }
-
   interface PaymentRequestUpdateOptions {
     /**
      * Three character currency code (e.g., `usd`).
@@ -220,6 +210,15 @@ declare module '@stripe/stripe-js' {
      * The first shipping option listed appears in the browser payment interface as the default option.
      */
     shippingOptions?: PaymentRequestShippingOption[];
+
+    /**
+     * An array of `PaymentRequestWallet` strings.
+     *
+     * By default, if no `wallets` option is passed in, all wallets will be enabled.
+     * If you use this property, only wallets passed in will be enabled.
+     * If an empty array is specified, all wallets will be disabled.
+     */
+    wallets?: PaymentRequestWallet[];
   }
 
   /**
@@ -269,6 +268,8 @@ declare module '@stripe/stripe-js' {
      */
     amount: number;
   }
+
+  type PaymentRequestWallet = 'applePay' | 'googlePay' | 'browserCard';
 
   type PaymentRequestCompleteStatus =
     /**

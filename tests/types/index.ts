@@ -182,6 +182,7 @@ const paymentRequestButtonElement = elements.create('paymentRequestButton', {
     total: {label: 'Demo total', amount: 1000},
     requestPayerName: true,
     requestPayerEmail: true,
+    wallets: ['applePay', 'browserCard'],
   }),
 });
 
