@@ -36,6 +36,7 @@ import {
   StripeAuBankAccountElementChangeEvent,
   StripePaymentRequestButtonElement,
   StripeElementType,
+  CanMakePaymentResult,
 } from '@stripe/stripe-js';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -821,7 +822,7 @@ const paymentRequest: PaymentRequest = stripe.paymentRequest({
 
 paymentRequest.canMakePayment().then((result) => {
   if (result) {
-    const {applePay} = result;
+    const {applePay}: CanMakePaymentResult = result;
     console.log(applePay);
   }
 });
