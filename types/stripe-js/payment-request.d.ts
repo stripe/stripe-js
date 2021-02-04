@@ -4,7 +4,7 @@ declare module '@stripe/stripe-js' {
      * Returns a `Promise` that resolves with a truthy value if an enabled wallet is ready to pay.
      * If no wallet is available, it resolves with `null`.
      */
-    canMakePayment(): Promise<Record<string, boolean> | null>;
+    canMakePayment(): Promise<CanMakePaymentResult | null>;
 
     /**
      * Shows the browser’s payment interface.
@@ -122,6 +122,8 @@ declare module '@stripe/stripe-js' {
       handler?: (event: PaymentRequestShippingOptionEvent) => any
     ): this;
   }
+
+  type CanMakePaymentResult = Record<string, boolean>;
 
   interface PaymentRequestUpdateOptions {
     /**
