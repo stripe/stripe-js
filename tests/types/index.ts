@@ -127,6 +127,8 @@ const cardNumberElement: StripeCardNumberElement = elements.create(
 );
 
 elements.create('cardNumber', {style: {base: {fontWeight: 500}}});
+elements.create('cardCvc', {style: {base: {fontWeight: 500}}});
+elements.create('cardExpiry', {style: {base: {fontWeight: 500}}});
 
 const retrievedCardNumberElement: StripeCardNumberElement | null = elements.getElement(
   'cardNumber'
