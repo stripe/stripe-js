@@ -862,6 +862,7 @@ paymentRequest.on('token', function(ev) {
 
 paymentRequest.on('source', function(ev) {
   console.log(ev.source.id);
+  console.log(ev.walletName);
   console.log(ev.methodName);
   console.log(ev.payerPhone);
   ev.complete('invalid_payer_email');
