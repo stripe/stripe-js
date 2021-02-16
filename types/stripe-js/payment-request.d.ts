@@ -343,8 +343,14 @@ declare module '@stripe/stripe-js' {
     shippingOption?: PaymentRequestShippingOption;
 
     /**
-     * The unique name of the payment handler the customer chose to authorize payment.
-     * For example, `basic-card`.
+     * The unique name of the wallet the customer chose to authorize payment.
+     * For example, `browserCard`.
+     */
+    walletName: PaymentRequestWallet | string;
+
+    /**
+     * @deprecated
+     * Use walletName instead.
      */
     methodName: string;
   }
