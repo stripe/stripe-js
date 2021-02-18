@@ -354,6 +354,7 @@ const createSourceRaw = async () => {
     type: 'ideal',
     amount: 1099,
     currency: 'eur',
+    statement_descriptor: 'ORDER AT11990',
     owner: {
       name: 'Jenny Rosen',
     },
@@ -370,6 +371,158 @@ const createSourceRaw = async () => {
     console.log(source.type);
   }
 };
+
+stripe.createSource(cardElement, {
+  owner: {
+    name: 'Jenny Rosen',
+    address: {
+      line1: 'Nollendorfstraße 27',
+      city: 'Berlin',
+      postal_code: '10777',
+      country: 'DE',
+    },
+    email: 'jenny.rosen@example.com',
+  },
+});
+
+stripe.createSource({
+  type: 'klarna',
+  amount: 816,
+  currency: 'eur',
+  klarna: {
+    product: 'payment',
+    purchase_country: 'DE',
+  },
+  source_order: {
+    items: [
+      {
+        type: 'sku',
+        description: 'Grey cotton T-shirt',
+        quantity: 2,
+        currency: 'eur',
+        amount: 796,
+      },
+      {
+        type: 'tax',
+        description: 'Taxes',
+        currency: 'eur',
+        amount: 20,
+      },
+      {
+        type: 'shipping',
+        description: 'Free Shipping',
+        currency: 'eur',
+        amount: 0,
+      },
+    ],
+  },
+});
+
+stripe.createSource({
+  type: 'alipay',
+  amount: 1099,
+  currency: 'usd',
+  redirect: {
+    return_url: 'https://shop.example.com/crtA6B28E1',
+  },
+});
+
+stripe.createSource({
+  type: 'bancontact',
+  amount: 1099,
+  currency: 'eur',
+  bancontact: {
+    preferred_language: 'fr',
+  },
+  owner: {
+    name: 'Jenny Rosen',
+  },
+  redirect: {
+    return_url: 'https://shop.example.com/crtA6B28E1',
+  },
+});
+
+stripe.createSource({
+  type: 'eps',
+  amount: 1099,
+  currency: 'eur',
+  owner: {
+    name: 'Jenny Rosen',
+  },
+  redirect: {
+    return_url: 'https://shop.example.com/crtA6B28E1',
+  },
+});
+
+stripe.createSource({
+  type: 'giropay',
+  amount: 1099,
+  currency: 'eur',
+  owner: {
+    name: 'Jenny Rosen',
+  },
+  redirect: {
+    return_url: 'https://shop.example.com/crtA6B28E1',
+  },
+});
+
+stripe.createSource({
+  type: 'ideal',
+  amount: 1099,
+  currency: 'eur',
+  ideal: {bank: ''},
+  statement_descriptor: 'ORDER AT11990',
+  owner: {
+    name: 'Jenny Rosen',
+  },
+  redirect: {
+    return_url: 'https://shop.example.com/crtA6B28E1',
+  },
+});
+
+stripe.createSource({
+  type: 'p24',
+  amount: 1099,
+  currency: 'eur',
+  owner: {
+    name: 'Jenny Rosen',
+    email: 'jenny.rosen@example.com',
+  },
+  redirect: {
+    return_url: 'https://shop.example.com/crtA6B28E1',
+  },
+});
+
+stripe.createSource({
+  type: 'wechat',
+  amount: 1099,
+  currency: 'usd',
+});
+
+stripe.createSource({
+  type: 'multibanco',
+  amount: 1099,
+  currency: 'eur',
+  owner: {
+    name: 'Jenny Rosen',
+    email: 'jenny.rosen@example.com',
+  },
+  redirect: {
+    return_url: 'https://shop.example.com/crtA6B28E1',
+  },
+});
+
+stripe.createSource({
+  type: 'sofort',
+  amount: 1099,
+  currency: 'eur',
+  redirect: {
+    return_url: 'https://shop.example.com/crtA6B28E1',
+  },
+  sofort: {
+    country: 'DE',
+  },
+});
 
 stripe.retrieveSource({id: '', client_secret: ''}).then((result) => {
   console.log(result.source!.type);

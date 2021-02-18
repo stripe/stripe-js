@@ -90,5 +90,19 @@ declare module '@stripe/stripe-js' {
    * Instead, you must gather card information in an `Element` and use `stripe.createSource(element, sourceData)`.
    * You can also pass an existing card token to convert it into a `Source` object.
    */
-  type CreateSourceData = SourceCreateParams;
+  interface CreateSourceData extends SourceCreateParams {
+    bancontact?: CreateSourceData.DeprecatedMethodData;
+
+    ideal?: CreateSourceData.DeprecatedMethodData;
+
+    klarna?: CreateSourceData.DeprecatedMethodData;
+
+    sepa_debit?: CreateSourceData.DeprecatedMethodData;
+
+    sofort?: CreateSourceData.DeprecatedMethodData;
+  }
+
+  namespace CreateSourceData {
+    type DeprecatedMethodData = Record<string, unknown>;
+  }
 }
