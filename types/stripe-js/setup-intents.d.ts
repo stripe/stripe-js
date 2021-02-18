@@ -93,4 +93,18 @@ declare module '@stripe/stripe-js' {
      */
     payment_method?: string | Omit<CreatePaymentMethodBacsDebitData, 'type'>;
   }
+
+  /**
+   * Data to be sent with a `stripe.confirmBancontactSetup` request.
+   * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmBancontactSetupData extends SetupIntentConfirmParams {
+    /*
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodBancontactData, 'type'>;
+  }
 }

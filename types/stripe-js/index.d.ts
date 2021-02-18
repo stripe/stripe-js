@@ -79,7 +79,7 @@ declare module '@stripe/stripe-js' {
 
     /**
      * Use `stripe.confirmBancontactPayment` in the [Bancontact Payments with Payment Methods](https://stripe.com/docs/payments/bancontact#web) flow when the customer submits your payment form.
-     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
      *
      * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
@@ -114,7 +114,7 @@ declare module '@stripe/stripe-js' {
 
     /**
      * Use `stripe.confirmEpsPayment` in the [EPS Payments with Payment Methods](https://stripe.com/docs/payments/eps#web) flow when the customer submits your payment form.
-     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
      *
      * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
@@ -131,7 +131,7 @@ declare module '@stripe/stripe-js' {
 
     /**
      * Use `stripe.confirmFpxPayment` in the [FPX Payments with Payment Methods](https://stripe.com/docs/payments/fpx#web) flow when the customer submits your payment form.
-     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
      *
      * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
@@ -148,7 +148,7 @@ declare module '@stripe/stripe-js' {
 
     /**
      * Use `stripe.confirmGiropayPayment` in the [giropay Payments with Payment Methods](https://stripe.com/docs/payments/giropay#web) flow when the customer submits your payment form.
-     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
      *
      * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
@@ -179,7 +179,7 @@ declare module '@stripe/stripe-js' {
 
     /**
      * Use `stripe.confirmIdealPayment` in the [iDEAL Payments with Payment Methods](https://stripe.com/docs/payments/ideal) flow when the customer submits your payment form.
-     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
      *
      * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
@@ -214,7 +214,7 @@ declare module '@stripe/stripe-js' {
 
     /**
      * Use `stripe.confirmP24Payment` in the [Przelewy24 Payments with Payment Methods](https://stripe.com/docs/payments/p24#web) flow when the customer submits your payment form.
-     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to the authorize the transaction.
+     * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
      *
      * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
@@ -340,6 +340,24 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmBacsDebitSetupData
     ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+
+    /**
+     * Use `stripe.confirmBancontactSetup` in the [Set up future payments](https://stripe.com/docs/payments/bancontact/set-up-payment) flow to use Bancontact bank details to set up a SEPA Direct Debit payment method for future payments.
+     * When called, it will confirm a `SetupIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     * Note that there are some additional requirements to this flow that are not covered in this reference.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/bancontact/set-up-payment) for more details.
+     *
+     * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+     * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_bancontact_setup
+     */
+    confirmBancontactSetup(
+      clientSecret: string,
+      data?: ConfirmBancontactSetupData
+    ): Promise<{paymentIntent?: SetupIntent; error?: StripeError}>;
 
     /**
      * Use `stripe.confirmCardSetup` in the [Setup Intents API flow](https://stripe.com/docs/payments/save-and-reuse) when the customer submits your payment form.

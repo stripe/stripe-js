@@ -731,6 +731,18 @@ stripe.confirmBacsDebitSetup('', {
   },
 });
 
+stripe.confirmBancontactSetup('', {payment_method: ''});
+
+stripe.confirmBancontactSetup('', {
+  payment_method: {
+    billing_details: {
+      name: '',
+      email: '',
+    },
+  },
+  return_url: '',
+});
+
 stripe.confirmCardSetup('', {
   payment_method: {card: cardElement, billing_details: {name: ''}},
 });
