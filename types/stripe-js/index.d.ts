@@ -357,7 +357,7 @@ declare module '@stripe/stripe-js' {
     confirmBancontactSetup(
       clientSecret: string,
       data?: ConfirmBancontactSetupData
-    ): Promise<{paymentIntent?: SetupIntent; error?: StripeError}>;
+    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
 
     /**
      * Use `stripe.confirmCardSetup` in the [Setup Intents API flow](https://stripe.com/docs/payments/save-and-reuse) when the customer submits your payment form.

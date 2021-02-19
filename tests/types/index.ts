@@ -375,51 +375,73 @@ stripe.retrieveSource({id: '', client_secret: ''}).then((result) => {
   console.log(result.source!.type);
 });
 
-stripe.confirmAlipayPayment('', {
-  payment_method: '',
-  return_url: window.location.href,
-});
+stripe
+  .confirmAlipayPayment('', {
+    payment_method: '',
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmAlipayPayment('', {return_url: window.location.href});
+stripe
+  .confirmAlipayPayment('', {return_url: window.location.href})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmAlipayPayment('', {payment_method: ''});
+stripe
+  .confirmAlipayPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmAlipayPayment('', {payment_method: ''}, {handleActions: false});
+stripe
+  .confirmAlipayPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmAlipayPayment('');
+stripe
+  .confirmAlipayPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmAuBecsDebitPayment('', {
-  payment_method: {
-    au_becs_debit: auBankAccountElement,
-    billing_details: {name: '', email: ''},
-  },
-});
+stripe
+  .confirmAuBecsDebitPayment('', {
+    payment_method: {
+      au_becs_debit: auBankAccountElement,
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmAuBecsDebitPayment('', {
-  payment_method: {
-    au_becs_debit: {bsb_number: '', account_number: ''},
-    billing_details: {name: '', email: ''},
-  },
-});
+stripe
+  .confirmAuBecsDebitPayment('', {
+    payment_method: {
+      au_becs_debit: {bsb_number: '', account_number: ''},
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmAuBecsDebitPayment('', {payment_method: ''});
+stripe
+  .confirmAuBecsDebitPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmAuBecsDebitPayment('');
+stripe
+  .confirmAuBecsDebitPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmBancontactPayment('', {
-  payment_method: {billing_details: {name: 'Jenny Rosen'}},
-  return_url: window.location.href,
-});
+stripe
+  .confirmBancontactPayment('', {
+    payment_method: {billing_details: {name: 'Jenny Rosen'}},
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmBancontactPayment('', {payment_method: ''});
+stripe
+  .confirmBancontactPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmBancontactPayment(
-  '',
-  {payment_method: ''},
-  {handleActions: false}
-);
+stripe
+  .confirmBancontactPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmBancontactPayment('');
+stripe
+  .confirmBancontactPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
   .confirmCardPayment('', {
@@ -427,189 +449,283 @@ stripe
   })
   .then((result) => console.log(result.paymentIntent!.amount));
 
-stripe.confirmCardPayment('', {payment_method: ''});
+stripe
+  .confirmCardPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmCardPayment('', {payment_method: ''}, {handleActions: false});
+stripe
+  .confirmCardPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmCardPayment('', {payment_method: {card: {token: ''}}});
+stripe
+  .confirmCardPayment('', {payment_method: {card: {token: ''}}})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmCardPayment('', {
-  payment_method: '',
-  payment_method_options: {card: {cvc: cardCvcElement}},
-});
+stripe
+  .confirmCardPayment('', {
+    payment_method: '',
+    payment_method_options: {card: {cvc: cardCvcElement}},
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmCardPayment('');
+stripe
+  .confirmCardPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmEpsPayment('', {
-  payment_method: {
-    eps: {bank: 'bank_austria'},
-    billing_details: {name: 'Jenny Rosen'},
-  },
-  return_url: window.location.href,
-});
-
-stripe.confirmEpsPayment('', {
-  payment_method: {
-    eps: epsBankElement,
-    billing_details: {name: 'Jenny Rosen'},
-  },
-  return_url: window.location.href,
-});
-
-stripe.confirmEpsPayment('', {payment_method: ''});
-
-stripe.confirmEpsPayment('', {payment_method: ''}, {handleActions: false});
-
-stripe.confirmEpsPayment('');
-
-stripe.confirmFpxPayment('', {
-  payment_method: {fpx: fpxBankElement},
-  return_url: window.location.href,
-});
-
-stripe.confirmFpxPayment('', {payment_method: ''});
-
-stripe.confirmFpxPayment('', {payment_method: ''}, {handleActions: false});
-
-stripe.confirmFpxPayment('', {payment_method: {fpx: {bank: ''}}});
-
-stripe.confirmFpxPayment('');
-
-stripe.confirmGiropayPayment('', {
-  payment_method: {billing_details: {name: 'Jenny Rosen'}},
-  return_url: window.location.href,
-});
-
-stripe.confirmGiropayPayment('', {payment_method: ''});
-
-stripe.confirmGiropayPayment('', {payment_method: ''}, {handleActions: false});
-
-stripe.confirmGiropayPayment('');
-
-stripe.confirmGrabPayPayment('', {return_url: window.location.href});
-
-stripe.confirmGrabPayPayment('');
-
-stripe.confirmGrabPayPayment('', {payment_method: {grabpay: {}}});
-
-stripe.confirmGrabPayPayment('', {payment_method: ''});
-
-stripe.confirmGrabPayPayment('', {payment_method: ''}, {handleActions: false});
-
-stripe.confirmIdealPayment('', {
-  payment_method: {ideal: idealBankElement},
-  return_url: window.location.href,
-});
-
-stripe.confirmIdealPayment('', {payment_method: ''});
-
-stripe.confirmIdealPayment('', {payment_method: ''}, {handleActions: false});
-
-stripe.confirmIdealPayment('', {payment_method: {ideal: {bank: ''}}});
-
-stripe.confirmIdealPayment('');
-
-stripe.confirmOxxoPayment('', {payment_method: ''});
-
-stripe.confirmOxxoPayment('', {payment_method: ''}, {handleActions: false});
-
-stripe.confirmOxxoPayment('', {
-  payment_method: {
-    billing_details: {
-      name: '',
-      email: '',
+stripe
+  .confirmEpsPayment('', {
+    payment_method: {
+      eps: {bank: 'bank_austria'},
+      billing_details: {name: 'Jenny Rosen'},
     },
-  },
-});
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmOxxoPayment('');
-
-stripe.confirmP24Payment('', {
-  payment_method: {billing_details: {email: 'jenny@example.com'}},
-  return_url: window.location.href,
-});
-
-stripe.confirmP24Payment('', {payment_method: ''});
-
-stripe.confirmP24Payment('', {payment_method: ''}, {handleActions: false});
-
-stripe.confirmP24Payment('');
-
-stripe.confirmP24Payment('', {
-  payment_method: {
-    p24: {bank: 'ing'},
-    billing_details: {email: 'jenny@example.com'},
-  },
-  return_url: window.location.href,
-});
-
-stripe.confirmP24Payment('', {
-  payment_method: {
-    p24: p24BankElement,
-    billing_details: {email: 'jenny@example.com'},
-  },
-  return_url: window.location.href,
-});
-
-stripe.confirmP24Payment('', {
-  payment_method: {
-    p24: {bank: 'ing'},
-    billing_details: {email: 'jenny@example.com'},
-  },
-  payment_method_options: {
-    p24: {
-      tos_shown_and_accepted: true,
+stripe
+  .confirmEpsPayment('', {
+    payment_method: {
+      eps: epsBankElement,
+      billing_details: {name: 'Jenny Rosen'},
     },
-  },
-  return_url: window.location.href,
-});
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmP24Payment('', {
-  payment_method: {
-    p24: p24BankElement,
-    billing_details: {email: 'jenny@example.com'},
-  },
-  payment_method_options: {
-    p24: {
-      tos_shown_and_accepted: true,
+stripe
+  .confirmEpsPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmEpsPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmEpsPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmFpxPayment('', {
+    payment_method: {fpx: fpxBankElement},
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmFpxPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmFpxPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmFpxPayment('', {payment_method: {fpx: {bank: ''}}})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmFpxPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGiropayPayment('', {
+    payment_method: {billing_details: {name: 'Jenny Rosen'}},
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGiropayPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGiropayPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGiropayPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGrabPayPayment('', {return_url: window.location.href})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGrabPayPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGrabPayPayment('', {payment_method: {grabpay: {}}})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGrabPayPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmGrabPayPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmIdealPayment('', {
+    payment_method: {ideal: idealBankElement},
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmIdealPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmIdealPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmIdealPayment('', {payment_method: {ideal: {bank: ''}}})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmIdealPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmOxxoPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmOxxoPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmOxxoPayment('', {
+    payment_method: {
+      billing_details: {
+        name: '',
+        email: '',
+      },
     },
-  },
-  return_url: window.location.href,
-});
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmSepaDebitPayment('', {
-  payment_method: {
-    sepa_debit: ibanElement,
-    billing_details: {name: '', email: ''},
-  },
-});
+stripe
+  .confirmOxxoPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmSepaDebitPayment('', {
-  payment_method: {
-    sepa_debit: {iban: ''},
-    billing_details: {name: '', email: ''},
-  },
-});
+stripe
+  .confirmP24Payment('', {
+    payment_method: {billing_details: {email: 'jenny@example.com'}},
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmSepaDebitPayment('', {payment_method: ''});
+stripe
+  .confirmP24Payment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmSepaDebitPayment('');
+stripe
+  .confirmP24Payment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmSofortPayment('', {
-  payment_method: {
-    sofort: {
-      country: '',
+stripe
+  .confirmP24Payment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmP24Payment('', {
+    payment_method: {
+      p24: {bank: 'ing'},
+      billing_details: {email: 'jenny@example.com'},
     },
-    billing_details: {
-      name: '',
-    },
-  },
-  return_url: '',
-});
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-stripe.confirmSofortPayment('', {
-  payment_method: '',
-});
+stripe
+  .confirmP24Payment('', {
+    payment_method: {
+      p24: p24BankElement,
+      billing_details: {email: 'jenny@example.com'},
+    },
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmP24Payment('', {
+    payment_method: {
+      p24: {bank: 'ing'},
+      billing_details: {email: 'jenny@example.com'},
+    },
+    payment_method_options: {
+      p24: {
+        tos_shown_and_accepted: true,
+      },
+    },
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmP24Payment('', {
+    payment_method: {
+      p24: p24BankElement,
+      billing_details: {email: 'jenny@example.com'},
+    },
+    payment_method_options: {
+      p24: {
+        tos_shown_and_accepted: true,
+      },
+    },
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmSepaDebitPayment('', {
+    payment_method: {
+      sepa_debit: ibanElement,
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmSepaDebitPayment('', {
+    payment_method: {
+      sepa_debit: {iban: ''},
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmSepaDebitPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmSepaDebitPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmSofortPayment('', {
+    payment_method: {
+      sofort: {
+        country: '',
+      },
+      billing_details: {
+        name: '',
+      },
+    },
+    return_url: '',
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmSofortPayment('', {
+    payment_method: '',
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
   .confirmSofortPayment('')
@@ -697,61 +813,83 @@ stripe.createPaymentMethod({
 
 stripe.retrievePaymentIntent('{PAYMENT_INTENT_CLIENT_SECRET}');
 
-stripe.confirmAuBecsDebitSetup('', {
-  payment_method: {
-    au_becs_debit: auBankAccountElement,
-    billing_details: {name: '', email: ''},
-  },
-});
+stripe
+  .confirmAuBecsDebitSetup('', {
+    payment_method: {
+      au_becs_debit: auBankAccountElement,
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmAuBecsDebitSetup('', {payment_method: ''});
+stripe
+  .confirmAuBecsDebitSetup('', {payment_method: ''})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmAuBecsDebitSetup('', {
-  payment_method: {
-    au_becs_debit: {bsb_number: '', account_number: ''},
-    billing_details: {name: '', email: ''},
-  },
-});
+stripe
+  .confirmAuBecsDebitSetup('', {
+    payment_method: {
+      au_becs_debit: {bsb_number: '', account_number: ''},
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmBacsDebitSetup('', {payment_method: ''});
+stripe
+  .confirmBacsDebitSetup('', {payment_method: ''})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmBacsDebitSetup('', {
-  payment_method: {
-    bacs_debit: {sort_code: '', account_number: ''},
-    billing_details: {
-      name: '',
-      email: '',
-      address: {
-        line1: '',
-        city: '',
-        country: '',
-        postal_code: '',
+stripe
+  .confirmBacsDebitSetup('', {
+    payment_method: {
+      bacs_debit: {sort_code: '', account_number: ''},
+      billing_details: {
+        name: '',
+        email: '',
+        address: {
+          line1: '',
+          city: '',
+          country: '',
+          postal_code: '',
+        },
       },
     },
-  },
-});
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmBancontactSetup('', {payment_method: ''});
+stripe
+  .confirmBancontactSetup('', {payment_method: ''})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmBancontactSetup('', {
-  payment_method: {
-    billing_details: {
-      name: '',
-      email: '',
+stripe
+  .confirmBancontactSetup('', {
+    payment_method: {
+      billing_details: {
+        name: '',
+        email: '',
+      },
     },
-  },
-  return_url: '',
-});
+    return_url: '',
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmCardSetup('', {
-  payment_method: {card: cardElement, billing_details: {name: ''}},
-});
+stripe
+  .confirmCardSetup('', {
+    payment_method: {card: cardElement, billing_details: {name: ''}},
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmCardSetup('', {payment_method: ''});
+stripe
+  .confirmCardSetup('', {payment_method: ''})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmCardSetup('', {payment_method: ''}, {handleActions: false});
+stripe
+  .confirmCardSetup('', {payment_method: ''}, {handleActions: false})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmCardSetup('', {payment_method: {card: {token: ''}}});
+stripe
+  .confirmCardSetup('', {payment_method: {card: {token: ''}}})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
   .confirmCardSetup('')
@@ -769,36 +907,46 @@ stripe
   })
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmIdealSetup('', {payment_method: ''});
+stripe
+  .confirmIdealSetup('', {payment_method: ''})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmIdealSetup('', {
-  payment_method: {
-    ideal: {
-      bank: '',
+stripe
+  .confirmIdealSetup('', {
+    payment_method: {
+      ideal: {
+        bank: '',
+      },
+      billing_details: {
+        name: '',
+        email: '',
+      },
     },
-    billing_details: {
-      name: '',
-      email: '',
+    return_url: '',
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmSepaDebitSetup('', {
+    payment_method: {
+      sepa_debit: ibanElement,
+      billing_details: {name: '', email: ''},
     },
-  },
-  return_url: '',
-});
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmSepaDebitSetup('', {
-  payment_method: {
-    sepa_debit: ibanElement,
-    billing_details: {name: '', email: ''},
-  },
-});
+stripe
+  .confirmSepaDebitSetup('', {payment_method: ''})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmSepaDebitSetup('', {payment_method: ''});
-
-stripe.confirmSepaDebitSetup('', {
-  payment_method: {
-    sepa_debit: {iban: ''},
-    billing_details: {name: '', email: ''},
-  },
-});
+stripe
+  .confirmSepaDebitSetup('', {
+    payment_method: {
+      sepa_debit: {iban: ''},
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
   .confirmSofortSetup('', {
@@ -814,11 +962,15 @@ stripe
   })
   .then((result: {setupIntent?: SetupIntent}) => null);
 
-stripe.confirmSofortSetup('', {
-  payment_method: '',
-});
+stripe
+  .confirmSofortSetup('', {
+    payment_method: '',
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-stripe.confirmSofortSetup('');
+stripe
+  .confirmSofortSetup('')
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
   .retrieveSetupIntent('')
