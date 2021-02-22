@@ -9,6 +9,7 @@
 ///<reference path='./elements/au-bank-account.d.ts' />
 ///<reference path='./elements/eps-bank.d.ts' />
 ///<reference path='./elements/p24-bank.d.ts' />
+///<reference path='./elements/afterpay-clearpay-message.d.ts' />
 
 import {StripeAuBankAccountElement} from '@stripe/stripe-js';
 
@@ -216,6 +217,21 @@ declare module '@stripe/stripe-js' {
     getElement(
       elementType: 'paymentRequestButton'
     ): StripePaymentRequestButtonElement | null;
+
+    /**
+     * Creates an `AfterpayClearpayMessageElement`.
+     */
+    create(
+      elementType: 'afterpayClearpayMessage',
+      options: StripeAfterpayClearpayMessageElementOptions
+    ): StripeAfterpayClearpayMessageElement;
+
+    /**
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(
+      elementType: 'afterpayClearpayMessage'
+    ): StripeAfterpayClearpayMessageElement | null;
   }
 
   type StripeElementType =
@@ -229,7 +245,8 @@ declare module '@stripe/stripe-js' {
     | 'iban'
     | 'idealBank'
     | 'p24Bank'
-    | 'paymentRequestButton';
+    | 'paymentRequestButton'
+    | 'afterpayClearpayMessage';
 
   type StripeElement =
     | StripeAuBankAccountElement
@@ -242,7 +259,8 @@ declare module '@stripe/stripe-js' {
     | StripeIbanElement
     | StripeIdealBankElement
     | StripeP24BankElement
-    | StripePaymentRequestButtonElement;
+    | StripePaymentRequestButtonElement
+    | StripeAfterpayClearpayMessageElement;
 
   type StripeElementLocale =
     | 'auto'
@@ -253,14 +271,21 @@ declare module '@stripe/stripe-js' {
     | 'de'
     | 'el'
     | 'en'
+    | 'en-AU'
+    | 'en-CA'
+    | 'en-NZ'
+    | 'en-GB'
     | 'es'
+    | 'es-ES'
     | 'es-419'
     | 'et'
     | 'fi'
     | 'fr'
+    | 'fr-FR'
     | 'he'
     | 'id'
     | 'it'
+    | 'it-IT'
     | 'ja'
     | 'lt'
     | 'lv'

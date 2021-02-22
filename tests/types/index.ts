@@ -35,6 +35,7 @@ import {
   StripeAuBankAccountElement,
   StripeAuBankAccountElementChangeEvent,
   StripePaymentRequestButtonElement,
+  StripeAfterpayClearpayMessageElement,
   StripeElementType,
   CanMakePaymentResult,
 } from '@stripe/stripe-js';
@@ -193,6 +194,20 @@ const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | 
 
 // Make sure that `paymentRequest` is at least optional;
 retrievedPaymentRequestButtonElement!.update({});
+
+const afterpayClearpayMessageElement = elements.create(
+  'afterpayClearpayMessage',
+  {
+    amount: 2000,
+    currency: 'USD',
+  }
+);
+
+const retrievedAfterpayClearpayMessageElement: StripeAfterpayClearpayMessageElement | null = elements.getElement(
+  'afterpayClearpayMessage'
+);
+
+retrievedAfterpayClearpayMessageElement!.update({currency: 'GBP'});
 
 const epsBankElement = elements.create('epsBank', {
   style: MY_STYLE,
