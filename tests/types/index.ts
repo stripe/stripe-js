@@ -705,7 +705,6 @@ stripe.confirmCardPayment('').then((res) => {
   }
 });
 
-
 stripe
   .confirmEpsPayment('', {
     payment_method: {
@@ -993,27 +992,31 @@ stripe
     }
   });
 
-stripe.createPaymentMethod({
+stripe
+  .createPaymentMethod({
     type: 'card',
     card: cardElement,
-  }).then(({paymentMethod, error}) => {
-  if (paymentMethod) {
-    console.log(paymentMethod.id);
-  } else if (error) {
-    console.log(error.code);
-  }
-});
+  })
+  .then(({paymentMethod, error}) => {
+    if (paymentMethod) {
+      console.log(paymentMethod.id);
+    } else if (error) {
+      console.log(error.code);
+    }
+  });
 
-stripe.createPaymentMethod({
+stripe
+  .createPaymentMethod({
     type: 'card',
     card: cardElement,
-  }).then((res) => {
-  if (res.paymentMethod) {
-    console.log(res.paymentMethod.id);
-  } else {
-    console.log(res.error.code);
-  }
-});
+  })
+  .then((res) => {
+    if (res.paymentMethod) {
+      console.log(res.paymentMethod.id);
+    } else {
+      console.log(res.error.code);
+    }
+  });
 
 stripe.createPaymentMethod({
   type: 'fpx',
