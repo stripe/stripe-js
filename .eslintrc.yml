@@ -20,11 +20,12 @@ rules:
     - 2
     - allowNamedFunctions: false
       allowUnboundThis: false
-  no-unused-vars:
-    - 2
-    - ignoreRestSiblings: true
+  no-unused-vars: 0
   jest/no-disabled-tests: 2
   jest/no-focused-tests: 2
   '@typescript-eslint/no-explicit-any': 0
   '@typescript-eslint/no-empty-interface': 0
   '@typescript-eslint/triple-slash-reference': 0
+  '@typescript-eslint/no-unused-vars':
+    - 2
+    - ignoreRestSiblings: true
