@@ -55,7 +55,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmAlipayPaymentData,
       options?: ConfirmAlipayPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Requires beta access:
@@ -75,7 +75,7 @@ declare module '@stripe/stripe-js' {
     confirmAuBecsDebitPayment(
       clientSecret: string,
       data?: ConfirmAuBecsDebitPaymentData
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmBancontactPayment` in the [Bancontact Payments with Payment Methods](https://stripe.com/docs/payments/bancontact#web) flow when the customer submits your payment form.
@@ -92,7 +92,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmBancontactPaymentData,
       options?: ConfirmBancontactPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmCardPayment` when the customer submits your payment form.
@@ -110,7 +110,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmCardPaymentData,
       options?: ConfirmCardPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmEpsPayment` in the [EPS Payments with Payment Methods](https://stripe.com/docs/payments/eps#web) flow when the customer submits your payment form.
@@ -127,7 +127,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmEpsPaymentData,
       options?: ConfirmEpsPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmFpxPayment` in the [FPX Payments with Payment Methods](https://stripe.com/docs/payments/fpx#web) flow when the customer submits your payment form.
@@ -144,7 +144,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmFpxPaymentData,
       options?: ConfirmFpxPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmGiropayPayment` in the [giropay Payments with Payment Methods](https://stripe.com/docs/payments/giropay#web) flow when the customer submits your payment form.
@@ -161,7 +161,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmGiropayPaymentData,
       options?: ConfirmGiropayPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmGrabPayPayment` in the [GrabPay payments](https://stripe.com/docs/payments/grabpay) flow when the customer submits your payment form.
@@ -175,7 +175,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmGrabPayPaymentData,
       options?: ConfirmGrabPayPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmIdealPayment` in the [iDEAL Payments with Payment Methods](https://stripe.com/docs/payments/ideal) flow when the customer submits your payment form.
@@ -192,7 +192,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmIdealPaymentData,
       options?: ConfirmIdealPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmOxxoPayment` in the [OXXO Payment](https://stripe.com/docs/payments/oxxo) with Payment Methods flow when the customer submits your payment form.
@@ -210,7 +210,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmOxxoPaymentData,
       options?: ConfirmOxxoPaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmP24Payment` in the [Przelewy24 Payments with Payment Methods](https://stripe.com/docs/payments/p24#web) flow when the customer submits your payment form.
@@ -227,7 +227,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmP24PaymentData,
       options?: ConfirmP24PaymentOptions
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmSepaDebitPayment` in the [SEPA Direct Debit Payments](https://stripe.com/docs/payments/sepa-debit) with Payment Methods flow when the customer submits your payment form.
@@ -244,7 +244,7 @@ declare module '@stripe/stripe-js' {
     confirmSepaDebitPayment(
       clientSecret: string,
       data?: ConfirmSepaDebitPaymentData
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.confirmSofortPayment` in the [Sofort Payments with Payment Methods](https://stripe.com/docs/payments/sofort) flow when the customer submits your payment form.
@@ -260,7 +260,7 @@ declare module '@stripe/stripe-js' {
     confirmSofortPayment(
       clientSecret: string,
       data?: ConfirmSofortPaymentData
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    ): Promise<PaymentIntentResult>;
 
     /**
      * Use `stripe.handleCardAction` in the Payment Intents API [manual confirmation](https://stripe.com/docs/payments/payment-intents/web-manual) flow to handle a [PaymentIntent](https://stripe.com/docs/api/payment_intents) with the `requires_action` status.
@@ -276,9 +276,7 @@ declare module '@stripe/stripe-js' {
      *
      * @docs https://stripe.com/docs/js/payment_intents/handle_card_action
      */
-    handleCardAction(
-      clientSecret: string
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    handleCardAction(clientSecret: string): Promise<PaymentIntentResult>;
 
     /**
      * Use stripe.createPaymentMethod to convert payment information collected by elements into a [PaymentMethod](https://stripe.com/docs/api/payment_methods) object that you safely pass to your server to use in an API call.
@@ -287,16 +285,14 @@ declare module '@stripe/stripe-js' {
      */
     createPaymentMethod(
       paymentMethodData: CreatePaymentMethodData
-    ): Promise<{paymentMethod?: PaymentMethod; error?: StripeError}>;
+    ): Promise<PaymentMethodResult>;
 
     /**
      * Retrieve a [PaymentIntent](https://stripe.com/docs/api/payment_intents) using its [client secret](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret).
      *
      * @docs https://stripe.com/docs/js/payment_intents/retrieve_payment_intent
      */
-    retrievePaymentIntent(
-      clientSecret: string
-    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+    retrievePaymentIntent(clientSecret: string): Promise<PaymentIntentResult>;
 
     /////////////////////////////
     /// Setup Intents
@@ -322,7 +318,7 @@ declare module '@stripe/stripe-js' {
     confirmAuBecsDebitSetup(
       clientSecret: string,
       data?: ConfirmAuBecsDebitSetupData
-    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+    ): Promise<SetupIntentResult>;
 
     /**
      * Use `stripe.confirmBacsDebitSetup` in the [Bacs Direct Debit Payments](https://stripe.com/docs/payments/payment-methods/bacs-debit) flow when the customer submits your payment form.
@@ -339,7 +335,7 @@ declare module '@stripe/stripe-js' {
     confirmBacsDebitSetup(
       clientSecret: string,
       data?: ConfirmBacsDebitSetupData
-    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+    ): Promise<SetupIntentResult>;
 
     /**
      * Use `stripe.confirmBancontactSetup` in the [Set up future payments](https://stripe.com/docs/payments/bancontact/set-up-payment) flow to use Bancontact bank details to set up a SEPA Direct Debit payment method for future payments.
@@ -357,7 +353,7 @@ declare module '@stripe/stripe-js' {
     confirmBancontactSetup(
       clientSecret: string,
       data?: ConfirmBancontactSetupData
-    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+    ): Promise<SetupIntentResult>;
 
     /**
      * Use `stripe.confirmCardSetup` in the [Setup Intents API flow](https://stripe.com/docs/payments/save-and-reuse) when the customer submits your payment form.
@@ -373,7 +369,7 @@ declare module '@stripe/stripe-js' {
       clientSecret: string,
       data?: ConfirmCardSetupData,
       options?: ConfirmCardSetupOptions
-    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+    ): Promise<SetupIntentResult>;
 
     /**
      * Use `stripe.confirmIdealSetup` in the [Set up future payments](https://stripe.com/docs/payments/ideal/set-up-payment) flow to use iDEAL bank details to set up a SEPA Direct Debit payment method for future payments.
@@ -391,7 +387,7 @@ declare module '@stripe/stripe-js' {
     confirmIdealSetup(
       clientSecret: string,
       data?: ConfirmIdealSetupData
-    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+    ): Promise<SetupIntentResult>;
 
     /**
      * Use `stripe.confirmSepaDebitSetup` in the [SEPA Direct Debit with Setup Intents](https://stripe.com/docs/payments/sepa-debit-setup-intents) flow when the customer submits your payment form.
@@ -408,7 +404,7 @@ declare module '@stripe/stripe-js' {
     confirmSepaDebitSetup(
       clientSecret: string,
       data?: ConfirmSepaDebitSetupData
-    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+    ): Promise<SetupIntentResult>;
 
     /*
      * Use `stripe.confirmSofortSetup` in the [Set up future payments](https://stripe.com/docs/payments/sofort/set-up-payment) flow to use SOFORT bank details to set up a SEPA Direct Debit payment method for future payments.
@@ -424,16 +420,14 @@ declare module '@stripe/stripe-js' {
     confirmSofortSetup(
       clientSecret: string,
       data?: ConfirmSofortSetupData
-    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+    ): Promise<SetupIntentResult>;
 
     /**
      * Retrieve a [SetupIntent](https://stripe.com/docs/api/setup_intents) using its client secret.
      *
      * @docs https://stripe.com/docs/js/setup_intents/retrieve_setup_intent
      */
-    retrieveSetupIntent(
-      clientSecret: string
-    ): Promise<{setupIntent?: SetupIntent; error?: StripeError}>;
+    retrieveSetupIntent(clientSecret: string): Promise<SetupIntentResult>;
 
     /////////////////////////////
     /// Payment Request
@@ -463,7 +457,7 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: StripeIbanElement,
       data: CreateTokenIbanData
-    ): Promise<{token?: Token; error?: StripeError}>;
+    ): Promise<TokenResult>;
 
     /**
      * Use `stripe.createToken` to convert information collected by card elements into a single-use [Token](https://stripe.com/docs/api#tokens) that you safely pass to your server to use in an API call.
@@ -473,7 +467,7 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: StripeCardElement | StripeCardNumberElement,
       data?: CreateTokenCardData
-    ): Promise<{token?: Token; error?: StripeError}>;
+    ): Promise<TokenResult>;
 
     /**
      * Use `stripe.createToken` to convert personally identifiable information (PII) into a single-use [Token](https://stripe.com/docs/api#tokens) for account identity verification.
@@ -483,7 +477,7 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: 'pii',
       data: CreateTokenPiiData
-    ): Promise<{token?: Token; error?: StripeError}>;
+    ): Promise<TokenResult>;
 
     /**
      * Use `stripe.createToken` to convert bank account information into a single-use token that you safely pass to your server to use in an API call.
@@ -493,7 +487,7 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: 'bank_account',
       data: CreateTokenBankAccountData
-    ): Promise<{token?: Token; error?: StripeError}>;
+    ): Promise<TokenResult>;
 
     /**
      * Use `stripe.createToken` to tokenize the recollected CVC for a saved card.
@@ -506,7 +500,7 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: 'cvc_update',
       element: StripeCardCvcElement
-    ): Promise<{token?: Token; error?: StripeError}>;
+    ): Promise<TokenResult>;
 
     /**
      * Use `stripe.createToken` to create a single-use token that wraps a user’s legal entity information.
@@ -516,7 +510,7 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: 'account',
       data: TokenCreateParams.Account
-    ): Promise<{token?: Token; error?: StripeError}>;
+    ): Promise<TokenResult>;
 
     /**
      * Use `stripe.createToken` to create a single-use token that represents the details for a person.
@@ -526,7 +520,7 @@ declare module '@stripe/stripe-js' {
     createToken(
       tokenType: 'person',
       data: TokenCreateParams.Person
-    ): Promise<{token?: Token; error?: StripeError}>;
+    ): Promise<TokenResult>;
 
     /**
      * Use `stripe.createSource` to convert payment information collected by elements into a `Source` object that you safely pass to your server to use in an API call.
@@ -535,25 +529,41 @@ declare module '@stripe/stripe-js' {
     createSource(
       element: StripeElement,
       sourceData: CreateSourceData
-    ): Promise<{source?: Source; error?: StripeError}>;
+    ): Promise<SourceResult>;
 
     /**
      * Use `stripe.createSource` to convert raw payment information into a `Source` object that you safely pass to your server to use in an API call.
      * See the [Sources documentation](https://stripe.com/docs/sources) for more information about sources.
      */
-    createSource(
-      sourceData: CreateSourceData
-    ): Promise<{source?: Source; error?: StripeError}>;
+    createSource(sourceData: CreateSourceData): Promise<SourceResult>;
 
     /**
      * Retrieve a [Source](https://stripe.com/docs/api#sources) using its unique ID and client secret.
      *
      * @docs https://stripe.com/docs/js/tokens_sources/retrieve_source
      */
-    retrieveSource(
-      source: RetrieveSourceParam
-    ): Promise<{source?: Source; error?: StripeError}>;
+    retrieveSource(source: RetrieveSourceParam): Promise<SourceResult>;
   }
+
+  type PaymentIntentResult =
+    | {paymentIntent: PaymentIntent; error?: undefined}
+    | {paymentIntent?: undefined; error: StripeError};
+
+  type SetupIntentResult =
+    | {setupIntent: SetupIntent; error?: undefined}
+    | {setupIntent?: undefined; error: StripeError};
+
+  type PaymentMethodResult =
+    | {paymentMethod: PaymentMethod; error?: undefined}
+    | {paymentMethod?: undefined; error: StripeError};
+
+  type SourceResult =
+    | {source: Source; error?: undefined}
+    | {source?: undefined; error: StripeError};
+
+  type TokenResult =
+    | {token: Token; error?: undefined}
+    | {token?: undefined; error: StripeError};
 
   /**
    * Use `Stripe(publishableKey, options?)` to create an instance of the `Stripe` object.
