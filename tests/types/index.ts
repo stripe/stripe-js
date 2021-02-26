@@ -110,6 +110,8 @@ const cardElement: StripeCardElement = elements.create('card', {
   disabled: false,
 });
 
+elements.create('card', {style: {base: {fontWeight: 500}}});
+
 const cardElementDefaults: StripeCardElement = elements.create('card');
 
 const retrievedCardElement: StripeCardElement | null = elements.getElement(
@@ -124,6 +126,10 @@ const cardNumberElement: StripeCardNumberElement = elements.create(
     iconStyle: 'solid',
   }
 );
+
+elements.create('cardNumber', {style: {base: {fontWeight: 500}}});
+elements.create('cardCvc', {style: {base: {fontWeight: 500}}});
+elements.create('cardExpiry', {style: {base: {fontWeight: 500}}});
 
 const retrievedCardNumberElement: StripeCardNumberElement | null = elements.getElement(
   'cardNumber'
@@ -151,6 +157,11 @@ const fpxBankElement = elements.create('fpxBank', {
   classes: {webkitAutoFill: ''},
 });
 
+elements.create('fpxBank', {
+  style: {base: {fontWeight: 500}},
+  accountHolderType: 'individual',
+});
+
 const retrievedFpxBankElement: StripeFpxBankElement | null = elements.getElement(
   'fpxBank'
 );
@@ -167,6 +178,8 @@ const idealBankElement = elements.create('idealBank', {
   hideIcon: false,
   classes: {webkitAutoFill: ''},
 });
+
+elements.create('idealBank', {style: {base: {fontWeight: 500}}});
 
 const retrievedIdealBankElement: StripeIdealBankElement | null = elements.getElement(
   'idealBank'
@@ -215,6 +228,8 @@ const epsBankElement = elements.create('epsBank', {
   classes: {webkitAutoFill: ''},
 });
 
+elements.create('epsBank', {style: {base: {fontWeight: 500}}});
+
 const retrievedEpsBankElement: StripeEpsBankElement | null = elements.getElement(
   'epsBank'
 );
@@ -224,6 +239,8 @@ const p24BankElement = elements.create('p24Bank', {
   value: '',
   classes: {webkitAutoFill: ''},
 });
+
+elements.create('p24Bank', {style: {base: {fontWeight: 500}}});
 
 const retrievedP24BankElement: StripeP24BankElement | null = elements.getElement(
   'p24Bank'

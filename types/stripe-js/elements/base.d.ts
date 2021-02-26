@@ -137,7 +137,7 @@ declare module '@stripe/stripe-js' {
     /**
      * The [font-weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight) CSS property.
      */
-    fontWeight?: string;
+    fontWeight?: string | number;
 
     /**
      * A custom property, used to set the color of the icons that are rendered in an element.
