@@ -328,6 +328,22 @@ stripe
     console.log(token);
   });
 
+stripe.createToken(cardElement).then(({token, error}) => {
+  if (token) {
+    console.log(token.type);
+  } else if (error) {
+    console.log(error.code);
+  }
+});
+
+stripe.createToken(cardElement).then((res) => {
+  if (res.token) {
+    console.log(res.token.type);
+  } else {
+    console.log(res.error.code);
+  }
+});
+
 stripe.createToken(cardNumberElement);
 
 stripe.createToken('cvc_update', cardCvcElement);
@@ -560,6 +576,22 @@ stripe.retrieveSource({id: '', client_secret: ''}).then((result) => {
   console.log(result.source!.type);
 });
 
+stripe.retrieveSource({id: '', client_secret: ''}).then(({source, error}) => {
+  if (source) {
+    console.log(source.type);
+  } else if (error) {
+    console.log(error.code);
+  }
+});
+
+stripe.retrieveSource({id: '', client_secret: ''}).then((res) => {
+  if (res.source) {
+    console.log(res.source.type);
+  } else {
+    console.log(res.error.code);
+  }
+});
+
 stripe
   .confirmAlipayPayment('', {
     payment_method: '',
@@ -656,6 +688,23 @@ stripe
 stripe
   .confirmCardPayment('')
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe.confirmCardPayment('').then(({paymentIntent, error}) => {
+  if (paymentIntent) {
+    console.log(paymentIntent.id);
+  } else if (error) {
+    console.log(error.code);
+  }
+});
+
+stripe.confirmCardPayment('').then((res) => {
+  if (res.paymentIntent) {
+    console.log(res.paymentIntent.id);
+  } else {
+    console.log(res.error.code);
+  }
+});
+
 
 stripe
   .confirmEpsPayment('', {
@@ -945,6 +994,28 @@ stripe
   });
 
 stripe.createPaymentMethod({
+    type: 'card',
+    card: cardElement,
+  }).then(({paymentMethod, error}) => {
+  if (paymentMethod) {
+    console.log(paymentMethod.id);
+  } else if (error) {
+    console.log(error.code);
+  }
+});
+
+stripe.createPaymentMethod({
+    type: 'card',
+    card: cardElement,
+  }).then((res) => {
+  if (res.paymentMethod) {
+    console.log(res.paymentMethod.id);
+  } else {
+    console.log(res.error.code);
+  }
+});
+
+stripe.createPaymentMethod({
   type: 'fpx',
   fpx: fpxBankElement,
 });
@@ -1079,6 +1150,22 @@ stripe
 stripe
   .confirmCardSetup('')
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe.confirmCardSetup('').then(({setupIntent, error}) => {
+  if (setupIntent) {
+    console.log(setupIntent.id);
+  } else if (error) {
+    console.log(error.code);
+  }
+});
+
+stripe.confirmCardSetup('').then((res) => {
+  if (res.setupIntent) {
+    console.log(res.setupIntent.id);
+  } else {
+    console.log(res.error.code);
+  }
+});
 
 stripe
   .confirmIdealSetup('', {
