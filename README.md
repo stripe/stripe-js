@@ -18,10 +18,6 @@ Use `npm` to install the Stripe.js module:
 npm install @stripe/stripe-js
 ```
 
-```sh
-yarn add @stripe/stripe-js
-```
-
 ## Usage
 
 ### `loadStripe`
