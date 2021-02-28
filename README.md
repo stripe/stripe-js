@@ -12,7 +12,7 @@ include it in a bundle or host it yourself. This package wraps the global
 
 ## Installation
 
-Use `npm` or `yarn` to install the Stripe.js module:
+Use `npm` to install the Stripe.js module:
 
 ```sh
 npm install @stripe/stripe-js
