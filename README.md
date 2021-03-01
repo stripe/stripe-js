@@ -108,7 +108,7 @@ If you would like to use `loadStripe` in your application, but defer loading the
 Stripe.js script until `loadStripe` is first called, use the alternative
 `@stripe/stripe-js/pure` import path:
 
-```
+```js
 import {loadStripe} from '@stripe/stripe-js/pure';
 
 // Stripe.js will not be loaded until `loadStripe` is called
@@ -121,10 +121,10 @@ If you would like to
 [disable advanced fraud detection](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection#disabling-advanced-fraud-detection)
 altogether, use `loadStripe.setLoadParameters`:
 
-```
+```js
 import {loadStripe} from '@stripe/stripe-js/pure';
 
-loadStripe.setLoadParameters({advancedFraudSignals: false})
+loadStripe.setLoadParameters({advancedFraudSignals: false});
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 ```
 
