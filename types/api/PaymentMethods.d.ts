@@ -55,6 +55,8 @@ declare module '@stripe/stripe-js' {
      * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
      */
     type: string;
+
+    afterpay_clearpay?: PaymentMethod.AfterpayClearpay;
   }
 
   namespace PaymentMethod {
@@ -238,6 +240,8 @@ declare module '@stripe/stripe-js' {
        */
       last4: string | null;
     }
+
+    interface AfterpayClearpay {}
   }
 
   interface PaymentMethodCreateParams {
