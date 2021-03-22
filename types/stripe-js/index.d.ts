@@ -436,7 +436,6 @@ declare module '@stripe/stripe-js' {
       options?: ConfirmAfterpayClearpayPaymentOptions
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
-
     /**
      * Retrieve a [SetupIntent](https://stripe.com/docs/api/setup_intents) using its client secret.
      *

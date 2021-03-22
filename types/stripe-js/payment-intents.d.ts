@@ -21,7 +21,8 @@ declare module '@stripe/stripe-js' {
     type: 'alipay';
   }
 
-  interface CreatePaymentMethodAfterpayClearpayData extends PaymentMethodCreateParams {
+  interface CreatePaymentMethodAfterpayClearpayData
+    extends PaymentMethodCreateParams {
     type: 'afterpay_clearpay';
 
     /**
@@ -678,14 +679,17 @@ declare module '@stripe/stripe-js' {
    * Data to be sent with a `stripe.confirmAfterpayClearpayPayment` request.
    * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
    */
-  interface ConfirmAfterpayClearpayPaymentData extends PaymentIntentConfirmParams {
+  interface ConfirmAfterpayClearpayPaymentData
+    extends PaymentIntentConfirmParams {
     /**
      * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
      * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
      *
      * @recommended
      */
-    payment_method?: string | Omit<CreatePaymentMethodAfterpayClearpayData, 'type'>;
+    payment_method?:
+      | string
+      | Omit<CreatePaymentMethodAfterpayClearpayData, 'type'>;
 
     /**
      * The url your customer will be directed to after they complete authentication.

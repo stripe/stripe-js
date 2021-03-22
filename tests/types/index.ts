@@ -995,7 +995,11 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmAfterpayClearpayPayment('', {payment_method: ''}, {handleActions: false})
+  .confirmAfterpayClearpayPayment(
+    '',
+    {payment_method: ''},
+    {handleActions: false}
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
