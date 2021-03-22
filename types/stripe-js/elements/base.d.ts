@@ -225,7 +225,7 @@ declare module '@stripe/stripe-js' {
      * The class name to apply when the `Element` has its value autofilled by the browser (only on Chrome and Safari).
      * Defaults to `StripeElement--webkit-autofill`.
      */
-    webkitAutoFill?: string;
+    webkitAutofill?: string;
   }
 
   interface StripeElementChangeEvent {
