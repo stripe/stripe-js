@@ -161,7 +161,7 @@ const fpxBankElement = elements.create('fpxBank', {
   style: MY_STYLE,
   value: '',
   accountHolderType: 'individual',
-  classes: {webkitAutoFill: ''},
+  classes: {webkitAutofill: ''},
 });
 
 elements.create('fpxBank', {
@@ -190,7 +190,7 @@ const idealBankElement = elements.create('idealBank', {
   style: MY_STYLE,
   value: '',
   hideIcon: false,
-  classes: {webkitAutoFill: ''},
+  classes: {webkitAutofill: ''},
 });
 
 elements.create('idealBank', {style: {base: {fontWeight: 500}}});
@@ -239,7 +239,7 @@ retrievedAfterpayClearpayMessageElement!.update({currency: 'GBP'});
 const epsBankElement = elements.create('epsBank', {
   style: MY_STYLE,
   value: '',
-  classes: {webkitAutoFill: ''},
+  classes: {webkitAutofill: ''},
 });
 
 elements.create('epsBank', {style: {base: {fontWeight: 500}}});
@@ -251,7 +251,7 @@ const retrievedEpsBankElement: StripeEpsBankElement | null = elements.getElement
 const p24BankElement = elements.create('p24Bank', {
   style: MY_STYLE,
   value: '',
-  classes: {webkitAutoFill: ''},
+  classes: {webkitAutofill: ''},
 });
 
 elements.create('p24Bank', {style: {base: {fontWeight: 500}}});
