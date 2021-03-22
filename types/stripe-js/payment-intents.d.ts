@@ -703,5 +703,4 @@ declare module '@stripe/stripe-js' {
      */
     handleActions?: boolean;
   }
-
 }
