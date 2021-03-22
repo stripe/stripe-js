@@ -979,6 +979,30 @@ stripe
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
 stripe
+  .confirmAfterpayClearpayPayment('', {return_url: window.location.href})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAfterpayClearpayPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAfterpayClearpayPayment('', {payment_method: {afterpay_clearpay: {}}})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAfterpayClearpayPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAfterpayClearpayPayment(
+    '',
+    {payment_method: ''},
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .handleCardAction('')
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
@@ -1082,6 +1106,15 @@ stripe.createPaymentMethod({
   type: 'sofort',
   sofort: {country: ''},
   billing_details: {name: ''},
+});
+
+stripe.createPaymentMethod({
+  type: 'afterpay_clearpay',
+});
+
+stripe.createPaymentMethod({
+  type: 'afterpay_clearpay',
+  afterpay_clearpay: {},
 });
 
 stripe.retrievePaymentIntent('{PAYMENT_INTENT_CLIENT_SECRET}');

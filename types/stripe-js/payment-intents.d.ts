@@ -3,6 +3,7 @@ declare module '@stripe/stripe-js' {
   type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 
   type CreatePaymentMethodData =
+    | CreatePaymentMethodAfterpayClearpayData
     | CreatePaymentMethodAlipayData
     | CreatePaymentMethodAuBecsDebitData
     | CreatePaymentMethodBancontactData
@@ -18,6 +19,16 @@ declare module '@stripe/stripe-js' {
 
   interface CreatePaymentMethodAlipayData extends PaymentMethodCreateParams {
     type: 'alipay';
+  }
+
+  interface CreatePaymentMethodAfterpayClearpayData
+    extends PaymentMethodCreateParams {
+    type: 'afterpay_clearpay';
+
+    /**
+     * Can be omitted as there are no AfterpayClearpay-specific fields.
+     */
+    afterpay_clearpay?: {}; // eslint-disable-line @typescript-eslint/ban-types
   }
 
   interface CreatePaymentMethodBancontactData
@@ -662,5 +673,38 @@ declare module '@stripe/stripe-js' {
      * BECS Direct Debit only accepts an `off_session` value for this parameter.
      */
     setup_future_usage?: 'off_session';
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmAfterpayClearpayPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmAfterpayClearpayPaymentData
+    extends PaymentIntentConfirmParams {
+    /**
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?:
+      | string
+      | Omit<CreatePaymentMethodAfterpayClearpayData, 'type'>;
+
+    /**
+     * The url your customer will be directed to after they complete authentication.
+     */
+    return_url?: string;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmAfterpayClearpayPayment`.
+   */
+  interface ConfirmAfterpayClearpayPaymentOptions {
+    /**
+     * Set this to `false` if you want to handle next actions yourself. Please refer to our [Stripe Afterpay / Clearpay integration guide](https://stripe.com/docs/payments/afterpay-clearpay/accept-a-payment#handle-redirect)
+     * for more info. Default is `true`.
+     */
+    handleActions?: boolean;
   }
 }
