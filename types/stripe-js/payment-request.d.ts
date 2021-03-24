@@ -214,11 +214,14 @@ declare module '@stripe/stripe-js' {
     shippingOptions?: PaymentRequestShippingOption[];
 
     /**
-     * An array of `PaymentRequestWallet` strings.
-     *
-     * By default, if no `wallets` option is passed in, all wallets will be enabled.
-     * If you use this property, only wallets passed in will be enabled.
-     * If an empty array is specified, all wallets will be disabled.
+     * An array of wallet strings.
+     * Use this option to disable Google Pay and/or Apple Pay.
+     */
+    disableWallets?: PaymentRequestWallet[];
+
+    /**
+     * @deprecated
+     * Use disableWallets instead.
      */
     wallets?: PaymentRequestWallet[];
   }
