@@ -145,6 +145,7 @@ declare module '@stripe/stripe-js' {
     | 'sk'
     | 'sl'
     | 'sv'
+    | 'th'
     | 'tr'
     | 'zh'
     | 'zh-HK'
