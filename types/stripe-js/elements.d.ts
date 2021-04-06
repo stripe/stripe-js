@@ -282,6 +282,7 @@ declare module '@stripe/stripe-js' {
     | 'fi'
     | 'fr'
     | 'fr-FR'
+    | 'hu'
     | 'he'
     | 'id'
     | 'it'
@@ -290,18 +291,23 @@ declare module '@stripe/stripe-js' {
     | 'lt'
     | 'lv'
     | 'ms'
+    | 'mt'
     | 'nb'
     | 'nl'
     | 'no'
     | 'pl'
     | 'pt'
     | 'pt-BR'
+    | 'ro'
     | 'ru'
     | 'sk'
     | 'sl'
     | 'sv'
     | 'th'
-    | 'zh';
+    | 'tr'
+    | 'zh'
+    | 'zh-HK'
+    | 'zh-TW';
 
   /**
    * Options to create an `Elements` instance with.
