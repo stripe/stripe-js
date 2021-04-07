@@ -764,4 +764,14 @@ declare module '@stripe/stripe-js' {
      */
     skipMandate?: boolean;
   }
+
+  /**
+   * Data to be sent with a `stripe.verifyMicrodepositsForPayment` request.
+   */
+  interface VerifyMicrodepositsForPaymentData {
+    /**
+     * An array of two positive integers, in cents, equal to the values of the microdeposits sent to the bank account.
+     */
+    amounts?: Array<number>;
+  }
 }

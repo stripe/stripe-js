@@ -1035,6 +1035,10 @@ stripe
   .handleCardAction('')
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
+stripe
+  .verifyMicrodepositsForPayment('', {amounts: [32, 45]})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
 stripe.createPaymentMethod({
   type: 'acss_debit',
   billing_details: {name: '', email: ''},
@@ -1361,6 +1365,10 @@ stripe
 
 stripe
   .confirmSofortSetup('')
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .verifyMicrodepositsForSetup('', {amounts: [32, 45]})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
