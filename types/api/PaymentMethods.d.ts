@@ -57,6 +57,8 @@ declare module '@stripe/stripe-js' {
     type: string;
 
     afterpay_clearpay?: PaymentMethod.AfterpayClearpay;
+
+    acss_debit?: PaymentMethod.AcssDebit;
   }
 
   namespace PaymentMethod {
@@ -242,6 +244,23 @@ declare module '@stripe/stripe-js' {
     }
 
     interface AfterpayClearpay {}
+
+    interface AcssDebit {
+      /**
+       * Customer’s bank account number.
+       */
+      account_number: string;
+
+      /**
+       * Institution number of the customer’s bank.
+       */
+      institution_number: string;
+
+      /**
+       * Transit number of the customer’s bank.
+       */
+      transit_number: string;
+    }
   }
 
   interface PaymentMethodCreateParams {

@@ -41,6 +41,23 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
+     * Use `stripe.confirmAcssDebitPayment` in the [Accept a payment](/docs/payments/accept-a-payment) flow with [Canadian pre-authorized debit](/docs/payments/acss-debit) payment method when the customer submits your payment form..
+     * When called, it will automatically pop up a model to collect bank account details and verification, confirm the mandate, and confirm the [PaymentIntent](/docs/api/payment_intents) when the user submits the form.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](/docs/api/payment_methods).
+     * This methods automatically loads an on-page modal UI and create a new PaymentMethod for you.
+     * It can also be called with an existing `PaymentMethod`, and loads the modal UI to collect new mandate.
+     * If you have already attached a `PaymentMethod` and a `Mandate`, you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_acss_debit_payment
+     */
+    confirmAcssDebitPayment(
+      clientSecret: string,
+      data?: ConfirmAcssDebitPaymentData,
+      options?: ConfirmAcssDebitPaymentOptions
+    ): Promise<PaymentIntentResult>;
+
+    /**
      * Use `stripe.confirmAlipayPayment` in the [Alipay Payments](https://stripe.com/docs/payments/alipay) with Payment Methods flow when the customer submits your payment form.
      * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
@@ -299,6 +316,23 @@ declare module '@stripe/stripe-js' {
     ///
     /// https://stripe.com/docs/js/setup_intents
     /////////////////////////////
+
+    /**
+     * Use `stripe.confirmAcssDebitSetup` in the [Set up future payments](/docs/payments/ideal/set-up-payment) flow to set up a [Canadian pre-authorized debit](/docs/payments/acss-debit) payment method for future payments.
+     * When called, it will automatically pop up a model to collect bank account details and verification, confirm the mandate, and confirm the [SetupIntent](/docs/api/setup_intents) when the user submits the form.
+     *
+     * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](/docs/api/payment_methods).
+     * This methods automatically loads an on-page modal UI and create a new PaymentMethod for you.
+     * It can also be called with an existing `PaymentMethod`, and loads the modal UI to collect new mandate.
+     * If you have already attached a `PaymentMethod` and a `Mandate`, you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/setup_intents/confirm_acss_debit_setup
+     */
+    confirmAcssDebitSetup(
+      clientSecret: string,
+      data?: ConfirmAcssDebitSetupData,
+      options?: ConfirmAcssDebitSetupOptions
+    ): Promise<SetupIntentResult>;
 
     /**
      * Requires beta access:
