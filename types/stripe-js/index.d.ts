@@ -41,10 +41,10 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
-     * Use `stripe.confirmAcssDebitPayment` in the [Accept a payment](/docs/payments/accept-a-payment) flow with [Canadian pre-authorized debit](/docs/payments/acss-debit) payment method when the customer submits your payment form..
-     * When called, it will automatically pop up a modal to collect bank account details and verification, accept the mandate, and confirm the [PaymentIntent](/docs/api/payment_intents) when the user submits the form.
+     * Use `stripe.confirmAcssDebitPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow when the customer submits your payment form.
+     * When called, it will automatically pop up a modal to collect bank account details and verification, accept the mandate, and confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) when the user submits the form.
      *
-     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](/docs/api/payment_methods).
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
      * `stripe.confirmAcssDebitPayment` automatically creates a new `PaymentMethod` for you when your customer completes the modal UI.
      * It can also be called with an existing `PaymentMethod` which will load the modal UI to collect a new mandate agreement.
      * If you have already attached a `PaymentMethod`, you can call this method without needing to provide any additional data.
@@ -296,7 +296,7 @@ declare module '@stripe/stripe-js' {
     handleCardAction(clientSecret: string): Promise<PaymentIntentResult>;
 
     /**
-     * Use `stripe.verifyMicrodepositsForPayment` in the [Accept a Canadian pre-authorized debit payment](/docs/payments/acss-debit/accept-a-payment) flow
+     * Use `stripe.verifyMicrodepositsForPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow
      * to verify a customer's bank account with micro-deposits.
      *
      * @docs https://stripe.com/docs/js/payment_intents/verify_microdeposits_for_payment
@@ -329,10 +329,10 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
-     * Use `stripe.confirmAcssDebitSetup` in the [Save bank details](/docs/payments/acss-debit/set-up-payment) flow to set up a [Canadian pre-authorized debit](/docs/payments/acss-debit) payment method for future payments.
-     * When called, it will automatically pop up a modal to collect bank account details and verification, accept the mandate, and confirm the [SetupIntent](/docs/api/setup_intents) when the user submits the form.
+     * Use `stripe.confirmAcssDebitSetup` to [save details for future payments with pre-authorized debit in Canada](https://stripe.com/docs/payments/acss-debit/set-up-payment).
+     * When called, it will automatically pop up a modal to collect bank account details and verification, accept the mandate, and confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) when the user submits the form.
      *
-     * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](/docs/api/payment_methods).
+     * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
      * `stripe.confirmAcssDebitSetup` automatically creates a new `PaymentMethod` for you when your customer completes the modal UI.
      * It can also be called with an existing `PaymentMethod` which will load the modal UI to collect a new mandate agreement.
      * If you have already attached a `PaymentMethod`, you can call this method without needing to provide any additional data.
@@ -482,7 +482,7 @@ declare module '@stripe/stripe-js' {
     ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
 
     /**
-     * Use `stripe.verifyMicrodepositsForSetup` in the [Save details for future payments with pre-authorized debit in Canada](/docs/payments/acss-debit/set-up-payment) flow
+     * Use `stripe.verifyMicrodepositsForSetup` in the [Save details for future payments with pre-authorized debit in Canada](https://stripe.com/docs/payments/acss-debit/set-up-payment) flow
      * to verify customer's bank account with micro-deposits.
      *
      * @docs https://stripe.com/docs/js/payment_intents/verify_microdeposits_for_setup

@@ -280,7 +280,7 @@ declare module '@stripe/stripe-js' {
 
     /**
      * Can be omitted as Stripe will help to collect bank account details and verification.
-     * Refer to our [integration guide](/docs/payments/acss-debit/accept-a-payment) for more details.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/acss-debit/accept-a-payment) for more details.
      */
     acss_debit?: {
       /**
