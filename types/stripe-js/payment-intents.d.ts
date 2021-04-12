@@ -760,7 +760,7 @@ declare module '@stripe/stripe-js' {
    */
   interface ConfirmAcssDebitPaymentOptions {
     /**
-     * Set this to true if you want to skip displaying the mandate confirmation.
+     * Set `skipMandate` to `true` if you want to skip displaying the mandate confirmation screen.
      */
     skipMandate?: boolean;
   }
