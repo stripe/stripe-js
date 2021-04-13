@@ -107,4 +107,38 @@ declare module '@stripe/stripe-js' {
      */
     payment_method?: string | Omit<CreatePaymentMethodBancontactData, 'type'>;
   }
+
+  /**
+   * Data to be sent with a `stripe.confirmAcssDebitSetup` request.
+   * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmAcssDebitSetupData extends SetupIntentConfirmParams {
+    /**
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodAcssDebitData, 'type'>;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmAcssDebitSetup`.
+   */
+  interface ConfirmAcssDebitSetupOptions {
+    /**
+     * Set this to true if you want to skip displaying the mandate confirmation.
+     */
+    skipMandate?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.verifyMicrodepositsForSetup` request.
+   */
+  interface VerifyMicrodepositsForSetupData {
+    /**
+     * An array of two positive integers, in cents, equal to the values of the microdeposits sent to the bank account.
+     */
+    amounts?: Array<number>;
+  }
 }

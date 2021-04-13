@@ -607,6 +607,35 @@ stripe.retrieveSource({id: '', client_secret: ''}).then((res) => {
 });
 
 stripe
+  .confirmAcssDebitPayment('', {
+    payment_method: {
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAcssDebitPayment('', {
+    payment_method: {
+      acss_debit: {
+        institution_number: '',
+        transit_number: '',
+        account_number: '',
+      },
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAcssDebitPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAcssDebitPayment('', {payment_method: ''}, {skipMandate: true})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmAlipayPayment('', {
     payment_method: '',
     return_url: window.location.href,
@@ -1006,6 +1035,21 @@ stripe
   .handleCardAction('')
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
+stripe
+  .verifyMicrodepositsForPayment('', {amounts: [32, 45]})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe.createPaymentMethod({
+  type: 'acss_debit',
+  billing_details: {name: '', email: ''},
+});
+
+stripe.createPaymentMethod({
+  type: 'acss_debit',
+  acss_debit: {institution_number: '', transit_number: '', account_number: ''},
+  billing_details: {name: '', email: ''},
+});
+
 stripe.createPaymentMethod({
   type: 'au_becs_debit',
   au_becs_debit: auBankAccountElement,
@@ -1118,6 +1162,35 @@ stripe.createPaymentMethod({
 });
 
 stripe.retrievePaymentIntent('{PAYMENT_INTENT_CLIENT_SECRET}');
+
+stripe
+  .confirmAcssDebitSetup('', {
+    payment_method: {
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAcssDebitSetup('', {
+    payment_method: {
+      acss_debit: {
+        institution_number: '',
+        transit_number: '',
+        account_number: '',
+      },
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAcssDebitSetup('', {payment_method: ''})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAcssDebitSetup('', {payment_method: ''}, {skipMandate: true})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
   .confirmAuBecsDebitSetup('', {
@@ -1292,6 +1365,10 @@ stripe
 
 stripe
   .confirmSofortSetup('')
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .verifyMicrodepositsForSetup('', {amounts: [32, 45]})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe

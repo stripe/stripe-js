@@ -3,6 +3,7 @@ declare module '@stripe/stripe-js' {
   type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 
   type CreatePaymentMethodData =
+    | CreatePaymentMethodAcssDebitData
     | CreatePaymentMethodAfterpayClearpayData
     | CreatePaymentMethodAlipayData
     | CreatePaymentMethodAuBecsDebitData
@@ -273,6 +274,38 @@ declare module '@stripe/stripe-js' {
         postal_code: string;
       };
     };
+  }
+  interface CreatePaymentMethodAcssDebitData extends PaymentMethodCreateParams {
+    type: 'acss_debit';
+
+    /**
+     * Can be omitted as Stripe will help to collect bank account details and verification.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/acss-debit/accept-a-payment) for more details.
+     */
+    acss_debit?: {
+      /**
+       * Customer’s bank account number.
+       */
+      account_number: string;
+
+      /**
+       * Institution number of the customer’s bank.
+       */
+      institution_number: string;
+
+      /**
+       * Transit number of the customer’s bank.
+       */
+      transit_number: string;
+    };
+
+    /**
+     * The customer's billing details.
+     * `name`, `email`, and `address` are required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails;
   }
 
   /**
@@ -706,5 +739,39 @@ declare module '@stripe/stripe-js' {
      * for more info. Default is `true`.
      */
     handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmAcssDebitPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmAcssDebitPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodAcssDebitData, 'type'>;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmAcssDebitPayment`.
+   */
+  interface ConfirmAcssDebitPaymentOptions {
+    /**
+     * Set `skipMandate` to `true` if you want to skip displaying the mandate confirmation screen.
+     */
+    skipMandate?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.verifyMicrodepositsForPayment` request.
+   */
+  interface VerifyMicrodepositsForPaymentData {
+    /**
+     * An array of two positive integers, in cents, equal to the values of the microdeposits sent to the bank account.
+     */
+    amounts?: Array<number>;
   }
 }
