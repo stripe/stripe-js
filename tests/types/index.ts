@@ -866,6 +866,25 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmKlarnaPayment('', {
+    payment_method: {billing_details: {address: {country: 'DE'}}},
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmKlarnaPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmKlarnaPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmKlarnaPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmOxxoPayment('', {payment_method: ''})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
