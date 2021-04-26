@@ -309,7 +309,7 @@ declare module '@stripe/stripe-js' {
     /**
      * Use stripe.createPaymentMethod to convert payment information collected by elements into a [PaymentMethod](https://stripe.com/docs/api/payment_methods) object that you safely pass to your server to use in an API call.
      *
-     * @docs https://stripe.com/docs/js/payment_intents/create_payment_method
+     * @docs https://stripe.com/docs/js/payment_methods/create_payment_method
      */
     createPaymentMethod(
       paymentMethodData: CreatePaymentMethodData
