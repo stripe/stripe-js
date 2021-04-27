@@ -128,6 +128,10 @@ declare module '@stripe/stripe-js' {
 
   interface CreatePaymentMethodKlarnaData
     extends PaymentMethodCreateParams {
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
     type: 'klarna';
 
     /**

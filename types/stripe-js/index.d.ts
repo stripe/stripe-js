@@ -212,6 +212,9 @@ declare module '@stripe/stripe-js' {
     ): Promise<PaymentIntentResult>;
 
     /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
      * Use `stripe.confirmKlarnaPayment` in the [Klarna Payments](https://stripe.com/docs/payments/klarna) with Payment Methods flow when the customer submits your payment form.
      * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
