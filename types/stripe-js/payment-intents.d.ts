@@ -126,8 +126,7 @@ declare module '@stripe/stripe-js' {
         };
   }
 
-  interface CreatePaymentMethodKlarnaData
-    extends PaymentMethodCreateParams {
+  interface CreatePaymentMethodKlarnaData extends PaymentMethodCreateParams {
     /**
      * Requires beta access:
      * Contact [Stripe support](https://support.stripe.com/) for more information.
@@ -142,7 +141,7 @@ declare module '@stripe/stripe-js' {
      */
     billing_details: PaymentMethodCreateParams.BillingDetails & {
       address: PaymentMethodCreateParams.BillingDetails.Address & {
-        country: string
+        country: string;
       };
     };
   }
