@@ -13,6 +13,7 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodGiropayData
     | CreatePaymentMethodGrabPayData
     | CreatePaymentMethodIdealData
+    | CreatePaymentMethodKlarnaData
     | CreatePaymentMethodP24Data
     | CreatePaymentMethodFpxData
     | CreatePaymentMethodSepaDebitData
@@ -123,6 +124,26 @@ declare module '@stripe/stripe-js' {
            */
           bank?: string;
         };
+  }
+
+  interface CreatePaymentMethodKlarnaData extends PaymentMethodCreateParams {
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
+    type: 'klarna';
+
+    /**
+     * The customer's billing details.
+     * `address.country` is required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails & {
+      address: PaymentMethodCreateParams.BillingDetails.Address & {
+        country: string;
+      };
+    };
   }
 
   interface CreatePaymentMethodOxxoData extends PaymentMethodCreateParams {
@@ -587,6 +608,38 @@ declare module '@stripe/stripe-js' {
   interface ConfirmIdealPaymentOptions {
     /**
      * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/ideal#handle-redirect).
+     * Default is `true`.
+     */
+    handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmKlarnaPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmKlarnaPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodKlarnaData, 'type'>;
+
+    /**
+     * The url your customer will be directed to after they complete authentication.
+     *
+     * @recommended
+     */
+    return_url?: string;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmKlarnaPayment`.
+   */
+  interface ConfirmKlarnaPaymentOptions {
+    /**
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/klarna#handle-redirect).
      * Default is `true`.
      */
     handleActions?: boolean;

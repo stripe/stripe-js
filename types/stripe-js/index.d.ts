@@ -212,6 +212,26 @@ declare module '@stripe/stripe-js' {
     ): Promise<PaymentIntentResult>;
 
     /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Use `stripe.confirmKlarnaPayment` in the [Klarna Payments](https://stripe.com/docs/payments/klarna) with Payment Methods flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
+     * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_klarna_payment
+     */
+    confirmKlarnaPayment(
+      clientSecret: string,
+      data?: ConfirmKlarnaPaymentData,
+      options?: ConfirmKlarnaPaymentOptions
+    ): Promise<PaymentIntentResult>;
+
+    /**
      * Use `stripe.confirmOxxoPayment` in the [OXXO Payment](https://stripe.com/docs/payments/oxxo) with Payment Methods flow when the customer submits your payment form.
      * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
      * Note that there are some additional requirements to this flow that are not covered in this reference.
