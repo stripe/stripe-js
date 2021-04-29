@@ -215,7 +215,8 @@ declare module '@stripe/stripe-js' {
 
     /**
      * An array of wallet strings.
-     * Use this option to disable Google Pay and/or Apple Pay.
+     * Can be one or more of `applePay`, `googlePay` and `browserCard`.
+     * Use this option to disable Google Pay, Apple Pay and/or browser-saved cards.
      */
     disableWallets?: PaymentRequestWallet[];
 
