@@ -179,9 +179,14 @@ declare module '@stripe/stripe-js' {
       redirect_to_url?: NextAction.RedirectToUrl;
 
       /**
-       * Type of the next action to perform, one of `redirect_to_url` or `use_stripe_sdk`.
+       * Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk` or `wechat_pay_display_qr_code`.
        */
       type: string;
+
+      /**
+       * Wechat Pay display qrcode
+       */
+      wechat_pay_display_qr_code?: NextAction.WechatPayDisplayQrCode;
     }
 
     namespace NextAction {
@@ -195,6 +200,17 @@ declare module '@stripe/stripe-js' {
          * The URL you must redirect your customer to in order to authenticate the payment.
          */
         url: string | null;
+      }
+      interface WechatPayDisplayQrCode {
+        /**
+         * Render and display `paymentIntent.next_action.wechat_pay_display_qr_code.data` as a QR code on your checkout page.
+         */
+        data: string;
+
+        /**
+         * Use `paymentIntent.next_action.wechat_pay_display_qr_code.image_data_url` as an image source.
+         */
+        image_data_url: string;
       }
     }
 

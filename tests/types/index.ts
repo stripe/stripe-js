@@ -1027,6 +1027,67 @@ stripe
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
 stripe
+  .confirmWechatPayPayment('', {}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmWechatPayPayment(
+    '',
+    {
+      payment_method: '',
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmWechatPayPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
+      },
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmWechatPayPayment(
+    '',
+    {
+      payment_method_options: {
+        wechat_pay: {
+          client: 'web',
+        },
+      },
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmWechatPayPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
+      },
+      payment_method_options: {
+        wechat_pay: {},
+      },
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmAfterpayClearpayPayment('', {return_url: window.location.href})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
