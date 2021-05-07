@@ -633,6 +633,16 @@ declare module '@stripe/stripe-js' {
      * @docs https://stripe.com/docs/js/tokens_sources/retrieve_source
      */
     retrieveSource(source: RetrieveSourceParam): Promise<SourceResult>;
+
+    /////////////////////////////
+    /// Analytics
+    ///
+    /////////////////////////////
+
+    /**
+     * Use `stripe.registerAppInfo` to register a frontend open source library.
+     */
+    registerAppInfo(wrapperLibrary: WrapperLibrary): void;
   }
 
   type PaymentIntentResult =
@@ -654,6 +664,29 @@ declare module '@stripe/stripe-js' {
   type TokenResult =
     | {token: Token; error?: undefined}
     | {token?: undefined; error: StripeError};
+
+  interface WrapperLibrary {
+    /**
+     * Your library’s name
+     */
+    name: string;
+
+    /**
+     * Required for Stripe Verified Partners, optional otherwise
+     * Your Partner ID from the Partners section of the Dashboard
+     */
+    partner_id?: string;
+
+    /**
+     * Your library's version
+     */
+    version?: string;
+
+    /**
+     * The URL for your library's website with your contact details
+     */
+    url?: string;
+  }
 
   /**
    * Use `Stripe(publishableKey, options?)` to create an instance of the `Stripe` object.

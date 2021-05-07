@@ -1394,6 +1394,13 @@ stripe
   .retrieveSetupIntent('')
   .then((result: {setupIntent?: SetupIntent}) => null);
 
+stripe.registerAppInfo({
+  name: '',
+  partner_id: 'pp_partner_1234',
+  version: '1.2.34',
+  url: '',
+});
+
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',
   currency: 'usd',
