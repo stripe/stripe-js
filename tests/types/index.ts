@@ -1395,10 +1395,10 @@ stripe
   .then((result: {setupIntent?: SetupIntent}) => null);
 
 stripe.registerAppInfo({
-  name: '',
+  name: 'Demo_Wrapper',
   partner_id: 'pp_partner_1234',
   version: '1.2.34',
-  url: '',
+  url: 'https://example.com',
 });
 
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
