@@ -667,7 +667,7 @@ declare module '@stripe/stripe-js' {
 
   interface WrapperLibrary {
     /**
-     * Your library’s name
+     * Your library’s name, maximum length is 30
      */
     name: string;
 
@@ -678,7 +678,7 @@ declare module '@stripe/stripe-js' {
     partner_id?: string;
 
     /**
-     * Your library's version
+     * Your library's version, in the format of x.x.x
      */
     version?: string;
 
