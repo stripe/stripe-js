@@ -17,10 +17,19 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodP24Data
     | CreatePaymentMethodFpxData
     | CreatePaymentMethodSepaDebitData
-    | CreatePaymentMethodSofortData;
+    | CreatePaymentMethodSofortData
+    | CreatePaymentMethodWechatPayData;
 
   interface CreatePaymentMethodAlipayData extends PaymentMethodCreateParams {
     type: 'alipay';
+  }
+
+  interface CreatePaymentMethodWechatPayData extends PaymentMethodCreateParams {
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
+    type: 'wechat_pay';
   }
 
   interface CreatePaymentMethodAfterpayClearpayData
@@ -739,6 +748,42 @@ declare module '@stripe/stripe-js' {
      * The newly created SEPA Direct Debit [PaymentMethod](https://stripe.com/docs/api/payment_methods) will be attached to this customer.
      */
     setup_future_usage?: 'off_session';
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmWechatPayPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmWechatPayPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodWechatPayData, 'type'>;
+
+    /**
+     * An object containing payment-method-specific configuration to confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with.
+     */
+    payment_method_options?: {
+      /**
+       * Configuration for this wechat payment.
+       */
+      wechat_pay: {
+        client?: 'web';
+      };
+    };
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmWechatPayPayment`.
+   */
+  interface ConfirmWechatPayPaymentOptions {
+    /**
+     * This must be set to false, and you are responsible for handling the next_action after confirming the PaymentIntent.
+     */
+    handleActions: boolean;
   }
 
   /**
