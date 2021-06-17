@@ -21,30 +21,66 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
-    on(eventType: 'ready', handler: () => any): StripeCardCvcElement;
-    once(eventType: 'ready', handler: () => any): StripeCardCvcElement;
-    off(eventType: 'ready', handler?: () => any): StripeCardCvcElement;
+    on(
+      eventType: 'ready',
+      handler: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
+    once(
+      eventType: 'ready',
+      handler: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
+    off(
+      eventType: 'ready',
+      handler?: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
 
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeCardCvcElement;
-    once(eventType: 'focus', handler: () => any): StripeCardCvcElement;
-    off(eventType: 'focus', handler?: () => any): StripeCardCvcElement;
+    on(
+      eventType: 'focus',
+      handler: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
+    once(
+      eventType: 'focus',
+      handler: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
+    off(
+      eventType: 'focus',
+      handler?: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeCardCvcElement;
-    once(eventType: 'blur', handler: () => any): StripeCardCvcElement;
-    off(eventType: 'blur', handler?: () => any): StripeCardCvcElement;
+    on(
+      eventType: 'blur',
+      handler: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
+    once(
+      eventType: 'blur',
+      handler: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
+    off(
+      eventType: 'blur',
+      handler?: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
-    on(eventType: 'escape', handler: () => any): StripeCardCvcElement;
-    once(eventType: 'escape', handler: () => any): StripeCardCvcElement;
-    off(eventType: 'escape', handler?: () => any): StripeCardCvcElement;
+    on(
+      eventType: 'escape',
+      handler: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
+    once(
+      eventType: 'escape',
+      handler: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
+    off(
+      eventType: 'escape',
+      handler?: (event: {elementType: 'cardCvc'}) => any
+    ): StripeCardCvcElement;
 
     /**
      * Updates the options the `CardCvcElement` was initialized with.

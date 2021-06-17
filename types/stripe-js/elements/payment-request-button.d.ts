@@ -23,15 +23,15 @@ declare module '@stripe/stripe-js' {
      */
     on(
       eventType: 'ready',
-      handler: () => any
+      handler: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
     once(
       eventType: 'ready',
-      handler: () => any
+      handler: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
     off(
       eventType: 'ready',
-      handler?: () => any
+      handler?: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
 
     /**
@@ -39,15 +39,15 @@ declare module '@stripe/stripe-js' {
      */
     on(
       eventType: 'focus',
-      handler: () => any
+      handler: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
     once(
       eventType: 'focus',
-      handler: () => any
+      handler: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
     off(
       eventType: 'focus',
-      handler?: () => any
+      handler?: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
 
     /**
@@ -55,15 +55,15 @@ declare module '@stripe/stripe-js' {
      */
     on(
       eventType: 'blur',
-      handler: () => any
+      handler: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
     once(
       eventType: 'blur',
-      handler: () => any
+      handler: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
     off(
       eventType: 'blur',
-      handler?: () => any
+      handler?: (event: {elementType: 'paymentRequestButton'}) => any
     ): StripePaymentRequestButtonElement;
 
     /**

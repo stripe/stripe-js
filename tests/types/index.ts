@@ -230,6 +230,11 @@ const afterpayClearpayMessageElement = elements.create(
   }
 );
 
+afterpayClearpayMessageElement.on(
+  'ready',
+  (e: {elementType: 'afterpayClearpayMessage'}) => {}
+);
+
 const retrievedAfterpayClearpayMessageElement: StripeAfterpayClearpayMessageElement | null = elements.getElement(
   'afterpayClearpayMessage'
 );
@@ -248,11 +253,21 @@ const retrievedEpsBankElement: StripeEpsBankElement | null = elements.getElement
   'epsBank'
 );
 
+epsBankElement
+  .on('ready', (e: {elementType: 'epsBank'}) => {})
+  .on('focus', (e: {elementType: 'epsBank'}) => {})
+  .on('blur', (e: {elementType: 'epsBank'}) => {});
+
 const p24BankElement = elements.create('p24Bank', {
   style: MY_STYLE,
   value: '',
   classes: {webkitAutofill: ''},
 });
+
+p24BankElement
+  .on('ready', (e: {elementType: 'p24Bank'}) => {})
+  .on('focus', (e: {elementType: 'p24Bank'}) => {})
+  .on('blur', (e: {elementType: 'p24Bank'}) => {});
 
 elements.create('p24Bank', {style: {base: {fontWeight: 500}}});
 
@@ -281,9 +296,9 @@ cardElement.mount('#bogus-container');
 ibanElement.mount('#bogus-container');
 
 cardElement
-  .on('ready', () => {})
-  .on('focus', () => {})
-  .on('blur', () => {})
+  .on('ready', (e: {elementType: 'card'}) => {})
+  .on('focus', (e: {elementType: 'card'}) => {})
+  .on('blur', (e: {elementType: 'card'}) => {})
   .on('change', (e: StripeCardElementChangeEvent) => {
     if (e.error) {
       console.error(e.error.message);
@@ -300,7 +315,22 @@ auBankAccountElement.on(
   (e: StripeAuBankAccountElementChangeEvent) => {}
 );
 
+auBankAccountElement
+  .on('ready', (e: {elementType: 'auBankAccount'}) => {})
+  .on('focus', (e: {elementType: 'auBankAccount'}) => {})
+  .on('blur', (e: {elementType: 'auBankAccount'}) => {});
+
 fpxBankElement.on('change', (e: StripeFpxBankElementChangeEvent) => {});
+
+fpxBankElement
+  .on('ready', (e: {elementType: 'fpxBank'}) => {})
+  .on('focus', (e: {elementType: 'fpxBank'}) => {})
+  .on('blur', (e: {elementType: 'fpxBank'}) => {});
+
+ibanElement
+  .on('ready', (e: {elementType: 'iban'}) => {})
+  .on('focus', (e: {elementType: 'iban'}) => {})
+  .on('blur', (e: {elementType: 'iban'}) => {});
 
 paymentRequestButtonElement.on(
   'click',
