@@ -29,7 +29,7 @@ declare module '@stripe/stripe-js' {
      */
     on(
       eventType: 'ready',
-      handler: () => any
+      handler: (event: {elementType: 'afterpayClearpayMessage'}) => any
     ): StripeAfterpayClearpayMessageElement;
   };
 

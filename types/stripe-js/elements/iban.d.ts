@@ -21,30 +21,66 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
-    on(eventType: 'ready', handler: () => any): StripeIbanElement;
-    once(eventType: 'ready', handler: () => any): StripeIbanElement;
-    off(eventType: 'ready', handler?: () => any): StripeIbanElement;
+    on(
+      eventType: 'ready',
+      handler: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
+    once(
+      eventType: 'ready',
+      handler: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
+    off(
+      eventType: 'ready',
+      handler?: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
 
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeIbanElement;
-    once(eventType: 'focus', handler: () => any): StripeIbanElement;
-    off(eventType: 'focus', handler?: () => any): StripeIbanElement;
+    on(
+      eventType: 'focus',
+      handler: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
+    once(
+      eventType: 'focus',
+      handler: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
+    off(
+      eventType: 'focus',
+      handler?: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeIbanElement;
-    once(eventType: 'blur', handler: () => any): StripeIbanElement;
-    off(eventType: 'blur', handler?: () => any): StripeIbanElement;
+    on(
+      eventType: 'blur',
+      handler: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
+    once(
+      eventType: 'blur',
+      handler: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
+    off(
+      eventType: 'blur',
+      handler?: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
-    on(eventType: 'escape', handler: () => any): StripeIbanElement;
-    once(eventType: 'escape', handler: () => any): StripeIbanElement;
-    off(eventType: 'escape', handler?: () => any): StripeIbanElement;
+    on(
+      eventType: 'escape',
+      handler: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
+    once(
+      eventType: 'escape',
+      handler: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
+    off(
+      eventType: 'escape',
+      handler?: (event: {elementType: 'iban'}) => any
+    ): StripeIbanElement;
 
     /**
      * Updates the options the `IbanElement` was initialized with.

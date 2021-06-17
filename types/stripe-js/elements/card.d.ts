@@ -21,30 +21,66 @@ declare module '@stripe/stripe-js' {
     /**
      * Triggered when the element is fully rendered and can accept `element.focus` calls.
      */
-    on(eventType: 'ready', handler: () => any): StripeCardElement;
-    once(eventType: 'ready', handler: () => any): StripeCardElement;
-    off(eventType: 'ready', handler?: () => any): StripeCardElement;
+    on(
+      eventType: 'ready',
+      handler: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
+    once(
+      eventType: 'ready',
+      handler: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
+    off(
+      eventType: 'ready',
+      handler?: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
 
     /**
      * Triggered when the element gains focus.
      */
-    on(eventType: 'focus', handler: () => any): StripeCardElement;
-    once(eventType: 'focus', handler: () => any): StripeCardElement;
-    off(eventType: 'focus', handler?: () => any): StripeCardElement;
+    on(
+      eventType: 'focus',
+      handler: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
+    once(
+      eventType: 'focus',
+      handler: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
+    off(
+      eventType: 'focus',
+      handler?: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
 
     /**
      * Triggered when the element loses focus.
      */
-    on(eventType: 'blur', handler: () => any): StripeCardElement;
-    once(eventType: 'blur', handler: () => any): StripeCardElement;
-    off(eventType: 'blur', handler?: () => any): StripeCardElement;
+    on(
+      eventType: 'blur',
+      handler: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
+    once(
+      eventType: 'blur',
+      handler: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
+    off(
+      eventType: 'blur',
+      handler?: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
 
     /**
      * Triggered when the escape key is pressed within the element.
      */
-    on(eventType: 'escape', handler: () => any): StripeCardElement;
-    once(eventType: 'escape', handler: () => any): StripeCardElement;
-    off(eventType: 'escape', handler?: () => any): StripeCardElement;
+    on(
+      eventType: 'escape',
+      handler: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
+    once(
+      eventType: 'escape',
+      handler: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
+    off(
+      eventType: 'escape',
+      handler?: (event: {elementType: 'card'}) => any
+    ): StripeCardElement;
 
     /**
      * Updates the options the `CardElement` was initialized with.
