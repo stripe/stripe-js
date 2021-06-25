@@ -38,6 +38,7 @@ import {
   StripeAfterpayClearpayMessageElement,
   StripeElementType,
   CanMakePaymentResult,
+  VerificationSession,
 } from '@stripe/stripe-js';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -1491,6 +1492,15 @@ stripe.registerAppInfo({
   version: '1.2.34',
   url: 'https://example.com',
 });
+
+stripe
+  .verifyIdentity('')
+  .then(
+    (result: {
+      verificationSession?: VerificationSession;
+      error?: StripeError;
+    }) => null
+  );
 
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',

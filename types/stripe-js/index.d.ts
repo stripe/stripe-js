@@ -663,6 +663,18 @@ declare module '@stripe/stripe-js' {
      * Use `stripe.registerAppInfo` to register a frontend open source library.
      */
     registerAppInfo(wrapperLibrary: WrapperLibrary): void;
+
+    /////////////////////////////
+    /// Identity
+    ///
+    /////////////////////////////
+
+    /**
+     * Use `stripe.verifyIdentity` to display an [Identity](https://stripe.com/docs/identity) modal that securely collects verification information.
+     *
+     * * @docs https://stripe.com/docs/js/identity/modal
+     */
+    verifyIdentity(clientSecret: string): Promise<VerificationSessionResult>;
   }
 
   type PaymentIntentResult =
@@ -684,6 +696,10 @@ declare module '@stripe/stripe-js' {
   type TokenResult =
     | {token: Token; error?: undefined}
     | {token?: undefined; error: StripeError};
+
+  type VerificationSessionResult =
+    | {verificationSession: VerificationSession; error?: undefined}
+    | {verificationSession?: undefined; error: StripeError};
 
   interface WrapperLibrary {
     /**

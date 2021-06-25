@@ -6,3 +6,4 @@
 ///<reference path='./Tokens.d.ts' />
 ///<reference path='./BankAccounts.d.ts' />
 ///<reference path='./Cards.d.ts' />
+///<reference path='./VerificationSessions.d.ts' />
