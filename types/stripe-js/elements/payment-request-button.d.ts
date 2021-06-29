@@ -85,15 +85,44 @@ declare module '@stripe/stripe-js' {
 
     /**
      * An object used to customize the appearance of the Payment Request Button.
+     * The object must have a single `paymentRequestButton` field, containing any of the following sub-fields
      */
     style?: {
       paymentRequestButton: {
-        type?: 'default' | 'book' | 'buy' | 'donate';
+        /**
+         * Preferred button type to display. Available types, by wallet:
+         *
+         * Browser card: default, book, buy, or donate.
+         *
+         * Google Pay: default, buy, or donate.
+         *
+         * Apple Pay: default, book, buy, donate, check-out, subscribe, reload, add-money, top-up, order, rent, support, contribute, tip
+         *
+         * When a wallet does not support the provided value, default is used as a fallback.
+         */
+        type?:
+          | 'default'
+          | 'book'
+          | 'buy'
+          | 'donate'
+          | 'check-out'
+          | 'subscribe'
+          | 'reload'
+          | 'add-money'
+          | 'top-up'
+          | 'order'
+          | 'rent'
+          | 'support'
+          | 'contribute'
+          | 'tip';
 
+        /**
+         * One of dark, light, or light-outline. The default is dark.
+         */
         theme?: 'dark' | 'light' | 'light-outline';
 
         /**
-         * The height of the Payment Request Button.
+         * The height of the Payment Request Button. Accepts px unit values.
          */
         height?: string;
       };

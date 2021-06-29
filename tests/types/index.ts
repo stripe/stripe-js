@@ -204,6 +204,8 @@ const paymentRequestButtonElement = elements.create('paymentRequestButton', {
   style: {
     paymentRequestButton: {
       theme: 'light',
+      height: '21px',
+      type: 'donate',
     },
   },
   paymentRequest: stripe.paymentRequest({
