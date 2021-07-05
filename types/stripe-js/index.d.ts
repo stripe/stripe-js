@@ -280,9 +280,9 @@ declare module '@stripe/stripe-js' {
      *
      * @docs https://stripe.com/docs/js/payment_intents/confirm_paypal_payment
      */
-     confirmPayPalPayment(
+    confirmPayPalPayment(
       clientSecret: string,
-      data?: ConfirmPayPalPaymentData,
+      data?: ConfirmPayPalPaymentData
     ): Promise<PaymentIntentResult>;
 
     /**
@@ -506,7 +506,7 @@ declare module '@stripe/stripe-js' {
      *
      * @docs https://stripe.com/docs/js/setup_intents/confirm_paypal_setup
      */
-     confirmPayPalSetup(
+    confirmPayPalSetup(
       clientSecret: string,
       data?: ConfirmPayPalSetupData
     ): Promise<SetupIntentResult>;

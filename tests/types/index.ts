@@ -1009,16 +1009,16 @@ stripe
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-  stripe
+stripe
   .confirmPayPalPayment('', {
-    return_url: 'https://example.com'
+    return_url: 'https://example.com',
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-  stripe
+stripe
   .confirmPayPalPayment('', {
     payment_method: '',
-    return_url: 'https://example.com'
+    return_url: 'https://example.com',
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
@@ -1452,7 +1452,10 @@ stripe
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmPayPalSetup('', {payment_method: '', return_url: 'https://example.com'})
+  .confirmPayPalSetup('', {
+    payment_method: '',
+    return_url: 'https://example.com',
+  })
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
