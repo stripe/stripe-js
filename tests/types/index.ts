@@ -1010,6 +1010,19 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmPayPalPayment('', {
+    return_url: 'https://example.com',
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPayPalPayment('', {
+    payment_method: '',
+    return_url: 'https://example.com',
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmSepaDebitPayment('', {
     payment_method: {
       sepa_debit: ibanElement,
@@ -1431,6 +1444,17 @@ stripe
       },
     },
     return_url: '',
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPayPalSetup('', {return_url: 'https://example.com'})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPayPalSetup('', {
+    payment_method: '',
+    return_url: 'https://example.com',
   })
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 

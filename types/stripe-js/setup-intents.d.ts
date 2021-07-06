@@ -39,6 +39,25 @@ declare module '@stripe/stripe-js' {
   }
 
   /**
+   * Data to be sent with a `stripe.confirmIdealSetup` request.
+   * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmPayPalSetupData extends SetupIntentConfirmParams {
+    /*
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodPayPalData, 'type'>;
+
+    /**
+     * The required url your customer will be directed to after they complete authentication.
+     */
+    return_url: string;
+  }
+
+  /**
    * Data to be sent with a `stripe.confirmSepaDebitSetup` request.
    * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
    */
