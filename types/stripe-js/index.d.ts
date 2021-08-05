@@ -112,6 +112,24 @@ declare module '@stripe/stripe-js' {
     ): Promise<PaymentIntentResult>;
 
     /**
+     * Use `stripe.confirmBoletoPayment` in the [Boleto Payment](https://stripe.com/docs/payments/boleto) with Payment Methods flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
+     * Note that there are some additional requirements to this flow that are not covered in this reference.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/boleto) for more details.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_boleto_payment
+     */
+    confirmBoletoPayment(
+      clientSecret: string,
+      data?: ConfirmBoletoPaymentData,
+      options?: ConfirmBoletoPaymentOptions
+    ): Promise<PaymentIntentResult>;
+
+    /**
      * Use `stripe.confirmCardPayment` when the customer submits your payment form.
      * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide and carry out 3DS or other next actions if they are required.
      *

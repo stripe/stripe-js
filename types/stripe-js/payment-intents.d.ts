@@ -8,6 +8,7 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodAlipayData
     | CreatePaymentMethodAuBecsDebitData
     | CreatePaymentMethodBancontactData
+    | CreatePaymentMethodBoletoData
     | CreatePaymentMethodCardData
     | CreatePaymentMethodEpsData
     | CreatePaymentMethodGiropayData
@@ -54,6 +55,32 @@ declare module '@stripe/stripe-js' {
      */
     billing_details: PaymentMethodCreateParams.BillingDetails & {
       name: string;
+    };
+  }
+
+  interface CreatePaymentMethodBoletoData extends PaymentMethodCreateParams {
+    type: 'boleto';
+
+    /**
+     * The customer's billing details.
+     * `name`, `email`, and full `address` is required.
+     *
+     * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+     */
+    billing_details: PaymentMethodCreateParams.BillingDetails & {
+      email: string;
+      name: string;
+      address: PaymentMethodCreateParams.BillingDetails.Address & {
+        line1: string;
+        city: string;
+        postal_code: string;
+        state: string;
+        country: string;
+      };
+    };
+
+    boleto: {
+      tax_id: string;
     };
   }
 
@@ -361,6 +388,30 @@ declare module '@stripe/stripe-js' {
      * @recommended
      */
     return_url?: string;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmBoletoPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmBoletoPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodBoletoData, 'type'>;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmBoletoPayment`.
+   */
+  interface ConfirmBoletoPaymentOptions {
+    /**
+     * Set this to `false` if you want to handle next actions yourself. Please refer to our [Stripe Boleto integration guide](https://stripe.com/docs/payments/boleto) for more info. Default is `true`.
+     */
+    handleActions?: boolean;
   }
 
   /**
