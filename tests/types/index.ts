@@ -737,6 +737,45 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmBoletoPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: 'Jenny Rosen',
+          email: 'jennyrosen@stripe.com',
+          address: {
+            line1: 'Av. Paulista 1374',
+            country: 'BR',
+            state: 'SP',
+            postal_code: '01310100',
+            city: 'São Paulo',
+          },
+        },
+        boleto: {
+          tax_id: '000.000.000-00',
+        },
+      },
+    },
+    {
+      handleActions: false,
+    }
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmBoletoPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmBoletoPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmBoletoPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmCardPayment('', {
     payment_method: {card: cardElement, billing_details: {name: ''}},
   })
