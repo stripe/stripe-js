@@ -482,7 +482,12 @@ declare module '@stripe/stripe-js' {
          * Use the provided `CardCvcElement` when confirming the PaymentIntent with an existing PaymentMethod.
          */
         cvc?: StripeCardCvcElement;
-      };
+
+        /**
+         * Selected network to process this PaymentIntent on. Depends on the available networks of the card attached to the PaymentIntent.
+         */
+         network?: string;
+        };
     };
   }
 
