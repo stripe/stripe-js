@@ -486,8 +486,8 @@ declare module '@stripe/stripe-js' {
         /**
          * Selected network to process this PaymentIntent on. Depends on the available networks of the card attached to the PaymentIntent.
          */
-         network?: string;
-        };
+        network?: string;
+      };
     };
   }
 
