@@ -410,6 +410,7 @@ stripe.createToken('bank_account', {
   account_number: '',
   account_holder_name: '',
   account_holder_type: '',
+  account_type: '',
 });
 
 stripe.createToken('account', {

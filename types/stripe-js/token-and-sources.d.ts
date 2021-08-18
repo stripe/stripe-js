@@ -80,6 +80,8 @@ declare module '@stripe/stripe-js' {
     account_holder_name?: string;
 
     account_holder_type: string;
+
+    account_type?: string;
   }
 
   /**
