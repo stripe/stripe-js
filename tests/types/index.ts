@@ -797,7 +797,7 @@ stripe
 stripe
   .confirmCardPayment('', {
     payment_method: '',
-    payment_method_options: {card: {cvc: cardCvcElement}},
+    payment_method_options: {card: {cvc: cardCvcElement, network: ''}},
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
