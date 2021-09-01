@@ -27,30 +27,30 @@ declare module '@stripe/stripe-js' {
     /**
      * @recommended
      */
-    name?: string;
+    name?: string | undefined;
 
-    address_line1?: string;
+    address_line1?: string | undefined;
 
-    address_line2?: string;
+    address_line2?: string | undefined;
 
-    address_city?: string;
+    address_city?: string | undefined;
 
-    address_state?: string;
+    address_state?: string | undefined;
 
-    address_zip?: string;
+    address_zip?: string | undefined;
 
     /**
      * A two character country code (for example, `US`).
      *
      * @recommended
      */
-    address_country?: string;
+    address_country?: string | undefined;
 
     /**
      * Required in order to [add the card to a Connect account](https://stripe.com/docs/connect/payouts#bank-accounts) (in all other cases, this parameter is not used).
      * Currently, the only supported currency for debit card payouts is `usd`.
      */
-    currency?: string;
+    currency?: string | undefined;
   }
 
   interface CreateTokenIbanData {
