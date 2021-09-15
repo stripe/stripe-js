@@ -10,6 +10,7 @@
 ///<reference path='./elements/eps-bank.d.ts' />
 ///<reference path='./elements/p24-bank.d.ts' />
 ///<reference path='./elements/afterpay-clearpay-message.d.ts' />
+///<reference path='./elements/payment.d.ts' />
 
 import {StripeAuBankAccountElement} from '@stripe/stripe-js';
 
@@ -223,6 +224,29 @@ declare module '@stripe/stripe-js' {
     getElement(elementType: 'idealBank'): StripeIdealBankElement | null;
 
     /////////////////////////////
+    /// payment
+    /////////////////////////////
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Creates a `PaymentElement`.
+     */
+    create(
+      elementType: 'payment',
+      options?: StripePaymentElementOptions
+    ): StripePaymentElement;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'payment'): StripePaymentElement | null;
+
+    /////////////////////////////
     /// paymentRequestButton
     /////////////////////////////
 
@@ -256,6 +280,7 @@ declare module '@stripe/stripe-js' {
     | 'iban'
     | 'idealBank'
     | 'p24Bank'
+    | 'payment'
     | 'paymentRequestButton';
 
   type StripeElement =
@@ -270,6 +295,7 @@ declare module '@stripe/stripe-js' {
     | StripeIbanElement
     | StripeIdealBankElement
     | StripeP24BankElement
+    | StripePaymentElement
     | StripePaymentRequestButtonElement;
 
   type StripeElementLocale =

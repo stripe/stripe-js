@@ -35,6 +35,7 @@ import {
   StripeAuBankAccountElement,
   StripeAuBankAccountElementChangeEvent,
   StripePaymentRequestButtonElement,
+  StripePaymentElement,
   StripeAfterpayClearpayMessageElement,
   StripeElementType,
   CanMakePaymentResult,
@@ -246,6 +247,55 @@ const afterpayClearpayMessageElement = elements.create(
     currency: 'USD',
   }
 );
+
+const paymentElement: StripePaymentElement = elements.create('payment', {
+  fields: {
+    billingDetails: {
+      email: 'never',
+      phone: 'auto',
+      address: 'never',
+    },
+  },
+  terms: {
+    card: 'auto',
+    sepaDebit: 'always',
+    ideal: 'never',
+  },
+  business: {
+    name: '',
+  },
+  paymentMethodOrder: ['card', 'sepa_debit'],
+});
+
+let paymentElementDefaults: StripePaymentElement = elements.create('payment');
+paymentElementDefaults = elements.create('payment', {});
+
+const retrievedPaymentElement: StripePaymentElement | null = elements.getElement(
+  'payment'
+);
+
+paymentElement
+  .on('ready', (e: {elementType: 'payment'}) => {})
+  .on('focus', (e: {elementType: 'payment'}) => {})
+  .on('blur', (e: {elementType: 'payment'}) => {})
+  .on(
+    'change',
+    (e: {
+      elementType: 'payment';
+      value: {type: string};
+      collapsed: boolean;
+      complete: boolean;
+      empty: boolean;
+    }) => {}
+  );
+
+paymentElement.on('change', (e) => {
+  // @ts-expect-error: `error` is not present on PaymentElement "change" event.
+  if (e.error) {
+  }
+});
+
+paymentElement.collapse();
 
 afterpayClearpayMessageElement.on(
   'ready',
