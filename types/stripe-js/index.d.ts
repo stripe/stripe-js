@@ -41,6 +41,30 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * @docs https://stripe.com/docs/stripe-js/payment-element/accept-a-payment-manual
+     */
+    confirmPayment(options: {
+      elements: StripeElements;
+      confirmParams: ConfirmPaymentData;
+      redirect: 'if_required';
+    }): Promise<PaymentIntentResult>;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * @docs https://stripe.com/docs/stripe-js/payment-element/accept-a-payment-manual
+     */
+    confirmPayment(options: {
+      elements: StripeElements;
+      confirmParams: ConfirmPaymentData;
+      redirect?: 'always';
+    }): Promise<never | {error: StripeError}>;
+
+    /**
      * Use `stripe.confirmAcssDebitPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow when the customer submits your payment form.
      * When called, it will automatically pop up a modal to collect bank account details and verification, accept the mandate, and confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) when the user submits the form.
      *
@@ -404,6 +428,30 @@ declare module '@stripe/stripe-js' {
     ///
     /// https://stripe.com/docs/js/setup_intents
     /////////////////////////////
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * @docs https://stripe.com/docs/stripe-js/payment-element/set-up-payment-manual
+     */
+    confirmSetup(options: {
+      elements: StripeElements;
+      confirmParams: ConfirmPaymentData;
+      redirect: 'if_required';
+    }): Promise<SetupIntentResult>;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * @docs https://stripe.com/docs/stripe-js/payment-element/set-up-payment-manual
+     */
+    confirmSetup(options: {
+      elements: StripeElements;
+      confirmParams: ConfirmPaymentData;
+      redirect?: 'always';
+    }): Promise<never | {error: StripeError}>;
 
     /**
      * Use `stripe.confirmAcssDebitSetup` to [save details for future payments with pre-authorized debit in Canada](https://stripe.com/docs/payments/acss-debit/set-up-payment).

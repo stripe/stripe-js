@@ -1632,6 +1632,111 @@ stripe
     }) => null
   );
 
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
+// @ts-expect-error confirmParams.return_url is required
+stripe
+  .confirmSetup({
+    elements,
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',
   currency: 'usd',
