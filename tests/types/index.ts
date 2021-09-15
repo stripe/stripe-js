@@ -96,6 +96,20 @@ const MY_STYLE: StripeElementStyle = {
   },
 };
 
+elements.update({});
+elements.update({
+  locale: 'es',
+  appearance: {},
+});
+elements.update({
+  // @ts-expect-error: `clientSecret` is not updatable
+  clientSecret: 'pk_foo_secret_bar',
+});
+elements.update({
+  // @ts-expect-error: `fonts` is not updatable
+  fonts: [],
+});
+
 const auBankAccountElement = elements.create('auBankAccount', {});
 
 const retrievedAuBankAccountElement: StripeAuBankAccountElement | null = elements.getElement(
