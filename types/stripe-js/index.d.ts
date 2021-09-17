@@ -48,7 +48,7 @@ declare module '@stripe/stripe-js' {
      */
     confirmPayment(options: {
       elements: StripeElements;
-      confirmParams: ConfirmPaymentData;
+      confirmParams?: Partial<ConfirmPaymentData>;
       redirect: 'if_required';
     }): Promise<PaymentIntentResult>;
 
@@ -437,7 +437,7 @@ declare module '@stripe/stripe-js' {
      */
     confirmSetup(options: {
       elements: StripeElements;
-      confirmParams: ConfirmPaymentData;
+      confirmParams?: Partial<ConfirmPaymentData>;
       redirect: 'if_required';
     }): Promise<SetupIntentResult>;
 

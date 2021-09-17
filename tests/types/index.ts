@@ -1666,9 +1666,18 @@ stripe
 stripe
   .confirmPayment({
     elements,
-    confirmParams: {
-      return_url: '',
-    },
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {},
     redirect: 'if_required',
   })
   .then((res) => {
@@ -1724,7 +1733,6 @@ stripe
     }
   });
 
-// @ts-expect-error confirmParams.return_url is required
 stripe
   .confirmSetup({
     elements,
@@ -1736,6 +1744,20 @@ stripe
     if (res.setupIntent) {
     }
   });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {},
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
 
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',
