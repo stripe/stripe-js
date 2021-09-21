@@ -10,11 +10,37 @@
 ///<reference path='./elements/eps-bank.d.ts' />
 ///<reference path='./elements/p24-bank.d.ts' />
 ///<reference path='./elements/afterpay-clearpay-message.d.ts' />
+///<reference path='./elements/payment.d.ts' />
 
 import {StripeAuBankAccountElement} from '@stripe/stripe-js';
 
 declare module '@stripe/stripe-js' {
   interface StripeElements {
+    /**
+     * Updates the options that `Elements` was initialized with.
+     * Updates are shallowly merged into the existing configuration.
+     */
+    update(options: StripeElementsUpdateOptions): void;
+
+    /////////////////////////////
+    /// afterpayClearpayMessage
+    /////////////////////////////
+
+    /**
+     * Creates an `AfterpayClearpayMessageElement`.
+     */
+    create(
+      elementType: 'afterpayClearpayMessage',
+      options: StripeAfterpayClearpayMessageElementOptions
+    ): StripeAfterpayClearpayMessageElement;
+
+    /**
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(
+      elementType: 'afterpayClearpayMessage'
+    ): StripeAfterpayClearpayMessageElement | null;
+
     /////////////////////////////
     /// auBankAccount
     /////////////////////////////
@@ -198,6 +224,29 @@ declare module '@stripe/stripe-js' {
     getElement(elementType: 'idealBank'): StripeIdealBankElement | null;
 
     /////////////////////////////
+    /// payment
+    /////////////////////////////
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Creates a `PaymentElement`.
+     */
+    create(
+      elementType: 'payment',
+      options?: StripePaymentElementOptions
+    ): StripePaymentElement;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'payment'): StripePaymentElement | null;
+
+    /////////////////////////////
     /// paymentRequestButton
     /////////////////////////////
 
@@ -217,24 +266,10 @@ declare module '@stripe/stripe-js' {
     getElement(
       elementType: 'paymentRequestButton'
     ): StripePaymentRequestButtonElement | null;
-
-    /**
-     * Creates an `AfterpayClearpayMessageElement`.
-     */
-    create(
-      elementType: 'afterpayClearpayMessage',
-      options: StripeAfterpayClearpayMessageElementOptions
-    ): StripeAfterpayClearpayMessageElement;
-
-    /**
-     * Looks up a previously created `Element` by its type.
-     */
-    getElement(
-      elementType: 'afterpayClearpayMessage'
-    ): StripeAfterpayClearpayMessageElement | null;
   }
 
   type StripeElementType =
+    | 'afterpayClearpayMessage'
     | 'auBankAccount'
     | 'card'
     | 'cardNumber'
@@ -245,10 +280,11 @@ declare module '@stripe/stripe-js' {
     | 'iban'
     | 'idealBank'
     | 'p24Bank'
-    | 'paymentRequestButton'
-    | 'afterpayClearpayMessage';
+    | 'payment'
+    | 'paymentRequestButton';
 
   type StripeElement =
+    | StripeAfterpayClearpayMessageElement
     | StripeAuBankAccountElement
     | StripeCardElement
     | StripeCardNumberElement
@@ -259,8 +295,8 @@ declare module '@stripe/stripe-js' {
     | StripeIbanElement
     | StripeIdealBankElement
     | StripeP24BankElement
-    | StripePaymentRequestButtonElement
-    | StripeAfterpayClearpayMessageElement;
+    | StripePaymentElement
+    | StripePaymentRequestButtonElement;
 
   type StripeElementLocale =
     | 'auto'
@@ -324,6 +360,50 @@ declare module '@stripe/stripe-js' {
      * Setting the locale does not affect the behavior of postal code validation—a valid postal code for the billing country of the card is still required.
      */
     locale?: StripeElementLocale;
+
+    /**
+     * Used with the Payment Element, requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Match the design of your site with the appearance option.
+     * The layout of each Element stays consistent, but you can modify colors, fonts, borders, padding, and more.
+     *
+     * @docs https://stripe.com/docs/stripe-js/appearance-api
+     */
+    appearance?: Record<string, unknown>;
+
+    /**
+     * Used with the Payment Element, requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * The client secret for a PaymentIntent or SetupIntent
+     *
+     * @docs https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret
+     */
+    clientSecret?: string;
+  }
+
+  /*
+   * Updatable options for an `Elements` instance
+   */
+  interface StripeElementsUpdateOptions {
+    /**
+     * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) of the locale to display placeholders and error strings in.
+     * Default is `auto` (Stripe detects the locale of the browser).
+     * Setting the locale does not affect the behavior of postal code validation—a valid postal code for the billing country of the card is still required.
+     */
+    locale?: StripeElementLocale;
+
+    /**
+     * Used with the Payment Element, requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Match the design of your site with the appearance option.
+     * The layout of each Element stays consistent, but you can modify colors, fonts, borders, padding, and more.
+     *
+     * @docs https://stripe.com/docs/stripe-js/appearance-api
+     */
+    appearance?: Record<string, unknown>;
   }
 
   /*

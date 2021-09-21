@@ -943,6 +943,32 @@ declare module '@stripe/stripe-js' {
   }
 
   /**
+   * Data to be sent with a `stripe.confirmPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * The url your customer will be directed to after they complete payment.
+     */
+    return_url: string;
+
+    /**
+     * An object to attach additional billing_details to the PaymentMethod created via Elements.
+     *
+     * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data
+     */
+    payment_method_data?: {
+      /**
+       * The customer's billing details. Details collected by Elements will override values passed here.
+       * Billing fields that are omitted in the Payment Element via the `fields` option required.
+       *
+       * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data-billing_details
+       */
+      billing_details?: PaymentMethodCreateParams.BillingDetails;
+    };
+  }
+
+  /**
    * Data to be sent with a `stripe.verifyMicrodepositsForPayment` request.
    */
   interface VerifyMicrodepositsForPaymentData {

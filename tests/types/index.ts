@@ -35,6 +35,7 @@ import {
   StripeAuBankAccountElement,
   StripeAuBankAccountElementChangeEvent,
   StripePaymentRequestButtonElement,
+  StripePaymentElement,
   StripeAfterpayClearpayMessageElement,
   StripeElementType,
   CanMakePaymentResult,
@@ -95,6 +96,20 @@ const MY_STYLE: StripeElementStyle = {
     color: '#FFC7EE',
   },
 };
+
+elements.update({});
+elements.update({
+  locale: 'es',
+  appearance: {},
+});
+elements.update({
+  // @ts-expect-error: `clientSecret` is not updatable
+  clientSecret: 'pk_foo_secret_bar',
+});
+elements.update({
+  // @ts-expect-error: `fonts` is not updatable
+  fonts: [],
+});
 
 const auBankAccountElement = elements.create('auBankAccount', {});
 
@@ -232,6 +247,55 @@ const afterpayClearpayMessageElement = elements.create(
     currency: 'USD',
   }
 );
+
+const paymentElement: StripePaymentElement = elements.create('payment', {
+  fields: {
+    billingDetails: {
+      email: 'never',
+      phone: 'auto',
+      address: 'never',
+    },
+  },
+  terms: {
+    card: 'auto',
+    sepaDebit: 'always',
+    ideal: 'never',
+  },
+  business: {
+    name: '',
+  },
+  paymentMethodOrder: ['card', 'sepa_debit'],
+});
+
+let paymentElementDefaults: StripePaymentElement = elements.create('payment');
+paymentElementDefaults = elements.create('payment', {});
+
+const retrievedPaymentElement: StripePaymentElement | null = elements.getElement(
+  'payment'
+);
+
+paymentElement
+  .on('ready', (e: {elementType: 'payment'}) => {})
+  .on('focus', (e: {elementType: 'payment'}) => {})
+  .on('blur', (e: {elementType: 'payment'}) => {})
+  .on(
+    'change',
+    (e: {
+      elementType: 'payment';
+      value: {type: string};
+      collapsed: boolean;
+      complete: boolean;
+      empty: boolean;
+    }) => {}
+  );
+
+paymentElement.on('change', (e) => {
+  // @ts-expect-error: `error` is not present on PaymentElement "change" event.
+  if (e.error) {
+  }
+});
+
+paymentElement.collapse();
 
 afterpayClearpayMessageElement.on(
   'ready',
@@ -1567,6 +1631,132 @@ stripe
       error?: StripeError;
     }) => null
   );
+
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmPayment({
+    elements,
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {},
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {},
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
 
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',
