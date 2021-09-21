@@ -1758,7 +1758,6 @@ stripe
     }
   });
 
-
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',
   currency: 'usd',
