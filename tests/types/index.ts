@@ -37,6 +37,8 @@ import {
   StripePaymentRequestButtonElement,
   StripePaymentElement,
   StripeAfterpayClearpayMessageElement,
+  StripeLinkAuthenticationElementChangeEvent,
+  StripeLinkAuthenticationElement,
   StripeElementType,
   CanMakePaymentResult,
   VerificationSession,
@@ -406,6 +408,18 @@ paymentRequestButtonElement.on(
   }
 );
 
+const linkAuthenticationElement = elements.create('linkAuthentication');
+
+linkAuthenticationElement
+  .on('ready', (e: {elementType: 'linkAuthentication'}) => {})
+  .on('focus', (e: {elementType: 'linkAuthentication'}) => {})
+  .on('blur', (e: {elementType: 'linkAuthentication'}) => {})
+  .on('change', (e: StripeLinkAuthenticationElementChangeEvent) => {});
+
+const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null = elements.getElement(
+  'linkAuthentication'
+);
+
 auBankAccountElement.destroy();
 cardElement.destroy();
 cardNumberElement.destroy();
@@ -415,6 +429,7 @@ fpxBankElement.destroy();
 ibanElement.destroy();
 idealBankElement.destroy();
 paymentRequestButtonElement.destroy();
+linkAuthenticationElement.destroy();
 
 stripe.redirectToCheckout({sessionId: ''});
 
