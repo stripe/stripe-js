@@ -234,9 +234,7 @@ declare module '@stripe/stripe-js' {
      *
      * Creates a `LinkAuthenticationElement`.
      */
-     create(
-      elementType: 'linkAuthentication',
-    ): StripeLinkAuthenticationElement;
+    create(elementType: 'linkAuthentication'): StripeLinkAuthenticationElement;
 
     /**
      * Requires beta access:
@@ -244,8 +242,9 @@ declare module '@stripe/stripe-js' {
      *
      * Looks up a previously created `Element` by its type.
      */
-    getElement(elementType: 'linkAuthentication'): StripeLinkAuthenticationElement | null;
-
+    getElement(
+      elementType: 'linkAuthentication'
+    ): StripeLinkAuthenticationElement | null;
 
     /////////////////////////////
     /// payment
