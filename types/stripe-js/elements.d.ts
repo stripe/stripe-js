@@ -11,6 +11,7 @@
 ///<reference path='./elements/p24-bank.d.ts' />
 ///<reference path='./elements/afterpay-clearpay-message.d.ts' />
 ///<reference path='./elements/payment.d.ts' />
+///<reference path='./elements/link-authentication.d.ts' />
 
 import {StripeAuBankAccountElement} from '@stripe/stripe-js';
 
@@ -224,6 +225,28 @@ declare module '@stripe/stripe-js' {
     getElement(elementType: 'idealBank'): StripeIdealBankElement | null;
 
     /////////////////////////////
+    /// linkAuthentication
+    /////////////////////////////
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Creates a `LinkAuthenticationElement`.
+     */
+    create(elementType: 'linkAuthentication'): StripeLinkAuthenticationElement;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(
+      elementType: 'linkAuthentication'
+    ): StripeLinkAuthenticationElement | null;
+
+    /////////////////////////////
     /// payment
     /////////////////////////////
 
@@ -281,7 +304,8 @@ declare module '@stripe/stripe-js' {
     | 'idealBank'
     | 'p24Bank'
     | 'payment'
-    | 'paymentRequestButton';
+    | 'paymentRequestButton'
+    | 'linkAuthentication';
 
   type StripeElement =
     | StripeAfterpayClearpayMessageElement
