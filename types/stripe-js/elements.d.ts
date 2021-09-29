@@ -12,6 +12,7 @@
 ///<reference path='./elements/afterpay-clearpay-message.d.ts' />
 ///<reference path='./elements/payment.d.ts' />
 ///<reference path='./elements/link-authentication.d.ts' />
+///<reference path='./elements/shipping-address.d.ts' />
 
 import {StripeAuBankAccountElement} from '@stripe/stripe-js';
 
@@ -289,6 +290,27 @@ declare module '@stripe/stripe-js' {
     getElement(
       elementType: 'paymentRequestButton'
     ): StripePaymentRequestButtonElement | null;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Creates a `ShippingAddressElement`.
+     */
+    create(
+      elementType: 'shippingAddress',
+      options?: StripeShippingAddressOptions
+    ): StripeShippingAddressElement;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(
+      elementType: 'shippingAddress'
+    ): StripeShippingAddressElement | null;
   }
 
   type StripeElementType =
@@ -305,7 +327,8 @@ declare module '@stripe/stripe-js' {
     | 'p24Bank'
     | 'payment'
     | 'paymentRequestButton'
-    | 'linkAuthentication';
+    | 'linkAuthentication'
+    | 'shippingAddress';
 
   type StripeElement =
     | StripeAfterpayClearpayMessageElement
