@@ -529,8 +529,8 @@ declare module '@stripe/stripe-js' {
     payment_method: CreatePaymentMethodCustomerBalanceData
     payment_method_options?: {
       customer_balance?: {
-        funding_type: 'bank_transfer';
-        bank_transfer: {
+        funding_type?: 'bank_transfer';
+        bank_transfer?: {
           type:  'us_bank_account' | 'eu_bank_account' | 'id_bank_account' | 'gb_bank_account' | 'jp_bank_account' | 'mx_bank_account';
           eu_bank_account?: {
             country: 'ES' | 'FR' | 'IE' | 'NL';
