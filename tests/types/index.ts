@@ -886,74 +886,90 @@ stripe.confirmCardPayment('').then((res) => {
 });
 
 stripe
-  .confirmCustomerBalancePayment('', {
-    payment_method: {
-      customer_balance: {},
+  .confirmCustomerBalancePayment(
+    '',
+    {
+      payment_method: {
+        customer_balance: {},
+      },
+    },
+    {
+      handleActions: false,
     }
-  }, {
-    handleActions: false,
-  })
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmCustomerBalancePayment('', {
-    payment_method: {
-      customer_balance: {},
-    },
-    payment_method_options: {
-      customer_balance: {
-        funding_type: 'bank_transfer',
-        bank_transfer: {
-          type:  'us_bank_account',
-          requested_address_types: ['aba', 'swift'],
-        },
+  .confirmCustomerBalancePayment(
+    '',
+    {
+      payment_method: {
+        customer_balance: {},
       },
-    },
-  }, {
-    handleActions: false,
-  })
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmCustomerBalancePayment('', {
-    payment_method: {
-      customer_balance: {},
-    },
-    payment_method_options: {
-      customer_balance: {
-        funding_type: 'bank_transfer',
-        bank_transfer: {
-          type:  'eu_bank_account',
-          eu_bank_account: {
-            country: 'NL',
+      payment_method_options: {
+        customer_balance: {
+          funding_type: 'bank_transfer',
+          bank_transfer: {
+            type: 'us_bank_account',
+            requested_address_types: ['aba', 'swift'],
           },
         },
       },
     },
-  }, {
-    handleActions: false,
-  })
+    {
+      handleActions: false,
+    }
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmCustomerBalancePayment('', {
-    payment_method: {
-      customer_balance: {},
-    },
-    payment_method_options: {
-      customer_balance: {
-        funding_type: 'bank_transfer',
-        bank_transfer: {
-          type: 'id_bank_account',
-          id_bank_account: {
-            bank: 'bni',
+  .confirmCustomerBalancePayment(
+    '',
+    {
+      payment_method: {
+        customer_balance: {},
+      },
+      payment_method_options: {
+        customer_balance: {
+          funding_type: 'bank_transfer',
+          bank_transfer: {
+            type: 'eu_bank_account',
+            eu_bank_account: {
+              country: 'NL',
+            },
           },
         },
       },
     },
-  }, {
-    handleActions: false,
-  })
+    {
+      handleActions: false,
+    }
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmCustomerBalancePayment(
+    '',
+    {
+      payment_method: {
+        customer_balance: {},
+      },
+      payment_method_options: {
+        customer_balance: {
+          funding_type: 'bank_transfer',
+          bank_transfer: {
+            type: 'id_bank_account',
+            id_bank_account: {
+              bank: 'bni',
+            },
+          },
+        },
+      },
+    },
+    {
+      handleActions: false,
+    }
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe

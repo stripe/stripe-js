@@ -174,12 +174,12 @@ declare module '@stripe/stripe-js' {
     /**
      * Requires beta access:
      * Contact [Stripe support](https://support.stripe.com/) for more information.
-     * 
+     *
      * Use `stripe.confirmCustomerBalancePayment` when the customer submits your payment form.
-     * 
-     * When called, it will confirm the PaymentIntent with data you provide. 
+     *
+     * When called, it will confirm the PaymentIntent with data you provide.
      * Refer to our [integration guide](https://stripe.com/docs/payments/bank-transfers) for more details.
-     * 
+     *
      * Since the Customer Balance payment method draws from a balance, the attempt will succeed or fail depending on the current balance amount. To collect more funds from the customer when the cash balance is insufficient, use the customer balance with bank transfer funding parameters.
      * The confirmation attempt will finish in one of the following result states:
      * 1. If the customer balance was enough to pay the amount, the status is succeeded. The funding_type data is effectively ignored.
