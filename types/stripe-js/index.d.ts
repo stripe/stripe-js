@@ -172,6 +172,9 @@ declare module '@stripe/stripe-js' {
     ): Promise<PaymentIntentResult>;
 
     /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     * 
      * Use `stripe.confirmCustomerBalancePayment` when the customer submits your payment form.
      * 
      * When called, it will confirm the PaymentIntent with data you provide. 

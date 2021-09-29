@@ -92,7 +92,16 @@ declare module '@stripe/stripe-js' {
   }
 
   interface CreatePaymentMethodCustomerBalanceData extends PaymentMethodCreateParams {
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
     type: 'customer_balance';
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
     customer_balance: {};
   }
 
