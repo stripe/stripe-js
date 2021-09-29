@@ -10,6 +10,7 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodBancontactData
     | CreatePaymentMethodBoletoData
     | CreatePaymentMethodCardData
+    | CreatePaymentMethodCustomerBalanceData
     | CreatePaymentMethodEpsData
     | CreatePaymentMethodGiropayData
     | CreatePaymentMethodGrabPayData
@@ -88,6 +89,11 @@ declare module '@stripe/stripe-js' {
     type: 'card';
 
     card: StripeCardElement | StripeCardNumberElement | {token: string};
+  }
+
+  interface CreatePaymentMethodCustomerBalanceData extends PaymentMethodCreateParams {
+    type: 'customer_balance';
+    customer_balance: {};
   }
 
   interface CreatePaymentMethodEpsData extends PaymentMethodCreateParams {
@@ -501,6 +507,32 @@ declare module '@stripe/stripe-js' {
      */
     handleActions?: boolean;
   }
+
+
+  /**
+   * Data to be sent with a `stripe.confirmCustomerBalancePayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+   interface ConfirmCustomerBalancePaymentData extends PaymentIntentConfirmParams {
+    /**
+     * An object specifying the `customer_balance` type.
+     */
+    payment_method: CreatePaymentMethodCustomerBalanceData
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmCustomerBalancePayment`.
+   */
+  interface ConfirmCustomerBalancePaymentOptions {
+    /**
+     * This must be set to `false`.
+     * The Customer Balance does not handle the next actions for you automatically (e.g. displaying bank transfer details). 
+     * To make future upgrades easier, this option is required to always be sent. 
+     * Please refer to our [Stripe Customer Balance integration guide](https://stripe.com/docs/payments/bank-transfers) for more info.
+     */
+    handleActions: false;
+  }
+
 
   /**
    * Data to be sent with a `stripe.confirmEpsPayment` request.
