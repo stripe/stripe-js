@@ -96,7 +96,7 @@ declare module '@stripe/stripe-js' {
      * Requires beta access:
      * Contact [Stripe support](https://support.stripe.com/) for more information.
      */
-    customer_balance: {},
+    customer_balance: Record<string, never>,
   }
 
   interface CreatePaymentMethodEpsData extends PaymentMethodCreateParams {
