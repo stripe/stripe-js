@@ -527,6 +527,23 @@ declare module '@stripe/stripe-js' {
      * An object specifying the `customer_balance` type.
      */
     payment_method: CreatePaymentMethodCustomerBalanceData
+    payment_method_options?: {
+      customer_balance?: {
+        funding_type: 'bank_transfer';
+        bank_transfer: {
+          type:  'us_bank_account' | 'eu_bank_account' | 'id_bank_account' | 'gb_bank_account' | 'jp_bank_account' | 'mx_bank_account';
+          eu_bank_account?: {
+            country: 'ES' | 'FR' | 'IE' | 'NL';
+          };
+          id_bank_account?: {
+            bank: 'bni' | 'bca';
+          };
+          requested_address_types?: Array<
+            'aba' | 'swift' | 'sort_code' | 'zengin' | 'iban' | 'spei' | 'id_bban' | 'sepa'
+          >;
+        };
+      },
+    },
   }
 
   /**
