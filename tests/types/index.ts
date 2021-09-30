@@ -39,6 +39,8 @@ import {
   StripeAfterpayClearpayMessageElement,
   StripeLinkAuthenticationElementChangeEvent,
   StripeLinkAuthenticationElement,
+  StripeShippingAddressElementChangeEvent,
+  StripeShippingAddressElement,
   StripeElementType,
   CanMakePaymentResult,
   VerificationSession,
@@ -420,6 +422,20 @@ const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null
   'linkAuthentication'
 );
 
+const shippingAddressElement = elements.create('shippingAddress', {
+  allowedCountries: ['US'],
+});
+
+shippingAddressElement
+  .on('ready', (e: {elementType: 'shippingAddress'}) => {})
+  .on('focus', (e: {elementType: 'shippingAddress'}) => {})
+  .on('blur', (e: {elementType: 'shippingAddress'}) => {})
+  .on('change', (e: StripeShippingAddressElementChangeEvent) => {});
+
+const retrievedShippingAddressElement: StripeShippingAddressElement | null = elements.getElement(
+  'shippingAddress'
+);
+
 auBankAccountElement.destroy();
 cardElement.destroy();
 cardNumberElement.destroy();
@@ -430,6 +446,7 @@ ibanElement.destroy();
 idealBankElement.destroy();
 paymentRequestButtonElement.destroy();
 linkAuthenticationElement.destroy();
+shippingAddressElement.destroy();
 
 stripe.redirectToCheckout({sessionId: ''});
 
