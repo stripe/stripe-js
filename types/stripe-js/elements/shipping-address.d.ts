@@ -87,11 +87,11 @@ declare module '@stripe/stripe-js' {
      * Updates are merged into the existing configuration.
      */
     update(
-      options: Partial<StripeShippingAddressOptions>
+      options: Partial<StripeShippingAddressElementOptions>
     ): StripeShippingAddressElement;
   };
 
-  interface StripeShippingAddressOptions {
+  interface StripeShippingAddressElementOptions {
     /**
      * Control which countries are displayed in the shippingAddress Element.
      */

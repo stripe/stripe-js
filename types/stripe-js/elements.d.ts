@@ -299,7 +299,7 @@ declare module '@stripe/stripe-js' {
      */
     create(
       elementType: 'shippingAddress',
-      options?: StripeShippingAddressOptions
+      options?: StripeShippingAddressElementOptions
     ): StripeShippingAddressElement;
 
     /**
