@@ -772,6 +772,31 @@ declare module '@stripe/stripe-js' {
   }
 
   /**
+   * Data to be sent with a `stripe.confirmPayNowPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmPayNowPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<ConfirmPayNowPaymentData, 'type'>;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmPayNowPayment`.
+   */
+  interface ConfirmPayNowPaymentOptions {
+    /**
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/p24#handle-redirect).
+     * Default is `true`.
+     */
+    handleActions?: boolean;
+  }
+
+  /**
    * Data to be sent with a `stripe.confirmPayPalPayment` request.
    * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
    */
@@ -794,6 +819,31 @@ declare module '@stripe/stripe-js' {
    * An options object to control the behavior of `stripe.confirmP24Payment`.
    */
   interface ConfirmP24PaymentOptions {
+    /**
+     * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/p24#handle-redirect).
+     * Default is `true`.
+     */
+    handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmPayNowPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmPromptPayPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<ConfirmPromptPayPaymentData, 'type'>;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmPayNowPayment`.
+   */
+  interface ConfirmPromptPayPaymentOptions {
     /**
      * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/p24#handle-redirect).
      * Default is `true`.
