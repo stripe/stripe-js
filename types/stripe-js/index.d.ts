@@ -172,6 +172,29 @@ declare module '@stripe/stripe-js' {
     ): Promise<PaymentIntentResult>;
 
     /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Use `stripe.confirmCustomerBalancePayment` when the customer submits your payment form.
+     *
+     * When called, it will confirm the PaymentIntent with data you provide.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/bank-transfers) for more details.
+     *
+     * Since the Customer Balance payment method draws from a balance, the attempt will succeed or fail depending on the current balance amount. To collect more funds from the customer when the cash balance is insufficient, use the customer balance with bank transfer funding parameters.
+     * The confirmation attempt will finish in one of the following result states:
+     * 1. If the customer balance was enough to pay the amount, the status is succeeded. The funding_type data is effectively ignored.
+     * 2. If the balance was not enough to pay the amount, and you didn't send the funding_type, the status is requires_payment_method.
+     * 3. If the balance was not enough to pay the amount, and you did send the funding_type, the status is requires_action. The paymentIntent.next_action.display_bank_transfer_instructions hash contains bank transfer details for funding the Customer Balance.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_customer_balance_payment
+     */
+    confirmCustomerBalancePayment(
+      clientSecret: string,
+      data: ConfirmCustomerBalancePaymentData,
+      options: ConfirmCustomerBalancePaymentOptions
+    ): Promise<PaymentIntentResult>;
+
+    /**
      * Use `stripe.confirmEpsPayment` in the [EPS Payments with Payment Methods](https://stripe.com/docs/payments/eps#web) flow when the customer submits your payment form.
      * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.

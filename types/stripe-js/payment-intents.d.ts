@@ -10,6 +10,7 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodBancontactData
     | CreatePaymentMethodBoletoData
     | CreatePaymentMethodCardData
+    | CreatePaymentMethodCustomerBalanceData
     | CreatePaymentMethodEpsData
     | CreatePaymentMethodGiropayData
     | CreatePaymentMethodGrabPayData
@@ -88,6 +89,15 @@ declare module '@stripe/stripe-js' {
     type: 'card';
 
     card: StripeCardElement | StripeCardNumberElement | {token: string};
+  }
+
+  interface CreatePaymentMethodCustomerBalanceData
+    extends PaymentMethodCreateParams {
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
+    customer_balance: Record<string, never>;
   }
 
   interface CreatePaymentMethodEpsData extends PaymentMethodCreateParams {
@@ -500,6 +510,61 @@ declare module '@stripe/stripe-js' {
      * Default is `true`.
      */
     handleActions?: boolean;
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmCustomerBalancePayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmCustomerBalancePaymentData
+    extends PaymentIntentConfirmParams {
+    /**
+     * An object specifying the `customer_balance` type.
+     */
+    payment_method: CreatePaymentMethodCustomerBalanceData;
+    payment_method_options?: {
+      customer_balance?: {
+        funding_type?: 'bank_transfer';
+        bank_transfer?: {
+          type:
+            | 'us_bank_account'
+            | 'eu_bank_account'
+            | 'id_bank_account'
+            | 'gb_bank_account'
+            | 'jp_bank_account'
+            | 'mx_bank_account';
+          eu_bank_account?: {
+            country: 'ES' | 'FR' | 'IE' | 'NL';
+          };
+          id_bank_account?: {
+            bank: 'bni' | 'bca';
+          };
+          requested_address_types?: Array<
+            | 'aba'
+            | 'swift'
+            | 'sort_code'
+            | 'zengin'
+            | 'iban'
+            | 'spei'
+            | 'id_bban'
+            | 'sepa'
+          >;
+        };
+      };
+    };
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmCustomerBalancePayment`.
+   */
+  interface ConfirmCustomerBalancePaymentOptions {
+    /**
+     * This must be set to `false`.
+     * The Customer Balance does not handle the next actions for you automatically (e.g. displaying bank transfer details).
+     * To make future upgrades easier, this option is required to always be sent.
+     * Please refer to our [Stripe Customer Balance integration guide](https://stripe.com/docs/payments/bank-transfers) for more info.
+     */
+    handleActions: false;
   }
 
   /**
