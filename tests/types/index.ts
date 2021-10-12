@@ -1150,31 +1150,43 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmPayNowPayment('', {
-    payment_method: '',
-  }, {handleActions: false})
+  .confirmPayNowPayment(
+    '',
+    {
+      payment_method: '',
+    },
+    {handleActions: false}
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmPayNowPayment('', {
-    payment_method: {
-      billing_details: {
-        name: '',
-        email: '',
+  .confirmPayNowPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
       },
     },
-  }, {handleActions: false})
+    {handleActions: false}
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmPayNowPayment('', {
-    payment_method: {
-      billing_details: {
-        name: '',
-        email: '',
+  .confirmPayNowPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
       },
     },
-  }, {handleActions: false})
+    {handleActions: false}
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
@@ -1195,20 +1207,28 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmPromptPayPayment('', {
-    payment_method: '',
-  }, {handleActions: false})
+  .confirmPromptPayPayment(
+    '',
+    {
+      payment_method: '',
+    },
+    {handleActions: false}
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmPromptPayPayment('', {
-    payment_method: {
-      billing_details: {
-        name: '',
-        email: '',
+  .confirmPromptPayPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
       },
     },
-  }, {handleActions: false})
+    {handleActions: false}
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
