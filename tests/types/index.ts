@@ -1233,6 +1233,50 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmPayNowPayment('', {})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPayNowPayment(
+    '',
+    {
+      payment_method: '',
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPayNowPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
+      },
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPayNowPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
+      },
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmPayPalPayment('', {
     return_url: 'https://example.com',
   })
@@ -1243,6 +1287,35 @@ stripe
     payment_method: '',
     return_url: 'https://example.com',
   })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPromptPayPayment('', {})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPromptPayPayment(
+    '',
+    {
+      payment_method: '',
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPromptPayPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
+      },
+    },
+    {handleActions: false}
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
@@ -1508,6 +1581,16 @@ stripe.createPaymentMethod({
 stripe.createPaymentMethod({
   type: 'afterpay_clearpay',
   afterpay_clearpay: {},
+});
+
+stripe.createPaymentMethod({
+  type: 'paynow',
+  billing_details: {name: '', email: ''},
+});
+
+stripe.createPaymentMethod({
+  type: 'promptpay',
+  billing_details: {name: '', email: ''},
 });
 
 stripe.retrievePaymentIntent('{PAYMENT_INTENT_CLIENT_SECRET}');

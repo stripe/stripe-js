@@ -335,6 +335,24 @@ declare module '@stripe/stripe-js' {
      * Requires beta access:
      * Contact [Stripe support](https://support.stripe.com/) for more information.
      *
+     * Use `stripe.confirmPayNowPayment` in the [PayNow Payments](https://stripe.com/docs/payments/paynow) with Payment Methods flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/paynow) for more details.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     */
+    confirmPayNowPayment(
+      clientSecret: string,
+      data?: ConfirmPayNowPaymentData,
+      options?: ConfirmPayNowPaymentOptions
+    ): Promise<PaymentIntentResult>;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
      * Use `stripe.confirmPayPalPayment` in the [PayPal Payments](https://stripe.com/docs/payments/paypal) with Payment Methods flow when the customer submits your payment form.
      * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
      * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
@@ -348,6 +366,24 @@ declare module '@stripe/stripe-js' {
     confirmPayPalPayment(
       clientSecret: string,
       data?: ConfirmPayPalPaymentData
+    ): Promise<PaymentIntentResult>;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Use `stripe.confirmPromptPayPayment` in the [PromptPay Payments](https://stripe.com/docs/payments/promptpay) with Payment Methods flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
+     * Refer to our [integration guide](https://stripe.com/docs/payments/promptpay) for more details.
+     *
+     * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+     * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+     * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+     */
+    confirmPromptPayPayment(
+      clientSecret: string,
+      data?: ConfirmPromptPayPaymentData,
+      options?: ConfirmPromptPayPaymentOptions
     ): Promise<PaymentIntentResult>;
 
     /**
