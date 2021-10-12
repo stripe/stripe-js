@@ -219,8 +219,16 @@ declare module '@stripe/stripe-js' {
         };
   }
 
+  interface CreatePaymentMethodPayNowData extends PaymentMethodCreateParams {
+    type: 'paynow';
+  }
+
   interface CreatePaymentMethodPayPalData extends PaymentMethodCreateParams {
     type: 'paypal';
+  }
+
+  interface CreatePaymentMethodPromptPayData extends PaymentMethodCreateParams {
+    type: 'promptpay';
   }
 
   interface CreatePaymentMethodSepaDebitData extends PaymentMethodCreateParams {
@@ -782,7 +790,7 @@ declare module '@stripe/stripe-js' {
      *
      * @recommended
      */
-    payment_method?: string | Omit<ConfirmPayNowPaymentData, 'type'>;
+    payment_method?: string | Omit<CreatePaymentMethodPayNowData, 'type'>;
   }
 
   /**
@@ -837,7 +845,7 @@ declare module '@stripe/stripe-js' {
      *
      * @recommended
      */
-    payment_method?: string | Omit<ConfirmPromptPayPaymentData, 'type'>;
+    payment_method?: string | Omit<CreatePaymentMethodPromptPayData, 'type'>;
   }
 
   /**
