@@ -16,6 +16,8 @@ declare module '@stripe/stripe-js' {
     | CreatePaymentMethodIdealData
     | CreatePaymentMethodKlarnaData
     | CreatePaymentMethodP24Data
+    | CreatePaymentMethodPayNowData
+    | CreatePaymentMethodPromptPayData
     | CreatePaymentMethodFpxData
     | CreatePaymentMethodSepaDebitData
     | CreatePaymentMethodSofortData
