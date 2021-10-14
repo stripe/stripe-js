@@ -56,6 +56,8 @@ declare module '@stripe/stripe-js' {
      */
     type: string;
 
+    affirm?: PaymentMethod.Affirm;
+    
     afterpay_clearpay?: PaymentMethod.AfterpayClearpay;
 
     acss_debit?: PaymentMethod.AcssDebit;
@@ -243,6 +245,8 @@ declare module '@stripe/stripe-js' {
       last4: string | null;
     }
 
+    interface Affirm {}
+    
     interface AfterpayClearpay {}
 
     interface AcssDebit {

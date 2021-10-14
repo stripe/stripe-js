@@ -670,6 +670,20 @@ declare module '@stripe/stripe-js' {
     ): Promise<SetupIntentResult>;
 
     /**
+     * Use `stripe.confirmAffirmPayment` in the [Affirm payments](https://stripe.com/docs/payments/affirm) flow when the customer submits your payment form.
+     * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents).
+     * Refer to our [integration guide](https://stripe.com/docs/payments/affirm/accept-a-payment) for more details.
+     *
+     * @docs https://stripe.com/docs/js/payment_intents/confirm_affirm_payment
+     */
+
+    confirmAffirmPayment(
+      clientSecret: string,
+      data?: ConfirmAffirmPaymentData,
+      options?: ConfirmAffirmPaymentOptions
+    ): Promise<{paymentIntent?: PaymentIntent; error?: StripeError}>;
+
+    /**
      * Use `stripe.confirmAfterpayClearpayPayment` in the [Afterpay / Clearpay payments](https://stripe.com/docs/payments/afterpay-clearpay) flow when the customer submits your payment form.
      * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents).
      * Refer to our [integration guide](https://stripe.com/docs/payments/afterpay-clearpay/accept-a-payment) for more details.
