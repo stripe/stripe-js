@@ -4,6 +4,7 @@ declare module '@stripe/stripe-js' {
 
   type CreatePaymentMethodData =
     | CreatePaymentMethodAcssDebitData
+    | CreatePaymentMethodAffirmData
     | CreatePaymentMethodAfterpayClearpayData
     | CreatePaymentMethodAlipayData
     | CreatePaymentMethodAuBecsDebitData
@@ -34,6 +35,15 @@ declare module '@stripe/stripe-js' {
      * Contact [Stripe support](https://support.stripe.com/) for more information.
      */
     type: 'wechat_pay';
+  }
+
+  interface CreatePaymentMethodAffirmData extends PaymentMethodCreateParams {
+    type: 'affirm';
+
+    /**
+     * Can be omitted as there are no Affirm-specific fields.
+     */
+    affirm?: {}; // eslint-disable-line @typescript-eslint/ban-types
   }
 
   interface CreatePaymentMethodAfterpayClearpayData
@@ -1008,6 +1018,36 @@ declare module '@stripe/stripe-js' {
      * BECS Direct Debit only accepts an `off_session` value for this parameter.
      */
     setup_future_usage?: 'off_session';
+  }
+
+  /**
+   * Data to be sent with a `stripe.confirmAffirmPayment` request.
+   * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+   */
+  interface ConfirmAffirmPaymentData extends PaymentIntentConfirmParams {
+    /**
+     * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+     * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+     *
+     * @recommended
+     */
+    payment_method?: string | Omit<CreatePaymentMethodAffirmData, 'type'>;
+
+    /**
+     * The url your customer will be directed to after they complete authentication.
+     */
+    return_url?: string;
+  }
+
+  /**
+   * An options object to control the behavior of `stripe.confirmAffirmPayment`.
+   */
+  interface ConfirmAffirmPaymentOptions {
+    /**
+     * Set this to `false` if you want to handle next actions yourself. Please refer to our [Stripe Affirm integration guide](https://stripe.com/docs/payments/affirm/accept-a-payment)
+     * for more info. Default is `true`.
+     */
+    handleActions?: boolean;
   }
 
   /**

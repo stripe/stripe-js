@@ -36,6 +36,7 @@ import {
   StripeAuBankAccountElementChangeEvent,
   StripePaymentRequestButtonElement,
   StripePaymentElement,
+  StripeAffirmMessageElement,
   StripeAfterpayClearpayMessageElement,
   StripeLinkAuthenticationElementChangeEvent,
   StripeLinkAuthenticationElement,
@@ -244,6 +245,11 @@ const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | 
 // Make sure that `paymentRequest` is at least optional;
 retrievedPaymentRequestButtonElement!.update({});
 
+const affirmMessageElement = elements.create('affirmMessage', {
+  amount: 50000,
+  currency: 'USD',
+});
+
 const afterpayClearpayMessageElement = elements.create(
   'afterpayClearpayMessage',
   {
@@ -300,6 +306,14 @@ paymentElement.on('change', (e) => {
 });
 
 paymentElement.collapse();
+
+affirmMessageElement.on('ready', (e: {elementType: 'affirmMessage'}) => {});
+
+const retrievedAffirmMessageElement: StripeAffirmMessageElement | null = elements.getElement(
+  'affirmMessage'
+);
+
+retrievedAffirmMessageElement!.update({amount: 10000});
 
 afterpayClearpayMessageElement.on(
   'ready',
@@ -1430,6 +1444,26 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmAffirmPayment('', {return_url: window.location.href})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAffirmPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAffirmPayment('', {payment_method: {affirm: {}}})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAffirmPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmAffirmPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmAfterpayClearpayPayment('', {return_url: window.location.href})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
@@ -1572,6 +1606,15 @@ stripe.createPaymentMethod({
   type: 'sofort',
   sofort: {country: ''},
   billing_details: {name: ''},
+});
+
+stripe.createPaymentMethod({
+  type: 'affirm',
+});
+
+stripe.createPaymentMethod({
+  type: 'affirm',
+  affirm: {},
 });
 
 stripe.createPaymentMethod({

@@ -9,6 +9,7 @@
 ///<reference path='./elements/au-bank-account.d.ts' />
 ///<reference path='./elements/eps-bank.d.ts' />
 ///<reference path='./elements/p24-bank.d.ts' />
+///<reference path='./elements/affirm-message.d.ts' />
 ///<reference path='./elements/afterpay-clearpay-message.d.ts' />
 ///<reference path='./elements/payment.d.ts' />
 ///<reference path='./elements/link-authentication.d.ts' />
@@ -23,6 +24,23 @@ declare module '@stripe/stripe-js' {
      * Updates are shallowly merged into the existing configuration.
      */
     update(options: StripeElementsUpdateOptions): void;
+
+    /////////////////////////////
+    /// affirmMessage
+    /////////////////////////////
+
+    /**
+     * Creates an `AffirmMessageElement`.
+     */
+    create(
+      elementType: 'affirmMessage',
+      options: StripeAffirmMessageElementOptions
+    ): StripeAffirmMessageElement;
+
+    /**
+     * Looks up a previously created `Element` by its type.
+     */
+    getElement(elementType: 'affirmMessage'): StripeAffirmMessageElement | null;
 
     /////////////////////////////
     /// afterpayClearpayMessage
@@ -314,6 +332,7 @@ declare module '@stripe/stripe-js' {
   }
 
   type StripeElementType =
+    | 'affirmMessage'
     | 'afterpayClearpayMessage'
     | 'auBankAccount'
     | 'card'
@@ -331,6 +350,7 @@ declare module '@stripe/stripe-js' {
     | 'shippingAddress';
 
   type StripeElement =
+    | StripeAffirmMessageElement
     | StripeAfterpayClearpayMessageElement
     | StripeAuBankAccountElement
     | StripeCardElement
