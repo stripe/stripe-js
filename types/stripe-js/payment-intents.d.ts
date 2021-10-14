@@ -37,8 +37,7 @@ declare module '@stripe/stripe-js' {
     type: 'wechat_pay';
   }
 
-  interface CreatePaymentMethodAffirmData
-    extends PaymentMethodCreateParams {
+  interface CreatePaymentMethodAffirmData extends PaymentMethodCreateParams {
     type: 'affirm';
 
     /**
@@ -1021,21 +1020,18 @@ declare module '@stripe/stripe-js' {
     setup_future_usage?: 'off_session';
   }
 
-   /**
+  /**
    * Data to be sent with a `stripe.confirmAffirmPayment` request.
    * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
    */
-  interface ConfirmAffirmPaymentData
-    extends PaymentIntentConfirmParams {
+  interface ConfirmAffirmPaymentData extends PaymentIntentConfirmParams {
     /**
      * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
      * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
      *
      * @recommended
      */
-    payment_method?:
-      | string
-      | Omit<CreatePaymentMethodAffirmData, 'type'>;
+    payment_method?: string | Omit<CreatePaymentMethodAffirmData, 'type'>;
 
     /**
      * The url your customer will be directed to after they complete authentication.

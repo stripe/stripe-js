@@ -40,9 +40,7 @@ declare module '@stripe/stripe-js' {
     /**
      * Looks up a previously created `Element` by its type.
      */
-    getElement(
-      elementType: 'affirmMessage'
-    ): StripeAffirmMessageElement | null;
+    getElement(elementType: 'affirmMessage'): StripeAffirmMessageElement | null;
 
     /////////////////////////////
     /// afterpayClearpayMessage

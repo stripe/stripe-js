@@ -245,13 +245,10 @@ const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | 
 // Make sure that `paymentRequest` is at least optional;
 retrievedPaymentRequestButtonElement!.update({});
 
-const affirmMessageElement = elements.create(
-  'affirmMessage',
-  {
-    amount: 50000,
-    currency: 'USD',
-  }
-);
+const affirmMessageElement = elements.create('affirmMessage', {
+  amount: 50000,
+  currency: 'USD',
+});
 
 const afterpayClearpayMessageElement = elements.create(
   'afterpayClearpayMessage',
@@ -310,10 +307,7 @@ paymentElement.on('change', (e) => {
 
 paymentElement.collapse();
 
-affirmMessageElement.on(
-  'ready',
-  (e: {elementType: 'affirmMessage'}) => {}
-);
+affirmMessageElement.on('ready', (e: {elementType: 'affirmMessage'}) => {});
 
 const retrievedAffirmMessageElement: StripeAffirmMessageElement | null = elements.getElement(
   'affirmMessage'
@@ -1466,11 +1460,7 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmAffirmPayment(
-    '',
-    {payment_method: ''},
-    {handleActions: false}
-  )
+  .confirmAffirmPayment('', {payment_method: ''}, {handleActions: false})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
