@@ -32,7 +32,7 @@ declare module '@stripe/stripe-js' {
     /**
      * Creates an `AffirmMessageElement`.
      */
-     create(
+    create(
       elementType: 'affirmMessage',
       options: StripeAffirmMessageElementOptions
     ): StripeAffirmMessageElement;
