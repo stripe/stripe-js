@@ -124,6 +124,8 @@ declare module '@stripe/stripe-js' {
     ideal?: TermOption;
     sepaDebit?: TermOption;
     sofort?: TermOption;
+    auBecsDebit?: TermOption;
+    usBankAccount?: TermOption;
   }
 
   interface StripePaymentElementOptions {
@@ -150,12 +152,21 @@ declare module '@stripe/stripe-js' {
     terms?: TermsOption;
   }
 
-  interface StripePaymentElementChangeEvent
-    extends Omit<StripeElementChangeEvent, 'error'> {
+  interface StripePaymentElementChangeEvent {
     /**
      * The type of element that emitted this event.
      */
     elementType: 'payment';
+
+    /**
+     * `true` if the all inputs in the Payment Element are empty.
+     */
+    empty: boolean;
+
+    /**
+     * `true` if the every input in the Payment Element is well-formed and potentially complete.
+     */
+    complete: boolean;
 
     /**
      * Whether or not the Payment Element is currently collapsed.
@@ -163,7 +174,7 @@ declare module '@stripe/stripe-js' {
     collapsed: boolean;
 
     /**
-     * An object containing the currently selected PaymentMethod type.
+     * An object containing the currently selected PaymentMethod type (in snake_case, for example "afterpay_clearpay").
      */
     value: {type: string};
   }

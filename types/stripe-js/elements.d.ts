@@ -270,10 +270,9 @@ declare module '@stripe/stripe-js' {
     /////////////////////////////
 
     /**
-     * Requires beta access:
-     * Contact [Stripe support](https://support.stripe.com/) for more information.
-     *
      * Creates a `PaymentElement`.
+     *
+     * @docs https://stripe.com/docs/payments/payment-element
      */
     create(
       elementType: 'payment',
@@ -281,9 +280,6 @@ declare module '@stripe/stripe-js' {
     ): StripePaymentElement;
 
     /**
-     * Requires beta access:
-     * Contact [Stripe support](https://support.stripe.com/) for more information.
-     *
      * Looks up a previously created `Element` by its type.
      */
     getElement(elementType: 'payment'): StripePaymentElement | null;
@@ -429,21 +425,15 @@ declare module '@stripe/stripe-js' {
     locale?: StripeElementLocale;
 
     /**
-     * Used with the Payment Element, requires beta access:
-     * Contact [Stripe support](https://support.stripe.com/) for more information.
-     *
-     * Match the design of your site with the appearance option.
-     * The layout of each Element stays consistent, but you can modify colors, fonts, borders, padding, and more.
+     * Match the Payment Element with the design of your site with the appearance option.
+     * The layout of the Payment Element stays consistent, but you can modify colors, fonts, borders, padding, and more.
      *
      * @docs https://stripe.com/docs/stripe-js/appearance-api
      */
-    appearance?: Record<string, unknown>;
+    appearance?: Appearance;
 
     /**
-     * Used with the Payment Element, requires beta access:
-     * Contact [Stripe support](https://support.stripe.com/) for more information.
-     *
-     * The client secret for a PaymentIntent or SetupIntent
+     * The client secret for a PaymentIntent or SetupIntent used by the Payment Element.
      *
      * @docs https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret
      */
@@ -470,7 +460,7 @@ declare module '@stripe/stripe-js' {
      *
      * @docs https://stripe.com/docs/stripe-js/appearance-api
      */
-    appearance?: Record<string, unknown>;
+    appearance?: Appearance;
   }
 
   /*
@@ -521,5 +511,94 @@ declare module '@stripe/stripe-js' {
      * A valid [font-weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight), as a string.
      */
     weight?: string;
+  }
+
+  /*
+   * @docs https://stripe.com/docs/stripe-js/appearance-api
+   */
+  interface Appearance {
+    theme?: 'stripe' | 'night' | 'none';
+
+    variables?: {
+      // General font styles
+      fontFamily?: string;
+      fontSmooth?: string;
+      fontVariantLigatures?: string;
+      fontVariationSettings?: string;
+      fontLineHeight?: string;
+
+      // Font sizes
+      fontSizeBase?: string;
+      fontSizeSm?: string;
+      fontSizeXs?: string;
+      fontSize2Xs?: string;
+      fontSize3Xs?: string;
+      fontSizeLg?: string;
+      fontSizeXl?: string;
+
+      // Font weights
+      fontWeightLight?: string;
+      fontWeightNormal?: string;
+      fontWeightMedium?: string;
+      fontWeightBold?: string;
+
+      // Spacing
+      spacingUnit?: string;
+      spacingGridRow?: string;
+      spacingGridColumn?: string;
+      spacingTab?: string;
+
+      // Colors
+      colorPrimary?: string;
+      colorPrimaryText?: string;
+      colorBackground?: string;
+      colorBackgroundText?: string;
+      colorText?: string;
+      colorSuccess?: string;
+      colorSuccessText?: string;
+      colorDanger?: string;
+      colorDangerText?: string;
+      colorWarning?: string;
+      colorWarningText?: string;
+
+      // Text variations
+      colorTextSecondary?: string;
+      colorTextPlaceholder?: string;
+
+      // Icons
+      colorIcon?: string;
+      colorIconHover?: string;
+      colorIconCardError?: string;
+      colorIconCardCvc?: string;
+      colorIconCardCvcError?: string;
+      colorIconCheckmark?: string;
+      colorIconChevronDown?: string;
+      colorIconChevronDownHover?: string;
+      colorIconRedirect?: string;
+      colorIconTab?: string;
+      colorIconTabHover?: string;
+      colorIconTabSelected?: string;
+      colorIconTabMore?: string;
+      colorIconTabMoreHover?: string;
+
+      // Logos
+      colorLogo?: string;
+      colorLogoTab?: string;
+      colorLogoTabSelected?: string;
+      colorLogoBlock?: string;
+
+      // Focus
+      focusBoxShadow?: string;
+      focusOutline?: string;
+
+      // Radius
+      borderRadius?: string;
+    };
+
+    rules?: {
+      [selector: string]: {
+        [cssPropertyName: string]: string;
+      };
+    };
   }
 }
