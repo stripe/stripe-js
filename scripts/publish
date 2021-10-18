@@ -119,19 +119,19 @@ if ! grep -q 'working tree clean' <<< "$GIT_STATUS"; then
 fi
 
 echo "Installing dependencies according to lockfile"
-yarn -s install --frozen-lockfile
+yarn install --frozen-lockfile
 
 echo "Running tests"
-yarn -s run test
+yarn run test
 
 echo "Bumping package.json $RELEASE_TYPE version and tagging commit"
-yarn -s version --$RELEASE_TYPE
+yarn version --$RELEASE_TYPE
 
 echo "Building"
-yarn -s run build
+yarn run build
 
 echo "Publishing release"
-yarn -s --ignore-scripts publish --non-interactive --access=public
+yarn --ignore-scripts publish --non-interactive --access=public
 
 echo "Pushing git commit and tag"
 git push --follow-tags
