@@ -79,7 +79,24 @@ const AVENIR: CustomFontSource = {
   style: 'normal',
 };
 
-const elements: StripeElements = stripe.elements({fonts: [OPEN_SANS, AVENIR]});
+const elements: StripeElements = stripe.elements({
+  fonts: [OPEN_SANS, AVENIR],
+  locale: 'auto',
+  clientSecret: '',
+  appearance: {
+    theme: 'night',
+    variables: {
+      colorIcon: 'blue',
+    },
+    rules: {
+      '.Tab--selected': {
+        backgroundColor: 'blue',
+      },
+    },
+  },
+});
+
+const elementsNoOptions: StripeElements = stripe.elements();
 
 const MY_STYLE: StripeElementStyle = {
   base: {
@@ -105,7 +122,17 @@ const MY_STYLE: StripeElementStyle = {
 elements.update({});
 elements.update({
   locale: 'es',
-  appearance: {},
+  appearance: {
+    theme: 'night',
+    variables: {
+      colorIcon: 'blue',
+    },
+    rules: {
+      '.Tab--selected': {
+        backgroundColor: 'blue',
+      },
+    },
+  },
 });
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
@@ -270,6 +297,10 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
     card: 'auto',
     sepaDebit: 'always',
     ideal: 'never',
+    sofort: 'never',
+    bancontact: 'never',
+    auBecsDebit: 'never',
+    usBankAccount: 'never',
   },
   business: {
     name: '',
