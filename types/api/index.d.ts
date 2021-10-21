@@ -1,9 +1,9 @@
 ///<reference path='./shared.d.ts' />
-///<reference path='./PaymentMethods.d.ts' />
-///<reference path='./PaymentIntents.d.ts' />
-///<reference path='./SetupIntents.d.ts' />
-///<reference path='./Sources.d.ts' />
-///<reference path='./Tokens.d.ts' />
-///<reference path='./BankAccounts.d.ts' />
-///<reference path='./Cards.d.ts' />
-///<reference path='./VerificationSessions.d.ts' />
+///<reference path='./payment-methods.d.ts' />
+///<reference path='./payment-intents.d.ts' />
+///<reference path='./setup-intents.d.ts' />
+///<reference path='./sources.d.ts' />
+///<reference path='./tokens.d.ts' />
+///<reference path='./bank-accounts.d.ts' />
+///<reference path='./cards.d.ts' />
+///<reference path='./verification-sessions.d.ts' />
