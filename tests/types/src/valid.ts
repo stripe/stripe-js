@@ -134,14 +134,6 @@ elements.update({
     },
   },
 });
-elements.update({
-  // @ts-expect-error: `clientSecret` is not updatable
-  clientSecret: 'pk_foo_secret_bar',
-});
-elements.update({
-  // @ts-expect-error: `fonts` is not updatable
-  fonts: [],
-});
 
 const auBankAccountElement = elements.create('auBankAccount', {});
 
@@ -198,13 +190,6 @@ const retrievedCardCvcElement: StripeCardCvcElement | null = elements.getElement
   'cardCvc'
 );
 
-stripe.createToken(cardElement, {
-  currency: '',
-  name: '',
-  // @ts-expect-error: `extra_property` is not valid
-  extra_property: '',
-});
-
 const fpxBankElement = elements.create('fpxBank', {
   style: MY_STYLE,
   value: '',
@@ -226,13 +211,6 @@ const ibanElement = elements.create('iban', {supportedCountries: ['']});
 const retrievedIbanElement: StripeIbanElement | null = elements.getElement(
   'iban'
 );
-
-// @ts-expect-error: `extra_property` is not valid
-stripe.createToken(ibanElement, {
-  currency: '',
-  account_holder_name: '',
-  extra_property: '',
-});
 
 const idealBankElement = elements.create('idealBank', {
   style: MY_STYLE,
@@ -329,12 +307,6 @@ paymentElement
       empty: boolean;
     }) => {}
   );
-
-paymentElement.on('change', (e) => {
-  // @ts-expect-error: `error` is not present on PaymentElement "change" event.
-  if (e.error) {
-  }
-});
 
 paymentElement.collapse();
 
@@ -1911,37 +1883,6 @@ stripe
 stripe
   .confirmPayment({
     elements,
-    confirmParams: {
-      return_url: '',
-    },
-  })
-  .then((res) => {
-    if (res.error) {
-    }
-    // @ts-expect-error redirect only, no paymentIntent expected
-    if (res.paymentIntent) {
-    }
-  });
-
-stripe
-  .confirmPayment({
-    elements,
-    confirmParams: {
-      return_url: '',
-    },
-    redirect: 'always',
-  })
-  .then((res) => {
-    if (res.error) {
-    }
-    // @ts-expect-error redirect only, no paymentIntent expected
-    if (res.paymentIntent) {
-    }
-  });
-
-stripe
-  .confirmPayment({
-    elements,
     redirect: 'if_required',
   })
   .then((res) => {
@@ -1959,37 +1900,6 @@ stripe
   .then((res) => {
     if (res.error) {
     }
-    if (res.paymentIntent) {
-    }
-  });
-
-stripe
-  .confirmSetup({
-    elements,
-    confirmParams: {
-      return_url: '',
-    },
-  })
-  .then((res) => {
-    if (res.error) {
-    }
-    // @ts-expect-error redirect only, no paymentIntent expected
-    if (res.paymentIntent) {
-    }
-  });
-
-stripe
-  .confirmSetup({
-    elements,
-    confirmParams: {
-      return_url: '',
-    },
-    redirect: 'always',
-  })
-  .then((res) => {
-    if (res.error) {
-    }
-    // @ts-expect-error redirect only, no paymentIntent expected
     if (res.paymentIntent) {
     }
   });

@@ -8,13 +8,13 @@ const VERSIONS = [
   'beta',
   'latest',
   '3.9.7',
-  // '3.8.3',
-  // '3.7.4',
-  // '3.6.3',
-  // '3.5.1',
-  // '3.4.4',
-  // '3.3.3',
-  // '3.2.1',
+  '3.8.3',
+  '3.7.4',
+  '3.6.3',
+  '3.5.1',
+  '3.4.4',
+  '3.3.3',
+  '3.2.1',
   // '3.1.1',
 ];
 
@@ -33,4 +33,12 @@ for (const version of VERSIONS) {
   console.log(`--- Testing with TypeScript version ${version}`);
   await $`yarn add -s --no-progress typescript@${version}`;
   await $`yarn run tsc --strict --noEmit src/valid.ts`;
+
+  // TypeScript versions >= 3.9.0 support [@ts-expect-error][0], which lets us
+  // write tests for types that we expect to cause errors
+  //
+  // [0]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#-ts-expect-error-comments
+  if (version >= '3.9.0') {
+    await $`yarn run tsc --strict --noEmit src/invalid.ts`;
+  }
 }
