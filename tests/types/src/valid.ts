@@ -1,4 +1,4 @@
-///<reference path='../../types/index.d.ts' />
+///<reference path='../../../types/index.d.ts' />
 
 import {assert, Has} from 'conditional-type-checks';
 
@@ -51,12 +51,12 @@ const stripePromise: Promise<Stripe | null> = loadStripe('');
 const stripeConnectPromise = loadStripe('', {stripeAccount: '', locale: 'en'});
 
 type TypeModule = typeof import('@stripe/stripe-js');
-type SrcModule = typeof import('../../src/index');
+type SrcModule = typeof import('../../../src/index');
 
 // Makes sure that the implementation matches the type definitions
 // Checking for compatibility both ways ensures that the exports
 // are equivalent with nothing missing on either side.
-import('../../src/index').then((srcModule: TypeModule) => {});
+import('../../../src/index').then((srcModule: TypeModule) => {});
 import('@stripe/stripe-js').then((typeModule: SrcModule) => {});
 
 const stripe: Stripe = window.Stripe!('pk_123');
