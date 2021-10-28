@@ -10,7 +10,7 @@
   "scripts": {
     "test": "yarn lint && yarn test:unit && yarn test:versions && yarn test:types && yarn typecheck",
     "test:unit": "jest",
-    "test:types": "zx --quiet ./tests/types/scripts/test.mjs",
+    "test:types": "zx ./tests/types/scripts/test.mjs",
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-check",
     "typecheck": "tsc",
     "build": "yarn clean && yarn rollup -c",

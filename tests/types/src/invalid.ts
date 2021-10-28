@@ -1,12 +1,10 @@
-///<reference path='../../../types/index.d.ts' />
-
 import {
   Stripe,
   StripeElements,
   StripeCardElement,
   StripeIbanElement,
   StripePaymentElement,
-} from '@stripe/stripe-js';
+} from '../../../types';
 
 declare const stripe: Stripe;
 declare const elements: StripeElements;
