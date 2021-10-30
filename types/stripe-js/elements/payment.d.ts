@@ -127,6 +127,13 @@ export interface TermsOption {
   usBankAccount?: TermOption;
 }
 
+export type WalletOption = 'auto' | 'never';
+
+export interface WalletsOption {
+  applePay?: WalletOption;
+  googlePay?: WalletOption;
+}
+
 export interface StripePaymentElementOptions {
   /**
    * Override the business name displayed in the Payment Element.
@@ -149,6 +156,11 @@ export interface StripePaymentElementOptions {
    * Control terms display in the Payment Element.
    */
   terms?: TermsOption;
+
+  /**
+   * Control wallets display in the Payment Element.
+   */
+  wallets?: WalletsOption;
 }
 
 export interface StripePaymentElementChangeEvent {
