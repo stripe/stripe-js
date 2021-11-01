@@ -16,5 +16,4 @@ jobs:
     - run: yarn run lint
     - run: yarn run typecheck
     - run: yarn run test:unit
-    - run: yarn run test:versions
     - run: yarn run test:types
