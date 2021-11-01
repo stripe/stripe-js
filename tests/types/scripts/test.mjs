@@ -15,6 +15,10 @@ const VERSIONS = [
   '3.4.4',
   '3.3.3',
   '3.2.1',
+
+  // Attempting to test on 3.1.1 currently fails. I believe it is not a
+  // fundamental incompability with the types, just some tsconfig.json changes
+  // that are needed. Skipping for now
   // '3.1.1',
 ];
 
