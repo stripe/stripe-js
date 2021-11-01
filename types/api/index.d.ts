@@ -1,9 +1,9 @@
-///<reference path='./shared.d.ts' />
-///<reference path='./PaymentMethods.d.ts' />
-///<reference path='./PaymentIntents.d.ts' />
-///<reference path='./SetupIntents.d.ts' />
-///<reference path='./Sources.d.ts' />
-///<reference path='./Tokens.d.ts' />
-///<reference path='./BankAccounts.d.ts' />
-///<reference path='./Cards.d.ts' />
-///<reference path='./VerificationSessions.d.ts' />
+export * from './shared';
+export * from './PaymentMethods';
+export * from './PaymentIntents';
+export * from './SetupIntents';
+export * from './Sources';
+export * from './Tokens';
+export * from './BankAccounts';
+export * from './Cards';
+export * from './VerificationSessions';

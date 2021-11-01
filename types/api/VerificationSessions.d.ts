@@ -1,11 +1,9 @@
-declare module '@stripe/stripe-js' {
+/**
+ * The VerificationSession object.
+ */
+export interface VerificationSession {
   /**
-   * The VerificationSession object.
+   * Unique identifier for the object.
    */
-  interface VerificationSession {
-    /**
-     * Unique identifier for the object.
-     */
-    id: string;
-  }
+  id: string;
 }
