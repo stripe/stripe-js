@@ -1,5 +1,4 @@
-///<reference path='../types/index.d.ts' />
-import {Stripe, StripeConstructor} from '@stripe/stripe-js';
+import {Stripe, StripeConstructor} from '../types';
 
 export type LoadStripe = (
   ...args: Parameters<StripeConstructor>
