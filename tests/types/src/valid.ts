@@ -273,6 +273,10 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
     name: '',
   },
   paymentMethodOrder: ['card', 'sepa_debit'],
+  wallets: {
+    applePay: 'never',
+    googlePay: 'auto',
+  },
 });
 
 let paymentElementDefaults: StripePaymentElement = elements.create('payment');
