@@ -1,4 +1,4 @@
-import {PaymentMethod} from './PaymentMethods';
+import {PaymentMethod} from './payment-methods';
 
 /**
  * The SetupIntent object.

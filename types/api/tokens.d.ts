@@ -1,5 +1,5 @@
-import {Card} from './Cards';
-import {BankAccount} from './BankAccounts';
+import {Card} from './cards';
+import {BankAccount} from './bank-accounts';
 import {JapanAddressParam, MetadataParam} from './shared';
 
 /**
