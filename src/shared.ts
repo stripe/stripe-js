@@ -106,8 +106,8 @@ export const loadScript = (
         }
       });
 
-      script.addEventListener('error', () => {
-        reject(new Error('Failed to load Stripe.js'));
+      script.addEventListener('error', (e) => {
+        reject(new Error('Failed to load Stripe.js: ' + e.message));
       });
     } catch (error) {
       reject(error);
