@@ -1,5 +1,5 @@
 import {Address, AddressParam} from './shared';
-import {PaymentMethod} from './PaymentMethods';
+import {PaymentMethod} from './payment-methods';
 
 /**
  * The PaymentIntent object.
