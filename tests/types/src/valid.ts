@@ -889,6 +889,12 @@ stripe
   .then((result) => console.log(result.paymentIntent!.amount));
 
 stripe
+  .confirmCardPayment('', {
+    payment_method: {card: cardElement, billing_details: {name: ''}},
+  })
+  .then((result) => console.log(result.paymentIntent!.metadata));
+
+stripe
   .confirmCardPayment('', {payment_method: ''})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 

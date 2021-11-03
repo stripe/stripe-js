@@ -1,4 +1,4 @@
-import {Address, AddressParam} from './shared';
+import {Address, AddressParam, Metadata} from './shared';
 import {PaymentMethod} from './payment-methods';
 
 /**
@@ -70,6 +70,11 @@ export interface PaymentIntent {
    * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
    */
   livemode: boolean;
+
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+   */
+  metadata: Metadata;
 
   /**
    * If present, this property tells you what actions you need to take in order for your customer to fulfill a payment using the provided source.
