@@ -533,7 +533,7 @@ export interface CustomFontSource {
  * @docs https://stripe.com/docs/stripe-js/appearance-api
  */
 export interface Appearance {
-  theme?: 'stripe' | 'night' | 'none';
+  theme?: 'stripe' | 'night' | 'flat' | 'none';
 
   variables?: {
     // General font styles
