@@ -272,6 +272,7 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
   business: {
     name: '',
   },
+  readOnly: true,
   paymentMethodOrder: ['card', 'sepa_debit'],
   wallets: {
     applePay: 'never',
