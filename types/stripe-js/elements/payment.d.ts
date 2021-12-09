@@ -153,6 +153,12 @@ export interface StripePaymentElementOptions {
   fields?: FieldsOption;
 
   /**
+   * Apply a read-only state to the Payment Element so that payment details can’t be changed.
+   * Default is false.
+   */
+  readOnly?: boolean;
+
+  /**
    * Control terms display in the Payment Element.
    */
   terms?: TermsOption;
