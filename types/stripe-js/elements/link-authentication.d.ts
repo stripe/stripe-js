@@ -82,6 +82,15 @@ export type StripeLinkAuthenticationElement = StripeElementBase & {
   ): StripeLinkAuthenticationElement;
 };
 
+export interface StripeLinkAuthenticationElementOptions {
+  /**
+   * Default value for LinkAuthenticationElement fields
+   */
+  defaultValues?: {
+    email: string;
+  };
+}
+
 export interface StripeLinkAuthenticationElementChangeEvent
   extends StripeElementChangeEvent {
   /**
