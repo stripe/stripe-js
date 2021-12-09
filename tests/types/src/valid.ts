@@ -421,7 +421,9 @@ paymentRequestButtonElement.on(
   }
 );
 
-const linkAuthenticationElement = elements.create('linkAuthentication');
+const linkAuthenticationElement = elements.create('linkAuthentication', {
+  defaultValues: {email: 'foo@bar.com'},
+});
 
 linkAuthenticationElement
   .on('ready', (e: {elementType: 'linkAuthentication'}) => {})

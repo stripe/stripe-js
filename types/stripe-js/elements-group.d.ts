@@ -6,6 +6,7 @@ import {
   StripePaymentElement,
   StripePaymentElementOptions,
   StripeLinkAuthenticationElement,
+  StripeLinkAuthenticationElementOptions,
   StripeIdealBankElement,
   StripeIdealBankElementOptions,
   StripeIbanElement,
@@ -267,7 +268,10 @@ export interface StripeElements {
    *
    * Creates a `LinkAuthenticationElement`.
    */
-  create(elementType: 'linkAuthentication'): StripeLinkAuthenticationElement;
+  create(
+    elementType: 'linkAuthentication',
+    options?: StripeLinkAuthenticationElementOptions
+  ): StripeLinkAuthenticationElement;
 
   /**
    * Requires beta access:
