@@ -107,4 +107,11 @@ export interface StripeLinkAuthenticationElementChangeEvent
    * Whether or not the LinkAuthentication Element is complete.
    */
   complete: boolean;
+
+  /**
+   * An object containing the current email.
+   */
+  value: {
+    email: string;
+  };
 }

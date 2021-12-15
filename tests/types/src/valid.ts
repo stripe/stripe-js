@@ -421,6 +421,11 @@ paymentRequestButtonElement.on(
   }
 );
 
+let linkAuthenticationElementDefaults: StripeLinkAuthenticationElement = elements.create(
+  'linkAuthentication'
+);
+linkAuthenticationElementDefaults = elements.create('linkAuthentication');
+
 const linkAuthenticationElement = elements.create('linkAuthentication', {
   defaultValues: {email: 'foo@bar.com'},
 });
@@ -434,6 +439,11 @@ linkAuthenticationElement
 const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null = elements.getElement(
   'linkAuthentication'
 );
+
+let shippingAddressElementDefaults: StripeShippingAddressElement = elements.create(
+  'shippingAddress'
+);
+shippingAddressElementDefaults = elements.create('shippingAddress');
 
 const shippingAddressElement = elements.create('shippingAddress', {
   allowedCountries: ['US'],
