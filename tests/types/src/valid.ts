@@ -424,7 +424,7 @@ paymentRequestButtonElement.on(
 let linkAuthenticationElementDefaults: StripeLinkAuthenticationElement = elements.create(
   'linkAuthentication'
 );
-linkAuthenticationElementDefaults = elements.create('linkAuthentication');
+linkAuthenticationElementDefaults = elements.create('linkAuthentication', {});
 
 const linkAuthenticationElement = elements.create('linkAuthentication', {
   defaultValues: {email: 'foo@bar.com'},
@@ -443,7 +443,7 @@ const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null
 let shippingAddressElementDefaults: StripeShippingAddressElement = elements.create(
   'shippingAddress'
 );
-shippingAddressElementDefaults = elements.create('shippingAddress');
+shippingAddressElementDefaults = elements.create('shippingAddress', {});
 
 const shippingAddressElement = elements.create('shippingAddress', {
   allowedCountries: ['US'],
