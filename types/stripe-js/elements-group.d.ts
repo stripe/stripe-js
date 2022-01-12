@@ -537,6 +537,8 @@ export interface CustomFontSource {
  * @docs https://stripe.com/docs/stripe-js/appearance-api
  */
 export interface Appearance {
+  disableAnimations?: boolean;
+
   theme?: 'stripe' | 'night' | 'flat' | 'none';
 
   variables?: {
@@ -620,4 +622,6 @@ export interface Appearance {
       [cssPropertyName: string]: string;
     };
   };
+
+  labels?: 'above' | 'floating';
 }

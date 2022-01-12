@@ -73,6 +73,7 @@ const elements: StripeElements = stripe.elements({
   locale: 'auto',
   clientSecret: '',
   appearance: {
+    disableAnimations: false,
     theme: 'night',
     variables: {
       colorIcon: 'blue',
@@ -82,6 +83,7 @@ const elements: StripeElements = stripe.elements({
         backgroundColor: 'blue',
       },
     },
+    labels: 'above',
   },
 });
 
@@ -112,6 +114,7 @@ elements.update({});
 elements.update({
   locale: 'es',
   appearance: {
+    disableAnimations: true,
     theme: 'night',
     variables: {
       colorIcon: 'blue',
@@ -121,6 +124,7 @@ elements.update({
         backgroundColor: 'blue',
       },
     },
+    labels: 'floating',
   },
 });
 
