@@ -1372,17 +1372,23 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmSofortPayment('', {
-    payment_method: {
-      sofort: {
-        country: '',
+  .confirmSofortPayment(
+    '',
+    {
+      payment_method: {
+        sofort: {
+          country: '',
+        },
+        billing_details: {
+          name: '',
+        },
       },
-      billing_details: {
-        name: '',
-      },
+      return_url: '',
     },
-    return_url: '',
-  })
+    {
+      handleActions: false,
+    }
+  )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe

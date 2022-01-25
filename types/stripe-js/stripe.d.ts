@@ -424,7 +424,8 @@ export interface Stripe {
    */
   confirmSofortPayment(
     clientSecret: string,
-    data?: paymentIntents.ConfirmSofortPaymentData
+    data?: paymentIntents.ConfirmSofortPaymentData,
+    options?: paymentIntents.ConfirmSofortPaymentOptions
   ): Promise<PaymentIntentResult>;
 
   /**
