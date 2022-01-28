@@ -57,4 +57,9 @@ export interface StripeAffirmMessageElementOptions {
    * The font size of the promotional message.
    */
   fontSize?: string;
+
+  /**
+   * The text alignment of the promotional message.
+   */
+  textAlign?: 'start' | 'end' | 'left' | 'right' | 'center' | 'justify';
 }
