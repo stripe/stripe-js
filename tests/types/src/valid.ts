@@ -451,6 +451,18 @@ shippingAddressElementDefaults = elements.create('shippingAddress', {});
 
 const shippingAddressElement = elements.create('shippingAddress', {
   allowedCountries: ['US'],
+  blockPoBox: true,
+  defaultValues: {
+    name: 'Jane Doe',
+    address: {
+      line1: '513 Townsend St',
+      city: 'San Francisco',
+      state: 'CA',
+      postal_code: '92122',
+      country: 'US',
+    },
+  },
+  disableAutocomplete: true,
 });
 
 shippingAddressElement

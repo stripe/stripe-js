@@ -95,6 +95,31 @@ export interface StripeShippingAddressElementOptions {
    * Control which countries are displayed in the shippingAddress Element.
    */
   allowedCountries?: string[] | null;
+
+  /**
+   * Whether or not ShippingAddressElement accepts PO boxes
+   */
+  blockPoBox?: boolean;
+
+  /**
+   * Default value for ShippingAddressElement fields
+   */
+  defaultValues?: {
+    name?: string | null;
+    address?: {
+      line1?: string | null;
+      line2?: string | null;
+      city?: string | null;
+      state?: string | null;
+      postal_code?: string | null;
+      country: string;
+    };
+  };
+
+  /**
+   * Whether or not ShippingAddressElement provides autocomplete suggestions
+   */
+  disableAutocomplete?: boolean;
 }
 
 export interface StripeShippingAddressElementChangeEvent
@@ -124,13 +149,13 @@ export interface StripeShippingAddressElementChangeEvent
    */
   value: {
     name: string;
-    addressLine1: string;
-    addressLine2: string;
-    locality: string;
-    administrativeArea: string;
-    postalCode: string;
-    country: string;
-    dependentLocality: string;
-    sortingCode: string;
+    address: {
+      line1: string;
+      line2: string;
+      city: string;
+      state: string;
+      postal_code: string;
+      country: string;
+    };
   };
 }
