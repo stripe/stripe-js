@@ -995,6 +995,17 @@ export interface ConfirmSofortPaymentData extends PaymentIntentConfirmParams {
 }
 
 /**
+ * An options object to control the behavior of `stripe.confirmSofortPayment`.
+ */
+export interface ConfirmSofortPaymentOptions {
+  /**
+   * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/sofort/accept-a-payment?platform=web#handle-redirect).
+   * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
  * Data to be sent with a `stripe.confirmWechatPayPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
  */

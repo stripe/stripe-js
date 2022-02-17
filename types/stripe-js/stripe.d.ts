@@ -424,7 +424,8 @@ export interface Stripe {
    */
   confirmSofortPayment(
     clientSecret: string,
-    data?: paymentIntents.ConfirmSofortPaymentData
+    data?: paymentIntents.ConfirmSofortPaymentData,
+    options?: paymentIntents.ConfirmSofortPaymentOptions
   ): Promise<PaymentIntentResult>;
 
   /**
@@ -680,7 +681,8 @@ export interface Stripe {
    */
   confirmSofortSetup(
     clientSecret: string,
-    data?: setupIntents.ConfirmSofortSetupData
+    data?: setupIntents.ConfirmSofortSetupData,
+    options?: setupIntents.ConfirmSofortSetupOptions
   ): Promise<SetupIntentResult>;
 
   /**

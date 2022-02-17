@@ -101,6 +101,17 @@ export interface ConfirmSofortSetupData extends SetupIntentConfirmParams {
 }
 
 /**
+ * An options object to control the behavior of `stripe.confirmSofortSetup`.
+ */
+export interface ConfirmSofortSetupOptions {
+  /**
+   * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/sofort/accept-a-payment?platform=web#handle-redirect).
+   * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
  * Data to be sent with a `stripe.confirmAuBecsDebitSetup` request.
  * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
  */
