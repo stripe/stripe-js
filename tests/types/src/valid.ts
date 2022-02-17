@@ -1396,6 +1396,10 @@ stripe
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
 stripe
+  .confirmSofortPayment('', {}, {handleActions: false})
+  .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
+
+stripe
   .confirmWechatPayPayment('', {}, {handleActions: false})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
@@ -1864,6 +1868,10 @@ stripe
 
 stripe
   .confirmSofortSetup('')
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmSofortSetup('', {}, {handleActions: false})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
