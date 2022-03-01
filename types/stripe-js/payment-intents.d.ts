@@ -859,7 +859,7 @@ export interface ConfirmKonbiniPaymentData extends PaymentIntentConfirmParams {
   payment_method?: string | Omit<CreatePaymentMethodKonbiniData, 'type'>;
 
   /**
-   * An object containing payment-method-specific configuration to confirm the [PaymentIntent](/docs/api/payment_intents) with.
+   * An object containing payment-method-specific configuration to confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with.
    */
   payment_method_options?: {
     /**
@@ -879,7 +879,7 @@ export interface ConfirmKonbiniPaymentData extends PaymentIntentConfirmParams {
  */
 export interface ConfirmKonbiniPaymentOptions {
   /**
-   * Set this to `false` if you want to handle next actions yourself. Please refer to our [integration guide](/docs/payments/konbini/accept-a-payment) for more info. Default is `true`.
+   * Set this to `false` if you want to handle next actions yourself. Please refer to our [integration guide](https://stripe.com/docs/payments/konbini/accept-a-payment) for more info. Default is `true`.
    */
   handleActions?: boolean;
 }

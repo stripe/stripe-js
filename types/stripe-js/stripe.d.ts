@@ -305,15 +305,14 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
-   * Use `stripe.confirmKonbiniPayment` in the [Konbini](/docs/payments/konbini) payment flow when the customer submits your payment form.
-   * When called, it will confirm the [PaymentIntent](/docs/api/payment_intents) with `data` you provide.
+   * Use `stripe.confirmKonbiniPayment` in the [Konbini](https://stripe.com/docs/payments/konbini) payment flow when the customer submits your payment form.
+   * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
    * Note that there are some additional requirements to this flow that are not covered in this reference.
-   * Refer to our [integration guide](/docs/payments/konbini/accept-a-payment) for more details.
+   * Refer to our [integration guide](https://stripe.com/docs/payments/konbini/accept-a-payment) for more details.
    *
-   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](/docs/api/payment_methods).
+   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
    * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
    * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
-   * These use cases are detailed in the sections that follow.
    *
    * @docs https://stripe.com/docs/js/payment_intents/confirm_konbini_payment
    */
