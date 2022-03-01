@@ -1168,6 +1168,45 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmKonbiniPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmKonbiniPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmKonbiniPayment('', {
+    payment_method: {
+      billing_details: {
+        name: '',
+        email: '',
+      },
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmKonbiniPayment('', {
+    payment_method: {
+      billing_details: {
+        name: '',
+        email: '',
+      },
+    },
+    payment_method_options: {
+      konbini: {
+        confirmation_number: '',
+      },
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmKonbiniPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmOxxoPayment('', {payment_method: ''})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 

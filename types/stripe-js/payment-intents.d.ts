@@ -28,6 +28,7 @@ export type CreatePaymentMethodData =
   | CreatePaymentMethodGrabPayData
   | CreatePaymentMethodIdealData
   | CreatePaymentMethodKlarnaData
+  | CreatePaymentMethodKonbiniData
   | CreatePaymentMethodP24Data
   | CreatePaymentMethodPayPalData
   | CreatePaymentMethodPayNowData
@@ -221,6 +222,22 @@ export interface CreatePaymentMethodKlarnaData
     address: PaymentMethodCreateParams.BillingDetails.Address & {
       country: string;
     };
+  };
+}
+
+export interface CreatePaymentMethodKonbiniData
+  extends PaymentMethodCreateParams {
+  type: 'konbini';
+
+  /**
+   * The customer's billing details.
+   * `email` and `name` are required.
+   *
+   * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+   */
+  billing_details: PaymentMethodCreateParams.BillingDetails & {
+    email: string;
+    name: string;
   };
 }
 
@@ -824,6 +841,45 @@ export interface ConfirmKlarnaPaymentOptions {
   /**
    * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/klarna#handle-redirect).
    * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmKonbiniPayment` request.
+ * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmKonbiniPaymentData extends PaymentIntentConfirmParams {
+  /**
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodKonbiniData, 'type'>;
+
+  /**
+   * An object containing payment-method-specific configuration to confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with.
+   */
+  payment_method_options?: {
+    /**
+     * Configuration for this Konbini payment.
+     */
+    konbini: {
+      /**
+       * An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores. May not be all 0 and could be rejected in case of insufficient uniqueness. We recommend to use the customer’s phone number.
+       */
+      confirmation_number?: string;
+    };
+  };
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmKonbiniPayment`.
+ */
+export interface ConfirmKonbiniPaymentOptions {
+  /**
+   * Set this to `false` if you want to handle next actions yourself. Please refer to our [integration guide](https://stripe.com/docs/payments/konbini/accept-a-payment) for more info. Default is `true`.
    */
   handleActions?: boolean;
 }
