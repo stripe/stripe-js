@@ -1614,7 +1614,7 @@ stripe.createPaymentMethod({
 
 stripe.createPaymentMethod({
   type: 'us_bank_account',
-  acss_debit: {institution_number: '', transit_number: '', account_number: ''},
+  us_bank_account: {account_number: '', routing_number: '', account_holder_type: ''},
   billing_details: {name: '', email: ''},
 });
 
