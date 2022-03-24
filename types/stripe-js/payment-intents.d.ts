@@ -34,6 +34,7 @@ export type CreatePaymentMethodData =
   | CreatePaymentMethodPayNowData
   | CreatePaymentMethodPromptPayData
   | CreatePaymentMethodFpxData
+  | CreatePaymentMethodUsBankAccountData
   | CreatePaymentMethodSepaDebitData
   | CreatePaymentMethodSofortData
   | CreatePaymentMethodWechatPayData;
@@ -432,6 +433,40 @@ export interface CreatePaymentMethodAcssDebitData
      * Transit number of the customer’s bank.
      */
     transit_number: string;
+  };
+
+  /**
+   * The customer's billing details.
+   * `name`, `email`, and `address` are required.
+   *
+   * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+   */
+  billing_details: PaymentMethodCreateParams.BillingDetails;
+}
+
+export interface CreatePaymentMethodUsBankAccountData
+  extends PaymentMethodCreateParams {
+  type: 'us_bank_account';
+
+  /**
+   * Can be omitted as Stripe will help to collect bank account details and verification.
+   * Refer to our [integration guide](https://stripe.com/docs/payments/acss-debit/accept-a-payment) for more details.
+   */
+   us_bank_account?: {
+    /**
+     * Customer’s bank account number.
+     */
+    account_number: string;
+
+    /**
+     * The routing transit number for the bank account.
+     */
+    routing_number: string;
+
+    /**
+    * The type of entity that holds the account. This can be either `individual` or `company`.
+    */
+    account_holder_type: string | null;
   };
 
   /**
@@ -1207,6 +1242,27 @@ export interface ConfirmAcssDebitPaymentOptions {
   skipMandate?: boolean;
 }
 
+export interface ConfirmUsBankAccountPaymentData
+  extends PaymentIntentConfirmParams {
+  /**
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodUsBankAccountData, 'type'>;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmAcssDebitPayment`.
+ */
+export interface ConfirmUsBankAccountPaymentOptions {
+  /**
+   * Set `skipMandate` to `true` if you want to skip displaying the mandate confirmation screen.
+   */
+  skipMandate?: boolean;
+}
+
 /**
  * Data to be sent with a `stripe.confirmPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
@@ -1241,4 +1297,17 @@ export interface VerifyMicrodepositsForPaymentData {
    * An array of two positive integers, in cents, equal to the values of the microdeposits sent to the bank account.
    */
   amounts?: Array<number>;
+}
+
+/**
+ * Data to be sent with a `stripe.collectBankAccountForPayment` request.
+ */
+ export interface CollectBankAccountForPaymentData {
+  /**
+   * The customer's billing details. Details collected by Elements will override values passed here.
+   * Billing fields that are omitted in the Payment Element via the `fields` option required.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data-billing_details
+   */
+  billing_details?: PaymentMethodCreateParams.BillingDetails;
 }

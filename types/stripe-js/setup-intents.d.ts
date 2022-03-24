@@ -1,4 +1,4 @@
-import {SetupIntentConfirmParams} from '../api';
+import {PaymentMethodCreateParams, SetupIntentConfirmParams} from '../api';
 
 import {
   CreatePaymentMethodAcssDebitData,
@@ -10,6 +10,7 @@ import {
   CreatePaymentMethodSofortData,
   CreatePaymentMethodPayPalData,
   CreatePaymentMethodBacsDebitData,
+  CreatePaymentMethodUsBankAccountData,
 } from './payment-intents';
 
 import {Omit} from '../utils';
@@ -185,4 +186,37 @@ export interface VerifyMicrodepositsForSetupData {
    * An array of two positive integers, in cents, equal to the values of the microdeposits sent to the bank account.
    */
   amounts?: Array<number>;
+}
+
+export interface ConfirmUsBankAccountSetupData extends SetupIntentConfirmParams {
+  /**
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodUsBankAccountData, 'type'>;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmUsBankAccountSetup`.
+ */
+export interface ConfirmUsBankAccountSetupOptions {
+  /**
+   * Set this to true if you want to skip displaying the mandate confirmation.
+   */
+  skipMandate?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.collectBankAccountForSetup` request.
+ */
+export interface CollectBankAccountForSetupData {
+  /**
+   * The customer's billing details. Details collected by Elements will override values passed here.
+   * Billing fields that are omitted in the Payment Element via the `fields` option required.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data-billing_details
+   */
+   billing_details?: PaymentMethodCreateParams.BillingDetails;
 }

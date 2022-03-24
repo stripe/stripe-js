@@ -805,6 +805,35 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmUsBankAccountPayment('', {
+    payment_method: {
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmUsBankAccountPayment('', {
+    payment_method: {
+      us_bank_account: {
+        account_number: '',
+        routing_number: '',
+        account_holder_type: '',
+      },
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmUsBankAccountPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmUsBankAccountPayment('', {payment_method: ''}, {skipMandate: true})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmAlipayPayment('', {
     payment_method: '',
     return_url: window.location.href,
@@ -1574,6 +1603,21 @@ stripe.createPaymentMethod({
   billing_details: {name: '', email: ''},
 });
 
+stripe
+  .collectBankAccountForPayment('', {billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'}})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe.createPaymentMethod({
+  type: 'us_bank_account',
+  billing_details: {name: '', email: ''},
+});
+
+stripe.createPaymentMethod({
+  type: 'us_bank_account',
+  acss_debit: {institution_number: '', transit_number: '', account_number: ''},
+  billing_details: {name: '', email: ''},
+});
+
 stripe.createPaymentMethod({
   type: 'au_becs_debit',
   au_becs_debit: auBankAccountElement,
@@ -1733,6 +1777,35 @@ stripe
 
 stripe
   .confirmAcssDebitSetup('', {payment_method: ''}, {skipMandate: true})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+  stripe
+  .confirmUsBankAccountSetup('', {
+    payment_method: {
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmUsBankAccountSetup('', {
+    payment_method: {
+      us_bank_account: {
+        account_number: '',
+        routing_number:'',
+        account_holder_type: '',
+      },
+      billing_details: {name: '', email: ''},
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmUsBankAccountSetup('', {payment_method: ''})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmUsBankAccountSetup('', {payment_method: ''}, {skipMandate: true})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
@@ -1927,6 +2000,11 @@ stripe
 
 stripe
   .verifyMicrodepositsForSetup('', {amounts: [32, 45]})
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+
+stripe
+  .collectBankAccountForSetup('', {billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'}})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe

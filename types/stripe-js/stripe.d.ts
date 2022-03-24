@@ -90,6 +90,23 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
+   * Use `stripe.confirmUsBankAccount` in the [Accept an ACH Direct Debit payment](https://stripe.com/docs/payments/ach-debit/accept-a-payment) flow when the customer submits your payment form.
+   * When called, it will automatically pop up a modal to collect bank account details and verification, accept the mandate, and confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) when the user submits the form.
+   *
+   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * `stripe.confirmUsBankAccount` automatically creates a new `PaymentMethod` for you when your customer completes the modal UI.
+   * It can also be called with an existing `PaymentMethod` which will load the modal UI to collect a new mandate agreement.
+   * If you have already attached a `PaymentMethod`, you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_acss_debit_payment TODO @schau
+   */
+  confirmUsBankAccountPayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmUsBankAccountPaymentData,
+    options?: paymentIntents.ConfirmUsBankAccountPaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+  /**
    * Use `stripe.confirmAlipayPayment` in the [Alipay Payments](https://stripe.com/docs/payments/alipay) with Payment Methods flow when the customer submits your payment form.
    * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
    * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
@@ -493,6 +510,17 @@ export interface Stripe {
     data?: paymentIntents.VerifyMicrodepositsForPaymentData
   ): Promise<PaymentIntentResult>;
 
+    /**
+   * Use `stripe.collectBankAccountForPayment` in the [Accept an ACH Direct Debit payment](https://stripe.com/docs/payments/ach-debit/accept-a-payment) flow
+   * to collect a customer's bank account for payment. TODO @schau
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/verify_microdeposits_for_payment TODO @schau
+   */
+     collectBankAccountForPayment(
+      clientSecret: string,
+      data?: paymentIntents.CollectBankAccountForPaymentData
+    ): Promise<PaymentIntentResult>;
+
   /**
    * Use stripe.createPaymentMethod to convert payment information collected by elements into a [PaymentMethod](https://stripe.com/docs/api/payment_methods) object that you safely pass to your server to use in an API call.
    *
@@ -561,6 +589,23 @@ export interface Stripe {
     data?: setupIntents.ConfirmAcssDebitSetupData,
     options?: setupIntents.ConfirmAcssDebitSetupOptions
   ): Promise<SetupIntentResult>;
+
+  /**
+   * Use `stripe.confirmUsBankAccountSetup` to [save details for future payments with ACH Direct Debit](https://stripe.com/docs/payments/ach-debit/set-up-payment).
+   * When called, it will automatically pop up a modal to collect bank account details and verification, accept the mandate, and confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) when the user submits the form.
+   *
+   * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * `stripe.confirmUsBankAccountSetup` automatically creates a new `PaymentMethod` for you when your customer completes the modal UI.
+   * It can also be called with an existing `PaymentMethod` which will load the modal UI to collect a new mandate agreement.
+   * If you have already attached a `PaymentMethod`, you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/setup_intents/confirm_ach_debit_setup TODO @schau
+   */
+   confirmUsBankAccountSetup(
+      clientSecret: string,
+      data?: setupIntents.ConfirmUsBankAccountSetupData,
+      options?: setupIntents.ConfirmUsBankAccountSetupOptions
+    ): Promise<SetupIntentResult>;
 
   /**
    * Requires beta access:
@@ -740,6 +785,17 @@ export interface Stripe {
   verifyMicrodepositsForSetup(
     clientSecret: string,
     data?: setupIntents.VerifyMicrodepositsForSetupData
+  ): Promise<PaymentIntentResult>;
+
+  /**
+   * Use `stripe.collectBankAccountForSetup` in the [Save details for future payments with ACH Direct Debit](https://stripe.com/docs/payments/ach-debit/set-up-payment) flow
+   * to collect customer's bank account.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/verify_microdeposits_for_setup TODO @schau
+   */
+  collectBankAccountForSetup(
+    clientSecret: string,
+    data?: setupIntents.CollectBankAccountForSetupData
   ): Promise<PaymentIntentResult>;
 
   /**
