@@ -281,8 +281,8 @@ export namespace PaymentMethod {
     routing_number: string;
 
     /**
-    * The type of entity that holds the account. This can be either `individual` or `company`.
-    */
+     * The type of entity that holds the account. This can be either `individual` or `company`.
+     */
     account_holder_type: string;
   }
 }

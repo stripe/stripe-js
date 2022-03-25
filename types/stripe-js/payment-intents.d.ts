@@ -452,7 +452,7 @@ export interface CreatePaymentMethodUsBankAccountData
    * Can be omitted as Stripe will help to collect bank account details and verification.
    * Refer to our [integration guide](https://stripe.com/docs/payments/acss-debit/accept-a-payment) for more details.
    */
-   us_bank_account?: {
+  us_bank_account?: {
     /**
      * Customer’s bank account number.
      */
@@ -464,8 +464,8 @@ export interface CreatePaymentMethodUsBankAccountData
     routing_number: string;
 
     /**
-    * The type of entity that holds the account. This can be either `individual` or `company`.
-    */
+     * The type of entity that holds the account. This can be either `individual` or `company`.
+     */
     account_holder_type: string | null;
   };
 
@@ -478,7 +478,8 @@ export interface CreatePaymentMethodUsBankAccountData
   billing_details: PaymentMethodCreateParams.BillingDetails;
 }
 
-export interface CollectBankAccountPaymentMethodData{  /**
+export interface CollectBankAccountPaymentMethodData {
+  /**
    * The customer's billing details.
    * `name`, `email`, and `address` are required.
    *
@@ -1301,13 +1302,13 @@ export interface VerifyMicrodepositsForPaymentData {
 /**
  * Data to be sent with a `stripe.collectBankAccountForPayment` request.
  */
- export interface CollectBankAccountForPaymentOptions {
+export interface CollectBankAccountForPaymentOptions {
   /**
    * The payment method type for the bank account details (e.g. `us_bank_account`)
    */
-   payment_method_type: string;
+  payment_method_type: string;
   /**
    * Payment method specific data to be sent with the request (billing details)
    */
-   payment_method_data: CollectBankAccountPaymentMethodData;
+  payment_method_data: CollectBankAccountPaymentMethodData;
 }

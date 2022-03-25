@@ -1600,7 +1600,12 @@ stripe.createPaymentMethod({
 });
 
 stripe
-  .collectBankAccountForPayment('', {payment_method_type: '', payment_method_data: {billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'}}})
+  .collectBankAccountForPayment('', {
+    payment_method_type: '',
+    payment_method_data: {
+      billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+    },
+  })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe.createPaymentMethod({
@@ -1610,7 +1615,11 @@ stripe.createPaymentMethod({
 
 stripe.createPaymentMethod({
   type: 'us_bank_account',
-  us_bank_account: {account_number: '', routing_number: '', account_holder_type: ''},
+  us_bank_account: {
+    account_number: '',
+    routing_number: '',
+    account_holder_type: '',
+  },
   billing_details: {name: '', email: ''},
 });
 
@@ -1775,7 +1784,7 @@ stripe
   .confirmAcssDebitSetup('', {payment_method: ''}, {skipMandate: true})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-  stripe
+stripe
   .confirmUsBankAccountSetup('', {
     payment_method: {
       billing_details: {name: '', email: ''},
@@ -1788,7 +1797,7 @@ stripe
     payment_method: {
       us_bank_account: {
         account_number: '',
-        routing_number:'',
+        routing_number: '',
         account_holder_type: '',
       },
       billing_details: {name: '', email: ''},
@@ -1999,7 +2008,12 @@ stripe
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
-  .collectBankAccountForSetup('', {payment_method_type: '', payment_method_data: {billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'}}})
+  .collectBankAccountForSetup('', {
+    payment_method_type: '',
+    payment_method_data: {
+      billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+    },
+  })
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe

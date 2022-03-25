@@ -189,7 +189,8 @@ export interface VerifyMicrodepositsForSetupData {
   amounts?: Array<number>;
 }
 
-export interface ConfirmUsBankAccountSetupData extends SetupIntentConfirmParams {
+export interface ConfirmUsBankAccountSetupData
+  extends SetupIntentConfirmParams {
   /**
    * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
    * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
@@ -206,9 +207,9 @@ export interface CollectBankAccountForSetupOptions {
   /**
    * The payment method type for the bank account details (e.g. `us_bank_account`)
    */
-   payment_method_type: string;
+  payment_method_type: string;
   /**
    * Payment method specific data to be sent with the request (billing details)
    */
-   payment_method_data: CollectBankAccountPaymentMethodData;
+  payment_method_data: CollectBankAccountPaymentMethodData;
 }
