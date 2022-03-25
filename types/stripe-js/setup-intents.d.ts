@@ -199,24 +199,15 @@ export interface ConfirmUsBankAccountSetupData extends SetupIntentConfirmParams 
 }
 
 /**
- * An options object to control the behavior of `stripe.confirmUsBankAccountSetup`.
- */
-export interface ConfirmUsBankAccountSetupOptions {
-  /**
-   * Set this to true if you want to skip displaying the mandate confirmation.
-   */
-  skipMandate?: boolean;
-}
-
-/**
  * Data to be sent with a `stripe.collectBankAccountForSetup` request.
  */
-export interface CollectBankAccountForSetupData {
+export interface CollectBankAccountForSetupOptions {
   /**
-   * The customer's billing details. Details collected by Elements will override values passed here.
-   * Billing fields that are omitted in the Payment Element via the `fields` option required.
-   *
-   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data-billing_details
+   * The payment method type for the bank account details (e.g. `us_bank_account`)
    */
-   billing_details?: PaymentMethodCreateParams.BillingDetails;
+   payment_method_type: string;
+  /**
+   * Payment method specific data to be sent with the request (billing details)
+   */
+   payment_method_data: object;
 }

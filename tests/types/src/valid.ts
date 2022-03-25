@@ -830,7 +830,7 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmUsBankAccountPayment('', {payment_method: ''}, {skipMandate: true})
+  .confirmUsBankAccountPayment('', {payment_method: ''})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
@@ -1604,7 +1604,7 @@ stripe.createPaymentMethod({
 });
 
 stripe
-  .collectBankAccountForPayment('', {billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'}})
+  .collectBankAccountForPayment('', {payment_method_type: '', payment_method_data: {billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'}}})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe.createPaymentMethod({
@@ -1805,7 +1805,7 @@ stripe
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmUsBankAccountSetup('', {payment_method: ''}, {skipMandate: true})
+  .confirmUsBankAccountSetup('', {payment_method: ''})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
@@ -2002,9 +2002,8 @@ stripe
   .verifyMicrodepositsForSetup('', {amounts: [32, 45]})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
-
 stripe
-  .collectBankAccountForSetup('', {billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'}})
+  .collectBankAccountForSetup('', {payment_method_type: '', payment_method_data: {billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'}}})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe

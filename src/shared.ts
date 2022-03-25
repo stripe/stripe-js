@@ -132,6 +132,7 @@ export const initStripe = (
   return stripe;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const validateLoadParams = (params: any): LoadParams => {
   const errorMessage = `invalid load parameters; expected object of shape
 

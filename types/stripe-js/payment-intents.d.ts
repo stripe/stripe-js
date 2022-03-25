@@ -1254,16 +1254,6 @@ export interface ConfirmUsBankAccountPaymentData
 }
 
 /**
- * An options object to control the behavior of `stripe.confirmAcssDebitPayment`.
- */
-export interface ConfirmUsBankAccountPaymentOptions {
-  /**
-   * Set `skipMandate` to `true` if you want to skip displaying the mandate confirmation screen.
-   */
-  skipMandate?: boolean;
-}
-
-/**
  * Data to be sent with a `stripe.confirmPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
  */
@@ -1302,12 +1292,7 @@ export interface VerifyMicrodepositsForPaymentData {
 /**
  * Data to be sent with a `stripe.collectBankAccountForPayment` request.
  */
- export interface CollectBankAccountForPaymentData {
-  /**
-   * The customer's billing details. Details collected by Elements will override values passed here.
-   * Billing fields that are omitted in the Payment Element via the `fields` option required.
-   *
-   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data-billing_details
-   */
-  billing_details?: PaymentMethodCreateParams.BillingDetails;
+ export interface CollectBankAccountForPaymentOptions {
+  payment_method_type: string;
+  payment_method_data: object;
 }
