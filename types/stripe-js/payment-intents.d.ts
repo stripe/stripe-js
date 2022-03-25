@@ -1293,6 +1293,12 @@ export interface VerifyMicrodepositsForPaymentData {
  * Data to be sent with a `stripe.collectBankAccountForPayment` request.
  */
  export interface CollectBankAccountForPaymentOptions {
-  payment_method_type: string;
-  payment_method_data: object;
+  /**
+   * The payment method type for the bank account details (e.g. `us_bank_account`)
+   */
+   payment_method_type: string;
+  /**
+   * Payment method specific data to be sent with the request (billing details)
+   */
+   payment_method_data: object;
 }

@@ -1,4 +1,4 @@
-import {PaymentMethodCreateParams, SetupIntentConfirmParams} from '../api';
+import {SetupIntentConfirmParams} from '../api';
 
 import {
   CreatePaymentMethodAcssDebitData,

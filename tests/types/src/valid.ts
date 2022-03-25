@@ -830,10 +830,6 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmUsBankAccountPayment('', {payment_method: ''})
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
   .confirmAlipayPayment('', {
     payment_method: '',
     return_url: window.location.href,
