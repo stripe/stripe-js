@@ -11,6 +11,7 @@ import {
   CreatePaymentMethodPayPalData,
   CreatePaymentMethodBacsDebitData,
   CreatePaymentMethodUsBankAccountData,
+  CollectBankAccountPaymentMethodData,
 } from './payment-intents';
 
 import {Omit} from '../utils';
@@ -209,5 +210,5 @@ export interface CollectBankAccountForSetupOptions {
   /**
    * Payment method specific data to be sent with the request (billing details)
    */
-   payment_method_data: object;
+   payment_method_data: CollectBankAccountPaymentMethodData;
 }

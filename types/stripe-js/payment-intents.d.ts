@@ -478,6 +478,15 @@ export interface CreatePaymentMethodUsBankAccountData
   billing_details: PaymentMethodCreateParams.BillingDetails;
 }
 
+export interface CollectBankAccountPaymentMethodData{  /**
+   * The customer's billing details.
+   * `name`, `email`, and `address` are required.
+   *
+   * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
+   */
+  billing_details: PaymentMethodCreateParams.BillingDetails;
+}
+
 /**
  * Data to be sent with a `stripe.confirmBancontactPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
@@ -1300,5 +1309,5 @@ export interface VerifyMicrodepositsForPaymentData {
   /**
    * Payment method specific data to be sent with the request (billing details)
    */
-   payment_method_data: object;
+   payment_method_data: CollectBankAccountPaymentMethodData;
 }
