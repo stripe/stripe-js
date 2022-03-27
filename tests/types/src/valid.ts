@@ -824,13 +824,13 @@ stripe
         account_number: '',
         routing_number: '',
         account_holder_type: '',
-        account_type:'',
+        account_type: '',
       },
       billing_details: {name: '', email: ''},
     },
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-  
+
 stripe
   .confirmUsBankAccountPayment('', {payment_method: ''})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
