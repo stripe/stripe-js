@@ -452,7 +452,7 @@ export interface CreatePaymentMethodUsBankAccountData
    * Can be omitted as Stripe will help to collect bank account details and verification.
    * Refer to our [integration guide](https://stripe.com/docs/payments/acss-debit/accept-a-payment) for more details.
    */
-  us_bank_account?: {
+  us_bank_account: {
     /**
      * Customer’s bank account number.
      */
@@ -466,7 +466,12 @@ export interface CreatePaymentMethodUsBankAccountData
     /**
      * The type of entity that holds the account. This can be either `individual` or `company`.
      */
-    account_holder_type: string | null;
+    account_holder_type: string;
+
+    /**
+     * Account type: checkings or savings. Defaults to checking if omitted.
+     */
+    account_type?: string;
   };
 
   /**

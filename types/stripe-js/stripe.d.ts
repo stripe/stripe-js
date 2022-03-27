@@ -95,7 +95,7 @@ export interface Stripe {
    * When you confirm a [PaymentIntent](https://stripe.com/docs/api/payment_intents), it needs to have an attached PaymentMethod.
    * Use `stripe.collectBankAccountForPayment` to collect and attach a [PaymentMethod](https://stripe.com/docs/api/payment_methods), or provide bank account details using the `data` parameter if a `PaymentMethod` was not already provided.
    *
-   * @docs https://stripe.com/docs/js/payment_intents/confirm_ach_debit_payment
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_us_bank_account_payment
    */
   confirmUsBankAccountPayment(
     clientSecret: string,
@@ -592,7 +592,7 @@ export interface Stripe {
    * When you confirm a [SetupIntent](https://stripe.com/docs/api/setup_intents), it needs to have an attached PaymentMethod.
    * Use `stripe.collectBankAccountForSetup` to collect and attach a [PaymentMethod](https://stripe.com/docs/api/payment_methods), or provide bank account details using the `data` parameter if a `PaymentMethod` was not already provided.
    *
-   * @docs https://stripe.com/docs/js/setup_intents/confirm_ach_debit_setup
+   * @docs https://stripe.com/docs/js/setup_intents/confirm_us_bank_account_setup
    */
   confirmUsBankAccountSetup(
     clientSecret: string,

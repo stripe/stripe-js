@@ -284,6 +284,11 @@ export namespace PaymentMethod {
      * The type of entity that holds the account. This can be either `individual` or `company`.
      */
     account_holder_type: string;
+
+    /**
+     * Account type: checkings or savings. Defaults to checking if omitted.
+     */
+    account_type: string;
   }
 }
 

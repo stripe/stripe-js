@@ -807,6 +807,11 @@ stripe
 stripe
   .confirmUsBankAccountPayment('', {
     payment_method: {
+      us_bank_account: {
+        account_number: '',
+        routing_number: '',
+        account_holder_type: '',
+      },
       billing_details: {name: '', email: ''},
     },
   })
@@ -819,12 +824,13 @@ stripe
         account_number: '',
         routing_number: '',
         account_holder_type: '',
+        account_type:'',
       },
       billing_details: {name: '', email: ''},
     },
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
+  
 stripe
   .confirmUsBankAccountPayment('', {payment_method: ''})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
@@ -1610,11 +1616,6 @@ stripe
 
 stripe.createPaymentMethod({
   type: 'us_bank_account',
-  billing_details: {name: '', email: ''},
-});
-
-stripe.createPaymentMethod({
-  type: 'us_bank_account',
   us_bank_account: {
     account_number: '',
     routing_number: '',
@@ -1787,6 +1788,11 @@ stripe
 stripe
   .confirmUsBankAccountSetup('', {
     payment_method: {
+      us_bank_account: {
+        account_number: '',
+        routing_number: '',
+        account_holder_type: '',
+      },
       billing_details: {name: '', email: ''},
     },
   })
@@ -1799,14 +1805,11 @@ stripe
         account_number: '',
         routing_number: '',
         account_holder_type: '',
+        account_type: '',
       },
       billing_details: {name: '', email: ''},
     },
   })
-  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmUsBankAccountSetup('', {payment_method: ''})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
