@@ -62,6 +62,8 @@ export interface PaymentMethod {
   afterpay_clearpay?: PaymentMethod.AfterpayClearpay;
 
   acss_debit?: PaymentMethod.AcssDebit;
+
+  us_bank_account?: PaymentMethod.UsBankAccount;
 }
 
 export namespace PaymentMethod {
@@ -265,6 +267,28 @@ export namespace PaymentMethod {
      * Transit number of the customer’s bank.
      */
     transit_number: string;
+  }
+
+  export interface UsBankAccount {
+    /**
+     * Customer’s bank account number.
+     */
+    account_number: string;
+
+    /**
+     * The routing transit number for the bank account.
+     */
+    routing_number: string;
+
+    /**
+     * The type of entity that holds the account. This can be either `individual` or `company`.
+     */
+    account_holder_type: string;
+
+    /**
+     * Account type: checkings or savings. Defaults to checking if omitted.
+     */
+    account_type: string;
   }
 }
 
