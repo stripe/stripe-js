@@ -22,6 +22,11 @@ elements.update({
   fonts: [],
 });
 
+elements.update({
+  // @ts-expect-error: `loader` is not updatable
+  loader: 'auto',
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {

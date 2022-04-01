@@ -458,6 +458,13 @@ export interface StripeElementsOptions {
    * @docs https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret
    */
   clientSecret?: string;
+
+  /**
+   * Display skeleton loader UI while waiting for Elements to be fully loaded, after they are mounted.
+   * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
+   * Default is `'auto'` (Stripe determines if a loader UI should be shown).
+   */
+  loader?: 'auto' | 'always' | 'never';
 }
 
 /*

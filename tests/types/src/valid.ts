@@ -85,6 +85,7 @@ const elements: StripeElements = stripe.elements({
     },
     labels: 'above',
   },
+  loader: 'auto',
 });
 
 const elementsNoOptions: StripeElements = stripe.elements();
