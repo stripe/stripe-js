@@ -487,11 +487,11 @@ export interface CollectBankAccountParams {
   /**
    * The payment method type for the bank account details (e.g. `us_bank_account`)
    */
-   payment_method_type: string;
-   /**
-    * Payment method specific data to be sent with the request (billing details)
-    */
-   payment_method_data: CollectBankAccountPaymentMethodData;
+  payment_method_type: string;
+  /**
+   * Payment method specific data to be sent with the request (billing details)
+   */
+  payment_method_data: CollectBankAccountPaymentMethodData;
 }
 
 export interface CollectBankAccountPaymentMethodData {
@@ -1322,7 +1322,7 @@ export interface CollectBankAccountForPaymentOptions {
   /**
    * The client secret of the PaymentIntent.
    */
-  clientSecret: string; 
+  clientSecret: string;
 
   params: CollectBankAccountParams;
 }

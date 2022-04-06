@@ -1614,7 +1614,7 @@ stripe
       payment_method_data: {
         billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
       },
-    }
+    },
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
@@ -2017,8 +2017,8 @@ stripe
 stripe
   .collectBankAccountForSetup({
     clientSecret: '',
-    params: 
-      {payment_method_type: '',
+    params: {
+      payment_method_type: '',
       payment_method_data: {
         billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
       },

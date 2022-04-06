@@ -207,7 +207,7 @@ export interface CollectBankAccountForSetupOptions {
   /**
    * The client secret of the SetupIntent.
    */
-  clientSecret: string; 
+  clientSecret: string;
 
   params: CollectBankAccountParams;
 }
