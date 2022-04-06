@@ -11,7 +11,7 @@ import {
   CreatePaymentMethodPayPalData,
   CreatePaymentMethodBacsDebitData,
   CreatePaymentMethodUsBankAccountData,
-  CollectBankAccountPaymentMethodData,
+  CollectBankAccountParams,
 } from './payment-intents';
 
 import {Omit} from '../utils';
@@ -205,11 +205,9 @@ export interface ConfirmUsBankAccountSetupData
  */
 export interface CollectBankAccountForSetupOptions {
   /**
-   * The payment method type for the bank account details (e.g. `us_bank_account`)
+   * The client secret of the SetupIntent.
    */
-  payment_method_type: string;
-  /**
-   * Payment method specific data to be sent with the request (billing details)
-   */
-  payment_method_data: CollectBankAccountPaymentMethodData;
+  clientSecret: string; 
+
+  params: CollectBankAccountParams;
 }
