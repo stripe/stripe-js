@@ -513,7 +513,6 @@ export interface Stripe {
    * @docs https://stripe.com/docs/js/payment_intents/collect_bank_account_for_payment
    */
   collectBankAccountForPayment(
-    clientSecret: string,
     options: paymentIntents.CollectBankAccountForPaymentOptions
   ): Promise<PaymentIntentResult>;
 
@@ -786,7 +785,6 @@ export interface Stripe {
    * @docs https://stripe.com/docs/js/setup_intents/collect_bank_account_for_setup
    */
   collectBankAccountForSetup(
-    clientSecret: string,
     options: setupIntents.CollectBankAccountForSetupOptions
   ): Promise<SetupIntentResult>;
 

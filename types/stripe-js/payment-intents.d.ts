@@ -483,6 +483,17 @@ export interface CreatePaymentMethodUsBankAccountData
   billing_details: PaymentMethodCreateParams.BillingDetails;
 }
 
+export interface CollectBankAccountParams {
+  /**
+   * The payment method type for the bank account details (e.g. `us_bank_account`)
+   */
+  payment_method_type: string;
+  /**
+   * Payment method specific data to be sent with the request (billing details)
+   */
+  payment_method_data: CollectBankAccountPaymentMethodData;
+}
+
 export interface CollectBankAccountPaymentMethodData {
   /**
    * The customer's billing details.
@@ -1309,11 +1320,9 @@ export interface VerifyMicrodepositsForPaymentData {
  */
 export interface CollectBankAccountForPaymentOptions {
   /**
-   * The payment method type for the bank account details (e.g. `us_bank_account`)
+   * The client secret of the PaymentIntent.
    */
-  payment_method_type: string;
-  /**
-   * Payment method specific data to be sent with the request (billing details)
-   */
-  payment_method_data: CollectBankAccountPaymentMethodData;
+  clientSecret: string;
+
+  params: CollectBankAccountParams;
 }

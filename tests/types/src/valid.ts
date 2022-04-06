@@ -1607,10 +1607,13 @@ stripe.createPaymentMethod({
 });
 
 stripe
-  .collectBankAccountForPayment('', {
-    payment_method_type: '',
-    payment_method_data: {
-      billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+  .collectBankAccountForPayment({
+    clientSecret: '',
+    params: {
+      payment_method_type: '',
+      payment_method_data: {
+        billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+      },
     },
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
@@ -2012,10 +2015,13 @@ stripe
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
-  .collectBankAccountForSetup('', {
-    payment_method_type: '',
-    payment_method_data: {
-      billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+  .collectBankAccountForSetup({
+    clientSecret: '',
+    params: {
+      payment_method_type: '',
+      payment_method_data: {
+        billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+      },
     },
   })
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
