@@ -1615,6 +1615,7 @@ stripe
         billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
       },
     },
+    expand: ['payment_method'],
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
@@ -2023,6 +2024,7 @@ stripe
         billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
       },
     },
+    expand: ['payment_method'],
   })
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
