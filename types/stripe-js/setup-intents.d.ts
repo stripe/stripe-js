@@ -210,4 +210,9 @@ export interface CollectBankAccountForSetupOptions {
   clientSecret: string;
 
   params: CollectBankAccountParams;
+
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
+  expand?: Array<string>;
 }

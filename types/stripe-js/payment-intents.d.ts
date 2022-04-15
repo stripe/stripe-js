@@ -1303,6 +1303,11 @@ export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
      */
     billing_details?: PaymentMethodCreateParams.BillingDetails;
   };
+
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
+  expand?: Array<string>;
 }
 
 /**
@@ -1325,4 +1330,9 @@ export interface CollectBankAccountForPaymentOptions {
   clientSecret: string;
 
   params: CollectBankAccountParams;
+
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
+  expand?: Array<string>;
 }

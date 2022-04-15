@@ -52,9 +52,9 @@ export interface SetupIntent {
   next_action: SetupIntent.NextAction | null;
 
   /**
-   * ID of the payment method used with this SetupIntent.
+   * ID of the payment method used with this SetupIntent, or the PaymentMethod itself if this field is expanded.
    */
-  payment_method: string | null;
+  payment_method: string | null | PaymentMethod;
 
   /**
    * The list of payment method types (e.g. card) that this SetupIntent is allowed to set up.

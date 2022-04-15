@@ -77,9 +77,9 @@ export interface PaymentIntent {
   next_action: PaymentIntent.NextAction | null;
 
   /**
-   * ID of the payment method used in this PaymentIntent.
+   * ID of the payment method used in this PaymentIntent, or the PaymentMethod itself if this field is expanded.
    */
-  payment_method: string | null;
+  payment_method: string | null | PaymentMethod;
 
   /**
    * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
