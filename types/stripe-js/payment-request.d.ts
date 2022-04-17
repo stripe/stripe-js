@@ -16,6 +16,8 @@ export interface PaymentRequest {
 
   /**
    * Closes the browser’s payment interface.
+   *
+   * WARNING: NOT OFFICIALLY SUPPORTED BY STRIPE
    */
   abort?: () => void;
 
