@@ -129,7 +129,9 @@ elements.update({
   },
 });
 
-const {error} = await elements.fetchUpdates();
+const fetchUpdates = async () => {
+  const {error} = await elements.fetchUpdates();
+};
 
 const auBankAccountElement = elements.create('auBankAccount', {});
 
