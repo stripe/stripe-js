@@ -40,6 +40,12 @@ export interface StripeElements {
    */
   update(options: StripeElementsUpdateOptions): void;
 
+  /**
+   * Fetches updates from the associated PaymentIntent or SetupIntent on an existing
+   * instance of Elements, and reflects these updates in the Payment Element.
+   */
+  fetchUpdates(): Promise<{error?: {message: string; status?: string}}>;
+
   /////////////////////////////
   /// affirmMessage
   /////////////////////////////

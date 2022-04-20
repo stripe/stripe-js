@@ -129,6 +129,10 @@ elements.update({
   },
 });
 
+const fetchUpdates = async () => {
+  const {error} = await elements.fetchUpdates();
+};
+
 const auBankAccountElement = elements.create('auBankAccount', {});
 
 const retrievedAuBankAccountElement: StripeAuBankAccountElement | null = elements.getElement(
