@@ -63,6 +63,8 @@ export interface PaymentMethod {
 
   acss_debit?: PaymentMethod.AcssDebit;
 
+  au_becs_debit?: PaymentMethod.AuBecsDebit;
+
   us_bank_account?: PaymentMethod.UsBankAccount;
 }
 

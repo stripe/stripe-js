@@ -1639,11 +1639,21 @@ stripe.createPaymentMethod({
   billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
 });
 
-stripe.createPaymentMethod({
-  type: 'au_becs_debit',
-  au_becs_debit: {bsb_number: '', account_number: ''},
-  billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
-});
+stripe
+  .createPaymentMethod({
+    type: 'au_becs_debit',
+    au_becs_debit: {bsb_number: '', account_number: ''},
+    billing_details: {name: 'Jenny Rosen', email: 'jenny@example.com'},
+  })
+  .then(({paymentMethod}) => {
+    if (
+      paymentMethod &&
+      paymentMethod.au_becs_debit &&
+      paymentMethod.au_becs_debit.fingerprint
+    ) {
+      console.log(paymentMethod.au_becs_debit.fingerprint);
+    }
+  });
 
 stripe
   .createPaymentMethod({
