@@ -471,6 +471,15 @@ export interface StripeElementsOptions {
    * Default is `'auto'` (Stripe determines if a loader UI should be shown).
    */
   loader?: 'auto' | 'always' | 'never';
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Display saved PaymentMethods and Customer information.
+   * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
+   */
+  customerOptions?: CustomerOptions;
 }
 
 /*
@@ -485,9 +494,6 @@ export interface StripeElementsUpdateOptions {
   locale?: StripeElementLocale;
 
   /**
-   * Used with the Payment Element, requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
    * Match the design of your site with the appearance option.
    * The layout of each Element stays consistent, but you can modify colors, fonts, borders, padding, and more.
    *
@@ -637,4 +643,16 @@ export interface Appearance {
   };
 
   labels?: 'above' | 'floating';
+}
+
+export interface CustomerOptions {
+  /**
+   * The Customer id.
+   */
+  customer: string;
+
+  /**
+   * The ephemeral key for a Customer that grants temporary access to Customer data.
+   */
+  ephemeralKey: string;
 }

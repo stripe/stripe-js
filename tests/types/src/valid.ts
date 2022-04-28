@@ -86,6 +86,10 @@ const elements: StripeElements = stripe.elements({
     labels: 'above',
   },
   loader: 'auto',
+  customerOptions: {
+    customer: 'cus_foo',
+    ephemeralKey: 'ek_test_foo',
+  },
 });
 
 const elementsNoOptions: StripeElements = stripe.elements();
