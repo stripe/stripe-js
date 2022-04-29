@@ -28,7 +28,7 @@ elements.update({
 });
 
 elements.update({
-  // @ts-expect-error: `loader` is not updatable
+  // @ts-expect-error: `customerOptions` is not updatable
   customerOptions: {
     customer: 'cus_foo',
     ephemeralKey: 'ek_test_foo',
