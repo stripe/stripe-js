@@ -27,6 +27,14 @@ elements.update({
   loader: 'auto',
 });
 
+elements.update({
+  // @ts-expect-error: `customerOptions` is not updatable
+  customerOptions: {
+    customer: 'cus_foo',
+    ephemeralKey: 'ek_test_foo',
+  },
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {
