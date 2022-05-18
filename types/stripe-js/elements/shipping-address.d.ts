@@ -80,14 +80,6 @@ export type StripeShippingAddressElement = StripeElementBase & {
     eventType: 'escape',
     handler?: (event: {elementType: 'shippingAddress'}) => any
   ): StripeShippingAddressElement;
-
-  /**
-   * Updates the options the `ShippingAddressElement` was initialized with.
-   * Updates are merged into the existing configuration.
-   */
-  update(
-    options: Partial<StripeShippingAddressElementOptions>
-  ): StripeShippingAddressElement;
 };
 
 export interface StripeShippingAddressElementOptions {
