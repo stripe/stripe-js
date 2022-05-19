@@ -15,6 +15,11 @@ export interface PaymentRequest {
   show(): void;
 
   /**
+   * Closes the browser’s payment interface.
+   */
+  abort: () => void;
+
+  /**
    * `true` if the browser’s payment interface is showing.
    * When using the `PaymentRequestButtonElement`, this is called for you automatically.
    */
