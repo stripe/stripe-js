@@ -1,4 +1,5 @@
 import {StripeElementBase} from './base';
+import {StripeError} from '../stripe';
 
 export type StripePaymentElement = StripeElementBase & {
   /**
@@ -79,6 +80,22 @@ export type StripePaymentElement = StripeElementBase & {
   off(
     eventType: 'escape',
     handler?: (event: {elementType: 'payment'}) => any
+  ): StripePaymentElement;
+
+  /**
+   * Triggered when the element fails to load.
+   */
+  on(
+    eventType: 'loaderror',
+    handler: (event: {elementType: 'payment'; error: StripeError}) => any
+  ): StripePaymentElement;
+  once(
+    eventType: 'loaderror',
+    handler: (event: {elementType: 'payment'; error: StripeError}) => any
+  ): StripePaymentElement;
+  off(
+    eventType: 'loaderror',
+    handler?: (event: {elementType: 'payment'; error: StripeError}) => any
   ): StripePaymentElement;
 
   /**

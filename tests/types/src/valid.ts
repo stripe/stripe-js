@@ -313,6 +313,15 @@ paymentElement
       complete: boolean;
       empty: boolean;
     }) => {}
+  )
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'payment';
+      error: {
+        type: string;
+      };
+    }) => {}
   );
 
 paymentElement.collapse();
