@@ -987,6 +987,7 @@ export type SetupIntentResult =
 
 export type OrderResult =
   | {paymentIntent: api.PaymentIntent; order: api.Order; error?: undefined}
+  | {paymentIntent?: undefined; order: api.Order; error?: undefined}
   | {paymentIntent?: undefined; order?: undefined; error: StripeError};
 
 export type PaymentMethodResult =
