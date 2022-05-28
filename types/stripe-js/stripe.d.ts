@@ -1,6 +1,7 @@
 import * as api from '../api';
 import * as paymentIntents from './payment-intents';
 import * as setupIntents from './setup-intents';
+import * as orders from './orders';
 import * as tokens from './token-and-sources';
 import * as elements from './elements';
 
@@ -47,7 +48,7 @@ export interface Stripe {
    * When called, `stripe.confirmPayment` will attempt to complete any [required actions](https://stripe.com/docs/payments/intents), such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
    * Your user will be redirected to the return_url you pass once the confirmation is complete.
    *
-   * By default, stripe.`confirmPayment` will always redirect to your return_url after a successful confirmation.
+   * By default, `stripe.confirmPayment` will always redirect to your return_url after a successful confirmation.
    * If you set `redirect: "if_required"`, then `stripe.confirmPayment` will only redirect if your user chooses a redirect-based payment method.
    * Setting `if_required` requires that you handle successful confirmations for redirect-based and non-redirect based payment methods separately.
    *
@@ -796,6 +797,49 @@ export interface Stripe {
   retrieveSetupIntent(clientSecret: string): Promise<SetupIntentResult>;
 
   /////////////////////////////
+  /// Orders
+  ///
+  /// https://stripe.com/docs/js/orders
+  /////////////////////////////
+
+  /**
+   * Use `stripe.processOrder` to submit and confirm payment for an [Order](https://stripe.com/docs/api/orders_v2) using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
+   * When called, `stripe.processOrder` will attempt to complete any required actions, such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
+   * Your user will be redirected to the return_url you pass once the confirmation is complete.
+   *
+   * By default, `stripe.processOrder` will always redirect to your return_url after a successful confirmation.
+   * If you set `redirect: "if_required"`, then `stripe.processOrder` will only redirect if your user chooses a redirect-based method.
+   * Setting `if_required` requires that you handle successful confirmations for redirect-based and non-redirect based payment methods separately.
+   *
+   * @docs https://stripe.com/docs/js/orders/process_order
+   */
+  processOrder(options: {
+    elements: StripeElements;
+    confirmParams?: Partial<orders.ProcessOrderParams>;
+    redirect: 'if_required';
+  }): Promise<ProcessOrderResult>;
+
+  /**
+   * Use `stripe.processOrder` to submit and confirm payment for an [Order](https://stripe.com/docs/api/orders_v2) using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
+   * When called, `stripe.processOrder` will attempt to complete any required actions, such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
+   * Your user will be redirected to the return_url you pass once the confirmation is complete.
+   *
+   * @docs https://stripe.com/docs/js/orders/process_order
+   */
+  processOrder(options: {
+    elements: StripeElements;
+    confirmParams: orders.ProcessOrderParams;
+    redirect?: 'always';
+  }): Promise<never | {error: StripeError}>;
+
+  /**
+   * Retrieve an [Order](https://stripe.com/docs/api/orders_v2) using its [client secret](https://stripe.com/docs/api/orders_v2/object#order_v2_object-client_secret).
+   *
+   * @docs https://stripe.com/docs/js/orders/retrieve_order
+   */
+  retrieveOrder(clientSecret: string): Promise<RetrieveOrderResult>;
+
+  /////////////////////////////
   /// Payment Request
   ///
   /// https://stripe.com/docs/js/payment_request
@@ -940,6 +984,15 @@ export type PaymentIntentResult =
 export type SetupIntentResult =
   | {setupIntent: api.SetupIntent; error?: undefined}
   | {setupIntent?: undefined; error: StripeError};
+
+export type ProcessOrderResult =
+  | {paymentIntent: api.PaymentIntent; order: api.Order; error?: undefined}
+  | {paymentIntent?: undefined; order: api.Order; error?: undefined}
+  | {paymentIntent?: undefined; order?: undefined; error: StripeError};
+
+export type RetrieveOrderResult =
+  | {order: api.Order; error?: undefined}
+  | {order?: undefined; error: StripeError};
 
 export type PaymentMethodResult =
   | {paymentMethod: api.PaymentMethod; error?: undefined}

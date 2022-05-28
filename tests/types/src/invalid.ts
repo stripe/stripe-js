@@ -87,6 +87,50 @@ stripe
     }
   });
 
+stripe.processOrder({elements, confirmParams: {return_url: ''}}).then((res) => {
+  if (res.error) {
+  }
+
+  // @ts-expect-error redirect only, no paymentIntent expected
+  if (res.paymentIntent) {
+  }
+
+  // @ts-expect-error redirect only, no order expected
+  if (res.order) {
+  }
+});
+
+stripe
+  .processOrder({
+    elements,
+    confirmParams: {return_url: ''},
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+
+    // @ts-expect-error redirect only, no paymentIntent expected
+    if (res.paymentIntent) {
+    }
+
+    // @ts-expect-error redirect only, no order expected
+    if (res.order) {
+    }
+  });
+
+stripe.retrieveOrder('{ORDER_CLIENT_SECRET}').then((res) => {
+  if (res.error) {
+  }
+
+  if (res.order) {
+  }
+
+  // @ts-expect-error retrieve order, no paymentIntent expected
+  if (res.paymentIntent) {
+  }
+});
+
 stripe.createToken(cardElement, {
   currency: '',
   name: '',

@@ -2139,6 +2139,42 @@ stripe
     }
   });
 
+stripe
+  .processOrder({
+    elements,
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+    if (res.order) {
+    }
+  });
+
+stripe
+  .processOrder({
+    elements,
+    confirmParams: {},
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+    if (res.order) {
+    }
+  });
+
+stripe.retrieveOrder('{ORDER_CLIENT_SECRET}').then((res) => {
+  if (res.error) {
+  }
+  if (res.order) {
+  }
+});
+
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',
   currency: 'usd',
