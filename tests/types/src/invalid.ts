@@ -119,6 +119,18 @@ stripe
     }
   });
 
+stripe.retrieveOrder('{ORDER_CLIENT_SECRET}').then((res) => {
+  if (res.error) {
+  }
+
+  if (res.order) {
+  }
+
+  // @ts-expect-error retrieve order, no paymentIntent expected
+  if (res.paymentIntent) {
+  }
+});
+
 stripe.createToken(cardElement, {
   currency: '',
   name: '',

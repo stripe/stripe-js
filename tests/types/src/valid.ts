@@ -2168,7 +2168,12 @@ stripe
     }
   });
 
-stripe.retrieveOrder('{ORDER_CLIENT_SECRET}');
+stripe.retrieveOrder('{ORDER_CLIENT_SECRET}').then((res) => {
+  if (res.error) {
+  }
+  if (res.order) {
+  }
+});
 
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',

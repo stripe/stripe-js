@@ -817,7 +817,7 @@ export interface Stripe {
     elements: StripeElements;
     confirmParams?: Partial<orders.ProcessOrderParams>;
     redirect: 'if_required';
-  }): Promise<OrderResult>;
+  }): Promise<ProcessOrderResult>;
 
   /**
    * Use `stripe.processOrder` to submit and confirm payment for an [Order](https://stripe.com/docs/api/orders_v2) using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
@@ -837,7 +837,7 @@ export interface Stripe {
    *
    * @docs https://stripe.com/docs/js/orders/retrieve_order
    */
-  retrieveOrder(clientSecret: string): Promise<OrderResult>;
+  retrieveOrder(clientSecret: string): Promise<RetrieveOrderResult>;
 
   /////////////////////////////
   /// Payment Request
@@ -985,10 +985,14 @@ export type SetupIntentResult =
   | {setupIntent: api.SetupIntent; error?: undefined}
   | {setupIntent?: undefined; error: StripeError};
 
-export type OrderResult =
+export type ProcessOrderResult =
   | {paymentIntent: api.PaymentIntent; order: api.Order; error?: undefined}
   | {paymentIntent?: undefined; order: api.Order; error?: undefined}
   | {paymentIntent?: undefined; order?: undefined; error: StripeError};
+
+export type RetrieveOrderResult =
+  | {order: api.Order; error?: undefined}
+  | {order?: undefined; error: StripeError};
 
 export type PaymentMethodResult =
   | {paymentMethod: api.PaymentMethod; error?: undefined}
