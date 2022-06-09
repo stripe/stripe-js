@@ -2043,6 +2043,13 @@ stripe
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
+  .verifyMicrodepositsForSetup('', {
+    amounts: [32, 45],
+    descriptor_code: '123456',
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
   .collectBankAccountForSetup({
     clientSecret: '',
     params: {

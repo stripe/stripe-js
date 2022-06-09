@@ -187,6 +187,11 @@ export interface VerifyMicrodepositsForSetupData {
    * An array of two positive integers, in cents, equal to the values of the microdeposits sent to the bank account.
    */
   amounts?: Array<number>;
+
+  /**
+   * A six-character code starting with SM present in the microdeposit sent to the bank account.
+   */
+  descriptor_code?: string;
 }
 
 export interface ConfirmUsBankAccountSetupData
