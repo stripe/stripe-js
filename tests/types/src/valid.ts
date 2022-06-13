@@ -456,7 +456,16 @@ linkAuthenticationElement
   .on('ready', (e: {elementType: 'linkAuthentication'}) => {})
   .on('focus', (e: {elementType: 'linkAuthentication'}) => {})
   .on('blur', (e: {elementType: 'linkAuthentication'}) => {})
-  .on('change', (e: StripeLinkAuthenticationElementChangeEvent) => {});
+  .on('change', (e: StripeLinkAuthenticationElementChangeEvent) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'linkAuthentication';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
 
 const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null = elements.getElement(
   'linkAuthentication'

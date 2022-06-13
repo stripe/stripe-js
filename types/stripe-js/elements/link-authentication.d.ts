@@ -1,4 +1,5 @@
 import {StripeElementBase, StripeElementChangeEvent} from './base';
+import {StripeError} from '../stripe';
 
 export type StripeLinkAuthenticationElement = StripeElementBase & {
   /**
@@ -79,6 +80,31 @@ export type StripeLinkAuthenticationElement = StripeElementBase & {
   off(
     eventType: 'escape',
     handler?: (event: {elementType: 'linkAuthentication'}) => any
+  ): StripeLinkAuthenticationElement;
+
+  /**
+   * Triggered when the element fails to load.
+   */
+  on(
+    eventType: 'loaderror',
+    handler: (event: {
+      elementType: 'linkAuthentication';
+      error: StripeError;
+    }) => any
+  ): StripeLinkAuthenticationElement;
+  once(
+    eventType: 'loaderror',
+    handler: (event: {
+      elementType: 'linkAuthentication';
+      error: StripeError;
+    }) => any
+  ): StripeLinkAuthenticationElement;
+  off(
+    eventType: 'loaderror',
+    handler?: (event: {
+      elementType: 'linkAuthentication';
+      error: StripeError;
+    }) => any
   ): StripeLinkAuthenticationElement;
 };
 
