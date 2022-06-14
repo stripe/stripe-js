@@ -1,4 +1,5 @@
 import {StripeElementBase, StripeElementChangeEvent} from './base';
+import {StripeError} from '../stripe';
 
 export type StripeShippingAddressElement = StripeElementBase & {
   /**
@@ -79,6 +80,31 @@ export type StripeShippingAddressElement = StripeElementBase & {
   off(
     eventType: 'escape',
     handler?: (event: {elementType: 'shippingAddress'}) => any
+  ): StripeShippingAddressElement;
+
+  /**
+   * Triggered when the element fails to load.
+   */
+  on(
+    eventType: 'loaderror',
+    handler: (event: {
+      elementType: 'shippingAddress';
+      error: StripeError;
+    }) => any
+  ): StripeShippingAddressElement;
+  once(
+    eventType: 'loaderror',
+    handler: (event: {
+      elementType: 'shippingAddress';
+      error: StripeError;
+    }) => any
+  ): StripeShippingAddressElement;
+  off(
+    eventType: 'loaderror',
+    handler?: (event: {
+      elementType: 'shippingAddress';
+      error: StripeError;
+    }) => any
   ): StripeShippingAddressElement;
 };
 

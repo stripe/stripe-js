@@ -456,7 +456,16 @@ linkAuthenticationElement
   .on('ready', (e: {elementType: 'linkAuthentication'}) => {})
   .on('focus', (e: {elementType: 'linkAuthentication'}) => {})
   .on('blur', (e: {elementType: 'linkAuthentication'}) => {})
-  .on('change', (e: StripeLinkAuthenticationElementChangeEvent) => {});
+  .on('change', (e: StripeLinkAuthenticationElementChangeEvent) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'linkAuthentication';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
 
 const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null = elements.getElement(
   'linkAuthentication'
@@ -487,7 +496,16 @@ shippingAddressElement
   .on('ready', (e: {elementType: 'shippingAddress'}) => {})
   .on('focus', (e: {elementType: 'shippingAddress'}) => {})
   .on('blur', (e: {elementType: 'shippingAddress'}) => {})
-  .on('change', (e: StripeShippingAddressElementChangeEvent) => {});
+  .on('change', (e: StripeShippingAddressElementChangeEvent) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'shippingAddress';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
 
 const retrievedShippingAddressElement: StripeShippingAddressElement | null = elements.getElement(
   'shippingAddress'
