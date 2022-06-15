@@ -110,6 +110,24 @@ export type StripePaymentElement = StripeElementBase & {
   collapse(): StripePaymentElement;
 };
 
+export interface DefaultValuesOption {
+  billingDetails?:
+    {
+      name?: string;
+      email?: string;
+      phone?: string;
+      address?:
+        {
+          country?: string;
+          postalCode?: string;
+          state?: string;
+          city?: string;
+          line1?: string;
+          line2?: string;
+        };
+    };
+}
+
 export type FieldOption = 'auto' | 'never';
 
 export interface FieldsOption {
@@ -152,6 +170,11 @@ export interface WalletsOption {
 }
 
 export interface StripePaymentElementOptions {
+  /**
+   * Provide initial customer information that will be displayed in the Payment Element.
+   */
+  defaultValues?: DefaultValuesOption;
+
   /**
    * Override the business name displayed in the Payment Element.
    * By default the PaymentElement will use your Stripe account or business name.
