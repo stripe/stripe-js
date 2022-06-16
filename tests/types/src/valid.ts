@@ -266,6 +266,21 @@ const afterpayClearpayMessageElement = elements.create(
 );
 
 const paymentElement: StripePaymentElement = elements.create('payment', {
+  defaultValues: {
+    billingDetails: {
+      name: 'Jane Doe',
+      email: 'jane.doe@example.com',
+      phone: '8004444444',
+      address: {
+        line1: '354 Oyster Point Blvd',
+        line2: '',
+        city: 'South San Francisco',
+        state: 'CA',
+        country: 'US',
+        postal_code: '94080',
+      },
+    },
+  },
   fields: {
     billingDetails: {
       email: 'never',
