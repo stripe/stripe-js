@@ -111,21 +111,19 @@ export type StripePaymentElement = StripeElementBase & {
 };
 
 export interface DefaultValuesOption {
-  billingDetails?:
-    {
-      name?: string;
-      email?: string;
-      phone?: string;
-      address?:
-        {
-          country?: string;
-          postalCode?: string;
-          state?: string;
-          city?: string;
-          line1?: string;
-          line2?: string;
-        };
+  billingDetails?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    address?: {
+      country?: string;
+      postalCode?: string;
+      state?: string;
+      city?: string;
+      line1?: string;
+      line2?: string;
     };
+  };
 }
 
 export type FieldOption = 'auto' | 'never';
