@@ -117,7 +117,7 @@ export interface DefaultValuesOption {
     phone?: string;
     address?: {
       country?: string;
-      postalCode?: string;
+      postal_code?: string;
       state?: string;
       city?: string;
       line1?: string;

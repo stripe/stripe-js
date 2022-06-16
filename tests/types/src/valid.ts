@@ -277,7 +277,7 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
         city: 'South San Francisco',
         state: 'CA',
         country: 'US',
-        postalCode: '94080',
+        postal_code: '94080',
       },
     },
   },
