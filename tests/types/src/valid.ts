@@ -319,6 +319,7 @@ paymentElement
   .on('ready', (e: {elementType: 'payment'}) => {})
   .on('focus', (e: {elementType: 'payment'}) => {})
   .on('blur', (e: {elementType: 'payment'}) => {})
+  .on('loaderstart', (e: {elementType: 'payment'}) => {})
   .on(
     'change',
     (e: {
@@ -472,6 +473,7 @@ linkAuthenticationElement
   .on('focus', (e: {elementType: 'linkAuthentication'}) => {})
   .on('blur', (e: {elementType: 'linkAuthentication'}) => {})
   .on('change', (e: StripeLinkAuthenticationElementChangeEvent) => {})
+  .on('loaderstart', (e: {elementType: 'linkAuthentication'}) => {})
   .on(
     'loaderror',
     (e: {
@@ -512,6 +514,7 @@ shippingAddressElement
   .on('focus', (e: {elementType: 'shippingAddress'}) => {})
   .on('blur', (e: {elementType: 'shippingAddress'}) => {})
   .on('change', (e: StripeShippingAddressElementChangeEvent) => {})
+  .on('loaderstart', (e: {elementType: 'shippingAddress'}) => {})
   .on(
     'loaderror',
     (e: {

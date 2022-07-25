@@ -106,6 +106,22 @@ export type StripeShippingAddressElement = StripeElementBase & {
       error: StripeError;
     }) => any
   ): StripeShippingAddressElement;
+
+  /**
+   * Triggered when the loader UI is mounted to the DOM and ready to be displayed.
+   */
+  on(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'shippingAddress'}) => any
+  ): StripeShippingAddressElement;
+  once(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'shippingAddress'}) => any
+  ): StripeShippingAddressElement;
+  off(
+    eventType: 'loaderstart',
+    handler?: (event: {elementType: 'shippingAddress'}) => any
+  ): StripeShippingAddressElement;
 };
 
 export interface StripeShippingAddressElementOptions {

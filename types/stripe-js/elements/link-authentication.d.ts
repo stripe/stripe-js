@@ -106,6 +106,22 @@ export type StripeLinkAuthenticationElement = StripeElementBase & {
       error: StripeError;
     }) => any
   ): StripeLinkAuthenticationElement;
+
+  /**
+   * Triggered when the loader UI is mounted to the DOM and ready to be displayed.
+   */
+  on(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'linkAuthentication'}) => any
+  ): StripeLinkAuthenticationElement;
+  once(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'linkAuthentication'}) => any
+  ): StripeLinkAuthenticationElement;
+  off(
+    eventType: 'loaderstart',
+    handler?: (event: {elementType: 'linkAuthentication'}) => any
+  ): StripeLinkAuthenticationElement;
 };
 
 export interface StripeLinkAuthenticationElementOptions {
