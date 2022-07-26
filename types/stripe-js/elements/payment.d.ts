@@ -99,6 +99,22 @@ export type StripePaymentElement = StripeElementBase & {
   ): StripePaymentElement;
 
   /**
+   * Triggered when the loader UI is mounted to the DOM and ready to be displayed.
+   */
+  on(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'payment'}) => any
+  ): StripePaymentElement;
+  once(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'payment'}) => any
+  ): StripePaymentElement;
+  off(
+    eventType: 'loaderstart',
+    handler?: (event: {elementType: 'payment'}) => any
+  ): StripePaymentElement;
+
+  /**
    * Updates the options the `PaymentElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
