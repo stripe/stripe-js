@@ -2237,6 +2237,21 @@ stripe
     }
   });
 
+stripe
+  .collectBankAccountToken({
+    clientSecret: '{FINANCIAL_CONNECTIONS_CLIENT_SECRET}',
+  })
+  .then((result) => {
+    if (result.error) {
+    }
+
+    if (result.financialConnectionsSession) {
+    }
+
+    if (result.token) {
+    }
+  });
+
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',
   currency: 'usd',

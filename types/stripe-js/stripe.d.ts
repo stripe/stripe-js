@@ -990,6 +990,15 @@ export interface Stripe {
   collectFinancialConnectionsAccounts(
     options: financialConnections.CollectFinancialConnectionsAccountsOptions
   ): Promise<FinancialConnectionsSessionResult>;
+
+  /**
+   * Use `stripe.collectBankAccountToken` to display a [Financial Connections](https://stripe.com/docs/financial-connections) modal that lets you securely collect a [Bank Account Token](https://stripe.com/docs/api/tokens/object).
+   *
+   * * @docs https://stripe.com/docs/js/financial_connections/collect_bank_account_token
+   */
+  collectBankAccountToken(
+    options: financialConnections.CollectBankAccountTokenOptions
+  ): Promise<CollectBankAccountTokenResult>;
 }
 
 export type PaymentIntentResult =
@@ -1031,6 +1040,18 @@ export type FinancialConnectionsSessionResult =
       error?: undefined;
     }
   | {financialConnectionsSession: undefined; error: StripeError};
+
+export type CollectBankAccountTokenResult =
+  | {
+      financialConnectionsSession: api.FinancialConnectionsSession;
+      token: string;
+      error?: undefined;
+    }
+  | {
+      financialConnectionsSession: undefined;
+      token: undefined;
+      error: StripeError;
+    };
 
 export interface WrapperLibrary {
   /**
