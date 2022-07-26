@@ -8,3 +8,4 @@ export * from './tokens';
 export * from './bank-accounts';
 export * from './cards';
 export * from './verification-sessions';
+export * from './financial-connections';

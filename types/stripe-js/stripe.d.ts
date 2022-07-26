@@ -4,6 +4,7 @@ import * as setupIntents from './setup-intents';
 import * as orders from './orders';
 import * as tokens from './token-and-sources';
 import * as elements from './elements';
+import * as financialConnections from './financial-connections';
 
 import {StripeElements, StripeElementsOptions} from './elements-group';
 import {RedirectToCheckoutOptions} from './checkout';
@@ -975,6 +976,20 @@ export interface Stripe {
    * * @docs https://stripe.com/docs/js/identity/modal
    */
   verifyIdentity(clientSecret: string): Promise<VerificationSessionResult>;
+
+  /////////////////////////////
+  /// Financial Connections
+  ///
+  /////////////////////////////
+
+  /**
+   * Use `stripe.collectFinancialConnectionsAccounts` to display a [Financial Connections](https://stripe.com/docs/financial-connections) modal that lets you securely collect financial accounts.
+   *
+   * * @docs https://stripe.com/docs/js/financial_connections/collect_financial_connections_accounts
+   */
+  collectFinancialConnectionsAccounts(
+    options: financialConnections.CollectFinancialConnectionsAccountsOptions
+  ): Promise<FinancialConnectionsSessionResult>;
 }
 
 export type PaymentIntentResult =
@@ -1009,6 +1024,13 @@ export type TokenResult =
 export type VerificationSessionResult =
   | {verificationSession: api.VerificationSession; error?: undefined}
   | {verificationSession?: undefined; error: StripeError};
+
+export type FinancialConnectionsSessionResult =
+  | {
+      financialConnectionsSession: api.FinancialConnectionsSession;
+      error?: undefined;
+    }
+  | {financialConnectionsSession: undefined; error: StripeError};
 
 export interface WrapperLibrary {
   /**
