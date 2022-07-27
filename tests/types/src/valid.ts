@@ -2218,6 +2218,40 @@ stripe.retrieveOrder('{ORDER_CLIENT_SECRET}').then((res) => {
   }
 });
 
+stripe
+  .collectFinancialConnectionsAccounts({
+    clientSecret: '{FINANCIAL_CONNECTIONS_CLIENT_SECRET}',
+  })
+  .then((result) => {
+    if (result.error) {
+    }
+
+    if (result.financialConnectionsSession) {
+      const numAccounts = result.financialConnectionsSession.accounts.length;
+      const accountNames = result.financialConnectionsSession.accounts.map(
+        (account) => account.display_name
+      );
+
+      console.log(numAccounts);
+      console.log(accountNames);
+    }
+  });
+
+stripe
+  .collectBankAccountToken({
+    clientSecret: '{FINANCIAL_CONNECTIONS_CLIENT_SECRET}',
+  })
+  .then((result) => {
+    if (result.error) {
+    }
+
+    if (result.financialConnectionsSession) {
+    }
+
+    if (result.token) {
+    }
+  });
+
 const paymentRequest: PaymentRequest = stripe.paymentRequest({
   country: 'US',
   currency: 'usd',
