@@ -148,12 +148,29 @@ export interface StripeShippingAddressElementOptions {
       postal_code?: string | null;
       country: string;
     };
+    phone?: string | null;
   };
 
   /**
    * Whether or not ShippingAddressElement provides autocomplete suggestions
    */
   disableAutocomplete?: boolean;
+
+  /**
+   * Control which additional fields to display in the shippingAddress Element.
+   */
+  fields?: {
+    phone?: 'always' | 'never' | 'auto';
+  };
+
+  /**
+   * Specify validation rules for the above additional fields.
+   */
+  validation?: {
+    phone?: {
+      required: 'always' | 'never' | 'auto';
+    };
+  };
 }
 
 export interface StripeShippingAddressElementChangeEvent
@@ -191,5 +208,6 @@ export interface StripeShippingAddressElementChangeEvent
       postal_code: string;
       country: string;
     };
+    phone?: string;
   };
 }
