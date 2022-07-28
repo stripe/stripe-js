@@ -4,6 +4,7 @@ import {
   StripeCardElement,
   StripeIbanElement,
   StripePaymentElement,
+  StripeShippingAddressElement,
 } from '../../../types';
 
 declare const stripe: Stripe;
@@ -11,6 +12,7 @@ declare const elements: StripeElements;
 declare const cardElement: StripeCardElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
+declare const shippingAddressElement: StripeShippingAddressElement;
 
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
@@ -39,6 +41,13 @@ paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {
   }
+});
+
+shippingAddressElement.update({
+  // @ts-expect-error: Argument of type '{ defaultValues: { allowedCountries: string[]; }; }' is not assignable to parameter of type 'StripeShippingAddressElementUpdateOptions'.
+  defaultValues: {
+    name: 'foo bar',
+  },
 });
 
 stripe

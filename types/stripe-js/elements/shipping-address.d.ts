@@ -148,7 +148,7 @@ export type StripeShippingAddressElementUpdateOptions = {
       required: 'always' | 'never' | 'auto';
     };
   };
-}
+};
 
 export interface StripeShippingAddressElementOptions {
   /**
