@@ -44,7 +44,6 @@ paymentElement.on('change', (e) => {
 });
 
 shippingAddressElement.update({
-  // @ts-expect-error: Argument of type '{ defaultValues: { allowedCountries: string[]; }; }' is not assignable to parameter of type 'StripeShippingAddressElementUpdateOptions'.
   defaultValues: {
     name: 'foo bar',
   },

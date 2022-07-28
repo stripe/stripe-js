@@ -512,7 +512,7 @@ const shippingAddressElement = elements.create('shippingAddress', {
   },
   validation: {
     phone: {
-      required: 'always',
+      required: 'never',
     },
   },
 });
@@ -534,11 +534,10 @@ shippingAddressElement
   );
 
 shippingAddressElement.update({
-  fields: {
-    phone: 'never',
-  },
   validation: {
-    phone: undefined,
+    phone: {
+      required: 'always',
+    },
   },
 });
 
