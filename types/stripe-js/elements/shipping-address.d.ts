@@ -122,7 +122,33 @@ export type StripeShippingAddressElement = StripeElementBase & {
     eventType: 'loaderstart',
     handler?: (event: {elementType: 'shippingAddress'}) => any
   ): StripeShippingAddressElement;
+
+  /**
+   * Updates the options the `ShippingAddressElement` was initialized with.
+   * Updates are merged into the existing configuration.
+   */
+  update(
+    options: StripeShippingAddressElementUpdateOptions
+  ): StripeShippingAddressElement;
 };
+
+export type StripeShippingAddressElementUpdateOptions = {
+  /**
+   * Control which additional fields to display in the shippingAddress Element.
+   */
+  fields?: {
+    phone?: 'always' | 'never' | 'auto';
+  };
+
+  /**
+   * Specify validation rules for the above additional fields.
+   */
+  validation?: {
+    phone?: {
+      required: 'always' | 'never' | 'auto';
+    };
+  };
+}
 
 export interface StripeShippingAddressElementOptions {
   /**
