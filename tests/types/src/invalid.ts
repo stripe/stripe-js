@@ -4,7 +4,6 @@ import {
   StripeCardElement,
   StripeIbanElement,
   StripePaymentElement,
-  StripeShippingAddressElement,
 } from '../../../types';
 
 declare const stripe: Stripe;
@@ -12,7 +11,6 @@ declare const elements: StripeElements;
 declare const cardElement: StripeCardElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
-declare const shippingAddressElement: StripeShippingAddressElement;
 
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
