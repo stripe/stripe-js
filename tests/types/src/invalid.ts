@@ -43,12 +43,6 @@ paymentElement.on('change', (e) => {
   }
 });
 
-shippingAddressElement.update({
-  defaultValues: {
-    name: 'foo bar',
-  },
-});
-
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
   .then((res) => {
