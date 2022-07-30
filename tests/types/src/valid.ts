@@ -507,6 +507,14 @@ const shippingAddressElement = elements.create('shippingAddress', {
     },
   },
   disableAutocomplete: true,
+  fields: {
+    phone: 'always',
+  },
+  validation: {
+    phone: {
+      required: 'never',
+    },
+  },
 });
 
 shippingAddressElement
@@ -524,6 +532,14 @@ shippingAddressElement
       };
     }) => {}
   );
+
+shippingAddressElement.update({
+  validation: {
+    phone: {
+      required: 'always',
+    },
+  },
+});
 
 const retrievedShippingAddressElement: StripeShippingAddressElement | null = elements.getElement(
   'shippingAddress'
