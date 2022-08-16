@@ -2265,6 +2265,8 @@ stripe
     }
 
     if (result.token) {
+      if (result.token.id) {
+      }
     }
   });
 
