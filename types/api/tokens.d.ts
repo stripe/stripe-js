@@ -1,3 +1,4 @@
+import {Omit} from '../utils';
 import {Card} from './cards';
 import {BankAccount} from './bank-accounts';
 import {JapanAddressParam, MetadataParam} from './shared';
@@ -45,6 +46,10 @@ export interface Token {
    */
   used: boolean;
 }
+
+export type BankAccountToken = Omit<Token, 'card'> & {
+  bank_account: BankAccount;
+};
 
 export namespace TokenCreateParams {
   export interface Account {

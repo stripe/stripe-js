@@ -1044,7 +1044,7 @@ export type FinancialConnectionsSessionResult =
 export type CollectBankAccountTokenResult =
   | {
       financialConnectionsSession: api.FinancialConnectionsSession;
-      token: string;
+      token: api.BankAccountToken;
       error?: undefined;
     }
   | {
