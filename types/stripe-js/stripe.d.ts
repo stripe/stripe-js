@@ -7,7 +7,7 @@ import * as elements from './elements';
 import * as financialConnections from './financial-connections';
 
 import {StripeElements, StripeElementsOptions} from './elements-group';
-import {RedirectToCheckoutOptions} from './checkout';
+import {RadarSessionPayload, RedirectToCheckoutOptions} from './checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
 import {CheckoutLocale} from './checkout';
@@ -37,6 +37,12 @@ export interface Stripe {
   redirectToCheckout(
     options: RedirectToCheckoutOptions
   ): Promise<never | {error: StripeError}>;
+
+  /**
+  * Use stripe.createRadarSession to create a [Radar Session](https://stripe.com/docs/radar/radar-session) in your checkout flow or when saving card details. 
+  * Stripe uses the Radar Session to associate the client information captured by Stripe libraries with subsequent server-side API requests.
+  */
+  createRadarSession(): Promise<RadarSessionPayload>
 
   /////////////////////////////
   /// Payment Intents

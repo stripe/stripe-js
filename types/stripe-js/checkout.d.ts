@@ -1,3 +1,5 @@
+import * as api from '../api';
+
 export interface RedirectToCheckoutServerOptions {
   /**
    * The ID of the [Checkout Session](https://stripe.com/docs/api/checkout/sessions) that is used in [Checkout's server integration](https://stripe.com/docs/payments/checkout/one-time).
@@ -149,3 +151,26 @@ export type CheckoutLocale =
   | 'zh'
   | 'zh-HK'
   | 'zh-TW';
+
+  export type RadarSessionPayload =
+  | {
+      radarSession: Record<any, any>;
+    }
+  | {
+      error: LocalizedError;
+    };
+
+    export type LocalizedError = {
+      message: string;
+      code?: string;
+      type?: string;
+      decline_code?: string;
+      param?: string;
+      payment_intent?: api.PaymentIntent;
+      setup_intent?: api.SetupIntent;
+      status?: number;
+      extra_fields?: {
+        [key: string]: string | number | boolean;
+      };
+      order?: api.Order;
+    };
