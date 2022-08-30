@@ -575,8 +575,11 @@ stripe
 
 stripe.createRadarSession();
 
-stripe.createRadarSession()
-.then((result: {radarSession?: Record<any, any>; error?: LocalizedError}) => null);
+stripe
+  .createRadarSession()
+  .then(
+    (result: {radarSession?: Record<any, any>; error?: LocalizedError}) => null
+  );
 
 stripe.createToken(cardElement, {name: ''});
 

@@ -9,16 +9,16 @@ export type RadarSessionPayload =
   | {radarSession?: undefined; error: LocalizedError};
 
 export type LocalizedError = {
-    message: string;
-    code?: string;
-    type?: string;
-    decline_code?: string;
-    param?: string;
-    payment_intent?: api.PaymentIntent;
-    setup_intent?: api.SetupIntent;
-    status?: number;
-    extra_fields?: {
-        [key: string]: string | number | boolean;
-    };
-    order?: api.Order;
+  message: string;
+  code?: string;
+  type?: string;
+  decline_code?: string;
+  param?: string;
+  payment_intent?: api.PaymentIntent;
+  setup_intent?: api.SetupIntent;
+  status?: number;
+  extra_fields?: {
+    [key: string]: string | number | boolean;
+  };
+  order?: api.Order;
 };
