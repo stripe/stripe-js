@@ -3,6 +3,7 @@ export * from './elements';
 export * from './elements-group';
 export * from './payment-intents';
 export * from './payment-request';
+export * from './radar';
 export * from './setup-intents';
 export * from './token-and-sources';
 export * from './stripe';
