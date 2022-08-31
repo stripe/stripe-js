@@ -7,10 +7,10 @@ import * as elements from './elements';
 import * as financialConnections from './financial-connections';
 
 import {StripeElements, StripeElementsOptions} from './elements-group';
-import {RadarSessionPayload, RedirectToCheckoutOptions} from './checkout';
+import {CheckoutLocale, RedirectToCheckoutOptions} from './checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
-import {CheckoutLocale} from './checkout';
+import {RadarSessionPayload} from './radar';
 
 export interface Stripe {
   /////////////////////////////
