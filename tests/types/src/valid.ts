@@ -506,7 +506,6 @@ const shippingAddressElement = elements.create('shippingAddress', {
       country: 'US',
     },
   },
-  disableAutocomplete: true,
   fields: {
     phone: 'always',
   },

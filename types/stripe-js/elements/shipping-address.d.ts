@@ -160,11 +160,6 @@ export interface StripeShippingAddressElementOptions {
   };
 
   /**
-   * Whether or not ShippingAddressElement provides autocomplete suggestions
-   */
-  disableAutocomplete?: boolean;
-
-  /**
    * Control which additional fields to display in the shippingAddress Element.
    */
   fields?: {
