@@ -87,6 +87,22 @@ export type StripeCardElement = StripeElementBase & {
   ): StripeCardElement;
 
   /**
+   * Triggered when there is a change to the available networks the provided card can run on.
+   */
+   on(
+    eventType: 'networkschange',
+    handler: (event: {elementType: 'card'}) => any
+  ): StripeCardElement;
+  once(
+    eventType: 'networkschange',
+    handler: (event: {elementType: 'card'}) => any
+  ): StripeCardElement;
+  off(
+    eventType: 'networkschange',
+    handler?: (event: {elementType: 'card'}) => any
+  ): StripeCardElement;
+
+  /**
    * Updates the options the `CardElement` was initialized with.
    * Updates are merged into the existing configuration.
    *

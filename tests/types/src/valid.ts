@@ -423,12 +423,15 @@ cardElement
     if (e.error) {
       console.error(e.error.message);
     }
-  });
+  })
+  .on('networkschange', (e: {elementType: 'card'}) => {});
 
 const onceHandler = () => {};
 cardElement.once('ready', onceHandler);
 cardElement.off('ready', onceHandler);
 cardElement.off('change');
+
+cardNumberElement.on('networkschange', (e: {elementType: 'cardNumber'}) => {});
 
 auBankAccountElement.on(
   'change',
