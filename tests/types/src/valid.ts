@@ -43,7 +43,6 @@ import {
   StripeElementType,
   CanMakePaymentResult,
   VerificationSession,
-  LocalizedError,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -578,7 +577,7 @@ stripe.createRadarSession();
 stripe
   .createRadarSession()
   .then(
-    (result: {radarSession?: Record<any, any>; error?: LocalizedError}) => null
+    (result: {radarSession?: Record<any, any>; error?: StripeError}) => null
   );
 
 stripe.createToken(cardElement, {name: ''});
