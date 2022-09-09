@@ -513,7 +513,7 @@ export interface Stripe {
    * This metadata includes information like IP address, browser, screen or device information, and other device characteristics.
    * By using Radar Sessions, you can capture critical fraud information without tokenizing on Stripe.
    */
-   createRadarSession(): Promise<RadarSessionPayload>;
+  createRadarSession(): Promise<RadarSessionPayload>;
 
   /**
    * Use `stripe.collectBankAccountForPayment` in the [Accept a payment flow](https://stripe.com/docs/payments/ach-debit/accept-a-payment) for the [ACH Direct Debit](https://stripe.com/docs/payments/ach-debit)
