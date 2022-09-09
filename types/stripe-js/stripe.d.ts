@@ -37,14 +37,6 @@ export interface Stripe {
     options: RedirectToCheckoutOptions
   ): Promise<never | {error: StripeError}>;
 
-  /**
-   * Use stripe.createRadarSession to create a [Radar Session](https://stripe.com/docs/radar/radar-session) in your checkout flow or when saving card details.
-   * A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments.
-   * This metadata includes information like IP address, browser, screen or device information, and other device characteristics.
-   * By using Radar Sessions, you can capture critical fraud information without tokenizing on Stripe.
-   */
-  createRadarSession(): Promise<RadarSessionPayload>;
-
   /////////////////////////////
   /// Payment Intents
   ///
@@ -514,6 +506,14 @@ export interface Stripe {
     clientSecret: string,
     data?: paymentIntents.VerifyMicrodepositsForPaymentData
   ): Promise<PaymentIntentResult>;
+
+  /**
+   * Use stripe.createRadarSession to create a [Radar Session](https://stripe.com/docs/radar/radar-session) in your checkout flow or when saving card details.
+   * A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments.
+   * This metadata includes information like IP address, browser, screen or device information, and other device characteristics.
+   * By using Radar Sessions, you can capture critical fraud information without tokenizing on Stripe.
+   */
+   createRadarSession(): Promise<RadarSessionPayload>;
 
   /**
    * Use `stripe.collectBankAccountForPayment` in the [Accept a payment flow](https://stripe.com/docs/payments/ach-debit/accept-a-payment) for the [ACH Direct Debit](https://stripe.com/docs/payments/ach-debit)
