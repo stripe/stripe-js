@@ -87,6 +87,22 @@ export type StripeCardNumberElement = StripeElementBase & {
   ): StripeCardNumberElement;
 
   /**
+   * Triggered when there is a change to the available networks the provided card can run on.
+   */
+  on(
+    eventType: 'networkschange',
+    handler: (event: {elementType: 'cardNumber'}) => any
+  ): StripeCardNumberElement;
+  once(
+    eventType: 'networkschange',
+    handler: (event: {elementType: 'cardNumber'}) => any
+  ): StripeCardNumberElement;
+  off(
+    eventType: 'networkschange',
+    handler?: (event: {elementType: 'cardNumber'}) => any
+  ): StripeCardNumberElement;
+
+  /**
    * Updates the options the `CardNumberElement` was initialized with.
    * Updates are merged into the existing configuration.
    *
