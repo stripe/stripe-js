@@ -7,10 +7,9 @@ import * as elements from './elements';
 import * as financialConnections from './financial-connections';
 
 import {StripeElements, StripeElementsOptions} from './elements-group';
-import {RedirectToCheckoutOptions} from './checkout';
+import {CheckoutLocale, RedirectToCheckoutOptions} from './checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
-import {CheckoutLocale} from './checkout';
 
 export interface Stripe {
   /////////////////////////////
@@ -507,6 +506,14 @@ export interface Stripe {
     clientSecret: string,
     data?: paymentIntents.VerifyMicrodepositsForPaymentData
   ): Promise<PaymentIntentResult>;
+
+  /**
+   * Use stripe.createRadarSession to create a [Radar Session](https://stripe.com/docs/radar/radar-session) in your checkout flow or when saving card details.
+   * A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments.
+   * This metadata includes information like IP address, browser, screen or device information, and other device characteristics.
+   * By using Radar Sessions, you can capture critical fraud information without tokenizing on Stripe.
+   */
+  createRadarSession(): Promise<RadarSessionPayload>;
 
   /**
    * Use `stripe.collectBankAccountForPayment` in the [Accept a payment flow](https://stripe.com/docs/payments/ach-debit/accept-a-payment) for the [ACH Direct Debit](https://stripe.com/docs/payments/ach-debit)
@@ -1052,6 +1059,14 @@ export type CollectBankAccountTokenResult =
       token: undefined;
       error: StripeError;
     };
+
+/* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments. 
+  This metadata includes information like IP address, browser, screen or device information, and other device characteristics. 
+  You can find more details about how Radar uses this data by reading about how Radar performs [advanced fraud detection](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection).
+  */
+export type RadarSessionPayload =
+  | {radarSession: Record<any, any>; error?: undefined}
+  | {radarSession?: undefined; error: StripeError};
 
 export interface WrapperLibrary {
   /**

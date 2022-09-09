@@ -574,6 +574,14 @@ stripe
     console.error(result.error.message);
   });
 
+stripe.createRadarSession();
+
+stripe
+  .createRadarSession()
+  .then(
+    (result: {radarSession?: Record<any, any>; error?: StripeError}) => null
+  );
+
 stripe.createToken(cardElement, {name: ''});
 
 stripe
