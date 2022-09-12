@@ -1082,7 +1082,7 @@ stripe
         customer_balance: {
           funding_type: 'bank_transfer',
           bank_transfer: {
-            type: 'us_bank_account',
+            type: 'us_bank_transfer',
             requested_address_types: ['aba', 'swift'],
           },
         },
@@ -1105,8 +1105,8 @@ stripe
         customer_balance: {
           funding_type: 'bank_transfer',
           bank_transfer: {
-            type: 'eu_bank_account',
-            eu_bank_account: {
+            type: 'eu_bank_transfer',
+            eu_bank_transfer: {
               country: 'NL',
             },
           },
@@ -1130,8 +1130,8 @@ stripe
         customer_balance: {
           funding_type: 'bank_transfer',
           bank_transfer: {
-            type: 'id_bank_account',
-            id_bank_account: {
+            type: 'id_bank_transfer',
+            id_bank_transfer: {
               bank: 'bni',
             },
           },
