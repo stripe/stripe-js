@@ -41,6 +41,9 @@ paymentElement.on('change', (e) => {
   }
 });
 
+// @ts-expect-error: AddressElement requires a mode
+elements.create('address');
+
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
   .then((res) => {

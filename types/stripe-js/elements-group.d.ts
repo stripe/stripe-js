@@ -1,4 +1,6 @@
 import {
+  StripeAddressElement,
+  StripeAddressElementOptions,
   StripeShippingAddressElement,
   StripeShippingAddressElementOptions,
   StripePaymentRequestButtonElement,
@@ -45,6 +47,29 @@ export interface StripeElements {
    * instance of Elements, and reflects these updates in the Payment Element.
    */
   fetchUpdates(): Promise<{error?: {message: string; status?: string}}>;
+
+  /////////////////////////////
+  /// address
+  /////////////////////////////
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Creates a `AddressElement`.
+   */
+  create(
+    elementType: 'address',
+    options: StripeAddressElementOptions
+  ): StripeAddressElement;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(elementType: 'address'): StripeAddressElement | null;
 
   /////////////////////////////
   /// affirmMessage
@@ -329,9 +354,13 @@ export interface StripeElements {
     elementType: 'paymentRequestButton'
   ): StripePaymentRequestButtonElement | null;
 
+  /////////////////////////////
+  /// shippingAddress
+  /////////////////////////////
+
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   * @deprecated
+   * Use `Address` element instead.
    *
    * Creates a `ShippingAddressElement`.
    */
@@ -341,8 +370,8 @@ export interface StripeElements {
   ): StripeShippingAddressElement;
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   * @deprecated
+   * Use `Address` element instead.
    *
    * Looks up a previously created `Element` by its type.
    */
@@ -352,6 +381,7 @@ export interface StripeElements {
 }
 
 export type StripeElementType =
+  | 'address'
   | 'affirmMessage'
   | 'afterpayClearpayMessage'
   | 'auBankAccount'

@@ -40,6 +40,8 @@ import {
   StripeLinkAuthenticationElement,
   StripeShippingAddressElementChangeEvent,
   StripeShippingAddressElement,
+  StripeAddressElementChangeEvent,
+  StripeAddressElement,
   StripeElementType,
   CanMakePaymentResult,
   VerificationSession,
@@ -489,6 +491,77 @@ linkAuthenticationElement
 
 const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null = elements.getElement(
   'linkAuthentication'
+);
+
+let addressElementDefaults: StripeAddressElement = elements.create('address', {
+  mode: 'shipping',
+});
+
+addressElementDefaults = elements.create('address', {mode: 'billing'});
+
+const addressElement = elements.create('address', {
+  mode: 'shipping',
+  allowedCountries: ['US'],
+  autocomplete: {mode: 'disabled'},
+  contacts: [
+    {
+      name: 'Jane Doe',
+      address: {
+        line1: '513 Townsend St',
+        city: 'San Francisco',
+        state: 'CA',
+        postal_code: '92122',
+        country: 'US',
+      },
+    },
+  ],
+  blockPoBox: true,
+  defaultValues: {
+    name: 'Jane Doe',
+    address: {
+      line1: '513 Townsend St',
+      city: 'San Francisco',
+      state: 'CA',
+      postal_code: '92122',
+      country: 'US',
+    },
+  },
+  fields: {
+    phone: 'always',
+  },
+  validation: {
+    phone: {
+      required: 'never',
+    },
+  },
+});
+
+addressElement
+  .on('ready', (e: {elementType: 'address'}) => {})
+  .on('focus', (e: {elementType: 'address'}) => {})
+  .on('blur', (e: {elementType: 'address'}) => {})
+  .on('change', (e: StripeAddressElementChangeEvent) => {})
+  .on('loaderstart', (e: {elementType: 'address'}) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'address';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
+
+addressElement.update({
+  validation: {
+    phone: {
+      required: 'always',
+    },
+  },
+});
+
+const retrievedAddressElement: StripeAddressElement | null = elements.getElement(
+  'address'
 );
 
 let shippingAddressElementDefaults: StripeShippingAddressElement = elements.create(
