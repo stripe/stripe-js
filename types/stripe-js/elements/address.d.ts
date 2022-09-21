@@ -143,7 +143,8 @@ export interface StripeAddressElementOptions {
   mode: AddressMode;
 
   /**
-   * Control which countries are displayed in the address Element.
+   * An array of two-letter ISO country codes representing which countries 
+   * are displayed in the Address Element.
    */
   allowedCountries?: string[] | null;
 
@@ -182,7 +183,7 @@ export interface StripeAddressElementOptions {
   };
 
   /**
-   * Control which additional fields to display in the address Element.
+   * Control which additional fields to display in the Address Element.
    */
   fields?: {
     phone?: 'always' | 'never' | 'auto';
@@ -206,17 +207,17 @@ export interface StripeAddressElementChangeEvent
   elementType: 'address';
 
   /**
-   * The mode of the address Element that emitted this event.
+   * The mode of the Address Element that emitted this event.
    */
   elementMode: AddressMode;
 
   /**
-   * Whether or not the address Element is currently empty.
+   * Whether or not the Address Element is currently empty.
    */
   empty: boolean;
 
   /**
-   * Whether or not the address Element is complete.
+   * Whether or not the Address Element is complete.
    */
   complete: boolean;
 
