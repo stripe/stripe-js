@@ -194,7 +194,7 @@ export interface StripeShippingAddressElementChangeEvent
   complete: boolean;
 
   /**
-   * Whether or not the the shipping address is new.
+   * Whether or not the shipping address is new.
    */
   isNewAddress: boolean;
 
