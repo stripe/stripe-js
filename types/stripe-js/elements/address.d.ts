@@ -143,7 +143,7 @@ export interface StripeAddressElementOptions {
   mode: AddressMode;
 
   /**
-   * An array of two-letter ISO country codes representing which countries 
+   * An array of two-letter ISO country codes representing which countries
    * are displayed in the Address Element.
    */
   allowedCountries?: string[] | null;
