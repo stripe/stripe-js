@@ -41,17 +41,43 @@ export interface StripePaymentMethodMessagingElementOptions {
   /**
    * The currency to display.
    */
-  currency: 'USD' | 'GBP' | 'EUR' | 'DKK' | 'NOK' | 'SEK' | 'AUD' | 'CAD' | 'NZD';
+  currency:
+    | 'USD'
+    | 'GBP'
+    | 'EUR'
+    | 'DKK'
+    | 'NOK'
+    | 'SEK'
+    | 'AUD'
+    | 'CAD'
+    | 'NZD';
 
   /**
    * Payment methods to show messaging for.
    */
-  paymentMethods: Array<'afterpay_clearpay' | 'klarna'>
+  paymentMethods: Array<'afterpay_clearpay' | 'klarna'>;
 
   /**
    * The country the end-buyer is in.
    */
-  countryCode:  'US' | 'CA' | 'AU' | 'NZ' | 'GB' | 'IE' | 'FR' | 'ES' | 'DE' | 'AT' | 'BE' | 'DK' | 'FI' | 'IT' | 'NL' | 'NO' | 'SE';
+  countryCode:
+    | 'US'
+    | 'CA'
+    | 'AU'
+    | 'NZ'
+    | 'GB'
+    | 'IE'
+    | 'FR'
+    | 'ES'
+    | 'DE'
+    | 'AT'
+    | 'BE'
+    | 'DK'
+    | 'FI'
+    | 'IT'
+    | 'NL'
+    | 'NO'
+    | 'SE';
 
   /**
    * The font color of the promotional message.

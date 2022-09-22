@@ -80,7 +80,7 @@ export interface StripeElements {
   /**
    * Creates an `paymentMethodMessaging`.
    */
-   create(
+  create(
     elementType: 'paymentMethodMessaging',
     options: StripePaymentMethodMessagingElementOptions
   ): StripePaymentMethodMessagingElement;
@@ -88,7 +88,9 @@ export interface StripeElements {
   /**
    * Looks up a previously created `Element` by its type.
    */
-  getElement(elementType: 'paymentMethodMessaging'): StripePaymentMethodMessagingElement | null;
+  getElement(
+    elementType: 'paymentMethodMessaging'
+  ): StripePaymentMethodMessagingElement | null;
 
   /////////////////////////////
   /// affirmMessage

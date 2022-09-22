@@ -274,9 +274,9 @@ const paymentMethodMessagingElement = elements.create(
     amount: 2000,
     paymentMethods: ['afterpay_clearpay', 'klarna'],
     countryCode: 'US',
-    currency: 'USD'
+    currency: 'USD',
   }
-)
+);
 
 const paymentElement: StripePaymentElement = elements.create('payment', {
   defaultValues: {
@@ -377,7 +377,10 @@ const retrievedAfterpayClearpayMessageElement: StripeAfterpayClearpayMessageElem
 retrievedAfterpayClearpayMessageElement!.update({currency: 'GBP'});
 
 // Test Payment Method Messaging Element
-paymentMethodMessagingElement.on('ready', (e: {elementType: 'paymentMethodMessaging'}) => {});
+paymentMethodMessagingElement.on(
+  'ready',
+  (e: {elementType: 'paymentMethodMessaging'}) => {}
+);
 
 const retrievedPaymentMethodMessagingElement: StripePaymentMethodMessagingElement | null = elements.getElement(
   'paymentMethodMessaging'
