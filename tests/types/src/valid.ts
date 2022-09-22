@@ -36,6 +36,7 @@ import {
   StripePaymentElement,
   StripeAffirmMessageElement,
   StripeAfterpayClearpayMessageElement,
+  StripePaymentMethodMessagingElement,
   StripeLinkAuthenticationElementChangeEvent,
   StripeLinkAuthenticationElement,
   StripeShippingAddressElementChangeEvent,
@@ -267,6 +268,16 @@ const afterpayClearpayMessageElement = elements.create(
   }
 );
 
+const paymentMethodMessagingElement = elements.create(
+  'paymentMethodMessaging',
+  {
+    amount: 2000,
+    paymentMethods: ['afterpay_clearpay', 'klarna'],
+    countryCode: 'US',
+    currency: 'USD'
+  }
+)
+
 const paymentElement: StripePaymentElement = elements.create('payment', {
   defaultValues: {
     billingDetails: {
@@ -344,6 +355,7 @@ paymentElement
 
 paymentElement.collapse();
 
+// Test Affirm Messaging Element
 affirmMessageElement.on('ready', (e: {elementType: 'affirmMessage'}) => {});
 
 const retrievedAffirmMessageElement: StripeAffirmMessageElement | null = elements.getElement(
@@ -352,6 +364,7 @@ const retrievedAffirmMessageElement: StripeAffirmMessageElement | null = element
 
 retrievedAffirmMessageElement!.update({amount: 10000});
 
+// Test Afterpay Messaging Element
 afterpayClearpayMessageElement.on(
   'ready',
   (e: {elementType: 'afterpayClearpayMessage'}) => {}
@@ -362,6 +375,15 @@ const retrievedAfterpayClearpayMessageElement: StripeAfterpayClearpayMessageElem
 );
 
 retrievedAfterpayClearpayMessageElement!.update({currency: 'GBP'});
+
+// Test Payment Method Messaging Element
+paymentMethodMessagingElement.on('ready', (e: {elementType: 'paymentMethodMessaging'}) => {});
+
+const retrievedPaymentMethodMessagingElement: StripePaymentMethodMessagingElement | null = elements.getElement(
+  'paymentMethodMessaging'
+);
+
+retrievedPaymentMethodMessagingElement!.update({amount: 10000});
 
 const epsBankElement = elements.create('epsBank', {
   style: MY_STYLE,

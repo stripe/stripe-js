@@ -1,4 +1,5 @@
 export * from './address';
+export * from './payment-method-messaging';
 export * from './affirm-message';
 export * from './afterpay-clearpay-message';
 export * from './au-bank-account';
