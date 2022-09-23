@@ -31,6 +31,8 @@ import {
   StripeAfterpayClearpayMessageElementOptions,
   StripeAffirmMessageElement,
   StripeAffirmMessageElementOptions,
+  StripePaymentMethodMessagingElementOptions,
+  StripePaymentMethodMessagingElement,
   StripeAfterpayClearpayMessageElement,
   StripeAuBankAccountElementOptions,
 } from './elements';
@@ -70,6 +72,25 @@ export interface StripeElements {
    * Looks up a previously created `Element` by its type.
    */
   getElement(elementType: 'address'): StripeAddressElement | null;
+
+  /////////////////////////////
+  /// paymentMethodMessaging
+  /////////////////////////////
+
+  /**
+   * Creates an `paymentMethodMessagingElement`.
+   */
+  create(
+    elementType: 'paymentMethodMessaging',
+    options: StripePaymentMethodMessagingElementOptions
+  ): StripePaymentMethodMessagingElement;
+
+  /**
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(
+    elementType: 'paymentMethodMessaging'
+  ): StripePaymentMethodMessagingElement | null;
 
   /////////////////////////////
   /// affirmMessage
