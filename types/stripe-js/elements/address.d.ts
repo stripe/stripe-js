@@ -171,6 +171,8 @@ export interface StripeAddressElementOptions {
    */
   defaultValues?: {
     name?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
     address?: {
       line1?: string | null;
       line2?: string | null;
@@ -196,6 +198,13 @@ export interface StripeAddressElementOptions {
     phone?: {
       required: 'always' | 'never' | 'auto';
     };
+  };
+
+  /**
+   * Specify display options in the AddressElement
+   */
+  display?: {
+    name?: 'full' | 'split' | 'organization';
   };
 }
 
@@ -231,6 +240,8 @@ export interface StripeAddressElementChangeEvent
    */
   value: {
     name: string;
+    firstName?: string;
+    lastName?: string;
     address: {
       line1: string;
       line2: string | null;

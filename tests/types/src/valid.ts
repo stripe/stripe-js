@@ -559,6 +559,9 @@ const addressElement = elements.create('address', {
       required: 'never',
     },
   },
+  display: {
+    name: 'full',
+  },
 });
 
 addressElement
