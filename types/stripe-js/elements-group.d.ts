@@ -78,7 +78,7 @@ export interface StripeElements {
   /////////////////////////////
 
   /**
-   * Creates an `paymentMethodMessaging`.
+   * Creates an `paymentMethodMessagingElement`.
    */
   create(
     elementType: 'paymentMethodMessaging',
