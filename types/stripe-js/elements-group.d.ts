@@ -416,6 +416,7 @@ export type StripeElementType =
   | 'idealBank'
   | 'p24Bank'
   | 'payment'
+  | 'paymentMethodMessaging'
   | 'paymentRequestButton'
   | 'linkAuthentication'
   | 'shippingAddress';
@@ -434,6 +435,7 @@ export type StripeElement =
   | StripeIdealBankElement
   | StripeP24BankElement
   | StripePaymentElement
+  | StripePaymentMethodMessagingElement
   | StripePaymentRequestButtonElement;
 
 export type StripeElementLocale =
