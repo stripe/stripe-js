@@ -5,7 +5,7 @@ import 'zx/globals';
 
 const VERSIONS = [
   'next',
-  // 'beta', TypeScript beta version is broken right now: https://github.com/microsoft/TypeScript/pull/50915
+  'beta',
   'latest',
   '3.9.7',
   '3.8.3',
