@@ -1580,6 +1580,26 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmPixPayment('', {})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPixPayment('', {
+    payment_method: '',
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPixPayment(
+    '',
+    {
+      payment_method: '',
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmPromptPayPayment('', {})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
