@@ -409,6 +409,24 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
+
+   * Use `stripe.confirmPixPayment` in the [Pix Payments](https://stripe.com/docs/payments/pix) with Payment Methods flow when the customer submits your payment form.
+   * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
+   * Refer to our [integration guide](https://stripe.com/docs/payments/pix) for more details.
+   *
+   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+   * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_pix_payment
+   */
+  confirmPixPayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmPixPaymentData,
+    options?: paymentIntents.ConfirmPixPaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+  /**
    * Requires beta access:
    * Contact [Stripe support](https://support.stripe.com/) for more information.
    *

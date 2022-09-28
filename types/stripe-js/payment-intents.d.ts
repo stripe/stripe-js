@@ -32,6 +32,7 @@ export type CreatePaymentMethodData =
   | CreatePaymentMethodP24Data
   | CreatePaymentMethodPayPalData
   | CreatePaymentMethodPayNowData
+  | CreatePaymentMethodPixData
   | CreatePaymentMethodPromptPayData
   | CreatePaymentMethodFpxData
   | CreatePaymentMethodUsBankAccountData
@@ -287,6 +288,10 @@ export interface CreatePaymentMethodPayNowData
 export interface CreatePaymentMethodPayPalData
   extends PaymentMethodCreateParams {
   type: 'paypal';
+}
+
+export interface CreatePaymentMethodPixData extends PaymentMethodCreateParams {
+  type: 'pix';
 }
 
 export interface CreatePaymentMethodPromptPayData
@@ -1050,6 +1055,31 @@ export interface ConfirmPayPalPaymentData extends PaymentIntentConfirmParams {
  * An options object to control the behavior of `stripe.confirmP24Payment`.
  */
 export interface ConfirmP24PaymentOptions {
+  /**
+   * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/p24#handle-redirect).
+   * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmPixPayment` request.
+ * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmPixPaymentData extends PaymentIntentConfirmParams {
+  /**
+   * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodPixData, 'type'>;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmPayNowPayment`.
+ */
+export interface ConfirmPixPaymentOptions {
   /**
    * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/p24#handle-redirect).
    * Default is `true`.
