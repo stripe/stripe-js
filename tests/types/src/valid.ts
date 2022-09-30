@@ -2376,7 +2376,61 @@ stripe
     if (result.financialConnectionsSession) {
       const numAccounts = result.financialConnectionsSession.accounts.length;
       const accountNames = result.financialConnectionsSession.accounts.map(
-        (account) => account.display_name
+        (account) => {
+          if (account.balance) {
+            console.log(account.balance.as_of);
+            console.log(
+              account.balance.current.usd && account.balance.current.usd > 0
+            );
+
+            if (
+              account.balance.type === 'cash' &&
+              account.balance.cash.available.usd
+            ) {
+              console.log(account.balance.cash.available.usd > 0);
+            }
+
+            if (
+              account.balance.type === 'credit' &&
+              account.balance.credit.used.usd
+            ) {
+              console.log(account.balance.credit.used.usd > 0);
+            }
+          }
+
+          if (
+            account.balance_refresh &&
+            account.balance_refresh.status === 'pending'
+          ) {
+          }
+
+          if (
+            account.ownership_refresh &&
+            account.ownership_refresh.status === 'failed'
+          ) {
+          }
+
+          console.log(
+            account.supported_payment_method_types.includes('us_bank_account')
+          );
+
+          if (account.livemode) {
+          }
+
+          if (account.permissions.includes('balances')) {
+          }
+
+          if (account.status === 'inactive') {
+          }
+
+          if (
+            account.category === 'cash' &&
+            account.subcategory === 'checking'
+          ) {
+          }
+
+          return account.display_name;
+        }
       );
 
       console.log(numAccounts);
