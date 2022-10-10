@@ -44,6 +44,23 @@ paymentElement.on('change', (e) => {
 // @ts-expect-error: AddressElement requires a mode
 elements.create('address');
 
+// @ts-expect-error: No overload matches this call
+elements.create('issuingCardNumberDisplay');
+
+// @ts-expect-error: No overload matches this call
+elements.create('issuingCardCvcDisplay');
+
+// @ts-expect-error: No overload matches this call
+elements.create('issuingCardExpiryDisplay');
+
+// @ts-expect-error: No overload matches this call
+elements.create('issuingCardPinDisplay');
+
+elements.create('issuingCardCopyButton', {
+  // @ts-expect-error: Type '"non_existent"' is not assignable to type '"number" | "expiry" | "cvc" | "pin"'
+  toCopy: 'non_existent',
+});
+
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
   .then((res) => {
@@ -147,3 +164,9 @@ stripe.createToken(ibanElement, {
   account_holder_name: '',
   extra_property: '',
 });
+
+// @ts-expect-error: Argument of type '{}' is not assignable to parameter of type 'EphemeralKeyNonceOptions'
+stripe.createEphemeralKeyNonce({});
+
+// @ts-expect-error: Expected 1 arguments, but got 0
+stripe.createEphemeralKeyNonce();

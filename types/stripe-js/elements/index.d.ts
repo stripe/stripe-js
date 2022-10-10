@@ -17,3 +17,4 @@ export * from './p24-bank';
 export * from './payment-request-button';
 export * from './payment';
 export * from './shipping-address';
+export * from './issuing';

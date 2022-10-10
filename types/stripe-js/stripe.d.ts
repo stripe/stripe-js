@@ -5,6 +5,7 @@ import * as orders from './orders';
 import * as tokens from './token-and-sources';
 import * as elements from './elements';
 import * as financialConnections from './financial-connections';
+import * as ephemeralKeys from './ephemeral-keys';
 
 import {StripeElements, StripeElementsOptions} from './elements-group';
 import {CheckoutLocale, RedirectToCheckoutOptions} from './checkout';
@@ -1024,6 +1025,15 @@ export interface Stripe {
   collectBankAccountToken(
     options: financialConnections.CollectBankAccountTokenOptions
   ): Promise<CollectBankAccountTokenResult>;
+
+  /**
+   * Use `stripe.createEphemeralKeyNonce` to create an ephemeral key nonce that lets you securely create ephemeral keys
+   *
+   * * @docs https://stripe.com/docs/js/issuing/create_ephemeral_key_nonce
+   */
+  createEphemeralKeyNonce(
+    options: ephemeralKeys.EphemeralKeyNonceOptions
+  ): Promise<EphemeralKeyNonceResult>;
 }
 
 export type PaymentIntentResult =
@@ -1077,6 +1087,10 @@ export type CollectBankAccountTokenResult =
       token: undefined;
       error: StripeError;
     };
+
+export type EphemeralKeyNonceResult =
+  | {nonce: string; error?: undefined}
+  | {nonce?: undefined; error: StripeError};
 
 /* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments. 
   This metadata includes information like IP address, browser, screen or device information, and other device characteristics. 
