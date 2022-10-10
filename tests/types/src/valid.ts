@@ -2668,3 +2668,7 @@ issuingCopyButtonElement.update({
     },
   },
 });
+
+stripe.createEphemeralKeyNonce({
+  issuingCard: '',
+});

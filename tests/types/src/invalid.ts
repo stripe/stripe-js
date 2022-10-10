@@ -164,3 +164,9 @@ stripe.createToken(ibanElement, {
   account_holder_name: '',
   extra_property: '',
 });
+
+// @ts-expect-error: Argument of type '{}' is not assignable to parameter of type 'EphemeralKeyNonceOptions'
+stripe.createEphemeralKeyNonce({});
+
+// @ts-expect-error: Expected 1 arguments, but got 0
+stripe.createEphemeralKeyNonce();
