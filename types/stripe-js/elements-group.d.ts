@@ -35,6 +35,16 @@ import {
   StripePaymentMethodMessagingElement,
   StripeAfterpayClearpayMessageElement,
   StripeAuBankAccountElementOptions,
+  StripeIssuingCardNumberDisplayElement,
+  StripeIssuingCardNumberDisplayElementOptions,
+  StripeIssuingCardCvcDisplayElement,
+  StripeIssuingCardCvcDisplayElementOptions,
+  StripeIssuingCardExpiryDisplayElement,
+  StripeIssuingCardExpiryDisplayElementOptions,
+  StripeIssuingCardPinDisplayElement,
+  StripeIssuingCardPinDisplayElementOptions,
+  StripeIssuingCardCopyButtonElement,
+  StripeIssuingCardCopyButtonElementOptions,
 } from './elements';
 
 export interface StripeElements {
@@ -399,6 +409,60 @@ export interface StripeElements {
   getElement(
     elementType: 'shippingAddress'
   ): StripeShippingAddressElement | null;
+
+  /////////////////////////////
+  /// issuing
+  /////////////////////////////
+
+  /**
+   * Creates an `issuingCardNumberDisplay` Element
+   *
+   * @docs https://stripe.com/docs/js/issuing_elements/create?type=issuingCardNumberDisplay
+   */
+  create(
+    elementType: 'issuingCardNumberDisplay',
+    options: StripeIssuingCardNumberDisplayElementOptions
+  ): StripeIssuingCardNumberDisplayElement;
+
+  /**
+   * Creates an `issuingCardCvcDisplay` Element
+   *
+   * @docs https://stripe.com/docs/js/issuing_elements/create?type=issuingCardCvcDisplay
+   */
+  create(
+    elementType: 'issuingCardCvcDisplay',
+    options: StripeIssuingCardCvcDisplayElementOptions
+  ): StripeIssuingCardCvcDisplayElement;
+
+  /**
+   * Creates an `issuingCardExpiryDisplay` Element
+   *
+   * @docs https://stripe.com/docs/js/issuing_elements/create?type=issuingCardExpiryDisplay
+   */
+  create(
+    elementType: 'issuingCardExpiryDisplay',
+    options: StripeIssuingCardExpiryDisplayElementOptions
+  ): StripeIssuingCardExpiryDisplayElement;
+
+  /**
+   * Creates an `issuingCardPinDisplay` Element
+   *
+   * @docs https://stripe.com/docs/js/issuing_elements/create?type=issuingCardPinDisplay
+   */
+  create(
+    elementType: 'issuingCardPinDisplay',
+    options: StripeIssuingCardPinDisplayElementOptions
+  ): StripeIssuingCardPinDisplayElement;
+
+  /**
+   * Creates an `issuingCardCopyButton` Element
+   *
+   * @docs https://stripe.com/docs/js/issuing_elements/create?type=issuingCardCopyButton
+   */
+  create(
+    elementType: 'issuingCardCopyButton',
+    options: StripeIssuingCardCopyButtonElementOptions
+  ): StripeIssuingCardCopyButtonElement;
 }
 
 export type StripeElementType =
@@ -419,7 +483,12 @@ export type StripeElementType =
   | 'paymentMethodMessaging'
   | 'paymentRequestButton'
   | 'linkAuthentication'
-  | 'shippingAddress';
+  | 'shippingAddress'
+  | 'issuingCardNumberDisplay'
+  | 'issuingCardCvcDisplay'
+  | 'issuingCardExpiryDisplay'
+  | 'issuingCardPinDisplay'
+  | 'issuingCardCopyButton';
 
 export type StripeElement =
   | StripeAffirmMessageElement
@@ -436,7 +505,12 @@ export type StripeElement =
   | StripeP24BankElement
   | StripePaymentElement
   | StripePaymentMethodMessagingElement
-  | StripePaymentRequestButtonElement;
+  | StripePaymentRequestButtonElement
+  | StripeIssuingCardNumberDisplayElement
+  | StripeIssuingCardCvcDisplayElement
+  | StripeIssuingCardExpiryDisplayElement
+  | StripeIssuingCardPinDisplayElement
+  | StripeIssuingCardCopyButtonElement;
 
 export type StripeElementLocale =
   | 'auto'

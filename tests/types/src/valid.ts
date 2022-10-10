@@ -2564,3 +2564,107 @@ paymentRequest.on(
     });
   }
 );
+
+const issuingCardElement = elements.create('issuingCardNumberDisplay', {
+  issuingCard: '',
+  nonce: '',
+  ephemeralKeySecret: '',
+  style: {
+    base: {
+      fontSize: '2rem',
+    },
+  },
+});
+
+issuingCardElement.mount('#bogus-container');
+
+issuingCardElement.update({
+  style: {
+    base: {
+      fontSize: '5rem',
+    },
+  },
+});
+
+const issuingCvcElement = elements.create('issuingCardCvcDisplay', {
+  issuingCard: '',
+  nonce: '',
+  ephemeralKeySecret: '',
+  style: {
+    base: {
+      fontSize: '2rem',
+    },
+  },
+});
+
+issuingCvcElement.mount('#bogus-container');
+
+issuingCvcElement.update({
+  style: {
+    base: {
+      fontSize: '5rem',
+    },
+  },
+});
+
+const issuingExpiryElement = elements.create('issuingCardExpiryDisplay', {
+  issuingCard: '',
+  nonce: '',
+  ephemeralKeySecret: '',
+  style: {
+    base: {
+      fontSize: '2rem',
+    },
+  },
+});
+
+issuingExpiryElement.mount('#bogus-container');
+
+issuingExpiryElement.update({
+  style: {
+    base: {
+      fontSize: '5rem',
+    },
+  },
+});
+
+const issuingPinElement = elements.create('issuingCardPinDisplay', {
+  issuingCard: '',
+  nonce: '',
+  ephemeralKeySecret: '',
+  style: {
+    base: {
+      fontSize: '2rem',
+    },
+  },
+});
+
+issuingPinElement.mount('#bogus-container');
+
+issuingPinElement.update({
+  style: {
+    base: {
+      fontSize: '5rem',
+    },
+  },
+});
+
+const issuingCopyButtonElement = elements.create('issuingCardCopyButton', {
+  toCopy: 'pin',
+  style: {
+    base: {
+      fontSize: '2rem',
+    },
+  },
+});
+
+issuingCopyButtonElement.mount('#bogus-container');
+
+issuingCopyButtonElement.update({
+  toCopy: 'number',
+  style: {
+    base: {
+      fontSize: '5rem',
+    },
+  },
+});

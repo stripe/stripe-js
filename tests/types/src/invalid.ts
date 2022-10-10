@@ -44,6 +44,23 @@ paymentElement.on('change', (e) => {
 // @ts-expect-error: AddressElement requires a mode
 elements.create('address');
 
+// @ts-expect-error: No overload matches this call
+elements.create('issuingCardNumberDisplay');
+
+// @ts-expect-error: No overload matches this call
+elements.create('issuingCardCvcDisplay');
+
+// @ts-expect-error: No overload matches this call
+elements.create('issuingCardExpiryDisplay');
+
+// @ts-expect-error: No overload matches this call
+elements.create('issuingCardPinDisplay');
+
+elements.create('issuingCardCopyButton', {
+  // @ts-expect-error: Type '"non_existent"' is not assignable to type '"number" | "expiry" | "cvc" | "pin"'
+  toCopy: 'non_existent',
+});
+
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
   .then((res) => {
