@@ -27,6 +27,8 @@ import {
   StripeCardNumberElementOptions,
   StripeCardElement,
   StripeCardElementOptions,
+  StripeCartElement,
+  StripeCartElementOptions,
   StripeAuBankAccountElement,
   StripeAfterpayClearpayMessageElementOptions,
   StripeAffirmMessageElement,
@@ -228,6 +230,30 @@ export interface StripeElements {
    * Looks up a previously created `Element` by its type.
    */
   getElement(elementType: 'cardCvc'): StripeCardCvcElement | null;
+
+
+  /////////////////////////////
+  /// cart
+  /////////////////////////////
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Creates a `CartElement`.
+   */
+   create(
+    elementType: 'cart',
+    options: StripeCartElementOptions
+  ): StripeCartElement;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(elementType: 'cart'): StripeCartElement | null;
 
   /////////////////////////////
   /// fpxBank
@@ -474,6 +500,7 @@ export type StripeElementType =
   | 'cardNumber'
   | 'cardExpiry'
   | 'cardCvc'
+  | 'cart'
   | 'epsBank'
   | 'fpxBank'
   | 'iban'
@@ -491,6 +518,7 @@ export type StripeElementType =
   | 'issuingCardCopyButton';
 
 export type StripeElement =
+  | StripeAddressElement
   | StripeAffirmMessageElement
   | StripeAfterpayClearpayMessageElement
   | StripeAuBankAccountElement
@@ -498,6 +526,7 @@ export type StripeElement =
   | StripeCardNumberElement
   | StripeCardExpiryElement
   | StripeCardCvcElement
+  | StripeCartElement
   | StripeEpsBankElement
   | StripeFpxBankElement
   | StripeIbanElement
@@ -510,7 +539,9 @@ export type StripeElement =
   | StripeIssuingCardCvcDisplayElement
   | StripeIssuingCardExpiryDisplayElement
   | StripeIssuingCardPinDisplayElement
-  | StripeIssuingCardCopyButtonElement;
+  | StripeIssuingCardCopyButtonElement
+  | StripeLinkAuthenticationElement
+  | StripeShippingAddressElement;
 
 export type StripeElementLocale =
   | 'auto'

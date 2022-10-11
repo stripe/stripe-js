@@ -43,6 +43,10 @@ import {
   StripeShippingAddressElement,
   StripeAddressElementChangeEvent,
   StripeAddressElement,
+  StripeCartElementChangeEvent,
+  StripeCartElementLineitemclickEvent,
+  StripeCartElementCheckoutEvent,
+  StripeCartElement,
   StripeElementType,
   CanMakePaymentResult,
   VerificationSession,
@@ -646,6 +650,50 @@ shippingAddressElement.update({
 
 const retrievedShippingAddressElement: StripeShippingAddressElement | null = elements.getElement(
   'shippingAddress'
+);
+
+let cartElementDefaults: StripeCartElement = elements.create('cart', {
+  clientSecret: '',
+});
+
+const cartElement = elements.create('cart', {
+  clientSecret: '',
+  descriptor: 'cart',
+  header: {
+    text: 'cart'
+  },
+  showOnAdd: 'auto',
+});
+
+cartElement.on('ready', (e: {elementType: 'cart'}) => {})
+
+cartElement.on('lineitemclick', (e: StripeCartElementLineitemclickEvent) => {})
+
+cartElement.on('change', (e: StripeCartElementChangeEvent) => {})
+
+cartElement.on('checkout', (e: StripeCartElementCheckoutEvent) => {})
+
+cartElement.on(
+  'loaderror',
+  (e: {
+    elementType: 'cart';
+    error: {
+      type: string;
+    };
+  }) => {}
+);
+
+cartElement.update({
+  clientSecret: '',
+  descriptor: 'bag',
+  header: {
+    text: 'Your Cart'
+  },
+  showOnAdd: 'never',
+});
+
+const retrievedCartElement: StripeCartElement | null = elements.getElement(
+  'cart'
 );
 
 auBankAccountElement.destroy();
