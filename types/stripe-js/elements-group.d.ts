@@ -539,7 +539,6 @@ export type StripeElement =
   | StripeIssuingCardExpiryDisplayElement
   | StripeIssuingCardPinDisplayElement
   | StripeIssuingCardCopyButtonElement
-  | StripeLinkAuthenticationElement
   | StripeShippingAddressElement;
 
 export type StripeElementLocale =
