@@ -1,4 +1,4 @@
-import {StripeElementBase, StripeElementChangeEvent} from './base';
+import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
 
 export type StripeCartElement = StripeElementBase & {
@@ -7,15 +7,15 @@ export type StripeCartElement = StripeElementBase & {
    */
   on(
     eventType: 'change',
-    handler: (event: StripeCartElementChangeEvent) => any
+    handler: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
   once(
     eventType: 'change',
-    handler: (event: StripeCartElementChangeEvent) => any
+    handler: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
   off(
     eventType: 'change',
-    handler?: (event: StripeCartElementChangeEvent) => any
+    handler?: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
 
   /**
@@ -23,15 +23,15 @@ export type StripeCartElement = StripeElementBase & {
    */
   on(
     eventType: 'ready',
-    handler: (event: StripeCartElementChangeEvent) => any
+    handler: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
   once(
     eventType: 'ready',
-    handler: (event: StripeCartElementChangeEvent) => any
+    handler: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
   off(
     eventType: 'ready',
-    handler?: (event: StripeCartElementChangeEvent) => any
+    handler?: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
 
   /**
@@ -55,15 +55,15 @@ export type StripeCartElement = StripeElementBase & {
    */
   on(
     eventType: 'checkout',
-    handler: (event: StripeCartElementChangeEvent) => any
+    handler: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
   once(
     eventType: 'checkout',
-    handler: (event: StripeCartElementChangeEvent) => any
+    handler: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
   off(
     eventType: 'checkout',
-    handler?: (event: StripeCartElementChangeEvent) => any
+    handler?: (event: StripeCartElementPayloadEvent) => any
   ): StripeCartElement;
 
   /**
@@ -120,7 +120,7 @@ export interface StripeCartElementOptions {
   showOnAdd?: CartShowOnAdd | null;
 }
 
-export interface StripeCartElementChangeEvent extends StripeElementChangeEvent {
+export interface StripeCartElementPayloadEvent {
   /**
    * The type of element that emitted this event.
    */

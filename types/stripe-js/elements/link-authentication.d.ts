@@ -1,4 +1,4 @@
-import {StripeElementBase, StripeElementChangeEvent} from './base';
+import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
 
 export type StripeLinkAuthenticationElement = StripeElementBase & {
@@ -133,8 +133,7 @@ export interface StripeLinkAuthenticationElementOptions {
   };
 }
 
-export interface StripeLinkAuthenticationElementChangeEvent
-  extends StripeElementChangeEvent {
+export interface StripeLinkAuthenticationElementChangeEvent {
   /**
    * The type of element that emitted this event.
    */

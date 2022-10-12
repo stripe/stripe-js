@@ -1,4 +1,4 @@
-import {StripeElementBase, StripeElementChangeEvent} from './base';
+import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
 
 export type StripeShippingAddressElement = StripeElementBase & {
@@ -176,8 +176,7 @@ export interface StripeShippingAddressElementOptions {
   };
 }
 
-export interface StripeShippingAddressElementChangeEvent
-  extends StripeElementChangeEvent {
+export interface StripeShippingAddressElementChangeEvent {
   /**
    * The type of element that emitted this event.
    */

@@ -43,7 +43,7 @@ import {
   StripeShippingAddressElement,
   StripeAddressElementChangeEvent,
   StripeAddressElement,
-  StripeCartElementChangeEvent,
+  StripeCartElementPayloadEvent,
   StripeCartElementLineItemClickEvent,
   StripeCartElement,
   StripeElementType,
@@ -664,7 +664,7 @@ const cartElement = elements.create('cart', {
   showOnAdd: 'auto',
 });
 
-cartElement.on('ready', (e: StripeCartElementChangeEvent) => {
+cartElement.on('ready', (e: StripeCartElementPayloadEvent) => {
   console.log(e.lineItems.count);
 });
 
@@ -673,11 +673,11 @@ cartElement.on('lineitemclick', (e: StripeCartElementLineItemClickEvent) => {
   console.log(e.url);
 });
 
-cartElement.on('change', (e: StripeCartElementChangeEvent) => {
+cartElement.on('change', (e: StripeCartElementPayloadEvent) => {
   console.log(e.lineItems.count);
 });
 
-cartElement.on('checkout', (e: StripeCartElementChangeEvent) => {
+cartElement.on('checkout', (e: StripeCartElementPayloadEvent) => {
   console.log(e.lineItems.count);
 });
 
