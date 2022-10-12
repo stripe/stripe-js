@@ -45,7 +45,6 @@ import {
   StripeAddressElement,
   StripeCartElementChangeEvent,
   StripeCartElementLineitemclickEvent,
-  StripeCartElementCheckoutEvent,
   StripeCartElement,
   StripeElementType,
   CanMakePaymentResult,
@@ -665,13 +664,22 @@ const cartElement = elements.create('cart', {
   showOnAdd: 'auto',
 });
 
-cartElement.on('ready', (e: {elementType: 'cart'}) => {})
+cartElement.on('ready', (e: StripeCartElementChangeEvent) => {
+  console.log(e.lineItems.count)
+})
 
-cartElement.on('lineitemclick', (e: StripeCartElementLineitemclickEvent) => {})
+cartElement.on('lineitemclick', (e: StripeCartElementLineitemclickEvent) => {
+  e.preventDefault();
+  console.log(e.url)
+})
 
-cartElement.on('change', (e: StripeCartElementChangeEvent) => {})
+cartElement.on('change', (e: StripeCartElementChangeEvent) => {
+  console.log(e.lineItems.count)
+})
 
-cartElement.on('checkout', (e: StripeCartElementCheckoutEvent) => {})
+cartElement.on('checkout', (e: StripeCartElementChangeEvent) => {
+  console.log(e.lineItems.count)
+})
 
 cartElement.on(
   'loaderror',

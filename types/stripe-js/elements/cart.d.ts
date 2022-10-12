@@ -23,15 +23,15 @@ export type StripeCartElement = StripeElementBase & {
    */
   on(
     eventType: 'ready',
-    handler: (event: {elementType: 'cart'}) => any
+    handler: (event: StripeCartElementChangeEvent) => any
   ): StripeCartElement;
   once(
     eventType: 'ready',
-    handler: (event: {elementType: 'cart'}) => any
+    handler: (event: StripeCartElementChangeEvent) => any
   ): StripeCartElement;
   off(
     eventType: 'ready',
-    handler?: (event: {elementType: 'cart'}) => any
+    handler?: (event: StripeCartElementChangeEvent) => any
   ): StripeCartElement;
 
   /**
@@ -55,15 +55,15 @@ export type StripeCartElement = StripeElementBase & {
    */
   on(
     eventType: 'checkout',
-    handler: (event: StripeCartElementCheckoutEvent) => any
+    handler: (event: StripeCartElementChangeEvent) => any
   ): StripeCartElement;
   once(
     eventType: 'checkout',
-    handler: (event: StripeCartElementCheckoutEvent) => any
+    handler: (event: StripeCartElementChangeEvent) => any
   ): StripeCartElement;
   off(
     eventType: 'checkout',
-    handler?: (event: StripeCartElementCheckoutEvent) => any
+    handler?: (event: StripeCartElementChangeEvent) => any
   ): StripeCartElement;
 
   /**
@@ -144,30 +144,15 @@ export interface StripeCartElementLineitemclickEvent {
   /**
    * The type of element that emitted this event.
    */
-  url: string;
+  elementType: 'cart';
 
   /**
    * The ID of the CartSession associated with the Element.
    */
-  preventDefault: () => {};
-}
+  preventDefault: () => void;
 
-export interface StripeCartElementCheckoutEvent {
   /**
    * The type of element that emitted this event.
    */
-  elementType: 'cart';
-  
-  /**
-   * The ID of the CartSession associated with the Element.
-   */
-  id: string;
-  
-  /**
-   * The number of line items currently in the cart.
-   */
-  lineItems: {
-    count: number;
-  };
+  url: string;
 }
-
