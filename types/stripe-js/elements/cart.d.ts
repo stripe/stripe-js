@@ -71,15 +71,15 @@ export type StripeCartElement = StripeElementBase & {
    */
   on(
     eventType: 'lineitemclick',
-    handler: (event: StripeCartElementLineitemclickEvent) => any
+    handler: (event: StripeCartElementLineItemClickEvent) => any
   ): StripeCartElement;
   once(
     eventType: 'lineitemclick',
-    handler: (event: StripeCartElementLineitemclickEvent) => any
+    handler: (event: StripeCartElementLineItemClickEvent) => any
   ): StripeCartElement;
   off(
     eventType: 'lineitemclick',
-    handler?: (event: StripeCartElementLineitemclickEvent) => any
+    handler?: (event: StripeCartElementLineItemClickEvent) => any
   ): StripeCartElement;
 
   /**
@@ -139,7 +139,7 @@ export interface StripeCartElementChangeEvent extends StripeElementChangeEvent {
   };
 }
 
-export interface StripeCartElementLineitemclickEvent {
+export interface StripeCartElementLineItemClickEvent {
   /**
    * The type of element that emitted this event.
    */

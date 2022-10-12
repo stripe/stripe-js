@@ -44,7 +44,7 @@ import {
   StripeAddressElementChangeEvent,
   StripeAddressElement,
   StripeCartElementChangeEvent,
-  StripeCartElementLineitemclickEvent,
+  StripeCartElementLineItemClickEvent,
   StripeCartElement,
   StripeElementType,
   CanMakePaymentResult,
@@ -668,7 +668,7 @@ cartElement.on('ready', (e: StripeCartElementChangeEvent) => {
   console.log(e.lineItems.count);
 });
 
-cartElement.on('lineitemclick', (e: StripeCartElementLineitemclickEvent) => {
+cartElement.on('lineitemclick', (e: StripeCartElementLineItemClickEvent) => {
   e.preventDefault();
   console.log(e.url);
 });
