@@ -231,7 +231,6 @@ export interface StripeElements {
    */
   getElement(elementType: 'cardCvc'): StripeCardCvcElement | null;
 
-
   /////////////////////////////
   /// cart
   /////////////////////////////
@@ -242,7 +241,7 @@ export interface StripeElements {
    *
    * Creates a `CartElement`.
    */
-   create(
+  create(
     elementType: 'cart',
     options: StripeCartElementOptions
   ): StripeCartElement;

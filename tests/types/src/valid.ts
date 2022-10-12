@@ -659,27 +659,27 @@ const cartElement = elements.create('cart', {
   clientSecret: '',
   descriptor: 'cart',
   header: {
-    text: 'cart'
+    text: 'cart',
   },
   showOnAdd: 'auto',
 });
 
 cartElement.on('ready', (e: StripeCartElementChangeEvent) => {
-  console.log(e.lineItems.count)
-})
+  console.log(e.lineItems.count);
+});
 
 cartElement.on('lineitemclick', (e: StripeCartElementLineitemclickEvent) => {
   e.preventDefault();
-  console.log(e.url)
-})
+  console.log(e.url);
+});
 
 cartElement.on('change', (e: StripeCartElementChangeEvent) => {
-  console.log(e.lineItems.count)
-})
+  console.log(e.lineItems.count);
+});
 
 cartElement.on('checkout', (e: StripeCartElementChangeEvent) => {
-  console.log(e.lineItems.count)
-})
+  console.log(e.lineItems.count);
+});
 
 cartElement.on(
   'loaderror',
@@ -695,7 +695,7 @@ cartElement.update({
   clientSecret: '',
   descriptor: 'bag',
   header: {
-    text: 'Your Cart'
+    text: 'Your Cart',
   },
   showOnAdd: 'never',
 });

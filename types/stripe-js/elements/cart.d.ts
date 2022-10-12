@@ -69,7 +69,7 @@ export type StripeCartElement = StripeElementBase & {
   /**
    * Triggered when a line item in the element is clicked
    */
-   on(
+  on(
     eventType: 'lineitemclick',
     handler: (event: StripeCartElementLineitemclickEvent) => any
   ): StripeCartElement;
@@ -110,8 +110,8 @@ export interface StripeCartElementOptions {
    * By default the Cart Element will use the title 'Your [descriptor]'.
    */
   header?: {
-    text?: string
-  }
+    text?: string;
+  };
 
   /**
    * Control whether the Element automatically appears when items are added to the cart.
@@ -120,8 +120,7 @@ export interface StripeCartElementOptions {
   showOnAdd?: CartShowOnAdd | null;
 }
 
-export interface StripeCartElementChangeEvent
-  extends StripeElementChangeEvent {
+export interface StripeCartElementChangeEvent extends StripeElementChangeEvent {
   /**
    * The type of element that emitted this event.
    */
