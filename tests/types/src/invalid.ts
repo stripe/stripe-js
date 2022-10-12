@@ -61,6 +61,9 @@ elements.create('issuingCardCopyButton', {
   toCopy: 'non_existent',
 });
 
+// @ts-expect-error: CartElement requires a clientSecret
+elements.create('cart');
+
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
   .then((res) => {
