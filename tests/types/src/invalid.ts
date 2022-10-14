@@ -4,6 +4,7 @@ import {
   StripeCardElement,
   StripeIbanElement,
   StripePaymentElement,
+  StripeCartElement,
 } from '../../../types';
 
 declare const stripe: Stripe;
@@ -11,6 +12,7 @@ declare const elements: StripeElements;
 declare const cardElement: StripeCardElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
+declare const cartElement: StripeCartElement;
 
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
@@ -40,6 +42,18 @@ paymentElement.on('change', (e) => {
   if (e.error) {
   }
 });
+
+// @ts-expect-error: either `product` or `price` is required
+cartElement.addLineItem({});
+
+// @ts-expect-error: either `product` or `price` is required
+cartElement.addLineItem({quantity: 1});
+
+// @ts-expect-error: only one of `product` or `price` may be specified
+cartElement.addLineItem({product: '', price: ''});
+
+// @ts-expect-error: `clientSecret` is not updatable
+cartElement.update({clientSecret: ''});
 
 // @ts-expect-error: AddressElement requires a mode
 elements.create('address');

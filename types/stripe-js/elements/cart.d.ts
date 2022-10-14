@@ -86,7 +86,39 @@ export type StripeCartElement = StripeElementBase & {
    * Updates the options the `CartElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
-  update(options: Partial<StripeCartElementOptions>): StripeCartElement;
+  update(options: StripeCartElementUpdateOptions): StripeCartElement;
+
+  /**
+   * Makes the Cart Element visible
+   */
+  show(): StripeCartElement;
+
+  /**
+   * Makes the Cart Element not visible
+   */
+  hide(): StripeCartElement;
+
+  /**
+   * Cancels the "Check Out" button loader and displays an error message regarding why going to checkout failed
+   */
+  cancelCheckout(errorMessage?: string | null): StripeCartElement;
+
+  /**
+   * Adds a line item to the CartSession
+   */
+  addLineItem(
+    lineItemData:
+      | {
+          product: string;
+          price?: null;
+          quantity?: number | null;
+        }
+      | {
+          price: string;
+          product?: null;
+          quantity?: number | null;
+        }
+  ): Promise<{error?: StripeError}>;
 };
 
 export type CartDescriptor = 'cart' | 'bag' | 'basket';
@@ -110,7 +142,32 @@ export interface StripeCartElementOptions {
    * By default the Cart Element will use the title 'Your [descriptor]'.
    */
   header?: {
-    text?: string;
+    text?: string | null;
+  };
+
+  /**
+   * Control whether the Element automatically appears when items are added to the cart.
+   * By default, the Cart Element will use 'auto'.
+   */
+  showOnAdd?: CartShowOnAdd | null;
+}
+
+/*
+ * Updatable options for an `Elements` instance
+ */
+export interface StripeCartElementUpdateOptions {
+  /**
+   * Override the verbiage used within the Element to refer to itself.
+   * By default the Cart Element will use the term 'cart'.
+   */
+  descriptor?: CartDescriptor | null;
+
+  /**
+   * Override the text used in the title of the Element.
+   * By default the Cart Element will use the title 'Your [descriptor]'.
+   */
+  header?: {
+    text?: string | null;
   };
 
   /**
