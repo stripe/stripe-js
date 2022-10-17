@@ -664,6 +664,22 @@ const cartElement = elements.create('cart', {
   showOnAdd: 'auto',
 });
 
+cartElement.show();
+
+cartElement.hide();
+
+cartElement.cancelCheckout();
+
+cartElement.cancelCheckout('Error message');
+
+cartElement.addLineItem({product: ''});
+
+cartElement.addLineItem({price: ''});
+
+cartElement.addLineItem({product: '', quantity: 1});
+
+cartElement.addLineItem({price: '', quantity: 1});
+
 cartElement.on('ready', (e: StripeCartElementPayloadEvent) => {
   console.log(e.lineItems.count);
 });
@@ -692,8 +708,6 @@ cartElement.on(
 );
 
 cartElement.update({
-  clientSecret: '',
-  descriptor: 'bag',
   header: {
     text: 'Your Cart',
   },
