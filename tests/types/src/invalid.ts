@@ -55,6 +55,9 @@ cartElement.addLineItem({product: '', price: ''});
 // @ts-expect-error: `clientSecret` is not updatable
 cartElement.update({clientSecret: ''});
 
+// @ts-expect-error: cartElement has no function `escape`
+cartElement.escape();
+
 // @ts-expect-error: AddressElement requires a mode
 elements.create('address');
 

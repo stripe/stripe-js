@@ -157,12 +157,6 @@ export interface StripeCartElementOptions {
  */
 export interface StripeCartElementUpdateOptions {
   /**
-   * Override the verbiage used within the Element to refer to itself.
-   * By default the Cart Element will use the term 'cart'.
-   */
-  descriptor?: CartDescriptor | null;
-
-  /**
    * Override the text used in the title of the Element.
    * By default the Cart Element will use the title 'Your [descriptor]'.
    */

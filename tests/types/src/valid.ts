@@ -708,7 +708,6 @@ cartElement.on(
 );
 
 cartElement.update({
-  descriptor: 'bag',
   header: {
     text: 'Your Cart',
   },
