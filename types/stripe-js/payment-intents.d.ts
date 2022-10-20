@@ -653,14 +653,14 @@ export interface ConfirmCustomerBalancePaymentData
       funding_type?: 'bank_transfer';
       bank_transfer?: {
         type:
-          | 'us_bank_transfer'
           | 'eu_bank_transfer'
-          | 'id_bank_transfer'
           | 'gb_bank_transfer'
+          | 'id_bank_transfer'
           | 'jp_bank_transfer'
-          | 'mx_bank_transfer';
+          | 'mx_bank_transfer'
+          | 'us_bank_transfer';
         eu_bank_transfer?: {
-          country: 'ES' | 'FR' | 'IE' | 'NL';
+          country: 'DE' | 'ES' | 'FR' | 'IE' | 'NL';
         };
         id_bank_transfer?: {
           bank: 'bni' | 'bca';
