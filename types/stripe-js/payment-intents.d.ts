@@ -658,16 +658,16 @@ export interface ConfirmCustomerBalancePaymentData
       funding_type?: 'bank_transfer';
       bank_transfer?: {
         type:
-          | 'us_bank_account'
-          | 'eu_bank_account'
-          | 'id_bank_account'
-          | 'gb_bank_account'
-          | 'jp_bank_account'
-          | 'mx_bank_account';
-        eu_bank_account?: {
-          country: 'ES' | 'FR' | 'IE' | 'NL';
+          | 'eu_bank_transfer'
+          | 'gb_bank_transfer'
+          | 'id_bank_transfer'
+          | 'jp_bank_transfer'
+          | 'mx_bank_transfer'
+          | 'us_bank_transfer';
+        eu_bank_transfer?: {
+          country: 'DE' | 'ES' | 'FR' | 'IE' | 'NL';
         };
-        id_bank_account?: {
+        id_bank_transfer?: {
           bank: 'bni' | 'bca';
         };
         requested_address_types?: Array<
