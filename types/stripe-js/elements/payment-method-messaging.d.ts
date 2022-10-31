@@ -80,9 +80,9 @@ export interface StripePaymentMethodMessagingElementOptions {
     | 'SE';
 
   /**
-   * The font color of the promotional message.
+   * The logo color to display in the message. Defaults to black
    */
-  darkMode?: boolean;
+  logoColor?: 'black' | 'white' | 'color';
 
   /**
    * The font size of the promotional message.
