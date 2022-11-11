@@ -69,10 +69,7 @@ export interface StripeElements {
   /////////////////////////////
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
-   * Creates a `AddressElement`.
+   * Creates an `AddressElement`.
    */
   create(
     elementType: 'address',
@@ -80,9 +77,6 @@ export interface StripeElements {
   ): StripeAddressElement;
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
    * Looks up a previously created `Element` by its type.
    */
   getElement(elementType: 'address'): StripeAddressElement | null;
