@@ -53,6 +53,7 @@ import {
   StripePayButtonElementConfirmEvent,
   StripePayButtonElementShippingAddressChangeEvent,
   StripePayButtonElementShippingRateChangeEvent,
+  AvailablePaymentMethods,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -745,7 +746,7 @@ const retrievedCartElement: StripeCartElement | null = elements.getElement(
 const payButtonElementDefault = elements.create('payButton');
 
 const payButtonElement = elements.create('payButton', {
-  buttonHeight: 60,
+  buttonHeight: 55,
   layout: 'horizontal',
   paymentMethodOrder: ['apple_pay', 'google_pay'],
   wallets: {
@@ -773,6 +774,9 @@ const payButtonElement2 = elements.create('payButton', {
   buttonTheme: {
     googlePay: 'black',
   },
+  buttonType: {
+    applePay: 'check-out',
+  },
 });
 
 payButtonElement
@@ -780,9 +784,7 @@ payButtonElement
     'ready',
     (e: {
       elementType: 'payButton';
-      availablePaymentMethods:
-        | undefined
-        | {applePay: boolean; googlePay: boolean};
+      availablePaymentMethods: undefined | AvailablePaymentMethods;
     }) => {}
   )
   .on('click', (e: StripePayButtonElementClickEvent) => {})

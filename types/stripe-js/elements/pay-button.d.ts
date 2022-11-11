@@ -115,7 +115,7 @@ export type StripePayButtonElement = StripeElementBase & {
   ): StripePayButtonElement;
 
   /**
-   * Triggered when a payment sheet is dismissed (e.g., a buyer closes the sheet)
+   * Triggered when a payment interface is dismissed (e.g., a buyer closes the payment interface)
    */
   on(
     eventType: 'cancel',
@@ -269,8 +269,8 @@ export type GooglePayButtonType =
   | 'subscribe';
 
 export type ButtonTypeOption = {
-  applePay: ApplePayButtonType;
-  googlePay: GooglePayButtonType;
+  applePay?: ApplePayButtonType;
+  googlePay?: GooglePayButtonType;
 };
 
 export interface StripePayButtonElementOptions {
@@ -377,7 +377,7 @@ export type ClickResolveDetails = {
   billingAddressRequired?: boolean;
 
   /**
-   * Provide information about your business that will be displayed in the payment sheet.
+   * Provide information about your business that will be displayed in the payment interface.
    * This information will be retrieved from your Stripe account if not provided.
    */
   business?: {name: string};
@@ -407,7 +407,7 @@ export interface StripePayButtonElementClickEvent {
   paymentMethodType: PaymentMethodType;
 
   /**
-   * Callback to configure the details shown on a payment sheet, including which fields to collect.
+   * Callback to configure the details shown on a payment interface, including which fields to collect.
    * This must be called within 1 second of the 'click' event being emitted.
    */
   resolve: (resolveDetails?: ClickResolveDetails) => void;
@@ -415,7 +415,7 @@ export interface StripePayButtonElementClickEvent {
 
 export interface StripePayButtonElementConfirmEvent {
   /**
-   * Callback when a payment is unsuccessful. Optionally, specifying a reason will show a more detailed error in the payment sheet.
+   * Callback when a payment is unsuccessful. Optionally, specifying a reason will show a more detailed error in the payment interface.
    */
   paymentFailed: (payload?: {
     reason?: 'fail' | 'invalid_shipping_address';
