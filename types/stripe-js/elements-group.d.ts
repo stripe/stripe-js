@@ -47,6 +47,8 @@ import {
   StripeIssuingCardPinDisplayElementOptions,
   StripeIssuingCardCopyButtonElement,
   StripeIssuingCardCopyButtonElementOptions,
+  StripePayButtonElement,
+  StripePayButtonElementOptions,
 } from './elements';
 
 export interface StripeElements {
@@ -371,6 +373,29 @@ export interface StripeElements {
   ): StripeLinkAuthenticationElement | null;
 
   /////////////////////////////
+  /// payButton
+  /////////////////////////////
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Creates a `PayButtonElement`.
+   */
+  create(
+    elementType: 'payButton',
+    options?: StripePayButtonElementOptions
+  ): StripePayButtonElement;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(elementType: 'payButton'): StripePayButtonElement | null;
+
+  /////////////////////////////
   /// payment
   /////////////////////////////
 
@@ -505,6 +530,7 @@ export type StripeElementType =
   | 'iban'
   | 'idealBank'
   | 'p24Bank'
+  | 'payButtonElement'
   | 'payment'
   | 'paymentMethodMessaging'
   | 'paymentRequestButton'
@@ -531,6 +557,7 @@ export type StripeElement =
   | StripeIbanElement
   | StripeIdealBankElement
   | StripeP24BankElement
+  | StripePayButtonElement
   | StripePaymentElement
   | StripePaymentMethodMessagingElement
   | StripePaymentRequestButtonElement

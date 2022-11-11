@@ -176,11 +176,11 @@ export interface TermsOption {
   usBankAccount?: TermOption;
 }
 
-export type WalletOption = 'auto' | 'never';
+export type PaymentWalletOption = 'auto' | 'never';
 
-export interface WalletsOption {
-  applePay?: WalletOption;
-  googlePay?: WalletOption;
+export interface PaymentWalletsOption {
+  applePay?: PaymentWalletOption;
+  googlePay?: PaymentWalletOption;
 }
 
 export interface StripePaymentElementOptions {
@@ -220,7 +220,7 @@ export interface StripePaymentElementOptions {
   /**
    * Control wallets display in the Payment Element.
    */
-  wallets?: WalletsOption;
+  wallets?: PaymentWalletsOption;
 }
 
 export interface StripePaymentElementChangeEvent {
