@@ -49,6 +49,11 @@ import {
   StripeElementType,
   CanMakePaymentResult,
   VerificationSession,
+  StripePayButtonElementClickEvent,
+  StripePayButtonElementConfirmEvent,
+  StripePayButtonElementShippingAddressChangeEvent,
+  StripePayButtonElementShippingRateChangeEvent,
+  AvailablePaymentMethods,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -738,6 +743,166 @@ const retrievedCartElement: StripeCartElement | null = elements.getElement(
   'cart'
 );
 
+const payButtonElementDefault = elements.create('payButton');
+
+const payButtonElement = elements.create('payButton', {
+  buttonHeight: 55,
+  layout: 'horizontal',
+  paymentMethodOrder: ['apple_pay', 'google_pay'],
+  wallets: {
+    googlePay: 'always',
+    applePay: 'auto',
+  },
+  buttonTheme: {
+    applePay: 'white-outline',
+    googlePay: 'white',
+  },
+  buttonType: {
+    googlePay: 'donate',
+    applePay: 'add-money',
+  },
+});
+
+const payButtonElement2 = elements.create('payButton', {
+  layout: {
+    type: 'auto',
+    visibleButtonCount: 5,
+  },
+  wallets: {
+    applePay: 'never',
+  },
+  buttonTheme: {
+    googlePay: 'black',
+  },
+  buttonType: {
+    applePay: 'check-out',
+  },
+});
+
+payButtonElement
+  .on(
+    'ready',
+    (e: {
+      elementType: 'payButton';
+      availablePaymentMethods: undefined | AvailablePaymentMethods;
+    }) => {}
+  )
+  .on('click', (e: StripePayButtonElementClickEvent) => {})
+  .on('focus', (e: {elementType: 'payButton'}) => {})
+  .on('blur', (e: {elementType: 'payButton'}) => {})
+  .on('escape', (e: {elementType: 'payButton'}) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'payButton';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
+
+payButtonElement.on('confirm', ({paymentFailed}) => {
+  paymentFailed();
+  paymentFailed({});
+  paymentFailed({reason: 'invalid_shipping_address'});
+});
+
+payButtonElement.on('cancel', (e: {elementType: 'payButton'}) => {});
+
+payButtonElement.on(
+  'shippingaddresschange',
+  (e: StripePayButtonElementShippingAddressChangeEvent) => {
+    e.reject();
+    e.resolve();
+    e.resolve({
+      lineItems: [{name: 'Pizza', amount: 1200}],
+    });
+    e.resolve({
+      shippingRates: [
+        {
+          id: 'fastest-shipping',
+          amount: 1500,
+          displayName: 'Pizza time',
+          deliveryEstimate: {
+            maximum: {
+              unit: 'hour',
+              value: 1,
+            },
+          },
+        },
+        {
+          id: 'faster-shipping',
+          amount: 500,
+          displayName: 'Pizza time, sort of',
+          deliveryEstimate: {
+            minimum: {
+              unit: 'day',
+              value: 2,
+            },
+            maximum: {
+              unit: 'week',
+              value: 1,
+            },
+          },
+        },
+        {
+          id: 'free-shipping',
+          amount: 0,
+          displayName: 'Pizza time, eventually',
+        },
+      ],
+    });
+  }
+);
+
+payButtonElement.on(
+  'shippingratechange',
+  (e: StripePayButtonElementShippingRateChangeEvent) => {
+    e.reject();
+    e.resolve();
+    e.resolve({
+      lineItems: [{name: 'Pizza', amount: 1200}],
+    });
+    e.resolve({
+      shippingRates: [
+        {
+          id: 'fastest-shipping',
+          amount: 1500,
+          displayName: 'Pizza time',
+          deliveryEstimate: {
+            maximum: {
+              unit: 'hour',
+              value: 1,
+            },
+          },
+        },
+        {
+          id: 'faster-shipping',
+          amount: 500,
+          displayName: 'Pizza time, sort of',
+          deliveryEstimate: {
+            minimum: {
+              unit: 'day',
+              value: 2,
+            },
+            maximum: {
+              unit: 'week',
+              value: 1,
+            },
+          },
+        },
+        {
+          id: 'free-shipping',
+          amount: 0,
+          displayName: 'Pizza time, eventually',
+        },
+      ],
+    });
+  }
+);
+
+const retrievedPayButtonElement = elements.getElement('payButton');
+
 auBankAccountElement.destroy();
 cardElement.destroy();
 cardNumberElement.destroy();
@@ -749,6 +914,9 @@ idealBankElement.destroy();
 paymentRequestButtonElement.destroy();
 linkAuthenticationElement.destroy();
 shippingAddressElement.destroy();
+payButtonElementDefault.destroy();
+payButtonElement.destroy();
+payButtonElement2.destroy();
 
 stripe.redirectToCheckout({sessionId: ''});
 

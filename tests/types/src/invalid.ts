@@ -5,6 +5,7 @@ import {
   StripeIbanElement,
   StripePaymentElement,
   StripeCartElement,
+  StripePayButtonElement,
 } from '../../../types';
 
 declare const stripe: Stripe;
@@ -13,6 +14,7 @@ declare const cardElement: StripeCardElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
 declare const cartElement: StripeCartElement;
+declare const payButtonElement: StripePayButtonElement;
 
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
@@ -77,6 +79,39 @@ cartElement.update({clientSecret: ''});
 // @ts-expect-error: cartElement has no function `escape`
 cartElement.escape();
 
+payButtonElement.update({
+  // @ts-expect-error: `wallets` option can't be updated
+  wallets: {
+    applePay: 'never',
+  },
+});
+
+payButtonElement.update({
+  // @ts-expect-error: buttonTheme option can't be updated
+  buttonTheme: {
+    applePay: 'white-outline',
+  },
+});
+
+payButtonElement.update({
+  // @ts-expect-error: buttonType option can't be updated
+  buttonType: {
+    applePay: 'donate',
+  },
+});
+
+payButtonElement.on('shippingaddresschange', ({address}) => {
+  // @ts-expect-error Property 'line1' does not exist on type 'PartialAddress'.
+  address.line1;
+  // @ts-expect-error Property 'line2' does not exist on type 'PartialAddress'.
+  address.line2;
+});
+
+payButtonElement.on('confirm', ({paymentFailed}) => {
+  // @ts-expect-error Can only fail a payment for a reason of 'fail' or 'invalid-shipping-address'
+  paymentFailed({reason: 'pizza-time'});
+});
+
 // @ts-expect-error: AddressElement requires a mode
 elements.create('address');
 
@@ -99,6 +134,20 @@ elements.create('issuingCardCopyButton', {
 
 // @ts-expect-error: CartElement requires a clientSecret
 elements.create('cart');
+
+// @ts-expect-error: `white-outline` is only supported by apple pay
+elements.create('payButton', {
+  buttonTheme: {
+    googlePay: 'white-outline',
+  },
+});
+
+// @ts-expect-error: `checkout` is only supported by google pay
+elements.create('payButton', {
+  buttonType: {
+    applePay: 'checkout',
+  },
+});
 
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
