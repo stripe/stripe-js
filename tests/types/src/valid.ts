@@ -680,6 +680,26 @@ cartElement.addLineItem({product: '', quantity: 1});
 
 cartElement.addLineItem({price: '', quantity: 1});
 
+cartElement.addLineItem({
+  item_details: {
+    external_id: '',
+    name: '',
+    unit_amount: 0,
+  },
+  quantity: 1,
+});
+
+cartElement.addLineItem({
+  item_details: {
+    external_id: '',
+    name: '',
+    unit_amount: 0,
+    image: '',
+    description: '',
+  },
+  quantity: 1,
+});
+
 cartElement.on('ready', (e: StripeCartElementPayloadEvent) => {
   console.log(e.lineItems.count);
 });
