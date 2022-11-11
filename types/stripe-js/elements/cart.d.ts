@@ -111,14 +111,30 @@ export type StripeCartElement = StripeElementBase & {
       | {
           product: string;
           price?: null;
+          item_details?: null;
           quantity?: number | null;
         }
       | {
-          price: string;
           product?: null;
+          price: string;
+          item_details?: null;
+          quantity?: number | null;
+        }
+      | {
+          price?: null;
+          product?: null;
+          item_details: CartItemDetails;
           quantity?: number | null;
         }
   ): Promise<{error?: StripeError}>;
+};
+
+export type CartItemDetails = {
+  external_id: string;
+  name: string;
+  description?: string;
+  image?: string;
+  unit_amount: number;
 };
 
 export type CartDescriptor = 'cart' | 'bag' | 'basket';

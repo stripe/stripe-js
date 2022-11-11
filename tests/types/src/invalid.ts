@@ -43,14 +43,33 @@ paymentElement.on('change', (e) => {
   }
 });
 
-// @ts-expect-error: either `product` or `price` is required
+// @ts-expect-error: either `product`, `price`, or `item_details` is required
 cartElement.addLineItem({});
 
-// @ts-expect-error: either `product` or `price` is required
+// @ts-expect-error: either `product`, `price`, or `item_details` is required
 cartElement.addLineItem({quantity: 1});
 
-// @ts-expect-error: only one of `product` or `price` may be specified
+// @ts-expect-error: only one of `product`, `price`, or `item_details` may be specified
 cartElement.addLineItem({product: '', price: ''});
+
+// @ts-expect-error: only one of `product`, `price`, or `item_details` may be specified
+cartElement.addLineItem({
+  product: '',
+  item_details: {
+    external_id: '',
+    name: '',
+    unit_amount: 0,
+  },
+});
+
+// @ts-expect-error: `item_details.external_id` is required if `item_details` is present
+cartElement.addLineItem({item_details: {name: '', unit_amount: 0}});
+
+// @ts-expect-error: `item_details.name` is required if `item_details` is present
+cartElement.addLineItem({item_details: {external_id: '', unit_amount: 0}});
+
+// @ts-expect-error: `item_details.unit_amount` is required if `item_details` is present
+cartElement.addLineItem({item_details: {external_id: '', name: ''}});
 
 // @ts-expect-error: `clientSecret` is not updatable
 cartElement.update({clientSecret: ''});
