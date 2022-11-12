@@ -530,7 +530,7 @@ export type StripeElementType =
   | 'iban'
   | 'idealBank'
   | 'p24Bank'
-  | 'payButtonElement'
+  | 'payButton'
   | 'payment'
   | 'paymentMethodMessaging'
   | 'paymentRequestButton'
