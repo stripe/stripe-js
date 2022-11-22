@@ -765,6 +765,7 @@ export interface Appearance {
     spacingGridRow?: string;
     spacingGridColumn?: string;
     spacingTab?: string;
+    spacingAccordionItem?: string;
 
     // Colors
     colorPrimary?: string;
