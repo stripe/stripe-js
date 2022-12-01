@@ -221,8 +221,8 @@ export interface PaymentRequestOptions {
 
   /**
    * An array of wallet strings.
-   * Can be one or more of `applePay`, `googlePay` and `browserCard`.
-   * Use this option to disable Google Pay, Apple Pay and/or browser-saved cards.
+   * Can be one or more of `applePay`, `googlePay`, `link` and `browserCard`.
+   * Use this option to disable Apple Pay, Google Pay, Link and/or browser-saved cards.
    */
   disableWallets?: PaymentRequestWallet[];
 
@@ -281,7 +281,11 @@ export interface PaymentRequestShippingOption {
   amount: number;
 }
 
-export type PaymentRequestWallet = 'applePay' | 'googlePay' | 'browserCard';
+export type PaymentRequestWallet =
+  | 'applePay'
+  | 'googlePay'
+  | 'link'
+  | 'browserCard';
 
 export type PaymentRequestCompleteStatus =
   /**
