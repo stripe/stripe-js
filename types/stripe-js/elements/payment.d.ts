@@ -183,6 +183,15 @@ export interface PaymentWalletsOption {
   googlePay?: PaymentWalletOption;
 }
 
+export type Layout = 'tabs' | 'accordion' | 'auto';
+
+export interface LayoutObject {
+  type: Layout;
+  defaultCollapsed?: boolean;
+  radios?: boolean;
+  spacedAccordionItems?: boolean;
+}
+
 export interface StripePaymentElementOptions {
   /**
    * Provide initial customer information that will be displayed in the Payment Element.
@@ -221,6 +230,11 @@ export interface StripePaymentElementOptions {
    * Control wallets display in the Payment Element.
    */
   wallets?: PaymentWalletsOption;
+
+  /**
+   * Specify a layout to use when rendering a Payment Element.
+   */
+  layout?: Layout | LayoutObject;
 }
 
 export interface StripePaymentElementChangeEvent {
