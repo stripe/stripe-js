@@ -186,10 +186,10 @@ export interface PaymentWalletsOption {
 export type Layout = 'tabs' | 'accordion' | 'auto';
 
 export interface LayoutObject {
-    type: Layout;
-    defaultCollapsed?: boolean;
-    radios?: boolean;
-    spacedAccordionItems?: boolean;
+  type: Layout;
+  defaultCollapsed?: boolean;
+  radios?: boolean;
+  spacedAccordionItems?: boolean;
 }
 
 export interface StripePaymentElementOptions {
