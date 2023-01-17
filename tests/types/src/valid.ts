@@ -596,6 +596,8 @@ addressElement.update({
   },
 });
 
+addressElement.getValue();
+
 const retrievedAddressElement: StripeAddressElement | null = elements.getElement(
   'address'
 );
