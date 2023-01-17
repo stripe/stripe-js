@@ -121,9 +121,11 @@ export type StripeAddressElement = StripeElementBase & {
   update(options: Partial<StripeAddressElementOptions>): StripeAddressElement;
 
   /**
-   * Validates and retrieves form values.
+   * Validates and retrieves form values from the `AddressElement`.
    */
-  getValue(): Promise<Pick<StripeAddressElementChangeEvent, "complete" | "isNewAddress" | "value">>
+  getValue(): Promise<
+    Pick<StripeAddressElementChangeEvent, 'complete' | 'isNewAddress' | 'value'>
+  >;
 };
 
 export interface ContactOption {
