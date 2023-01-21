@@ -20,6 +20,7 @@ export type CreatePaymentMethodData =
   | CreatePaymentMethodAuBecsDebitData
   | CreatePaymentMethodBacsDebitData
   | CreatePaymentMethodBancontactData
+  | CreatePaymentMethodBlikData
   | CreatePaymentMethodBoletoData
   | CreatePaymentMethodCardData
   | CreatePaymentMethodCustomerBalanceData
@@ -87,6 +88,15 @@ export interface CreatePaymentMethodBancontactData
   billing_details: PaymentMethodCreateParams.BillingDetails & {
     name: string;
   };
+}
+
+export interface CreatePaymentMethodBlikData extends PaymentMethodCreateParams {
+  type: 'blik';
+
+  /**
+   * Details about the BLIK pament method. Currently there are no supported child attributes for this field.
+   */
+  blik?: {}; // eslint-disable-line @typescript-eslint/ban-types
 }
 
 export interface CreatePaymentMethodBoletoData
@@ -532,6 +542,35 @@ export interface ConfirmBancontactPaymentData
 }
 
 /**
+ * Data to be sent with a `stripe.ConfirmBlikPayment` request.
+ * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmBlikPaymentData extends PaymentIntentConfirmParams {
+  /**
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodBlikData, 'type'>;
+
+  /**
+   * An object containing payment-method-specific configuration to confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with.
+   */
+  payment_method_options?: {
+    /**
+     * A configuration for this BLIK payment.
+     */
+    blik?: {
+      /**
+       * Your customer's 6-digit BLIK code.
+       */
+      code?: string;
+    };
+  };
+}
+
+/**
  * Data to be sent with a `stripe.confirmBoletoPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
  */
@@ -594,6 +633,16 @@ export interface ConfirmBancontactPaymentOptions {
   /**
    * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/bancontact#handle-redirect).
    * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmBlikPayment`.
+ */
+export interface ConfirmBlikPaymentOptions {
+  /**
+   * Set this to false if you want to manually determine if the confirmation has succeeded or failed.
    */
   handleActions?: boolean;
 }

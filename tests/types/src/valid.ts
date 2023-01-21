@@ -1349,6 +1349,40 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmBlikPayment(
+    '',
+    {
+      payment_method: {
+        blik: {},
+        billing_details: {
+          email: 'jenny@example.com',
+        },
+      },
+      payment_method_options: {
+        blik: {
+          code: '123456',
+        },
+      },
+    },
+    {
+      handleActions: false,
+    }
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmBlikPayment('', {payment_method: ''})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmBlikPayment('', {payment_method: ''}, {handleActions: false})
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmBlikPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmBoletoPayment(
     '',
     {

@@ -159,6 +159,18 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
+   * Use `stripe.confirmBlikPayment` in the [BLIK Payments with Payment Methods](https://stripe.com/docs/payments/blik) flow when the customer submits your payment form.
+   * When called, it will confirm the PaymentIntent with data you provide, and it will automatically prompt the customer to authorize the transaction.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_blik_payment
+   */
+  confirmBlikPayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmBlikPaymentData,
+    options?: paymentIntents.ConfirmBlikPaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+  /**
    * Use `stripe.confirmBoletoPayment` in the [Boleto Payment](https://stripe.com/docs/payments/boleto) with Payment Methods flow when the customer submits your payment form.
    * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
    * Note that there are some additional requirements to this flow that are not covered in this reference.
@@ -1092,8 +1104,8 @@ export type EphemeralKeyNonceResult =
   | {nonce: string; error?: undefined}
   | {nonce?: undefined; error: StripeError};
 
-/* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments. 
-  This metadata includes information like IP address, browser, screen or device information, and other device characteristics. 
+/* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments.
+  This metadata includes information like IP address, browser, screen or device information, and other device characteristics.
   You can find more details about how Radar uses this data by reading about how Radar performs [advanced fraud detection](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection).
   */
 export type RadarSessionPayload =
