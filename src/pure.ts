@@ -42,5 +42,6 @@ loadStripe.setLoadParameters = (params): void => {
       'You cannot change load parameters after calling loadStripe'
     );
   }
+
   loadParams = validateLoadParams(params);
 };
