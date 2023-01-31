@@ -32,12 +32,15 @@ loadStripe.setLoadParameters = (params): void => {
       );
     }, true);
 
-    if (!sameParameters) {
-      throw new Error(
-        'You cannot change load parameters after calling loadStripe'
-      );
+    if (sameParameters) {
+      return;
     }
   }
 
+  if (loadStripeCalled) {
+    throw new Error(
+      'You cannot change load parameters after calling loadStripe'
+    );
+  }
   loadParams = validateLoadParams(params);
 };
