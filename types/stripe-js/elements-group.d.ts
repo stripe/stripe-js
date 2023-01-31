@@ -584,6 +584,7 @@ export type StripeElementLocale =
   | 'fr-FR'
   | 'he'
   | 'hu'
+  | 'hr'
   | 'id'
   | 'it'
   | 'it-IT'
