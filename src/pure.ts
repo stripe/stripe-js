@@ -23,10 +23,20 @@ export const loadStripe: LoadStripe & {setLoadParameters: SetLoadParams} = (
 };
 
 loadStripe.setLoadParameters = (params): void => {
-  if (loadStripeCalled) {
-    throw new Error(
-      'You cannot change load parameters after calling loadStripe'
-    );
+  // we won't throw an error if setLoadParameters is called with the same values as before
+  if (loadStripeCalled && loadParams) {
+    const parameters = Object.keys(params) as Array<keyof typeof params>;
+    const sameParameters = parameters.reduce((previousValue, currentValue) => {
+      return (
+        previousValue && params[currentValue] === loadParams?.[currentValue]
+      );
+    }, true);
+
+    if (!sameParameters) {
+      throw new Error(
+        'You cannot change load parameters after calling loadStripe'
+      );
+    }
   }
 
   loadParams = validateLoadParams(params);

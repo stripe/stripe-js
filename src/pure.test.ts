@@ -127,7 +127,18 @@ describe('pure module', () => {
     loadStripe('pk_foo');
 
     expect(() => {
-      loadStripe.setLoadParameters({advancedFraudSignals: false});
+      loadStripe.setLoadParameters({advancedFraudSignals: true});
     }).toThrow('cannot change load parameters');
+  });
+
+  test('does not throw an error if calling setLoadParameters after loadStripe but the parameters are the same', () => {
+    const {loadStripe} = require('./pure');
+
+    loadStripe.setLoadParameters({advancedFraudSignals: false});
+    loadStripe('pk_foo');
+
+    expect(() => {
+      loadStripe.setLoadParameters({advancedFraudSignals: false});
+    }).not.toThrow('cannot change load parameters');
   });
 });
