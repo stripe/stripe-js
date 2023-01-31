@@ -25,12 +25,19 @@ export const loadStripe: LoadStripe & {setLoadParameters: SetLoadParams} = (
 loadStripe.setLoadParameters = (params): void => {
   // we won't throw an error if setLoadParameters is called with the same values as before
   if (loadStripeCalled && loadParams) {
-    const parameters = Object.keys(validateLoadParams(params));
-    const sameParameters = parameters.reduce((previousValue, currentValue) => {
-      return (
-        previousValue && params[currentValue] === loadParams?.[currentValue]
-      );
-    }, true);
+    const validatedParams = validateLoadParams(params);
+    const parameterKeys = Object.keys(validatedParams) as Array<
+      keyof LoadParams
+    >;
+
+    const sameParameters = parameterKeys.reduce(
+      (previousValue, currentValue) => {
+        return (
+          previousValue && params[currentValue] === loadParams?.[currentValue]
+        );
+      },
+      true
+    );
 
     if (sameParameters) {
       return;
