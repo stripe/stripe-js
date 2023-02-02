@@ -9,6 +9,14 @@ export type StripeIssuingCardNumberDisplayElement = StripeElementBase & {
    * This method can be used to simulate CSS media queries that automatically adjust the size of elements when viewed on different devices.
    */
   update(options: Partial<StripeIssuingCardNumberDisplayElementOptions>): void;
+
+  /**
+   * Triggered when the element is fully rendered and can accept `element.focus` calls.
+   */
+  on(
+    eventType: 'ready',
+    handler: (event: {elementType: 'issuingCardNumberDisplay'}) => any
+  ): StripeIssuingCardNumberDisplayElement;
 };
 
 export interface StripeIssuingCardNumberDisplayElementOptions {
