@@ -804,7 +804,7 @@ export interface Stripe {
   verifyMicrodepositsForSetup(
     clientSecret: string,
     data?: setupIntents.VerifyMicrodepositsForSetupData
-  ): Promise<PaymentIntentResult>;
+  ): Promise<SetupIntentResult>;
 
   /**
    * Use `stripe.collectBankAccountForSetup` in the [Save bank details](https://stripe.com/docs/payments/ach-debit/set-up-payment) flow for the [ACH Direct Debit](https://stripe.com/docs/payments/ach-debit)
