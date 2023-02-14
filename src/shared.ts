@@ -73,7 +73,7 @@ export const loadScript = (
   }
 
   stripePromise = new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       // Resolve to null when imported server side. This makes the module
       // safe to import in an isomorphic code base.
       resolve(null);
