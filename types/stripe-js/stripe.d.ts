@@ -166,7 +166,7 @@ export interface Stripe {
    */
   confirmBlikPayment(
     clientSecret: string,
-    data?: paymentIntents.ConfirmBlikPaymentData,
+    data: paymentIntents.ConfirmBlikPaymentData,
     options?: paymentIntents.ConfirmBlikPaymentOptions
   ): Promise<PaymentIntentResult>;
 
@@ -1104,8 +1104,8 @@ export type EphemeralKeyNonceResult =
   | {nonce: string; error?: undefined}
   | {nonce?: undefined; error: StripeError};
 
-/* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments.
-  This metadata includes information like IP address, browser, screen or device information, and other device characteristics.
+/* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments. 
+  This metadata includes information like IP address, browser, screen or device information, and other device characteristics. 
   You can find more details about how Radar uses this data by reading about how Radar performs [advanced fraud detection](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection).
   */
 export type RadarSessionPayload =

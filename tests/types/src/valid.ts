@@ -1371,18 +1371,6 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmBlikPayment('', {payment_method: ''})
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmBlikPayment('', {payment_method: ''}, {handleActions: false})
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmBlikPayment('')
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
   .confirmBoletoPayment(
     '',
     {

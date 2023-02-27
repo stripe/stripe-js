@@ -557,15 +557,15 @@ export interface ConfirmBlikPaymentData extends PaymentIntentConfirmParams {
   /**
    * An object containing payment-method-specific configuration to confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with.
    */
-  payment_method_options?: {
+  payment_method_options: {
     /**
      * A configuration for this BLIK payment.
      */
-    blik?: {
+    blik: {
       /**
        * Your customer's 6-digit BLIK code.
        */
-      code?: string;
+      code: string;
     };
   };
 }
