@@ -49,10 +49,10 @@ import {
   StripeElementType,
   CanMakePaymentResult,
   VerificationSession,
-  StripePayButtonElementClickEvent,
-  StripePayButtonElementConfirmEvent,
-  StripePayButtonElementShippingAddressChangeEvent,
-  StripePayButtonElementShippingRateChangeEvent,
+  StripeExpressCheckoutElementClickEvent,
+  StripeExpressCheckoutElementConfirmEvent,
+  StripeExpressCheckoutElementShippingAddressChangeEvent,
+  StripeExpressCheckoutElementShippingRateChangeEvent,
   AvailablePaymentMethods,
 } from '../../../types';
 
@@ -749,9 +749,9 @@ const retrievedCartElement: StripeCartElement | null = elements.getElement(
   'cart'
 );
 
-const payButtonElementDefault = elements.create('payButton');
+const expressCheckoutElementDefault = elements.create('expressCheckout');
 
-const payButtonElement = elements.create('payButton', {
+const expressCheckoutElement = elements.create('expressCheckout', {
   buttonHeight: 55,
   layout: 'horizontal',
   paymentMethodOrder: ['apple_pay', 'google_pay'],
@@ -769,7 +769,7 @@ const payButtonElement = elements.create('payButton', {
   },
 });
 
-const payButtonElement2 = elements.create('payButton', {
+const expressCheckoutElement2 = elements.create('expressCheckout', {
   layout: {
     type: 'auto',
     visibleButtonCount: 5,
@@ -785,39 +785,42 @@ const payButtonElement2 = elements.create('payButton', {
   },
 });
 
-payButtonElement
+expressCheckoutElement
   .on(
     'ready',
     (e: {
-      elementType: 'payButton';
+      elementType: 'expressCheckout';
       availablePaymentMethods: undefined | AvailablePaymentMethods;
     }) => {}
   )
-  .on('click', (e: StripePayButtonElementClickEvent) => {})
-  .on('focus', (e: {elementType: 'payButton'}) => {})
-  .on('blur', (e: {elementType: 'payButton'}) => {})
-  .on('escape', (e: {elementType: 'payButton'}) => {})
+  .on('click', (e: StripeExpressCheckoutElementClickEvent) => {})
+  .on('focus', (e: {elementType: 'expressCheckout'}) => {})
+  .on('blur', (e: {elementType: 'expressCheckout'}) => {})
+  .on('escape', (e: {elementType: 'expressCheckout'}) => {})
   .on(
     'loaderror',
     (e: {
-      elementType: 'payButton';
+      elementType: 'expressCheckout';
       error: {
         type: string;
       };
     }) => {}
   );
 
-payButtonElement.on('confirm', ({paymentFailed}) => {
+expressCheckoutElement.on('confirm', ({paymentFailed}) => {
   paymentFailed();
   paymentFailed({});
   paymentFailed({reason: 'invalid_shipping_address'});
 });
 
-payButtonElement.on('cancel', (e: {elementType: 'payButton'}) => {});
+expressCheckoutElement.on(
+  'cancel',
+  (e: {elementType: 'expressCheckout'}) => {}
+);
 
-payButtonElement.on(
+expressCheckoutElement.on(
   'shippingaddresschange',
-  (e: StripePayButtonElementShippingAddressChangeEvent) => {
+  (e: StripeExpressCheckoutElementShippingAddressChangeEvent) => {
     e.reject();
     e.resolve();
     e.resolve({
@@ -861,9 +864,9 @@ payButtonElement.on(
   }
 );
 
-payButtonElement.on(
+expressCheckoutElement.on(
   'shippingratechange',
-  (e: StripePayButtonElementShippingRateChangeEvent) => {
+  (e: StripeExpressCheckoutElementShippingRateChangeEvent) => {
     e.reject();
     e.resolve();
     e.resolve({
@@ -907,7 +910,7 @@ payButtonElement.on(
   }
 );
 
-const retrievedPayButtonElement = elements.getElement('payButton');
+const retrievedExpressCheckoutElement = elements.getElement('expressCheckout');
 
 auBankAccountElement.destroy();
 cardElement.destroy();
@@ -920,9 +923,9 @@ idealBankElement.destroy();
 paymentRequestButtonElement.destroy();
 linkAuthenticationElement.destroy();
 shippingAddressElement.destroy();
-payButtonElementDefault.destroy();
-payButtonElement.destroy();
-payButtonElement2.destroy();
+expressCheckoutElementDefault.destroy();
+expressCheckoutElement.destroy();
+expressCheckoutElement2.destroy();
 
 stripe.redirectToCheckout({sessionId: ''});
 
