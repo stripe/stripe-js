@@ -1,184 +1,203 @@
 import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
 
-export type StripePayButtonElement = StripeElementBase & {
+export type StripeExpressCheckoutElement = StripeElementBase & {
   /**
    * Triggered when the element is fully rendered and can accept `element.focus` calls.
    */
   on(
     eventType: 'ready',
-    handler: (event: StripePayButtonElementReadyEvent) => any
-  ): StripePayButtonElement;
+    handler: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'ready',
-    handler: (event: StripePayButtonElementReadyEvent) => any
-  ): StripePayButtonElement;
+    handler: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'ready',
-    handler?: (event: StripePayButtonElementReadyEvent) => any
-  ): StripePayButtonElement;
+    handler?: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when a button on the element is clicked.
    */
   on(
     eventType: 'click',
-    handler: (event: StripePayButtonElementClickEvent) => any
-  ): StripePayButtonElement;
+    handler: (event: StripeExpressCheckoutElementClickEvent) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'click',
-    handler: (event: StripePayButtonElementClickEvent) => any
-  ): StripePayButtonElement;
+    handler: (event: StripeExpressCheckoutElementClickEvent) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'click',
-    handler?: (event: StripePayButtonElementClickEvent) => any
-  ): StripePayButtonElement;
+    handler?: (event: StripeExpressCheckoutElementClickEvent) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when the element gains focus.
    */
   on(
     eventType: 'focus',
-    handler: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'focus',
-    handler: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'focus',
-    handler?: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when the element loses focus.
    */
   on(
     eventType: 'blur',
-    handler: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'blur',
-    handler: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'blur',
-    handler?: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when the escape key is pressed within the element.
    */
   on(
     eventType: 'escape',
-    handler: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'escape',
-    handler: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'escape',
-    handler?: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when the element fails to load.
    */
   on(
     eventType: 'loaderror',
-    handler: (event: {elementType: 'payButton'; error: StripeError}) => any
-  ): StripePayButtonElement;
+    handler: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'loaderror',
-    handler: (event: {elementType: 'payButton'; error: StripeError}) => any
-  ): StripePayButtonElement;
+    handler: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'loaderror',
-    handler?: (event: {elementType: 'payButton'; error: StripeError}) => any
-  ): StripePayButtonElement;
+    handler?: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when a buyer authorizes a payment within a supported payment method.
    */
   on(
     eventType: 'confirm',
-    handler: (event: StripePayButtonElementConfirmEvent) => any
-  ): StripePayButtonElement;
+    handler: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'confirm',
-    handler: (event: StripePayButtonElementConfirmEvent) => any
-  ): StripePayButtonElement;
+    handler: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'confirm',
-    handler?: (event: StripePayButtonElementConfirmEvent) => any
-  ): StripePayButtonElement;
+    handler?: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when a payment interface is dismissed (e.g., a buyer closes the payment interface)
    */
   on(
     eventType: 'cancel',
-    handler: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'cancel',
-    handler: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'cancel',
-    handler?: (event: {elementType: 'payButton'}) => any
-  ): StripePayButtonElement;
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when a buyer selects a different shipping address.
    */
   on(
     eventType: 'shippingaddresschange',
-    handler: (event: StripePayButtonElementShippingAddressChangeEvent) => any
-  ): StripePayButtonElement;
+    handler: (
+      event: StripeExpressCheckoutElementShippingAddressChangeEvent
+    ) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'shippingaddresschange',
-    handler: (event: StripePayButtonElementShippingAddressChangeEvent) => any
-  ): StripePayButtonElement;
+    handler: (
+      event: StripeExpressCheckoutElementShippingAddressChangeEvent
+    ) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'shippingaddresschange',
-    handler?: (event: StripePayButtonElementShippingAddressChangeEvent) => any
-  ): StripePayButtonElement;
+    handler?: (
+      event: StripeExpressCheckoutElementShippingAddressChangeEvent
+    ) => any
+  ): StripeExpressCheckoutElement;
 
   /**
    * Triggered when a buyer selects a different shipping rate.
    */
   on(
     eventType: 'shippingratechange',
-    handler: (event: StripePayButtonElementShippingRateChangeEvent) => any
-  ): StripePayButtonElement;
+    handler: (event: StripeExpressCheckoutElementShippingRateChangeEvent) => any
+  ): StripeExpressCheckoutElement;
   once(
     eventType: 'shippingratechange',
-    handler: (event: StripePayButtonElementShippingRateChangeEvent) => any
-  ): StripePayButtonElement;
+    handler: (event: StripeExpressCheckoutElementShippingRateChangeEvent) => any
+  ): StripeExpressCheckoutElement;
   off(
     eventType: 'shippingratechange',
-    handler?: (event: StripePayButtonElementShippingRateChangeEvent) => any
-  ): StripePayButtonElement;
+    handler?: (
+      event: StripeExpressCheckoutElementShippingRateChangeEvent
+    ) => any
+  ): StripeExpressCheckoutElement;
 
   /**
-   * Updates the options the `PayButtonElement` was initialized with.
+   * Updates the options the `ExpressCheckoutElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
-  update(options: StripePayButtonElementUpdateOptions): StripePayButtonElement;
+  update(
+    options: StripeExpressCheckoutElementUpdateOptions
+  ): StripeExpressCheckoutElement;
 };
 
-export type PaymentMethodType = 'google_pay' | 'apple_pay';
+export type PaymentMethodType = 'google_pay' | 'apple_pay' | 'link';
 
-export type PayButtonPartialAddress = {
+export type ExpressCheckoutPartialAddress = {
   city: string;
   state: string;
   postal_code: string;
   country: string;
 };
 
-export type PayButtonAddress = PayButtonPartialAddress & {
+export type ExpressCheckoutAddress = ExpressCheckoutPartialAddress & {
   line1: string;
   line2: string | null;
 };
@@ -187,12 +206,12 @@ export type BillingDetails = {
   name: string;
   email?: string;
   phone?: string;
-  address: PayButtonAddress;
+  address: ExpressCheckoutAddress;
 };
 
 export type ShippingAddress = {
   name: string;
-  address: PayButtonAddress;
+  address: ExpressCheckoutAddress;
 };
 
 export type LineItem = {
@@ -226,11 +245,11 @@ export type LayoutOption =
       visibleButtonCount?: number;
     };
 
-export type PayButtonWalletOption = 'always' | 'auto' | 'never';
+export type ExpressCheckoutWalletOption = 'always' | 'auto' | 'never';
 
-export type PayButtonWalletsOption = {
-  applePay?: PayButtonWalletOption;
-  googlePay?: PayButtonWalletOption;
+export type ExpressCheckoutWalletsOption = {
+  applePay?: ExpressCheckoutWalletOption;
+  googlePay?: ExpressCheckoutWalletOption;
 };
 
 export type ApplePayButtonTheme = 'black' | 'white' | 'white-outline';
@@ -273,7 +292,7 @@ export type ButtonTypeOption = {
   googlePay?: GooglePayButtonType;
 };
 
-export interface StripePayButtonElementOptions {
+export interface StripeExpressCheckoutElementOptions {
   /**
    * Manually sets the height of the buttons shown.
    */
@@ -295,21 +314,21 @@ export interface StripePayButtonElementOptions {
   layout?: LayoutOption;
 
   /**
-   * Override the order in which payment methods are displayed in the Pay Button Element.
-   * By default, the Pay Button Element will use a dynamic ordering that optimizes payment method display for each user.
+   * Override the order in which payment methods are displayed in the Express Checkout Element.
+   * By default, the Express Checkout Element will use a dynamic ordering that optimizes payment method display for each user.
    */
   paymentMethodOrder?: string[];
 
   /**
-   * Control wallets display in the Pay Button Element.
+   * Control wallets display in the Express Checkout Element.
    */
-  wallets?: PayButtonWalletsOption;
+  wallets?: ExpressCheckoutWalletsOption;
 }
 
 /*
  * Updatable options for an `Elements` instance
  */
-export interface StripePayButtonElementUpdateOptions {
+export interface StripeExpressCheckoutElementUpdateOptions {
   /**
    * Manually sets the height of the buttons shown.
    */
@@ -322,7 +341,7 @@ export interface StripePayButtonElementUpdateOptions {
 
   /**
    * Override the order in which payment methods are displayed in the Pay Button Element.
-   * By default, the Pay Button Element will use a dynamic ordering that optimizes payment method display for each user.
+   * By default, the Express Checkout Element will use a dynamic ordering that optimizes payment method display for each user.
    */
   paymentMethodOrder?: string[];
 }
@@ -332,11 +351,11 @@ export type AvailablePaymentMethods = {
   googlePay: boolean;
 };
 
-export interface StripePayButtonElementReadyEvent {
+export interface StripeExpressCheckoutElementReadyEvent {
   /**
    * The type of element that emitted this event.
    */
-  elementType: 'payButton';
+  elementType: 'expressCheckout';
 
   /**
    * The list of payment methods that could possibly show in the element, or undefined if no payment methods can show.
@@ -395,11 +414,11 @@ export type ClickResolveDetails = {
   applePay?: ApplePayOption;
 };
 
-export interface StripePayButtonElementClickEvent {
+export interface StripeExpressCheckoutElementClickEvent {
   /**
    * The type of element that emitted this event.
    */
-  elementType: 'payButton';
+  elementType: 'expressCheckout';
 
   /**
    * The payment method associated with the button that was clicked.
@@ -413,7 +432,7 @@ export interface StripePayButtonElementClickEvent {
   resolve: (resolveDetails?: ClickResolveDetails) => void;
 }
 
-export interface StripePayButtonElementConfirmEvent {
+export interface StripeExpressCheckoutElementConfirmEvent {
   /**
    * Callback when a payment is unsuccessful. Optionally, specifying a reason will show a more detailed error in the payment interface.
    */
@@ -435,14 +454,14 @@ export type ChangeResolveDetails = {
   shippingRates?: Array<ShippingRate>;
 };
 
-export interface StripePayButtonElementShippingAddressChangeEvent {
+export interface StripeExpressCheckoutElementShippingAddressChangeEvent {
   name: string;
-  address: PayButtonPartialAddress;
+  address: ExpressCheckoutPartialAddress;
   resolve: (resolveDetails?: ChangeResolveDetails) => void;
   reject: () => void;
 }
 
-export interface StripePayButtonElementShippingRateChangeEvent {
+export interface StripeExpressCheckoutElementShippingRateChangeEvent {
   shippingRate: ShippingRate;
   resolve: (resolveDetails?: ChangeResolveDetails) => void;
   reject: () => void;
