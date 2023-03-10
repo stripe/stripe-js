@@ -195,6 +195,23 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
+   * Use `stripe.confirmCashappPayment` in the [Cash App Payments](https://stripe.com/docs/payments/cash-app-pay) with Payment Methods flow when the customer submits your payment form.
+   * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
+   * Refer to our [integration guide](https://stripe.com/docs/payments/cash-app-pay) for more details.
+   *
+   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+   * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_cashapp_payment
+   */
+  confirmCashappPayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmCashappPaymentData,
+    options?: paymentIntents.ConfirmCashappPaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+  /**
    * Requires beta access:
    * Contact [Stripe support](https://support.stripe.com/) for more information.
    *
@@ -695,6 +712,23 @@ export interface Stripe {
     clientSecret: string,
     data?: setupIntents.ConfirmCardSetupData,
     options?: setupIntents.ConfirmCardSetupOptions
+  ): Promise<SetupIntentResult>;
+
+  /**
+   * Use `stripe.confirmCashappSetup` in the [Setup Intents API flow](https://stripe.com/docs/payments/save-and-reuse) when the customer submits your payment form.
+   * When called, it will confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) with `data` you provide.
+   * Refer to our [integration guide](https://stripe.com/docs/payments/cash-app-pay) for more details..
+   *
+   * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+   * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_cashapp_setup
+   */
+  confirmCashappSetup(
+    clientSecret: string,
+    data?: setupIntents.ConfirmCashappSetupData,
+    options?: setupIntents.ConfirmCashappSetupOptions
   ): Promise<SetupIntentResult>;
 
   /**

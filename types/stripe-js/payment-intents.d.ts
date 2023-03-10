@@ -22,6 +22,7 @@ export type CreatePaymentMethodData =
   | CreatePaymentMethodBancontactData
   | CreatePaymentMethodBoletoData
   | CreatePaymentMethodCardData
+  | CreatePaymentMethodCashappData
   | CreatePaymentMethodCustomerBalanceData
   | CreatePaymentMethodEpsData
   | CreatePaymentMethodGiropayData
@@ -120,6 +121,10 @@ export interface CreatePaymentMethodCardData extends PaymentMethodCreateParams {
   type: 'card';
 
   card: StripeCardElement | StripeCardNumberElement | {token: string};
+}
+
+interface CreatePaymentMethodCashappData extends PaymentMethodCreateParams {
+  type: 'cashapp';
 }
 
 export interface CreatePaymentMethodCustomerBalanceData
@@ -638,6 +643,36 @@ export interface ConfirmCardPaymentData extends PaymentIntentConfirmParams {
 export interface ConfirmCardPaymentOptions {
   /**
    * Set this to `false` if you want to [handle next actions yourself](https://stripe.com/docs/payments/payment-intents/verifying-status#next-actions), or if you want to defer next action handling until later (e.g. for use in the [PaymentRequest API](https://stripe.com/docs/stripe-js/elements/payment-request-button#complete-payment-intents)).
+   * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmCashappPayment` request.
+ * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+ */
+interface ConfirmCashappPaymentData extends PaymentIntentConfirmParams {
+  /**
+   * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodCashappData, 'type'>;
+
+  /**
+   * The url your customer will be directed to after they complete authentication.
+   */
+  return_url?: string;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmCashappPayment`.
+ */
+interface ConfirmCashappPaymentOptions {
+  /**
+   * Set this to `false` if you want to [manually handle the authorization QR code or redirect](https://stripe.com/docs/payments/cash-app-pay/accept-a-payment?platform=web&ui=API#handle-redirect).
    * Default is `true`.
    */
   handleActions?: boolean;
