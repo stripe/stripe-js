@@ -82,6 +82,32 @@ const AVENIR: CustomFontSource = {
 const elements: StripeElements = stripe.elements({
   fonts: [OPEN_SANS, AVENIR],
   locale: 'auto',
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1099,
+  appearance: {
+    disableAnimations: false,
+    theme: 'night',
+    variables: {
+      colorIcon: 'blue',
+    },
+    rules: {
+      '.Tab--selected': {
+        backgroundColor: 'blue',
+      },
+    },
+    labels: 'above',
+  },
+  loader: 'auto',
+  customerOptions: {
+    customer: 'cus_foo',
+    ephemeralKey: 'ek_test_foo',
+  },
+});
+
+const elementsClientSecret: StripeElements = stripe.elements({
+  fonts: [OPEN_SANS, AVENIR],
+  locale: 'auto',
   clientSecret: '',
   appearance: {
     disableAnimations: false,
@@ -142,6 +168,11 @@ elements.update({
     },
     labels: 'floating',
   },
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1099,
+  setup_future_usage: 'off_session',
+  capture_method: 'automatic',
 });
 
 const fetchUpdates = async () => {
@@ -2087,6 +2118,24 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe.createPaymentMethod({
+  elements: elements,
+  params: {
+    billing_details: {
+      name: 'Jenny Rosen',
+    },
+  },
+});
+
+stripe.createPaymentMethod({
+  element: cardElement,
+  params: {
+    billing_details: {
+      name: 'Jenny Rosen',
+    },
+  },
+});
+
+stripe.createPaymentMethod({
   type: 'us_bank_account',
   us_bank_account: {
     account_number: '',
@@ -2546,6 +2595,29 @@ stripe
 stripe
   .confirmPayment({
     elements,
+    clientSecret: '',
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+stripe
+  .confirmPayment({
+    clientSecret: '',
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+stripe
+  .confirmPayment({
+    elements,
     confirmParams: {},
     redirect: 'if_required',
   })
@@ -2559,6 +2631,37 @@ stripe
 stripe
   .confirmSetup({
     elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    clientSecret: '',
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    clientSecret: '',
     confirmParams: {
       return_url: '',
     },

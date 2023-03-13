@@ -1,3 +1,4 @@
+import {StripeElement, StripeElements} from '../stripe-js';
 import {Metadata, MetadataParam, Address} from './shared';
 
 /**
@@ -314,6 +315,19 @@ export interface PaymentMethodCreateParams {
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type. Required unless `payment_method` is specified (see the [Cloning PaymentMethods](https://stripe.com/docs/payments/payment-methods/connect#cloning-payment-methods) guide)
    */
   type?: string;
+}
+
+export interface CreatePaymentMethodElements {
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   */
+  metadata?: MetadataParam;
+
+  elements?: StripeElements;
+
+  element?: StripeElement;
+
+  params?: PaymentMethodCreateParams;
 }
 
 export namespace PaymentMethodCreateParams {

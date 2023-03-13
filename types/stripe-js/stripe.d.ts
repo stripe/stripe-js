@@ -7,7 +7,11 @@ import * as elements from './elements';
 import * as financialConnections from './financial-connections';
 import * as ephemeralKeys from './ephemeral-keys';
 
-import {StripeElements, StripeElementsOptions} from './elements-group';
+import {
+  StripeElements,
+  StripeElementsOptions,
+  StripeElementsOptionsClientSecret,
+} from './elements-group';
 import {CheckoutLocale, RedirectToCheckoutOptions} from './checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
@@ -22,6 +26,7 @@ export interface Stripe {
   /**
    * Create an `Elements` instance, which manages a group of elements.
    */
+  elements(options?: StripeElementsOptionsClientSecret): StripeElements;
   elements(options?: StripeElementsOptions): StripeElements;
 
   /////////////////////////////
@@ -60,6 +65,12 @@ export interface Stripe {
     confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
     redirect: 'if_required';
   }): Promise<PaymentIntentResult>;
+  confirmPayment(options: {
+    elements?: StripeElements;
+    clientSecret: string;
+    confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
+    redirect: 'if_required';
+  }): Promise<PaymentIntentResult>;
 
   /**
    * Use `stripe.confirmPayment` to confirm a PaymentIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
@@ -70,6 +81,12 @@ export interface Stripe {
    */
   confirmPayment(options: {
     elements: StripeElements;
+    confirmParams: paymentIntents.ConfirmPaymentData;
+    redirect?: 'always';
+  }): Promise<never | {error: StripeError}>;
+  confirmPayment(options: {
+    elements?: StripeElements;
+    clientSecret: string;
     confirmParams: paymentIntents.ConfirmPaymentData;
     redirect?: 'always';
   }): Promise<never | {error: StripeError}>;
@@ -516,6 +533,22 @@ export interface Stripe {
   handleCardAction(clientSecret: string): Promise<PaymentIntentResult>;
 
   /**
+   * Use `stripe.handleNextAction` in the Payment Intents API finalizing payments on the server flow to finish confirmation of a [PaymentIntent](https://stripe.com/docs/api/payment_intents) or [SetupIntent](https://stripe.com/docs/api/setup_intents) with the `requires_action` status.
+   * It will throw an error if the `PaymentIntent` has a different status.
+   *
+   * Note that `stripe.handleNextAction` may take several seconds to complete.
+   * During that time, you should disable your form from being resubmitted and show a waiting indicator like a spinner.
+   * If you receive an error result, you should be sure to show that error to the customer, re-enable the form, and hide the waiting indicator.
+   *
+   * Additionally, `stripe.handleNextAction` may trigger a [3D Secure](https://stripe.com/docs/payments/3d-secure) authentication challenge.
+   * The authentication challenge requires a context switch that can be hard to follow on a screen-reader.
+   * Ensure that your form is accessible by ensuring that success or error messages are clearly read out.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/handle_next_action
+   */
+  handleNextAction(clientSecret: string): Promise<PaymentIntentResult>;
+
+  /**
    * Use `stripe.verifyMicrodepositsForPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow
    * to verify a customer's bank account with micro-deposits.
    *
@@ -582,6 +615,12 @@ export interface Stripe {
     confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
     redirect: 'if_required';
   }): Promise<SetupIntentResult>;
+  confirmSetup(options: {
+    elements?: StripeElements;
+    clientSecret: string;
+    confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
+    redirect: 'if_required';
+  }): Promise<SetupIntentResult>;
 
   /**
    * Use `stripe.confirmSetup` to confirm a SetupIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
@@ -592,6 +631,12 @@ export interface Stripe {
    */
   confirmSetup(options: {
     elements: StripeElements;
+    confirmParams: paymentIntents.ConfirmPaymentData;
+    redirect?: 'always';
+  }): Promise<never | {error: StripeError}>;
+  confirmSetup(options: {
+    elements?: StripeElements;
+    clientSecret: string;
     confirmParams: paymentIntents.ConfirmPaymentData;
     redirect?: 'always';
   }): Promise<never | {error: StripeError}>;
