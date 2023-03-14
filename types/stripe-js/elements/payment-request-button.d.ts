@@ -143,7 +143,7 @@ export interface StripePaymentRequestButtonElementOptions {
    * Disable showing multiple buttons.
    * Default is `false`.
    */
-  disableMultipleButtons: PaymentRequest;
+  disableMultipleButtons: boolean;
 }
 
 export interface StripePaymentRequestButtonElementClickEvent {
