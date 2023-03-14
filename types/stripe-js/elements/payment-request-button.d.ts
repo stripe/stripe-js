@@ -144,7 +144,6 @@ export interface StripePaymentRequestButtonElementOptions {
    * Default is `false`.
    */
   disableMultipleButtons: PaymentRequest;
-  
 }
 
 export interface StripePaymentRequestButtonElementClickEvent {
