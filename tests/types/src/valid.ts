@@ -244,6 +244,7 @@ const paymentRequestButtonElement = elements.create('paymentRequestButton', {
       theme: 'light',
       height: '21px',
       type: 'donate',
+      buttonSpacing: '8px'
     },
   },
   paymentRequest: stripe.paymentRequest({
@@ -254,6 +255,7 @@ const paymentRequestButtonElement = elements.create('paymentRequestButton', {
     requestPayerEmail: true,
     disableWallets: ['googlePay', 'link'],
   }),
+  disableMultipleButtons: false
 });
 
 const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | null = elements.getElement(
