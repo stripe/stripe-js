@@ -667,7 +667,7 @@ export interface StripeElementsOptionsClientSecret
   clientSecret?: string;
 }
 
-export interface StripeElementsOptions extends BaseStripeElementsOptions {
+export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
   /**
    * Whether the Payment Element will be used to create a PaymentIntent, SetupIntent, or Subscription.
    */
@@ -696,6 +696,13 @@ export interface StripeElementsOptions extends BaseStripeElementsOptions {
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
    */
   capture_method?: 'manual' | 'automatic';
+
+  /**
+   * Instead of using automatic payment methods, declare specific payment methods to enable.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  payment_method_types?: string[];
 }
 
 /*
@@ -745,6 +752,13 @@ export interface StripeElementsUpdateOptions {
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
    */
   capture_method?: 'manual' | 'automatic';
+
+  /**
+   * Instead of using automatic payment methods, declare specific payment methods to enable.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  payment_method_types?: string[];
 }
 
 /*

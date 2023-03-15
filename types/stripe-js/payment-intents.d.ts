@@ -9,11 +9,7 @@ import {
   StripeCardElement,
   StripeAuBankAccountElement,
 } from './elements';
-import {
-  PaymentMethodCreateParams,
-  CreatePaymentMethodElements,
-  PaymentIntentConfirmParams,
-} from '../api';
+import {PaymentMethodCreateParams, PaymentIntentConfirmParams} from '../api';
 import {Omit} from '../utils';
 
 export type CreatePaymentMethodData =
@@ -42,8 +38,12 @@ export type CreatePaymentMethodData =
   | CreatePaymentMethodUsBankAccountData
   | CreatePaymentMethodSepaDebitData
   | CreatePaymentMethodSofortData
-  | CreatePaymentMethodWechatPayData
-  | CreatePaymentMethodElements;
+  | CreatePaymentMethodWechatPayData;
+
+export {
+  CreatePaymentMethodFromElement,
+  CreatePaymentMethodFromElements,
+} from '../api';
 
 export interface CreatePaymentMethodAlipayData
   extends PaymentMethodCreateParams {

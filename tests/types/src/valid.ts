@@ -2094,6 +2094,24 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe.createPaymentMethod({
+  elements: elements,
+  params: {
+    billing_details: {
+      name: 'Jenny Rosen',
+    },
+  },
+});
+
+stripe.createPaymentMethod({
+  element: cardElement,
+  params: {
+    billing_details: {
+      name: 'Jenny Rosen',
+    },
+  },
+});
+
+stripe.createPaymentMethod({
   type: 'acss_debit',
   billing_details: {name: '', email: ''},
 });
@@ -2116,24 +2134,6 @@ stripe
     expand: ['payment_method'],
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe.createPaymentMethod({
-  elements: elements,
-  params: {
-    billing_details: {
-      name: 'Jenny Rosen',
-    },
-  },
-});
-
-stripe.createPaymentMethod({
-  element: cardElement,
-  params: {
-    billing_details: {
-      name: 'Jenny Rosen',
-    },
-  },
-});
 
 stripe.createPaymentMethod({
   type: 'us_bank_account',
@@ -2581,32 +2581,62 @@ stripe
     }) => null
   );
 
+// confirmPayment: redirect: 'always' without clientSecret
 stripe
   .confirmPayment({
     elements,
-    redirect: 'if_required',
+    confirmParams: {
+      return_url: '',
+    },
   })
   .then((res) => {
     if (res.error) {
-    }
-    if (res.paymentIntent) {
     }
   });
 stripe
   .confirmPayment({
     elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+    onRequestPaymentIntent: () => {},
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+
+// confirmPayment: redirect: 'always' with clientSecret
+stripe
+  .confirmPayment({
     clientSecret: '',
-    redirect: 'if_required',
+    confirmParams: {
+      return_url: '',
+    },
   })
   .then((res) => {
     if (res.error) {
-    }
-    if (res.paymentIntent) {
     }
   });
 stripe
   .confirmPayment({
     clientSecret: '',
+    confirmParams: {
+      return_url: '',
+    },
+    elements,
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+
+// confirmPayment: redirect: 'if_required' without clientSecret
+stripe
+  .confirmPayment({
+    elements,
     redirect: 'if_required',
   })
   .then((res) => {
@@ -2618,8 +2648,9 @@ stripe
 stripe
   .confirmPayment({
     elements,
+    redirect: 'if_required',
     confirmParams: {},
-    redirect: 'if_required',
+    onRequestPaymentIntent: () => {},
   })
   .then((res) => {
     if (res.error) {
@@ -2628,69 +2659,128 @@ stripe
     }
   });
 
+// confirmPayment redirect: 'if_required' with clientSecret
 stripe
-  .confirmSetup({
-    elements,
-    confirmParams: {
-      return_url: '',
-    },
-    redirect: 'if_required',
-  })
-  .then((res) => {
-    if (res.error) {
-    }
-    if (res.setupIntent) {
-    }
-  });
-
-stripe
-  .confirmSetup({
-    elements,
+  .confirmPayment({
     clientSecret: '',
-    confirmParams: {
-      return_url: '',
-    },
     redirect: 'if_required',
   })
   .then((res) => {
     if (res.error) {
     }
-    if (res.setupIntent) {
+    if (res.paymentIntent) {
     }
   });
-
 stripe
-  .confirmSetup({
+  .confirmPayment({
     clientSecret: '',
-    confirmParams: {
-      return_url: '',
-    },
     redirect: 'if_required',
-  })
-  .then((res) => {
-    if (res.error) {
-    }
-    if (res.setupIntent) {
-    }
-  });
-
-stripe
-  .confirmSetup({
-    elements,
-    redirect: 'if_required',
-  })
-  .then((res) => {
-    if (res.error) {
-    }
-    if (res.setupIntent) {
-    }
-  });
-
-stripe
-  .confirmSetup({
-    elements,
     confirmParams: {},
+    elements,
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+
+// confirmSetup: redirect: 'always' without clientSecret
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+    onRequestSetupIntent: () => {},
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+
+// confirmSetup: redirect: 'always' with clientSecret
+stripe
+  .confirmSetup({
+    clientSecret: '',
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+stripe
+  .confirmSetup({
+    clientSecret: '',
+    confirmParams: {
+      return_url: '',
+    },
+    elements,
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+
+// confirmSetup: redirect: 'if_required' without clientSecret
+stripe
+  .confirmSetup({
+    elements,
     redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+stripe
+  .confirmSetup({
+    elements,
+    redirect: 'if_required',
+    confirmParams: {},
+    onRequestSetupIntent: () => {},
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
+// confirmSetup redirect: 'if_required' with clientSecret
+stripe
+  .confirmSetup({
+    clientSecret: '',
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+stripe
+  .confirmSetup({
+    clientSecret: '',
+    redirect: 'if_required',
+    confirmParams: {},
+    elements,
   })
   .then((res) => {
     if (res.error) {

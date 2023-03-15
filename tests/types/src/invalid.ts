@@ -153,8 +153,15 @@ elements.create('expressCheckout', {
   },
 });
 
-// @ts-expect-error either elements or clientSecret is required
+// @ts-expect-error at least one of elements or clientSecret is required
 stripe.confirmPayment({confirmParams: {return_url: ''}});
+
+stripe.confirmPayment({
+  elements,
+  clientSecret: '',
+  // @ts-expect-error clientSecret and onRequestPaymentIntent are incompatible
+  onRequestPaymentIntent: () => {},
+});
 
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
@@ -184,6 +191,13 @@ stripe
 
 // @ts-expect-error either elements or clientSecret is required
 stripe.confirmSetup({confirmParams: {return_url: ''}});
+
+stripe.confirmSetup({
+  elements,
+  clientSecret: '',
+  // @ts-expect-error clientSecret and onRequestPaymentIntent are incompatible
+  onRequestSetupIntent: () => {},
+});
 
 stripe.confirmSetup({elements, confirmParams: {return_url: ''}}).then((res) => {
   if (res.error) {
@@ -268,3 +282,36 @@ stripe.createEphemeralKeyNonce({});
 
 // @ts-expect-error: Expected 1 arguments, but got 0
 stripe.createEphemeralKeyNonce();
+
+// @ts-expect-error type and element are incompatible
+stripe.createPaymentMethod({
+  type: 'card',
+  element: cardElement,
+  params: {
+    billing_details: {
+      address: '',
+    },
+  },
+});
+
+// @ts-expect-error type and elements are incompatible
+stripe.createPaymentMethod({
+  type: 'card',
+  elements: elements,
+  params: {
+    billing_details: {
+      address: '',
+    },
+  },
+});
+
+// @ts-expect-error element and elements are incompatible
+stripe.createPaymentMethod({
+  element: cardElement,
+  elements: elements,
+  params: {
+    billing_details: {
+      address: '',
+    },
+  },
+});
