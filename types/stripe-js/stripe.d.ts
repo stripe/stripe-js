@@ -591,7 +591,9 @@ export interface Stripe {
    *
    * @docs https://stripe.com/docs/js/payment_intents/handle_next_action
    */
-  handleNextAction(clientSecret: string): Promise<PaymentIntentResult>;
+  handleNextAction(options: {
+    clientSecret: string;
+  }): Promise<PaymentIntentResult>;
 
   /**
    * Use `stripe.verifyMicrodepositsForPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow

@@ -2124,7 +2124,7 @@ stripe
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
 stripe
-  .handleNextAction('')
+  .handleNextAction({clientSecret: ''})
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
 stripe
