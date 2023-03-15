@@ -71,7 +71,6 @@ export interface Stripe {
   confirmPayment(options: {
     elements: StripeElements;
     confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
-    onRequestPaymentIntent?: () => paymentIntents.OnRequestIntentResult;
     redirect: 'if_required';
   }): Promise<PaymentIntentResult>;
 
@@ -103,7 +102,6 @@ export interface Stripe {
   confirmPayment(options: {
     elements: StripeElements;
     confirmParams: paymentIntents.ConfirmPaymentData;
-    onRequestPaymentIntent?: () => paymentIntents.OnRequestIntentResult;
     redirect?: 'always';
   }): Promise<never | {error: StripeError}>;
 
@@ -678,7 +676,6 @@ export interface Stripe {
   confirmSetup(options: {
     elements: StripeElements;
     confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
-    onRequestSetupIntent?: () => paymentIntents.OnRequestIntentResult;
     redirect: 'if_required';
   }): Promise<SetupIntentResult>;
 
@@ -710,7 +707,6 @@ export interface Stripe {
   confirmSetup(options: {
     elements: StripeElements;
     confirmParams: paymentIntents.ConfirmPaymentData;
-    onRequestSetupIntent?: () => paymentIntents.OnRequestIntentResult;
     redirect?: 'always';
   }): Promise<never | {error: StripeError}>;
 

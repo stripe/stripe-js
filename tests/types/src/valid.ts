@@ -183,6 +183,10 @@ const fetchUpdates = async () => {
   const {error} = await elements.fetchUpdates();
 };
 
+const handleSubmit = async () => {
+  const {error} = await elements.submit();
+};
+
 const auBankAccountElement = elements.create('auBankAccount', {});
 
 const retrievedAuBankAccountElement: StripeAuBankAccountElement | null = elements.getElement(
@@ -2641,7 +2645,6 @@ stripe
     }) => null
   );
 
-const handleOnRequestIntent = async () => ({clientSecret: '', status: ''});
 // confirmPayment: redirect: 'always' without clientSecret
 stripe
   .confirmPayment({
@@ -2661,7 +2664,6 @@ stripe
       return_url: '',
     },
     redirect: 'always',
-    onRequestPaymentIntent: handleOnRequestIntent,
   })
   .then((res) => {
     if (res.error) {
@@ -2711,7 +2713,6 @@ stripe
     elements,
     redirect: 'if_required',
     confirmParams: {},
-    onRequestPaymentIntent: handleOnRequestIntent,
   })
   .then((res) => {
     if (res.error) {
@@ -2765,7 +2766,6 @@ stripe
       return_url: '',
     },
     redirect: 'always',
-    onRequestSetupIntent: handleOnRequestIntent,
   })
   .then((res) => {
     if (res.error) {
@@ -2815,7 +2815,6 @@ stripe
     elements,
     redirect: 'if_required',
     confirmParams: {},
-    onRequestSetupIntent: handleOnRequestIntent,
   })
   .then((res) => {
     if (res.error) {

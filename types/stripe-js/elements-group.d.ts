@@ -50,6 +50,7 @@ import {
   StripeExpressCheckoutElement,
   StripeExpressCheckoutElementOptions,
 } from './elements';
+import {StripeError} from './stripe';
 
 export interface StripeElements {
   /**
@@ -63,6 +64,12 @@ export interface StripeElements {
    * instance of Elements, and reflects these updates in the Payment Element.
    */
   fetchUpdates(): Promise<{error?: {message: string; status?: string}}>;
+
+  /**
+   * Before confirming payment, call elements.submit() to validate the state of the
+   * Payment Element and collect any data required for wallets.
+   */
+  submit(): Promise<{error?: StripeError}>;
 
   /////////////////////////////
   /// address

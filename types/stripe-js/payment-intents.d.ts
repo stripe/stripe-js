@@ -46,11 +46,6 @@ export {
   CreatePaymentMethodFromElements,
 } from '../api';
 
-export type OnRequestIntentResult = Promise<{
-  clientSecret: string;
-  status?: string;
-}>;
-
 export interface CreatePaymentMethodAlipayData
   extends PaymentMethodCreateParams {
   type: 'alipay';
