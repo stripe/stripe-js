@@ -39,6 +39,11 @@ elements.update({
   },
 });
 
+cardElement.update({
+  // @ts-expect-error: 'disableLink' does not exist in type 'StripeCardElementUpdateOptions'
+  disableLink: false,
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {
