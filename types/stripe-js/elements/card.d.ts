@@ -109,10 +109,52 @@ export type StripeCardElement = StripeElementBase & {
    * The styles of an `CardElement` can be dynamically changed using `element.update`.
    * This method can be used to simulate CSS media queries that automatically adjust the size of elements when viewed on different devices.
    */
-  update(options: Partial<StripeCardElementOptions>): void;
+  update(options: StripeCardElementUpdateOptions): void;
 };
 
 export interface StripeCardElementOptions {
+  classes?: StripeElementClasses;
+
+  style?: StripeElementStyle;
+
+  /**
+   * A pre-filled set of values to include in the input (e.g., `{postalCode: '94110'}`).
+   * Note that sensitive card information (card number, CVC, and expiration date) cannot be pre-filled.
+   */
+  value?: {postalCode?: string};
+
+  /**
+   * Hide the postal code field.
+   * Default is `false`.
+   * If you are already collecting a full billing address or postal code elsewhere, set this to `true`.
+   */
+  hidePostalCode?: boolean;
+
+  /**
+   * Appearance of the icon in the Element.
+   */
+  iconStyle?: 'default' | 'solid';
+
+  /**
+   * Hides the icon in the Element.
+   * Default is `false`.
+   */
+  hideIcon?: boolean;
+
+  /**
+   * Applies a disabled state to the Element such that user input is not accepted.
+   * Default is false.
+   */
+  disabled?: boolean;
+
+  /**
+   * Hides and disables the Link Button in the Card Element.
+   * Default is false.
+   */
+  disableLink?: boolean;
+}
+
+export interface StripeCardElementUpdateOptions {
   classes?: StripeElementClasses;
 
   style?: StripeElementStyle;

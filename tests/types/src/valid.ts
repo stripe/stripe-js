@@ -161,6 +161,7 @@ const cardElement: StripeCardElement = elements.create('card', {
   hidePostalCode: true,
   iconStyle: 'solid',
   disabled: false,
+  disableLink: false,
 });
 
 elements.create('card', {style: {base: {fontWeight: 500}}});
