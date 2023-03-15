@@ -128,7 +128,8 @@ export interface CreatePaymentMethodCardData extends PaymentMethodCreateParams {
   card: StripeCardElement | StripeCardNumberElement | {token: string};
 }
 
-interface CreatePaymentMethodCashappData extends PaymentMethodCreateParams {
+export interface CreatePaymentMethodCashappData
+  extends PaymentMethodCreateParams {
   type: 'cashapp';
 }
 
@@ -657,7 +658,7 @@ export interface ConfirmCardPaymentOptions {
  * Data to be sent with a `stripe.confirmCashappPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
  */
-interface ConfirmCashappPaymentData extends PaymentIntentConfirmParams {
+export interface ConfirmCashappPaymentData extends PaymentIntentConfirmParams {
   /**
    * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
    * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
@@ -675,7 +676,7 @@ interface ConfirmCashappPaymentData extends PaymentIntentConfirmParams {
 /**
  * An options object to control the behavior of `stripe.confirmCashappPayment`.
  */
-interface ConfirmCashappPaymentOptions {
+export interface ConfirmCashappPaymentOptions {
   /**
    * Set this to `false` if you want to [manually handle the authorization QR code or redirect](https://stripe.com/docs/payments/cash-app-pay/accept-a-payment?platform=web&ui=API#handle-redirect).
    * Default is `true`.
