@@ -126,6 +126,11 @@ export interface StripePaymentRequestButtonElementOptions {
        * The height of the Payment Request Button. Accepts px unit values.
        */
       height?: string;
+
+      /**
+       * The gap between buttons when multile buttons are shown. Accepts px unit values.
+       */
+      buttonSpacing?: string;
     };
   };
 
@@ -133,6 +138,12 @@ export interface StripePaymentRequestButtonElementOptions {
    * A `PaymentRequest` object used to configure the element.
    */
   paymentRequest: PaymentRequest;
+
+  /**
+   * Disable showing multiple buttons.
+   * Default is `false`.
+   */
+  disableMultipleButtons?: boolean;
 }
 
 export interface StripePaymentRequestButtonElementClickEvent {
