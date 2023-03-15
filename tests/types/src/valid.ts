@@ -1467,6 +1467,32 @@ stripe.confirmCardPayment('').then((res) => {
 });
 
 stripe
+  .confirmCashappPayment('', {
+    payment_method: '',
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmCashappPayment('', {
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmCashappPayment(
+    '',
+    {
+      payment_method: '',
+      return_url: window.location.href,
+    },
+    {
+      handleActions: false,
+    }
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmCustomerBalancePayment(
     '',
     {
@@ -2444,6 +2470,32 @@ stripe.confirmCardSetup('').then((res) => {
     console.log(res.setupIntent.id);
   }
 });
+
+stripe
+  .confirmCashappSetup('', {
+    payment_method: '',
+    return_url: window.location.href,
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmCashappSetup('', {
+    return_url: window.location.href,
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmCashappSetup(
+    '',
+    {
+      payment_method: '',
+      return_url: window.location.href,
+    },
+    {
+      handleActions: false,
+    }
+  )
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
   .confirmIdealSetup('', {
