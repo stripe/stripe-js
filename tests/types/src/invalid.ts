@@ -164,6 +164,21 @@ stripe.confirmPayment({
 });
 
 stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+    // @ts-expect-error onRequestPaymentIntent result must include clientSecret
+    onRequestPaymentIntent: async () => ({}),
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+
+stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
   .then((res) => {
     if (res.error) {
@@ -195,7 +210,7 @@ stripe.confirmSetup({confirmParams: {return_url: ''}});
 stripe.confirmSetup({
   elements,
   clientSecret: '',
-  // @ts-expect-error clientSecret and onRequestPaymentIntent are incompatible
+  // @ts-expect-error clientSecret and onRequestSetupIntent are incompatible
   onRequestSetupIntent: () => {},
 });
 
@@ -216,6 +231,21 @@ stripe
 
     // @ts-expect-error redirect only, no paymentIntent expected
     if (res.paymentIntent) {
+    }
+  });
+
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+    // @ts-expect-error onRequestSetupIntent result must include clientSecret
+    onRequestSetupIntent: async () => ({}),
+  })
+  .then((res) => {
+    if (res.error) {
     }
   });
 

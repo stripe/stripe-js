@@ -2116,6 +2116,10 @@ stripe
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
 stripe
+  .handleNextAction('')
+  .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
+
+stripe
   .verifyMicrodepositsForPayment('', {amounts: [32, 45]})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
@@ -2633,6 +2637,7 @@ stripe
     }) => null
   );
 
+const handleOnRequestIntent = async () => ({clientSecret: '', status: ''});
 // confirmPayment: redirect: 'always' without clientSecret
 stripe
   .confirmPayment({
@@ -2652,7 +2657,7 @@ stripe
       return_url: '',
     },
     redirect: 'always',
-    onRequestPaymentIntent: () => {},
+    onRequestPaymentIntent: handleOnRequestIntent,
   })
   .then((res) => {
     if (res.error) {
@@ -2702,7 +2707,7 @@ stripe
     elements,
     redirect: 'if_required',
     confirmParams: {},
-    onRequestPaymentIntent: () => {},
+    onRequestPaymentIntent: handleOnRequestIntent,
   })
   .then((res) => {
     if (res.error) {
@@ -2756,7 +2761,7 @@ stripe
       return_url: '',
     },
     redirect: 'always',
-    onRequestSetupIntent: () => {},
+    onRequestSetupIntent: handleOnRequestIntent,
   })
   .then((res) => {
     if (res.error) {
@@ -2806,7 +2811,7 @@ stripe
     elements,
     redirect: 'if_required',
     confirmParams: {},
-    onRequestSetupIntent: () => {},
+    onRequestSetupIntent: handleOnRequestIntent,
   })
   .then((res) => {
     if (res.error) {
