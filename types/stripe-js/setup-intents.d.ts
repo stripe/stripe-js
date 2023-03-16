@@ -42,7 +42,7 @@ export interface ConfirmCardSetupOptions {
   handleActions?: boolean;
 }
 
-interface ConfirmCashappSetupData extends SetupIntentConfirmParams {
+export interface ConfirmCashappSetupData extends SetupIntentConfirmParams {
   /*
    * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
    * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.

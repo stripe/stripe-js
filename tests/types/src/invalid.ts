@@ -1,6 +1,5 @@
 import {
   Stripe,
-  StripeElements,
   StripeCardElement,
   StripeIbanElement,
   StripePaymentElement,
@@ -9,12 +8,17 @@ import {
 } from '../../../types';
 
 declare const stripe: Stripe;
-declare const elements: StripeElements;
 declare const cardElement: StripeCardElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
 declare const cartElement: StripeCartElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
+
+// @ts-expect-error: Passing `clientSecret` or `mode` implies different integration paths which cannot be combined
+const elements = stripe.elements({clientSecret: '', mode: ''});
+
+// @ts-expect-error mode must be one of payment, setup, or subscription
+stripe.elements({mode: 'test'});
 
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
@@ -154,6 +158,9 @@ elements.create('expressCheckout', {
   },
 });
 
+// @ts-expect-error at least one of elements or clientSecret is required
+stripe.confirmPayment({confirmParams: {return_url: ''}});
+
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
   .then((res) => {
@@ -179,6 +186,9 @@ stripe
     if (res.paymentIntent) {
     }
   });
+
+// @ts-expect-error either elements or clientSecret is required
+stripe.confirmSetup({confirmParams: {return_url: ''}});
 
 stripe.confirmSetup({elements, confirmParams: {return_url: ''}}).then((res) => {
   if (res.error) {
@@ -263,3 +273,36 @@ stripe.createEphemeralKeyNonce({});
 
 // @ts-expect-error: Expected 1 arguments, but got 0
 stripe.createEphemeralKeyNonce();
+
+// @ts-expect-error type and element are incompatible
+stripe.createPaymentMethod({
+  type: 'card',
+  element: cardElement,
+  params: {
+    billing_details: {
+      address: '',
+    },
+  },
+});
+
+// @ts-expect-error type and elements are incompatible
+stripe.createPaymentMethod({
+  type: 'card',
+  elements: elements,
+  params: {
+    billing_details: {
+      address: '',
+    },
+  },
+});
+
+// @ts-expect-error element and elements are incompatible
+stripe.createPaymentMethod({
+  element: cardElement,
+  elements: elements,
+  params: {
+    billing_details: {
+      address: '',
+    },
+  },
+});

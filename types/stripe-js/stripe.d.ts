@@ -7,7 +7,11 @@ import * as elements from './elements';
 import * as financialConnections from './financial-connections';
 import * as ephemeralKeys from './ephemeral-keys';
 
-import {StripeElements, StripeElementsOptions} from './elements-group';
+import {
+  StripeElements,
+  StripeElementsOptionsClientSecret,
+  StripeElementsOptionsMode,
+} from './elements-group';
 import {CheckoutLocale, RedirectToCheckoutOptions} from './checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
@@ -21,8 +25,17 @@ export interface Stripe {
 
   /**
    * Create an `Elements` instance, which manages a group of elements.
+   *
+   * https://stripe.com/docs/js/elements_object/create
    */
-  elements(options?: StripeElementsOptions): StripeElements;
+  elements(options?: StripeElementsOptionsClientSecret): StripeElements;
+
+  /**
+   * Create an `Elements` instance, which manages a group of elements.
+   *
+   * https://stripe.com/docs/js/elements_object/create_without_intent
+   */
+  elements(options?: StripeElementsOptionsMode): StripeElements;
 
   /////////////////////////////
   /// Checkout
@@ -66,10 +79,42 @@ export interface Stripe {
    * When called, `stripe.confirmPayment` will attempt to complete any [required actions](https://stripe.com/docs/payments/intents), such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
    * Your user will be redirected to the return_url you pass once the confirmation is complete.
    *
+   * By default, `stripe.confirmPayment` will always redirect to your return_url after a successful confirmation.
+   * If you set `redirect: "if_required"`, then `stripe.confirmPayment` will only redirect if your user chooses a redirect-based payment method.
+   * Setting `if_required` requires that you handle successful confirmations for redirect-based and non-redirect based payment methods separately.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_payment
+   */
+  confirmPayment(options: {
+    elements?: StripeElements;
+    clientSecret: string;
+    confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
+    redirect: 'if_required';
+  }): Promise<PaymentIntentResult>;
+
+  /**
+   * Use `stripe.confirmPayment` to confirm a PaymentIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
+   * When called, `stripe.confirmPayment` will attempt to complete any [required actions](https://stripe.com/docs/payments/intents), such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
+   * Your user will be redirected to the return_url you pass once the confirmation is complete.
+   *
    * @docs https://stripe.com/docs/js/payment_intents/confirm_payment
    */
   confirmPayment(options: {
     elements: StripeElements;
+    confirmParams: paymentIntents.ConfirmPaymentData;
+    redirect?: 'always';
+  }): Promise<never | {error: StripeError}>;
+
+  /**
+   * Use `stripe.confirmPayment` to confirm a PaymentIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
+   * When called, `stripe.confirmPayment` will attempt to complete any [required actions](https://stripe.com/docs/payments/intents), such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
+   * Your user will be redirected to the return_url you pass once the confirmation is complete.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_payment
+   */
+  confirmPayment(options: {
+    elements?: StripeElements;
+    clientSecret: string;
     confirmParams: paymentIntents.ConfirmPaymentData;
     redirect?: 'always';
   }): Promise<never | {error: StripeError}>;
@@ -533,6 +578,24 @@ export interface Stripe {
   handleCardAction(clientSecret: string): Promise<PaymentIntentResult>;
 
   /**
+   * Use `stripe.handleNextAction` in the Payment Intents API finalizing payments on the server flow to finish confirmation of a [PaymentIntent](https://stripe.com/docs/api/payment_intents) or [SetupIntent](https://stripe.com/docs/api/setup_intents) with the `requires_action` status.
+   * It will throw an error if the `PaymentIntent` has a different status.
+   *
+   * Note that `stripe.handleNextAction` may take several seconds to complete.
+   * During that time, you should disable your form from being resubmitted and show a waiting indicator like a spinner.
+   * If you receive an error result, you should be sure to show that error to the customer, re-enable the form, and hide the waiting indicator.
+   *
+   * Additionally, `stripe.handleNextAction` may trigger a [3D Secure](https://stripe.com/docs/payments/3d-secure) authentication challenge.
+   * The authentication challenge requires a context switch that can be hard to follow on a screen-reader.
+   * Ensure that your form is accessible by ensuring that success or error messages are clearly read out.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/handle_next_action
+   */
+  handleNextAction(options: {
+    clientSecret: string;
+  }): Promise<PaymentIntentResult>;
+
+  /**
    * Use `stripe.verifyMicrodepositsForPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow
    * to verify a customer's bank account with micro-deposits.
    *
@@ -571,6 +634,24 @@ export interface Stripe {
   ): Promise<PaymentMethodResult>;
 
   /**
+   * Use stripe.createPaymentMethod to convert payment information collected by elements into a [PaymentMethod](https://stripe.com/docs/api/payment_methods) object that you safely pass to your server to use in an API call.
+   *
+   * @docs https://stripe.com/docs/js/payment_methods/create_payment_method_elements
+   */
+  createPaymentMethod(
+    options: paymentIntents.CreatePaymentMethodFromElements
+  ): Promise<PaymentMethodResult>;
+
+  /**
+   * Use stripe.createPaymentMethod to convert payment information collected by elements into a [PaymentMethod](https://stripe.com/docs/api/payment_methods) object that you safely pass to your server to use in an API call.
+   *
+   * @docs https://stripe.com/docs/js/payment_methods/create_payment_method_elements
+   */
+  createPaymentMethod(
+    options: paymentIntents.CreatePaymentMethodFromElement
+  ): Promise<PaymentMethodResult>;
+
+  /**
    * Retrieve a [PaymentIntent](https://stripe.com/docs/api/payment_intents) using its [client secret](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret).
    *
    * @docs https://stripe.com/docs/js/payment_intents/retrieve_payment_intent
@@ -605,10 +686,42 @@ export interface Stripe {
    * When called, `stripe.confirmSetup` will attempt to complete any [required actions](https://stripe.com/docs/payments/intents), such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
    * Your user will be redirected to the return_url you pass once the confirmation is complete.
    *
+   * By default, stripe.`confirmSetup` will always redirect to your return_url after a successful confirmation.
+   * If you set `redirect: "if_required"`, then `stripe.confirmSetup` will only redirect if your user chooses a redirect-based payment method.
+   * Setting `if_required` requires that you handle successful confirmations for redirect-based and non-redirect based payment methods separately.
+   *
+   * @docs https://stripe.com/docs/js/setup_intents/confirm_setup
+   */
+  confirmSetup(options: {
+    elements?: StripeElements;
+    clientSecret: string;
+    confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
+    redirect: 'if_required';
+  }): Promise<SetupIntentResult>;
+
+  /**
+   * Use `stripe.confirmSetup` to confirm a SetupIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
+   * When called, `stripe.confirmSetup` will attempt to complete any [required actions](https://stripe.com/docs/payments/intents), such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
+   * Your user will be redirected to the return_url you pass once the confirmation is complete.
+   *
    * @docs https://stripe.com/docs/js/setup_intents/confirm_setup
    */
   confirmSetup(options: {
     elements: StripeElements;
+    confirmParams: paymentIntents.ConfirmPaymentData;
+    redirect?: 'always';
+  }): Promise<never | {error: StripeError}>;
+
+  /**
+   * Use `stripe.confirmSetup` to confirm a SetupIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
+   * When called, `stripe.confirmSetup` will attempt to complete any [required actions](https://stripe.com/docs/payments/intents), such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
+   * Your user will be redirected to the return_url you pass once the confirmation is complete.
+   *
+   * @docs https://stripe.com/docs/js/setup_intents/confirm_setup
+   */
+  confirmSetup(options: {
+    elements?: StripeElements;
+    clientSecret: string;
     confirmParams: paymentIntents.ConfirmPaymentData;
     redirect?: 'always';
   }): Promise<never | {error: StripeError}>;

@@ -50,6 +50,7 @@ import {
   StripeExpressCheckoutElement,
   StripeExpressCheckoutElementOptions,
 } from './elements';
+import {StripeError} from './stripe';
 
 export interface StripeElements {
   /**
@@ -63,6 +64,12 @@ export interface StripeElements {
    * instance of Elements, and reflects these updates in the Payment Element.
    */
   fetchUpdates(): Promise<{error?: {message: string; status?: string}}>;
+
+  /**
+   * Before confirming payment, call elements.submit() to validate the state of the
+   * Payment Element and collect any data required for wallets.
+   */
+  submit(): Promise<{error?: StripeError}>;
 
   /////////////////////////////
   /// address
@@ -619,7 +626,7 @@ export type StripeElementLocale =
 /**
  * Options to create an `Elements` instance with.
  */
-export interface StripeElementsOptions {
+interface BaseStripeElementsOptions {
   /**
    * An array of custom fonts, which elements created from the `Elements` object can use.
    */
@@ -641,13 +648,6 @@ export interface StripeElementsOptions {
   appearance?: Appearance;
 
   /**
-   * The client secret for a PaymentIntent or SetupIntent used by the Payment Element.
-   *
-   * @docs https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret
-   */
-  clientSecret?: string;
-
-  /**
    * Display skeleton loader UI while waiting for Elements to be fully loaded, after they are mounted.
    * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
    * Default is `'auto'` (Stripe determines if a loader UI should be shown).
@@ -662,6 +662,54 @@ export interface StripeElementsOptions {
    * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
    */
   customerOptions?: CustomerOptions;
+}
+
+export interface StripeElementsOptionsClientSecret
+  extends BaseStripeElementsOptions {
+  /**
+   * The client secret for a PaymentIntent or SetupIntent used by the Payment Element.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret
+   */
+  clientSecret?: string;
+}
+
+export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
+  /**
+   * Whether the Payment Element will be used to create a PaymentIntent, SetupIntent, or Subscription.
+   */
+  mode?: 'payment' | 'setup' | 'subscription';
+
+  /**
+   * Three character currency code (e.g., usd).
+   */
+  currency?: string;
+
+  /**
+   * The amount to be charged. Shown in Apple Pay, Google Pay, or Buy now pay later UIs, and influences available payment methods.
+   */
+  amount?: number;
+
+  /**
+   * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
+   */
+  setup_future_usage?: 'off_session' | 'on_session';
+
+  /**
+   * Controls when the funds will be captured from the customer’s account.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
+   */
+  capture_method?: 'manual' | 'automatic';
+
+  /**
+   * Instead of using automatic payment methods, declare specific payment methods to enable.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  payment_method_types?: string[];
 }
 
 /*
@@ -682,6 +730,42 @@ export interface StripeElementsUpdateOptions {
    * @docs https://stripe.com/docs/stripe-js/appearance-api
    */
   appearance?: Appearance;
+
+  /**
+   * Whether the Payment Element will be used to create a PaymentIntent, SetupIntent, or Subscription.
+   */
+  mode?: 'payment' | 'setup' | 'subscription';
+
+  /**
+   * Three character currency code (e.g., usd).
+   */
+  currency?: string;
+
+  /**
+   * The amount to be charged. Shown in Apple Pay, Google Pay, or Buy now pay later UIs, and influences available payment methods.
+   */
+  amount?: number;
+
+  /**
+   * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
+   */
+  setup_future_usage?: 'off_session' | 'on_session';
+
+  /**
+   * Controls when the funds will be captured from the customer’s account.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
+   */
+  capture_method?: 'manual' | 'automatic';
+
+  /**
+   * Instead of using automatic payment methods, declare specific payment methods to enable.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  payment_method_types?: string[];
 }
 
 /*

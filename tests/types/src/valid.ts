@@ -82,6 +82,35 @@ const AVENIR: CustomFontSource = {
 const elements: StripeElements = stripe.elements({
   fonts: [OPEN_SANS, AVENIR],
   locale: 'auto',
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1099,
+  setup_future_usage: 'off_session',
+  capture_method: 'automatic',
+  payment_method_types: ['card'],
+  appearance: {
+    disableAnimations: false,
+    theme: 'night',
+    variables: {
+      colorIcon: 'blue',
+    },
+    rules: {
+      '.Tab--selected': {
+        backgroundColor: 'blue',
+      },
+    },
+    labels: 'above',
+  },
+  loader: 'auto',
+  customerOptions: {
+    customer: 'cus_foo',
+    ephemeralKey: 'ek_test_foo',
+  },
+});
+
+const elementsClientSecret: StripeElements = stripe.elements({
+  fonts: [OPEN_SANS, AVENIR],
+  locale: 'auto',
   clientSecret: '',
   appearance: {
     disableAnimations: false,
@@ -142,10 +171,20 @@ elements.update({
     },
     labels: 'floating',
   },
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1099,
+  setup_future_usage: 'off_session',
+  capture_method: 'automatic',
+  payment_method_types: ['card'],
 });
 
 const fetchUpdates = async () => {
   const {error} = await elements.fetchUpdates();
+};
+
+const handleSubmit = async () => {
+  const {error} = await elements.submit();
 };
 
 const auBankAccountElement = elements.create('auBankAccount', {});
@@ -2088,8 +2127,30 @@ stripe
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
 stripe
+  .handleNextAction({clientSecret: ''})
+  .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
+
+stripe
   .verifyMicrodepositsForPayment('', {amounts: [32, 45]})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe.createPaymentMethod({
+  elements: elements,
+  params: {
+    billing_details: {
+      name: 'Jenny Rosen',
+    },
+  },
+});
+
+stripe.createPaymentMethod({
+  element: cardElement,
+  params: {
+    billing_details: {
+      name: 'Jenny Rosen',
+    },
+  },
+});
 
 stripe.createPaymentMethod({
   type: 'acss_debit',
@@ -2587,6 +2648,58 @@ stripe
     }) => null
   );
 
+// confirmPayment: redirect: 'always' without clientSecret
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+stripe
+  .confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+
+// confirmPayment: redirect: 'always' with clientSecret
+stripe
+  .confirmPayment({
+    clientSecret: '',
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+stripe
+  .confirmPayment({
+    clientSecret: '',
+    confirmParams: {
+      return_url: '',
+    },
+    elements,
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+
+// confirmPayment: redirect: 'if_required' without clientSecret
 stripe
   .confirmPayment({
     elements,
@@ -2601,8 +2714,8 @@ stripe
 stripe
   .confirmPayment({
     elements,
-    confirmParams: {},
     redirect: 'if_required',
+    confirmParams: {},
   })
   .then((res) => {
     if (res.error) {
@@ -2611,21 +2724,84 @@ stripe
     }
   });
 
+// confirmPayment redirect: 'if_required' with clientSecret
+stripe
+  .confirmPayment({
+    clientSecret: '',
+    redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+stripe
+  .confirmPayment({
+    clientSecret: '',
+    redirect: 'if_required',
+    confirmParams: {},
+    elements,
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+
+// confirmSetup: redirect: 'always' without clientSecret
 stripe
   .confirmSetup({
     elements,
     confirmParams: {
       return_url: '',
     },
-    redirect: 'if_required',
   })
   .then((res) => {
     if (res.error) {
     }
-    if (res.setupIntent) {
+  });
+stripe
+  .confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: '',
+    },
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
     }
   });
 
+// confirmSetup: redirect: 'always' with clientSecret
+stripe
+  .confirmSetup({
+    clientSecret: '',
+    confirmParams: {
+      return_url: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+stripe
+  .confirmSetup({
+    clientSecret: '',
+    confirmParams: {
+      return_url: '',
+    },
+    elements,
+    redirect: 'always',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+  });
+
+// confirmSetup: redirect: 'if_required' without clientSecret
 stripe
   .confirmSetup({
     elements,
@@ -2637,12 +2813,37 @@ stripe
     if (res.setupIntent) {
     }
   });
-
 stripe
   .confirmSetup({
     elements,
+    redirect: 'if_required',
     confirmParams: {},
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
+// confirmSetup redirect: 'if_required' with clientSecret
+stripe
+  .confirmSetup({
+    clientSecret: '',
     redirect: 'if_required',
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+stripe
+  .confirmSetup({
+    clientSecret: '',
+    redirect: 'if_required',
+    confirmParams: {},
+    elements,
   })
   .then((res) => {
     if (res.error) {
