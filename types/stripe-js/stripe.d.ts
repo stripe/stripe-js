@@ -204,6 +204,18 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
+   * Use `stripe.confirmBlikPayment` in the [BLIK Payments with Payment Methods](https://stripe.com/docs/payments/blik) flow when the customer submits your payment form.
+   * When called, it will confirm the PaymentIntent with data you provide, and it will automatically prompt the customer to authorize the transaction.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_blik_payment
+   */
+  confirmBlikPayment(
+    clientSecret: string,
+    data: paymentIntents.ConfirmBlikPaymentData,
+    options?: paymentIntents.ConfirmBlikPaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+  /**
    * Use `stripe.confirmBoletoPayment` in the [Boleto Payment](https://stripe.com/docs/payments/boleto) with Payment Methods flow when the customer submits your payment form.
    * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
    * Note that there are some additional requirements to this flow that are not covered in this reference.
