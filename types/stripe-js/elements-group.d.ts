@@ -698,11 +698,25 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
   setupFutureUsage?: 'off_session' | 'on_session';
 
   /**
+   * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
+   */
+  setup_future_usage?: 'off_session' | 'on_session';
+
+  /**
    * Controls when the funds will be captured from the customer’s account.
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
    */
   captureMethod?: 'manual' | 'automatic';
+
+  /**
+   * Controls when the funds will be captured from the customer’s account.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
+   */
+  capture_method?: 'manual' | 'automatic';
 
   /**
    * Instead of using automatic payment methods, declare specific payment methods to enable.
@@ -712,9 +726,21 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
   paymentMethodTypes?: string[];
 
   /**
+   * Instead of using automatic payment methods, declare specific payment methods to enable.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  payment_method_types?: string[];
+
+  /**
    * Allows PaymentMethods to be created from the Elements instance.
    */
   paymentMethodCreation?: 'manual';
+
+  /**
+   * Allows PaymentMethods to be created from the Elements instance.
+   */
+  payment_method_creation?: 'manual';
 }
 
 /*
@@ -759,11 +785,32 @@ export interface StripeElementsUpdateOptions {
   setupFutureUsage?: 'off_session' | 'on_session';
 
   /**
+   * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
+   */
+  setup_future_usage?: 'off_session' | 'on_session';
+
+  /**
    * Controls when the funds will be captured from the customer’s account.
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
    */
   captureMethod?: 'manual' | 'automatic';
+
+  /**
+   * Controls when the funds will be captured from the customer’s account.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
+   */
+  capture_method?: 'manual' | 'automatic';
+
+  /**
+   * Instead of using automatic payment methods, declare specific payment methods to enable.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  payment_method_types?: string[];
 
   /**
    * Instead of using automatic payment methods, declare specific payment methods to enable.

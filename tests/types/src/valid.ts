@@ -109,6 +109,15 @@ const elements: StripeElements = stripe.elements({
   },
 });
 
+stripe.elements({
+  mode: 'setup',
+  currency: 'usd',
+  setup_future_usage: 'off_session',
+  capture_method: 'automatic',
+  payment_method_types: ['card'],
+  payment_method_creation: 'manual',
+});
+
 const elementsClientSecret: StripeElements = stripe.elements({
   fonts: [OPEN_SANS, AVENIR],
   locale: 'auto',
@@ -178,6 +187,15 @@ elements.update({
   setupFutureUsage: 'off_session',
   captureMethod: 'automatic',
   paymentMethodTypes: ['card'],
+});
+
+elements.update({
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1099,
+  setup_future_usage: 'off_session',
+  capture_method: 'automatic',
+  payment_method_types: ['card'],
 });
 
 const fetchUpdates = async () => {
