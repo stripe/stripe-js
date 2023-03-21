@@ -85,9 +85,10 @@ const elements: StripeElements = stripe.elements({
   mode: 'payment',
   currency: 'usd',
   amount: 1099,
-  setup_future_usage: 'off_session',
-  capture_method: 'automatic',
-  payment_method_types: ['card'],
+  setupFutureUsage: 'off_session',
+  captureMethod: 'automatic',
+  paymentMethodTypes: ['card'],
+  paymentMethodCreation: 'manual',
   appearance: {
     disableAnimations: false,
     theme: 'night',
@@ -174,9 +175,9 @@ elements.update({
   mode: 'payment',
   currency: 'usd',
   amount: 1099,
-  setup_future_usage: 'off_session',
-  capture_method: 'automatic',
-  payment_method_types: ['card'],
+  setupFutureUsage: 'off_session',
+  captureMethod: 'automatic',
+  paymentMethodTypes: ['card'],
 });
 
 const fetchUpdates = async () => {
