@@ -55,7 +55,7 @@ export interface StripePaymentMethodMessagingElementOptions {
   /**
    * Payment methods to show messaging for.
    */
-  paymentMethods: Array<'afterpay_clearpay' | 'klarna'>;
+  paymentMethods: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
 
   /**
    * The country the end-buyer is in.
