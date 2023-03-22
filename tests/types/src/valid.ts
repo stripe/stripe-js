@@ -54,6 +54,7 @@ import {
   StripeExpressCheckoutElementShippingAddressChangeEvent,
   StripeExpressCheckoutElementShippingRateChangeEvent,
   AvailablePaymentMethods,
+  StripeElementsOptions,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -79,7 +80,7 @@ const AVENIR: CustomFontSource = {
   style: 'normal',
 };
 
-const elements: StripeElements = stripe.elements({
+const options: StripeElementsOptions = {
   fonts: [OPEN_SANS, AVENIR],
   locale: 'auto',
   mode: 'payment',
@@ -107,7 +108,9 @@ const elements: StripeElements = stripe.elements({
     customer: 'cus_foo',
     ephemeralKey: 'ek_test_foo',
   },
-});
+};
+
+const elements: StripeElements = stripe.elements(options);
 
 stripe.elements({
   mode: 'setup',
