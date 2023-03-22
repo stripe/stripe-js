@@ -5,6 +5,7 @@ import {
   StripePaymentElement,
   StripeCartElement,
   StripeExpressCheckoutElement,
+  StripeElementsOptions,
 } from '../../../types';
 
 declare const stripe: Stripe;
@@ -15,7 +16,10 @@ declare const cartElement: StripeCartElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
 
 // @ts-expect-error: Passing `clientSecret` or `mode` implies different integration paths which cannot be combined
-const elements = stripe.elements({clientSecret: '', mode: ''});
+const options: StripeElementsOptions = {clientSecret: '', mode: ''};
+
+// @ts-expect-error: Passing `clientSecret` or `mode` implies different integration paths which cannot be combined
+const elements = stripe.elements(options);
 
 // @ts-expect-error mode must be one of payment, setup, or subscription
 stripe.elements({mode: 'test'});

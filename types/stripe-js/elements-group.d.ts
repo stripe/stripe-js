@@ -672,6 +672,11 @@ export interface StripeElementsOptionsClientSecret
    * @docs https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret
    */
   clientSecret?: string;
+
+  /**
+   * Either use mode or clientSecret when creating an Elements group
+   */
+  mode?: never;
 }
 
 export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
@@ -741,7 +746,16 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
    * Allows PaymentMethods to be created from the Elements instance.
    */
   payment_method_creation?: 'manual';
+
+  /**
+   * Either use mode or clientSecret when creating an Elements group
+   */
+  clientSecret?: never;
 }
+
+export type StripeElementsOptions =
+  | StripeElementsOptionsClientSecret
+  | StripeElementsOptionsMode;
 
 /*
  * Updatable options for an `Elements` instance
