@@ -2170,9 +2170,14 @@ stripe
   .handleCardAction('')
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
-stripe
-  .handleNextAction({clientSecret: ''})
-  .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
+stripe.handleNextAction({clientSecret: ''}).then((res) => {
+  if (res.paymentIntent) {
+  }
+  if (res.setupIntent) {
+  }
+  if (res.error) {
+  }
+});
 
 stripe
   .verifyMicrodepositsForPayment('', {amounts: [32, 45]})

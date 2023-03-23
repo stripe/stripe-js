@@ -590,8 +590,8 @@ export interface Stripe {
   handleCardAction(clientSecret: string): Promise<PaymentIntentResult>;
 
   /**
-   * Use `stripe.handleNextAction` in the Payment Intents API finalizing payments on the server flow to finish confirmation of a [PaymentIntent](https://stripe.com/docs/api/payment_intents) or [SetupIntent](https://stripe.com/docs/api/setup_intents) with the `requires_action` status.
-   * It will throw an error if the `PaymentIntent` has a different status.
+   * Use `stripe.handleNextAction` in the [finalizing payments on the server](https://stripe.com/docs/payments/finalize-payments-on-the-server) flow to finish confirmation of a [PaymentIntent](https://stripe.com/docs/api/payment_intents) or [SetupIntent](https://stripe.com/docs/api/setup_intents) with the `requires_action` status.
+   * It will throw an error if the `PaymentIntent` or `SetupIntent` has a different status.
    *
    * Note that `stripe.handleNextAction` may take several seconds to complete.
    * During that time, you should disable your form from being resubmitted and show a waiting indicator like a spinner.
@@ -605,7 +605,7 @@ export interface Stripe {
    */
   handleNextAction(options: {
     clientSecret: string;
-  }): Promise<PaymentIntentResult>;
+  }): Promise<PaymentIntentOrSetupIntentResult>;
 
   /**
    * Use `stripe.verifyMicrodepositsForPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow
@@ -1202,6 +1202,15 @@ export type PaymentIntentResult =
 export type SetupIntentResult =
   | {setupIntent: api.SetupIntent; error?: undefined}
   | {setupIntent?: undefined; error: StripeError};
+
+export type PaymentIntentOrSetupIntentResult =
+  | {
+      paymentIntent: api.PaymentIntent;
+      setupIntent?: undefined;
+      error?: undefined;
+    }
+  | {paymentIntent?: undefined; setupIntent: api.SetupIntent; error?: undefined}
+  | {paymentIntent?: undefined; setupIntent?: undefined; error: StripeError};
 
 export type ProcessOrderResult =
   | {paymentIntent: api.PaymentIntent; order: api.Order; error?: undefined}
