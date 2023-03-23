@@ -214,6 +214,23 @@ stripe
     }
   });
 
+stripe.handleNextAction({clientSecret: ''}).then((res) => {
+  if (res.paymentIntent) {
+    // @ts-expect-error If result has a paymentIntent, setupIntent will be undefined
+    const setupIntentId = res.setupIntent.id;
+  }
+  if (res.setupIntent) {
+    // @ts-expect-error If result has a setupIntent, paymentIntent will be undefined
+    const paymentIntentId = res.paymentIntent.id;
+  }
+  if (res.error) {
+    // @ts-expect-error If result has an error, paymentIntent will be undefined
+    const paymentIntentId = res.paymentIntent.id;
+    // @ts-expect-error If result has an error, setupIntent will be undefined
+    const setupIntentId = res.setupIntent.id;
+  }
+});
+
 stripe.processOrder({elements, confirmParams: {return_url: ''}}).then((res) => {
   if (res.error) {
   }
