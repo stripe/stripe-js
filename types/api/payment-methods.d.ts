@@ -292,6 +292,41 @@ export namespace PaymentMethod {
      * Account type: checkings or savings. Defaults to checking if omitted.
      */
     account_type: string;
+
+    /**
+     * The name of the bank.
+     */
+    bank_name: string;
+
+    /**
+     * The ID of the Financial Connections Account used to create the payment method.
+     */
+    financial_connections_account: string;
+
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+     */
+    fingerprint: string;
+
+    /**
+     * Last four digits of the bank account number.
+     */
+    last4: string;
+
+    /**
+     * Contains information about US bank account networks that can be used.
+     */
+    networks: {
+      /**
+       * The preferred network.
+       */
+      preferred: string;
+
+      /**
+       * All supported networks.
+       */
+      supported: string[];
+    };
   }
 }
 
