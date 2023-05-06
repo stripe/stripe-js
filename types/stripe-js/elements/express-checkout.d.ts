@@ -237,8 +237,8 @@ export type ShippingRate = {
 };
 
 export type LayoutOption = {
-  maxColumns: number;
-  maxRows: number;
+  maxColumns?: number;
+  maxRows?: number;
   overflow?: 'auto' | 'never';
 };
 

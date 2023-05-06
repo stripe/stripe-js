@@ -817,7 +817,7 @@ const expressCheckoutElementDefault = elements.create('expressCheckout');
 
 const expressCheckoutElement = elements.create('expressCheckout', {
   buttonHeight: 55,
-  layout: 'horizontal',
+  layout: {maxRows: 1, maxColumns: 1, overflow: 'auto'},
   paymentMethodOrder: ['apple_pay', 'google_pay'],
   wallets: {
     googlePay: 'always',
@@ -835,8 +835,7 @@ const expressCheckoutElement = elements.create('expressCheckout', {
 
 const expressCheckoutElement2 = elements.create('expressCheckout', {
   layout: {
-    type: 'auto',
-    visibleButtonCount: 5,
+    maxRows: 1,
   },
   wallets: {
     applePay: 'never',
