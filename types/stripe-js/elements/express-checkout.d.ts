@@ -236,14 +236,11 @@ export type ShippingRate = {
   };
 };
 
-export type LayoutType = 'auto' | 'horizontal' | 'vertical';
-
-export type LayoutOption =
-  | LayoutType
-  | {
-      type: LayoutType;
-      visibleButtonCount?: number;
-    };
+export type LayoutOption = {
+  maxColumns?: number;
+  maxRows?: number;
+  overflow?: 'auto' | 'never';
+};
 
 export type ExpressCheckoutWalletOption = 'always' | 'auto' | 'never';
 
