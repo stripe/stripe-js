@@ -188,7 +188,7 @@ export type StripeExpressCheckoutElement = StripeElementBase & {
   ): StripeExpressCheckoutElement;
 };
 
-export type PaymentMethodType = 'google_pay' | 'apple_pay' | 'link';
+export type ExpressPaymentType = 'google_pay' | 'apple_pay' | 'link' | 'paypal';
 
 export type ExpressCheckoutPartialAddress = {
   city: string;
@@ -420,7 +420,7 @@ export interface StripeExpressCheckoutElementClickEvent {
   /**
    * The payment method associated with the button that was clicked.
    */
-  paymentMethodType: PaymentMethodType;
+  expressPaymentType: ExpressPaymentType;
 
   /**
    * Callback to configure the details shown on a payment interface, including which fields to collect.
@@ -443,7 +443,7 @@ export interface StripeExpressCheckoutElementConfirmEvent {
 
   shippingRate?: ShippingRate;
 
-  paymentMethodType: PaymentMethodType;
+  expressPaymentType: ExpressPaymentType;
 }
 
 export type ChangeResolveDetails = {
