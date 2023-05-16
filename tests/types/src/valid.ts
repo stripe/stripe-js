@@ -870,7 +870,7 @@ expressCheckoutElement
     }) => {}
   );
 
-expressCheckoutElement.on('confirm', ({paymentFailed}) => {
+expressCheckoutElement.on('confirm', ({paymentFailed, expressPaymentType}) => {
   paymentFailed();
   paymentFailed({});
   paymentFailed({reason: 'invalid_shipping_address'});
