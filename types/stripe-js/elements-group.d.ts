@@ -700,14 +700,14 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
    */
-  setupFutureUsage?: 'off_session' | 'on_session';
+  setupFutureUsage?: 'off_session' | 'on_session' | null;
 
   /**
    * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
    */
-  setup_future_usage?: 'off_session' | 'on_session';
+  setup_future_usage?: 'off_session' | 'on_session' | null;
 
   /**
    * Controls when the funds will be captured from the customer’s account.
@@ -794,16 +794,16 @@ export interface StripeElementsUpdateOptions {
   /**
    * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
    *
-   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
+   * @docs https://stripe.com/docs/api/payment_intents/update#update_payment_intent-setup_future_usage
    */
-  setupFutureUsage?: 'off_session' | 'on_session';
+  setupFutureUsage?: 'off_session' | 'on_session' | null;
 
   /**
    * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
    *
-   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
+   * @docs https://stripe.com/docs/api/payment_intents/update#update_payment_intent-setup_future_usage
    */
-  setup_future_usage?: 'off_session' | 'on_session';
+  setup_future_usage?: 'off_session' | 'on_session' | null;
 
   /**
    * Controls when the funds will be captured from the customer’s account.
