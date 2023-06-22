@@ -738,6 +738,22 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
   payment_method_types?: string[];
 
   /**
+   * When using automatic payment methods (omitting paymentMethodTypes), provide a
+   * payment method configuration ID for deriving payment methods.
+   *
+   * @docs https://stripe.com/docs/connect/payment-method-configurations
+   */
+  paymentMethodConfiguration?: string;
+
+  /**
+   * When using automatic payment methods (omitting payment_method_types), provide a
+   * payment method configuration ID for deriving payment methods.
+   *
+   * @docs https://stripe.com/docs/connect/payment-method-configurations
+   */
+  payment_method_configuration?: string;
+
+  /**
    * Allows PaymentMethods to be created from the Elements instance.
    */
   paymentMethodCreation?: 'manual';

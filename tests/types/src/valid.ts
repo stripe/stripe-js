@@ -145,6 +145,14 @@ const elementsClientSecret: StripeElements = stripe.elements({
   },
 });
 
+const elementsPMCProvided = stripe.elements({
+  mode: 'payment',
+  currency: 'usd',
+  setup_future_usage: 'off_session',
+  capture_method: 'automatic',
+  payment_method_configuration: 'pmc_12345678901234567890',
+});
+
 const elementsNoOptions: StripeElements = stripe.elements();
 
 const MY_STYLE: StripeElementStyle = {
