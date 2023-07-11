@@ -686,9 +686,9 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
   mode?: 'payment' | 'setup' | 'subscription';
 
   /**
-   * Three character currency code (e.g., usd).
+   * Three-character currency code (e.g., usd).
    */
-  currency?: string;
+  currency: string;
 
   /**
    * The amount to be charged. Shown in Apple Pay, Google Pay, or Buy now pay later UIs, and influences available payment methods.
