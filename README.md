@@ -8,6 +8,12 @@ you must load Stripe.js directly from `https://js.stripe.com`. You cannot
 include it in a bundle or host it yourself. This package wraps the global
 `Stripe` function provided by the Stripe.js script as an ES module.
 
+Calling `loadStripe` always loads the latest version of Stripe.js, regardless of
+which version of `@stripe/stripe-js` you use. Updates for this package only
+impact tooling around the `loadStripe` helper itself and the TypeScript type
+definitions provided for Stripe.js. Updates do not affect runtime availability
+of features of Stripe.js.
+
 [![npm version](https://img.shields.io/npm/v/@stripe/stripe-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/stripe-js)
 
 ## Installation
