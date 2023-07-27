@@ -167,12 +167,16 @@ export interface FieldsOption {
 export type TermOption = 'auto' | 'always' | 'never';
 
 export interface TermsOption {
+  applePay?: TermOption;
+  auBecsDebit?: TermOption;
   bancontact?: TermOption;
   card?: TermOption;
+  cashapp?: TermOption;
+  googlePay?: TermOption;
   ideal?: TermOption;
+  paypal?: TermOption;
   sepaDebit?: TermOption;
   sofort?: TermOption;
-  auBecsDebit?: TermOption;
   usBankAccount?: TermOption;
 }
 
