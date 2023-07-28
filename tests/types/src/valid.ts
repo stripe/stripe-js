@@ -381,6 +381,10 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
     bancontact: 'never',
     auBecsDebit: 'never',
     usBankAccount: 'never',
+    cashapp: 'auto',
+    applePay: 'always',
+    googlePay: 'never',
+    paypal: 'never',
   },
   business: {
     name: '',
