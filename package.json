@@ -1,6 +1,6 @@
 {
   "name": "@stripe/stripe-js",
-  "version": "1.54.1",
+  "version": "1.54.2",
   "description": "Stripe.js loading utility",
   "main": "dist/stripe.js",
   "module": "dist/stripe.esm.js",
