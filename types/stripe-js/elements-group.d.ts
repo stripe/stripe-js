@@ -890,7 +890,7 @@ export interface CustomFontSource {
 export interface Appearance {
   disableAnimations?: boolean;
 
-  theme?: 'stripe' | 'night' | 'flat' | 'none';
+  theme?: 'stripe' | 'night' | 'flat';
 
   variables?: {
     // General font styles
