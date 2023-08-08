@@ -724,6 +724,13 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
   capture_method?: 'manual' | 'automatic';
 
   /**
+   * The Stripe account ID which is the business of record.
+   *
+   * @docs https://stripe.com/docs/js/elements_object/create_without_intent#stripe_elements_no_intent-options-onBehalfOf
+   */
+  onBehalfOf?: string;
+
+  /**
    * Instead of using automatic payment methods, declare specific payment methods to enable.
    *
    * @docs https://stripe.com/docs/payments/payment-methods/overview
