@@ -378,10 +378,7 @@ export interface StripeElements {
   /////////////////////////////
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
-   * Creates a `ExpressCheckoutElement`.
+   * Creates an `ExpressCheckoutElement`.
    */
   create(
     elementType: 'expressCheckout',
@@ -389,9 +386,6 @@ export interface StripeElements {
   ): StripeExpressCheckoutElement;
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
    * Looks up a previously created `Element` by its type.
    */
   getElement(
