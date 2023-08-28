@@ -45,6 +45,7 @@ export type CreatePaymentMethodData =
 export {
   CreatePaymentMethodFromElement,
   CreatePaymentMethodFromElements,
+  CreateConfirmationToken
 } from '../api';
 
 export interface CreatePaymentMethodAlipayData

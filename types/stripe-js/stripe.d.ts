@@ -664,6 +664,15 @@ export interface Stripe {
   ): Promise<PaymentMethodResult>;
 
   /**
+   * Use stripe.createConfirmationToken to convert payment information collected by elements into a [ConfirmationToken](https://stripe.com/docs/api/confirmation_tokens) object that you safely pass to your server to use in an API call.
+   *
+   * @docs https://stripe.com/docs/js/confirmation_tokens/create_confirmation_token
+   */
+  createConfirmationToken(
+    options: paymentIntents.CreateConfirmationToken
+  ): Promise<ConfirmationTokenResult>;
+
+  /**
    * Retrieve a [PaymentIntent](https://stripe.com/docs/api/payment_intents) using its [client secret](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret).
    *
    * @docs https://stripe.com/docs/js/payment_intents/retrieve_payment_intent
@@ -1225,6 +1234,10 @@ export type PaymentMethodResult =
   | {paymentMethod: api.PaymentMethod; error?: undefined}
   | {paymentMethod?: undefined; error: StripeError};
 
+export type ConfirmationTokenResult =
+| {confirmationToken: api.ConfirmationToken; error?: undefined}
+| {confirmationToken?: undefined; error: StripeError};
+
 export type SourceResult =
   | {source: api.Source; error?: undefined}
   | {source?: undefined; error: StripeError};
@@ -1260,8 +1273,8 @@ export type EphemeralKeyNonceResult =
   | {nonce: string; error?: undefined}
   | {nonce?: undefined; error: StripeError};
 
-/* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments. 
-  This metadata includes information like IP address, browser, screen or device information, and other device characteristics. 
+/* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments.
+  This metadata includes information like IP address, browser, screen or device information, and other device characteristics.
   You can find more details about how Radar uses this data by reading about how Radar performs [advanced fraud detection](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection).
   */
 export type RadarSessionPayload =
