@@ -15,6 +15,10 @@ import {
 import {CheckoutLocale, RedirectToCheckoutOptions} from './checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
+import {
+  StripeCustomCheckoutOptions,
+  StripeCustomCheckout,
+} from './custom-checkout';
 
 export interface Stripe {
   /////////////////////////////
@@ -1193,6 +1197,14 @@ export interface Stripe {
   createEphemeralKeyNonce(
     options: ephemeralKeys.EphemeralKeyNonceOptions
   ): Promise<EphemeralKeyNonceResult>;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   */
+  initCustomCheckout(
+    options: StripeCustomCheckoutOptions
+  ): Promise<StripeCustomCheckout>;
 }
 
 export type PaymentIntentResult =
