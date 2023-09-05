@@ -19,6 +19,10 @@ import {
   StripeCustomCheckoutOptions,
   StripeCustomCheckout,
 } from './custom-checkout';
+import {
+  StripeEmbeddedCheckoutOptions,
+  StripeEmbeddedCheckout,
+} from './embedded-checkout';
 
 export interface Stripe {
   /////////////////////////////
@@ -1205,6 +1209,14 @@ export interface Stripe {
   initCustomCheckout(
     options: StripeCustomCheckoutOptions
   ): Promise<StripeCustomCheckout>;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   */
+  initEmbeddedCheckout(
+    options: StripeEmbeddedCheckoutOptions
+  ): Promise<StripeEmbeddedCheckout>;
 }
 
 export type PaymentIntentResult =
