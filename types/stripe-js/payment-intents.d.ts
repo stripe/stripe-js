@@ -1410,6 +1410,13 @@ export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
   return_url: string;
 
   /**
+   * ID of the payment method (a PaymentMethod, Card, or compatible Source object) to attach to this PaymentIntent.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method
+   */
+  payment_method?: string;
+
+  /**
    * An object to attach additional billing_details to the PaymentMethod created via Elements.
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data
