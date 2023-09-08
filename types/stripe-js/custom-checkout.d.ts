@@ -10,6 +10,7 @@ import {
   StripeAddressElement,
 } from './elements/address';
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
+import {StripeError} from './stripe';
 
 /**
  * Requires beta access:
@@ -49,24 +50,33 @@ export type StripeCustomCheckoutShippingAddress = {
 };
 
 export type StripeCustomCheckoutBillingAddress = StripeCustomCheckoutShippingAddress;
+export type StripeCustomCheckoutResult =
+  | {session: StripeCustomCheckoutSession; error?: undefined}
+  | {session?: undefined; error: StripeError};
 
 export interface StripeCustomCheckoutActions {
-  applyPromotionCode: (promotionCode: string) => Promise<void>;
-  removePromotionCode: () => Promise<void>;
+  applyPromotionCode: (
+    promotionCode: string
+  ) => Promise<StripeCustomCheckoutResult>;
+  removePromotionCode: () => Promise<StripeCustomCheckoutResult>;
   updateShippingAddress: (
     shippingAddress: StripeCustomCheckoutShippingAddress
-  ) => Promise<void>;
+  ) => Promise<StripeCustomCheckoutResult>;
   updateBillingAddress: (
     billingAddress: StripeCustomCheckoutBillingAddress
-  ) => Promise<void>;
+  ) => Promise<StripeCustomCheckoutResult>;
   updatePhoneNumber: (phoneNumber: string) => void;
   updateEmail: (email: string) => void;
   updateLineItemQuantity: (args: {
     lineItem: string;
     quantity: number;
-  }) => Promise<void>;
-  updateShippingOption: (shippingOption: string) => Promise<void>;
-  confirm: (args?: {return_url?: string}) => Promise<void>;
+  }) => Promise<StripeCustomCheckoutResult>;
+  updateShippingOption: (
+    shippingOption: string
+  ) => Promise<StripeCustomCheckoutResult>;
+  confirm: (args?: {
+    return_url?: string;
+  }) => Promise<StripeCustomCheckoutResult>;
 }
 
 /**
