@@ -47,7 +47,7 @@ export type StripeCustomCheckoutAddress = {
 export type StripeCustomCheckoutContact = {
   name?: string | null;
   address: StripeCustomCheckoutAddress;
-}
+};
 
 export type StripeCustomCheckoutResult =
   | {session: StripeCustomCheckoutSession; error?: undefined}
