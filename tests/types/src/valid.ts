@@ -2813,6 +2813,22 @@ stripe
     }
   });
 
+// confirmPayment redirect: 'if_required' with clientSecret and existing PM
+stripe
+  .confirmPayment({
+    clientSecret: '',
+    redirect: 'if_required',
+    confirmParams: {
+      payment_method: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.paymentIntent) {
+    }
+  });
+
 // confirmSetup: redirect: 'always' without clientSecret
 stripe
   .confirmSetup({
@@ -2914,6 +2930,23 @@ stripe
     if (res.setupIntent) {
     }
   });
+
+// confirmSetup redirect: 'if_required' with clientSecret and existing PM
+stripe
+  .confirmSetup({
+    clientSecret: '',
+    redirect: 'if_required',
+    confirmParams: {
+      payment_method: '',
+    },
+  })
+  .then((res) => {
+    if (res.error) {
+    }
+    if (res.setupIntent) {
+    }
+  });
+
 
 stripe
   .processOrder({
