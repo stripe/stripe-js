@@ -165,8 +165,11 @@ elements.create('expressCheckout', {
 // @ts-expect-error at least one of elements or clientSecret is required
 stripe.confirmPayment({confirmParams: {return_url: ''}});
 
-// @ts-expect-error Existing payment method by ID string only, not object
-stripe.confirmPayment({clientSecret: '', confirmParams: {return_url: '', payment_method: {}}});
+stripe.confirmPayment({
+  clientSecret: '',
+  // @ts-expect-error Existing payment method by ID string only, not object
+  confirmParams: {return_url: '', payment_method: {}},
+});
 
 stripe
   .confirmPayment({elements, confirmParams: {return_url: ''}})
@@ -197,8 +200,11 @@ stripe
 // @ts-expect-error either elements or clientSecret is required
 stripe.confirmSetup({confirmParams: {return_url: ''}});
 
-// @ts-expect-error Existing payment method by ID string only, not object
-stripe.confirmSetup({clientSecret: '', confirmParams: {return_url: '', payment_method: {}}});
+stripe.confirmSetup({
+  clientSecret: '',
+  // @ts-expect-error Existing payment method by ID string only, not object
+  confirmParams: {return_url: '', payment_method: {}},
+});
 
 stripe.confirmSetup({elements, confirmParams: {return_url: ''}}).then((res) => {
   if (res.error) {

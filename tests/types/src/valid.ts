@@ -2947,7 +2947,6 @@ stripe
     }
   });
 
-
 stripe
   .processOrder({
     elements,
