@@ -617,6 +617,18 @@ export type StripeElementLocale =
   | 'zh-HK'
   | 'zh-TW';
 
+type PaymentMethodOptions = {
+  card?: {require_cvc_recollection?: boolean};
+  us_bank_account?: {
+    financial_connections?: {
+      permissions?: Array<
+        'balances' | 'ownership' | 'payment_method' | 'transactions'
+      >;
+    };
+    verification_method?: 'automatic' | 'instant';
+  };
+};
+
 /**
  * Options to create an `Elements` instance with.
  */
@@ -770,6 +782,20 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
    * Allows PaymentMethods to be created from the Elements instance.
    */
   payment_method_creation?: 'manual';
+
+  /**
+   * Additional payment-method-specific options for configuring Payment Element behavior.
+   *
+   * @docs https://stripe.com/docs/js/elements_object/create_without_intent#stripe_elements_no_intent-options-paymentMethodOptions
+   */
+  paymentMethodOptions?: PaymentMethodOptions;
+
+  /**
+   * Additional payment-method-specific options for configuring Payment Element behavior.
+   *
+   * @docs https://stripe.com/docs/js/elements_object/create_without_intent#stripe_elements_no_intent-options-paymentMethodOptions
+   */
+  payment_method_options?: PaymentMethodOptions;
 
   /**
    * Either use mode or clientSecret when creating an Elements group

@@ -90,6 +90,9 @@ const options: StripeElementsOptions = {
   captureMethod: 'automatic',
   paymentMethodTypes: ['card'],
   paymentMethodCreation: 'manual',
+  paymentMethodOptions: {
+    card: {require_cvc_recollection: true},
+  },
   appearance: {
     disableAnimations: false,
     theme: 'night',
@@ -119,6 +122,9 @@ stripe.elements({
   capture_method: 'automatic',
   payment_method_types: ['card'],
   payment_method_creation: 'manual',
+  payment_method_options: {
+    us_bank_account: {financial_connections: {permissions: ['payment_method']}},
+  },
 });
 
 const elementsClientSecret: StripeElements = stripe.elements({
