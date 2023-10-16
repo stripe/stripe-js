@@ -1211,8 +1211,9 @@ export interface Stripe {
   ): Promise<StripeCustomCheckout>;
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   * Use `stripe.initEmbeddedCheckout` to initialize an embedded Checkout instance
+   *
+   * * @docs https://stripe.com/docs/payments/accept-a-payment?platform=web&ui=embedded-checkout
    */
   initEmbeddedCheckout(
     options: StripeEmbeddedCheckoutOptions
