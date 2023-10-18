@@ -59,10 +59,10 @@ export interface StripeCustomCheckoutActions {
   ) => Promise<StripeCustomCheckoutResult>;
   removePromotionCode: () => Promise<StripeCustomCheckoutResult>;
   updateShippingAddress: (
-    shippingAddress: StripeCustomCheckoutContact
+    shippingAddress: StripeCustomCheckoutContact | null
   ) => Promise<StripeCustomCheckoutResult>;
   updateBillingAddress: (
-    billingAddress: StripeCustomCheckoutContact
+    billingAddress: StripeCustomCheckoutContact | null
   ) => Promise<StripeCustomCheckoutResult>;
   updatePhoneNumber: (phoneNumber: string) => void;
   updateEmail: (email: string) => void;
