@@ -54,6 +54,21 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
   return script;
 };
 
+const reloadScript = (params: null | LoadParams): HTMLScriptElement => {
+  const queryString =
+    params && !params.advancedFraudSignals ? '?advancedFraudSignals=false' : '';
+  const script = [...document.getElementsByTagName("script")].filter((element) => element.src === `${V3_URL}${queryString}`)[0];
+  const headOrBody = document.head || document.body;
+  if (!headOrBody) {
+    throw new Error(
+      'Expected document.body not to be null. Stripe.js requires a <body> element.'
+    );
+  }
+  headOrBody.removeChild(script);
+
+  return injectScript(params);
+}
+
 const registerWrapper = (stripe: any, startTime: number): void => {
   if (!stripe || !stripe._registerWrapper) {
     return;
@@ -79,16 +94,16 @@ export const loadScript = (
       resolve(null);
       return;
     }
-
+  
     if (window.Stripe && params) {
       console.warn(EXISTING_SCRIPT_MESSAGE);
     }
-
+  
     if (window.Stripe) {
       resolve(window.Stripe);
       return;
     }
-
+  
     try {
       let script = findScript();
 
@@ -96,6 +111,10 @@ export const loadScript = (
         console.warn(EXISTING_SCRIPT_MESSAGE);
       } else if (!script) {
         script = injectScript(params);
+      } else {
+        // if script exists, but we are reloading due to an error, 
+        // reload script to trigger 'load' event
+        script = reloadScript(params);
       }
 
       script.addEventListener('load', () => {
@@ -115,7 +134,8 @@ export const loadScript = (
     }
   });
 
-  return stripePromise;
+  // set stripePromise to null on error
+  return stripePromise.catch((error) => {throw new Error(error)}).then(stripePromise = null);
 };
 
 export const initStripe = (
