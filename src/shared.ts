@@ -94,16 +94,16 @@ export const loadScript = (
       resolve(null);
       return;
     }
-  
+
     if (window.Stripe && params) {
       console.warn(EXISTING_SCRIPT_MESSAGE);
     }
-  
+
     if (window.Stripe) {
       resolve(window.Stripe);
       return;
     }
-  
+
     try {
       let script = findScript();
 
