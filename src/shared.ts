@@ -57,7 +57,9 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
 const reloadScript = (params: null | LoadParams): HTMLScriptElement => {
   const queryString =
     params && !params.advancedFraudSignals ? '?advancedFraudSignals=false' : '';
-  const script = [...document.getElementsByTagName("script")].filter((element) => element.src === `${V3_URL}${queryString}`)[0];
+  const script = [...document.getElementsByTagName('script')].filter(
+    (element) => element.src === `${V3_URL}${queryString}`
+  )[0];
   const headOrBody = document.head || document.body;
   if (!headOrBody) {
     throw new Error(
@@ -67,7 +69,7 @@ const reloadScript = (params: null | LoadParams): HTMLScriptElement => {
   headOrBody.removeChild(script);
 
   return injectScript(params);
-}
+};
 
 const registerWrapper = (stripe: any, startTime: number): void => {
   if (!stripe || !stripe._registerWrapper) {
@@ -112,7 +114,7 @@ export const loadScript = (
       } else if (!script) {
         script = injectScript(params);
       } else {
-        // if script exists, but we are reloading due to an error, 
+        // if script exists, but we are reloading due to an error,
         // reload script to trigger 'load' event
         script = reloadScript(params);
       }
@@ -135,7 +137,11 @@ export const loadScript = (
   });
 
   // set stripePromise to null on error
-  return stripePromise.catch((error) => {throw new Error(error)}).then(stripePromise = null);
+  return stripePromise
+    .catch((error) => {
+      throw new Error(error);
+    })
+    .then((stripePromise = null));
 };
 
 export const initStripe = (
