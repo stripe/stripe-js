@@ -139,7 +139,7 @@ export const loadScript = (
   // set stripePromise to null on error
   return stripePromise
     .catch((error) => {
-      throw new Error(error);
+      throw error;
     })
     .then((stripePromise = null));
 };
