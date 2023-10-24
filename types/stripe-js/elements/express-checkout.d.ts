@@ -230,10 +230,12 @@ export type ShippingRate = {
   id: string;
   amount: number;
   displayName: string;
-  deliveryEstimate?: string | {
-    maximum?: DeliveryEstimate;
-    minimum?: DeliveryEstimate;
-  };
+  deliveryEstimate?:
+    | string
+    | {
+        maximum?: DeliveryEstimate;
+        minimum?: DeliveryEstimate;
+      };
 };
 
 export type LayoutOption = {
