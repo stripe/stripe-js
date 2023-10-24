@@ -230,7 +230,7 @@ export type ShippingRate = {
   id: string;
   amount: number;
   displayName: string;
-  deliveryEstimate?: {
+  deliveryEstimate?: string | {
     maximum?: DeliveryEstimate;
     minimum?: DeliveryEstimate;
   };
