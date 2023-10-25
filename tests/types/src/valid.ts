@@ -982,6 +982,12 @@ expressCheckoutElement.on(
           },
         },
         {
+          id: 'fast-shipping',
+          amount: 300,
+          displayName: 'Pizza time, soon',
+          deliveryEstimate: 'A couple of weeks',
+        },
+        {
           id: 'free-shipping',
           amount: 0,
           displayName: 'Pizza time, eventually',
