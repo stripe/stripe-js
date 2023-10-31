@@ -196,6 +196,51 @@ export interface LayoutObject {
   spacedAccordionItems?: boolean;
 }
 
+export type PaymentRecurringPaymentIntervalUnit =
+  | 'year'
+  | 'month'
+  | 'day'
+  | 'hour'
+  | 'minute';
+
+export type PaymentApplePayOption = {
+  recurringPaymentRequest?: {
+    paymentDescription: string;
+    managementURL: string;
+    regularBilling: {
+      amount: number;
+      label: string;
+      recurringPaymentStartDate?: Date;
+      recurringPaymentEndDate?: Date;
+      recurringPaymentIntervalUnit?: PaymentRecurringPaymentIntervalUnit;
+      recurringPaymentIntervalCount?: number;
+    };
+    billingAgreement?: string;
+  } | null;
+  deferredPaymentRequest?: {
+    paymentDescription: string;
+    managementURL: string;
+    deferredBilling: {
+      amount: number;
+      label: string;
+      deferredPaymentDate: Date;
+    };
+    billingAgreement?: string;
+    freeCancellationDate?: Date;
+    freeCancellationDateTimeZone?: string;
+  } | null;
+  automaticReloadPaymentRequest?: {
+    paymentDescription: string;
+    managementURL: string;
+    automaticReloadBilling: {
+      amount: number;
+      label: string;
+      automaticReloadPaymentThresholdAmount: number;
+    };
+    billingAgreement?: string;
+  } | null;
+};
+
 export interface StripePaymentElementOptions {
   /**
    * Provide initial customer information that will be displayed in the Payment Element.
@@ -239,6 +284,11 @@ export interface StripePaymentElementOptions {
    * Specify a layout to use when rendering a Payment Element.
    */
   layout?: Layout | LayoutObject;
+
+  /**
+   * Specify the options to be used when the Apple Pay payment sheet opens.
+   */
+  applePay?: PaymentApplePayOption;
 }
 
 export interface StripePaymentElementChangeEvent {

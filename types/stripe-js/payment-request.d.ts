@@ -154,6 +154,11 @@ export interface PaymentRequestUpdateOptions {
    */
 
   shippingOptions?: PaymentRequestShippingOption[];
+
+  /**
+   * Specify the options to be used when the Apple Pay payment sheet opens.
+   */
+  applePay?: PaymentRequestApplePayOption;
 }
 
 /**
@@ -227,6 +232,11 @@ export interface PaymentRequestOptions {
   disableWallets?: PaymentRequestWallet[];
 
   /**
+   * Specify the options to be used when the Apple Pay payment sheet opens.
+   */
+  applePay?: PaymentRequestApplePayOption;
+
+  /**
    * @deprecated
    * Use disableWallets instead.
    */
@@ -286,6 +296,51 @@ export type PaymentRequestWallet =
   | 'googlePay'
   | 'link'
   | 'browserCard';
+
+export type PaymentRequestRecurringPaymentIntervalUnit =
+  | 'year'
+  | 'month'
+  | 'day'
+  | 'hour'
+  | 'minute';
+
+export type PaymentRequestApplePayOption = {
+  recurringPaymentRequest?: {
+    paymentDescription: string;
+    managementURL: string;
+    regularBilling: {
+      amount: number;
+      label: string;
+      recurringPaymentStartDate?: Date;
+      recurringPaymentEndDate?: Date;
+      recurringPaymentIntervalUnit?: PaymentRequestRecurringPaymentIntervalUnit;
+      recurringPaymentIntervalCount?: number;
+    };
+    billingAgreement?: string;
+  } | null;
+  deferredPaymentRequest?: {
+    paymentDescription: string;
+    managementURL: string;
+    deferredBilling: {
+      amount: number;
+      label: string;
+      deferredPaymentDate: Date;
+    };
+    billingAgreement?: string;
+    freeCancellationDate?: Date;
+    freeCancellationDateTimeZone?: string;
+  } | null;
+  automaticReloadPaymentRequest?: {
+    paymentDescription: string;
+    managementURL: string;
+    automaticReloadBilling: {
+      amount: number;
+      label: string;
+      automaticReloadPaymentThresholdAmount: number;
+    };
+    billingAgreement?: string;
+  } | null;
+};
 
 export type PaymentRequestCompleteStatus =
   /**
@@ -497,6 +552,11 @@ export interface PaymentRequestUpdateDetails {
    * The first shipping option listed appears in the browser payment interface as the default option.
    */
   shippingOptions?: PaymentRequestShippingOption[];
+
+  /**
+   * Specify new options to refresh the Apple Pay payment sheet.
+   */
+  applePay?: PaymentRequestApplePayOption;
 }
 
 export interface PaymentRequestShippingOptionEvent {

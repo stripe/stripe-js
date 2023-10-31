@@ -362,14 +362,14 @@ export interface StripeExpressCheckoutElementReadyEvent {
   availablePaymentMethods: undefined | AvailablePaymentMethods;
 }
 
-export type RecurringPaymentIntervalUnit =
+export type ExpressCheckoutRecurringPaymentIntervalUnit =
   | 'year'
   | 'month'
   | 'day'
   | 'hour'
   | 'minute';
 
-export type ApplePayOption = {
+export type ExpressCheckoutApplePayOption = {
   recurringPaymentRequest?: {
     paymentDescription: string;
     managementURL: string;
@@ -378,11 +378,33 @@ export type ApplePayOption = {
       label: string;
       recurringPaymentStartDate?: Date;
       recurringPaymentEndDate?: Date;
-      recurringPaymentIntervalUnit?: RecurringPaymentIntervalUnit;
+      recurringPaymentIntervalUnit?: ExpressCheckoutRecurringPaymentIntervalUnit;
       recurringPaymentIntervalCount?: number;
     };
     billingAgreement?: string;
-  };
+  } | null;
+  deferredPaymentRequest?: {
+    paymentDescription: string;
+    managementURL: string;
+    deferredBilling: {
+      amount: number;
+      label: string;
+      deferredPaymentDate: Date;
+    };
+    billingAgreement?: string;
+    freeCancellationDate?: Date;
+    freeCancellationDateTimeZone?: string;
+  } | null;
+  automaticReloadPaymentRequest?: {
+    paymentDescription: string;
+    managementURL: string;
+    automaticReloadBilling: {
+      amount: number;
+      label: string;
+      automaticReloadPaymentThresholdAmount: number;
+    };
+    billingAgreement?: string;
+  } | null;
 };
 
 export type ClickResolveDetails = {
@@ -410,7 +432,7 @@ export type ClickResolveDetails = {
 
   shippingRates?: Array<ShippingRate>;
 
-  applePay?: ApplePayOption;
+  applePay?: ExpressCheckoutApplePayOption;
 };
 
 export interface StripeExpressCheckoutElementClickEvent {
@@ -451,6 +473,7 @@ export interface StripeExpressCheckoutElementConfirmEvent {
 export type ChangeResolveDetails = {
   lineItems?: Array<LineItem>;
   shippingRates?: Array<ShippingRate>;
+  applePay?: ExpressCheckoutApplePayOption;
 };
 
 export interface StripeExpressCheckoutElementShippingAddressChangeEvent {
