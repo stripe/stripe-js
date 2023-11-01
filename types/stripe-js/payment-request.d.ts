@@ -305,7 +305,7 @@ export type PaymentRequestRecurringPaymentIntervalUnit =
   | 'minute';
 
 export type PaymentRequestApplePayOption = {
-  recurringPaymentRequest?: {
+  recurringPaymentRequest: {
     paymentDescription: string;
     managementURL: string;
     regularBilling: {
@@ -317,12 +317,12 @@ export type PaymentRequestApplePayOption = {
       recurringPaymentIntervalCount?: number;
     };
     billingAgreement?: string;
-  } | null;
+  };
   deferredPaymentRequest?: null;
   automaticReloadPaymentRequest?: null;
 } | {
   recurringPaymentRequest?: null;
-  deferredPaymentRequest?: {
+  deferredPaymentRequest: {
     paymentDescription: string;
     managementURL: string;
     deferredBilling: {
@@ -333,12 +333,12 @@ export type PaymentRequestApplePayOption = {
     billingAgreement?: string;
     freeCancellationDate?: Date;
     freeCancellationDateTimeZone?: string;
-  } | null;
+  };
   automaticReloadPaymentRequest?: null;
 } | {
   recurringPaymentRequest?: null;
   deferredPaymentRequest?: null;
-  automaticReloadPaymentRequest?: {
+  automaticReloadPaymentRequest: {
     paymentDescription: string;
     managementURL: string;
     automaticReloadBilling: {
@@ -347,7 +347,7 @@ export type PaymentRequestApplePayOption = {
       automaticReloadPaymentThresholdAmount: number;
     };
     billingAgreement?: string;
-  } | null;
+  };
 } | {
   recurringPaymentRequest?: null;
   deferredPaymentRequest?: null;
