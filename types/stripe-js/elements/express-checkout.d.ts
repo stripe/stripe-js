@@ -413,6 +413,10 @@ export type ExpressCheckoutApplePayOption = {
     };
     billingAgreement?: string;
   } | null;
+} | {
+  recurringPaymentRequest?: null;
+  deferredPaymentRequest?: null;
+  automaticReloadPaymentRequest?: null;
 };
 
 export type ClickResolveDetails = {

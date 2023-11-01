@@ -348,6 +348,10 @@ export type PaymentRequestApplePayOption = {
     };
     billingAgreement?: string;
   } | null;
+} | {
+  recurringPaymentRequest?: null;
+  deferredPaymentRequest?: null;
+  automaticReloadPaymentRequest?: null;
 };
 
 export type PaymentRequestCompleteStatus =

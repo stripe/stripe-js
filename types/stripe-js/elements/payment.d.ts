@@ -247,6 +247,10 @@ export type PaymentApplePayOption = {
     };
     billingAgreement?: string;
   } | null;
+} | {
+  recurringPaymentRequest?: null;
+  deferredPaymentRequest?: null;
+  automaticReloadPaymentRequest?: null;
 };
 
 export interface StripePaymentElementOptions {
