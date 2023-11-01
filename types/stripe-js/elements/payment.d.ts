@@ -203,55 +203,59 @@ export type PaymentRecurringPaymentIntervalUnit =
   | 'hour'
   | 'minute';
 
-export type PaymentApplePayOption = {
-  recurringPaymentRequest: {
-    paymentDescription: string;
-    managementURL: string;
-    regularBilling: {
-      amount: number;
-      label: string;
-      recurringPaymentStartDate?: Date;
-      recurringPaymentEndDate?: Date;
-      recurringPaymentIntervalUnit?: PaymentRecurringPaymentIntervalUnit;
-      recurringPaymentIntervalCount?: number;
+export type PaymentApplePayOption =
+  | {
+      recurringPaymentRequest: {
+        paymentDescription: string;
+        managementURL: string;
+        regularBilling: {
+          amount: number;
+          label: string;
+          recurringPaymentStartDate?: Date;
+          recurringPaymentEndDate?: Date;
+          recurringPaymentIntervalUnit?: PaymentRecurringPaymentIntervalUnit;
+          recurringPaymentIntervalCount?: number;
+        };
+        billingAgreement?: string;
+      };
+      deferredPaymentRequest?: null;
+      automaticReloadPaymentRequest?: null;
+    }
+  | {
+      recurringPaymentRequest?: null;
+      deferredPaymentRequest: {
+        paymentDescription: string;
+        managementURL: string;
+        deferredBilling: {
+          amount: number;
+          label: string;
+          deferredPaymentDate: Date;
+        };
+        billingAgreement?: string;
+        freeCancellationDate?: Date;
+        freeCancellationDateTimeZone?: string;
+      };
+      automaticReloadPaymentRequest?: null;
+    }
+  | {
+      recurringPaymentRequest?: null;
+      deferredPaymentRequest?: null;
+      automaticReloadPaymentRequest: {
+        paymentDescription: string;
+        managementURL: string;
+        automaticReloadBilling: {
+          amount: number;
+          label: string;
+          automaticReloadPaymentThresholdAmount: number;
+        };
+        billingAgreement?: string;
+      };
+    }
+  | {
+      recurringPaymentRequest?: null;
+      deferredPaymentRequest?: null;
+      automaticReloadPaymentRequest?: null;
     };
-    billingAgreement?: string;
-  };
-  deferredPaymentRequest?: null;
-  automaticReloadPaymentRequest?: null;
-} | {
-  recurringPaymentRequest?: null;
-  deferredPaymentRequest: {
-    paymentDescription: string;
-    managementURL: string;
-    deferredBilling: {
-      amount: number;
-      label: string;
-      deferredPaymentDate: Date;
-    };
-    billingAgreement?: string;
-    freeCancellationDate?: Date;
-    freeCancellationDateTimeZone?: string;
-  };
-  automaticReloadPaymentRequest?: null;
-} | {
-  recurringPaymentRequest?: null;
-  deferredPaymentRequest?: null;
-  automaticReloadPaymentRequest: {
-    paymentDescription: string;
-    managementURL: string;
-    automaticReloadBilling: {
-      amount: number;
-      label: string;
-      automaticReloadPaymentThresholdAmount: number;
-    };
-    billingAgreement?: string;
-  };
-} | {
-  recurringPaymentRequest?: null;
-  deferredPaymentRequest?: null;
-  automaticReloadPaymentRequest?: null;
-};
 
 export interface StripePaymentElementOptions {
   /**
