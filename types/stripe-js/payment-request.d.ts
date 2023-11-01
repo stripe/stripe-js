@@ -318,6 +318,10 @@ export type PaymentRequestApplePayOption = {
     };
     billingAgreement?: string;
   } | null;
+  deferredPaymentRequest?: null;
+  automaticReloadPaymentRequest?: null;
+} | {
+  recurringPaymentRequest?: null;
   deferredPaymentRequest?: {
     paymentDescription: string;
     managementURL: string;
@@ -330,6 +334,10 @@ export type PaymentRequestApplePayOption = {
     freeCancellationDate?: Date;
     freeCancellationDateTimeZone?: string;
   } | null;
+  automaticReloadPaymentRequest?: null;
+} | {
+  recurringPaymentRequest?: null;
+  deferredPaymentRequest?: null;
   automaticReloadPaymentRequest?: {
     paymentDescription: string;
     managementURL: string;
