@@ -1,4 +1,5 @@
 import {Token, PaymentMethod, Source} from '../api';
+import {ApplePayOption, ApplePayUpdateOption} from './elements/apple-pay';
 
 export interface PaymentRequest {
   /**
@@ -158,7 +159,7 @@ export interface PaymentRequestUpdateOptions {
   /**
    * Specify the options to be used when the Apple Pay payment sheet opens.
    */
-  applePay?: PaymentRequestApplePayOption;
+  applePay?: ApplePayOption;
 }
 
 /**
@@ -234,7 +235,7 @@ export interface PaymentRequestOptions {
   /**
    * Specify the options to be used when the Apple Pay payment sheet opens.
    */
-  applePay?: PaymentRequestApplePayOption;
+  applePay?: ApplePayOption;
 
   /**
    * @deprecated
@@ -296,67 +297,6 @@ export type PaymentRequestWallet =
   | 'googlePay'
   | 'link'
   | 'browserCard';
-
-export type PaymentRequestRecurringPaymentIntervalUnit =
-  | 'year'
-  | 'month'
-  | 'day'
-  | 'hour'
-  | 'minute';
-
-export type PaymentRequestApplePayOption =
-  | {
-      recurringPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        regularBilling: {
-          amount: number;
-          label: string;
-          recurringPaymentStartDate?: Date;
-          recurringPaymentEndDate?: Date;
-          recurringPaymentIntervalUnit?: PaymentRequestRecurringPaymentIntervalUnit;
-          recurringPaymentIntervalCount?: number;
-        };
-        billingAgreement?: string;
-      };
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest?: null;
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        deferredBilling: {
-          amount: number;
-          label: string;
-          deferredPaymentDate: Date;
-        };
-        billingAgreement?: string;
-        freeCancellationDate?: Date;
-        freeCancellationDateTimeZone?: string;
-      };
-      automaticReloadPaymentRequest?: null;
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        automaticReloadBilling: {
-          amount: number;
-          label: string;
-          automaticReloadPaymentThresholdAmount: number;
-        };
-        billingAgreement?: string;
-      };
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest?: null;
-    };
 
 export type PaymentRequestCompleteStatus =
   /**
@@ -572,7 +512,7 @@ export interface PaymentRequestUpdateDetails {
   /**
    * Specify new options to refresh the Apple Pay payment sheet.
    */
-  applePay?: PaymentRequestApplePayOption;
+  applePay?: ApplePayUpdateOption;
 }
 
 export interface PaymentRequestShippingOptionEvent {

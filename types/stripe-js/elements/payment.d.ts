@@ -1,5 +1,6 @@
 import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
+import {ApplePayOption} from './apple-pay';
 
 export type StripePaymentElement = StripeElementBase & {
   /**
@@ -196,67 +197,6 @@ export interface LayoutObject {
   spacedAccordionItems?: boolean;
 }
 
-export type PaymentRecurringPaymentIntervalUnit =
-  | 'year'
-  | 'month'
-  | 'day'
-  | 'hour'
-  | 'minute';
-
-export type PaymentApplePayOption =
-  | {
-      recurringPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        regularBilling: {
-          amount: number;
-          label: string;
-          recurringPaymentStartDate?: Date;
-          recurringPaymentEndDate?: Date;
-          recurringPaymentIntervalUnit?: PaymentRecurringPaymentIntervalUnit;
-          recurringPaymentIntervalCount?: number;
-        };
-        billingAgreement?: string;
-      };
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest?: null;
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        deferredBilling: {
-          amount: number;
-          label: string;
-          deferredPaymentDate: Date;
-        };
-        billingAgreement?: string;
-        freeCancellationDate?: Date;
-        freeCancellationDateTimeZone?: string;
-      };
-      automaticReloadPaymentRequest?: null;
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        automaticReloadBilling: {
-          amount: number;
-          label: string;
-          automaticReloadPaymentThresholdAmount: number;
-        };
-        billingAgreement?: string;
-      };
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest?: null;
-    };
-
 export interface StripePaymentElementOptions {
   /**
    * Provide initial customer information that will be displayed in the Payment Element.
@@ -304,7 +244,7 @@ export interface StripePaymentElementOptions {
   /**
    * Specify the options to be used when the Apple Pay payment sheet opens.
    */
-  applePay?: PaymentApplePayOption;
+  applePay?: ApplePayOption;
 }
 
 export interface StripePaymentElementChangeEvent {

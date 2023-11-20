@@ -1,5 +1,6 @@
 import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
+import {ApplePayOption, ApplePayUpdateOption} from './apple-pay';
 
 export type StripeExpressCheckoutElement = StripeElementBase & {
   /**
@@ -362,67 +363,6 @@ export interface StripeExpressCheckoutElementReadyEvent {
   availablePaymentMethods: undefined | AvailablePaymentMethods;
 }
 
-export type ExpressCheckoutRecurringPaymentIntervalUnit =
-  | 'year'
-  | 'month'
-  | 'day'
-  | 'hour'
-  | 'minute';
-
-export type ExpressCheckoutApplePayOption =
-  | {
-      recurringPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        regularBilling: {
-          amount: number;
-          label: string;
-          recurringPaymentStartDate?: Date;
-          recurringPaymentEndDate?: Date;
-          recurringPaymentIntervalUnit?: ExpressCheckoutRecurringPaymentIntervalUnit;
-          recurringPaymentIntervalCount?: number;
-        };
-        billingAgreement?: string;
-      };
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest?: null;
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        deferredBilling: {
-          amount: number;
-          label: string;
-          deferredPaymentDate: Date;
-        };
-        billingAgreement?: string;
-        freeCancellationDate?: Date;
-        freeCancellationDateTimeZone?: string;
-      };
-      automaticReloadPaymentRequest?: null;
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest: {
-        paymentDescription: string;
-        managementURL: string;
-        automaticReloadBilling: {
-          amount: number;
-          label: string;
-          automaticReloadPaymentThresholdAmount: number;
-        };
-        billingAgreement?: string;
-      };
-    }
-  | {
-      recurringPaymentRequest?: null;
-      deferredPaymentRequest?: null;
-      automaticReloadPaymentRequest?: null;
-    };
-
 export type ClickResolveDetails = {
   /**
    * An array of two-letter ISO country codes representing which countries
@@ -448,7 +388,7 @@ export type ClickResolveDetails = {
 
   shippingRates?: Array<ShippingRate>;
 
-  applePay?: ExpressCheckoutApplePayOption;
+  applePay?: ApplePayOption;
 };
 
 export interface StripeExpressCheckoutElementClickEvent {
@@ -489,7 +429,7 @@ export interface StripeExpressCheckoutElementConfirmEvent {
 export type ChangeResolveDetails = {
   lineItems?: Array<LineItem>;
   shippingRates?: Array<ShippingRate>;
-  applePay?: ExpressCheckoutApplePayOption;
+  applePay?: ApplePayUpdateOption;
 };
 
 export interface StripeExpressCheckoutElementShippingAddressChangeEvent {
