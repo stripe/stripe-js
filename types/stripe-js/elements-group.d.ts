@@ -967,48 +967,114 @@ export interface Appearance {
 
     // Spacing
     spacingUnit?: string;
+    gridRowSpacing?: string;
+    gridColumnSpacing?: string;
+    tabSpacing?: string;
+    accordionItemSpacing?: string;
+    /** @deprecated Use gridRowSpacing instead. */
     spacingGridRow?: string;
+    /** @deprecated Use gridColumnSpacing instead. */
     spacingGridColumn?: string;
+    /** @deprecated Use tabSpacing instead. */
     spacingTab?: string;
+    /** @deprecated Use accordionItemSpacing instead. */
     spacingAccordionItem?: string;
 
     // Colors
     colorPrimary?: string;
-    colorPrimaryText?: string;
     colorBackground?: string;
-    colorBackgroundText?: string;
     colorText?: string;
     colorSuccess?: string;
-    colorSuccessText?: string;
     colorDanger?: string;
-    colorDangerText?: string;
     colorWarning?: string;
-    colorWarningText?: string;
 
     // Text variations
     colorTextSecondary?: string;
     colorTextPlaceholder?: string;
 
+    // Accessible text
+    accessibleColorOnColorPrimary?: string;
+    accessibleColorOnColorBackground?: string;
+    accessibleColorOnColorSuccess?: string;
+    accessibleColorOnColorDanger?: string;
+    accessibleColorOnColorWarning?: string;
+    /** @deprecated Use accessibleColorOnColorPrimary instead. */
+    colorPrimaryText?: string;
+    /** @deprecated Use accessibleColorOnColorBackground instead. */
+    colorBackgroundText?: string;
+    /** @deprecated Use accessibleColorOnColorSuccess instead. */
+    colorSuccessText?: string;
+    /** @deprecated Use accessibleColorOnColorDanger instead. */
+    colorDangerText?: string;
+    /** @deprecated Use accessibleColorOnColorWarning instead. */
+    colorWarningText?: string;
+
     // Icons
+    iconColor?: string;
+    iconHoverColor?: string;
+    iconCardErrorColor?: string;
+    iconCardCvcColor?: string;
+    iconCardCvcErrorColor?: string;
+    iconCheckmarkColor?: string;
+    iconChevronDownColor?: string;
+    iconChevronDownHoverColor?: string;
+    iconCloseColor?: string;
+    iconCloseHoverColor?: string;
+    iconLoadingIndicatorColor?: string;
+    iconMenuColor?: string;
+    iconMenuHoverColor?: string;
+    iconPasscodeDeviceColor?: string;
+    iconPasscodeDeviceHoverColor?: string;
+    iconPasscodeDeviceNotificationColor?: string;
+    iconRedirectColor?: string;
+    /** @deprecated Use iconColor instead. */
     colorIcon?: string;
+    /** @deprecated Use iconHoverColor instead. */
     colorIconHover?: string;
+    /** @deprecated Use iconCardErrorColor instead. */
     colorIconCardError?: string;
+    /** @deprecated Use iconCardCvcColor instead. */
     colorIconCardCvc?: string;
+    /** @deprecated Use iconCardCvcErrorColor instead. */
     colorIconCardCvcError?: string;
+    /** @deprecated Use iconCheckmarkColor instead. */
     colorIconCheckmark?: string;
+    /** @deprecated Use iconChevronDownColor instead. */
     colorIconChevronDown?: string;
+    /** @deprecated Use iconChevronDownHoverColor instead. */
     colorIconChevronDownHover?: string;
+    /** @deprecated Use iconRedirectColor instead. */
     colorIconRedirect?: string;
+
+    // TabIcons
+    tabIconColor?: string;
+    tabIconHoverColor?: string;
+    tabIconSelectedColor?: string;
+    tabIconMoreColor?: string;
+    tabIconMoreHoverColor?: string;
+    /** @deprecated Use tabIconColor instead. */
     colorIconTab?: string;
+    /** @deprecated Use tabIconHoverColor instead. */
     colorIconTabHover?: string;
+    /** @deprecated Use tabIconHoverColor instead. */
     colorIconTabSelected?: string;
+    /** @deprecated Use tabIconMoreColor instead. */
     colorIconTabMore?: string;
+    /** @deprecated Use tabIconMoreHoverColor instead. */
     colorIconTabMoreHover?: string;
 
     // Logos
+    logoColor?: string;
+    tabLogoColor?: string;
+    tabLogoSelectedColor?: string;
+    blockLogoColor?: string;
+    /** @deprecated Use logoColor instead. */
     colorLogo?: string;
+    /** @deprecated Use tabLogoColor instead. */
     colorLogoTab?: string;
+    /** @deprecated Use tabLogoSelectedColor instead. */
     colorLogoTabSelected?: string;
+    /** @deprecated Use blockLogoColor instead. */
     colorLogoBlock?: string;
 
     // Focus

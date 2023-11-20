@@ -97,7 +97,7 @@ const options: StripeElementsOptions = {
     disableAnimations: false,
     theme: 'night',
     variables: {
-      colorIcon: 'blue',
+      iconColor: 'blue',
     },
     rules: {
       '.Tab--selected': {
@@ -135,7 +135,7 @@ const elementsClientSecret: StripeElements = stripe.elements({
     disableAnimations: false,
     theme: 'night',
     variables: {
-      colorIcon: 'blue',
+      iconColor: 'blue',
     },
     rules: {
       '.Tab--selected': {
@@ -189,7 +189,7 @@ elements.update({
     disableAnimations: true,
     theme: 'night',
     variables: {
-      colorIcon: 'blue',
+      iconColor: 'blue',
     },
     rules: {
       '.Tab--selected': {
