@@ -145,7 +145,6 @@ expressCheckoutElement.on('shippingaddresschange', ({address, resolve}) => {
         amount: 2000,
       },
       managementURL: 'https://atnnews.com/manage-subscription',
-      // @ts-expect-error: Object literal may only specify known properties, and 'billingAgreement' does not exist in type 'Omit<ApplePayRecurringPaymentRequest, "billingAgreement">'.
       billingAgreement: 'You agree to pay ATN News $20.00 every month.',
     },
   };

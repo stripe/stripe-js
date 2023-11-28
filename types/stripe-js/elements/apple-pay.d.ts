@@ -143,18 +143,12 @@ export type ApplePayOption =
 
 export type ApplePayUpdateOption =
   | {
-      recurringPaymentRequest: Omit<
-        ApplePayRecurringPaymentRequest,
-        'billingAgreement'
-      >;
+      recurringPaymentRequest: ApplePayRecurringPaymentRequest;
       automaticReloadPaymentRequest?: null;
     }
   | {
       recurringPaymentRequest?: null;
-      automaticReloadPaymentRequest: Omit<
-        ApplePayAutomaticReloadPaymentRequest,
-        'billingAgreement'
-      >;
+      automaticReloadPaymentRequest: ApplePayAutomaticReloadPaymentRequest;
     }
   | {
       recurringPaymentRequest?: null;
