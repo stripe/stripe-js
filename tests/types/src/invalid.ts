@@ -7,6 +7,7 @@ import {
   StripeExpressCheckoutElement,
   StripeElementsOptions,
 } from '../../../types';
+import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay';
 
 declare const stripe: Stripe;
 declare const cardElement: StripeCardElement;
@@ -136,19 +137,21 @@ expressCheckoutElement.on('shippingaddresschange', ({address, resolve}) => {
     },
   });
 
-  resolve({
-    applePay: {
-      recurringPaymentRequest: {
-        paymentDescription: 'Subscription to ATN News',
-        regularBilling: {
-          label: 'Online & paper news',
-          amount: 2000,
-        },
-        managementURL: 'https://atnnews.com/manage-subscription',
-        // @ts-expect-error: Object literal may only specify known properties, and 'billingAgreement' does not exist in type 'Omit<ApplePayRecurringPaymentRequest, "billingAgreement">'.
-        billingAgreement: 'You agree to pay ATN News $20.00 every month.',
+  const applePayUpdateOptions: ApplePayUpdateOption = {
+    recurringPaymentRequest: {
+      paymentDescription: 'Subscription to ATN News',
+      regularBilling: {
+        label: 'Online & paper news',
+        amount: 2000,
       },
+      managementURL: 'https://atnnews.com/manage-subscription',
+      // @ts-expect-error: Object literal may only specify known properties, and 'billingAgreement' does not exist in type 'Omit<ApplePayRecurringPaymentRequest, "billingAgreement">'.
+      billingAgreement: 'You agree to pay ATN News $20.00 every month.',
     },
+  };
+
+  resolve({
+    applePay: applePayUpdateOptions,
   });
 });
 
@@ -160,6 +163,7 @@ expressCheckoutElement.on('confirm', ({paymentFailed}) => {
 expressCheckoutElement.on('click', ({resolve}) => {
   resolve({
     applePay: {
+      // @ts-ignore
       recurringPaymentRequest: {
         paymentDescription: 'Subscription to ATN News',
         regularBilling: {
