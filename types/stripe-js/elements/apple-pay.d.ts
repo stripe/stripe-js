@@ -12,7 +12,7 @@ export interface ApplePayLineItem {
   label: string;
 
   /**
-   * The monetary amount displayed on the payment interface.
+   * The amount in the currency's subunit (e.g. cents, yen, etc.)
    */
   amount: number;
 }
