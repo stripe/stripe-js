@@ -242,7 +242,7 @@ export interface StripePaymentElementOptions {
   layout?: Layout | LayoutObject;
 
   /**
-   * Specify the options to be used when the Apple Pay payment sheet opens.
+   * Specify the options to be used when the Apple Pay payment interface opens.
    */
   applePay?: ApplePayOption;
 }

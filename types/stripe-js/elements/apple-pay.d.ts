@@ -12,7 +12,7 @@ export interface ApplePayLineItem {
   label: string;
 
   /**
-   * The monetary amount displayed on the payment sheet.
+   * The monetary amount displayed on the payment interface.
    */
   amount: number;
 }
@@ -52,7 +52,7 @@ export interface ApplePayRecurringPaymentRequest {
   regularBilling: ApplePayRegularBilling;
 
   /**
-   * The billing agreement label that is displayed to the customer in the Apple Pay payment sheet.
+   * The billing agreement label that is displayed to the customer in the Apple Pay payment interface.
    */
   billingAgreement?: string;
 }
@@ -77,7 +77,7 @@ export interface ApplePayAutomaticReloadPaymentRequest {
   automaticReloadBilling: ApplePayAutomaticReloadBilling;
 
   /**
-   * The billing agreement label that is displayed to the customer in the Apple Pay payment sheet.
+   * The billing agreement label that is displayed to the customer in the Apple Pay payment interface.
    */
   billingAgreement?: string;
 }
@@ -102,7 +102,7 @@ export interface ApplePayDeferredPaymentRequest {
   deferredBilling: ApplePayDeferredBilling;
 
   /**
-   * The billing agreement label that is displayed to the customer in the Apple Pay payment sheet.
+   * The billing agreement label that is displayed to the customer in the Apple Pay payment interface.
    */
   billingAgreement?: string;
 
@@ -143,12 +143,18 @@ export type ApplePayOption =
 
 export type ApplePayUpdateOption =
   | {
-      recurringPaymentRequest: ApplePayRecurringPaymentRequest;
+      recurringPaymentRequest: Omit<
+        ApplePayRecurringPaymentRequest,
+        'billingAgreement'
+      >;
       automaticReloadPaymentRequest?: null;
     }
   | {
       recurringPaymentRequest?: null;
-      automaticReloadPaymentRequest: ApplePayAutomaticReloadPaymentRequest;
+      automaticReloadPaymentRequest: Omit<
+        ApplePayAutomaticReloadPaymentRequest,
+        'billingAgreement'
+      >;
     }
   | {
       recurringPaymentRequest?: null;

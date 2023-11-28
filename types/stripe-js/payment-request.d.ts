@@ -157,7 +157,7 @@ export interface PaymentRequestUpdateOptions {
   shippingOptions?: PaymentRequestShippingOption[];
 
   /**
-   * Specify the options to be used when the Apple Pay payment sheet opens.
+   * Specify the options to be used when the Apple Pay payment interface opens.
    */
   applePay?: ApplePayOption;
 }
@@ -233,7 +233,7 @@ export interface PaymentRequestOptions {
   disableWallets?: PaymentRequestWallet[];
 
   /**
-   * Specify the options to be used when the Apple Pay payment sheet opens.
+   * Specify the options to be used when the Apple Pay payment interface opens.
    */
   applePay?: ApplePayOption;
 
@@ -510,7 +510,7 @@ export interface PaymentRequestUpdateDetails {
   shippingOptions?: PaymentRequestShippingOption[];
 
   /**
-   * Specify new options to refresh the Apple Pay payment sheet.
+   * Specify new options to refresh the Apple Pay payment interface.
    */
   applePay?: ApplePayUpdateOption;
 }

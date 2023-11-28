@@ -113,16 +113,76 @@ expressCheckoutElement.update({
   },
 });
 
-expressCheckoutElement.on('shippingaddresschange', ({address}) => {
+expressCheckoutElement.on('shippingaddresschange', ({address, resolve}) => {
   // @ts-expect-error Property 'line1' does not exist on type 'PartialAddress'.
   address.line1;
   // @ts-expect-error Property 'line2' does not exist on type 'PartialAddress'.
   address.line2;
+
+  resolve({
+    applePay: {
+      // @ts-expect-error: Object literal may only specify known properties, and 'deferredPaymentRequest' does not exist in type 'ApplePayUpdateOption'.
+      deferredPaymentRequest: {
+        paymentDescription: 'Deferred payment',
+        deferredBilling: {
+          label: 'Deferred payment',
+          amount: 2000,
+          deferredPaymentDate: new Date(Date.now()),
+        },
+        managementURL: 'https://atnnews.com/manage-subscription',
+        billingAgreement:
+          'You agree to pay 20 dollars some time in the future.',
+      },
+    },
+  });
+
+  resolve({
+    applePay: {
+      recurringPaymentRequest: {
+        paymentDescription: 'Subscription to ATN News',
+        regularBilling: {
+          label: 'Online & paper news',
+          amount: 2000,
+        },
+        managementURL: 'https://atnnews.com/manage-subscription',
+        // @ts-expect-error: Object literal may only specify known properties, and 'billingAgreement' does not exist in type 'Omit<ApplePayRecurringPaymentRequest, "billingAgreement">'.
+        billingAgreement: 'You agree to pay ATN News $20.00 every month.',
+      },
+    },
+  });
 });
 
 expressCheckoutElement.on('confirm', ({paymentFailed}) => {
   // @ts-expect-error Can only fail a payment for a reason of 'fail' or 'invalid-shipping-address'
   paymentFailed({reason: 'pizza-time'});
+});
+
+expressCheckoutElement.on('click', ({resolve}) => {
+  resolve({
+    applePay: {
+      recurringPaymentRequest: {
+        paymentDescription: 'Subscription to ATN News',
+        regularBilling: {
+          label: 'Online & paper news',
+          amount: 2000,
+        },
+        managementURL: 'https://atnnews.com/manage-subscription',
+        billingAgreement: 'You agree to pay ATN News $20.00 every month.',
+      },
+      // @ts-expect-error: Type '{ paymentDescription: string; deferredBilling: { label: string; amount: number; deferredPaymentDate: Date; }; managementURL: string; billingAgreement: string; }' is not assignable to type 'null | undefined'.
+      deferredPaymentRequest: {
+        paymentDescription: 'Deferred payment',
+        deferredBilling: {
+          label: 'Deferred payment',
+          amount: 2000,
+          deferredPaymentDate: new Date(Date.now()),
+        },
+        managementURL: 'https://atnnews.com/manage-subscription',
+        billingAgreement:
+          'You agree to pay 20 dollars some time in the future.',
+      },
+    },
+  });
 });
 
 // @ts-expect-error: AddressElement requires a mode
