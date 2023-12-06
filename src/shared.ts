@@ -89,6 +89,18 @@ export const loadScript = (
       return;
     }
 
+    const onError = () => {
+      reject(new Error('Failed to load Stripe.js'));
+    };
+
+    const onLoad = () => {
+      if (window.Stripe) {
+        resolve(window.Stripe);
+      } else {
+        reject(new Error('Stripe.js not available'));
+      }
+    };
+
     try {
       let script = findScript();
 
@@ -97,23 +109,19 @@ export const loadScript = (
       } else if (!script) {
         script = injectScript(params);
       } else if (script) {
+        // remove event listeners
+        script.removeEventListener('load', onLoad);
+        script.removeEventListener('error', onError);
+
         // if script exists, but we are reloading due to an error,
         // reload script to trigger 'load' event
         script.parentNode?.removeChild(script);
         script = injectScript(params);
       }
 
-      script.addEventListener('load', () => {
-        if (window.Stripe) {
-          resolve(window.Stripe);
-        } else {
-          reject(new Error('Stripe.js not available'));
-        }
-      });
+      script.addEventListener('load', onLoad);
 
-      script.addEventListener('error', () => {
-        reject(new Error('Failed to load Stripe.js'));
-      });
+      script.addEventListener('error', onError);
     } catch (error) {
       reject(error);
       return;
