@@ -120,11 +120,10 @@ export const loadScript = (
     }
   });
   // Resets stripePromise on error
-  return stripePromise
-    .catch((error) => {
-      stripePromise = null;
-      return Promise.reject(error);
-    });
+  return stripePromise.catch((error) => {
+    stripePromise = null;
+    return Promise.reject(error);
+  });
 };
 
 export const initStripe = (
