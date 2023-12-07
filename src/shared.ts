@@ -64,8 +64,8 @@ const registerWrapper = (stripe: any, startTime: number): void => {
 
 let stripePromise: Promise<StripeConstructor | null> | null = null;
 
-let onErrorListener = null;
-let onLoadListener = null;
+let onErrorListener: (() => void) | null = null;
+let onLoadListener: (() => void) | null = null;
 
 const onError = (reject: (reason?: any) => void) => () => {
   reject(new Error('Failed to load Stripe.js'));
@@ -109,9 +109,6 @@ export const loadScript = (
       return;
     }
 
-    onLoadListener = onLoad(resolve, reject);
-    onErrorListener = onError(reject);
-
     try {
       let script = findScript();
 
@@ -119,7 +116,11 @@ export const loadScript = (
         console.warn(EXISTING_SCRIPT_MESSAGE);
       } else if (!script) {
         script = injectScript(params);
-      } else if (script) {
+      } else if (
+        script &&
+        onLoadListener !== null &&
+        onErrorListener !== null
+      ) {
         // remove event listeners
         script.removeEventListener('load', onLoadListener);
         script.removeEventListener('error', onErrorListener);
@@ -130,6 +131,8 @@ export const loadScript = (
         script = injectScript(params);
       }
 
+      onLoadListener = onLoad(resolve, reject);
+      onErrorListener = onError(reject);
       script.addEventListener('load', onLoadListener);
 
       script.addEventListener('error', onErrorListener);
