@@ -15,8 +15,13 @@ declare const paymentElement: StripePaymentElement;
 declare const cartElement: StripeCartElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
 
-// @ts-expect-error: Passing `clientSecret` or `mode` implies different integration paths which cannot be combined
-const options: StripeElementsOptions = {clientSecret: '', mode: ''};
+
+const options: StripeElementsOptions = {
+  clientSecret: '',
+  // @ts-expect-error Type 'string' is not assignable to type '"payment" | "setup" | "subscription" | undefined'.ts(2322)
+  mode: '',
+  payment_method_creation: 'manual',
+};
 
 // @ts-expect-error: Passing `clientSecret` or `mode` implies different integration paths which cannot be combined
 const elements = stripe.elements(options);
