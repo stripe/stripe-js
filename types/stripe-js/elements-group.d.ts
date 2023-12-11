@@ -779,11 +779,6 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
   paymentMethodCreation?: 'manual';
 
   /**
-   * Allows PaymentMethods to be created from the Elements instance.
-   */
-  payment_method_creation?: 'manual';
-
-  /**
    * Additional payment-method-specific options for configuring Payment Element behavior.
    *
    * @docs https://stripe.com/docs/js/elements_object/create_without_intent#stripe_elements_no_intent-options-paymentMethodOptions

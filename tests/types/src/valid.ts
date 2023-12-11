@@ -121,7 +121,6 @@ stripe.elements({
   setup_future_usage: 'off_session',
   capture_method: 'automatic',
   payment_method_types: ['card'],
-  payment_method_creation: 'manual',
   payment_method_options: {
     us_bank_account: {financial_connections: {permissions: ['payment_method']}},
   },
