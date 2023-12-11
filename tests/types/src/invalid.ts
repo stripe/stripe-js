@@ -15,7 +15,6 @@ declare const paymentElement: StripePaymentElement;
 declare const cartElement: StripeCartElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
 
-
 const options: StripeElementsOptions = {
   clientSecret: '',
   // @ts-expect-error Type 'string' is not assignable to type '"payment" | "setup" | "subscription" | undefined'.ts(2322)
