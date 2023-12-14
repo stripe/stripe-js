@@ -404,9 +404,32 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
   },
   readOnly: true,
   paymentMethodOrder: ['card', 'sepa_debit'],
+  applePay: {
+    recurringPaymentRequest: {
+      paymentDescription: 'Subscription to ATN News',
+      regularBilling: {
+        label: 'Online & paper news',
+        amount: 2000,
+      },
+      managementURL: 'https://atnnews.com/manage-subscription',
+    },
+  },
   wallets: {
     applePay: 'never',
     googlePay: 'auto',
+  },
+});
+
+paymentElement.update({
+  applePay: {
+    recurringPaymentRequest: {
+      paymentDescription: 'Subscription to ATN News',
+      regularBilling: {
+        label: 'Online & paper news',
+        amount: 2000,
+      },
+      managementURL: 'https://atnnews.com/manage-subscription',
+    },
   },
 });
 
@@ -873,7 +896,54 @@ expressCheckoutElement
       availablePaymentMethods: undefined | AvailablePaymentMethods;
     }) => {}
   )
-  .on('click', (e: StripeExpressCheckoutElementClickEvent) => {})
+  .on('click', (e: StripeExpressCheckoutElementClickEvent) => {
+    e.resolve({
+      applePay: {
+        recurringPaymentRequest: {
+          paymentDescription: 'Subscription to ATN News',
+          regularBilling: {
+            label: 'Online & paper news',
+            amount: 2000,
+          },
+          managementURL: 'https://atnnews.com/manage-subscription',
+          billingAgreement: 'You agree to pay ATN News $20.00 every month.',
+        },
+      },
+    });
+  })
+  .on('click', (e: StripeExpressCheckoutElementClickEvent) => {
+    e.resolve({
+      applePay: {
+        deferredPaymentRequest: {
+          paymentDescription: 'Deferred payment',
+          deferredBilling: {
+            label: 'Deferred payment',
+            amount: 2000,
+            deferredPaymentDate: new Date(Date.now()),
+          },
+          managementURL: 'https://atnnews.com/manage-subscription',
+          billingAgreement:
+            'You agree to pay 20 dollars some time in the future.',
+        },
+      },
+    });
+  })
+  .on('click', (e: StripeExpressCheckoutElementClickEvent) => {
+    e.resolve({
+      applePay: {
+        automaticReloadPaymentRequest: {
+          paymentDescription: 'Automatic Reload Payment',
+          automaticReloadBilling: {
+            label: 'Online & paper news',
+            amount: 2000,
+            automaticReloadPaymentThresholdAmount: 1000,
+          },
+          managementURL: 'https://atnnews.com/manage-subscription',
+          billingAgreement: "You agree to reload your card when it's low.",
+        },
+      },
+    });
+  })
   .on('focus', (e: {elementType: 'expressCheckout'}) => {})
   .on('blur', (e: {elementType: 'expressCheckout'}) => {})
   .on('escape', (e: {elementType: 'expressCheckout'}) => {})
@@ -905,6 +975,18 @@ expressCheckoutElement.on(
     e.resolve();
     e.resolve({
       lineItems: [{name: 'Pizza', amount: 1200}],
+    });
+    e.resolve({
+      applePay: {
+        recurringPaymentRequest: {
+          paymentDescription: 'Subscription to ATN News',
+          regularBilling: {
+            label: 'Online & paper news',
+            amount: 2000,
+          },
+          managementURL: 'https://atnnews.com/manage-subscription',
+        },
+      },
     });
     e.resolve({
       shippingRates: [
@@ -951,6 +1033,18 @@ expressCheckoutElement.on(
     e.resolve();
     e.resolve({
       lineItems: [{name: 'Pizza', amount: 1200}],
+    });
+    e.resolve({
+      applePay: {
+        recurringPaymentRequest: {
+          paymentDescription: 'Subscription to ATN News',
+          regularBilling: {
+            label: 'Online & paper news',
+            amount: 2000,
+          },
+          managementURL: 'https://atnnews.com/manage-subscription',
+        },
+      },
     });
     e.resolve({
       shippingRates: [
@@ -3090,6 +3184,16 @@ const paymentRequest: PaymentRequest = stripe.paymentRequest({
   total: {label: 'Demo total', amount: 1000},
   requestPayerName: true,
   requestPayerEmail: true,
+  applePay: {
+    recurringPaymentRequest: {
+      paymentDescription: 'Subscription to ATN News',
+      regularBilling: {
+        label: 'Online & paper news',
+        amount: 2000,
+      },
+      managementURL: 'https://atnnews.com/manage-subscription',
+    },
+  },
 });
 
 paymentRequest.canMakePayment().then((result) => {
@@ -3114,6 +3218,16 @@ paymentRequest.update({
       amount: 995,
     },
   ],
+  applePay: {
+    recurringPaymentRequest: {
+      paymentDescription: 'Subscription to ATN News',
+      regularBilling: {
+        label: 'Online & paper news',
+        amount: 2000,
+      },
+      managementURL: 'https://atnnews.com/manage-subscription',
+    },
+  },
 });
 
 paymentRequest.on('paymentmethod', function(ev) {
@@ -3166,6 +3280,16 @@ paymentRequest.on('shippingaddresschange', function(ev) {
         ev.updateWith({
           status: 'success',
           shippingOptions: result.supportedShippingOptions,
+          applePay: {
+            recurringPaymentRequest: {
+              paymentDescription: 'Subscription to ATN News',
+              regularBilling: {
+                label: 'Online & paper news',
+                amount: 2000,
+              },
+              managementURL: 'https://atnnews.com/manage-subscription',
+            },
+          },
         });
       });
   }
@@ -3190,6 +3314,16 @@ paymentRequest.on(
           amount: 9.99,
         },
       ],
+      applePay: {
+        recurringPaymentRequest: {
+          paymentDescription: 'Subscription to ATN News',
+          regularBilling: {
+            label: 'Online & paper news',
+            amount: 2000,
+          },
+          managementURL: 'https://atnnews.com/manage-subscription',
+        },
+      },
     });
   }
 );

@@ -1,5 +1,6 @@
 import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
+import {ApplePayOption, ApplePayUpdateOption} from './apple-pay';
 
 export type StripeExpressCheckoutElement = StripeElementBase & {
   /**
@@ -362,29 +363,6 @@ export interface StripeExpressCheckoutElementReadyEvent {
   availablePaymentMethods: undefined | AvailablePaymentMethods;
 }
 
-export type RecurringPaymentIntervalUnit =
-  | 'year'
-  | 'month'
-  | 'day'
-  | 'hour'
-  | 'minute';
-
-export type ApplePayOption = {
-  recurringPaymentRequest?: {
-    paymentDescription: string;
-    managementURL: string;
-    regularBilling: {
-      amount: number;
-      label: string;
-      recurringPaymentStartDate?: Date;
-      recurringPaymentEndDate?: Date;
-      recurringPaymentIntervalUnit?: RecurringPaymentIntervalUnit;
-      recurringPaymentIntervalCount?: number;
-    };
-    billingAgreement?: string;
-  };
-};
-
 export type ClickResolveDetails = {
   /**
    * An array of two-letter ISO country codes representing which countries
@@ -451,6 +429,7 @@ export interface StripeExpressCheckoutElementConfirmEvent {
 export type ChangeResolveDetails = {
   lineItems?: Array<LineItem>;
   shippingRates?: Array<ShippingRate>;
+  applePay?: ApplePayUpdateOption;
 };
 
 export interface StripeExpressCheckoutElementShippingAddressChangeEvent {

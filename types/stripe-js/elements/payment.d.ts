@@ -1,5 +1,6 @@
 import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
+import {ApplePayOption} from './apple-pay';
 
 export type StripePaymentElement = StripeElementBase & {
   /**
@@ -239,6 +240,11 @@ export interface StripePaymentElementOptions {
    * Specify a layout to use when rendering a Payment Element.
    */
   layout?: Layout | LayoutObject;
+
+  /**
+   * Specify the options to be used when the Apple Pay payment interface opens.
+   */
+  applePay?: ApplePayOption;
 }
 
 export interface StripePaymentElementChangeEvent {
