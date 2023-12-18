@@ -150,6 +150,27 @@ describe('Stripe module loader', () => {
         new Error('Stripe.js not available')
       );
     });
+
+    it('rejects on first load, and succeeds on second load resolving with Stripe object', async () => {
+      const {loadStripe} = require(requirePath);
+      let stripePromise = loadStripe('pk_test_foo');
+
+      await Promise.resolve();
+      dispatchScriptEvent('error');
+
+      await expect(stripePromise).rejects.toEqual(
+        new Error('Failed to load Stripe.js')
+      );
+
+      expect(console.warn).not.toHaveBeenCalled();
+      stripePromise = loadStripe('pk_test_foo');
+
+      await new Promise((resolve) => setTimeout(resolve));
+      window.Stripe = jest.fn((key) => ({key})) as any;
+      dispatchScriptEvent('load');
+
+      return expect(stripePromise).resolves.toEqual({key: 'pk_test_foo'});
+    });
   });
 
   describe('loadStripe (index.ts)', () => {

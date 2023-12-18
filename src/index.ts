@@ -2,13 +2,16 @@ import {loadScript, initStripe, LoadStripe} from './shared';
 
 // Execute our own script injection after a tick to give users time to do their
 // own script injection.
-const stripePromise = Promise.resolve().then(() => loadScript(null));
+let stripePromise = Promise.resolve().then(() => loadScript(null));
 
 let loadCalled = false;
 
 stripePromise.catch((err: Error) => {
   if (!loadCalled) {
     console.warn(err);
+  } else {
+    // when load fails, we re-run loadScript
+    stripePromise = Promise.resolve().then(() => loadScript(null));
   }
 });
 
