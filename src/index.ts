@@ -9,13 +9,12 @@ const getStripePromise: () => Promise<StripeConstructor | null> = () => {
     return stripePromise;
   }
 
-  stripePromise = loadScript(null);
-
-  // clear cache on error
-  return stripePromise.catch((error) => {
+  stripePromise = loadScript(null).catch((error) => {
+    // clear cache on error
     stripePromise = null;
     return Promise.reject(error);
   });
+  return stripePromise;
 };
 
 // Execute our own script injection after a tick to give users time to do their
