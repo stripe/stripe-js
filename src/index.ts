@@ -11,7 +11,7 @@ const getStripePromise: () => Promise<StripeConstructor | null> = () => {
 
   stripePromise = loadScript(null);
 
-  // clear cache on error 
+  // clear cache on error
   return stripePromise.catch((error) => {
     stripePromise = null;
     return Promise.reject(error);
