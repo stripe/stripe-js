@@ -153,6 +153,8 @@ describe('Stripe module loader', () => {
 
     it('rejects on first load, and succeeds on second load resolving with Stripe object', async () => {
       const {loadStripe} = require(requirePath);
+
+      // start of first load, expect load failure
       let stripePromise = loadStripe('pk_test_foo');
 
       await Promise.resolve();
@@ -163,6 +165,8 @@ describe('Stripe module loader', () => {
       );
 
       expect(console.warn).not.toHaveBeenCalled();
+
+      // start of second load, expect successful load
       stripePromise = loadStripe('pk_test_foo');
 
       await new Promise((resolve) => setTimeout(resolve));
@@ -174,6 +178,8 @@ describe('Stripe module loader', () => {
 
     it('rejects on first load and second load but succeeds on third load resolving with Stripe object', async () => {
       const {loadStripe} = require(requirePath);
+
+      // start of first load, expect load failure
       let stripePromise = loadStripe('pk_test_foo');
 
       await Promise.resolve();
@@ -185,6 +191,7 @@ describe('Stripe module loader', () => {
 
       expect(console.warn).not.toHaveBeenCalled();
 
+      // start of second load, expect load failure
       stripePromise = loadStripe('pk_test_foo');
 
       await Promise.resolve();
@@ -195,6 +202,8 @@ describe('Stripe module loader', () => {
       );
 
       expect(console.warn).not.toHaveBeenCalled();
+
+      // start of third load, expect success
       stripePromise = loadStripe('pk_test_foo');
 
       await new Promise((resolve) => setTimeout(resolve));
