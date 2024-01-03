@@ -1394,6 +1394,11 @@ export type StripeErrorType =
   | 'card_error'
 
   /**
+   * Generic error. See the code of this error for more details.
+   */
+  | 'error'
+
+  /**
    * Idempotency errors occur when an `Idempotency-Key` is re-used on a request that does not match the first request's API endpoint and parameters.
    */
   | 'idempotency_error'
