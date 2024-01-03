@@ -803,13 +803,6 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
    * @docs https://stripe.com/docs/js/elements_object/create#stripe_elements-options-externalPaymentMethodTypes
    */
   externalPaymentMethodTypes?: string[];
-
-  /**
-   * The external payment methods to be displayed in the Payment Element that you are already integrated with.
-   *
-   * @docs https://stripe.com/docs/js/elements_object/create#stripe_elements-options-externalPaymentMethodTypes
-   */
-  external_payment_method_types?: string[];
 }
 
 export type StripeElementsOptions =
