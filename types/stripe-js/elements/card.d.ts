@@ -4,6 +4,7 @@ import {
   StripeElementClasses,
   StripeElementChangeEvent,
 } from './base';
+import {CardNetworkBrand} from '../elements-group';
 
 export type StripeCardElement = StripeElementBase & {
   /**
@@ -152,6 +153,13 @@ export interface StripeCardElementOptions {
    * Default is false.
    */
   disableLink?: boolean;
+
+  /**
+   * The preferred card network order for the Card Brand Choice dropdown. Specifying a value for this 
+   * parameter will result in the most preferred network being selected by default in the dropdown.
+   * Defaults to the automatic network ordering if no value is specified.
+   */
+  preferredNetwork?: Array<CardNetworkBrand>;
 }
 
 export interface StripeCardElementUpdateOptions {

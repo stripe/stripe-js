@@ -238,6 +238,10 @@ const cardElement: StripeCardElement = elements.create('card', {
   disableLink: false,
 });
 
+elements.create('card', {preferredNetwork: undefined});
+
+elements.create('card', {preferredNetwork: ['cartes_bancaires', 'accel']});
+
 elements.create('card', {style: {base: {fontWeight: 500}}});
 
 const cardElementDefaults: StripeCardElement = elements.create('card');
@@ -255,6 +259,10 @@ const cardNumberElement: StripeCardNumberElement = elements.create(
     disableLink: false,
   }
 );
+
+elements.create('cardNumber', {preferredNetwork: undefined});
+
+elements.create('cardNumber', {preferredNetwork: ['cartes_bancaires', 'accel']});
 
 elements.create('cardNumber', {style: {base: {fontWeight: 500}}});
 elements.create('cardCvc', {style: {base: {fontWeight: 500}}});
