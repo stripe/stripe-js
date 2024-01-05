@@ -796,6 +796,13 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
    * Either use mode or clientSecret when creating an Elements group
    */
   clientSecret?: never;
+
+  /**
+   * The external payment methods to be displayed in the Payment Element that you are already integrated with.
+   *
+   * @docs https://stripe.com/docs/js/elements_object/create#stripe_elements-options-externalPaymentMethodTypes
+   */
+  externalPaymentMethodTypes?: string[];
 }
 
 export type StripeElementsOptions =
