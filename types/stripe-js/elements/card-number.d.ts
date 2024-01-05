@@ -109,10 +109,41 @@ export type StripeCardNumberElement = StripeElementBase & {
    * The styles of an `Element` can be dynamically changed using `element.update`.
    * This method can be used to simulate CSS media queries that automatically adjust the size of elements when viewed on different devices.
    */
-  update(options: Partial<StripeCardNumberElementOptions>): void;
+  update(options: Partial<StripeCardNumberElementUpdateOptions>): void;
 };
 
 export interface StripeCardNumberElementOptions {
+  classes?: StripeElementClasses;
+
+  style?: StripeElementStyle;
+
+  placeholder?: string;
+
+  /**
+   * Applies a disabled state to the Element such that user input is not accepted.
+   * Default is false.
+   */
+  disabled?: boolean;
+
+  /**
+   * Show a card brand icon in the Element.
+   * Default is `false`.
+   */
+  showIcon?: boolean;
+
+  /**
+   * Appearance of the brand icon in the Element.
+   */
+  iconStyle?: 'default' | 'solid';
+
+  /**
+   * Hides and disables the Link Button in the Card Element.
+   * Default is false.
+   */
+  disableLink?: boolean;
+}
+
+export interface StripeCardNumberElementUpdateOptions {
   classes?: StripeElementClasses;
 
   style?: StripeElementStyle;

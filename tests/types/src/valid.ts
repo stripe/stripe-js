@@ -252,6 +252,7 @@ const cardNumberElement: StripeCardNumberElement = elements.create(
     style: MY_STYLE,
     showIcon: true,
     iconStyle: 'solid',
+    disableLink: false,
   }
 );
 

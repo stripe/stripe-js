@@ -1,6 +1,7 @@
 import {
   Stripe,
   StripeCardElement,
+  StripeCardNumberElement,
   StripeIbanElement,
   StripePaymentElement,
   StripeCartElement,
@@ -11,6 +12,7 @@ import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay'
 
 declare const stripe: Stripe;
 declare const cardElement: StripeCardElement;
+declare const cardNumberElement: StripeCardNumberElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
 declare const cartElement: StripeCartElement;
@@ -54,6 +56,11 @@ elements.update({
 
 cardElement.update({
   // @ts-expect-error: 'disableLink' does not exist in type 'StripeCardElementUpdateOptions'
+  disableLink: false,
+});
+
+cardNumberElement.update({
+  // @ts-expect-error: 'disableLink' does not exist in type 'StripeCardNumberElementUpdateOptions'
   disableLink: false,
 });
 
