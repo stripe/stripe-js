@@ -1,6 +1,7 @@
 import {
   Stripe,
   StripeCardElement,
+  StripeCardNumberElement,
   StripeIbanElement,
   StripePaymentElement,
   StripeCartElement,
@@ -11,6 +12,7 @@ import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay'
 
 declare const stripe: Stripe;
 declare const cardElement: StripeCardElement;
+declare const cardNumberElement: StripeCardNumberElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
 declare const cartElement: StripeCartElement;
@@ -52,9 +54,40 @@ elements.update({
   },
 });
 
+// invalid value for 'preferredNetwork'
+// @ts-expect-error: No overload matches this call
+elements.create('cardNumber', {preferredNetwork: ['invalid_network']});
+
+// invalid value for 'preferredNetwork'
+// @ts-expect-error: No overload matches this call
+elements.create('card', {preferredNetwork: ['invalid_network']});
+
+// invalid type for 'preferredNetwork'
+// @ts-expect-error: No overload matches this call
+elements.create('cardNumber', {preferredNetwork: 'cartes_bancaires'});
+
+// invalid type for 'preferredNetwork'
+// @ts-expect-error: No overload matches this call
+elements.create('card', {preferredNetwork: 'cartes_bancaires'});
+
 cardElement.update({
   // @ts-expect-error: 'disableLink' does not exist in type 'StripeCardElementUpdateOptions'
   disableLink: false,
+});
+
+cardNumberElement.update({
+  // @ts-expect-error: 'disableLink' does not exist in type 'StripeCardNumberElementUpdateOptions'
+  disableLink: false,
+});
+
+cardElement.update({
+  // @ts-expect-error: 'preferredNetwork' does not exist in type 'StripeCardElementUpdateOptions'
+  preferredNetwork: ['cartes_bancaires'],
+});
+
+cardNumberElement.update({
+  // @ts-expect-error: 'preferredNetwork' does not exist in type 'StripeCardNumberElementUpdateOptions'
+  preferredNetwork: ['cartes_bancaires'],
 });
 
 paymentElement.on('change', (e) => {

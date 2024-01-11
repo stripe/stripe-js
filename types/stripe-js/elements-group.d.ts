@@ -617,6 +617,26 @@ export type StripeElementLocale =
   | 'zh-HK'
   | 'zh-TW';
 
+export type CardNetworkBrand =
+  | 'accel'
+  | 'amex'
+  | 'carnet'
+  | 'cartes_bancaires'
+  | 'diners'
+  | 'discover'
+  | 'eftpos_au'
+  | 'elo'
+  | 'girocard'
+  | 'interac'
+  | 'jcb'
+  | 'mastercard'
+  | 'nyce'
+  | 'pulse'
+  | 'rupay'
+  | 'star'
+  | 'unionpay'
+  | 'visa';
+
 type PaymentMethodOptions = {
   card?: {require_cvc_recollection?: boolean};
   us_bank_account?: {
