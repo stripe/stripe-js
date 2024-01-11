@@ -262,7 +262,9 @@ const cardNumberElement: StripeCardNumberElement = elements.create(
 
 elements.create('cardNumber', {preferredNetwork: undefined});
 
-elements.create('cardNumber', {preferredNetwork: ['cartes_bancaires', 'accel']});
+elements.create('cardNumber', {
+  preferredNetwork: ['cartes_bancaires', 'accel'],
+});
 
 elements.create('cardNumber', {style: {base: {fontWeight: 500}}});
 elements.create('cardCvc', {style: {base: {fontWeight: 500}}});
