@@ -148,7 +148,7 @@ export interface StripeCardNumberElementOptions {
    * network on the entered card will be selected as the default in the Card Brand Choice dropdown upon
    * entry of a co-branded card.
    *
-   * Default is an empty array, meaning no network will be selected by default in the Card Brand choice dropdown.
+   * Default is an empty array, meaning no default selection will be made in the Card Brand choice dropdown.
    */
   preferredNetwork?: Array<CardNetworkBrand>;
 }
