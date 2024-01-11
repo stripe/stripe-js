@@ -144,9 +144,9 @@ export interface StripeCardNumberElementOptions {
   disableLink?: boolean;
 
   /**
-   * The preferred card network order for the Card Brand Choice dropdown. Specifying a value for this
-   * parameter will result in the most preferred network being selected by default in the dropdown.
-   * Defaults to the automatic network ordering if no value is specified.
+   * Specifies a network preference for Card Brand Choice. The first network in the array which is a valid
+   * network on the entered card will be selected as the default in the Card Brand Choice dropdown upon
+   * entry of a co-branded card.
    */
   preferredNetwork?: Array<CardNetworkBrand>;
 }
