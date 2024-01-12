@@ -4,6 +4,7 @@ import {
   StripeElementClasses,
   StripeElementChangeEvent,
 } from './base';
+import {CardNetworkBrand} from '../elements-group';
 
 export type StripeCardNumberElement = StripeElementBase & {
   /**
@@ -109,7 +110,7 @@ export type StripeCardNumberElement = StripeElementBase & {
    * The styles of an `Element` can be dynamically changed using `element.update`.
    * This method can be used to simulate CSS media queries that automatically adjust the size of elements when viewed on different devices.
    */
-  update(options: Partial<StripeCardNumberElementOptions>): void;
+  update(options: Partial<StripeCardNumberElementUpdateOptions>): void;
 };
 
 export interface StripeCardNumberElementOptions {
@@ -121,7 +122,47 @@ export interface StripeCardNumberElementOptions {
 
   /**
    * Applies a disabled state to the Element such that user input is not accepted.
-   * Default is false.
+   * Default is `false`.
+   */
+  disabled?: boolean;
+
+  /**
+   * Show a card brand icon in the Element.
+   * Default is `false`.
+   */
+  showIcon?: boolean;
+
+  /**
+   * Appearance of the brand icon in the Element.
+   */
+  iconStyle?: 'default' | 'solid';
+
+  /**
+   * Hides and disables the Link Button in the Card Element.
+   * Default is `false`.
+   */
+  disableLink?: boolean;
+
+  /**
+   * Specifies a network preference for Card Brand Choice. The first network in the array which is a valid
+   * network on the entered card will be selected as the default in the Card Brand Choice dropdown upon
+   * entry of a co-branded card.
+   *
+   * Default is an empty array, meaning no default selection will be made in the Card Brand choice dropdown.
+   */
+  preferredNetwork?: Array<CardNetworkBrand>;
+}
+
+export interface StripeCardNumberElementUpdateOptions {
+  classes?: StripeElementClasses;
+
+  style?: StripeElementStyle;
+
+  placeholder?: string;
+
+  /**
+   * Applies a disabled state to the Element such that user input is not accepted.
+   * Default is `false`.
    */
   disabled?: boolean;
 
