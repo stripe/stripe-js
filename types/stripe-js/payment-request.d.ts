@@ -1,4 +1,5 @@
 import {Token, PaymentMethod, Source} from '../api';
+import {ApplePayOption, ApplePayUpdateOption} from './elements/apple-pay';
 
 export interface PaymentRequest {
   /**
@@ -154,6 +155,11 @@ export interface PaymentRequestUpdateOptions {
    */
 
   shippingOptions?: PaymentRequestShippingOption[];
+
+  /**
+   * Specify the options to be used when the Apple Pay payment interface opens.
+   */
+  applePay?: ApplePayOption;
 }
 
 /**
@@ -225,6 +231,11 @@ export interface PaymentRequestOptions {
    * Use this option to disable Apple Pay, Google Pay, Link and/or browser-saved cards.
    */
   disableWallets?: PaymentRequestWallet[];
+
+  /**
+   * Specify the options to be used when the Apple Pay payment interface opens.
+   */
+  applePay?: ApplePayOption;
 
   /**
    * @deprecated
@@ -497,6 +508,11 @@ export interface PaymentRequestUpdateDetails {
    * The first shipping option listed appears in the browser payment interface as the default option.
    */
   shippingOptions?: PaymentRequestShippingOption[];
+
+  /**
+   * Specify new options to refresh the Apple Pay payment interface.
+   */
+  applePay?: ApplePayUpdateOption;
 }
 
 export interface PaymentRequestShippingOptionEvent {

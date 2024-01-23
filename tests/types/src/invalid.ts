@@ -1,22 +1,29 @@
 import {
   Stripe,
   StripeCardElement,
+  StripeCardNumberElement,
   StripeIbanElement,
   StripePaymentElement,
   StripeCartElement,
   StripeExpressCheckoutElement,
   StripeElementsOptions,
 } from '../../../types';
+import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay';
 
 declare const stripe: Stripe;
 declare const cardElement: StripeCardElement;
+declare const cardNumberElement: StripeCardNumberElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
 declare const cartElement: StripeCartElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
 
-// @ts-expect-error: Passing `clientSecret` or `mode` implies different integration paths which cannot be combined
-const options: StripeElementsOptions = {clientSecret: '', mode: ''};
+const options: StripeElementsOptions = {
+  clientSecret: '',
+  // @ts-expect-error Type 'string' is not assignable to type '"payment" | "setup" | "subscription" | undefined'.ts(2322)
+  mode: '',
+  payment_method_creation: 'manual',
+};
 
 // @ts-expect-error: Passing `clientSecret` or `mode` implies different integration paths which cannot be combined
 const elements = stripe.elements(options);
@@ -47,9 +54,40 @@ elements.update({
   },
 });
 
+// invalid value for 'preferredNetwork'
+// @ts-expect-error: No overload matches this call
+elements.create('cardNumber', {preferredNetwork: ['invalid_network']});
+
+// invalid value for 'preferredNetwork'
+// @ts-expect-error: No overload matches this call
+elements.create('card', {preferredNetwork: ['invalid_network']});
+
+// invalid type for 'preferredNetwork'
+// @ts-expect-error: No overload matches this call
+elements.create('cardNumber', {preferredNetwork: 'cartes_bancaires'});
+
+// invalid type for 'preferredNetwork'
+// @ts-expect-error: No overload matches this call
+elements.create('card', {preferredNetwork: 'cartes_bancaires'});
+
 cardElement.update({
   // @ts-expect-error: 'disableLink' does not exist in type 'StripeCardElementUpdateOptions'
   disableLink: false,
+});
+
+cardNumberElement.update({
+  // @ts-expect-error: 'disableLink' does not exist in type 'StripeCardNumberElementUpdateOptions'
+  disableLink: false,
+});
+
+cardElement.update({
+  // @ts-expect-error: 'preferredNetwork' does not exist in type 'StripeCardElementUpdateOptions'
+  preferredNetwork: ['cartes_bancaires'],
+});
+
+cardNumberElement.update({
+  // @ts-expect-error: 'preferredNetwork' does not exist in type 'StripeCardNumberElementUpdateOptions'
+  preferredNetwork: ['cartes_bancaires'],
 });
 
 paymentElement.on('change', (e) => {
@@ -113,16 +151,78 @@ expressCheckoutElement.update({
   },
 });
 
-expressCheckoutElement.on('shippingaddresschange', ({address}) => {
+expressCheckoutElement.on('shippingaddresschange', ({address, resolve}) => {
   // @ts-expect-error Property 'line1' does not exist on type 'PartialAddress'.
   address.line1;
   // @ts-expect-error Property 'line2' does not exist on type 'PartialAddress'.
   address.line2;
+
+  resolve({
+    applePay: {
+      // @ts-expect-error: Object literal may only specify known properties, and 'deferredPaymentRequest' does not exist in type 'ApplePayUpdateOption'.
+      deferredPaymentRequest: {
+        paymentDescription: 'Deferred payment',
+        deferredBilling: {
+          label: 'Deferred payment',
+          amount: 2000,
+          deferredPaymentDate: new Date(Date.now()),
+        },
+        managementURL: 'https://atnnews.com/manage-subscription',
+        billingAgreement:
+          'You agree to pay 20 dollars some time in the future.',
+      },
+    },
+  });
+
+  const applePayUpdateOptions: ApplePayUpdateOption = {
+    recurringPaymentRequest: {
+      paymentDescription: 'Subscription to ATN News',
+      regularBilling: {
+        label: 'Online & paper news',
+        amount: 2000,
+      },
+      managementURL: 'https://atnnews.com/manage-subscription',
+      billingAgreement: 'You agree to pay ATN News $20.00 every month.',
+    },
+  };
+
+  resolve({
+    applePay: applePayUpdateOptions,
+  });
 });
 
 expressCheckoutElement.on('confirm', ({paymentFailed}) => {
   // @ts-expect-error Can only fail a payment for a reason of 'fail' or 'invalid-shipping-address'
   paymentFailed({reason: 'pizza-time'});
+});
+
+expressCheckoutElement.on('click', ({resolve}) => {
+  resolve({
+    applePay: {
+      // @ts-ignore
+      recurringPaymentRequest: {
+        paymentDescription: 'Subscription to ATN News',
+        regularBilling: {
+          label: 'Online & paper news',
+          amount: 2000,
+        },
+        managementURL: 'https://atnnews.com/manage-subscription',
+        billingAgreement: 'You agree to pay ATN News $20.00 every month.',
+      },
+      // @ts-expect-error: Type '{ paymentDescription: string; deferredBilling: { label: string; amount: number; deferredPaymentDate: Date; }; managementURL: string; billingAgreement: string; }' is not assignable to type 'null | undefined'.
+      deferredPaymentRequest: {
+        paymentDescription: 'Deferred payment',
+        deferredBilling: {
+          label: 'Deferred payment',
+          amount: 2000,
+          deferredPaymentDate: new Date(Date.now()),
+        },
+        managementURL: 'https://atnnews.com/manage-subscription',
+        billingAgreement:
+          'You agree to pay 20 dollars some time in the future.',
+      },
+    },
+  });
 });
 
 // @ts-expect-error: AddressElement requires a mode

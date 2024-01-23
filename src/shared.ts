@@ -64,6 +64,26 @@ const registerWrapper = (stripe: any, startTime: number): void => {
 
 let stripePromise: Promise<StripeConstructor | null> | null = null;
 
+let onErrorListener: (() => void) | null = null;
+let onLoadListener: (() => void) | null = null;
+
+const onError = (reject: (reason?: any) => void) => () => {
+  reject(new Error('Failed to load Stripe.js'));
+};
+
+const onLoad = (
+  resolve: (
+    value: StripeConstructor | PromiseLike<StripeConstructor | null> | null
+  ) => void,
+  reject: (reason?: any) => void
+) => () => {
+  if (window.Stripe) {
+    resolve(window.Stripe);
+  } else {
+    reject(new Error('Stripe.js not available'));
+  }
+};
+
 export const loadScript = (
   params: null | LoadParams
 ): Promise<StripeConstructor | null> => {
@@ -96,26 +116,36 @@ export const loadScript = (
         console.warn(EXISTING_SCRIPT_MESSAGE);
       } else if (!script) {
         script = injectScript(params);
+      } else if (
+        script &&
+        onLoadListener !== null &&
+        onErrorListener !== null
+      ) {
+        // remove event listeners
+        script.removeEventListener('load', onLoadListener);
+        script.removeEventListener('error', onErrorListener);
+
+        // if script exists, but we are reloading due to an error,
+        // reload script to trigger 'load' event
+        script.parentNode?.removeChild(script);
+        script = injectScript(params);
       }
 
-      script.addEventListener('load', () => {
-        if (window.Stripe) {
-          resolve(window.Stripe);
-        } else {
-          reject(new Error('Stripe.js not available'));
-        }
-      });
+      onLoadListener = onLoad(resolve, reject);
+      onErrorListener = onError(reject);
+      script.addEventListener('load', onLoadListener);
 
-      script.addEventListener('error', () => {
-        reject(new Error('Failed to load Stripe.js'));
-      });
+      script.addEventListener('error', onErrorListener);
     } catch (error) {
       reject(error);
       return;
     }
   });
-
-  return stripePromise;
+  // Resets stripePromise on error
+  return stripePromise.catch((error) => {
+    stripePromise = null;
+    return Promise.reject(error);
+  });
 };
 
 export const initStripe = (

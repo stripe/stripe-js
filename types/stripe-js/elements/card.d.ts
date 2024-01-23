@@ -4,6 +4,7 @@ import {
   StripeElementClasses,
   StripeElementChangeEvent,
 } from './base';
+import {CardNetworkBrand} from '../elements-group';
 
 export type StripeCardElement = StripeElementBase & {
   /**
@@ -143,15 +144,24 @@ export interface StripeCardElementOptions {
 
   /**
    * Applies a disabled state to the Element such that user input is not accepted.
-   * Default is false.
+   * Default is `false`.
    */
   disabled?: boolean;
 
   /**
    * Hides and disables the Link Button in the Card Element.
-   * Default is false.
+   * Default is `false`.
    */
   disableLink?: boolean;
+
+  /**
+   * Specifies a network preference for Card Brand Choice. The first network in the array which is a valid
+   * network on the entered card will be selected as the default in the Card Brand Choice dropdown upon
+   * entry of a co-branded card.
+   *
+   * Default is an empty array, meaning no default selection will be made in the Card Brand choice dropdown.
+   */
+  preferredNetwork?: Array<CardNetworkBrand>;
 }
 
 export interface StripeCardElementUpdateOptions {
@@ -185,7 +195,7 @@ export interface StripeCardElementUpdateOptions {
 
   /**
    * Applies a disabled state to the Element such that user input is not accepted.
-   * Default is false.
+   * Default is `false`.
    */
   disabled?: boolean;
 }
