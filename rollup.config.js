@@ -29,7 +29,7 @@ export default [
     input: 'src/pure.ts',
     output: [
       {file: 'dist/pure.js', format: 'cjs'},
-      {file: 'dist/pure.esm.js', format: 'es'},
+      {file: 'dist/pure.mjs', format: 'es'},
     ],
     plugins: PLUGINS,
   },
