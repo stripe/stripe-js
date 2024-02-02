@@ -5,6 +5,16 @@
   "repository": "github:stripe/stripe-js",
   "main": "dist/stripe.js",
   "module": "dist/stripe.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/stripe.esm.js",
+      "default": "./dist/stripe.js"
+    },
+    "./pure": {
+      "import": "./dist/pure.esm.js",
+      "default": "./dist/pure.js"
+    }
+  },
   "jsnext:main": "dist/stripe.esm.js",
   "types": "types/index.d.ts",
   "typings": "types/index.d.ts",
