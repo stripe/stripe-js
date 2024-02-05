@@ -16,6 +16,10 @@ of features of Stripe.js.
 
 [![npm version](https://img.shields.io/npm/v/@stripe/stripe-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/stripe-js)
 
+## Minimum requirements
+
+- Node.js: v12.16
+
 ## Installation
 
 Use `npm` to install the Stripe.js module:
