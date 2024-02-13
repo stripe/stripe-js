@@ -7,10 +7,12 @@
   "module": "dist/stripe.mjs",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "import": "./dist/stripe.mjs",
       "default": "./dist/stripe.js"
     },
     "./pure": {
+      "types": "./types/pure.d.ts",
       "import": "./dist/pure.mjs",
       "default": "./dist/pure.js"
     }
