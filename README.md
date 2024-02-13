@@ -1,10 +1,3 @@
-# ⚠️ v3.0.0 Notice
-
-We are aware of an issue impacting builds for some TypeScript users in our
-latest package release **v3.0.0** and are actively investigating a fix. For the
-time being, we recommend users to remain on the previous release
-[v2.4.0](https://github.com/stripe/stripe-js/releases/tag/v2.4.0).
-
 # Stripe.js ES Module
 
 Use [Stripe.js](https://stripe.com/docs/stripe-js) as an ES module.
