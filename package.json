@@ -15,7 +15,6 @@
       "default": "./dist/pure.js"
     }
   },
-  "jsnext:main": "dist/stripe.mjs",
   "types": "types/index.d.ts",
   "typings": "types/index.d.ts",
   "scripts": {
