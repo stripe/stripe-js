@@ -12,7 +12,7 @@
         "default": "./dist/stripe.mjs"
       },
       "require": {
-        "types": "./dist/index.d.ts",
+        "types": "./types/index.d.ts",
         "default": "./dist/stripe.js"
       }
     },
@@ -22,7 +22,7 @@
         "default": "./dist/pure.mjs"
       },
       "require": {
-        "types": "./dist/pure.d.ts",
+        "types": "./types/pure.d.ts",
         "default": "./dist/pure.js"
       }
     }
