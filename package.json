@@ -1,18 +1,30 @@
 {
   "name": "@stripe/stripe-js",
-  "version": "2.4.0",
+  "version": "3.0.2",
   "description": "Stripe.js loading utility",
   "repository": "github:stripe/stripe-js",
   "main": "dist/stripe.js",
   "module": "dist/stripe.mjs",
   "exports": {
     ".": {
-      "import": "./dist/stripe.mjs",
-      "default": "./dist/stripe.js"
+      "import": {
+        "types": "./types/index.d.mts",
+        "default": "./dist/stripe.mjs"
+      },
+      "require": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/stripe.js"
+      }
     },
     "./pure": {
-      "import": "./dist/pure.mjs",
-      "default": "./dist/pure.js"
+      "import": {
+        "types": "./types/pure.d.mts",
+        "default": "./dist/pure.mjs"
+      },
+      "require": {
+        "types": "./types/pure.d.ts",
+        "default": "./dist/pure.js"
+      }
     }
   },
   "jsnext:main": "dist/stripe.mjs",
