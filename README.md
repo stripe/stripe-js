@@ -19,6 +19,7 @@ of features of Stripe.js.
 ## Minimum requirements
 
 - Node.js: v12.16
+- TypeScript: v.3.1.1
 
 ## Installation
 
@@ -76,6 +77,18 @@ or ignoring and overriding the type definitions as necessary.
 Note that we may release new [minor and patch](https://semver.org/) versions of
 `@stripe/stripe-js` with small but backwards-incompatible fixes to the type
 declarations. These changes will not affect Stripe.js itself.
+
+### [`moduleResolution`](https://www.typescriptlang.org/tsconfig#moduleResolution) support
+
+This package supports the following module resolution strategies:
+
+- `bundler`
+- `node16`
+- `nodenext`
+
+This package does not support `node10` or `node` strategies, which do not
+support ES6 modules. Using `node16` or `nodenext` is recommended as a
+replacement configuration.
 
 ## Ensuring Stripe.js is available everywhere
 
