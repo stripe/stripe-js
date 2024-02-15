@@ -8,7 +8,7 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./types/index.d.mts",
+        "types": "./types/index.d.ts",
         "default": "./dist/stripe.mjs"
       },
       "require": {
@@ -18,7 +18,7 @@
     },
     "./pure": {
       "import": {
-        "types": "./types/pure.d.mts",
+        "types": "./types/pure.d.ts",
         "default": "./dist/pure.mjs"
       },
       "require": {
