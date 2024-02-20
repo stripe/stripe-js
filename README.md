@@ -142,9 +142,6 @@ import {loadStripe} from '@stripe/stripe-js/pure';
 // ES module import
 import {loadStripe} from '@stripe/stripe-js/pure.mjs';
 
-// Stripe.js will not be loaded until `loadStripe` is called
-const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
-
 loadStripe.setLoadParameters({advancedFraudSignals: false});
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 ```
