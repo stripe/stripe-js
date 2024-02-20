@@ -6,8 +6,8 @@
   "main": "dist/stripe.js",
   "module": "dist/stripe.mjs",
   "jsnext:main": "dist/stripe.mjs",
-  "types": "types/index.d.ts",
-  "typings": "types/index.d.ts",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "yarn lint && yarn test:unit && yarn test:types && yarn typecheck",
     "test:unit": "jest",
@@ -31,9 +31,7 @@
   "files": [
     "dist",
     "src",
-    "types",
-    "pure.mjs",
-    "pure.js"
+    "pure"
   ],
   "engines": {
     "node": ">=12.16"

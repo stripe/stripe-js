@@ -122,9 +122,9 @@ Stripe.js script until `loadStripe` is first called, use the alternative
 
 ```js
 // CommonJS module import
-import {loadStripe} from '@stripe/stripe-js/pure';
+const {loadStripe} = require('@stripe/stripe-js/pure');
 // ES module import
-import {loadStripe} from '@stripe/stripe-js/pure.mjs';
+import {loadStripe} from '@stripe/stripe-js/pure';
 
 // Stripe.js will not be loaded until `loadStripe` is called
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -138,9 +138,9 @@ altogether, use `loadStripe.setLoadParameters`:
 
 ```js
 // CommonJS module import
-import {loadStripe} from '@stripe/stripe-js/pure';
+const {loadStripe} = require('@stripe/stripe-js/pure');
 // ES module import
-import {loadStripe} from '@stripe/stripe-js/pure.mjs';
+import {loadStripe} from '@stripe/stripe-js/pure';
 
 loadStripe.setLoadParameters({advancedFraudSignals: false});
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');

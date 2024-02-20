@@ -37,16 +37,16 @@ export default [
   {
     input: 'src/pure.ts',
     output: [
-      {file: 'dist/pure.js', format: 'cjs'},
-      {file: 'dist/pure.mjs', format: 'es'},
+      {file: 'pure/index.js', format: 'cjs'},
+      {file: 'pure/index.mjs', format: 'es'},
     ],
     plugins: PLUGINS,
   },
   {
     input: 'types/pure.d.ts',
     output: [
-      {file: './dist/pure.d.ts', format: 'cjs'},
-      {file: './dist/pure.d.mts', format: 'es'},
+      {file: './pure/index.d.ts', format: 'cjs'},
+      {file: './pure/index.d.mts', format: 'es'},
     ],
     plugins: [dts()],
   },
