@@ -1262,7 +1262,7 @@ export type PaymentMethodResult =
 
 export type ConfirmationTokenResult =
   | {confirmationToken: api.ConfirmationToken; error?: undefined}
-  | {confirmationToken?: undefined; error: StripeError};  
+  | {confirmationToken?: undefined; error: StripeError};
 
 export type SourceResult =
   | {source: api.Source; error?: undefined}

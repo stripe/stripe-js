@@ -455,4 +455,3 @@ stripe
     // @ts-expect-error mandate_data is not a valid parameter
     result.confirmationToken.mandate_data;
   });
-
