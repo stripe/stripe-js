@@ -1,14 +1,7 @@
-# ⚠️ v3.0.x Notice
+# Stripe.js as a CommonJS module or ES module
 
-We are aware of an issue impacting builds for some TypeScript users in our
-package releases **v3.0.0**, **v3.0.1**, **v3.0.2** and recommend users to
-upgrade to our latest package release
-[**v3.0.3**](https://github.com/stripe/stripe-js/releases/tag/v3.0.3) which
-contains a fix.
-
-# Stripe.js ES Module
-
-Use [Stripe.js](https://stripe.com/docs/stripe-js) as an ES module.
+This package allows [Stripe.js](https://stripe.com/docs/stripe-js) to be
+imported as a CommonJS module or ES module.
 
 **Note**: To be
 [PCI compliant](https://stripe.com/docs/security/guide#validating-pci-compliance),
@@ -86,18 +79,6 @@ Note that we may release new [minor and patch](https://semver.org/) versions of
 `@stripe/stripe-js` with small but backwards-incompatible fixes to the type
 declarations. These changes will not affect Stripe.js itself.
 
-### [`moduleResolution`](https://www.typescriptlang.org/tsconfig#moduleResolution) support
-
-This package supports the following module resolution strategies:
-
-- `bundler`
-- `node16`
-- `nodenext`
-
-This package does not support `node10` or `node` strategies, which do not
-support ES6 modules. Using `node16` or `nodenext` is recommended as a
-replacement configuration.
-
 ## Ensuring Stripe.js is available everywhere
 
 To best leverage Stripe’s advanced fraud functionality, ensure that Stripe.js is
@@ -137,10 +118,13 @@ one. When you call `loadStripe`, it will use the existing script tag.
 
 If you would like to use `loadStripe` in your application, but defer loading the
 Stripe.js script until `loadStripe` is first called, use the alternative
-`@stripe/stripe-js/pure` import path:
+`@stripe/stripe-js/pure` import module:
 
 ```js
+// CommonJS module import
 import {loadStripe} from '@stripe/stripe-js/pure';
+// ES module import
+import {loadStripe} from '@stripe/stripe-js/pure.mjs';
 
 // Stripe.js will not be loaded until `loadStripe` is called
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -153,7 +137,13 @@ If you would like to
 altogether, use `loadStripe.setLoadParameters`:
 
 ```js
+// CommonJS module import
 import {loadStripe} from '@stripe/stripe-js/pure';
+// ES module import
+import {loadStripe} from '@stripe/stripe-js/pure.mjs';
+
+// Stripe.js will not be loaded until `loadStripe` is called
+const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 loadStripe.setLoadParameters({advancedFraudSignals: false});
 const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');

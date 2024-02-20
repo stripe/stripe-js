@@ -5,28 +5,6 @@
   "repository": "github:stripe/stripe-js",
   "main": "dist/stripe.js",
   "module": "dist/stripe.mjs",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/stripe.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/stripe.js"
-      }
-    },
-    "./pure": {
-      "import": {
-        "types": "./dist/pure.d.mts",
-        "default": "./dist/pure.mjs"
-      },
-      "require": {
-        "types": "./dist/pure.d.ts",
-        "default": "./dist/pure.js"
-      }
-    }
-  },
   "jsnext:main": "dist/stripe.mjs",
   "types": "types/index.d.ts",
   "typings": "types/index.d.ts",
@@ -53,7 +31,9 @@
   "files": [
     "dist",
     "src",
-    "types"
+    "types",
+    "pure.mjs",
+    "pure.js"
   ],
   "engines": {
     "node": ">=12.16"
