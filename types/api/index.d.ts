@@ -1,5 +1,6 @@
 export * from './shared';
 export * from './payment-methods';
+export * from './confirmation-tokens';
 export * from './payment-intents';
 export * from './orders';
 export * from './setup-intents';

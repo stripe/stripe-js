@@ -2343,6 +2343,50 @@ stripe.createPaymentMethod({
 });
 
 stripe
+  .createConfirmationToken({
+    elements,
+    params: {
+      payment_method_data: {
+        billing_details: {
+          name: 'Jenny Rosen',
+        },
+      },
+      shipping: {
+        address: {
+          line1: '1234 Main St',
+          line2: 'Apt 213',
+          city: 'San Francisco',
+          state: 'CA',
+          country: 'US',
+          postal_code: '94111',
+        },
+        name: 'Jenny Rosen',
+      },
+      return_url: 'https://shop.example.com/success.html',
+    },
+  })
+  .then((result) => {
+    if (result.error) {
+      return console.log(result.error.code);
+    }
+    result.confirmationToken.payment_method_preview;
+  });
+
+stripe
+  .createConfirmationToken({
+    elements,
+  })
+  .then((result) => {
+    if (result.error) {
+      return console.log(result.error.code);
+    }
+    const a = result.confirmationToken.payment_method_preview;
+    const b = result.confirmationToken.setup_future_usage;
+    const c = result.confirmationToken.shipping;
+    const d = result.confirmationToken.payment_intent;
+  });
+
+stripe
   .collectBankAccountForPayment({
     clientSecret: '',
     params: {

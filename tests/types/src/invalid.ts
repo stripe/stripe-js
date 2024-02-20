@@ -439,3 +439,20 @@ stripe.createPaymentMethod({
     },
   },
 });
+
+stripe
+  .createConfirmationToken({
+    elements,
+    params: {
+      // @ts-expect-error payment_method is not a valid parameter
+      payment_method: 'pm_12345',
+    },
+  })
+  .then((result) => {
+    if (result.error) {
+      return console.log(result.error.code);
+    }
+    // @ts-expect-error mandate_data is not a valid parameter
+    result.confirmationToken.mandate_data;
+  });
+
