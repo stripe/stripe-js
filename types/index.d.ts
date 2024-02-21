@@ -1,12 +1,9 @@
 export * from './api';
 export * from './stripe-js';
 
-import {StripeConstructor, StripeConstructorOptions, Stripe} from './stripe-js';
+import {StripeConstructor} from './stripe-js';
 
-export const loadStripe: (
-  publishableKey: string,
-  options?: StripeConstructorOptions | undefined
-) => Promise<Stripe | null>;
+export {loadStripe} from './shared';
 
 declare global {
   interface Window {
