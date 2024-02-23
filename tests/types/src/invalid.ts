@@ -450,7 +450,7 @@ stripe
   })
   .then((result) => {
     if (result.error) {
-      return console.log(result.error.code);
+      return result.error.code;
     }
     // @ts-expect-error mandate_data is not a valid parameter
     result.confirmationToken.mandate_data;
