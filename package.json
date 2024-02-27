@@ -3,18 +3,19 @@
   "version": "3.0.5",
   "description": "Stripe.js loading utility",
   "repository": "github:stripe/stripe-js",
-  "main": "dist/stripe.js",
-  "module": "dist/stripe.mjs",
-  "jsnext:main": "dist/stripe.mjs",
-  "types": "dist/index.d.ts",
-  "typings": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "jsnext:main": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "test": "yarn lint && yarn test:unit && yarn test:types && yarn typecheck",
     "test:unit": "jest",
     "test:types": "zx ./tests/types/scripts/test.mjs",
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-check",
     "typecheck": "tsc",
-    "build": "yarn clean && yarn rollup -c",
+    "copy-types": "./scripts/copy-types",
+    "build": "yarn clean && yarn rollup -c && yarn copy-types",
     "clean": "rimraf dist",
     "prepublishOnly": "echo \"\nPlease use ./scripts/publish instead\n\" && exit 1",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
@@ -30,8 +31,9 @@
   "homepage": "https://stripe.com/docs/js",
   "files": [
     "dist",
-    "src",
-    "pure"
+    "lib",
+    "pure",
+    "src"
   ],
   "engines": {
     "node": ">=12.16"

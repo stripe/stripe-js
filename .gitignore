@@ -5,4 +5,3 @@ dist
 *.log
 .vim
 .vscode/
-pure
