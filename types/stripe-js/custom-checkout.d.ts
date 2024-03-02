@@ -14,13 +14,9 @@ import {StripeError} from './stripe';
 import {
   StripeElementBase,
   StripeExpressCheckoutElement,
-  StripeExpressCheckoutElementBlur,
   StripeExpressCheckoutElementConfirmEvent,
-  StripeExpressCheckoutElementEscape,
-  StripeExpressCheckoutElementFocus,
-  StripeExpressCheckoutElementLoaderror,
   StripeExpressCheckoutElementOptions,
-  StripeExpressCheckoutElementReady,
+  StripeExpressCheckoutElementReadyEvent,
 } from './elements';
 
 /**
@@ -235,32 +231,124 @@ export type StripeCustomCheckoutExpressCheckoutElementConfirmEvent = StripeExpre
   confirm: () => Promise<StripeCustomCheckoutResult>;
 };
 
-export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase &
-  StripeExpressCheckoutElementReady &
-  StripeExpressCheckoutElementFocus &
-  StripeExpressCheckoutElementBlur &
-  StripeExpressCheckoutElementEscape &
-  StripeExpressCheckoutElementLoaderror & {
-    update: StripeExpressCheckoutElement['update'];
-    on(
-      eventType: 'confirm',
-      handler: (
-        event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-      ) => any
-    ): StripeCustomCheckoutExpressCheckoutElement;
-    once(
-      eventType: 'confirm',
-      handler: (
-        event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-      ) => any
-    ): StripeCustomCheckoutExpressCheckoutElement;
-    off(
-      eventType: 'confirm',
-      handler?: (
-        event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-      ) => any
-    ): StripeCustomCheckoutExpressCheckoutElement;
-  };
+export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase & {
+  /**
+   * Triggered when the element is fully rendered and can accept `element.focus` calls.
+   */
+  on(
+    eventType: 'ready',
+    handler: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'ready',
+    handler: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'ready',
+    handler?: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the element gains focus.
+   */
+  on(
+    eventType: 'focus',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'focus',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'focus',
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the element loses focus.
+   */
+  on(
+    eventType: 'blur',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'blur',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'blur',
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the escape key is pressed within the element.
+   */
+  on(
+    eventType: 'escape',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'escape',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'escape',
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the element fails to load.
+   */
+  on(
+    eventType: 'loaderror',
+    handler: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'loaderror',
+    handler: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'loaderror',
+    handler?: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when a buyer authorizes a payment within a supported payment method.
+   */
+  on(
+    eventType: 'confirm',
+    handler: (
+      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+    ) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'confirm',
+    handler: (
+      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+    ) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'confirm',
+    handler?: (
+      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+    ) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+
+  /**
+   * Updates the options the `ExpressCheckoutElement` was initialized with.
+   * Updates are merged into the existing configuration.
+   */
+  update: StripeExpressCheckoutElement['update'];
+};
 
 export interface StripeCustomCheckout {
   /* Custom Checkout methods */

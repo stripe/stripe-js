@@ -2,7 +2,7 @@ import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
 import {ApplePayOption, ApplePayUpdateOption} from './apple-pay';
 
-export type StripeExpressCheckoutElementReady = {
+export type StripeExpressCheckoutElement = StripeElementBase & {
   /**
    * Triggered when the element is fully rendered and can accept `element.focus` calls.
    */
@@ -18,9 +18,7 @@ export type StripeExpressCheckoutElementReady = {
     eventType: 'ready',
     handler?: (event: StripeExpressCheckoutElementReadyEvent) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementClick = {
   /**
    * Triggered when a button on the element is clicked.
    */
@@ -36,9 +34,7 @@ export type StripeExpressCheckoutElementClick = {
     eventType: 'click',
     handler?: (event: StripeExpressCheckoutElementClickEvent) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementFocus = {
   /**
    * Triggered when the element gains focus.
    */
@@ -54,9 +50,7 @@ export type StripeExpressCheckoutElementFocus = {
     eventType: 'focus',
     handler?: (event: {elementType: 'expressCheckout'}) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementBlur = {
   /**
    * Triggered when the element loses focus.
    */
@@ -72,9 +66,7 @@ export type StripeExpressCheckoutElementBlur = {
     eventType: 'blur',
     handler?: (event: {elementType: 'expressCheckout'}) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementEscape = {
   /**
    * Triggered when the escape key is pressed within the element.
    */
@@ -90,9 +82,7 @@ export type StripeExpressCheckoutElementEscape = {
     eventType: 'escape',
     handler?: (event: {elementType: 'expressCheckout'}) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementLoaderror = {
   /**
    * Triggered when the element fails to load.
    */
@@ -117,9 +107,7 @@ export type StripeExpressCheckoutElementLoaderror = {
       error: StripeError;
     }) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementConfirm = {
   /**
    * Triggered when a buyer authorizes a payment within a supported payment method.
    */
@@ -135,9 +123,7 @@ export type StripeExpressCheckoutElementConfirm = {
     eventType: 'confirm',
     handler?: (event: StripeExpressCheckoutElementConfirmEvent) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementCancel = {
   /**
    * Triggered when a payment interface is dismissed (e.g., a buyer closes the payment interface)
    */
@@ -153,9 +139,7 @@ export type StripeExpressCheckoutElementCancel = {
     eventType: 'cancel',
     handler?: (event: {elementType: 'expressCheckout'}) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementShippingaddresschange = {
   /**
    * Triggered when a buyer selects a different shipping address.
    */
@@ -177,9 +161,7 @@ export type StripeExpressCheckoutElementShippingaddresschange = {
       event: StripeExpressCheckoutElementShippingAddressChangeEvent
     ) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElementShippingratechange = {
   /**
    * Triggered when a buyer selects a different shipping rate.
    */
@@ -197,27 +179,15 @@ export type StripeExpressCheckoutElementShippingratechange = {
       event: StripeExpressCheckoutElementShippingRateChangeEvent
     ) => any
   ): StripeExpressCheckoutElement;
-};
 
-export type StripeExpressCheckoutElement = StripeElementBase &
-  StripeExpressCheckoutElementReady &
-  StripeExpressCheckoutElementClick &
-  StripeExpressCheckoutElementFocus &
-  StripeExpressCheckoutElementBlur &
-  StripeExpressCheckoutElementEscape &
-  StripeExpressCheckoutElementLoaderror &
-  StripeExpressCheckoutElementConfirm &
-  StripeExpressCheckoutElementCancel &
-  StripeExpressCheckoutElementShippingaddresschange &
-  StripeExpressCheckoutElementShippingratechange & {
-    /**
-     * Updates the options the `ExpressCheckoutElement` was initialized with.
-     * Updates are merged into the existing configuration.
-     */
-    update(
-      options: StripeExpressCheckoutElementUpdateOptions
-    ): StripeExpressCheckoutElement;
-  };
+  /**
+   * Updates the options the `ExpressCheckoutElement` was initialized with.
+   * Updates are merged into the existing configuration.
+   */
+  update(
+    options: StripeExpressCheckoutElementUpdateOptions
+  ): StripeExpressCheckoutElement;
+};
 
 export type ExpressPaymentType = 'google_pay' | 'apple_pay' | 'link' | 'paypal';
 
