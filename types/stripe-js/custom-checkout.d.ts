@@ -13,8 +13,13 @@ import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
 import {
   StripeExpressCheckoutElement,
+  StripeExpressCheckoutElementBlur,
   StripeExpressCheckoutElementConfirmEvent,
+  StripeExpressCheckoutElementEscape,
+  StripeExpressCheckoutElementFocus,
+  StripeExpressCheckoutElementLoaderror,
   StripeExpressCheckoutElementOptions,
+  StripeExpressCheckoutElementReady,
 } from './elements';
 
 /**
@@ -229,26 +234,31 @@ export type StripeCustomCheckoutExpressCheckoutElementConfirmEvent = StripeExpre
   confirm: () => Promise<StripeCustomCheckoutResult>;
 };
 
-export type StripeCustomCheckoutExpressCheckoutElement = {
-  on(
-    eventType: 'confirm',
-    handler: (
-      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-    ) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
-  once(
-    eventType: 'confirm',
-    handler: (
-      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-    ) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
-  off(
-    eventType: 'confirm',
-    handler?: (
-      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-    ) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
-} & StripeExpressCheckoutElement;
+export type StripeCustomCheckoutExpressCheckoutElement = StripeExpressCheckoutElementReady &
+  StripeExpressCheckoutElementFocus &
+  StripeExpressCheckoutElementBlur &
+  StripeExpressCheckoutElementEscape &
+  StripeExpressCheckoutElementLoaderror & {
+    update: StripeExpressCheckoutElement['update'];
+    on(
+      eventType: 'confirm',
+      handler: (
+        event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+      ) => any
+    ): StripeCustomCheckoutExpressCheckoutElement;
+    once(
+      eventType: 'confirm',
+      handler: (
+        event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+      ) => any
+    ): StripeCustomCheckoutExpressCheckoutElement;
+    off(
+      eventType: 'confirm',
+      handler?: (
+        event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+      ) => any
+    ): StripeCustomCheckoutExpressCheckoutElement;
+  };
 
 export interface StripeCustomCheckout {
   /* Custom Checkout methods */
