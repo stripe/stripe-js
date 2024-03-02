@@ -13,6 +13,7 @@ import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
 import {
   StripeExpressCheckoutElement,
+  StripeExpressCheckoutElementConfirmEvent,
   StripeExpressCheckoutElementOptions,
 } from './elements';
 
@@ -40,6 +41,11 @@ export type StripeCustomCheckoutAddress = {
   city?: string | null;
   postal_code?: string | null;
   state?: string | null;
+};
+
+export type StripeCustomCheckoutAdjustableQuantity = {
+  maximum: number;
+  minimum: number;
 };
 
 export type StripeCustomCheckoutBillingInterval =
@@ -116,6 +122,7 @@ export type StripeCustomCheckoutLineItem = {
     isProrated: boolean;
     usageType: 'metered' | 'licensed';
   } | null;
+  adjustableQuantity: StripeCustomCheckoutAdjustableQuantity | null;
 };
 
 export type StripeCustomCheckoutRecurring = {
@@ -218,6 +225,31 @@ export type StripeCustomCheckoutUpdateHandler = (
   session: StripeCustomCheckoutSession
 ) => void;
 
+export type StripeCustomCheckoutExpressCheckoutElementConfirmEvent = StripeExpressCheckoutElementConfirmEvent & {
+  confirm: () => Promise<StripeCustomCheckoutResult>;
+};
+
+export type StripeCustomCheckoutExpressCheckoutElement = {
+  on(
+    eventType: 'confirm',
+    handler: (
+      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+    ) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'confirm',
+    handler: (
+      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+    ) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'confirm',
+    handler?: (
+      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
+    ) => any
+  ): StripeCustomCheckoutExpressCheckoutElement;
+} & StripeExpressCheckoutElement;
+
 export interface StripeCustomCheckout {
   /* Custom Checkout methods */
   applyPromotionCode: (
@@ -254,7 +286,7 @@ export interface StripeCustomCheckout {
   ): StripeAddressElement | null;
   getElement(
     elementType: 'expressCheckout'
-  ): StripeExpressCheckoutElement | null;
+  ): StripeCustomCheckoutExpressCheckoutElement | null;
   createElement(
     elementType: 'payment',
     options?: StripeCustomCheckoutPaymentElementOptions
@@ -266,5 +298,5 @@ export interface StripeCustomCheckout {
   createElement(
     elementType: 'expressCheckout',
     options: StripeCustomCheckoutExpressCheckoutElementOptions
-  ): StripeExpressCheckoutElement;
+  ): StripeCustomCheckoutExpressCheckoutElement;
 }
