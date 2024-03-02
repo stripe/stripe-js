@@ -12,6 +12,7 @@ import {
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
 import {
+  StripeElementBase,
   StripeExpressCheckoutElement,
   StripeExpressCheckoutElementBlur,
   StripeExpressCheckoutElementConfirmEvent,
@@ -234,7 +235,8 @@ export type StripeCustomCheckoutExpressCheckoutElementConfirmEvent = StripeExpre
   confirm: () => Promise<StripeCustomCheckoutResult>;
 };
 
-export type StripeCustomCheckoutExpressCheckoutElement = StripeExpressCheckoutElementReady &
+export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase &
+  StripeExpressCheckoutElementReady &
   StripeExpressCheckoutElementFocus &
   StripeExpressCheckoutElementBlur &
   StripeExpressCheckoutElementEscape &
