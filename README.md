@@ -1,6 +1,7 @@
-# Stripe.js ES Module
+# Stripe.js as a CommonJS module or ES module
 
-Use [Stripe.js](https://stripe.com/docs/stripe-js) as an ES module.
+This package allows [Stripe.js](https://stripe.com/docs/stripe-js) to be
+imported as a CommonJS module or ES module.
 
 **Note**: To be
 [PCI compliant](https://stripe.com/docs/security/guide#validating-pci-compliance),
@@ -15,6 +16,11 @@ definitions provided for Stripe.js. Updates do not affect runtime availability
 of features of Stripe.js.
 
 [![npm version](https://img.shields.io/npm/v/@stripe/stripe-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/stripe-js)
+
+## Minimum requirements
+
+- Node.js: v12.16
+- TypeScript: v.3.1.1
 
 ## Installation
 
@@ -112,9 +118,12 @@ one. When you call `loadStripe`, it will use the existing script tag.
 
 If you would like to use `loadStripe` in your application, but defer loading the
 Stripe.js script until `loadStripe` is first called, use the alternative
-`@stripe/stripe-js/pure` import path:
+`@stripe/stripe-js/pure` import module:
 
 ```js
+// CommonJS module import
+const {loadStripe} = require('@stripe/stripe-js/pure');
+// ES module import
 import {loadStripe} from '@stripe/stripe-js/pure';
 
 // Stripe.js will not be loaded until `loadStripe` is called
@@ -128,6 +137,9 @@ If you would like to
 altogether, use `loadStripe.setLoadParameters`:
 
 ```js
+// CommonJS module import
+const {loadStripe} = require('@stripe/stripe-js/pure');
+// ES module import
 import {loadStripe} from '@stripe/stripe-js/pure';
 
 loadStripe.setLoadParameters({advancedFraudSignals: false});

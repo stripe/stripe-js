@@ -1,13 +1,13 @@
 {
   "name": "@stripe/stripe-js",
-  "version": "2.4.0",
+  "version": "3.0.6",
   "description": "Stripe.js loading utility",
   "repository": "github:stripe/stripe-js",
   "main": "dist/stripe.js",
-  "module": "dist/stripe.esm.js",
-  "jsnext:main": "dist/stripe.esm.js",
-  "types": "types/index.d.ts",
-  "typings": "types/index.d.ts",
+  "module": "dist/stripe.mjs",
+  "jsnext:main": "dist/stripe.mjs",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "yarn lint && yarn test:unit && yarn test:types && yarn typecheck",
     "test:unit": "jest",
@@ -31,10 +31,11 @@
   "files": [
     "dist",
     "src",
-    "types",
-    "pure.js",
-    "pure.d.ts"
+    "pure"
   ],
+  "engines": {
+    "node": ">=12.16"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
@@ -55,6 +56,7 @@
     "rimraf": "^2.6.2",
     "rollup": "^1.29.0",
     "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-typescript2": "^0.25.3",
     "ts-jest": "^24.3.0",
     "typescript": "^4.1.2",
