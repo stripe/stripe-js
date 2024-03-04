@@ -1,5 +1,5 @@
-///<reference path='./index.d.ts' />
+import {loadStripe as _loadStripe} from './shared';
 
-export const loadStripe: typeof import('@stripe/stripe-js').loadStripe & {
+export const loadStripe: typeof _loadStripe & {
   setLoadParameters: (params: {advancedFraudSignals: boolean}) => void;
 };

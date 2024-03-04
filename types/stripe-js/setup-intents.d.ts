@@ -60,7 +60,7 @@ export interface ConfirmCashappSetupData extends SetupIntentConfirmParams {
 /**
  * An options object to control the behavior of `stripe.confirmCashappSetup`.
  */
-interface ConfirmCashappSetupOptions {
+export interface ConfirmCashappSetupOptions {
   /*
    * Set this to `false` if you want to [manually handle the authorization QR code or redirect](https://stripe.com/docs/payments/cash-app-pay/set-up-payment?platform=web&ui=API#web-create-setup-intent).
    * Default is `true`.
