@@ -233,7 +233,7 @@ export type StripeCustomCheckoutExpressCheckoutElementConfirmEvent = StripeExpre
 
 export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase & {
   /**
-   * Triggered when the element is fully rendered and can accept `element.focus` calls.
+   * Triggered when the element is fully rendered.
    */
   on(
     eventType: 'ready',
