@@ -2,7 +2,12 @@ export interface StripeEmbeddedCheckoutOptions {
   /**
    * The client secret of the [Checkout Session](https://stripe.com/docs/api/checkout/sessions).
    */
-  clientSecret: string;
+  clientSecret?: string;
+  /**
+   * A function that returns a Promise which resolves with the client secret of
+   * the [Checkout Session](https://stripe.com/docs/api/checkout/sessions).
+   */
+  fetchClientSecret?: () => Promise<string>;
   /**
    * onComplete is called when the Checkout Session completes successfully.
    * You can use it to unmount Embedded Checkout and render a custom success UI.
