@@ -53,9 +53,10 @@ export interface StripePaymentMethodMessagingElementOptions {
     | 'NZD';
 
   /**
-   * Payment methods to show messaging for.
+   * Payment methods to show messaging for. You can omit this attribute 
+   * to manage your payment methods from the Stripe Dashboard.
    */
-  paymentMethodTypes: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
+  paymentMethodTypes?: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
 
   /**
    * @deprecated Use `paymentMethodTypes` instead.
