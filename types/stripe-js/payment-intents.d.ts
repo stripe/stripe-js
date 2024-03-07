@@ -1422,6 +1422,11 @@ export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
      * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data-billing_details
      */
     billing_details?: PaymentMethodCreateParams.BillingDetails;
+
+    /**
+     * Specifies if the PaymentMethod should be redisplayed when using the Saved Payment Method feature
+     */
+    allow_redisplay?: 'always' | 'limited' | 'unspecified';
   };
 
   /**
