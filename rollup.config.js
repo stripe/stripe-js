@@ -1,5 +1,6 @@
 import babel from 'rollup-plugin-babel';
 import ts from 'rollup-plugin-typescript2';
+import {dts} from 'rollup-plugin-dts';
 import replace from '@rollup/plugin-replace';
 
 import pkg from './package.json';
@@ -20,17 +21,33 @@ export default [
   {
     input: 'src/index.ts',
     output: [
-      {file: 'dist/index.js', format: 'cjs'},
-      {file: 'dist/index.mjs', format: 'es'},
+      {file: pkg.main, format: 'cjs'},
+      {file: pkg.module, format: 'es'},
     ],
     plugins: PLUGINS,
   },
   {
+    input: 'types/index.d.ts',
+    output: [
+      {file: './dist/index.d.ts', format: 'cjs'},
+      {file: './dist/index.d.mts', format: 'es'},
+    ],
+    plugins: [dts()],
+  },
+  {
     input: 'src/pure.ts',
     output: [
-      {file: 'dist/pure.js', format: 'cjs'},
-      {file: 'dist/pure.mjs', format: 'es'},
+      {file: 'pure/index.js', format: 'cjs'},
+      {file: 'pure/index.mjs', format: 'es'},
     ],
     plugins: PLUGINS,
+  },
+  {
+    input: 'types/pure.d.ts',
+    output: [
+      {file: './pure/index.d.ts', format: 'cjs'},
+      {file: './pure/index.d.mts', format: 'es'},
+    ],
+    plugins: [dts()],
   },
 ];
