@@ -1,6 +1,7 @@
 import * as api from '../api';
 import * as paymentIntents from './payment-intents';
 import * as setupIntents from './setup-intents';
+import * as confirmationTokens from './confirmation-tokens';
 import * as orders from './orders';
 import * as tokens from './token-and-sources';
 import * as elements from './elements';
@@ -672,6 +673,15 @@ export interface Stripe {
   ): Promise<PaymentMethodResult>;
 
   /**
+   * Use stripe.createConfirmationToken to convert payment information collected by elements into a [ConfirmationToken](https://stripe.com/docs/api/confirmation_tokens) object that you safely pass to your server to use in an API call.
+   *
+   * @docs https://stripe.com/docs/js/confirmation_tokens/create_confirmation_token
+   */
+  createConfirmationToken(
+    options: confirmationTokens.CreateConfirmationToken
+  ): Promise<ConfirmationTokenResult>;
+
+  /**
    * Retrieve a [PaymentIntent](https://stripe.com/docs/api/payment_intents) using its [client secret](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-client_secret).
    *
    * @docs https://stripe.com/docs/js/payment_intents/retrieve_payment_intent
@@ -1249,6 +1259,10 @@ export type RetrieveOrderResult =
 export type PaymentMethodResult =
   | {paymentMethod: api.PaymentMethod; error?: undefined}
   | {paymentMethod?: undefined; error: StripeError};
+
+export type ConfirmationTokenResult =
+  | {confirmationToken: api.ConfirmationToken; error?: undefined}
+  | {confirmationToken?: undefined; error: StripeError};
 
 export type SourceResult =
   | {source: api.Source; error?: undefined}
