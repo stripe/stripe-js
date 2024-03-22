@@ -65,6 +65,11 @@ export interface ConfirmationToken {
    * Shipping information for this ConfirmationToken.
    */
   shipping: PaymentIntent.Shipping | null;
+
+  /**
+   * Set to true when confirming server-side and using Stripe.js, iOS, or Android client-side SDKs to handle the next actions.
+   */
+  use_stripe_sdk: boolean;
 }
 
 export interface ConfirmationTokenCreateParams {

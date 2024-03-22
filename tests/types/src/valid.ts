@@ -2384,6 +2384,7 @@ stripe
     const b = result.confirmationToken.setup_future_usage;
     const c = result.confirmationToken.shipping;
     const d = result.confirmationToken.payment_intent;
+    const e = result.confirmationToken.use_stripe_sdk;
   });
 
 stripe
