@@ -126,6 +126,11 @@ export namespace PaymentMethod {
     country: string | null;
 
     /**
+     * The brand to use when displaying the card, this accounts for customer’s brand choice on dual-branded cards. Can be american_express, cartes_bancaires, diners_club, discover, eftpos_australia, interac, jcb, mastercard, union_pay, visa, or other and may contain more values in the future.
+     */
+    display_brand: string | null;
+
+    /**
      * Two-digit number representing the card's expiration month.
      */
     exp_month: number;
@@ -149,6 +154,11 @@ export namespace PaymentMethod {
      * The last four digits of the card.
      */
     last4: string;
+
+    /**
+     * Contains information about card networks that can be used to process the payment.
+     */
+    networks: Card.Networks | null;
 
     /**
      * Contains details on how this Card maybe be used for 3D Secure authentication.
@@ -177,6 +187,18 @@ export namespace PaymentMethod {
        * If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
        */
       cvc_check: string | null;
+    }
+
+    export interface Networks {
+      /**
+       * All available networks for the card.
+       */
+      available: string[];
+
+      /**
+       * The preferred network for co-branded cards. Can be cartes_bancaires, mastercard, visa or invalid_preference if requested network is not valid for the card.
+       */
+      preferred: string | null;
     }
 
     export interface ThreeDSecureUsage {
