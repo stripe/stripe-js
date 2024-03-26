@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^1.8.0",
-    "express": "^4.17.1"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
