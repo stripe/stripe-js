@@ -124,6 +124,7 @@ stripe.elements({
   payment_method_options: {
     us_bank_account: {financial_connections: {permissions: ['payment_method']}},
   },
+  on_behalf_of: 'acct_id',
 });
 
 const elementsClientSecret: StripeElements = stripe.elements({
@@ -203,6 +204,7 @@ elements.update({
   setupFutureUsage: 'off_session',
   captureMethod: 'automatic',
   paymentMethodTypes: ['card'],
+  on_behalf_of: 'acct_id',
 });
 
 elements.update({
