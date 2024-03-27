@@ -2350,6 +2350,7 @@ stripe
         billing_details: {
           name: 'Jenny Rosen',
         },
+        allow_redisplay: 'always',
       },
       shipping: {
         address: {
