@@ -1426,7 +1426,7 @@ export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
     /**
      * Requires beta access:
      * Contact [Stripe support](https://support.stripe.com/) for more information.
-     * 
+     *
      * Specifies if the PaymentMethod should be redisplayed when using the Saved Payment Method feature
      */
     allow_redisplay?: 'always' | 'limited' | 'unspecified';
