@@ -4,7 +4,6 @@ import {
   StripeCardNumberElement,
   StripeIbanElement,
   StripePaymentElement,
-  StripeCartElement,
   StripeExpressCheckoutElement,
   StripeElementsOptions,
 } from '../../../types';
@@ -15,7 +14,6 @@ declare const cardElement: StripeCardElement;
 declare const cardNumberElement: StripeCardNumberElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
-declare const cartElement: StripeCartElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
 
 const options: StripeElementsOptions = {
@@ -95,40 +93,6 @@ paymentElement.on('change', (e) => {
   if (e.error) {
   }
 });
-
-// @ts-expect-error: either `product`, `price`, or `item_details` is required
-cartElement.addLineItem({});
-
-// @ts-expect-error: either `product`, `price`, or `item_details` is required
-cartElement.addLineItem({quantity: 1});
-
-// @ts-expect-error: only one of `product`, `price`, or `item_details` may be specified
-cartElement.addLineItem({product: '', price: ''});
-
-// @ts-expect-error: only one of `product`, `price`, or `item_details` may be specified
-cartElement.addLineItem({
-  product: '',
-  item_details: {
-    external_id: '',
-    name: '',
-    unit_amount: 0,
-  },
-});
-
-// @ts-expect-error: `item_details.external_id` is required if `item_details` is present
-cartElement.addLineItem({item_details: {name: '', unit_amount: 0}});
-
-// @ts-expect-error: `item_details.name` is required if `item_details` is present
-cartElement.addLineItem({item_details: {external_id: '', unit_amount: 0}});
-
-// @ts-expect-error: `item_details.unit_amount` is required if `item_details` is present
-cartElement.addLineItem({item_details: {external_id: '', name: ''}});
-
-// @ts-expect-error: `clientSecret` is not updatable
-cartElement.update({clientSecret: ''});
-
-// @ts-expect-error: cartElement has no function `escape`
-cartElement.escape();
 
 expressCheckoutElement.update({
   // @ts-expect-error: `wallets` option can't be updated
@@ -244,9 +208,6 @@ elements.create('issuingCardCopyButton', {
   // @ts-expect-error: Type '"non_existent"' is not assignable to type '"number" | "expiry" | "cvc" | "pin"'
   toCopy: 'non_existent',
 });
-
-// @ts-expect-error: CartElement requires a clientSecret
-elements.create('cart');
 
 // @ts-expect-error: `white-outline` is only supported by apple pay
 elements.create('expressCheckout', {
