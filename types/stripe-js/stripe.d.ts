@@ -1463,6 +1463,11 @@ export interface StripeError {
    * For example, you can use this to display a message near the correct form field.
    */
   param?: string;
+  
+  /**
+   * A URL to the request log entry in your dashboard.
+   */
+  request_log_url?: string;
 
   /**
    * The `PaymentIntent` object for errors returned on a request involving a `PaymentIntent`.
