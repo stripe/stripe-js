@@ -1463,7 +1463,7 @@ export interface StripeError {
    * For example, you can use this to display a message near the correct form field.
    */
   param?: string;
-  
+
   /**
    * A URL to the request log entry in your dashboard.
    */
