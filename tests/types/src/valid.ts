@@ -43,9 +43,6 @@ import {
   StripeShippingAddressElement,
   StripeAddressElementChangeEvent,
   StripeAddressElement,
-  StripeCartElementPayloadEvent,
-  StripeCartElementLineItemClickEvent,
-  StripeCartElement,
   StripeElementType,
   CanMakePaymentResult,
   VerificationSession,
@@ -777,93 +774,6 @@ shippingAddressElement.update({
 
 const retrievedShippingAddressElement: StripeShippingAddressElement | null = elements.getElement(
   'shippingAddress'
-);
-
-let cartElementDefaults: StripeCartElement = elements.create('cart', {
-  clientSecret: '',
-});
-
-const cartElement = elements.create('cart', {
-  clientSecret: '',
-  descriptor: 'cart',
-  header: {
-    text: 'cart',
-  },
-  showOnAdd: 'auto',
-});
-
-cartElement.show();
-
-cartElement.hide();
-
-cartElement.cancelCheckout();
-
-cartElement.cancelCheckout('Error message');
-
-cartElement.addLineItem({product: ''});
-
-cartElement.addLineItem({price: ''});
-
-cartElement.addLineItem({product: '', quantity: 1});
-
-cartElement.addLineItem({price: '', quantity: 1});
-
-cartElement.addLineItem({
-  item_details: {
-    external_id: '',
-    name: '',
-    unit_amount: 0,
-  },
-  quantity: 1,
-});
-
-cartElement.addLineItem({
-  item_details: {
-    external_id: '',
-    name: '',
-    unit_amount: 0,
-    image: '',
-    description: '',
-  },
-  quantity: 1,
-});
-
-cartElement.on('ready', (e: StripeCartElementPayloadEvent) => {
-  console.log(e.lineItems.count);
-});
-
-cartElement.on('lineitemclick', (e: StripeCartElementLineItemClickEvent) => {
-  e.preventDefault();
-  console.log(e.url);
-});
-
-cartElement.on('change', (e: StripeCartElementPayloadEvent) => {
-  console.log(e.lineItems.count);
-});
-
-cartElement.on('checkout', (e: StripeCartElementPayloadEvent) => {
-  console.log(e.lineItems.count);
-});
-
-cartElement.on(
-  'loaderror',
-  (e: {
-    elementType: 'cart';
-    error: {
-      type: string;
-    };
-  }) => {}
-);
-
-cartElement.update({
-  header: {
-    text: 'Your Cart',
-  },
-  showOnAdd: 'never',
-});
-
-const retrievedCartElement: StripeCartElement | null = elements.getElement(
-  'cart'
 );
 
 const expressCheckoutElementDefault = elements.create('expressCheckout');
