@@ -50,6 +50,7 @@ export interface ApplePayRecurringPaymentRequest {
    */
   managementURL: string;
   regularBilling: ApplePayRegularBilling;
+  trialBilling?: ApplePayRegularBilling;
 
   /**
    * The billing agreement label that is displayed to the customer in the Apple Pay payment interface.
