@@ -573,14 +573,33 @@ cardElement
       console.error(e.error.message);
     }
   })
-  .on('networkschange', (e: {elementType: 'card'}) => {});
+  .on('networkschange', (e: {elementType: 'card'}) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'card';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
 
 const onceHandler = () => {};
 cardElement.once('ready', onceHandler);
 cardElement.off('ready', onceHandler);
 cardElement.off('change');
 
-cardNumberElement.on('networkschange', (e: {elementType: 'cardNumber'}) => {});
+cardNumberElement
+  .on('networkschange', (e: {elementType: 'cardNumber'}) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'cardNumber';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
 
 auBankAccountElement.on(
   'change',
