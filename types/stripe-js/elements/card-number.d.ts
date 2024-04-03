@@ -4,6 +4,7 @@ import {
   StripeElementClasses,
   StripeElementChangeEvent,
 } from './base';
+import {StripeError} from '../stripe';
 import {CardNetworkBrand} from '../elements-group';
 
 export type StripeCardNumberElement = StripeElementBase & {
@@ -101,6 +102,22 @@ export type StripeCardNumberElement = StripeElementBase & {
   off(
     eventType: 'networkschange',
     handler?: (event: {elementType: 'cardNumber'}) => any
+  ): StripeCardNumberElement;
+
+  /**
+   * Triggered when the element fails to load.
+   */
+  on(
+    eventType: 'loaderror',
+    handler: (event: {elementType: 'cardNumber'; error: StripeError}) => any
+  ): StripeCardNumberElement;
+  once(
+    eventType: 'loaderror',
+    handler: (event: {elementType: 'cardNumber'; error: StripeError}) => any
+  ): StripeCardNumberElement;
+  off(
+    eventType: 'loaderror',
+    handler?: (event: {elementType: 'cardNumber'; error: StripeError}) => any
   ): StripeCardNumberElement;
 
   /**
