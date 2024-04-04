@@ -238,6 +238,11 @@ export interface PaymentRequestOptions {
   applePay?: ApplePayOption;
 
   /**
+   * The Stripe account ID which is the business of record.
+   */
+  onBehalfOf?: string;
+
+  /**
    * @deprecated
    * Use disableWallets instead.
    */
