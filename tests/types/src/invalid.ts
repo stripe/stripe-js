@@ -416,3 +416,18 @@ stripe
     // @ts-expect-error mandate_data is not a valid parameter
     result.confirmationToken.mandate_data;
   });
+
+const paymentRequest = stripe.paymentRequest({
+  country: 'US',
+  currency: 'usd',
+  total: {
+    label: 'Demo total',
+    amount: 1000,
+  },
+  // @ts-expect-error Type 'number' is not assignable to type 'string'.
+  onBehalfOf: 123,
+});
+paymentRequest.update({
+  // @ts-expect-error Object literal may only specify known properties, and 'onBehalfOf' does not exist in type 'PaymentRequestUpdateOptions'.
+  onBehalfOf: 'acct_123',
+});
