@@ -9,8 +9,9 @@
   "types": "lib/index.d.ts",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "test": "yarn lint && yarn test:unit && yarn test:types && yarn typecheck",
+    "test": "yarn lint && yarn test:unit && yarn test:package-types && yarn test:types && yarn typecheck",
     "test:unit": "jest",
+    "test:package-types": "attw --pack . --entrypoints ./lib ./pure",
     "test:types": "zx ./tests/types/scripts/test.mjs",
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-check",
     "typecheck": "tsc",
@@ -39,6 +40,7 @@
     "node": ">=12.16"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.3",
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
     "@rollup/plugin-replace": "^2.3.1",

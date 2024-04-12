@@ -16,4 +16,5 @@ jobs:
     - run: yarn run lint
     - run: yarn run typecheck
     - run: yarn run test:unit
+    - run: yarn run build && yarn run test:package-types
     - run: yarn run test:types
