@@ -1433,6 +1433,13 @@ export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
   };
 
   /**
+   * Optional `id` of an existing [ConfirmationToken](https://stripe.com/docs/api/confirmation_tokens).
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_payment#confirm_payment_intent-options-confirmParams-confirmation_token
+   */
+  confirmation_token?: string;
+
+  /**
    * Optional `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
    *
    * @docs https://stripe.com/docs/js/payment_intents/confirm_payment#confirm_payment_intent-options-confirmParams-payment_method
