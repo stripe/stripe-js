@@ -1,4 +1,4 @@
-import {SetupIntentConfirmParams} from '../api';
+import {PaymentMethodCreateParams, SetupIntentConfirmParams} from '../api';
 
 import {
   CreatePaymentMethodAcssDebitData,
@@ -16,6 +16,59 @@ import {
 } from './payment-intents';
 
 import {Omit} from '../utils';
+
+/**
+ * Data to be sent with a `stripe.confirmSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmSetupData extends SetupIntentConfirmParams {
+  /**
+   * The url your customer will be directed to after they complete payment.
+   */
+  return_url: string;
+
+  /**
+   * An object to attach additional billing_details to the PaymentMethod created via Elements.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data
+   */
+  payment_method_data?: {
+    /**
+     * The customer's billing details. Details collected by Elements will override values passed here.
+     * Billing fields that are omitted in the Payment Element via the `fields` option required.
+     *
+     * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data-billing_details
+     */
+    billing_details?: PaymentMethodCreateParams.BillingDetails;
+
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     *
+     * Specifies if the PaymentMethod should be redisplayed when using the Saved Payment Method feature
+     */
+    allow_redisplay?: 'always' | 'limited' | 'unspecified';
+  };
+
+  /**
+   * Optional `id` of an existing [ConfirmationToken](https://stripe.com/docs/api/confirmation_tokens).
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_payment#confirm_payment_intent-options-confirmParams-confirmation_token
+   */
+  confirmation_token?: string;
+
+  /**
+   * Optional `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_payment#confirm_payment_intent-options-confirmParams-payment_method
+   */
+  payment_method?: string;
+
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
+  expand?: Array<string>;
+}
 
 /**
  * Data to be sent with a `stripe.confirmCardSetup` request.
