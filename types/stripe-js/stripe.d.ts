@@ -1465,6 +1465,11 @@ export interface StripeError {
   param?: string;
 
   /**
+   * A URL to the request log entry in your dashboard.
+   */
+  request_log_url?: string;
+
+  /**
    * The `PaymentIntent` object for errors returned on a request involving a `PaymentIntent`.
    */
   payment_intent?: api.PaymentIntent;
