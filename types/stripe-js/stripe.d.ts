@@ -431,11 +431,11 @@ export interface Stripe {
    *
    * @docs https://stripe.com/docs/js/payment_intents/confirm_mobilepay_payment
    */
-    confirmMobilepayPayment(
-      clientSecret: string,
-      data?: paymentIntents.ConfirmMobilepayPaymentData,
-      options?: paymentIntents.ConfirmMobilepayPaymentOptions
-    ): Promise<PaymentIntentResult>;
+  confirmMobilepayPayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmMobilepayPaymentData,
+    options?: paymentIntents.ConfirmMobilepayPaymentOptions
+  ): Promise<PaymentIntentResult>;
 
   /**
    * Use `stripe.confirmOxxoPayment` in the [OXXO Payment](https://stripe.com/docs/payments/oxxo) with Payment Methods flow when the customer submits your payment form.

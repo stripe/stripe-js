@@ -1875,7 +1875,7 @@ stripe
   .confirmMobilepayPayment('', {payment_method: ''}, {handleActions: false})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-  stripe
+stripe
   .confirmMobilepayPayment('', {
     payment_method: '',
     return_url: window.location.href,
@@ -1901,7 +1901,6 @@ stripe
   )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-  
 stripe
   .confirmOxxoPayment('', {payment_method: ''})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);

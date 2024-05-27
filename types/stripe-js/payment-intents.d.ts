@@ -1049,7 +1049,8 @@ export interface ConfirmKonbiniPaymentOptions {
  * Data to be sent with a `stripe.confirmMobilepayPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
  */
-export interface ConfirmMobilepayPaymentData extends PaymentIntentConfirmParams {
+export interface ConfirmMobilepayPaymentData
+  extends PaymentIntentConfirmParams {
   /**
    * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
    * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
