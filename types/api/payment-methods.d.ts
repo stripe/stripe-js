@@ -398,22 +398,22 @@ export namespace PaymentMethodCreateParams {
     /**
      * Billing address.
      */
-    address?: BillingDetails.Address;
+    address: BillingDetails.Address;
 
     /**
      * Email address.
      */
-    email?: string;
+    email: string | null;
 
     /**
      * Full name.
      */
-    name?: string;
+    name: string | null;
 
     /**
      * Billing phone number (including extension).
      */
-    phone?: string;
+    phone: string | null;
   }
 
   export namespace BillingDetails {
