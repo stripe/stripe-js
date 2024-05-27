@@ -2267,12 +2267,14 @@ stripe.createPaymentMethod({
   params: {
     billing_details: {
       name: 'Jenny Rosen',
-      address: {line1: '1234 Main St',
-      line2: null,
-      city: 'San Francisco',
-      state: 'CA',
-      country: 'US',
-      postal_code: '94111',}
+      address: {
+        line1: '1234 Main St',
+        line2: null,
+        city: 'San Francisco',
+        state: 'CA',
+        country: 'US',
+        postal_code: '94111',
+      },
     },
   },
 });
