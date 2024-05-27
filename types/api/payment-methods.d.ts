@@ -398,22 +398,22 @@ export namespace PaymentMethodCreateParams {
     /**
      * Billing address.
      */
-    address: BillingDetails.Address;
+    address?: BillingDetails.Address;
 
     /**
      * Email address.
      */
-    email: string | null;
+    email?: string;
 
     /**
      * Full name.
      */
-    name: string | null;
+    name?: string;
 
     /**
      * Billing phone number (including extension).
      */
-    phone: string | null;
+    phone?: string;
   }
 
   export namespace BillingDetails {
@@ -421,32 +421,32 @@ export namespace PaymentMethodCreateParams {
       /**
        * City, district, suburb, town, or village.
        */
-      city: string | null;
+      city?: string;
 
       /**
        * Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
-      country: string | null;
+      country?: string;
 
       /**
        * Address line 1 (e.g., street, PO Box, or company name).
        */
-      line1: string | null;
+      line1?: string;
 
       /**
        * Address line 2 (e.g., apartment, suite, unit, or building).
        */
-      line2: string | null;
+      line2?: string | null;
 
       /**
        * ZIP or postal code.
        */
-      postal_code: string | null;
+      postal_code?: string;
 
       /**
        * State, county, province, or region.
        */
-      state: string | null;
+      state?: string;
     }
   }
 }
