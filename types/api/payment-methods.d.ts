@@ -403,17 +403,17 @@ export namespace PaymentMethodCreateParams {
     /**
      * Email address.
      */
-    email?: string;
+    email?: string | null;
 
     /**
      * Full name.
      */
-    name?: string;
+    name?: string | null;
 
     /**
      * Billing phone number (including extension).
      */
-    phone?: string;
+    phone?: string | null;
   }
 
   export namespace BillingDetails {
@@ -421,32 +421,32 @@ export namespace PaymentMethodCreateParams {
       /**
        * City, district, suburb, town, or village.
        */
-      city?: string;
+      city?: string | null;
 
       /**
        * Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
-      country?: string;
+      country?: string | null;
 
       /**
        * Address line 1 (e.g., street, PO Box, or company name).
        */
-      line1?: string;
+      line1?: string | null;
 
       /**
        * Address line 2 (e.g., apartment, suite, unit, or building).
        */
-      line2?: string;
+      line2?: string | null;
 
       /**
        * ZIP or postal code.
        */
-      postal_code?: string;
+      postal_code?: string | null;
 
       /**
        * State, county, province, or region.
        */
-      state?: string;
+      state?: string | null;
     }
   }
 }

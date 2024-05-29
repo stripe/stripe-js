@@ -2263,6 +2263,24 @@ stripe.createPaymentMethod({
 });
 
 stripe.createPaymentMethod({
+  element: cardElement,
+  params: {
+    billing_details: {
+      name: null,
+      address: {
+        line1: null,
+        city: null,
+        state: null,
+        country: null,
+        postal_code: null,
+      },
+      email: null,
+      phone: null,
+    },
+  },
+});
+
+stripe.createPaymentMethod({
   type: 'acss_debit',
   billing_details: {name: '', email: ''},
 });
