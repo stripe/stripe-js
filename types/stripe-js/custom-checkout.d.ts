@@ -221,7 +221,7 @@ export type StripeCustomCheckoutExpressCheckoutElementOptions = {
   buttonTheme: StripeExpressCheckoutElementOptions['buttonTheme'];
   buttonType: StripeExpressCheckoutElementOptions['buttonType'];
   layout: StripeExpressCheckoutElementOptions['layout'];
-  paymentMethodOrder: StripeExpressCheckoutElementOptions['paymentMethodOrder']
+  paymentMethodOrder: StripeExpressCheckoutElementOptions['paymentMethodOrder'];
 };
 
 export type StripeCustomCheckoutUpdateHandler = (
