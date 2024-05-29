@@ -2266,15 +2266,16 @@ stripe.createPaymentMethod({
   element: cardElement,
   params: {
     billing_details: {
-      name: 'Jenny Rosen',
+      name: null,
       address: {
-        line1: '1234 Main St',
-        line2: null,
-        city: 'San Francisco',
-        state: 'CA',
-        country: 'US',
-        postal_code: '94111',
+        line1: null,
+        city: null,
+        state: null,
+        country: null,
+        postal_code: null,
       },
+      email: null,
+      phone: null,
     },
   },
 });
