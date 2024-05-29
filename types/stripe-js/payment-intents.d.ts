@@ -264,6 +264,11 @@ export interface CreatePaymentMethodKonbiniData
   };
 }
 
+export interface CreatePaymentMethodMobilepayData
+  extends PaymentMethodCreateParams {
+  type: 'mobilepay';
+}
+
 export interface CreatePaymentMethodOxxoData extends PaymentMethodCreateParams {
   type: 'oxxo';
 
@@ -1036,6 +1041,37 @@ export interface ConfirmKonbiniPaymentData extends PaymentIntentConfirmParams {
 export interface ConfirmKonbiniPaymentOptions {
   /**
    * Set this to `false` if you want to handle next actions yourself. Please refer to our [integration guide](https://stripe.com/docs/payments/konbini/accept-a-payment) for more info. Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmMobilepayPayment` request.
+ * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmMobilepayPaymentData
+  extends PaymentIntentConfirmParams {
+  /**
+   * The `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent` or a new `PaymentMethod` will be created.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodMobilepayData, 'type'>;
+
+  /**
+   * The url your customer will be directed to after they complete authentication.
+   */
+  return_url?: string;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmMobilepayPayment`.
+ */
+export interface ConfirmMobilepayPaymentOptions {
+  /**
+   * Set this to `false` if you want to [manually handle the redirect](https://docs.stripe.com/payments/mobilepay/accept-a-payment?web-or-mobile=web&payments-ui-type=direct-api#web-confirm-payment-intent).
+   * Default is `true`.
    */
   handleActions?: boolean;
 }
