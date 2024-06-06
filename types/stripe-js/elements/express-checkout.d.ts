@@ -256,9 +256,12 @@ export type ApplePayButtonTheme = 'black' | 'white' | 'white-outline';
 
 export type GooglePayButtonTheme = 'black' | 'white';
 
+export type PayPalButtonTheme = 'gold' | 'blue' | 'silver' | 'white' | 'black';
+
 export type ButtonThemeOption = {
   applePay?: ApplePayButtonTheme;
   googlePay?: GooglePayButtonTheme;
+  paypal?: PayPalButtonTheme;
 };
 
 export type ApplePayButtonType =
