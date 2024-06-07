@@ -801,9 +801,10 @@ const expressCheckoutElement = elements.create('expressCheckout', {
   buttonHeight: 55,
   layout: {maxRows: 1, maxColumns: 1, overflow: 'auto'},
   paymentMethodOrder: ['apple_pay', 'google_pay'],
-  wallets: {
+  paymentMethods: {
     googlePay: 'always',
     applePay: 'auto',
+    link: 'auto',
   },
   buttonTheme: {
     applePay: 'white-outline',
@@ -819,7 +820,7 @@ const expressCheckoutElement2 = elements.create('expressCheckout', {
   layout: {
     maxRows: 1,
   },
-  wallets: {
+  paymentMethods: {
     applePay: 'never',
   },
   buttonTheme: {
