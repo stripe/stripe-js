@@ -258,6 +258,11 @@ export type ExpressCheckoutPaymentMethodsOption = {
   paypal?: ExpressCheckoutPaymentMethodOption;
 };
 
+export type ExpressCheckoutWalletsOption = {
+  applePay?: ExpressCheckoutPaymentMethodOptionWithAlways;
+  googlePay?: ExpressCheckoutPaymentMethodOptionWithAlways;
+};
+
 export type ApplePayButtonTheme = 'black' | 'white' | 'white-outline';
 
 export type GooglePayButtonTheme = 'black' | 'white';
@@ -332,6 +337,14 @@ export interface StripeExpressCheckoutElementOptions {
    * Control payment method display in the Express Checkout Element.
    */
   paymentMethods?: ExpressCheckoutPaymentMethodsOption;
+
+  /**
+   * @deprecated
+   * Use `paymentMethods` instead.
+   *
+   * Control wallets display in the Express Checkout Element.
+   */
+  wallets?: ExpressCheckoutWalletsOption;
 }
 
 /*
