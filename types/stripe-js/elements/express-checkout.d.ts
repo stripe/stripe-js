@@ -245,11 +245,17 @@ export type LayoutOption = {
   overflow?: 'auto' | 'never';
 };
 
-export type ExpressCheckoutWalletOption = 'always' | 'auto' | 'never';
+export type ExpressCheckoutPaymentMethodOptionWithAlways =
+  | 'always'
+  | ExpressCheckoutPaymentMethodOption;
+export type ExpressCheckoutPaymentMethodOption = 'auto' | 'never';
 
-export type ExpressCheckoutWalletsOption = {
-  applePay?: ExpressCheckoutWalletOption;
-  googlePay?: ExpressCheckoutWalletOption;
+export type ExpressCheckoutPaymentMethodsOption = {
+  amazonPay?: ExpressCheckoutPaymentMethodOption;
+  applePay?: ExpressCheckoutPaymentMethodOptionWithAlways;
+  googlePay?: ExpressCheckoutPaymentMethodOptionWithAlways;
+  link?: ExpressCheckoutPaymentMethodOption;
+  paypal?: ExpressCheckoutPaymentMethodOption;
 };
 
 export type ApplePayButtonTheme = 'black' | 'white' | 'white-outline';
@@ -323,9 +329,9 @@ export interface StripeExpressCheckoutElementOptions {
   paymentMethodOrder?: string[];
 
   /**
-   * Control wallets display in the Express Checkout Element.
+   * Control payment method display in the Express Checkout Element.
    */
-  wallets?: ExpressCheckoutWalletsOption;
+  paymentMethods?: ExpressCheckoutPaymentMethodsOption;
 }
 
 /*

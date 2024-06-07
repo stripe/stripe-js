@@ -95,8 +95,8 @@ paymentElement.on('change', (e) => {
 });
 
 expressCheckoutElement.update({
-  // @ts-expect-error: `wallets` option can't be updated
-  wallets: {
+  // @ts-expect-error: `paymentMethods` option can't be updated
+  paymentMethods: {
     applePay: 'never',
   },
 });
