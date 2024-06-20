@@ -661,6 +661,15 @@ interface BaseStripeElementsOptions {
    * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
    */
   customerOptions?: CustomerOptions;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Display saved PaymentMethods and Customer information.
+   * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
+   */
+  customerSessionClientSecret?: string,
 }
 
 export interface StripeElementsOptionsClientSecret
