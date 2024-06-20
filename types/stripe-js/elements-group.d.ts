@@ -665,7 +665,7 @@ interface BaseStripeElementsOptions {
   /**
    * Display saved PaymentMethods and Customer information.
    */
-  customerSessionClientSecret?: string,
+  customerSessionClientSecret?: string;
 }
 
 export interface StripeElementsOptionsClientSecret
