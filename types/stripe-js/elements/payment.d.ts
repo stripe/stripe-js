@@ -270,6 +270,26 @@ export interface StripePaymentElementChangeEvent {
 
   /**
    * An object containing the currently selected PaymentMethod type (in snake_case, for example "afterpay_clearpay").
+   * If a payment method is selected, it will be included in the object.
    */
-  value: {type: string};
+  value: {
+    type: string;
+    payment_method?: {
+      id: string;
+      type: string;
+      billing_details: {
+        address: {
+          city: null | string;
+          country: null | string;
+          line1: null | string;
+          line2: null | string;
+          postal_code: null | string;
+          state: null | string;
+        };
+        name: null | string;
+        email: null | string;
+        phone: null | string;
+      };
+    };
+  };
 }

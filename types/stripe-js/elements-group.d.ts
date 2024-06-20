@@ -661,6 +661,11 @@ interface BaseStripeElementsOptions {
    * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
    */
   customerOptions?: CustomerOptions;
+
+  /**
+   * Display saved PaymentMethods and Customer information.
+   */
+  customerSessionClientSecret?: string;
 }
 
 export interface StripeElementsOptionsClientSecret

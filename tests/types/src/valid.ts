@@ -158,6 +158,10 @@ const elementsPMCProvided = stripe.elements({
 
 const elementsNoOptions: StripeElements = stripe.elements();
 
+const elementsCustomerSessionClientSecret = stripe.elements({
+  customerSessionClientSecret: 'test_123',
+});
+
 const MY_STYLE: StripeElementStyle = {
   base: {
     iconColor: '#c4f0ff',
@@ -459,7 +463,26 @@ paymentElement
     'change',
     (e: {
       elementType: 'payment';
-      value: {type: string};
+      value: {
+        type: string;
+        payment_method?: {
+          id: string;
+          type: string;
+          billing_details: {
+            address: {
+              city: null | string;
+              country: null | string;
+              line1: null | string;
+              line2: null | string;
+              postal_code: null | string;
+              state: null | string;
+            };
+            name: null | string;
+            email: null | string;
+            phone: null | string;
+          };
+        };
+      };
       collapsed: boolean;
       complete: boolean;
       empty: boolean;
