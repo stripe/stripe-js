@@ -145,11 +145,11 @@ export interface DefaultValuesOption {
   };
   paymentMethods?: {
     ideal?: {
-      bank: string;
+      bank?: string;
     };
   };
   card?: {
-    network: CardNetworkOption[];
+    network?: CardNetworkOption[];
   };
 }
 
