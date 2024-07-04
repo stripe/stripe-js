@@ -141,6 +141,14 @@ export interface DefaultValuesOption {
       line2?: string;
     };
   };
+  paymentMethods?: {
+    ideal?: {
+      bank: string;
+    };
+  };
+  card?: {
+    network: 'cartes_bancaires' | 'mastercard' | 'visa';
+  };
 }
 
 export type FieldOption = 'auto' | 'never';
