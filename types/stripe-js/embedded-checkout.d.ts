@@ -1,3 +1,26 @@
+export type StripeEmbeddedCheckoutAddress = {
+  country: string;
+  line1?: string | null;
+  line2?: string | null;
+  city?: string | null;
+  postal_code?: string | null;
+  state?: string | null;
+};
+
+export type StripeEmbeddedCheckoutShippingDetails = {
+  name: string;
+  address: StripeEmbeddedCheckoutAddress;
+};
+
+export type StripeEmbeddedCheckoutShippingDetailsChangeEvent = {
+  checkoutSessionId: string;
+  shippingDetails: StripeEmbeddedCheckoutShippingDetails;
+};
+
+export type ResultAction =
+  | {type: 'accept'}
+  | {type: 'reject'; errorMessage?: string};
+
 export interface StripeEmbeddedCheckoutOptions {
   /**
    * The client secret of the [Checkout Session](https://stripe.com/docs/api/checkout/sessions).
@@ -13,6 +36,15 @@ export interface StripeEmbeddedCheckoutOptions {
    * You can use it to unmount Embedded Checkout and render a custom success UI.
    */
   onComplete?: () => void;
+  /**
+   * onShippingDetailsChange is called when the customer completes the shipping details form.
+   *
+   * The callback is required when [permissions.update.shipping_details](https://docs.stripe.com/api/checkout/sessions/create#create_checkout_session-permissions-update-shipping_details) is set to `server_only`.
+   * For a step-by-step guide on using this callback to customize shipping options during checkout, see [Customize Shipping Options](https://docs.stripe.com/payments/checkout/custom-shipping-options).
+   */
+  onShippingDetailsChange?: (
+    event: StripeEmbeddedCheckoutShippingDetailsChangeEvent
+  ) => Promise<ResultAction>;
 }
 
 export interface StripeEmbeddedCheckout {
