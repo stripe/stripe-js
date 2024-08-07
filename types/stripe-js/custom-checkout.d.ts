@@ -100,6 +100,32 @@ export type StripeCustomCheckoutLastPaymentError = {
   message: string;
 };
 
+export type StripeCustomCheckoutRedirectBehavior = 'always' | 'if_required';
+
+export type StripeCustomCheckoutSavedPaymentMethod = {
+  id: string;
+  type: 'card';
+  card: {
+    brand: string;
+    expMonth: number;
+    expYear: number;
+    last4: string;
+  };
+  billingDetails: {
+    email?: string | null;
+    name?: string | null;
+    phone?: string | null;
+    address?: {
+      line1?: string | null;
+      line2?: string | null;
+      city?: string | null;
+      postal_code?: string | null;
+      state?: string | null;
+      country?: string | null;
+    } | null;
+  };
+};
+
 export type StripeCustomCheckoutTaxAmount = {
   amount: number;
   inclusive: boolean;
@@ -179,15 +205,19 @@ export type StripeCustomCheckoutTrial = {
 /* Custom Checkout session */
 export interface StripeCustomCheckoutSession {
   billingAddress: StripeCustomCheckoutContact | null;
+  businessName: string | null;
   canConfirm: boolean;
   confirmationRequirements: StripeCustomCheckoutConfirmationRequirement[];
   currency: string;
   discountAmounts: Array<StripeCustomCheckoutDiscountAmount> | null;
   email: string | null;
+  id: string;
   lastPaymentError: StripeCustomCheckoutLastPaymentError | null;
   lineItems: Array<StripeCustomCheckoutLineItem>;
+  livemode: boolean;
   phoneNumber: string | null;
   recurring: StripeCustomCheckoutRecurring | null;
+  savedPaymentMethods: Array<StripeCustomCheckoutSavedPaymentMethod> | null;
   shipping: StripeCustomCheckoutShipping | null;
   shippingAddress: StripeCustomCheckoutContact | null;
   shippingOptions: Array<StripeCustomCheckoutShippingOption>;
@@ -374,6 +404,10 @@ export interface StripeCustomCheckout {
   ) => Promise<StripeCustomCheckoutResult>;
   confirm: (args?: {
     return_url?: string;
+    returnUrl?: string;
+    redirect?: StripeCustomCheckoutRedirectBehavior;
+    paymentMethod?: string;
+    savePaymentMethod?: boolean;
   }) => Promise<StripeCustomCheckoutResult>;
   session: () => StripeCustomCheckoutSession;
   on: (event: 'change', handler: StripeCustomCheckoutUpdateHandler) => void;
