@@ -127,6 +127,8 @@ export type StripePaymentElement = StripeElementBase & {
   collapse(): StripePaymentElement;
 };
 
+export type CardNetworkOption = 'cartes_bancaires' | 'mastercard' | 'visa';
+
 export interface DefaultValuesOption {
   billingDetails?: {
     name?: string;
@@ -140,6 +142,14 @@ export interface DefaultValuesOption {
       line1?: string;
       line2?: string;
     };
+  };
+  paymentMethods?: {
+    ideal?: {
+      bank?: string;
+    };
+  };
+  card?: {
+    network?: CardNetworkOption[];
   };
 }
 
