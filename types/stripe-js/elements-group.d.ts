@@ -47,6 +47,7 @@ import {
   StripeIssuingCardCopyButtonElementOptions,
   StripeExpressCheckoutElement,
   StripeExpressCheckoutElementOptions,
+  StripeAddressElementGetElementOptions,
 } from './elements';
 import {StripeError} from './stripe';
 
@@ -84,7 +85,10 @@ export interface StripeElements {
   /**
    * Looks up a previously created `Element` by its type.
    */
-  getElement(elementType: 'address'): StripeAddressElement | null;
+  getElement(
+    elementType: 'address',
+    options?: StripeAddressElementGetElementOptions
+  ): StripeAddressElement | null;
 
   /////////////////////////////
   /// paymentMethodMessaging
