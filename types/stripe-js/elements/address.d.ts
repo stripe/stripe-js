@@ -259,3 +259,7 @@ export interface StripeAddressElementChangeEvent {
     phone?: string;
   };
 }
+
+export interface StripeAddressElementGetElementOptions {
+  mode: AddressMode;
+}
