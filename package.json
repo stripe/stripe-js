@@ -1,6 +1,6 @@
 {
   "name": "@stripe/stripe-js",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "Stripe.js loading utility",
   "repository": "github:stripe/stripe-js",
   "main": "lib/index.js",
