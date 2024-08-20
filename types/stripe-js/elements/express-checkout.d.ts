@@ -189,7 +189,12 @@ export type StripeExpressCheckoutElement = StripeElementBase & {
   ): StripeExpressCheckoutElement;
 };
 
-export type ExpressPaymentType = 'google_pay' | 'apple_pay' | 'link' | 'paypal';
+export type ExpressPaymentType =
+  | 'google_pay'
+  | 'apple_pay'
+  | 'amazon_pay'
+  | 'link'
+  | 'paypal';
 
 export type ExpressCheckoutPartialAddress = {
   city: string;
