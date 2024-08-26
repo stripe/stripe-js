@@ -392,6 +392,9 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
         postal_code: '94080',
       },
     },
+    card: {
+      network: ['cartes_bancaires', 'visa'],
+    },
   },
   fields: {
     billingDetails: {

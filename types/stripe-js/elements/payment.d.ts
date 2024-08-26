@@ -1,6 +1,7 @@
 import {StripeElementBase} from './base';
 import {StripeError} from '../stripe';
 import {ApplePayOption} from './apple-pay';
+import {CardNetworkBrand} from '../elements-group';
 
 export type StripePaymentElement = StripeElementBase & {
   /**
@@ -140,6 +141,9 @@ export interface DefaultValuesOption {
       line1?: string;
       line2?: string;
     };
+  };
+  card?: {
+    network?: CardNetworkBrand[];
   };
 }
 

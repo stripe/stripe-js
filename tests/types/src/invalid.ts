@@ -88,6 +88,18 @@ cardNumberElement.update({
   preferredNetwork: ['cartes_bancaires'],
 });
 
+// invalid preferred network
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  defaultValues: {card: {network: ['invalid_network']}},
+});
+
+// invalid type for preferred network
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  defaultValues: {card: {network: 'invalid_network'}},
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {
