@@ -376,15 +376,12 @@ const paymentMethodMessagingElement = elements.create(
   }
 );
 
-elements.create(
-  'paymentMethodMessaging',
-  {
-    amount: 2000,
-    countryCode: 'US',
-    currency: 'USD',
-    paymentMethodTypes: ['afterpay_clearpay', 'klarna', 'affirm'],
-  }
-);
+elements.create('paymentMethodMessaging', {
+  amount: 2000,
+  countryCode: 'US',
+  currency: 'USD',
+  paymentMethodTypes: ['afterpay_clearpay', 'klarna', 'affirm'],
+});
 
 const paymentElement: StripePaymentElement = elements.create('payment', {
   defaultValues: {
