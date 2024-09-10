@@ -58,6 +58,12 @@ export interface StripePaymentMethodMessagingElementOptions {
   paymentMethodTypes: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
 
   /**
+   * Override the order in which payment methods are displayed in the Payment Method Messaging Element.
+   * By default, the Payment Method Messaging Element will use a dynamic ordering that optimizes payment method display for each user.
+   */
+  paymentMethodOrder?: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
+
+  /**
    * @deprecated Use `paymentMethodTypes` instead.
    */
   paymentMethods?: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
@@ -89,9 +95,6 @@ export interface StripePaymentMethodMessagingElementOptions {
    */
   logoColor?: 'black' | 'white' | 'color';
 
-  /**
-   * The font size of the promotional message.
-   */
   metaData?: {
     messagingClientReferenceId: string | null;
   };
