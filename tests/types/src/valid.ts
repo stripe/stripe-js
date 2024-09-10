@@ -371,7 +371,6 @@ const paymentMethodMessagingElement = elements.create(
   'paymentMethodMessaging',
   {
     amount: 2000,
-    paymentMethodTypes: ['afterpay_clearpay', 'klarna'],
     countryCode: 'US',
     currency: 'USD',
   }
