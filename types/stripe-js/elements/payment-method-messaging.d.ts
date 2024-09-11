@@ -55,7 +55,7 @@ export interface StripePaymentMethodMessagingElementOptions {
   /**
    * Payment methods to show messaging for.
    */
-  paymentMethodTypes: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
+  paymentMethodTypes?: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
 
   /**
    * @deprecated Use `paymentMethodTypes` instead.
@@ -89,9 +89,6 @@ export interface StripePaymentMethodMessagingElementOptions {
    */
   logoColor?: 'black' | 'white' | 'color';
 
-  /**
-   * The font size of the promotional message.
-   */
   metaData?: {
     messagingClientReferenceId: string | null;
   };
