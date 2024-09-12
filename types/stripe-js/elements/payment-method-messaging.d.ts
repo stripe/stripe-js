@@ -55,7 +55,7 @@ export interface StripePaymentMethodMessagingElementOptions {
   /**
    * Payment methods to show messaging for.
    */
-  paymentMethodTypes: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
+  paymentMethodTypes?: Array<'afterpay_clearpay' | 'klarna' | 'affirm'>;
 
   /**
    * Override the order in which payment methods are displayed in the Payment Method Messaging Element.
