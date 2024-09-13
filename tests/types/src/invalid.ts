@@ -443,3 +443,11 @@ paymentRequest.update({
   // @ts-expect-error Object literal may only specify known properties, and 'onBehalfOf' does not exist in type 'PaymentRequestUpdateOptions'.
   onBehalfOf: 'acct_123',
 });
+
+// @ts-expect-error: No overload matches this call
+elements.create('paymentMethodMessaging', {
+  amount: 2000,
+  countryCode: 'US',
+  currency: 'USD',
+  paymentMethodOrder: ['invalid_type'],
+});

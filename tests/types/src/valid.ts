@@ -383,6 +383,13 @@ elements.create('paymentMethodMessaging', {
   paymentMethodTypes: ['afterpay_clearpay', 'klarna', 'affirm'],
 });
 
+elements.create('paymentMethodMessaging', {
+  amount: 2000,
+  countryCode: 'US',
+  currency: 'USD',
+  paymentMethodOrder: ['klarna'],
+});
+
 const paymentElement: StripePaymentElement = elements.create('payment', {
   defaultValues: {
     billingDetails: {
