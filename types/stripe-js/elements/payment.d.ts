@@ -117,6 +117,15 @@ export type StripePaymentElement = StripeElementBase & {
   ): StripePaymentElement;
 
   /**
+   * The change event is triggered when the `Element`'s value changes.
+   * Represents the details of a selected Card payment method.
+   */
+  on(
+    eventType: 'carddetailschange',
+    handler: (event: StripePaymentElementCardDetailsChangeEvent) => any
+  ): StripePaymentElement;
+
+  /**
    * Updates the options the `PaymentElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
@@ -296,4 +305,28 @@ export interface StripePaymentElementChangeEvent {
       };
     };
   };
+}
+
+type CardBrand = 'amex' | 'diners' | 'discover' | 'eftpos_au' | 'jcb' | 'mastercard' | 'unionpay' | 'visa' | 'unknown';
+type CardFunding = 'credit' | 'debit' | 'prepaid' | 'unknown';
+
+export interface StripePaymentElementCardDetailsChangeEvent {
+  /**
+   * The type of element that emitted this event.
+   */
+  elementType: 'payment';
+
+  /**
+   * `true` when the card details are loading.
+   */
+  loading: boolean;
+
+  /**
+   * The card details for the selected payment method.
+   * Undefined while loading and for non card payment methods.
+   */
+  details?: {
+    brands: CardBrand[] | null;
+    funding: CardFunding | null;
+  }
 }

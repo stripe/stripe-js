@@ -105,6 +105,11 @@ paymentElement.on('change', (e) => {
   if (e.error) {
   }
 });
+paymentElement.on('carddetailschange', (e) => {
+  // @ts-expect-error: `error` is not present on PaymentElement "change" event.
+  if (e.error) {
+  }
+});
 
 expressCheckoutElement.update({
   // @ts-expect-error: `paymentMethods` option can't be updated

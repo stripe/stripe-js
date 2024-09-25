@@ -52,6 +52,8 @@ import {
   StripeExpressCheckoutElementShippingRateChangeEvent,
   AvailablePaymentMethods,
   StripeElementsOptions,
+  CardBrand,
+  CardFunding
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -510,6 +512,17 @@ paymentElement
       elementType: 'payment';
       error: {
         type: string;
+      };
+    }) => {}
+  )
+  .on(
+    'carddetailschange',
+    (e: {
+      elementType: 'payment';
+      loading: boolean;
+      details?: {
+        brands: CardBrand[] | null;
+        funding: CardFunding | null;
       };
     }) => {}
   );
