@@ -106,8 +106,18 @@ paymentElement.on('change', (e) => {
   }
 });
 paymentElement.on('carddetailschange', (e) => {
-  // @ts-expect-error: `error` is not present on PaymentElement "change" event.
+  // @ts-expect-error: `error` is not present on PaymentElement "carddetailschange" event.
   if (e.error) {
+  }
+});
+paymentElement.on('savedpaymentmethodupdate', (e) => {
+  // @ts-expect-error: `loading` is not present on PaymentElement "savedpaymentmethodupdate" event.
+  if (e.loading) {
+  }
+});
+paymentElement.on('savedpaymentmethodremove', (e) => {
+  // @ts-expect-error: `loading` is not present on PaymentElement "savedpaymentmethodremove" event.
+  if (e.loading) {
   }
 });
 

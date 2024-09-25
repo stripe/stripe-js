@@ -126,6 +126,22 @@ export type StripePaymentElement = StripeElementBase & {
   ): StripePaymentElement;
 
   /**
+   * Triggered when a Saved Payment Method is updated.
+   */
+  on(
+    eventType: 'savedpaymentmethodupdate',
+    handler: (event: StripePaymentElementSavedPaymentMethodUpdateEvent) => any
+  ): StripePaymentElement;
+
+  /**
+   * Triggered when a Saved Payment Method is removed.
+   */
+  on(
+    eventType: 'savedpaymentmethodremove',
+    handler: (event: StripePaymentElementSavedPaymentMethodRemoveEvent) => any
+  ): StripePaymentElement;
+
+  /**
    * Updates the options the `PaymentElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
@@ -329,4 +345,80 @@ export interface StripePaymentElementCardDetailsChangeEvent {
     brands: CardBrand[] | null;
     funding: CardFunding | null;
   }
+}
+
+export interface StripePaymentElementSavedPaymentMethodUpdateEvent {
+  /**
+   * The type of element that emitted this event.
+   */
+  elementType: 'payment';
+
+  /**
+   * `true` when the saved payment method is successfully updated.
+   */
+  success: boolean;
+
+  /**
+   * Error message if the saved payment method update fails.
+   */
+  error?: string;
+
+  /**
+   * The updated saved payment method.
+   */
+  payment_method: {
+    id: string;
+    type: string;
+    billing_details: {
+      address: {
+        city: null | string;
+        country: null | string;
+        line1: null | string;
+        line2: null | string;
+        postal_code: null | string;
+        state: null | string;
+      };
+      name: null | string;
+      email: null | string;
+      phone: null | string;
+    };
+  };
+}
+
+export interface StripePaymentElementSavedPaymentMethodRemoveEvent {
+  /**
+   * The type of element that emitted this event.
+   */
+  elementType: 'payment';
+
+  /**
+   * `true` when the saved payment method is successfully removed.
+   */
+  success: boolean;
+
+  /**
+   * Error message if the saved payment method removal fails.
+   */
+  error?: string;
+
+  /**
+   * The removed saved payment method.
+   */
+  payment_method: {
+    id: string;
+    type: string;
+    billing_details: {
+      address: {
+        city: null | string;
+        country: null | string;
+        line1: null | string;
+        line2: null | string;
+        postal_code: null | string;
+        state: null | string;
+      };
+      name: null | string;
+      email: null | string;
+      phone: null | string;
+    };
+  };
 }
