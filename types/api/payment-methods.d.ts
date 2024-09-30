@@ -150,6 +150,21 @@ export namespace PaymentMethod {
      */
     last4: string;
 
+     /**
+     * Contains information about card networks that can be used to process the payment.
+     */
+     networks: {
+      /**
+       * The preferred network for co-branded cards.
+       */
+      preferred: string | null;
+
+      /**
+       * All available networks for the card.
+       */
+      available: string[];
+    } | null;
+
     /**
      * Contains details on how this Card maybe be used for 3D Secure authentication.
      */
