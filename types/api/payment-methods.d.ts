@@ -150,10 +150,10 @@ export namespace PaymentMethod {
      */
     last4: string;
 
-     /**
+    /**
      * Contains information about card networks that can be used to process the payment.
      */
-     networks: {
+    networks: {
       /**
        * The preferred network for co-branded cards.
        */
