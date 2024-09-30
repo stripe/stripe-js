@@ -4,7 +4,6 @@ import fs from 'fs';
 import 'zx/globals';
 
 const VERSIONS = [
-  'next',
   'beta',
   'latest',
   '5.2',
