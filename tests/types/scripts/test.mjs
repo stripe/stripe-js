@@ -4,6 +4,7 @@ import fs from 'fs';
 import 'zx/globals';
 
 const VERSIONS = [
+  'next',
   'beta',
   'latest',
   '5.2',
@@ -19,19 +20,6 @@ const VERSIONS = [
   '4.2.4',
   '4.1.6',
   '4.0.6',
-  '3.9.10',
-  '3.8.3',
-  '3.7.4',
-  '3.6.3',
-  '3.5.1',
-  '3.4.4',
-  '3.3.3',
-  '3.2.1',
-
-  // Attempting to test on 3.1.1 currently fails. I believe it is not a
-  // fundamental incompatibility with the types, just some tsconfig.json changes
-  // that are needed. Skipping for now
-  // '3.1.1',
 ];
 
 const TYPE_TESTS_DIR = `${__dirname}/..`;
@@ -48,13 +36,15 @@ await $`yarn init -sy`;
 for (const version of VERSIONS) {
   console.log(`--- Testing with TypeScript version ${version}`);
   await $`yarn add -s --no-progress typescript@${version}`;
-  await $`yarn run tsc --strict --noEmit src/valid.ts`;
 
-  // TypeScript versions >= 3.9.0 support [@ts-expect-error][0], which lets us
-  // write tests for types that we expect to cause errors
-  //
-  // [0]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#-ts-expect-error-comments
-  if (version >= '3.9.0') {
-    await $`yarn run tsc --strict --noEmit src/invalid.ts`;
-  }
+  // Definitely Typed only supports TS versions 2 years in the past.
+  // To make this check more stable, install @types/node to match
+  // the version we are testing.
+  const tag = ['next', 'beta', 'latest'].includes(version)
+    ? 'latest'
+    : `ts${version.substring(0, 3)}`;
+  await $`yarn add -s --no-progress @types/node@${tag}`;
+
+  await $`yarn run tsc --strict --noEmit src/valid.ts`;
+  await $`yarn run tsc --strict --noEmit src/invalid.ts`;
 }
