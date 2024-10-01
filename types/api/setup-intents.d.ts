@@ -131,17 +131,25 @@ export namespace SetupIntent {
   }
 
   export interface NextAction {
-    redirect_to_url?: NextAction.RedirectToUrl;
-
     /**
-     * Type of the next action to perform, one of `redirect_to_url` or `use_stripe_sdk`.
+     * Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, or `verify_with_microdeposits`.
      */
     type: string;
+
+    /**
+     * Contains instructions for authenticating a payment by redirecting your customer to another page or application.
+     */
+    redirect_to_url?: NextAction.RedirectToUrl;
 
     /**
      * When confirming a SetupIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
      */
     use_stripe_sdk?: NextAction.UseStripeSdk;
+
+    /**
+     * Contains details describing microdeposits verification flow.
+     */
+    verify_with_microdeposits?: NextAction.VerifyWithMicrodeposits;
   }
 
   export namespace NextAction {
@@ -158,6 +166,23 @@ export namespace SetupIntent {
     }
 
     export interface UseStripeSdk {}
+
+    export interface VerifyWithMicrodeposits {
+      /**
+       * The timestamp when the microdeposits are expected to land.
+       */
+      arrival_date: number;
+
+      /**
+       * The URL for the hosted verification page, which allows customers to verify their bank account.
+       */
+      hosted_verification_url: string;
+
+      /**
+       * The type of the microdeposit sent to the customer. Used to distinguish between different verification methods.
+       */
+      microdeposit_type: string | null;
+    }
   }
 
   export type Status =
