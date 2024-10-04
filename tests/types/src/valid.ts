@@ -2854,7 +2854,13 @@ stripe
 
 stripe
   .verifyMicrodepositsForSetup('', {amounts: [32, 45]})
-  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => {
+    if (result.setupIntent?.next_action?.verify_with_microdeposits) {
+      console.log(
+        result.setupIntent?.next_action?.verify_with_microdeposits.arrival_date
+      );
+    }
+  });
 
 stripe
   .verifyMicrodepositsForSetup('', {
