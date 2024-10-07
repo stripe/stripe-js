@@ -323,7 +323,16 @@ export interface StripePaymentElementChangeEvent {
   };
 }
 
-type CardBrand = 'amex' | 'diners' | 'discover' | 'eftpos_au' | 'jcb' | 'mastercard' | 'unionpay' | 'visa' | 'unknown';
+type CardBrand =
+  | 'amex'
+  | 'diners'
+  | 'discover'
+  | 'eftpos_au'
+  | 'jcb'
+  | 'mastercard'
+  | 'unionpay'
+  | 'visa'
+  | 'unknown';
 type CardFunding = 'credit' | 'debit' | 'prepaid' | 'unknown';
 
 export interface StripePaymentElementCardDetailsChangeEvent {
@@ -344,7 +353,7 @@ export interface StripePaymentElementCardDetailsChangeEvent {
   details?: {
     brands: CardBrand[] | null;
     funding: CardFunding | null;
-  }
+  };
 }
 
 export interface StripePaymentElementSavedPaymentMethodUpdateEvent {

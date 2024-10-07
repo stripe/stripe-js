@@ -53,7 +53,7 @@ import {
   AvailablePaymentMethods,
   StripeElementsOptions,
   CardBrand,
-  CardFunding
+  CardFunding,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
