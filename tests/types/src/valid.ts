@@ -52,6 +52,8 @@ import {
   StripeExpressCheckoutElementShippingRateChangeEvent,
   AvailablePaymentMethods,
   StripeElementsOptions,
+  CardBrand,
+  CardFunding,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -510,6 +512,67 @@ paymentElement
       elementType: 'payment';
       error: {
         type: string;
+      };
+    }) => {}
+  )
+  .on(
+    'carddetailschange',
+    (e: {
+      elementType: 'payment';
+      loading: boolean;
+      details?: {
+        brands: CardBrand[] | null;
+        funding: CardFunding | null;
+      };
+    }) => {}
+  )
+  .on(
+    'savedpaymentmethodupdate',
+    (e: {
+      elementType: 'payment';
+      success: boolean;
+      error?: string;
+      payment_method: {
+        id: string;
+        type: string;
+        billing_details: {
+          address: {
+            city: null | string;
+            country: null | string;
+            line1: null | string;
+            line2: null | string;
+            postal_code: null | string;
+            state: null | string;
+          };
+          name: null | string;
+          email: null | string;
+          phone: null | string;
+        };
+      };
+    }) => {}
+  )
+  .on(
+    'savedpaymentmethodremove',
+    (e: {
+      elementType: 'payment';
+      success: boolean;
+      error?: string;
+      payment_method: {
+        id: string;
+        type: string;
+        billing_details: {
+          address: {
+            city: null | string;
+            country: null | string;
+            line1: null | string;
+            line2: null | string;
+            postal_code: null | string;
+            state: null | string;
+          };
+          name: null | string;
+          email: null | string;
+          phone: null | string;
+        };
       };
     }) => {}
   );

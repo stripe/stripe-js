@@ -105,6 +105,21 @@ paymentElement.on('change', (e) => {
   if (e.error) {
   }
 });
+paymentElement.on('carddetailschange', (e) => {
+  // @ts-expect-error: `error` is not present on PaymentElement "carddetailschange" event.
+  if (e.error) {
+  }
+});
+paymentElement.on('savedpaymentmethodupdate', (e) => {
+  // @ts-expect-error: `loading` is not present on PaymentElement "savedpaymentmethodupdate" event.
+  if (e.loading) {
+  }
+});
+paymentElement.on('savedpaymentmethodremove', (e) => {
+  // @ts-expect-error: `loading` is not present on PaymentElement "savedpaymentmethodremove" event.
+  if (e.loading) {
+  }
+});
 
 expressCheckoutElement.update({
   // @ts-expect-error: `paymentMethods` option can't be updated
