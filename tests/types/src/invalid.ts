@@ -100,6 +100,14 @@ elements.create('payment', {
   defaultValues: {card: {network: 'invalid_network'}},
 });
 
+// invalid value for fields
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  fields: {
+    billingDetails: 'if_required',
+  },
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {

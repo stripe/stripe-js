@@ -415,7 +415,7 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
     billingDetails: {
       email: 'never',
       phone: 'auto',
-      address: 'never',
+      address: 'if_required',
     },
   },
   terms: {

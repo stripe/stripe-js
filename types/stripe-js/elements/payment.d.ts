@@ -183,6 +183,7 @@ export interface FieldsOption {
         phone?: FieldOption;
         address?:
           | FieldOption
+          | 'if_required'
           | {
               country?: FieldOption;
               postalCode?: FieldOption;
