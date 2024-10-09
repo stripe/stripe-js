@@ -121,7 +121,7 @@ stripe.elements({
   capture_method: 'automatic',
   payment_method_types: ['card'],
   payment_method_options: {
-    us_bank_account: {financial_connections: {permissions: ['payment_method']}},
+    us_bank_account: {financial_connections: {permissions: ['payment_method'], return_url: 'https://example.com/return'}},
   },
   on_behalf_of: 'acct_id',
 });
