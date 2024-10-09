@@ -621,7 +621,7 @@ type PaymentMethodOptions = {
       permissions?: Array<
         'balances' | 'ownership' | 'payment_method' | 'transactions'
       >;
-      return_url?: String
+      return_url?: string
     };
     verification_method?: 'automatic' | 'instant';
   };
