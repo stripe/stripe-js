@@ -17,6 +17,29 @@ export type StripeEmbeddedCheckoutShippingDetailsChangeEvent = {
   shippingDetails: StripeEmbeddedCheckoutShippingDetails;
 };
 
+export type StripeEmbeddedCheckoutLineItem = {
+  id?: string;
+  quantity?: number;
+  price?: string;
+  display?: {
+    name?: string;
+    description?: string;
+    images?: string[];
+  };
+  pricingSpec?: {
+    unitAmount?: number;
+    unitAmountDecimal?: string;
+    currency?: string;
+    taxBehavior?: 'inclusive' | 'exclusive' | 'unspecified';
+    taxCode?: string;
+  };
+};
+
+export type StripeEmbeddedCheckoutLineItemsChangeEvent = {
+  checkoutSessionId: string;
+  lineItems: StripeEmbeddedCheckoutLineItem[];
+};
+
 export type ResultAction =
   | {type: 'accept'}
   | {type: 'reject'; errorMessage?: string};
@@ -44,6 +67,13 @@ export interface StripeEmbeddedCheckoutOptions {
    */
   onShippingDetailsChange?: (
     event: StripeEmbeddedCheckoutShippingDetailsChangeEvent
+  ) => Promise<ResultAction>;
+  /**
+   * onLineItemsChange is called when the customer adds, removes, or modifies a line item.
+   * The callback is required when [permissions.update.line_items](https://docs.stripe.com/api/checkout/sessions/create#create_checkout_session-permissions-update-line_items) is set to `server_only`.
+   */
+  onLineItemsChange?: (
+    event: StripeEmbeddedCheckoutLineItemsChangeEvent
   ) => Promise<ResultAction>;
 }
 
