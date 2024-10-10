@@ -437,6 +437,24 @@ export interface Stripe {
     options?: paymentIntents.ConfirmMobilepayPaymentOptions
   ): Promise<PaymentIntentResult>;
 
+   /**
+   * Use `stripe.confirmMultibancoPayment` in the [Multibanco Payments with Payment Methods](https://stripe.com/docs/payments/multibanco) flow when the customer submits your payment form.
+   * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
+   * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+   *
+   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+   * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_multibanco_payment
+   */
+   confirmMultibancoPayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmMultibancoPaymentData,
+    options?: paymentIntents.ConfirmMultibancoPaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+
   /**
    * Use `stripe.confirmOxxoPayment` in the [OXXO Payment](https://stripe.com/docs/payments/oxxo) with Payment Methods flow when the customer submits your payment form.
    * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
@@ -577,6 +595,23 @@ export interface Stripe {
     clientSecret: string,
     data?: paymentIntents.ConfirmSofortPaymentData,
     options?: paymentIntents.ConfirmSofortPaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+  /**
+   * Use `stripe.confirmTwintPayment` in the [TWINT Payments with Payment Methods](https://stripe.com/docs/payments/twint) flow when the customer submits your payment form.
+   * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
+   * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+   *
+   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+   * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_twint_payment
+   */
+  confirmTwintPayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmTwintPaymentData,
+    options?: paymentIntents.ConfirmTwintPaymentOptions
   ): Promise<PaymentIntentResult>;
 
   /**
