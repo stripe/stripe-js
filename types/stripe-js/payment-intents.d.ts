@@ -1086,7 +1086,6 @@ export interface ConfirmMobilepayPaymentOptions {
   handleActions?: boolean;
 }
 
-
 /**
  * Data to be sent with a `stripe.confirmMultibancoPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
@@ -1116,7 +1115,6 @@ export interface ConfirmMultibancoPaymentOptions {
    */
   handleActions?: boolean;
 }
-
 
 /**
  * Data to be sent with a `stripe.confirmOxxoPayment` request.
@@ -1324,8 +1322,7 @@ export interface ConfirmSofortPaymentOptions {
  * Data to be sent with a `stripe.confirmTwintPayment` request.
  * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
  */
-export interface ConfirmTwintPaymentData
-  extends PaymentIntentConfirmParams {
+export interface ConfirmTwintPaymentData extends PaymentIntentConfirmParams {
   /**
    * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
    * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.

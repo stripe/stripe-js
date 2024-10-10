@@ -2004,7 +2004,7 @@ stripe
   )
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
-  stripe
+stripe
   .confirmMultibancoPayment('', {
     payment_method: {billing_details: {name: 'Jenny Rosen'}},
     return_url: window.location.href,
@@ -2021,8 +2021,7 @@ stripe
 
 stripe
   .confirmMultibancoPayment('')
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);  
-
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
   .confirmOxxoPayment('', {payment_method: ''})
@@ -2276,7 +2275,7 @@ stripe
   .confirmSofortPayment('', {}, {handleActions: false})
   .then(({paymentIntent}: {paymentIntent?: PaymentIntent}) => {});
 
-  stripe
+stripe
   .confirmTwintPayment('', {
     payment_method: {billing_details: {name: 'Jenny Rosen'}},
     return_url: window.location.href,
@@ -2293,7 +2292,7 @@ stripe
 
 stripe
   .confirmTwintPayment('')
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);  
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
   .confirmWechatPayPayment('', {}, {handleActions: false})

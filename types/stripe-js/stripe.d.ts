@@ -437,7 +437,7 @@ export interface Stripe {
     options?: paymentIntents.ConfirmMobilepayPaymentOptions
   ): Promise<PaymentIntentResult>;
 
-   /**
+  /**
    * Use `stripe.confirmMultibancoPayment` in the [Multibanco Payments with Payment Methods](https://stripe.com/docs/payments/multibanco) flow when the customer submits your payment form.
    * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
    * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
@@ -448,12 +448,11 @@ export interface Stripe {
    *
    * @docs https://stripe.com/docs/js/payment_intents/confirm_multibanco_payment
    */
-   confirmMultibancoPayment(
+  confirmMultibancoPayment(
     clientSecret: string,
     data?: paymentIntents.ConfirmMultibancoPaymentData,
     options?: paymentIntents.ConfirmMultibancoPaymentOptions
   ): Promise<PaymentIntentResult>;
-
 
   /**
    * Use `stripe.confirmOxxoPayment` in the [OXXO Payment](https://stripe.com/docs/payments/oxxo) with Payment Methods flow when the customer submits your payment form.
