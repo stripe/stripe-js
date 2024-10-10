@@ -438,12 +438,13 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
-   * Use `stripe.confirmMultibancoPayment` in the [Multibanco Payments with Payment Methods](https://stripe.com/docs/payments/multibanco) flow when the customer submits your payment form.
-   * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
-   * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+   * Use `stripe.confirmMultibancoPayment` in the [Multibanco Payment](https://stripe.com/docs/payments/multibanco) with Payment Methods flow when the customer submits your payment form.
+   * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide.
+   * Note that there are some additional requirements to this flow that are not covered in this reference.
+   * Refer to our [integration guide](https://stripe.com/docs/payments/multibanco) for more details.
    *
    * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
-   * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+   * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
    * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
    *
    * @docs https://stripe.com/docs/js/payment_intents/confirm_multibanco_payment

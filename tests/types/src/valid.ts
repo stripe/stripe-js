@@ -2006,8 +2006,7 @@ stripe
 
 stripe
   .confirmMultibancoPayment('', {
-    payment_method: {billing_details: {name: 'Jenny Rosen'}},
-    return_url: window.location.href,
+    payment_method: {billing_details: {email: 'jenny@example.com'}},
   })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
