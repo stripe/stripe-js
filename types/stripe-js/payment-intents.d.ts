@@ -273,13 +273,13 @@ export interface CreatePaymentMethodMultibancoData
   extends PaymentMethodCreateParams {
   type: 'multibanco';
 
-   /**
+  /**
    * The customer's billing details.
    * `email` is required.
    *
    * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
    */
-   billing_details: PaymentMethodCreateParams.BillingDetails & {
+  billing_details: PaymentMethodCreateParams.BillingDetails & {
     email: string;
   };
 }
