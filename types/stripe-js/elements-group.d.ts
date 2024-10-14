@@ -1,6 +1,7 @@
 import {
   StripeAddressElement,
   StripeAddressElementOptions,
+  StripeCurrencySelectorElement,
   StripeShippingAddressElement,
   StripeShippingAddressElementOptions,
   StripePaymentRequestButtonElement,
@@ -332,9 +333,6 @@ export interface StripeElements {
   /////////////////////////////
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
    * Creates a `LinkAuthenticationElement`.
    */
   create(
@@ -343,9 +341,6 @@ export interface StripeElements {
   ): StripeLinkAuthenticationElement;
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
    * Looks up a previously created `Element` by its type.
    */
   getElement(
@@ -500,6 +495,7 @@ export type StripeElementType =
   | 'cardNumber'
   | 'cardExpiry'
   | 'cardCvc'
+  | 'currencySelector'
   | 'epsBank'
   | 'expressCheckout'
   | 'fpxBank'
@@ -531,6 +527,7 @@ export type StripeElement =
   | StripeIbanElement
   | StripeIdealBankElement
   | StripeP24BankElement
+  | StripeCurrencySelectorElement
   | StripeExpressCheckoutElement
   | StripePaymentElement
   | StripePaymentMethodMessagingElement
