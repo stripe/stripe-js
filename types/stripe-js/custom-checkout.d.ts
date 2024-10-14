@@ -12,6 +12,7 @@ import {
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
 import {
+  StripeCurrencySelectorElement,
   StripeElementBase,
   StripeExpressCheckoutElement,
   StripeExpressCheckoutElementConfirmEvent,
@@ -202,6 +203,12 @@ export type StripeCustomCheckoutTrial = {
   trialPeriodDays: number;
 };
 
+export type StripeCustomCheckoutCurrencyOption = {
+  unitAmount: number;
+  currency: string;
+  currencyConversion?: {fxRate: number; sourceCurrency: string};
+};
+
 /* Custom Checkout session */
 export interface StripeCustomCheckoutSession {
   billingAddress: StripeCustomCheckoutContact | null;
@@ -209,6 +216,7 @@ export interface StripeCustomCheckoutSession {
   canConfirm: boolean;
   confirmationRequirements: StripeCustomCheckoutConfirmationRequirement[];
   currency: string;
+  currencyOptions: Array<StripeCustomCheckoutCurrencyOption> | null;
   discountAmounts: Array<StripeCustomCheckoutDiscountAmount> | null;
   email: string | null;
   id: string;
@@ -422,6 +430,10 @@ export interface StripeCustomCheckout {
   getElement(
     elementType: 'expressCheckout'
   ): StripeCustomCheckoutExpressCheckoutElement | null;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  getElement(
+    elementType: 'currencySelector'
+  ): StripeCurrencySelectorElement | null;
   createElement(
     elementType: 'payment',
     options?: StripeCustomCheckoutPaymentElementOptions
@@ -434,4 +446,6 @@ export interface StripeCustomCheckout {
     elementType: 'expressCheckout',
     options: StripeCustomCheckoutExpressCheckoutElementOptions
   ): StripeCustomCheckoutExpressCheckoutElement;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  createElement(elementType: 'currencySelector'): StripeCurrencySelectorElement;
 }

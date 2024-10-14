@@ -54,6 +54,7 @@ import {
   StripeElementsOptions,
   CardBrand,
   CardFunding,
+  StripeCurrencySelectorElement,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -1137,11 +1138,28 @@ expressCheckoutElement.on(
 
 const retrievedExpressCheckoutElement = elements.getElement('expressCheckout');
 
+declare const currencySelectorElement: StripeCurrencySelectorElement;
+
+currencySelectorElement
+  .on('ready', (e: {elementType: 'currencySelector'}) => {})
+  .on('focus', (e: {elementType: 'currencySelector'}) => {})
+  .on('blur', (e: {elementType: 'currencySelector'}) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'currencySelector';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
+
 auBankAccountElement.destroy();
 cardElement.destroy();
 cardNumberElement.destroy();
 cardCvcElement.destroy();
 cardExpiryElement.destroy();
+currencySelectorElement.destroy();
 fpxBankElement.destroy();
 ibanElement.destroy();
 idealBankElement.destroy();

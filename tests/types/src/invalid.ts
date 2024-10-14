@@ -6,6 +6,7 @@ import {
   StripePaymentElement,
   StripeExpressCheckoutElement,
   StripeElementsOptions,
+  StripeCurrencySelectorElement,
 } from '../../../types';
 import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay';
 
@@ -15,6 +16,7 @@ declare const cardNumberElement: StripeCardNumberElement;
 declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
+declare const currencySelectorElement: StripeCurrencySelectorElement;
 
 const options: StripeElementsOptions = {
   clientSecret: '',
@@ -223,6 +225,13 @@ expressCheckoutElement.on('click', ({resolve}) => {
     },
   });
 });
+
+// @ts-expect-error: CurrencySelector cannot be created from Elements
+elements.create('currencySelector');
+// @ts-expect-error: CurrencySelector cannot be retrieved from Elements
+elements.getElement('currencySelector');
+// @ts-expect-error: CurrencySelector cannot be updated
+currencySelectorElement.update({});
 
 // @ts-expect-error: AddressElement requires a mode
 elements.create('address');
