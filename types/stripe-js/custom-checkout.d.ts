@@ -12,6 +12,7 @@ import {
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
 import {
+  FieldsOption,
   StripeElementBase,
   StripeExpressCheckoutElement,
   StripeExpressCheckoutElementConfirmEvent,
@@ -151,6 +152,7 @@ export type StripeCustomCheckoutLineItem = {
     usageType: 'metered' | 'licensed';
   } | null;
   adjustableQuantity: StripeCustomCheckoutAdjustableQuantity | null;
+  images: string[];
 };
 
 export type StripeCustomCheckoutRecurring = {
@@ -236,6 +238,7 @@ export type StripeCustomCheckoutPaymentElementOptions = {
   paymentMethodOrder?: Array<string>;
   readonly?: boolean;
   terms?: TermsOption;
+  fields?: FieldsOption;
 };
 
 export type StripeCustomCheckoutAddressElementOptions = {
@@ -252,6 +255,7 @@ export type StripeCustomCheckoutExpressCheckoutElementOptions = {
   buttonType: StripeExpressCheckoutElementOptions['buttonType'];
   layout: StripeExpressCheckoutElementOptions['layout'];
   paymentMethodOrder: StripeExpressCheckoutElementOptions['paymentMethodOrder'];
+  paymentMethods: StripeExpressCheckoutElementOptions['paymentMethods'];
 };
 
 export type StripeCustomCheckoutUpdateHandler = (
@@ -393,8 +397,10 @@ export interface StripeCustomCheckout {
   updateBillingAddress: (
     billingAddress: StripeCustomCheckoutContact | null
   ) => Promise<StripeCustomCheckoutResult>;
-  updatePhoneNumber: (phoneNumber: string) => void;
-  updateEmail: (email: string) => void;
+  updatePhoneNumber: (
+    phoneNumber: string
+  ) => Promise<StripeCustomCheckoutResult>;
+  updateEmail: (email: string) => Promise<StripeCustomCheckoutResult>;
   updateLineItemQuantity: (args: {
     lineItem: string;
     quantity: number;
@@ -403,7 +409,6 @@ export interface StripeCustomCheckout {
     shippingOption: string
   ) => Promise<StripeCustomCheckoutResult>;
   confirm: (args?: {
-    return_url?: string;
     returnUrl?: string;
     redirect?: StripeCustomCheckoutRedirectBehavior;
     paymentMethod?: string;
