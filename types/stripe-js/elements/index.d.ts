@@ -8,6 +8,7 @@ export * from './card-cvc';
 export * from './card-expiry';
 export * from './card-number';
 export * from './card';
+export * from './currency-selector';
 export * from './eps-bank';
 export * from './express-checkout';
 export * from './fpx-bank';
