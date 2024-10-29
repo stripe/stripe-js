@@ -225,6 +225,7 @@ export interface LayoutObject {
   defaultCollapsed?: boolean;
   radios?: boolean;
   spacedAccordionItems?: boolean;
+  visibleAccordionItemsCount?: number;
 }
 
 export interface StripePaymentElementOptions {
