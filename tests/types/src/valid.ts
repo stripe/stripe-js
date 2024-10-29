@@ -451,6 +451,13 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
     applePay: 'never',
     googlePay: 'auto',
   },
+  layout: {
+    type: 'accordion',
+    visibleAccordionItemsCount: 2,
+    defaultCollapsed: true,
+    radios: true,
+    spacedAccordionItems: true,
+  },
 });
 
 paymentElement.update({
