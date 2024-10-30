@@ -206,7 +206,7 @@ export type StripeCustomCheckoutTrial = {
 };
 
 export type StripeCustomCheckoutCurrencyOption = {
-  unitAmount: number;
+  amount: number;
   currency: string;
   currencyConversion?: {fxRate: number; sourceCurrency: string};
 };

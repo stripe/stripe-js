@@ -374,8 +374,11 @@ export interface StripeExpressCheckoutElementUpdateOptions {
 }
 
 export type AvailablePaymentMethods = {
+  amazonPay: boolean;
   applePay: boolean;
   googlePay: boolean;
+  link: boolean;
+  paypal: boolean;
 };
 
 export interface StripeExpressCheckoutElementReadyEvent {
