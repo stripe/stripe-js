@@ -1,4 +1,4 @@
-export * from './checkout';
+export * from './hosted-checkout';
 export * from './custom-checkout';
 export * from './embedded-checkout';
 export * from './elements';

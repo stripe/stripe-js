@@ -13,7 +13,7 @@ import {
   StripeElementsOptionsClientSecret,
   StripeElementsOptionsMode,
 } from './elements-group';
-import {CheckoutLocale, RedirectToCheckoutOptions} from './checkout';
+import {CheckoutLocale, RedirectToCheckoutOptions} from './hosted-checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
 import {
