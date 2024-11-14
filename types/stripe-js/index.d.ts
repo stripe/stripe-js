@@ -1,5 +1,5 @@
 export * from './hosted-checkout';
-export * from './custom-checkout';
+export * from './checkout';
 export * from './embedded-checkout';
 export * from './elements';
 export * from './elements-group';

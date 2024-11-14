@@ -16,10 +16,7 @@ import {
 import {CheckoutLocale, RedirectToCheckoutOptions} from './hosted-checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
-import {
-  StripeCustomCheckoutOptions,
-  StripeCustomCheckout,
-} from './custom-checkout';
+import {StripeCustomCheckoutOptions, StripeCustomCheckout} from './checkout';
 import {
   StripeEmbeddedCheckoutOptions,
   StripeEmbeddedCheckout,
