@@ -111,6 +111,14 @@ const options: StripeElementsOptions = {
     customer: 'cus_foo',
     ephemeralKey: 'ek_test_foo',
   },
+  customPaymentMethods: [
+    {
+      id: 'cpmt_123',
+      options: {
+        type: 'static',
+      },
+    },
+  ],
 };
 
 const elements: StripeElements = stripe.elements(options);
@@ -149,6 +157,14 @@ const elementsClientSecret: StripeElements = stripe.elements({
     customer: 'cus_foo',
     ephemeralKey: 'ek_test_foo',
   },
+  customPaymentMethods: [
+    {
+      id: 'cpmt_123',
+      options: {
+        type: 'static',
+      },
+    },
+  ],
 });
 
 const elementsPMCProvided = stripe.elements({
@@ -225,7 +241,7 @@ const fetchUpdates = async () => {
 };
 
 const handleSubmit = async () => {
-  const {error} = await elements.submit();
+  const {error, selectedPaymentMethod} = await elements.submit();
 };
 
 const auBankAccountElement = elements.create('auBankAccount', {});

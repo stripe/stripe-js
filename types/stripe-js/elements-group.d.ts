@@ -69,7 +69,10 @@ export interface StripeElements {
    * Before confirming payment, call elements.submit() to validate the state of the
    * Payment Element and collect any data required for wallets.
    */
-  submit(): Promise<{error?: StripeError}>;
+  submit(): Promise<
+    | {error?: StripeError; selectedPaymentMethod?: undefined}
+    | {selectedPaymentMethod: string; error?: undefined}
+  >;
 
   /////////////////////////////
   /// address
@@ -667,6 +670,14 @@ interface BaseStripeElementsOptions {
    * Display saved PaymentMethods and Customer information.
    */
   customerSessionClientSecret?: string;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Display Custom Payment Methods in the Payment Element that you are already registered with.
+   */
+  customPaymentMethods?: CustomPaymentMethod[];
 }
 
 export interface StripeElementsOptionsClientSecret
@@ -1124,4 +1135,26 @@ export interface CustomerOptions {
    * The ephemeral key for a Customer that grants temporary access to Customer data.
    */
   ephemeralKey: string;
+}
+
+export interface CustomPaymentMethod {
+  /**
+   * The Custom Payment Method id, prefixed with `cpmt_`.
+   */
+  id: string;
+
+  /**
+   * Additional options to configure the Custom Payment Method.
+   */
+  options: {
+    /**
+     * The payment form type.
+     */
+    type: 'static';
+
+    /**
+     * Display additional information about the payment method, max 100 characters.
+     */
+    subtitle?: string;
+  };
 }
