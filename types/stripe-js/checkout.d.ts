@@ -26,19 +26,19 @@ import {
  * Contact [Stripe support](https://support.stripe.com/) for more information.
  */
 
-export interface StripeCustomCheckoutElementsOptions {
+export interface StripeCheckoutElementsOptions {
   appearance?: Appearance;
   loader?: 'auto' | 'always' | 'never';
   fonts?: Array<CssFontSource | CustomFontSource>;
 }
 
-export interface StripeCustomCheckoutOptions {
+export interface StripeCheckoutOptions {
   clientSecret: string;
-  elementsOptions?: StripeCustomCheckoutElementsOptions;
+  elementsOptions?: StripeCheckoutElementsOptions;
 }
 
-/* Custom Checkout types */
-export type StripeCustomCheckoutAddress = {
+/* Elements with CheckoutSessions API types */
+export type StripeCheckoutAddress = {
   country: string;
   line1?: string | null;
   line2?: string | null;
@@ -47,35 +47,31 @@ export type StripeCustomCheckoutAddress = {
   state?: string | null;
 };
 
-export type StripeCustomCheckoutAdjustableQuantity = {
+export type StripeCheckoutAdjustableQuantity = {
   maximum: number;
   minimum: number;
 };
 
-export type StripeCustomCheckoutBillingInterval =
-  | 'day'
-  | 'month'
-  | 'week'
-  | 'year';
+export type StripeCheckoutBillingInterval = 'day' | 'month' | 'week' | 'year';
 
-export type StripeCustomCheckoutConfirmationRequirement =
+export type StripeCheckoutConfirmationRequirement =
   | 'phoneNumber'
   | 'shippingAddress'
   | 'billingAddress'
   | 'paymentDetails'
   | 'email';
 
-export type StripeCustomCheckoutContact = {
+export type StripeCheckoutContact = {
   name?: string | null;
-  address: StripeCustomCheckoutAddress;
+  address: StripeCheckoutAddress;
 };
 
-export type StripeCustomCheckoutDeliveryEstimate = {
-  maximum: StripeCustomCheckoutEstimate | null;
-  minimum: StripeCustomCheckoutEstimate | null;
+export type StripeCheckoutDeliveryEstimate = {
+  maximum: StripeCheckoutEstimate | null;
+  minimum: StripeCheckoutEstimate | null;
 };
 
-export type StripeCustomCheckoutDiscountAmount = {
+export type StripeCheckoutDiscountAmount = {
   amount: number;
   displayName: string;
   promotionCode: string | null;
@@ -85,7 +81,7 @@ export type StripeCustomCheckoutDiscountAmount = {
     | null;
 };
 
-export type StripeCustomCheckoutDueNext = {
+export type StripeCheckoutDueNext = {
   amountSubtotal: number;
   amountDiscount: number;
   amountTaxInclusive: number;
@@ -93,18 +89,18 @@ export type StripeCustomCheckoutDueNext = {
   billingCycleAnchor: number | null;
 };
 
-export type StripeCustomCheckoutEstimate = {
+export type StripeCheckoutEstimate = {
   unit: 'business_day' | 'day' | 'hour' | 'week' | 'month';
   value: number;
 };
 
-export type StripeCustomCheckoutLastPaymentError = {
+export type StripeCheckoutLastPaymentError = {
   message: string;
 };
 
-export type StripeCustomCheckoutRedirectBehavior = 'always' | 'if_required';
+export type StripeCheckoutRedirectBehavior = 'always' | 'if_required';
 
-export type StripeCustomCheckoutSavedPaymentMethod = {
+export type StripeCheckoutSavedPaymentMethod = {
   id: string;
   type: 'card';
   card: {
@@ -128,13 +124,13 @@ export type StripeCustomCheckoutSavedPaymentMethod = {
   };
 };
 
-export type StripeCustomCheckoutTaxAmount = {
+export type StripeCheckoutTaxAmount = {
   amount: number;
   inclusive: boolean;
   displayName: string;
 };
 
-export type StripeCustomCheckoutLineItem = {
+export type StripeCheckoutLineItem = {
   id: string;
   name: string;
   amountDiscount: number;
@@ -144,39 +140,39 @@ export type StripeCustomCheckoutLineItem = {
   unitAmount: number;
   description: string | null;
   quantity: number;
-  discountAmounts: Array<StripeCustomCheckoutDiscountAmount> | null;
-  taxAmounts: Array<StripeCustomCheckoutTaxAmount> | null;
+  discountAmounts: Array<StripeCheckoutDiscountAmount> | null;
+  taxAmounts: Array<StripeCheckoutTaxAmount> | null;
   recurring: {
-    interval: StripeCustomCheckoutBillingInterval;
+    interval: StripeCheckoutBillingInterval;
     intervalCount: number;
     isProrated: boolean;
     usageType: 'metered' | 'licensed';
   } | null;
-  adjustableQuantity: StripeCustomCheckoutAdjustableQuantity | null;
+  adjustableQuantity: StripeCheckoutAdjustableQuantity | null;
   images: string[];
 };
 
-export type StripeCustomCheckoutRecurring = {
-  interval: StripeCustomCheckoutBillingInterval;
+export type StripeCheckoutRecurring = {
+  interval: StripeCheckoutBillingInterval;
   intervalCount: number;
-  dueNext: StripeCustomCheckoutDueNext;
-  trial: StripeCustomCheckoutTrial | null;
+  dueNext: StripeCheckoutDueNext;
+  trial: StripeCheckoutTrial | null;
 };
 
-export type StripeCustomCheckoutShipping = {
-  shippingOption: StripeCustomCheckoutShippingOption;
-  taxAmounts: Array<StripeCustomCheckoutTaxAmount> | null;
+export type StripeCheckoutShipping = {
+  shippingOption: StripeCheckoutShippingOption;
+  taxAmounts: Array<StripeCheckoutTaxAmount> | null;
 };
 
-export type StripeCustomCheckoutShippingOption = {
+export type StripeCheckoutShippingOption = {
   id: string;
   amount: number;
   currency: string;
   displayName: string | null;
-  deliveryEstimate: StripeCustomCheckoutDeliveryEstimate | null;
+  deliveryEstimate: StripeCheckoutDeliveryEstimate | null;
 };
 
-export type StripeCustomCheckoutStatus =
+export type StripeCheckoutStatus =
   | {type: 'open'}
   | {type: 'expired'}
   | {
@@ -184,12 +180,12 @@ export type StripeCustomCheckoutStatus =
       paymentStatus: 'paid' | 'unpaid' | 'no_payment_required';
     };
 
-export type StripeCustomCheckoutTaxStatus =
+export type StripeCheckoutTaxStatus =
   | {status: 'ready'}
   | {status: 'requires_shipping_address'}
   | {status: 'requires_billing_address'};
 
-export type StripeCustomCheckoutTotalSummary = {
+export type StripeCheckoutTotalSummary = {
   appliedBalance: number;
   balanceAppliedToNextInvoice: boolean;
   discount: number;
@@ -200,48 +196,48 @@ export type StripeCustomCheckoutTotalSummary = {
   total: number;
 };
 
-export type StripeCustomCheckoutTrial = {
+export type StripeCheckoutTrial = {
   trialEnd: number;
   trialPeriodDays: number;
 };
 
-export type StripeCustomCheckoutCurrencyOption = {
+export type StripeCheckoutCurrencyOption = {
   amount: number;
   currency: string;
   currencyConversion?: {fxRate: number; sourceCurrency: string};
 };
 
 /* Custom Checkout session */
-export interface StripeCustomCheckoutSession {
-  billingAddress: StripeCustomCheckoutContact | null;
+export interface StripeCheckoutSession {
+  billingAddress: StripeCheckoutContact | null;
   businessName: string | null;
   canConfirm: boolean;
-  confirmationRequirements: StripeCustomCheckoutConfirmationRequirement[];
+  confirmationRequirements: StripeCheckoutConfirmationRequirement[];
   currency: string;
-  currencyOptions: Array<StripeCustomCheckoutCurrencyOption> | null;
-  discountAmounts: Array<StripeCustomCheckoutDiscountAmount> | null;
+  currencyOptions: Array<StripeCheckoutCurrencyOption> | null;
+  discountAmounts: Array<StripeCheckoutDiscountAmount> | null;
   email: string | null;
   id: string;
-  lastPaymentError: StripeCustomCheckoutLastPaymentError | null;
-  lineItems: Array<StripeCustomCheckoutLineItem>;
+  lastPaymentError: StripeCheckoutLastPaymentError | null;
+  lineItems: Array<StripeCheckoutLineItem>;
   livemode: boolean;
   phoneNumber: string | null;
-  recurring: StripeCustomCheckoutRecurring | null;
-  savedPaymentMethods: Array<StripeCustomCheckoutSavedPaymentMethod> | null;
-  shipping: StripeCustomCheckoutShipping | null;
-  shippingAddress: StripeCustomCheckoutContact | null;
-  shippingOptions: Array<StripeCustomCheckoutShippingOption>;
-  status: StripeCustomCheckoutStatus;
-  tax: StripeCustomCheckoutTaxStatus;
-  taxAmounts: Array<StripeCustomCheckoutTaxAmount> | null;
-  total: StripeCustomCheckoutTotalSummary;
+  recurring: StripeCheckoutRecurring | null;
+  savedPaymentMethods: Array<StripeCheckoutSavedPaymentMethod> | null;
+  shipping: StripeCheckoutShipping | null;
+  shippingAddress: StripeCheckoutContact | null;
+  shippingOptions: Array<StripeCheckoutShippingOption>;
+  status: StripeCheckoutStatus;
+  tax: StripeCheckoutTaxStatus;
+  taxAmounts: Array<StripeCheckoutTaxAmount> | null;
+  total: StripeCheckoutTotalSummary;
 }
 
-export type StripeCustomCheckoutResult =
-  | {session: StripeCustomCheckoutSession; error?: undefined}
+export type StripeCheckoutResult =
+  | {session: StripeCheckoutSession; error?: undefined}
   | {session?: undefined; error: StripeError};
 
-export type StripeCustomCheckoutPaymentElementOptions = {
+export type StripeCheckoutPaymentElementOptions = {
   layout?: Layout | LayoutObject;
   paymentMethodOrder?: Array<string>;
   readonly?: boolean;
@@ -249,7 +245,7 @@ export type StripeCustomCheckoutPaymentElementOptions = {
   fields?: FieldsOption;
 };
 
-export type StripeCustomCheckoutAddressElementOptions = {
+export type StripeCheckoutAddressElementOptions = {
   mode: AddressMode;
   contacts?: ContactOption[];
   display?: {
@@ -257,7 +253,7 @@ export type StripeCustomCheckoutAddressElementOptions = {
   };
 };
 
-export type StripeCustomCheckoutExpressCheckoutElementOptions = {
+export type StripeCheckoutExpressCheckoutElementOptions = {
   buttonHeight: StripeExpressCheckoutElementOptions['buttonHeight'];
   buttonTheme: StripeExpressCheckoutElementOptions['buttonTheme'];
   buttonType: StripeExpressCheckoutElementOptions['buttonType'];
@@ -266,30 +262,26 @@ export type StripeCustomCheckoutExpressCheckoutElementOptions = {
   paymentMethods: StripeExpressCheckoutElementOptions['paymentMethods'];
 };
 
-export type StripeCustomCheckoutUpdateHandler = (
-  session: StripeCustomCheckoutSession
+export type StripeCheckoutUpdateHandler = (
+  session: StripeCheckoutSession
 ) => void;
 
-export type StripeCustomCheckoutExpressCheckoutElementConfirmEvent = StripeExpressCheckoutElementConfirmEvent & {
-  confirm: () => Promise<StripeCustomCheckoutResult>;
-};
-
-export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase & {
+export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
   /**
    * Triggered when the element is fully rendered.
    */
   on(
     eventType: 'ready',
     handler: (event: StripeExpressCheckoutElementReadyEvent) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'ready',
     handler: (event: StripeExpressCheckoutElementReadyEvent) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'ready',
     handler?: (event: StripeExpressCheckoutElementReadyEvent) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
 
   /**
    * Triggered when the element gains focus.
@@ -297,15 +289,15 @@ export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase & {
   on(
     eventType: 'focus',
     handler: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'focus',
     handler: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'focus',
     handler?: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
 
   /**
    * Triggered when the element loses focus.
@@ -313,15 +305,15 @@ export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase & {
   on(
     eventType: 'blur',
     handler: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'blur',
     handler: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'blur',
     handler?: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
 
   /**
    * Triggered when the escape key is pressed within the element.
@@ -329,15 +321,15 @@ export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase & {
   on(
     eventType: 'escape',
     handler: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'escape',
     handler: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'escape',
     handler?: (event: {elementType: 'expressCheckout'}) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
 
   /**
    * Triggered when the element fails to load.
@@ -348,43 +340,37 @@ export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase & {
       elementType: 'expressCheckout';
       error: StripeError;
     }) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'loaderror',
     handler: (event: {
       elementType: 'expressCheckout';
       error: StripeError;
     }) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'loaderror',
     handler?: (event: {
       elementType: 'expressCheckout';
       error: StripeError;
     }) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+  ): StripeCheckoutExpressCheckoutElement;
 
   /**
    * Triggered when a buyer authorizes a payment within a supported payment method.
    */
   on(
     eventType: 'confirm',
-    handler: (
-      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-    ) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+    handler: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'confirm',
-    handler: (
-      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-    ) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+    handler: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'confirm',
-    handler?: (
-      event: StripeCustomCheckoutExpressCheckoutElementConfirmEvent
-    ) => any
-  ): StripeCustomCheckoutExpressCheckoutElement;
+    handler?: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
 
   /**
    * Updates the options the `ExpressCheckoutElement` was initialized with.
@@ -393,37 +379,84 @@ export type StripeCustomCheckoutExpressCheckoutElement = StripeElementBase & {
   update: StripeExpressCheckoutElement['update'];
 };
 
-export interface StripeCustomCheckout {
+type AnyBuyerError = {message: string; code: null};
+type ApplyPromotionCodeError =
+  | {message: string; code: 'invalidCode'}
+  | AnyBuyerError;
+export type StripeCheckoutApplyPromotionCodeResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: ApplyPromotionCodeError};
+
+export type StripeCheckoutRemovePromotionCodeResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
+export type StripeCheckoutUpdateAddressResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
+export type StripeCheckoutUpdatePhoneNumberResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: never};
+
+type UpdateEmailError =
+  | {message: string; code: 'incompleteEmail'}
+  | {message: string; code: 'invalidEmail'};
+export type StripeCheckoutUpdateEmailResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: UpdateEmailError};
+
+export type StripeCheckoutUpdateLineItemQuantityResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
+export type StripeCheckoutUpdateShippingOptionResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
+type ConfirmError =
+  | {
+      message: string;
+      code: 'paymentFailed';
+      paymentFailed: {
+        declineCode: string | null;
+      };
+    }
+  | AnyBuyerError;
+export type StripeCheckoutConfirmResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: ConfirmError};
+export interface StripeCheckout {
   /* Custom Checkout methods */
   applyPromotionCode: (
     promotionCode: string
-  ) => Promise<StripeCustomCheckoutResult>;
-  removePromotionCode: () => Promise<StripeCustomCheckoutResult>;
+  ) => Promise<StripeCheckoutApplyPromotionCodeResult>;
+  removePromotionCode: () => Promise<StripeCheckoutRemovePromotionCodeResult>;
   updateShippingAddress: (
-    shippingAddress: StripeCustomCheckoutContact | null
-  ) => Promise<StripeCustomCheckoutResult>;
+    shippingAddress: StripeCheckoutContact | null
+  ) => Promise<StripeCheckoutUpdateAddressResult>;
   updateBillingAddress: (
-    billingAddress: StripeCustomCheckoutContact | null
-  ) => Promise<StripeCustomCheckoutResult>;
+    billingAddress: StripeCheckoutContact | null
+  ) => Promise<StripeCheckoutUpdateAddressResult>;
   updatePhoneNumber: (
     phoneNumber: string
-  ) => Promise<StripeCustomCheckoutResult>;
-  updateEmail: (email: string) => Promise<StripeCustomCheckoutResult>;
+  ) => Promise<StripeCheckoutUpdatePhoneNumberResult>;
+  updateEmail: (email: string) => Promise<StripeCheckoutUpdateEmailResult>;
   updateLineItemQuantity: (args: {
     lineItem: string;
     quantity: number;
-  }) => Promise<StripeCustomCheckoutResult>;
+  }) => Promise<StripeCheckoutUpdateLineItemQuantityResult>;
   updateShippingOption: (
     shippingOption: string
-  ) => Promise<StripeCustomCheckoutResult>;
+  ) => Promise<StripeCheckoutResult>;
   confirm: (args?: {
     returnUrl?: string;
-    redirect?: StripeCustomCheckoutRedirectBehavior;
+    redirect?: StripeCheckoutRedirectBehavior;
     paymentMethod?: string;
     savePaymentMethod?: boolean;
-  }) => Promise<StripeCustomCheckoutResult>;
-  session: () => StripeCustomCheckoutSession;
-  on: (event: 'change', handler: StripeCustomCheckoutUpdateHandler) => void;
+  }) => Promise<StripeCheckoutConfirmResult>;
+  session: () => StripeCheckoutSession;
+  on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
 
   /* Elements methods */
   changeAppearance: (appearance: Appearance) => void;
@@ -434,23 +467,23 @@ export interface StripeCustomCheckout {
   ): StripeAddressElement | null;
   getElement(
     elementType: 'expressCheckout'
-  ): StripeCustomCheckoutExpressCheckoutElement | null;
+  ): StripeCheckoutExpressCheckoutElement | null;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   getElement(
     elementType: 'currencySelector'
   ): StripeCurrencySelectorElement | null;
   createElement(
     elementType: 'payment',
-    options?: StripeCustomCheckoutPaymentElementOptions
+    options?: StripeCheckoutPaymentElementOptions
   ): StripePaymentElement;
   createElement(
     elementType: 'address',
-    options: StripeCustomCheckoutAddressElementOptions
+    options: StripeCheckoutAddressElementOptions
   ): StripeAddressElement;
   createElement(
     elementType: 'expressCheckout',
-    options: StripeCustomCheckoutExpressCheckoutElementOptions
-  ): StripeCustomCheckoutExpressCheckoutElement;
+    options: StripeCheckoutExpressCheckoutElementOptions
+  ): StripeCheckoutExpressCheckoutElement;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   createElement(elementType: 'currencySelector'): StripeCurrencySelectorElement;
 }
