@@ -16,7 +16,7 @@ import {
 import {CheckoutLocale, RedirectToCheckoutOptions} from './hosted-checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
-import {StripeCustomCheckoutOptions, StripeCustomCheckout} from './checkout';
+import {StripeCheckoutOptions, StripeCheckout} from './checkout';
 import {
   StripeEmbeddedCheckoutOptions,
   StripeEmbeddedCheckout,
@@ -1265,9 +1265,7 @@ export interface Stripe {
    * Requires beta access:
    * Contact [Stripe support](https://support.stripe.com/) for more information.
    */
-  initCustomCheckout(
-    options: StripeCustomCheckoutOptions
-  ): Promise<StripeCustomCheckout>;
+  initCheckout(options: StripeCheckoutOptions): Promise<StripeCheckout>;
 
   /**
    * Use `stripe.initEmbeddedCheckout` to initialize an embedded Checkout instance
