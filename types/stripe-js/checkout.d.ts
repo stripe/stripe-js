@@ -1,153 +1,489 @@
-export interface RedirectToCheckoutServerOptions {
-  /**
-   * The ID of the [Checkout Session](https://stripe.com/docs/api/checkout/sessions) that is used in [Checkout's server integration](https://stripe.com/docs/payments/checkout/one-time).
-   */
-  sessionId: string;
+import {
+  LayoutObject,
+  Layout,
+  TermsOption,
+  StripePaymentElement,
+} from './elements/payment';
+import {
+  AddressMode,
+  ContactOption,
+  StripeAddressElement,
+} from './elements/address';
+import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
+import {StripeError} from './stripe';
+import {
+  StripeCurrencySelectorElement,
+  FieldsOption,
+  StripeElementBase,
+  StripeExpressCheckoutElement,
+  StripeExpressCheckoutElementConfirmEvent,
+  StripeExpressCheckoutElementOptions,
+  StripeExpressCheckoutElementReadyEvent,
+} from './elements';
+
+/**
+ * Requires beta access:
+ * Contact [Stripe support](https://support.stripe.com/) for more information.
+ */
+
+export interface StripeCheckoutElementsOptions {
+  appearance?: Appearance;
+  loader?: 'auto' | 'always' | 'never';
+  fonts?: Array<CssFontSource | CustomFontSource>;
 }
 
-export interface RedirectToCheckoutClientOptions {
-  /**
-   * The URL to which Stripe should send customers when payment is complete.
-   * If you’d like access to the Checkout Session for the successful payment, read more about it in our guide on [fulfilling your payments with webhooks](https://stripe.com/docs/payments/checkout/fulfillment#webhooks).
-   */
-  successUrl: string;
+export interface StripeCheckoutOptions {
+  clientSecret: string;
+  elementsOptions?: StripeCheckoutElementsOptions;
+}
 
-  /**
-   * The URL to which Stripe should send customers when payment is canceled.
-   */
-  cancelUrl: string;
+/* Elements with CheckoutSessions API types */
+export type StripeCheckoutAddress = {
+  country: string;
+  line1?: string | null;
+  line2?: string | null;
+  city?: string | null;
+  postal_code?: string | null;
+  state?: string | null;
+};
 
-  /**
-   * An array of objects representing the items that your customer would like to purchase.
-   * These items are shown as line items in the Checkout interface and make up the total amount to be collected by Checkout.
-   */
-  lineItems?: Array<{
-    /**
-     * The ID of the price that the customer would like to purchase. SKU or plan IDs may also be used.
-     */
-    price?: string;
+export type StripeCheckoutAdjustableQuantity = {
+  maximum: number;
+  minimum: number;
+};
 
-    /**
-     * The quantity of units for the item.
-     */
-    quantity?: number;
-  }>;
+export type StripeCheckoutBillingInterval = 'day' | 'month' | 'week' | 'year';
 
-  /**
-   * An array of objects representing the items that your customer would like to purchase.
-   * These items are shown as line items in the Checkout interface and make up the total amount to be collected by Checkout.
-   *
-   * @deprecated
-   */
-  items?: Array<{
-    /**
-     * The ID of the SKU that the customer would like to purchase
-     */
-    sku?: string;
+export type StripeCheckoutConfirmationRequirement =
+  | 'phoneNumber'
+  | 'shippingAddress'
+  | 'billingAddress'
+  | 'paymentDetails'
+  | 'email';
 
-    /**
-     * The ID of the plan that the customer would like to subscribe to.
-     */
-    plan?: string;
+export type StripeCheckoutContact = {
+  name?: string | null;
+  address: StripeCheckoutAddress;
+};
 
-    /**
-     * The quantity of units for the item.
-     */
-    quantity?: number;
-  }>;
+export type StripeCheckoutDeliveryEstimate = {
+  maximum: StripeCheckoutEstimate | null;
+  minimum: StripeCheckoutEstimate | null;
+};
 
-  /**
-   * The mode of the Checkout Session. Required if using lineItems.
-   */
-  mode?: 'payment' | 'subscription';
+export type StripeCheckoutDiscountAmount = {
+  amount: number;
+  displayName: string;
+  promotionCode: string | null;
+  recurring:
+    | {type: 'forever'}
+    | {type: 'repeating'; durationInMonths: number}
+    | null;
+};
 
-  /**
-   * A unique string to reference the Checkout session.
-   * This can be a customer ID, a cart ID, or similar.
-   * It is included in the `checkout.session.completed` webhook and can be used to fulfill the purchase.
-   */
-  clientReferenceId?: string;
+export type StripeCheckoutDueNext = {
+  amountSubtotal: number;
+  amountDiscount: number;
+  amountTaxInclusive: number;
+  amountTaxExclusive: number;
+  billingCycleAnchor: number | null;
+};
 
-  /**
-   * The email address used to create the customer object.
-   * If you already know your customer's email address, use this attribute to prefill it on Checkout.
-   */
-  customerEmail?: string;
+export type StripeCheckoutEstimate = {
+  unit: 'business_day' | 'day' | 'hour' | 'week' | 'month';
+  value: number;
+};
 
-  /**
-   * Specify whether Checkout should collect the customer’s billing address.
-   * If set to `required`, Checkout will attempt to collect the customer’s billing address.
-   * If not set or set to `auto` Checkout will only attempt to collect the billing address when necessary.
-   */
-  billingAddressCollection?: 'auto' | 'required';
+export type StripeCheckoutLastPaymentError = {
+  message: string;
+};
 
-  /**
-   * Provides configuration for Checkout to collect a shipping address from a customer.
-   */
-  shippingAddressCollection?: {
-    /**
-     * An array of two-letter ISO country codes representing which countries
-     * Checkout should provide as options for shipping locations. The codes are
-     * expected to be uppercase. Unsupported country codes: AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI.
-     */
-    allowedCountries: string[];
+export type StripeCheckoutRedirectBehavior = 'always' | 'if_required';
+
+export type StripeCheckoutSavedPaymentMethod = {
+  id: string;
+  type: 'card';
+  card: {
+    brand: string;
+    expMonth: number;
+    expYear: number;
+    last4: string;
   };
+  billingDetails: {
+    email?: string | null;
+    name?: string | null;
+    phone?: string | null;
+    address?: {
+      line1?: string | null;
+      line2?: string | null;
+      city?: string | null;
+      postal_code?: string | null;
+      state?: string | null;
+      country?: string | null;
+    } | null;
+  };
+};
 
-  /**
-   * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) of the locale to display Checkout in.
-   * Default is `auto` (Stripe detects the locale of the browser).
-   */
-  locale?: CheckoutLocale;
+export type StripeCheckoutTaxAmount = {
+  amount: number;
+  inclusive: boolean;
+  displayName: string;
+};
 
-  /**
-   * Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the **Submit** button.
-   * `submitType` can only be specified when using using line items or SKUs, and not subscriptions.
-   * The default is `auto`.
-   */
-  submitType?: 'auto' | 'book' | 'donate' | 'pay';
+export type StripeCheckoutLineItem = {
+  id: string;
+  name: string;
+  amountDiscount: number;
+  amountSubtotal: number;
+  amountTaxExclusive: number;
+  amountTaxInclusive: number;
+  unitAmount: number;
+  description: string | null;
+  quantity: number;
+  discountAmounts: Array<StripeCheckoutDiscountAmount> | null;
+  taxAmounts: Array<StripeCheckoutTaxAmount> | null;
+  recurring: {
+    interval: StripeCheckoutBillingInterval;
+    intervalCount: number;
+    isProrated: boolean;
+    usageType: 'metered' | 'licensed';
+  } | null;
+  adjustableQuantity: StripeCheckoutAdjustableQuantity | null;
+  images: string[];
+};
+
+export type StripeCheckoutRecurring = {
+  interval: StripeCheckoutBillingInterval;
+  intervalCount: number;
+  dueNext: StripeCheckoutDueNext;
+  trial: StripeCheckoutTrial | null;
+};
+
+export type StripeCheckoutShipping = {
+  shippingOption: StripeCheckoutShippingOption;
+  taxAmounts: Array<StripeCheckoutTaxAmount> | null;
+};
+
+export type StripeCheckoutShippingOption = {
+  id: string;
+  amount: number;
+  currency: string;
+  displayName: string | null;
+  deliveryEstimate: StripeCheckoutDeliveryEstimate | null;
+};
+
+export type StripeCheckoutStatus =
+  | {type: 'open'}
+  | {type: 'expired'}
+  | {
+      type: 'complete';
+      paymentStatus: 'paid' | 'unpaid' | 'no_payment_required';
+    };
+
+export type StripeCheckoutTaxStatus =
+  | {status: 'ready'}
+  | {status: 'requires_shipping_address'}
+  | {status: 'requires_billing_address'};
+
+export type StripeCheckoutTotalSummary = {
+  appliedBalance: number;
+  balanceAppliedToNextInvoice: boolean;
+  discount: number;
+  shippingRate: number;
+  subtotal: number;
+  taxExclusive: number;
+  taxInclusive: number;
+  total: number;
+};
+
+export type StripeCheckoutTrial = {
+  trialEnd: number;
+  trialPeriodDays: number;
+};
+
+export type StripeCheckoutCurrencyOption = {
+  amount: number;
+  currency: string;
+  currencyConversion?: {fxRate: number; sourceCurrency: string};
+};
+
+/* Custom Checkout session */
+export interface StripeCheckoutSession {
+  billingAddress: StripeCheckoutContact | null;
+  businessName: string | null;
+  canConfirm: boolean;
+  confirmationRequirements: StripeCheckoutConfirmationRequirement[];
+  currency: string;
+  currencyOptions: Array<StripeCheckoutCurrencyOption> | null;
+  discountAmounts: Array<StripeCheckoutDiscountAmount> | null;
+  email: string | null;
+  id: string;
+  lastPaymentError: StripeCheckoutLastPaymentError | null;
+  lineItems: Array<StripeCheckoutLineItem>;
+  livemode: boolean;
+  phoneNumber: string | null;
+  recurring: StripeCheckoutRecurring | null;
+  savedPaymentMethods: Array<StripeCheckoutSavedPaymentMethod> | null;
+  shipping: StripeCheckoutShipping | null;
+  shippingAddress: StripeCheckoutContact | null;
+  shippingOptions: Array<StripeCheckoutShippingOption>;
+  status: StripeCheckoutStatus;
+  tax: StripeCheckoutTaxStatus;
+  taxAmounts: Array<StripeCheckoutTaxAmount> | null;
+  total: StripeCheckoutTotalSummary;
 }
 
-export type RedirectToCheckoutOptions =
-  | RedirectToCheckoutServerOptions
-  | RedirectToCheckoutClientOptions;
+export type StripeCheckoutResult =
+  | {session: StripeCheckoutSession; error?: undefined}
+  | {session?: undefined; error: StripeError};
 
-export type CheckoutLocale =
-  | 'auto'
-  | 'bg'
-  | 'cs'
-  | 'da'
-  | 'de'
-  | 'el'
-  | 'en'
-  | 'en-GB'
-  | 'es'
-  | 'es-419'
-  | 'et'
-  | 'fi'
-  | 'fil'
-  | 'fr'
-  | 'fr-CA'
-  | 'hr'
-  | 'hu'
-  | 'id'
-  | 'it'
-  | 'ja'
-  | 'lt'
-  | 'lv'
-  | 'ms'
-  | 'mt'
-  | 'nb'
-  | 'nl'
-  | 'pl'
-  | 'pt'
-  | 'pt-BR'
-  | 'ro'
-  | 'ru'
-  | 'sk'
-  | 'sl'
-  | 'sv'
-  | 'th'
-  | 'tr'
-  | 'zh'
-  | 'zh-HK'
-  | 'zh-TW';
+export type StripeCheckoutPaymentElementOptions = {
+  layout?: Layout | LayoutObject;
+  paymentMethodOrder?: Array<string>;
+  readonly?: boolean;
+  terms?: TermsOption;
+  fields?: FieldsOption;
+};
+
+export type StripeCheckoutAddressElementOptions = {
+  mode: AddressMode;
+  contacts?: ContactOption[];
+  display?: {
+    name?: 'full' | 'split' | 'organization';
+  };
+};
+
+export type StripeCheckoutExpressCheckoutElementOptions = {
+  buttonHeight: StripeExpressCheckoutElementOptions['buttonHeight'];
+  buttonTheme: StripeExpressCheckoutElementOptions['buttonTheme'];
+  buttonType: StripeExpressCheckoutElementOptions['buttonType'];
+  layout: StripeExpressCheckoutElementOptions['layout'];
+  paymentMethodOrder: StripeExpressCheckoutElementOptions['paymentMethodOrder'];
+  paymentMethods: StripeExpressCheckoutElementOptions['paymentMethods'];
+};
+
+export type StripeCheckoutUpdateHandler = (
+  session: StripeCheckoutSession
+) => void;
+
+export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
+  /**
+   * Triggered when the element is fully rendered.
+   */
+  on(
+    eventType: 'ready',
+    handler: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'ready',
+    handler: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'ready',
+    handler?: (event: StripeExpressCheckoutElementReadyEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the element gains focus.
+   */
+  on(
+    eventType: 'focus',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'focus',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'focus',
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the element loses focus.
+   */
+  on(
+    eventType: 'blur',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'blur',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'blur',
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the escape key is pressed within the element.
+   */
+  on(
+    eventType: 'escape',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'escape',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'escape',
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the element fails to load.
+   */
+  on(
+    eventType: 'loaderror',
+    handler: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'loaderror',
+    handler: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'loaderror',
+    handler?: (event: {
+      elementType: 'expressCheckout';
+      error: StripeError;
+    }) => any
+  ): StripeCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when a buyer authorizes a payment within a supported payment method.
+   */
+  on(
+    eventType: 'confirm',
+    handler: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'confirm',
+    handler: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'confirm',
+    handler?: (event: StripeExpressCheckoutElementConfirmEvent) => any
+  ): StripeCheckoutExpressCheckoutElement;
+
+  /**
+   * Updates the options the `ExpressCheckoutElement` was initialized with.
+   * Updates are merged into the existing configuration.
+   */
+  update: StripeExpressCheckoutElement['update'];
+};
+
+type AnyBuyerError = {message: string; code: null};
+type ApplyPromotionCodeError =
+  | {message: string; code: 'invalidCode'}
+  | AnyBuyerError;
+export type StripeCheckoutApplyPromotionCodeResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: ApplyPromotionCodeError};
+
+export type StripeCheckoutRemovePromotionCodeResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
+export type StripeCheckoutUpdateAddressResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
+export type StripeCheckoutUpdatePhoneNumberResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: never};
+
+type UpdateEmailError =
+  | {message: string; code: 'incompleteEmail'}
+  | {message: string; code: 'invalidEmail'};
+export type StripeCheckoutUpdateEmailResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: UpdateEmailError};
+
+export type StripeCheckoutUpdateLineItemQuantityResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
+export type StripeCheckoutUpdateShippingOptionResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
+type ConfirmError =
+  | {
+      message: string;
+      code: 'paymentFailed';
+      paymentFailed: {
+        declineCode: string | null;
+      };
+    }
+  | AnyBuyerError;
+export type StripeCheckoutConfirmResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: ConfirmError};
+export interface StripeCheckout {
+  /* Custom Checkout methods */
+  applyPromotionCode: (
+    promotionCode: string
+  ) => Promise<StripeCheckoutApplyPromotionCodeResult>;
+  removePromotionCode: () => Promise<StripeCheckoutRemovePromotionCodeResult>;
+  updateShippingAddress: (
+    shippingAddress: StripeCheckoutContact | null
+  ) => Promise<StripeCheckoutUpdateAddressResult>;
+  updateBillingAddress: (
+    billingAddress: StripeCheckoutContact | null
+  ) => Promise<StripeCheckoutUpdateAddressResult>;
+  updatePhoneNumber: (
+    phoneNumber: string
+  ) => Promise<StripeCheckoutUpdatePhoneNumberResult>;
+  updateEmail: (email: string) => Promise<StripeCheckoutUpdateEmailResult>;
+  updateLineItemQuantity: (args: {
+    lineItem: string;
+    quantity: number;
+  }) => Promise<StripeCheckoutUpdateLineItemQuantityResult>;
+  updateShippingOption: (
+    shippingOption: string
+  ) => Promise<StripeCheckoutResult>;
+  confirm: (args?: {
+    returnUrl?: string;
+    redirect?: StripeCheckoutRedirectBehavior;
+    paymentMethod?: string;
+    savePaymentMethod?: boolean;
+  }) => Promise<StripeCheckoutConfirmResult>;
+  session: () => StripeCheckoutSession;
+  on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
+
+  /* Elements methods */
+  changeAppearance: (appearance: Appearance) => void;
+  getElement(elementType: 'payment'): StripePaymentElement | null;
+  getElement(
+    elementType: 'address',
+    mode: AddressMode
+  ): StripeAddressElement | null;
+  getElement(
+    elementType: 'expressCheckout'
+  ): StripeCheckoutExpressCheckoutElement | null;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  getElement(
+    elementType: 'currencySelector'
+  ): StripeCurrencySelectorElement | null;
+  createElement(
+    elementType: 'payment',
+    options?: StripeCheckoutPaymentElementOptions
+  ): StripePaymentElement;
+  createElement(
+    elementType: 'address',
+    options: StripeCheckoutAddressElementOptions
+  ): StripeAddressElement;
+  createElement(
+    elementType: 'expressCheckout',
+    options: StripeCheckoutExpressCheckoutElementOptions
+  ): StripeCheckoutExpressCheckoutElement;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  createElement(elementType: 'currencySelector'): StripeCurrencySelectorElement;
+}
