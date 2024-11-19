@@ -233,10 +233,6 @@ export interface StripeCheckoutSession {
   total: StripeCheckoutTotalSummary;
 }
 
-export type StripeCheckoutResult =
-  | {session: StripeCheckoutSession; error?: undefined}
-  | {session?: undefined; error: StripeError};
-
 export type StripeCheckoutPaymentElementOptions = {
   layout?: Layout | LayoutObject;
   paymentMethodOrder?: Array<string>;
@@ -448,7 +444,7 @@ export interface StripeCheckout {
   }) => Promise<StripeCheckoutUpdateLineItemQuantityResult>;
   updateShippingOption: (
     shippingOption: string
-  ) => Promise<StripeCheckoutResult>;
+  ) => Promise<StripeCheckoutUpdateShippingOptionResult>;
   confirm: (args?: {
     returnUrl?: string;
     redirect?: StripeCheckoutRedirectBehavior;
