@@ -454,6 +454,11 @@ export interface StripeCheckout {
     redirect?: StripeCheckoutRedirectBehavior;
     paymentMethod?: string;
     savePaymentMethod?: boolean;
+    email?: string;
+    phoneNumber?: string;
+    billingAddress?: StripeCheckoutContact;
+    shippingAddress?: StripeCheckoutContact;
+    expressCheckoutConfirmEvent?: StripeExpressCheckoutElementConfirmEvent;
   }) => Promise<StripeCheckoutConfirmResult>;
   session: () => StripeCheckoutSession;
   on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
