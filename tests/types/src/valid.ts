@@ -222,7 +222,7 @@ elements.update({
   currency: 'usd',
   amount: 1099,
   setupFutureUsage: 'off_session',
-  captureMethod: 'automatic',
+  captureMethod: 'automatic_async',
   paymentMethodTypes: ['card'],
   on_behalf_of: 'acct_id',
 });

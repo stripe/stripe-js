@@ -730,14 +730,14 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
    */
-  captureMethod?: 'manual' | 'automatic';
+  captureMethod?: 'manual' | 'automatic' | 'automatic_async';
 
   /**
    * Controls when the funds will be captured from the customer’s account.
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
    */
-  capture_method?: 'manual' | 'automatic';
+  capture_method?: 'manual' | 'automatic' | 'automatic_async';
 
   /**
    * The Stripe account ID which is the business of record.
@@ -872,14 +872,14 @@ export interface StripeElementsUpdateOptions {
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
    */
-  captureMethod?: 'manual' | 'automatic';
+  captureMethod?: 'manual' | 'automatic' | 'automatic_async';
 
   /**
    * Controls when the funds will be captured from the customer’s account.
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-capture_method
    */
-  capture_method?: 'manual' | 'automatic';
+  capture_method?: 'manual' | 'automatic' | 'automatic_async';
 
   /**
    * Instead of using automatic payment methods, declare specific payment methods to enable.
