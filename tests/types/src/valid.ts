@@ -2457,7 +2457,14 @@ stripe.handleNextAction({clientSecret: ''}).then((res) => {
 
 stripe
   .verifyMicrodepositsForPayment('', {amounts: [32, 45]})
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => {
+    if (result.paymentIntent?.next_action?.verify_with_microdeposits) {
+      console.log(
+        result.paymentIntent?.next_action?.verify_with_microdeposits
+          .arrival_date
+      );
+    }
+  });
 
 stripe.createPaymentMethod({
   elements: elements,
