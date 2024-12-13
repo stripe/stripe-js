@@ -422,6 +422,14 @@ type ConfirmError =
 export type StripeCheckoutConfirmResult =
   | {type: 'success'; success: StripeCheckoutSession}
   | {type: 'error'; error: ConfirmError};
+
+type RunServerUpdateFunction = (
+  session: StripeCheckoutSession
+) => Promise<void>;
+export type StripeCheckoutRunServerUpdateResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
+
 export interface StripeCheckout {
   /* Custom Checkout methods */
   applyPromotionCode: (
@@ -458,6 +466,9 @@ export interface StripeCheckout {
   }) => Promise<StripeCheckoutConfirmResult>;
   session: () => StripeCheckoutSession;
   on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
+  runServerUpdate: (
+    userFunction: RunServerUpdateFunction
+  ) => Promise<StripeCheckoutRunServerUpdateResult>;
 
   /* Elements methods */
   changeAppearance: (appearance: Appearance) => void;
