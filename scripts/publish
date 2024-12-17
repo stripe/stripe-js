@@ -140,14 +140,14 @@ fi
 echo "Installing dependencies according to lockfile"
 yarn install --frozen-lockfile
 
-echo "Building"
-yarn run build
-
 echo "Running tests"
 yarn run test
 
 echo "Bumping package.json $RELEASE_TYPE version and tagging commit"
 yarn version --$RELEASE_TYPE
+
+echo "Building"
+yarn run build
 
 create_github_release
 verify_commit_is_signed
