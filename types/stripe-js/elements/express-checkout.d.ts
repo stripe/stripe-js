@@ -306,9 +306,12 @@ export type GooglePayButtonType =
   | 'plain'
   | 'subscribe';
 
+export type PayPalButtonType = 'paypal' | 'buynow' | 'checkout' | 'pay';
+
 export type ButtonTypeOption = {
   applePay?: ApplePayButtonType;
   googlePay?: GooglePayButtonType;
+  paypal?: PayPalButtonType;
 };
 
 export interface StripeExpressCheckoutElementOptions {
