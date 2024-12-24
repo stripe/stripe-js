@@ -954,6 +954,7 @@ const expressCheckoutElement2 = elements.create('expressCheckout', {
   },
   buttonType: {
     applePay: 'check-out',
+    paypal: 'checkout',
   },
 });
 
