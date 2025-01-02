@@ -60,6 +60,11 @@ export interface StripeElements {
   update(options: StripeElementsUpdateOptions): void;
 
   /**
+   * Triggered when the call to elements.update() is complete.
+   */
+  on(eventType: 'update-end', handler: () => void): void;
+
+  /**
    * Fetches updates from the associated PaymentIntent or SetupIntent on an existing
    * instance of Elements, and reflects these updates in the Payment Element.
    */
