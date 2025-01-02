@@ -236,6 +236,8 @@ elements.update({
   payment_method_types: ['card'],
 });
 
+elements.on('update-end', () => {});
+
 const fetchUpdates = async () => {
   const {error} = await elements.fetchUpdates();
 };
