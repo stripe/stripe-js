@@ -423,9 +423,7 @@ export type StripeCheckoutConfirmResult =
   | {type: 'success'; success: StripeCheckoutSession}
   | {type: 'error'; error: ConfirmError};
 
-type RunServerUpdateFunction = (
-  session: StripeCheckoutSession
-) => Promise<void>;
+type RunServerUpdateFunction = () => Promise<unknown>;
 export type StripeCheckoutRunServerUpdateResult =
   | {type: 'success'; success: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
