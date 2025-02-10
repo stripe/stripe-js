@@ -1181,18 +1181,16 @@ expressCheckoutElement.on(
   }
 );
 
-expressCheckoutElement.update(
-  {
-    allowedShippingCountries: ['US'],
-    billingAddressRequired: true,
-    buttonHeight: 55,
-    emailRequired: true,
-    layout: {maxRows: 1, maxColumns: 1, overflow: 'auto'},
-    paymentMethodOrder: ['apple_pay', 'google_pay'],
-    phoneNumberRequired: true,
-    shippingAddressRequired: true,
-  },
-);
+expressCheckoutElement.update({
+  allowedShippingCountries: ['US'],
+  billingAddressRequired: true,
+  buttonHeight: 55,
+  emailRequired: true,
+  layout: {maxRows: 1, maxColumns: 1, overflow: 'auto'},
+  paymentMethodOrder: ['apple_pay', 'google_pay'],
+  phoneNumberRequired: true,
+  shippingAddressRequired: true,
+});
 
 const retrievedExpressCheckoutElement = elements.getElement('expressCheckout');
 
