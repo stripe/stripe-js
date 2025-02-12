@@ -926,14 +926,33 @@ const retrievedShippingAddressElement: StripeShippingAddressElement | null = ele
 const expressCheckoutElementDefault = elements.create('expressCheckout');
 
 const expressCheckoutElement = elements.create('expressCheckout', {
+  allowedShippingCountries: ['US'],
+  applePay: {
+    recurringPaymentRequest: {
+      paymentDescription: 'Subscription to ATN News',
+      regularBilling: {
+        label: 'Online & paper news',
+        amount: 2000,
+      },
+      managementURL: 'https://atnnews.com/manage-subscription',
+      billingAgreement: 'You agree to pay ATN News $20.00 every month.',
+    },
+  },
+  billingAddressRequired: true,
+  business: {name: 'Stripe Shop'},
   buttonHeight: 55,
+  emailRequired: true,
   layout: {maxRows: 1, maxColumns: 1, overflow: 'auto'},
+  lineItems: [{name: 'Pizza', amount: 1200}],
   paymentMethodOrder: ['apple_pay', 'google_pay'],
   paymentMethods: {
     googlePay: 'always',
     applePay: 'auto',
     link: 'auto',
   },
+  phoneNumberRequired: true,
+  shippingAddressRequired: true,
+  shippingRates: [{id: 'free-shipping', amount: 0, displayName: 'Free'}],
   buttonTheme: {
     applePay: 'white-outline',
     googlePay: 'white',
@@ -1161,6 +1180,17 @@ expressCheckoutElement.on(
     });
   }
 );
+
+expressCheckoutElement.update({
+  allowedShippingCountries: ['US'],
+  billingAddressRequired: true,
+  buttonHeight: 55,
+  emailRequired: true,
+  layout: {maxRows: 1, maxColumns: 1, overflow: 'auto'},
+  paymentMethodOrder: ['apple_pay', 'google_pay'],
+  phoneNumberRequired: true,
+  shippingAddressRequired: true,
+});
 
 const retrievedExpressCheckoutElement = elements.getElement('expressCheckout');
 

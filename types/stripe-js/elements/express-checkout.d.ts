@@ -316,6 +316,25 @@ export type ButtonTypeOption = {
 
 export interface StripeExpressCheckoutElementOptions {
   /**
+   * An array of two-letter ISO country codes representing which countries
+   * are eligible shipping locations.
+   */
+  allowedShippingCountries?: string[];
+
+  applePay?: ApplePayOption;
+
+  /**
+   * Whether the billing address should be collected in the payment interface.
+   */
+  billingAddressRequired?: boolean;
+
+  /**
+   * Provide information about your business that will be displayed in the payment interface.
+   * This information will be retrieved from your Stripe account if not provided.
+   */
+  business?: {name: string};
+
+  /**
    * Manually sets the height of the buttons shown.
    */
   buttonHeight?: number;
@@ -331,9 +350,16 @@ export interface StripeExpressCheckoutElementOptions {
   buttonType?: ButtonTypeOption;
 
   /**
+   * Whether the email address should be collected in the payment interface.
+   */
+  emailRequired?: boolean;
+
+  /**
    * Specifies how buttons should be laid out in relation to each other.
    */
   layout?: LayoutOption;
+
+  lineItems?: Array<LineItem>;
 
   /**
    * Override the order in which payment methods are displayed in the Express Checkout Element.
@@ -345,6 +371,18 @@ export interface StripeExpressCheckoutElementOptions {
    * Control payment method display in the Express Checkout Element.
    */
   paymentMethods?: ExpressCheckoutPaymentMethodsOption;
+
+  /**
+   * Whether the phone number should be collected in the payment interface.
+   */
+  phoneNumberRequired?: boolean;
+
+  /**
+   * Whether the shipping address should be collected in the payment interface.
+   */
+  shippingAddressRequired?: boolean;
+
+  shippingRates?: Array<ShippingRate>;
 
   /**
    * @deprecated
@@ -360,9 +398,25 @@ export interface StripeExpressCheckoutElementOptions {
  */
 export interface StripeExpressCheckoutElementUpdateOptions {
   /**
+   * An array of two-letter ISO country codes representing which countries
+   * are eligible shipping locations.
+   */
+  allowedShippingCountries?: string[];
+
+  /**
+   * Whether the billing address should be collected in the payment interface.
+   */
+  billingAddressRequired?: boolean;
+
+  /**
    * Manually sets the height of the buttons shown.
    */
   buttonHeight?: number;
+
+  /**
+   * Whether the email address should be collected in the payment interface.
+   */
+  emailRequired?: boolean;
 
   /**
    * Specifies how buttons should be laid out in relation to each other.
@@ -374,6 +428,16 @@ export interface StripeExpressCheckoutElementUpdateOptions {
    * By default, the Express Checkout Element will use a dynamic ordering that optimizes payment method display for each user.
    */
   paymentMethodOrder?: string[];
+
+  /**
+   * Whether the phone number should be collected in the payment interface.
+   */
+  phoneNumberRequired?: boolean;
+
+  /**
+   * Whether the shipping address should be collected in the payment interface.
+   */
+  shippingAddressRequired?: boolean;
 }
 
 export type AvailablePaymentMethods = {
@@ -398,25 +462,43 @@ export interface StripeExpressCheckoutElementReadyEvent {
 
 export type ClickResolveDetails = {
   /**
+   * @deprecated
    * An array of two-letter ISO country codes representing which countries
    * are eligible shipping locations.
    */
   allowedShippingCountries?: string[];
 
+  /**
+   * @deprecated
+   * Whether the billing address should be collected in the payment interface.
+   */
   billingAddressRequired?: boolean;
 
   /**
+   * @deprecated
    * Provide information about your business that will be displayed in the payment interface.
    * This information will be retrieved from your Stripe account if not provided.
    */
   business?: {name: string};
 
+  /**
+   * @deprecated
+   * Whether the email address should be collected in the payment interface.
+   */
   emailRequired?: boolean;
 
   lineItems?: Array<LineItem>;
 
+  /**
+   * @deprecated
+   * Whether the phone number should be collected in the payment interface.
+   */
   phoneNumberRequired?: boolean;
 
+  /**
+   * @deprecated
+   * Whether the shipping address should be collected in the payment interface.
+   */
   shippingAddressRequired?: boolean;
 
   shippingRates?: Array<ShippingRate>;
