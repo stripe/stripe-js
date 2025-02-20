@@ -12,20 +12,25 @@ export interface LoadParams {
 // containing the package.json version
 declare const _VERSION: string;
 
-const V3_URL = 'https://js.stripe.com/v3';
+const ORIGIN = 'https://js.stripe.com';
+const STRIPE_JS_URL = `${ORIGIN}/v3`;
 const V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
+const STRIPE_JS_URL_REGEX = /^https:\/\/js\.stripe\.com\/(v3|[a-z]+)\/stripe\.js(\?.*)?$/;
 const EXISTING_SCRIPT_MESSAGE =
   'loadStripe.setLoadParameters was called but an existing Stripe.js script already exists in the document; existing script parameters will be used';
 
+const isStripeJSURL = (url: string): boolean =>
+  V3_URL_REGEX.test(url) || STRIPE_JS_URL_REGEX.test(url);
+
 export const findScript = (): HTMLScriptElement | null => {
   const scripts = document.querySelectorAll<HTMLScriptElement>(
-    `script[src^="${V3_URL}"]`
+    `script[src^="${ORIGIN}"]`
   );
 
   for (let i = 0; i < scripts.length; i++) {
     const script = scripts[i];
 
-    if (!V3_URL_REGEX.test(script.src)) {
+    if (!isStripeJSURL(script.src)) {
       continue;
     }
 
@@ -39,7 +44,7 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
   const queryString =
     params && !params.advancedFraudSignals ? '?advancedFraudSignals=false' : '';
   const script = document.createElement('script');
-  script.src = `${V3_URL}${queryString}`;
+  script.src = `${STRIPE_JS_URL}${queryString}`;
 
   const headOrBody = document.head || document.body;
 
