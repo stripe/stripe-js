@@ -33,11 +33,20 @@ describe('findScript', () => {
     ['https://js.stripe.com/v3?advancedFraudSignals=true', true],
     ['https://js.stripe.com/v3', true],
     ['https://js.stripe.com/v3/', true],
+    ['https://js.stripe.com/v3/stripe.js', true],
+    ['https://js.stripe.com/v2/stripe.js', false],
+    ['https://js.stripe.com/versionname/stripe.js', true],
+    ['https://js.stripe.com/versionname/stripe.js', true],
+    ['https://js.stripe.com/versionname/', false],
+    ['https://js.stripe.com/versionname', false],
+    ['https://js.stripe.com/v2/', false],
+    ['https://js.stripe.com/v2', false],
     ['https://js.stripe.com/v3?advancedFraudSignals=false', true],
     ['https://js.stripe.com/v3?ab=cd', true],
     ['https://js.stripe.com/v3/something.js', false],
     ['https://js.stripe.com/v3/something.js?advancedFraudSignals=false', false],
     ['https://js.stripe.com/v3/something.js?ab=cd', false],
+    ['https://js.stripe.com/versionname/stripe.js?ab=cd', true],
   ];
 
   afterEach(() => {
