@@ -69,11 +69,11 @@ const registerWrapper = (stripe: any, startTime: number): void => {
 
 let stripePromise: Promise<StripeConstructor | null> | null = null;
 
-let onErrorListener: (() => void) | null = null;
+let onErrorListener: ((cause?: unknown) => void) | null = null;
 let onLoadListener: (() => void) | null = null;
 
-const onError = (reject: (reason?: any) => void) => () => {
-  reject(new Error('Failed to load Stripe.js'));
+const onError = (reject: (reason?: any) => void) => (cause?: unknown) => {
+  reject(new Error('Failed to load Stripe.js', {cause}));
 };
 
 const onLoad = (
