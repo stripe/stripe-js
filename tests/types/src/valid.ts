@@ -1052,6 +1052,10 @@ expressCheckoutElement.on('confirm', ({paymentFailed, expressPaymentType}) => {
   paymentFailed();
   paymentFailed({});
   paymentFailed({reason: 'invalid_shipping_address'});
+  paymentFailed({reason: 'invalid_billing_address'});
+  paymentFailed({reason: 'invalid_payment_data'});
+  paymentFailed({reason: 'address_unserviceable'});
+  paymentFailed({message: 'Test error message'});
 });
 
 expressCheckoutElement.on(
