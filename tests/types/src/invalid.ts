@@ -193,7 +193,7 @@ expressCheckoutElement.on('shippingaddresschange', ({address, resolve}) => {
 });
 
 expressCheckoutElement.on('confirm', ({paymentFailed}) => {
-  // @ts-expect-error Can only fail a payment for a reason of 'fail' or 'invalid-shipping-address'
+  // @ts-expect-error Can only fail a payment for a reason of 'fail', 'invalid_shipping_address', 'invalid_billing_address', 'invalid_payment_data', or 'address_unserviceable'
   paymentFailed({reason: 'pizza-time'});
 });
 

@@ -529,7 +529,13 @@ export interface StripeExpressCheckoutElementConfirmEvent {
    * Callback when a payment is unsuccessful. Optionally, specifying a reason will show a more detailed error in the payment interface.
    */
   paymentFailed: (payload?: {
-    reason?: 'fail' | 'invalid_shipping_address';
+    reason?:
+      | 'fail'
+      | 'invalid_shipping_address'
+      | 'invalid_billing_address'
+      | 'invalid_payment_data'
+      | 'address_unserviceable';
+    message?: string;
   }) => void;
 
   billingDetails?: BillingDetails;
