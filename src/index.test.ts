@@ -1,9 +1,9 @@
+import {SCRIPT_SRC} from './testUtils';
+import {RELEASE_TRAIN} from './shared';
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const dispatchScriptEvent = (eventType: string): void => {
-  const injectedScript = document.querySelector(
-    'script[src="https://js.stripe.com/v3"]'
-  );
+  const injectedScript = document.querySelector(`script[src="${SCRIPT_SRC}"]`);
 
   if (!injectedScript) {
     throw new Error('could not find Stripe.js script element');
@@ -15,11 +15,12 @@ const dispatchScriptEvent = (eventType: string): void => {
 describe('Stripe module loader', () => {
   afterEach(() => {
     const script = document.querySelector(
-      'script[src="https://js.stripe.com/v3"], script[src="https://js.stripe.com/v3/"]'
+      'script[src^="https://js.stripe.com/"]'
     );
     if (script && script.parentElement) {
       script.parentElement.removeChild(script);
     }
+
     delete window.Stripe;
     jest.resetModules();
   });
@@ -27,14 +28,12 @@ describe('Stripe module loader', () => {
   it('injects the Stripe script as a side effect after a tick', () => {
     require('./index');
 
-    expect(
-      document.querySelector('script[src="https://js.stripe.com/v3"]')
-    ).toBe(null);
+    expect(document.querySelector(`script[src="${SCRIPT_SRC}"]`)).toBe(null);
 
     return Promise.resolve().then(() => {
-      expect(
-        document.querySelector('script[src="https://js.stripe.com/v3"]')
-      ).not.toBe(null);
+      expect(document.querySelector(`script[src="${SCRIPT_SRC}"]`)).not.toBe(
+        null
+      );
     });
   });
 
@@ -44,41 +43,37 @@ describe('Stripe module loader', () => {
     window.Stripe = jest.fn((key) => ({key})) as any;
 
     return new Promise((resolve) => setTimeout(resolve)).then(() => {
-      expect(
-        document.querySelector('script[src="https://js.stripe.com/v3"]')
-      ).toBe(null);
+      expect(document.querySelector(`script[src="${SCRIPT_SRC}"]`)).toBe(null);
     });
   });
 
   describe('does not inject a duplicate script when one is already present', () => {
-    test('when the script does not have a trailing slash', () => {
-      require('./index');
+    if (RELEASE_TRAIN === 'v3') {
+      test('when the script does not have a trailing slash', () => {
+        require('./index');
 
-      const script = document.createElement('script');
-      script.src = 'https://js.stripe.com/v3';
-      document.body.appendChild(script);
+        const script = document.createElement('script');
+        script.src = 'https://js.stripe.com/v3';
+        document.body.appendChild(script);
 
-      return Promise.resolve().then(() => {
-        expect(
-          document.querySelectorAll(
-            'script[src="https://js.stripe.com/v3"], script[src="https://js.stripe.com/v3/"]'
-          )
-        ).toHaveLength(1);
+        return Promise.resolve().then(() => {
+          expect(
+            document.querySelectorAll(`script[src="${SCRIPT_SRC}"]`)
+          ).toHaveLength(1);
+        });
       });
-    });
+    }
 
     test('when the script has a trailing slash', () => {
       require('./index');
 
       const script = document.createElement('script');
-      script.src = 'https://js.stripe.com/v3/';
+      script.src = SCRIPT_SRC;
       document.body.appendChild(script);
 
       return Promise.resolve().then(() => {
         expect(
-          document.querySelectorAll(
-            'script[src="https://js.stripe.com/v3"], script[src="https://js.stripe.com/v3/"]'
-          )
+          document.querySelectorAll(`script[src="${SCRIPT_SRC}"]`)
         ).toHaveLength(1);
       });
     });
@@ -93,7 +88,7 @@ describe('Stripe module loader', () => {
       await Promise.resolve();
 
       expect(
-        document.querySelectorAll('script[src^="https://js.stripe.com/v3"]')
+        document.querySelectorAll('script[src^="https://js.stripe.com"]')
       ).toHaveLength(2);
 
       expect(
@@ -102,9 +97,9 @@ describe('Stripe module loader', () => {
         )
       ).not.toBe(null);
 
-      expect(
-        document.querySelector('script[src="https://js.stripe.com/v3"]')
-      ).not.toBe(null);
+      expect(document.querySelector(`script[src="${SCRIPT_SRC}"]`)).not.toBe(
+        null
+      );
     });
   });
 
