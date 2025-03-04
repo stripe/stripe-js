@@ -207,6 +207,111 @@ export type StripeCheckoutCurrencyOption = {
   currencyConversion?: {fxRate: number; sourceCurrency: string};
 };
 
+export type StripeCheckoutTaxIdType =
+  | 'al_tin'
+  | 'am_tin'
+  | 'ao_tin'
+  | 'at_vat'
+  | 'ba_tin'
+  | 'bb_tin'
+  | 'be_vat'
+  | 'bg_vat'
+  | 'bs_tin'
+  | 'cd_nif'
+  | 'cl_tin'
+  | 'tr_tin'
+  | 'cy_vat'
+  | 'cz_vat'
+  | 'de_vat'
+  | 'dk_vat'
+  | 'ee_vat'
+  | 'es_vat'
+  | 'fi_vat'
+  | 'fr_vat'
+  | 'gn_nif'
+  | 'gr_vat'
+  | 'hr_vat'
+  | 'th_vat'
+  | 'ie_vat'
+  | 'it_vat'
+  | 'kh_tin'
+  | 'lt_vat'
+  | 'lu_vat'
+  | 'lv_vat'
+  | 'me_pib'
+  | 'mk_vat'
+  | 'mr_nif'
+  | 'mt_vat'
+  | 'nl_vat'
+  | 'np_pan'
+  | 'pe_ruc'
+  | 'pl_vat'
+  | 'pt_vat'
+  | 'ro_vat'
+  | 'se_vat'
+  | 'sa_vat'
+  | 'si_vat'
+  | 'sk_vat'
+  | 'sn_ninea'
+  | 'sr_fin'
+  | 'tj_tin'
+  | 'ug_tin'
+  | 'uy_ruc'
+  | 'xi_vat'
+  | 'zm_tin'
+  | 'zw_tin'
+  | 'gb_vat'
+  | 'nz_gst'
+  | 'au_abn'
+  | 'no_vat'
+  | 'ch_vat'
+  | 'mx_rfc'
+  | 'hu_vat'
+  | 'ca_bn'
+  | 'ca_qst'
+  | 'ca_gst_hst'
+  | 'ca_pst_bc'
+  | 'ca_pst_mb'
+  | 'ca_pst_sk'
+  | 'sg_gst'
+  | 'za_vat'
+  | 'ru_inn'
+  | 'ru_kpp'
+  | 'ae_trn'
+  | 'is_vat'
+  | 'in_gst'
+  | 'kr_brn'
+  | 'es_cif'
+  | 'bh_vat'
+  | 'kz_bin'
+  | 'ng_tin'
+  | 'om_vat'
+  | 'ge_vat'
+  | 'ke_pin'
+  | 'eg_tin'
+  | 'tw_vat'
+  | 'ua_vat'
+  | 'ec_ruc'
+  | 'cr_tin'
+  | 'tz_vat'
+  | 'rs_pib'
+  | 'uz_vat'
+  | 'uz_tin'
+  | 'md_vat'
+  | 'ma_vat'
+  | 'by_tin'
+  | 'li_vat';
+
+export type StripeCheckoutTaxId = {
+  type: StripeCheckoutTaxIdType;
+  value: string;
+};
+
+export type StripeCheckoutTaxIdInfo = {
+  taxId: StripeCheckoutTaxId;
+  businessName: string;
+};
+
 /* Custom Checkout session */
 export interface StripeCheckoutSession {
   billingAddress: StripeCheckoutContact | null;
@@ -230,6 +335,7 @@ export interface StripeCheckoutSession {
   status: StripeCheckoutStatus;
   tax: StripeCheckoutTaxStatus;
   taxAmounts: Array<StripeCheckoutTaxAmount> | null;
+  taxIdInfo: StripeCheckoutTaxIdInfo | null;
   total: StripeCheckoutTotalSummary;
 }
 
@@ -410,6 +516,13 @@ export type StripeCheckoutUpdateShippingOptionResult =
   | {type: 'success'; success: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
+type UpdateTaxIdInfoError =
+  | {message: string; code: 'invalidTaxId'}
+  | AnyBuyerError;
+export type StripeCheckoutUpdateTaxIdInfoResult =
+  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'error'; error: UpdateTaxIdInfoError};
+
 type ConfirmError =
   | {
       message: string;
@@ -448,6 +561,9 @@ export interface StripeCheckout {
     lineItem: string;
     quantity: number;
   }) => Promise<StripeCheckoutUpdateLineItemQuantityResult>;
+  updateTaxIdInfo: (
+    taxIdInfo: StripeCheckoutTaxIdInfo | null
+  ) => Promise<StripeCheckoutUpdateTaxIdInfoResult>;
   updateShippingOption: (
     shippingOption: string
   ) => Promise<StripeCheckoutUpdateShippingOptionResult>;
