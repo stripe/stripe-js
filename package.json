@@ -8,6 +8,7 @@
   "jsnext:main": "lib/index.mjs",
   "types": "lib/index.d.ts",
   "typings": "lib/index.d.ts",
+  "releaseCandidate": false,
   "scripts": {
     "test": "yarn lint && yarn test:unit && yarn test:package-types && yarn test:types && yarn typecheck",
     "test:unit": "jest",
