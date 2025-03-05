@@ -158,7 +158,7 @@ if [ "$IS_RELEASE_CANDIDATE" -eq 1 ]; then
     # increment only the prerelease version if necessary, e.g. 
     # 1.2.3-rc.0 -> 1.2.3-rc.1
     # 1.2.3 -> 1.2.3-rc.0
-    yarn version --preid=rc
+    yarn version --prerelease --preid=rc
   else
     # always increment the main version, e.g. 
     # patch: 1.2.3-rc.0 -> 1.2.4-rc.0
