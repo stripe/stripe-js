@@ -84,26 +84,19 @@ check_github_token() {
   fi
 }
 
-# Show help if no arguments passed
-if [ $# -eq 0 ]; then
-  echo "Error! Missing release type argument"
-  echo ""
-  echo_help
-  exit 1
-fi
-
-# Show help message if -h, --help, or help passed
-case $1 in
-  -h | --help | help)
-    echo_help
-    exit 0
-    ;;
-esac
-
 # Require release type when not a beta release
 # Not necessary for beta releases because the prerelease versions
 # can be incremented automatically
 if [ "$IS_RELEASE_CANDIDATE" -ne 1 ]; then
+
+  # Show help if no arguments passed
+  if [ $# -eq 0 ]; then
+    echo "Error! Missing release type argument"
+    echo ""
+    echo_help
+    exit 1
+  fi
+
   # Validate passed release type
   case $RELEASE_TYPE in
     patch | minor | major)
@@ -117,6 +110,14 @@ if [ "$IS_RELEASE_CANDIDATE" -ne 1 ]; then
       ;;
   esac
 fi
+
+# Show help message if -h, --help, or help passed
+case "${1:-}" in
+  -h | --help | help)
+    echo_help
+    exit 0
+    ;;
+esac
 
 check_github_token
 
