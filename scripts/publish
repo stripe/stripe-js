@@ -4,6 +4,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 RELEASE_TYPE=${1:-}
+IS_BETA=$(node scripts/is_beta.js)
 
 echo_help() {
   cat << EOF
@@ -99,18 +100,23 @@ case $1 in
     ;;
 esac
 
-# Validate passed release type
-case $RELEASE_TYPE in
-  patch | minor | major)
-    ;;
+# Require release type when not a beta release
+# Not necessary for beta releases because the prerelease versions
+# can be incremented automatically
+if [ "$IS_BETA" -ne 1 ]; then
+  # Validate passed release type
+  case $RELEASE_TYPE in
+    patch | minor | major)
+      ;;
 
-  *)
-    echo "Error! Invalid release type supplied"
-    echo ""
-    echo_help
-    exit 1
-    ;;
-esac
+    *)
+      echo "Error! Invalid release type supplied"
+      echo ""
+      echo_help
+      exit 1
+      ;;
+  esac
+fi
 
 check_github_token
 
@@ -144,7 +150,27 @@ echo "Running tests"
 yarn run test
 
 echo "Bumping package.json $RELEASE_TYPE version and tagging commit"
-yarn version --$RELEASE_TYPE
+if [ "$IS_BETA" -eq 1 ]; then
+  # The Github changelog is based on tag history, so do not create tags for beta versions
+  # rc = release candidate
+  if [ -z "$RELEASE_TYPE" ]; then
+    # increment only the prerelease version if necessary, e.g. 
+    # 1.2.3-rc.0 -> 1.2.3-rc.1
+    # 1.2.3 -> 1.2.3-rc.0
+    yarn version --tag=rc --preid=rc --no-git-tag-version
+  else
+    # always increment the main version, e.g. 
+    # patch: 1.2.3-rc.0 -> 1.2.4-rc.0
+    # patch: 1.2.3 -> 1.2.4-rc.0
+    # major: 1.2.3 -> 2.0.0-rc.0
+    yarn version "--pre$RELEASE_TYPE" --tag=rc --preid=rc --no-git-tag-version
+  fi
+else
+  # increment the main version with no prerelease version, e.g.
+  # patch: 1.2.3-rc.0 -> 1.2.4
+  # major: 1.2.3 -> 2.0.0
+  yarn version "--$RELEASE_TYPE" 
+fi
 
 echo "Building"
 yarn run build
@@ -154,9 +180,11 @@ verify_commit_is_signed
 echo "Pushing git commit and tag"
 git push --follow-tags
 
-# Create release after commit and tag are pushed to ensure package.json
-# is bumped in the GitHub release.
-create_github_release
+if [ "$IS_BETA" -ne 1 ]; then
+  # Create release after commit and tag are pushed to ensure package.json
+  # is bumped in the GitHub release.
+  create_github_release
+fi
 
 echo "Publishing release"
 yarn --ignore-scripts publish --non-interactive --access=public
