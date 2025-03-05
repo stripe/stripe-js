@@ -23,8 +23,8 @@ create_github_release() {
     return
   fi
 
-  # Get the last two releases. For example, `("v1.3.1" "v1.3.2")`
-  local versions=($(git tag --sort version:refname | grep '^v' | tail -n 2))
+  # Get the last two non-release-candidate releases. For example, `("v1.3.1" "v1.3.2")`
+  local versions=($(git tag --sort version:refname | grep '^v' | grep -v "rc" | tail -n 2))
 
   # If we didn't find exactly two previous version versions, give up
   if [ ${#versions[@]} -ne 2 ]; then
@@ -157,13 +157,13 @@ if [ "$IS_RELEASE_CANDIDATE" -eq 1 ]; then
     # increment only the prerelease version if necessary, e.g. 
     # 1.2.3-rc.0 -> 1.2.3-rc.1
     # 1.2.3 -> 1.2.3-rc.0
-    yarn version --tag=rc --preid=rc --no-git-tag-version
+    yarn version --preid=rc
   else
     # always increment the main version, e.g. 
     # patch: 1.2.3-rc.0 -> 1.2.4-rc.0
     # patch: 1.2.3 -> 1.2.4-rc.0
     # major: 1.2.3 -> 2.0.0-rc.0
-    yarn version "--pre$RELEASE_TYPE" --tag=rc --preid=rc --no-git-tag-version
+    yarn version "--pre$RELEASE_TYPE" --preid=rc
   fi
 else
   # increment the main version with no prerelease version, e.g.
@@ -187,7 +187,11 @@ if [ "$IS_RELEASE_CANDIDATE" -ne 1 ]; then
 fi
 
 echo "Publishing release"
-yarn --ignore-scripts publish --non-interactive --access=public
+if [ "$IS_RELEASE_CANDIDATE" -eq 1 ]; then
+  yarn --ignore-scripts publish --tag=rc --non-interactive --access=public
+else
+  yarn --ignore-scripts publish --non-interactive --access=public
+fi
 
 echo "Publish successful!"
 echo ""
