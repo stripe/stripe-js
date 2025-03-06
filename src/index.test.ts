@@ -1,5 +1,4 @@
 import {SCRIPT_SRC} from './testUtils';
-import {RELEASE_TRAIN} from './shared';
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const dispatchScriptEvent = (eventType: string): void => {
@@ -48,22 +47,6 @@ describe('Stripe module loader', () => {
   });
 
   describe('does not inject a duplicate script when one is already present', () => {
-    if (RELEASE_TRAIN === 'v3') {
-      test('when the script does not have a trailing slash', () => {
-        require('./index');
-
-        const script = document.createElement('script');
-        script.src = 'https://js.stripe.com/v3';
-        document.body.appendChild(script);
-
-        return Promise.resolve().then(() => {
-          expect(
-            document.querySelectorAll(`script[src="${SCRIPT_SRC}"]`)
-          ).toHaveLength(1);
-        });
-      });
-    }
-
     test('when the script has a trailing slash', () => {
       require('./index');
 
