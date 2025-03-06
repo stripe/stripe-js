@@ -179,7 +179,7 @@ export const initStripe = (
   const expectedVersion = RELEASE_TRAIN;
   if (isTestKey && version !== expectedVersion) {
     console.warn(
-      `Stripe.js@${version} was loaded on the page, but @stripe/stripe-js@${_VERSION} expected Stripe.js@${expectedVersion}. This may result in unexpected behavior.`
+      `Stripe.js@${version} was loaded on the page, but @stripe/stripe-js@${_VERSION} expected Stripe.js@${expectedVersion}. This may result in unexpected behavior. For more information see https://docs.stripe.com/sdks/stripejs-versioning`
     );
   }
 
