@@ -12,8 +12,17 @@ export interface LoadParams {
 // containing the package.json version
 declare const _VERSION: string;
 
+export const RELEASE_TRAIN = 'v3';
+
+const runtimeVersionToUrlVersion = (version: string | number) =>
+  version === 3 ? 'v3' : version;
+
 const ORIGIN = 'https://js.stripe.com';
-const STRIPE_JS_URL = `${ORIGIN}/v3`;
+const STRIPE_JS_URL =
+  RELEASE_TRAIN === 'v3'
+    ? `${ORIGIN}/v3`
+    : `${ORIGIN}/${RELEASE_TRAIN}/stripe.js`;
+
 const V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
 const STRIPE_JS_URL_REGEX = /^https:\/\/js\.stripe\.com\/(v3|[a-z]+)\/stripe\.js(\?.*)?$/;
 const EXISTING_SCRIPT_MESSAGE =
@@ -160,6 +169,18 @@ export const initStripe = (
 ): Stripe | null => {
   if (maybeStripe === null) {
     return null;
+  }
+
+  const pk = args[0];
+  const isTestKey = pk.match(/^pk_test/);
+
+  // @ts-expect-error this is not publicly typed
+  const version = runtimeVersionToUrlVersion(maybeStripe.version);
+  const expectedVersion = RELEASE_TRAIN;
+  if (isTestKey && version !== expectedVersion) {
+    console.warn(
+      `Stripe.js@${version} was loaded on the page, but @stripe/stripe-js@${_VERSION} expected Stripe.js@${expectedVersion}. This may result in unexpected behavior. For more information, see https://docs.stripe.com/sdks/stripejs-versioning`
+    );
   }
 
   const stripe = maybeStripe.apply(undefined, args);
