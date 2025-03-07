@@ -12,16 +12,13 @@ export interface LoadParams {
 // containing the package.json version
 declare const _VERSION: string;
 
-export const RELEASE_TRAIN = 'v3';
+export const RELEASE_TRAIN = 'acacia';
 
 const runtimeVersionToUrlVersion = (version: string | number) =>
   version === 3 ? 'v3' : version;
 
 const ORIGIN = 'https://js.stripe.com';
-const STRIPE_JS_URL =
-  RELEASE_TRAIN === 'v3'
-    ? `${ORIGIN}/v3`
-    : `${ORIGIN}/${RELEASE_TRAIN}/stripe.js`;
+const STRIPE_JS_URL = `${ORIGIN}/${RELEASE_TRAIN}/stripe.js`;
 
 const V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
 const STRIPE_JS_URL_REGEX = /^https:\/\/js\.stripe\.com\/(v3|[a-z]+)\/stripe\.js(\?.*)?$/;

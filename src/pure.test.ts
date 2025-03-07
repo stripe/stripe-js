@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import {RELEASE_TRAIN} from './shared';
 
-const SCRIPT_SRC =
-  RELEASE_TRAIN === 'v3'
-    ? `https://js.stripe.com/v3`
-    : `https://js.stripe.com/acacia/stripe.js`;
+const SCRIPT_SRC = `https://js.stripe.com/${RELEASE_TRAIN}/stripe.js`;
 const SCRIPT_SELECTOR = `script[src^="${SCRIPT_SRC}"]`;
 
 describe('pure module', () => {
