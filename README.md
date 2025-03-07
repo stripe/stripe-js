@@ -30,6 +30,17 @@ Use `npm` to install the Stripe.js module:
 npm install @stripe/stripe-js
 ```
 
+## Versioning
+
+Each `@stripe/stripe-js` version is pinned to a specific
+[Stripe.js version](https://docs.stripe.com/sdks/stripejs-versioning). The
+pinned versions are as follows:
+
+| **@stripe/stripe-js** | **Stripe.js** |
+| --------------------- | ------------- |
+| <6                    | v3            |
+| v6                    | acacia        |
+
 ## Usage
 
 ### `loadStripe`
@@ -111,7 +122,7 @@ one. When you call `loadStripe`, it will use the existing script tag.
 
 ```html
 <!-- Somewhere in your site's <head> -->
-<script src="https://js.stripe.com/v3" async></script>
+<script src="https://js.stripe.com/acacia/stripe.js" async></script>
 ```
 
 ### Importing `loadStripe` without side effects
