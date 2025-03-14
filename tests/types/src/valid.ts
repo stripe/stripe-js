@@ -3713,3 +3713,22 @@ issuingCopyButtonElement.update({
 stripe.createEphemeralKeyNonce({
   issuingCard: '',
 });
+
+const checkout = await stripe.initCheckout({
+  fetchClientSecret: async () => 'cs_test_foo',
+});
+const checkoutPaymentElement: StripePaymentElement = checkout.createPaymentElement();
+checkout.getPaymentElement();
+const checkoutAddressElement: StripeAddressElement = checkout.createBillingAddressElement();
+checkout.getBillingAddressElement();
+checkout.applyPromotionCode('code');
+const {
+  minorUnitsAmountDivisor,
+  lineItems,
+  total: {
+    taxExclusive: {amount, minorUnitsAmount},
+  },
+} = checkout.session();
+const {
+  subtotal: {amount: _, minorUnitsAmount: __},
+} = lineItems[0];

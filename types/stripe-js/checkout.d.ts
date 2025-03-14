@@ -4,11 +4,7 @@ import {
   TermsOption,
   StripePaymentElement,
 } from './elements/payment';
-import {
-  AddressMode,
-  ContactOption,
-  StripeAddressElement,
-} from './elements/address';
+import {ContactOption, StripeAddressElement} from './elements/address';
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
 import {
@@ -33,7 +29,7 @@ export interface StripeCheckoutElementsOptions {
 }
 
 export interface StripeCheckoutOptions {
-  clientSecret: string;
+  fetchClientSecret: () => Promise<string>;
   elementsOptions?: StripeCheckoutElementsOptions;
 }
 
@@ -54,13 +50,6 @@ export type StripeCheckoutAdjustableQuantity = {
 
 export type StripeCheckoutBillingInterval = 'day' | 'month' | 'week' | 'year';
 
-export type StripeCheckoutConfirmationRequirement =
-  | 'phoneNumber'
-  | 'shippingAddress'
-  | 'billingAddress'
-  | 'paymentDetails'
-  | 'email';
-
 export type StripeCheckoutContact = {
   name?: string | null;
   address: StripeCheckoutAddress;
@@ -71,8 +60,9 @@ export type StripeCheckoutDeliveryEstimate = {
   minimum: StripeCheckoutEstimate | null;
 };
 
-export type StripeCheckoutDiscountAmount = {
-  amount: number;
+export type StripeCheckoutAmount = {minorUnitsAmount: number; amount: string};
+
+export type StripeCheckoutDiscountAmount = StripeCheckoutAmount & {
   displayName: string;
   promotionCode: string | null;
   recurring:
@@ -82,10 +72,10 @@ export type StripeCheckoutDiscountAmount = {
 };
 
 export type StripeCheckoutDueNext = {
-  amountSubtotal: number;
-  amountDiscount: number;
-  amountTaxInclusive: number;
-  amountTaxExclusive: number;
+  subtotal: StripeCheckoutAmount;
+  discount: StripeCheckoutAmount;
+  taxInclusive: StripeCheckoutAmount;
+  taxExclusive: StripeCheckoutAmount;
   billingCycleAnchor: number | null;
 };
 
@@ -124,8 +114,7 @@ export type StripeCheckoutSavedPaymentMethod = {
   };
 };
 
-export type StripeCheckoutTaxAmount = {
-  amount: number;
+export type StripeCheckoutTaxAmount = StripeCheckoutAmount & {
   inclusive: boolean;
   displayName: string;
 };
@@ -133,11 +122,12 @@ export type StripeCheckoutTaxAmount = {
 export type StripeCheckoutLineItem = {
   id: string;
   name: string;
-  amountDiscount: number;
-  amountSubtotal: number;
-  amountTaxExclusive: number;
-  amountTaxInclusive: number;
-  unitAmount: number;
+  discount: StripeCheckoutAmount;
+  subtotal: StripeCheckoutAmount;
+  total: StripeCheckoutAmount;
+  taxExclusive: StripeCheckoutAmount;
+  taxInclusive: StripeCheckoutAmount;
+  unitAmount: StripeCheckoutAmount;
   description: string | null;
   quantity: number;
   discountAmounts: Array<StripeCheckoutDiscountAmount> | null;
@@ -164,9 +154,8 @@ export type StripeCheckoutShipping = {
   taxAmounts: Array<StripeCheckoutTaxAmount> | null;
 };
 
-export type StripeCheckoutShippingOption = {
+export type StripeCheckoutShippingOption = StripeCheckoutAmount & {
   id: string;
-  amount: number;
   currency: string;
   displayName: string | null;
   deliveryEstimate: StripeCheckoutDeliveryEstimate | null;
@@ -186,14 +175,14 @@ export type StripeCheckoutTaxStatus =
   | {status: 'requires_billing_address'};
 
 export type StripeCheckoutTotalSummary = {
-  appliedBalance: number;
+  appliedBalance: StripeCheckoutAmount;
   balanceAppliedToNextInvoice: boolean;
-  discount: number;
-  shippingRate: number;
-  subtotal: number;
-  taxExclusive: number;
-  taxInclusive: number;
-  total: number;
+  discount: StripeCheckoutAmount;
+  shippingRate: StripeCheckoutAmount;
+  subtotal: StripeCheckoutAmount;
+  taxExclusive: StripeCheckoutAmount;
+  taxInclusive: StripeCheckoutAmount;
+  total: StripeCheckoutAmount;
 };
 
 export type StripeCheckoutTrial = {
@@ -201,8 +190,7 @@ export type StripeCheckoutTrial = {
   trialPeriodDays: number;
 };
 
-export type StripeCheckoutCurrencyOption = {
-  amount: number;
+export type StripeCheckoutCurrencyOption = StripeCheckoutAmount & {
   currency: string;
   currencyConversion?: {fxRate: number; sourceCurrency: string};
 };
@@ -324,7 +312,6 @@ export interface StripeCheckoutSession {
   billingAddress: StripeCheckoutContact | null;
   businessName: string | null;
   canConfirm: boolean;
-  confirmationRequirements: StripeCheckoutConfirmationRequirement[];
   currency: string;
   currencyOptions: Array<StripeCheckoutCurrencyOption> | null;
   discountAmounts: Array<StripeCheckoutDiscountAmount> | null;
@@ -333,6 +320,7 @@ export interface StripeCheckoutSession {
   lastPaymentError: StripeCheckoutLastPaymentError | null;
   lineItems: Array<StripeCheckoutLineItem>;
   livemode: boolean;
+  minorUnitsAmountDivisor: number;
   phoneNumber: string | null;
   recurring: StripeCheckoutRecurring | null;
   savedPaymentMethods: Array<StripeCheckoutSavedPaymentMethod> | null;
@@ -355,7 +343,6 @@ export type StripeCheckoutPaymentElementOptions = {
 };
 
 export type StripeCheckoutAddressElementOptions = {
-  mode: AddressMode;
   contacts?: ContactOption[];
   display?: {
     name?: 'full' | 'split' | 'organization';
@@ -593,30 +580,24 @@ export interface StripeCheckout {
 
   /* Elements methods */
   changeAppearance: (appearance: Appearance) => void;
-  getElement(elementType: 'payment'): StripePaymentElement | null;
-  getElement(
-    elementType: 'address',
-    mode: AddressMode
-  ): StripeAddressElement | null;
-  getElement(
-    elementType: 'expressCheckout'
-  ): StripeCheckoutExpressCheckoutElement | null;
+  getPaymentElement(): StripePaymentElement | null;
+  getBillingAddressElement(): StripeAddressElement | null;
+  getShippingAddressElement(): StripeAddressElement | null;
+  getExpressCheckoutElement(): StripeCheckoutExpressCheckoutElement | null;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  getElement(
-    elementType: 'currencySelector'
-  ): StripeCurrencySelectorElement | null;
-  createElement(
-    elementType: 'payment',
+  getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
+  createPaymentElement(
     options?: StripeCheckoutPaymentElementOptions
   ): StripePaymentElement;
-  createElement(
-    elementType: 'address',
-    options: StripeCheckoutAddressElementOptions
+  createBillingAddressElement(
+    options?: StripeCheckoutAddressElementOptions
   ): StripeAddressElement;
-  createElement(
-    elementType: 'expressCheckout',
-    options: StripeCheckoutExpressCheckoutElementOptions
+  createShippingAddressElement(
+    options?: StripeCheckoutAddressElementOptions
+  ): StripeAddressElement;
+  createExpressCheckoutElement(
+    options?: StripeCheckoutExpressCheckoutElementOptions
   ): StripeCheckoutExpressCheckoutElement;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  createElement(elementType: 'currencySelector'): StripeCurrencySelectorElement;
+  createCurrencySelectorElement(): StripeCurrencySelectorElement;
 }
