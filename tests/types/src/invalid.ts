@@ -484,11 +484,14 @@ elements.create('paymentMethodMessaging', {
   paymentMethodOrder: ['invalid_type'],
 });
 
-const checkout = await stripe.initCheckout({
-  // @ts-expect-error Object literal may only specify known properties, and 'clientSecret' does not exist in type 'StripeCheckoutOptions'.
-  clientSecret: 'cs_test_foo',
-});
-// @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckout'.
-checkout.createElement('payment');
-// @ts-expect-error Type 'StripeCheckoutAmount' is not assignable to type 'number'.
-const subtotal: number = checkout.session().total.subtotal;
+stripe
+  .initCheckout({
+    // @ts-expect-error Object literal may only specify known properties, and 'clientSecret' does not exist in type 'StripeCheckoutOptions'.
+    clientSecret: 'cs_test_foo',
+  })
+  .then((checkout) => {
+    // @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckout'.
+    checkout.createElement('payment');
+    // @ts-expect-error Type 'StripeCheckoutAmount' is not assignable to type 'number'.
+    const subtotal: number = checkout.session().total.subtotal;
+  });
