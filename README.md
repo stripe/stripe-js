@@ -40,6 +40,7 @@ pinned versions are as follows:
 | --------------------- | ------------- |
 | <6                    | v3            |
 | v6                    | acacia        |
+| v7                    | basil         |
 
 ## Usage
 
@@ -122,7 +123,7 @@ one. When you call `loadStripe`, it will use the existing script tag.
 
 ```html
 <!-- Somewhere in your site's <head> -->
-<script src="https://js.stripe.com/acacia/stripe.js" async></script>
+<script src="https://js.stripe.com/basil/stripe.js" async></script>
 ```
 
 ### Importing `loadStripe` without side effects
