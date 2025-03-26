@@ -1430,6 +1430,15 @@ export interface StripeConstructorOptions {
    * Most users of Stripe.js do not pass this option.
    */
   betas?: string[];
+
+  /**
+   * Stripe.js developer tooling [options](https://docs.corp.stripe.com/js/initializing#init_stripe_js-options-developerTools).
+   */
+  developerTools?: {
+    assistant?: {
+      enabled?: boolean;
+    };
+  };
 }
 
 export type StripeErrorType =

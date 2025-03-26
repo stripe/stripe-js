@@ -68,6 +68,31 @@ const stripeWithBetas: Stripe = window.Stripe!('pk_123', {
   betas: ['beta_1'],
 });
 
+const stripeWithDeveloperToolsEnabled: Stripe = window.Stripe!('pk_123', {
+  stripeAccount: '123',
+  developerTools: {
+    assistant: {
+      enabled: true,
+    },
+  },
+});
+
+const stripeWithDeveloperToolsDisabled: Stripe = window.Stripe!('pk_123', {
+  stripeAccount: '123',
+  developerTools: {
+    assistant: {
+      enabled: false,
+    },
+  },
+});
+
+const stripeWithDeveloperToolsPartial: Stripe = window.Stripe!('pk_123', {
+  stripeAccount: '123',
+  developerTools: {
+    assistant: {},
+  },
+});
+
 const OPEN_SANS: CssFontSource = {
   cssSrc: 'https://fonts.googleapis.com/css?family=Open+Sans',
 };
