@@ -3743,7 +3743,7 @@ stripe
   .initCheckout({
     fetchClientSecret: async () => 'cs_test_foo',
   })
-  .then((checkout) => {
+  .then(async (checkout) => {
     const checkoutPaymentElement: StripePaymentElement = checkout.createPaymentElement();
     checkout.getPaymentElement();
     const checkoutAddressElement: StripeAddressElement = checkout.createBillingAddressElement();
@@ -3759,4 +3759,10 @@ stripe
     const {
       subtotal: {amount: _, minorUnitsAmount: __},
     } = lineItems[0];
+    const result = await checkout.confirm();
+    if (result.type === 'success') {
+      const {session} = result;
+    } else {
+      const {error} = result;
+    }
   });
