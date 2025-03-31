@@ -69,10 +69,12 @@ export type StripeCheckoutDiscountAmount = StripeCheckoutAmount & {
     | {type: 'forever'}
     | {type: 'repeating'; durationInMonths: number}
     | null;
+  percentOff: number | null;
 };
 
 export type StripeCheckoutDueNext = {
   subtotal: StripeCheckoutAmount;
+  total: StripeCheckoutAmount;
   discount: StripeCheckoutAmount;
   taxInclusive: StripeCheckoutAmount;
   taxExclusive: StripeCheckoutAmount;
@@ -480,41 +482,41 @@ type ApplyPromotionCodeError =
   | {message: string; code: 'invalidCode'}
   | AnyBuyerError;
 export type StripeCheckoutApplyPromotionCodeResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: ApplyPromotionCodeError};
 
 export type StripeCheckoutRemovePromotionCodeResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
 export type StripeCheckoutUpdateAddressResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
 export type StripeCheckoutUpdatePhoneNumberResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: never};
 
 type UpdateEmailError =
   | {message: string; code: 'incompleteEmail'}
   | {message: string; code: 'invalidEmail'};
 export type StripeCheckoutUpdateEmailResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: UpdateEmailError};
 
 export type StripeCheckoutUpdateLineItemQuantityResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
 export type StripeCheckoutUpdateShippingOptionResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
 type UpdateTaxIdInfoError =
   | {message: string; code: 'invalidTaxId'}
   | AnyBuyerError;
 export type StripeCheckoutUpdateTaxIdInfoResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: UpdateTaxIdInfoError};
 
 type ConfirmError =
@@ -527,12 +529,12 @@ type ConfirmError =
     }
   | AnyBuyerError;
 export type StripeCheckoutConfirmResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: ConfirmError};
 
 type RunServerUpdateFunction = () => Promise<unknown>;
 export type StripeCheckoutRunServerUpdateResult =
-  | {type: 'success'; success: StripeCheckoutSession}
+  | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
 export interface StripeCheckout {
