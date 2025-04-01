@@ -918,6 +918,14 @@ export interface StripeElementsUpdateOptions {
    * Display saved PaymentMethods and Customer information.
    */
   customerSessionClientSecret?: string;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Display Custom Payment Methods in the Payment Element that you are already registered with.
+   */
+  customPaymentMethods?: CustomPaymentMethod[];
 }
 
 /*
