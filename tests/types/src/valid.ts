@@ -259,6 +259,14 @@ elements.update({
   setup_future_usage: 'off_session',
   capture_method: 'automatic',
   payment_method_types: ['card'],
+  customPaymentMethods: [
+    {
+      id: 'cpmt_123',
+      options: {
+        type: 'static',
+      },
+    },
+  ],
 });
 
 elements.on('update-end', () => {});
