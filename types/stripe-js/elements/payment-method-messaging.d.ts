@@ -42,15 +42,18 @@ export interface StripePaymentMethodMessagingElementOptions {
    * The currency to display.
    */
   currency:
-    | 'USD'
-    | 'GBP'
-    | 'EUR'
-    | 'DKK'
-    | 'NOK'
-    | 'SEK'
     | 'AUD'
     | 'CAD'
-    | 'NZD';
+    | 'CHF'
+    | 'CZK'
+    | 'DKK'
+    | 'EUR'
+    | 'GBP'
+    | 'NOK'
+    | 'NZD'
+    | 'PLN'
+    | 'SEK'
+    | 'USD';
 
   /**
    * Payment methods to show messaging for.
@@ -71,24 +74,30 @@ export interface StripePaymentMethodMessagingElementOptions {
   /**
    * The country the end-buyer is in.
    */
-  countryCode:
-    | 'US'
-    | 'CA'
-    | 'AU'
-    | 'NZ'
-    | 'GB'
-    | 'IE'
-    | 'FR'
-    | 'ES'
-    | 'DE'
+  countryCode?:
     | 'AT'
+    | 'AU'
     | 'BE'
+    | 'CA'
+    | 'CH'
+    | 'CZ'
+    | 'DE'
     | 'DK'
+    | 'ES'
     | 'FI'
+    | 'FR'
+    | 'GB'
+    | 'GR'
+    | 'IE'
     | 'IT'
     | 'NL'
     | 'NO'
-    | 'SE';
+    | 'NZ'
+    | 'PL'
+    | 'PT'
+    | 'RO'
+    | 'SE'
+    | 'US';
 
   /**
    * The logo color to display in the message. Defaults to black
