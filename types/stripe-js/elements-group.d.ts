@@ -677,10 +677,9 @@ interface BaseStripeElementsOptions {
   customerSessionClientSecret?: string;
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
    * Display Custom Payment Methods in the Payment Element that you are already registered with.
+   *
+   * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-customPaymentMethods
    */
   customPaymentMethods?: CustomPaymentMethod[];
 }
@@ -918,6 +917,13 @@ export interface StripeElementsUpdateOptions {
    * Display saved PaymentMethods and Customer information.
    */
   customerSessionClientSecret?: string;
+
+  /**
+   * Display Custom Payment Methods in the Payment Element that you are already registered with.
+   *
+   * @docs https://docs.stripe.com/js/elements_object/update#elements_update-options-customPaymentMethods
+   */
+  customPaymentMethods?: CustomPaymentMethod[];
 }
 
 /*
