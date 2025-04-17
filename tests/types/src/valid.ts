@@ -425,7 +425,6 @@ const paymentMethodMessagingElement = elements.create(
   'paymentMethodMessaging',
   {
     amount: 2000,
-    countryCode: 'US',
     currency: 'USD',
   }
 );
