@@ -144,7 +144,7 @@ const options: StripeElementsOptions = {
       },
     },
   ],
-  syncAddressCheckbox: 'shipping'
+  syncAddressCheckbox: 'shipping',
 };
 
 const elements: StripeElements = stripe.elements(options);
@@ -191,7 +191,7 @@ const elementsClientSecret: StripeElements = stripe.elements({
       },
     },
   ],
-  syncAddressCheckbox: 'shipping'
+  syncAddressCheckbox: 'shipping',
 });
 
 const elementsPMCProvided = stripe.elements({
