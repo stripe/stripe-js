@@ -685,9 +685,9 @@ interface BaseStripeElementsOptions {
 
   /**
    * The syncAddressCheckbox parameter configures which Address Element to show the checkbox above when using 2 Address Elements.
-   * 
+   *
    * Default is 'billing'
-   * 
+   *
    * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-syncAddressCheckbox
    */
   syncAddressCheckbox?: 'billing' | 'shipping' | 'none';

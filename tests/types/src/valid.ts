@@ -144,6 +144,7 @@ const options: StripeElementsOptions = {
       },
     },
   ],
+  syncAddressCheckbox: 'shipping'
 };
 
 const elements: StripeElements = stripe.elements(options);
