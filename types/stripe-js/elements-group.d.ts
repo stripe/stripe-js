@@ -682,6 +682,15 @@ interface BaseStripeElementsOptions {
    * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-customPaymentMethods
    */
   customPaymentMethods?: CustomPaymentMethod[];
+
+  /**
+   * The syncAddressCheckbox parameter configures which Address Element to show the checkbox above when using 2 Address Elements.
+   *
+   * Default is 'billing'
+   *
+   * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-syncAddressCheckbox
+   */
+  syncAddressCheckbox?: 'billing' | 'shipping' | 'none';
 }
 
 export interface StripeElementsOptionsClientSecret
