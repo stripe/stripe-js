@@ -191,6 +191,7 @@ const elementsClientSecret: StripeElements = stripe.elements({
       },
     },
   ],
+  syncAddressCheckbox: 'shipping'
 });
 
 const elementsPMCProvided = stripe.elements({
