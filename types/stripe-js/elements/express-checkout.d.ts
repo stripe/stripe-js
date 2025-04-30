@@ -194,7 +194,8 @@ export type ExpressPaymentType =
   | 'apple_pay'
   | 'amazon_pay'
   | 'link'
-  | 'paypal';
+  | 'paypal'
+  | 'klarna';
 
 export type ExpressCheckoutPartialAddress = {
   city: string;
@@ -261,6 +262,7 @@ export type ExpressCheckoutPaymentMethodsOption = {
   googlePay?: ExpressCheckoutPaymentMethodOptionWithAlways;
   link?: ExpressCheckoutPaymentMethodOption;
   paypal?: ExpressCheckoutPaymentMethodOption;
+  klarna?: ExpressCheckoutPaymentMethodOption;
 };
 
 export type ExpressCheckoutWalletsOption = {
@@ -446,6 +448,7 @@ export type AvailablePaymentMethods = {
   googlePay: boolean;
   link: boolean;
   paypal: boolean;
+  klarna: boolean;
 };
 
 export interface StripeExpressCheckoutElementReadyEvent {
