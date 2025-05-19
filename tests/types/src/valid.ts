@@ -502,6 +502,7 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
   wallets: {
     applePay: 'never',
     googlePay: 'auto',
+    link: 'auto',
   },
   layout: {
     type: 'accordion',

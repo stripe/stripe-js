@@ -216,6 +216,7 @@ export type PaymentWalletOption = 'auto' | 'never';
 export interface PaymentWalletsOption {
   applePay?: PaymentWalletOption;
   googlePay?: PaymentWalletOption;
+  link?: PaymentWalletOption;
 }
 
 export type Layout = 'tabs' | 'accordion' | 'auto';
