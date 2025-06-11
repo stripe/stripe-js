@@ -525,6 +525,12 @@ export interface StripeExpressCheckoutElementClickEvent {
    * This must be called within 1 second of the 'click' event being emitted.
    */
   resolve: (resolveDetails?: ClickResolveDetails) => void;
+
+  /**
+   * Callback to allow for cancellation of the payment interface.
+   * This must be called within 1 second of the 'click' event being emitted.
+   */
+  reject: () => void;
 }
 
 export interface StripeExpressCheckoutElementConfirmEvent {
