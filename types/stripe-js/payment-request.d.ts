@@ -159,7 +159,9 @@ export interface PaymentRequestUpdateOptions {
   /**
    * Specify the options to be used when the Apple Pay payment interface opens.
    */
-  applePay?: ApplePayOption;
+  applePay?: ApplePayOption & {
+    cardFunding?: 'supportsCredit' | 'supportsDebit';
+  };
 }
 
 /**
@@ -235,7 +237,9 @@ export interface PaymentRequestOptions {
   /**
    * Specify the options to be used when the Apple Pay payment interface opens.
    */
-  applePay?: ApplePayOption;
+  applePay?: ApplePayOption & {
+    cardFunding?: 'supportsCredit' | 'supportsDebit';
+  };
 
   /**
    * The Stripe account ID which is the business of record.

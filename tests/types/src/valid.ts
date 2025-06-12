@@ -3499,6 +3499,7 @@ const paymentRequest: PaymentRequest = stripe.paymentRequest({
       },
       managementURL: 'https://atnnews.com/manage-subscription',
     },
+    cardFunding: 'supportsCredit',
   },
 });
 
@@ -3540,6 +3541,7 @@ paymentRequest.update({
       },
       managementURL: 'https://atnnews.com/manage-subscription',
     },
+    cardFunding: 'supportsDebit',
   },
 });
 
