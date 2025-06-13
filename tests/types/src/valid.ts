@@ -1070,6 +1070,9 @@ expressCheckoutElement
       },
     });
   })
+  .on('click', (e: StripeExpressCheckoutElementClickEvent) => {
+    e.reject();
+  })
   .on('focus', (e: {elementType: 'expressCheckout'}) => {})
   .on('blur', (e: {elementType: 'expressCheckout'}) => {})
   .on('escape', (e: {elementType: 'expressCheckout'}) => {})
