@@ -706,6 +706,14 @@ export interface StripeElementsOptionsClientSecret
    * Either use mode or clientSecret when creating an Elements group
    */
   mode?: never;
+
+  /**
+   * Influences available payment methods when creating SetupIntents with automatic_payment_methods.
+   * Payment Element renders the payment methods enabled in the Stripe Dashboard that support the provided currency.
+   *
+   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   */
+  currency?: string;
 }
 
 export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {

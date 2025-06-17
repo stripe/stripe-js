@@ -165,6 +165,7 @@ const elementsClientSecret: StripeElements = stripe.elements({
   fonts: [OPEN_SANS, AVENIR],
   locale: 'auto',
   clientSecret: '',
+  currency: 'usd',
   appearance: {
     disableAnimations: false,
     theme: 'night',
