@@ -306,6 +306,12 @@ export interface StripePaymentElementChangeEvent {
    */
   value: {
     type: string;
+    billingDetails?: {
+      address: {
+        country?: null | string;
+        postalCode?: null | string;
+      };
+    };
     payment_method?: {
       id: string;
       type: string;
