@@ -76,15 +76,17 @@ verify_prerequisites() {
     exit 1
   fi
   
-  # Check if commit is signed
+  echo "All prerequisites verified successfully!"
+}
+
+verify_commit_is_signed() {
   local commit_hash=$(git log -1 --format="%H")
+
   if git show --no-patch --pretty=format:"%G?" "$commit_hash" | grep "N" &> /dev/null; then
     echo "Error! Commit $commit_hash is not signed"
     echo "Please follow https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account and sign your commit"
     exit 1
   fi
-  
-  echo "All prerequisites verified successfully!"
 }
 
 create_github_release() {
@@ -228,6 +230,8 @@ yarn run build
 
 echo "Running tests"
 yarn run test
+
+verify_commit_is_signed
 
 echo "Pushing git commit and tag"
 git push --follow-tags
