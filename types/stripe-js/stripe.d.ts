@@ -210,6 +210,24 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Use `stripe.confirmBilliePayment` in the [Billie Payments](https://stripe.com/docs/payments/billie) with Payment Methods flow when the customer submits your payment form.
+   * When called, it will confirm the [PaymentIntent](https://stripe.com/docs/api/payment_intents) with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
+   * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+   *
+   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+   * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+   */
+  confirmBilliePayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmBilliePaymentData,
+    options?: paymentIntents.ConfirmBilliePaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+  /**
    * Use `stripe.confirmBlikPayment` in the [BLIK Payments with Payment Methods](https://stripe.com/docs/payments/blik) flow when the customer submits your payment form.
    * When called, it will confirm the PaymentIntent with data you provide, and it will automatically prompt the customer to authorize the transaction.
    *
