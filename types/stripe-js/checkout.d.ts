@@ -471,6 +471,22 @@ export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
   ): StripeCheckoutExpressCheckoutElement;
 
   /**
+   * Triggered when a payment interface is dismissed (e.g., a buyer closes the payment interface)
+   */
+  on(
+    eventType: 'cancel',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'cancel',
+    handler: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'cancel',
+    handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+
+  /**
    * Updates the options the `ExpressCheckoutElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
