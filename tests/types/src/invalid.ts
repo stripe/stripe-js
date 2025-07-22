@@ -267,6 +267,11 @@ elements.create('expressCheckout', {
   },
 });
 
+// @ts-expect-error: TaxId cannot be created from Elements
+elements.create('taxId');
+// @ts-expect-error: TaxId cannot be retrieved from Elements
+elements.getElement('taxId');
+
 // @ts-expect-error at least one of elements or clientSecret is required
 stripe.confirmPayment({confirmParams: {return_url: ''}});
 

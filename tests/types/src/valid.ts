@@ -55,6 +55,9 @@ import {
   CardBrand,
   CardFunding,
   StripeCurrencySelectorElement,
+  StripeTaxIdElement,
+  ExternalTaxIdType,
+  TaxIdType,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -1259,6 +1262,39 @@ currencySelectorElement
     }) => {}
   );
 
+declare const taxIdElement: StripeTaxIdElement;
+
+taxIdElement
+  .on('ready', (e: {elementType: 'taxId'}) => {})
+  .on('focus', (e: {elementType: 'taxId'}) => {})
+  .on('blur', (e: {elementType: 'taxId'}) => {})
+  .on('escape', (e: {elementType: 'taxId'}) => {})
+  .on('loaderstart', (e: {elementType: 'taxId'}) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'taxId';
+      error: {
+        type: string;
+      };
+    }) => {}
+  )
+  .on(
+    'change',
+    (e: {
+      elementType: 'taxId';
+      empty: boolean;
+      complete: boolean;
+      visible: boolean;
+      value: {
+        businessName: string;
+        taxId: string;
+        taxIdType: TaxIdType;
+        externalTaxIdType: ExternalTaxIdType;
+      };
+    }) => {}
+  );
+
 auBankAccountElement.destroy();
 cardElement.destroy();
 cardNumberElement.destroy();
@@ -1274,6 +1310,7 @@ shippingAddressElement.destroy();
 expressCheckoutElementDefault.destroy();
 expressCheckoutElement.destroy();
 expressCheckoutElement2.destroy();
+taxIdElement.destroy();
 
 stripe.redirectToCheckout({sessionId: ''});
 

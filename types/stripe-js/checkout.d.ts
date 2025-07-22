@@ -15,6 +15,8 @@ import {
   StripeExpressCheckoutElementConfirmEvent,
   StripeExpressCheckoutElementOptions,
   StripeExpressCheckoutElementReadyEvent,
+  StripeTaxIdElement,
+  StripeTaxIdElementOptions,
 } from './elements';
 
 /**
@@ -604,6 +606,8 @@ export interface StripeCheckout {
   getExpressCheckoutElement(): StripeCheckoutExpressCheckoutElement | null;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  getTaxIdElement(): StripeTaxIdElement | null;
   createPaymentElement(
     options?: StripeCheckoutPaymentElementOptions
   ): StripePaymentElement;
@@ -618,4 +622,6 @@ export interface StripeCheckout {
   ): StripeCheckoutExpressCheckoutElement;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   createCurrencySelectorElement(): StripeCurrencySelectorElement;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  createTaxIdElement(options?: StripeTaxIdElementOptions): StripeTaxIdElement;
 }
