@@ -49,6 +49,7 @@ import {
   StripeExpressCheckoutElement,
   StripeExpressCheckoutElementOptions,
   StripeAddressElementGetElementOptions,
+  StripeTaxIdElement,
 } from './elements';
 import {StripeError} from './stripe';
 
@@ -519,7 +520,8 @@ export type StripeElementType =
   | 'issuingCardCvcDisplay'
   | 'issuingCardExpiryDisplay'
   | 'issuingCardPinDisplay'
-  | 'issuingCardCopyButton';
+  | 'issuingCardCopyButton'
+  | 'taxId';
 
 export type StripeElement =
   | StripeAddressElement
@@ -545,7 +547,8 @@ export type StripeElement =
   | StripeIssuingCardExpiryDisplayElement
   | StripeIssuingCardPinDisplayElement
   | StripeIssuingCardCopyButtonElement
-  | StripeShippingAddressElement;
+  | StripeShippingAddressElement
+  | StripeTaxIdElement;
 
 export type StripeElementLocale =
   | 'auto'
