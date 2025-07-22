@@ -607,7 +607,5 @@ export interface StripeCheckout {
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   createCurrencySelectorElement(): StripeCurrencySelectorElement;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  createTaxIdElement(
-    options?: StripeTaxIdElementOptions
-  ): StripeTaxIdElement;
+  createTaxIdElement(options?: StripeTaxIdElementOptions): StripeTaxIdElement;
 }
