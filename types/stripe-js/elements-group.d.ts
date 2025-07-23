@@ -50,6 +50,8 @@ import {
   StripeExpressCheckoutElementOptions,
   StripeAddressElementGetElementOptions,
   StripeTaxIdElement,
+  StripeIssuingAddToWalletButtonElementOptions,
+  StripeIssuingAddToWalletButtonElement,
 } from './elements';
 import {StripeError} from './stripe';
 
@@ -443,6 +445,17 @@ export interface StripeElements {
   /////////////////////////////
   /// issuing
   /////////////////////////////
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Creates an `issuingAddToWalletButton` Element.
+   */
+  create(
+    elementType: 'issuingAddToWalletButton',
+    options: StripeIssuingAddToWalletButtonElementOptions
+  ): StripeIssuingAddToWalletButtonElement;
 
   /**
    * Creates an `issuingCardNumberDisplay` Element

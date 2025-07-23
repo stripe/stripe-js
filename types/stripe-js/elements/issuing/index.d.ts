@@ -1,3 +1,4 @@
+export * from './issuing-add-to-wallet-button';
 export * from './issuing-card-number-display';
 export * from './issuing-card-cvc-display';
 export * from './issuing-card-expiry-display';
