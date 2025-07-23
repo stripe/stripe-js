@@ -792,6 +792,20 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
   payment_method_types?: string[];
 
   /**
+   * The list of payment method types to exclude from use with this payment.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  excludedPaymentMethodTypes?: string[];
+
+  /**
+   * The list of payment method types to allow for use with this payment. From this list, Stripe will automatically render the relevant payment methods for this payment.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  allowedPaymentMethodTypes?: string[];
+
+  /**
    * When using automatic payment methods (omitting paymentMethodTypes), provide a
    * payment method configuration ID for deriving payment methods.
    *
@@ -918,6 +932,20 @@ export interface StripeElementsUpdateOptions {
    * @docs https://stripe.com/docs/payments/payment-methods/overview
    */
   paymentMethodTypes?: string[];
+
+  /**
+   * The list of payment method types to exclude from use with this payment.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  excludedPaymentMethodTypes?: string[];
+
+  /**
+   * The list of payment method types to allow for use with this payment. From this list, Stripe will automatically render the relevant payment methods for this payment.
+   *
+   * @docs https://stripe.com/docs/payments/payment-methods/overview
+   */
+  allowedPaymentMethodTypes?: string[];
 
   /**
    * The Stripe account ID which is the business of record.
