@@ -253,17 +253,12 @@ elements.create('issuingCardCopyButton', {
   toCopy: 'non_existent',
 });
 
-// @ts-expect-error `wallet` prop is required
-elements.create('issuingAddToWalletButton', {
-  nonce: '',
-  issuingCard: 'ic_123',
-  ephemeralKeySecret: '',
-  buttonHeight: 40,
-});
+// @ts-expect-error `issuingAddToWalletButton` is not available yet
+elements.create('issuingAddToWalletButton');
 
-// @ts-expect-error wallet must be 'apple'
+// @ts-expect-error `issuingAddToWalletButton` is not available yet, despite all correct options
 elements.create('issuingAddToWalletButton', {
-  wallet: 'google',
+  wallet: 'apple',
   nonce: '',
   issuingCard: 'ic_123',
   ephemeralKeySecret: '',
