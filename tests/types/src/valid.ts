@@ -58,6 +58,8 @@ import {
   StripeTaxIdElement,
   ExternalTaxIdType,
   TaxIdType,
+  StripeIssuingAddToWalletButtonElementOptions,
+  StripeIssuingAddToWalletButtonElement,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -3690,16 +3692,16 @@ paymentRequest.on(
   }
 );
 
-const issuingAddToWalletButtonElement = elements.create(
-  'issuingAddToWalletButton',
-  {
-    issuingCard: '',
-    nonce: '',
-    ephemeralKeySecret: '',
-    wallet: 'apple',
-    buttonHeight: 44,
-  }
-);
+declare const issuingAddToWalletButtonElement: StripeIssuingAddToWalletButtonElement;
+declare const issuingAddToWalletButtonOptions: StripeIssuingAddToWalletButtonElementOptions;
+
+const {
+  buttonHeight,
+  wallet,
+  issuingCard,
+  nonce,
+  ephemeralKeySecret,
+} = issuingAddToWalletButtonOptions;
 
 issuingAddToWalletButtonElement.mount('#bogus-container');
 issuingAddToWalletButtonElement.update({
