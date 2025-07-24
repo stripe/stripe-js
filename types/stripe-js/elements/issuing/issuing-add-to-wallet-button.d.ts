@@ -6,7 +6,6 @@ export type StripeIssuingAddToWalletButtonElement = StripeElementBase & {
    */
   on(
     eventType: 'click',
-    // TODO find
     handler: (event: {elementType: 'issuingAddToWalletButton'}) => any
   ): StripeIssuingAddToWalletButtonElement;
   once(
