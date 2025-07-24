@@ -253,6 +253,18 @@ elements.create('issuingCardCopyButton', {
   toCopy: 'non_existent',
 });
 
+// @ts-expect-error `issuingAddToWalletButton` is not available yet
+elements.create('issuingAddToWalletButton');
+
+// @ts-expect-error `issuingAddToWalletButton` is not available yet, despite all correct options
+elements.create('issuingAddToWalletButton', {
+  wallet: 'apple',
+  nonce: '',
+  issuingCard: 'ic_123',
+  ephemeralKeySecret: '',
+  buttonHeight: 40,
+});
+
 // @ts-expect-error: `white-outline` is only supported by apple pay
 elements.create('expressCheckout', {
   buttonTheme: {

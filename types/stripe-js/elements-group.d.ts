@@ -521,7 +521,8 @@ export type StripeElementType =
   | 'issuingCardExpiryDisplay'
   | 'issuingCardPinDisplay'
   | 'issuingCardCopyButton'
-  | 'taxId';
+  | 'taxId'
+  | 'issuingAddToWalletButton';
 
 export type StripeElement =
   | StripeAddressElement

@@ -58,6 +58,8 @@ import {
   StripeTaxIdElement,
   ExternalTaxIdType,
   TaxIdType,
+  StripeIssuingAddToWalletButtonElementOptions,
+  StripeIssuingAddToWalletButtonElement,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -3689,6 +3691,30 @@ paymentRequest.on(
     });
   }
 );
+
+declare const issuingAddToWalletButtonElement: StripeIssuingAddToWalletButtonElement;
+declare const issuingAddToWalletButtonOptions: StripeIssuingAddToWalletButtonElementOptions;
+
+const {
+  buttonHeight,
+  wallet,
+  issuingCard,
+  nonce,
+  ephemeralKeySecret,
+} = issuingAddToWalletButtonOptions;
+
+issuingAddToWalletButtonElement.mount('#bogus-container');
+issuingAddToWalletButtonElement.update({
+  buttonHeight: 44,
+});
+
+issuingAddToWalletButtonElement.on('click', () => {});
+issuingAddToWalletButtonElement.once('click', () => {});
+issuingAddToWalletButtonElement.off('click', () => {});
+
+issuingAddToWalletButtonElement.on('success', () => {});
+issuingAddToWalletButtonElement.once('success', () => {});
+issuingAddToWalletButtonElement.off('success', () => {});
 
 const issuingCardElement = elements.create('issuingCardNumberDisplay', {
   issuingCard: '',
