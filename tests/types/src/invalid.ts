@@ -253,6 +253,23 @@ elements.create('issuingCardCopyButton', {
   toCopy: 'non_existent',
 });
 
+// @ts-expect-error `wallet` prop is required
+elements.create('issuingAddToWalletButton', {
+  nonce: '',
+  issuingCard: 'ic_123',
+  ephemeralKeySecret: '',
+  buttonHeight: 40,
+});
+
+// @ts-expect-error wallet must be 'apple'
+elements.create('issuingAddToWalletButton', {
+  wallet: 'google',
+  nonce: '',
+  issuingCard: 'ic_123',
+  ephemeralKeySecret: '',
+  buttonHeight: 40,
+});
+
 // @ts-expect-error: `white-outline` is only supported by apple pay
 elements.create('expressCheckout', {
   buttonTheme: {

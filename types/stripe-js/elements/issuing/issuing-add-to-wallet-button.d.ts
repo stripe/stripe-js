@@ -51,21 +51,21 @@ export interface StripeIssuingAddToWalletButtonElementOptions {
    * The secret component of the ephemeral key with which to authenticate this sensitive
    * card provisioning request
    */
-  ephemeralKeySecret?: string;
+  ephemeralKeySecret: string;
 
   /**
    * The nonce used to mint the ephemeral key provided in `ephemeralKeySecret`
    */
-  nonce?: string;
-
-  /**
-   * The height of the button in pixels.
-   * Must be between 36px and 55px.
-   */
-  buttonHeight?: number;
+  nonce: string;
 
   /**
    * The type of Add to Wallet button to display. For now, only 'apple' is supported.
    */
   wallet: 'apple';
+
+  /**
+   * The height of the button in pixels. Defaults to 44px.
+   * Must be between 36px and 55px.
+   */
+  buttonHeight?: number;
 }

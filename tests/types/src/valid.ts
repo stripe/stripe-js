@@ -3690,6 +3690,30 @@ paymentRequest.on(
   }
 );
 
+const issuingAddToWalletButtonElement = elements.create(
+  'issuingAddToWalletButton',
+  {
+    issuingCard: '',
+    nonce: '',
+    ephemeralKeySecret: '',
+    wallet: 'apple',
+    buttonHeight: 44,
+  }
+);
+
+issuingAddToWalletButtonElement.mount('#bogus-container');
+issuingAddToWalletButtonElement.update({
+  buttonHeight: 44,
+});
+
+issuingAddToWalletButtonElement.on('click', () => {});
+issuingAddToWalletButtonElement.once('click', () => {});
+issuingAddToWalletButtonElement.off('click', () => {});
+
+issuingAddToWalletButtonElement.on('success', () => {});
+issuingAddToWalletButtonElement.once('success', () => {});
+issuingAddToWalletButtonElement.off('success', () => {});
+
 const issuingCardElement = elements.create('issuingCardNumberDisplay', {
   issuingCard: '',
   nonce: '',
