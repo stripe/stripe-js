@@ -3851,3 +3851,42 @@ stripe
       const {error} = result;
     }
   });
+
+// savedPaymentMethod variations for initCheckout:
+stripe.initCheckout({
+  fetchClientSecret: async () => 'cs_test_foo',
+  elementsOptions: {
+    savedPaymentMethod: {
+      enableSave: 'never',
+      enableRedisplay: 'auto',
+    },
+  },
+});
+
+// only enableSave
+stripe.initCheckout({
+  fetchClientSecret: async () => 'cs_test_foo',
+  elementsOptions: {
+    savedPaymentMethod: {
+      enableSave: 'auto',
+    },
+  },
+});
+
+// only enableRedisplay
+stripe.initCheckout({
+  fetchClientSecret: async () => 'cs_test_foo',
+  elementsOptions: {
+    savedPaymentMethod: {
+      enableRedisplay: 'never',
+    },
+  },
+});
+
+// empty savedPaymentMethod object
+stripe.initCheckout({
+  fetchClientSecret: async () => 'cs_test_foo',
+  elementsOptions: {
+    savedPaymentMethod: {},
+  },
+});
