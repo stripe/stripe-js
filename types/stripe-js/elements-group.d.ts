@@ -870,6 +870,11 @@ export interface StripeElementsUpdateOptions {
   locale?: StripeElementLocale;
 
   /**
+   * An array of custom fonts to update, which elements created from the `Elements` object can use.
+   */
+  fonts?: Array<CssFontSource | CustomFontSource>;
+
+  /**
    * Match the design of your site with the appearance option.
    * The layout of each Element stays consistent, but you can modify colors, fonts, borders, padding, and more.
    *
