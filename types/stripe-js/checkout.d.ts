@@ -19,15 +19,16 @@ import {
   StripeTaxIdElementOptions,
 } from './elements';
 
-/**
- * Requires beta access:
- * Contact [Stripe support](https://support.stripe.com/) for more information.
- */
+type SavedPaymentMethodOption = {
+  enableSave?: 'auto' | 'never';
+  enableRedisplay?: 'auto' | 'never';
+};
 
 export interface StripeCheckoutElementsOptions {
   appearance?: Appearance;
   loader?: 'auto' | 'always' | 'never';
   fonts?: Array<CssFontSource | CustomFontSource>;
+  savedPaymentMethod?: SavedPaymentMethodOption;
 }
 
 export interface StripeCheckoutOptions {
