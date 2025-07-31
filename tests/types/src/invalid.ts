@@ -37,11 +37,6 @@ elements.update({
 });
 
 elements.update({
-  // @ts-expect-error: `fonts` is not updatable
-  fonts: [],
-});
-
-elements.update({
   // @ts-expect-error: `loader` is not updatable
   loader: 'auto',
 });

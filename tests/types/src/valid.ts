@@ -235,6 +235,10 @@ const MY_STYLE: StripeElementStyle = {
   },
 };
 
+elements.update({
+  fonts: [{cssSrc: 'https://example.com/haha.css'}],
+});
+
 elements.update({});
 elements.update({
   locale: 'es',
