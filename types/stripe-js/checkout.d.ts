@@ -601,6 +601,7 @@ export interface StripeCheckout {
 
   /* Elements methods */
   changeAppearance: (appearance: Appearance) => void;
+  loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
   getPaymentElement(): StripePaymentElement | null;
   getBillingAddressElement(): StripeAddressElement | null;
   getShippingAddressElement(): StripeAddressElement | null;

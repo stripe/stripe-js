@@ -235,6 +235,10 @@ const MY_STYLE: StripeElementStyle = {
   },
 };
 
+elements.update({
+  fonts: [{cssSrc: 'https://example.com/haha.css'}],
+});
+
 elements.update({});
 elements.update({
   locale: 'es',
@@ -3834,6 +3838,21 @@ stripe
     const checkoutAddressElement: StripeAddressElement = checkout.createBillingAddressElement();
     checkout.getBillingAddressElement();
     checkout.applyPromotionCode('code');
+
+    checkout.loadFonts([
+      {
+        cssSrc: 'https://example.com/font.css',
+      },
+      {
+        src: 'url(https://example.com/Blah.woff)',
+        family: 'Blah',
+        weight: '500',
+        style: 'italic',
+        unicodeRange: 'some range',
+        display: 'display value',
+      },
+    ]);
+
     const {
       minorUnitsAmountDivisor,
       lineItems,
