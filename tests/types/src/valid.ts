@@ -2593,6 +2593,7 @@ stripe.createPaymentMethod({
     billing_details: {
       name: 'Jenny Rosen',
     },
+    allow_redisplay: 'always',
   },
 });
 
