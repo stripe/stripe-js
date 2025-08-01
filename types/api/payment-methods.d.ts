@@ -365,6 +365,11 @@ export interface PaymentMethodCreateParams {
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type. Required unless `payment_method` is specified (see the [Cloning PaymentMethods](https://stripe.com/docs/payments/payment-methods/connect#cloning-payment-methods) guide)
    */
   type?: string;
+
+  /**
+   * Specifies if the PaymentMethod should be redisplayed when using the Saved Payment Method feature.
+   */
+  allow_redisplay?: 'always' | 'limited' | 'unspecified';
 }
 
 export interface CreatePaymentMethodFromElements {
