@@ -506,4 +506,15 @@ stripe
     checkout.createElement('payment');
     // @ts-expect-error Type 'StripeCheckoutAmount' is not assignable to type 'number'.
     const subtotal: number = checkout.session().total.subtotal;
+
+    // @ts-expect-error - doesn't take a number
+    checkout.loadFonts(42);
+
+    checkout.loadFonts([
+      {
+        cssSrc: 'https://example.com/font.css',
+        // @ts-expect-error - this is not a valid field
+        extraWrongField: false,
+      },
+    ]);
   });
