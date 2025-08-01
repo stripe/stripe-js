@@ -31,6 +31,15 @@ const elements = stripe.elements(options);
 // @ts-expect-error mode must be one of payment, setup, or subscription
 stripe.elements({mode: 'test'});
 
+// @ts-expect-error: currency is required when using mode
+stripe.elements({mode: 'payment'});
+
+// @ts-expect-error: amount is required when using mode='payment'
+stripe.elements({mode: 'payment', currency: 'usd'});
+
+// @ts-expect-error: amount is required when using mode='subscription'
+stripe.elements({mode: 'subscription', currency: 'usd'});
+
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
   clientSecret: 'pk_foo_secret_bar',

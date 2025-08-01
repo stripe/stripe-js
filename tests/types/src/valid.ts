@@ -166,6 +166,12 @@ stripe.elements({
   on_behalf_of: 'acct_id',
 });
 
+stripe.elements({
+  mode: 'subscription',
+  currency: 'usd',
+  amount: 1000,
+});
+
 const elementsClientSecret: StripeElements = stripe.elements({
   fonts: [OPEN_SANS, AVENIR],
   locale: 'auto',
@@ -203,6 +209,7 @@ const elementsClientSecret: StripeElements = stripe.elements({
 const elementsPMCProvided = stripe.elements({
   mode: 'payment',
   currency: 'usd',
+  amount: 1000,
   setup_future_usage: 'off_session',
   capture_method: 'automatic',
   payment_method_configuration: 'pmc_12345678901234567890',
