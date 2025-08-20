@@ -1178,6 +1178,7 @@ export interface Appearance {
     focusOutline?: string;
 
     // Radius
+    buttonBorderRadius?: string;
     borderRadius?: string;
   };
 
