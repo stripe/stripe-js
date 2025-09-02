@@ -1051,8 +1051,14 @@ export interface CustomFontSource {
  * @docs https://stripe.com/docs/stripe-js/appearance-api
  */
 export interface Appearance {
+  /**
+   * Disables animations throughout Elements. Defaults to false.
+   */
   disableAnimations?: boolean;
 
+  /**
+   * The theme to use for the Elements. Defaults to 'stripe'.
+   */
   theme?: 'stripe' | 'night' | 'flat';
 
   variables?: {
@@ -1205,7 +1211,15 @@ export interface Appearance {
     };
   };
 
-  labels?: 'above' | 'floating';
+  /**
+   * The style of labels associated with input fields to use for the Elements. Defaults to 'auto'.
+   */
+  labels?: 'auto' | 'above' | 'floating' | 'none';
+
+  /**
+   * The style of input fields to use for the Elements. Defaults to 'spaced'.
+   */
+  inputs?: 'spaced' | 'condensed';
 }
 
 export interface CustomerOptions {
