@@ -1283,7 +1283,7 @@ export interface Stripe {
    * Requires beta access:
    * Contact [Stripe support](https://support.stripe.com/) for more information.
    */
-  initCheckout(options: StripeCheckoutOptions): Promise<StripeCheckout>;
+  initCheckout(options: StripeCheckoutOptions): StripeCheckout;
 
   /**
    * Use `stripe.initEmbeddedCheckout` to initialize an embedded Checkout instance

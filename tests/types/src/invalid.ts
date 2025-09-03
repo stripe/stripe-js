@@ -498,23 +498,30 @@ elements.create('paymentMethodMessaging', {
 
 stripe
   .initCheckout({
-    // @ts-expect-error Object literal may only specify known properties, and 'clientSecret' does not exist in type 'StripeCheckoutOptions'.
-    clientSecret: 'cs_test_foo',
+    // @ts-expect-error Object literal may only specify known properties, and 'fetchClientSecret' does not exist in type 'StripeCheckoutOptions'.
+    fetchClientSecret: () => Promise.resolve('cs_test_foo'),
   })
-  .then((checkout) => {
-    // @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckout'.
-    checkout.createElement('payment');
+  // @ts-expect-error Property 'then' does not exist on type 'StripeCheckout'.
+  .then((checkout) => {});
+
+const checkout = stripe.initCheckout({clientSecret: 'cs_test_foo'});
+// @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckout'.
+checkout.createElement('payment');
+// @ts-expect-error - doesn't take a number
+checkout.loadFonts(42);
+checkout.loadFonts([
+  {
+    cssSrc: 'https://example.com/font.css',
+    // @ts-expect-error - this is not a valid field
+    extraWrongField: false,
+  },
+]);
+checkout.loadActions().then((loadActionsResult) => {
+  if (loadActionsResult.type === 'success') {
+    const {actions} = loadActionsResult;
     // @ts-expect-error Type 'StripeCheckoutAmount' is not assignable to type 'number'.
-    const subtotal: number = checkout.session().total.subtotal;
-
-    // @ts-expect-error - doesn't take a number
-    checkout.loadFonts(42);
-
-    checkout.loadFonts([
-      {
-        cssSrc: 'https://example.com/font.css',
-        // @ts-expect-error - this is not a valid field
-        extraWrongField: false,
-      },
-    ]);
-  });
+    const subtotal: number = actions.getSession().total.subtotal;
+  } else {
+    const {error} = loadActionsResult;
+  }
+});

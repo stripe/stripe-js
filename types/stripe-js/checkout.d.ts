@@ -32,7 +32,7 @@ export interface StripeCheckoutElementsOptions {
 }
 
 export interface StripeCheckoutOptions {
-  fetchClientSecret: () => Promise<string>;
+  clientSecret: Promise<string> | string;
   elementsOptions?: StripeCheckoutElementsOptions;
 }
 
@@ -556,8 +556,8 @@ export type StripeCheckoutRunServerUpdateResult =
   | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
-export interface StripeCheckout {
-  /* Custom Checkout methods */
+type LoadActionsError = {message: string; code: null};
+type LoadActionsSuccess = {
   applyPromotionCode: (
     promotionCode: string
   ) => Promise<StripeCheckoutApplyPromotionCodeResult>;
@@ -569,9 +569,11 @@ export interface StripeCheckout {
     billingAddress: StripeCheckoutContact | null
   ) => Promise<StripeCheckoutUpdateAddressResult>;
   updatePhoneNumber: (
-    phoneNumber: string
+    phoneNumber: string | null
   ) => Promise<StripeCheckoutUpdatePhoneNumberResult>;
-  updateEmail: (email: string) => Promise<StripeCheckoutUpdateEmailResult>;
+  updateEmail: (
+    email: string | null
+  ) => Promise<StripeCheckoutUpdateEmailResult>;
   updateLineItemQuantity: (args: {
     lineItem: string;
     quantity: number;
@@ -593,11 +595,18 @@ export interface StripeCheckout {
     shippingAddress?: StripeCheckoutContact;
     expressCheckoutConfirmEvent?: StripeExpressCheckoutElementConfirmEvent;
   }) => Promise<StripeCheckoutConfirmResult>;
-  session: () => StripeCheckoutSession;
-  on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
+  getSession: () => StripeCheckoutSession;
   runServerUpdate: (
     userFunction: RunServerUpdateFunction
   ) => Promise<StripeCheckoutRunServerUpdateResult>;
+};
+export type StripeCheckoutLoadActionsResult =
+  | {type: 'success'; actions: LoadActionsSuccess}
+  | {type: 'error'; error: LoadActionsError};
+
+export interface StripeCheckout {
+  on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
+  loadActions: () => Promise<StripeCheckoutLoadActionsResult>;
 
   /* Elements methods */
   changeAppearance: (appearance: Appearance) => void;
