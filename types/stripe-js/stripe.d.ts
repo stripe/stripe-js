@@ -1280,8 +1280,9 @@ export interface Stripe {
   ): Promise<EphemeralKeyNonceResult>;
 
   /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   * Use `stripe.initCheckout` to initialize a Checkout instance
+   *
+   * * @docs https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-components
    */
   initCheckout(options: StripeCheckoutOptions): StripeCheckout;
 
