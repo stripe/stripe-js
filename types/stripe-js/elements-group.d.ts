@@ -720,21 +720,11 @@ export interface StripeElementsOptionsClientSecret
   currency?: string;
 }
 
-export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
-  /**
-   * Whether the Payment Element will be used to create a PaymentIntent, SetupIntent, or Subscription.
-   */
-  mode?: 'payment' | 'setup' | 'subscription';
-
+interface StripeElementsOptionsModeBase extends BaseStripeElementsOptions {
   /**
    * Three character currency code (e.g., usd).
    */
-  currency?: string;
-
-  /**
-   * The amount to be charged. Shown in Apple Pay, Google Pay, or Buy now pay later UIs, and influences available payment methods.
-   */
-  amount?: number;
+  currency: string;
 
   /**
    * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
@@ -853,6 +843,33 @@ export interface StripeElementsOptionsMode extends BaseStripeElementsOptions {
    */
   externalPaymentMethodTypes?: string[];
 }
+
+type StripeElementsOptionsModePayment = StripeElementsOptionsModeBase & {
+  mode: 'payment';
+
+  /**
+   * The amount to be charged. Shown in Apple Pay, Google Pay, or Buy now pay later UIs, and influences available payment methods.
+   */
+  amount: number;
+};
+
+type StripeElementsOptionsModeSubscription = StripeElementsOptionsModeBase & {
+  mode: 'subscription';
+
+  /**
+   * The amount to be charged. Shown in Apple Pay, Google Pay, or Buy now pay later UIs, and influences available payment methods.
+   */
+  amount: number;
+};
+
+type StripeElementsOptionsModeSetup = StripeElementsOptionsModeBase & {
+  mode: 'setup';
+};
+
+export type StripeElementsOptionsMode =
+  | StripeElementsOptionsModePayment
+  | StripeElementsOptionsModeSubscription
+  | StripeElementsOptionsModeSetup;
 
 export type StripeElementsOptions =
   | StripeElementsOptionsClientSecret
