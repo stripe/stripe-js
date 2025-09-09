@@ -3829,52 +3829,71 @@ stripe.createEphemeralKeyNonce({
   issuingCard: '',
 });
 
-stripe
-  .initCheckout({
-    fetchClientSecret: async () => 'cs_test_foo',
-  })
-  .then(async (checkout) => {
-    const checkoutPaymentElement: StripePaymentElement = checkout.createPaymentElement();
-    checkout.getPaymentElement();
-    const checkoutAddressElement: StripeAddressElement = checkout.createBillingAddressElement();
-    checkout.getBillingAddressElement();
-    checkout.applyPromotionCode('code');
+stripe.initCheckout({clientSecret: Promise.resolve('cs_test_foo')});
+const checkout = stripe.initCheckout({clientSecret: 'cs_test_foo'});
+const checkoutPaymentElement: StripePaymentElement = checkout.createPaymentElement();
+checkout.getPaymentElement();
+const checkoutAddressElement: StripeAddressElement = checkout.createBillingAddressElement();
+checkout.getBillingAddressElement();
+checkout.loadFonts([
+  {
+    cssSrc: 'https://example.com/font.css',
+  },
+  {
+    src: 'url(https://example.com/Blah.woff)',
+    family: 'Blah',
+    weight: '500',
+    style: 'italic',
+    unicodeRange: 'some range',
+    display: 'display value',
+  },
+]);
 
-    checkout.loadFonts([
-      {
-        cssSrc: 'https://example.com/font.css',
-      },
-      {
-        src: 'url(https://example.com/Blah.woff)',
-        family: 'Blah',
-        weight: '500',
-        style: 'italic',
-        unicodeRange: 'some range',
-        display: 'display value',
-      },
-    ]);
+checkout.loadActions().then((loadActionsResult) => {
+  if (loadActionsResult.type === 'success') {
+    const {actions} = loadActionsResult;
+    actions.applyPromotionCode('code').then((result) => {
+      if (result.type === 'success') {
+        const {session} = result;
+      } else {
+        const {error} = result;
+      }
+    });
+    actions.removePromotionCode().then((result) => {
+      if (result.type === 'success') {
+        const {session} = result;
+      } else {
+        const {error} = result;
+      }
+    });
 
+    const session = actions.getSession();
     const {
       minorUnitsAmountDivisor,
       lineItems,
       total: {
         taxExclusive: {amount, minorUnitsAmount},
       },
-    } = checkout.session();
+    } = session;
     const {
       subtotal: {amount: _, minorUnitsAmount: __},
     } = lineItems[0];
-    const result = await checkout.confirm();
-    if (result.type === 'success') {
-      const {session} = result;
-    } else {
-      const {error} = result;
-    }
-  });
+
+    actions.confirm().then((result) => {
+      if (result.type === 'success') {
+        const {session} = result;
+      } else {
+        const {error} = result;
+      }
+    });
+  } else {
+    const {error} = loadActionsResult;
+  }
+});
 
 // savedPaymentMethod variations for initCheckout:
 stripe.initCheckout({
-  fetchClientSecret: async () => 'cs_test_foo',
+  clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
       enableSave: 'never',
@@ -3885,7 +3904,7 @@ stripe.initCheckout({
 
 // only enableSave
 stripe.initCheckout({
-  fetchClientSecret: async () => 'cs_test_foo',
+  clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
       enableSave: 'auto',
@@ -3895,7 +3914,7 @@ stripe.initCheckout({
 
 // only enableRedisplay
 stripe.initCheckout({
-  fetchClientSecret: async () => 'cs_test_foo',
+  clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
       enableRedisplay: 'never',
@@ -3905,7 +3924,7 @@ stripe.initCheckout({
 
 // empty savedPaymentMethod object
 stripe.initCheckout({
-  fetchClientSecret: async () => 'cs_test_foo',
+  clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {},
   },
