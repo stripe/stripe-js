@@ -1,5 +1,5 @@
 # Stripe.js as a CommonJS module or ES module
-
+test
 This package allows [Stripe.js](https://stripe.com/docs/stripe-js) to be
 imported as a CommonJS module or ES module.
 
