@@ -13,7 +13,7 @@ import {
   StripeElementsOptionsClientSecret,
   StripeElementsOptionsMode,
 } from './elements-group';
-import {CheckoutLocale, RedirectToCheckoutOptions} from './hosted-checkout';
+import {CheckoutLocale} from './hosted-checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
 import {StripeCheckoutOptions, StripeCheckout} from './checkout';
@@ -42,20 +42,6 @@ export interface Stripe {
    * https://stripe.com/docs/js/elements_object/create_without_intent
    */
   elements(options?: StripeElementsOptionsMode): StripeElements;
-
-  /////////////////////////////
-  /// Checkout
-  ///
-  /// https://stripe.com/docs/js/checkout
-  /////////////////////////////
-
-  /**
-   * Use `stripe.redirectToCheckout` to redirect your customers to [Checkout](https://stripe.com/docs/payments/checkout), a Stripe-hosted page to securely collect payment information.
-   * When the customer completes their purchase, they are redirected back to your website.
-   */
-  redirectToCheckout(
-    options: RedirectToCheckoutOptions
-  ): Promise<never | {error: StripeError}>;
 
   /////////////////////////////
   /// Payment Intents
