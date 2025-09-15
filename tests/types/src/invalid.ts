@@ -288,6 +288,23 @@ elements.create('taxId');
 // @ts-expect-error: TaxId cannot be retrieved from Elements
 elements.getElement('taxId');
 
+// @ts-expect-error: redirectToCheckout is not a method on Stripe
+stripe.redirectToCheckout({sessionId: ''});
+
+stripe
+// @ts-expect-error: redirectToCheckout is not a method on Stripe
+  .redirectToCheckout({
+    items: [{sku: 'sku_123', quantity: 1}],
+    successUrl: 'https://your-website.com/success',
+    cancelUrl: 'https://your-website.com/canceled',
+    shippingAddressCollection: {
+      allowedCountries: ['EN'],
+    },
+  })
+  .then((result) => {
+    console.error(result.error.message);
+  });
+
 // @ts-expect-error at least one of elements or clientSecret is required
 stripe.confirmPayment({confirmParams: {return_url: ''}});
 
