@@ -292,7 +292,7 @@ elements.getElement('taxId');
 stripe.redirectToCheckout({sessionId: ''});
 
 stripe
-// @ts-expect-error: redirectToCheckout is not a method on Stripe
+  // @ts-expect-error: redirectToCheckout is not a method on Stripe
   .redirectToCheckout({
     items: [{sku: 'sku_123', quantity: 1}],
     successUrl: 'https://your-website.com/success',
