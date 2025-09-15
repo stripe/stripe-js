@@ -1325,21 +1325,6 @@ expressCheckoutElement.destroy();
 expressCheckoutElement2.destroy();
 taxIdElement.destroy();
 
-stripe.redirectToCheckout({sessionId: ''});
-
-stripe
-  .redirectToCheckout({
-    items: [{sku: 'sku_123', quantity: 1}],
-    successUrl: 'https://your-website.com/success',
-    cancelUrl: 'https://your-website.com/canceled',
-    shippingAddressCollection: {
-      allowedCountries: ['EN'],
-    },
-  })
-  .then((result) => {
-    console.error(result.error.message);
-  });
-
 stripe.createRadarSession();
 
 stripe
