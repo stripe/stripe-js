@@ -300,9 +300,6 @@ stripe
     shippingAddressCollection: {
       allowedCountries: ['EN'],
     },
-  })
-  .then((result) => {
-    console.error(result.error.message);
   });
 
 // @ts-expect-error at least one of elements or clientSecret is required
