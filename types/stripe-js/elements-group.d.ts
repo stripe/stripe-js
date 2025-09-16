@@ -1213,11 +1213,13 @@ export interface Appearance {
 
   /**
    * The style of labels associated with input fields to use for the Elements. Defaults to 'auto'.
+   * @docs https://stripe.com/docs/stripe-js/appearance-api#labels
    */
   labels?: 'auto' | 'above' | 'floating' | 'none';
 
   /**
    * The style of input fields to use for the Elements. Defaults to 'spaced'.
+   * @docs https://stripe.com/docs/stripe-js/appearance-api#inputs
    */
   inputs?: 'spaced' | 'condensed';
 }
