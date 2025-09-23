@@ -570,7 +570,7 @@ export interface CollectBankAccountPaymentMethodData {
   billing_details: PaymentMethodCreateParams.BillingDetails;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. 
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    * Individual keys can be unset by posting an empty value to them
    */
   metadata?: Record<string, string>;
@@ -1597,7 +1597,7 @@ export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
     allow_redisplay?: 'always' | 'limited' | 'unspecified';
 
     /**
-     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. 
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
      * Individual keys can be unset by posting an empty value to them
      */
     metadata?: Record<string, string>;
