@@ -568,6 +568,12 @@ export interface CollectBankAccountPaymentMethodData {
    * @docs https://stripe.com/docs/api/payment_methods/create#create_payment_method-billing_details
    */
   billing_details: PaymentMethodCreateParams.BillingDetails;
+
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. 
+   * Individual keys can be unset by posting an empty value to them
+   */
+  metadata?: Record<string, string>;
 }
 
 /**
@@ -1589,6 +1595,12 @@ export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
      * Specifies if the PaymentMethod should be redisplayed when using the Saved Payment Method feature
      */
     allow_redisplay?: 'always' | 'limited' | 'unspecified';
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. 
+     * Individual keys can be unset by posting an empty value to them
+     */
+    metadata?: Record<string, string>;
   };
 
   /**
