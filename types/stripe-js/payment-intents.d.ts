@@ -1,9 +1,5 @@
 import {
-  StripeIdealBankElement,
   StripeIbanElement,
-  StripeP24BankElement,
-  StripeEpsBankElement,
-  StripeFpxBankElement,
   StripeCardCvcElement,
   StripeCardNumberElement,
   StripeCardElement,
@@ -180,27 +176,23 @@ export interface CreatePaymentMethodEpsData extends PaymentMethodCreateParams {
     name: string;
   };
 
-  eps:
-    | StripeEpsBankElement
-    | {
-        /**
-         * The customer's bank
-         */
-        bank?: string;
-      };
+  eps: {
+    /**
+     * The customer's bank
+     */
+    bank?: string;
+  };
 }
 
 export interface CreatePaymentMethodFpxData extends PaymentMethodCreateParams {
   type: 'fpx';
 
-  fpx:
-    | StripeFpxBankElement
-    | {
-        /**
-         * The customer's bank.
-         */
-        bank: string;
-      };
+  fpx: {
+    /**
+     * The customer's bank.
+     */
+    bank: string;
+  };
 }
 
 export interface CreatePaymentMethodGiropayData
@@ -232,14 +224,12 @@ export interface CreatePaymentMethodIdealData
   extends PaymentMethodCreateParams {
   type: 'ideal';
 
-  ideal:
-    | StripeIdealBankElement
-    | {
-        /**
-         * The customer's bank.
-         */
-        bank?: string;
-      };
+  ideal: {
+    /**
+     * The customer's bank.
+     */
+    bank?: string;
+  };
 }
 
 export interface CreatePaymentMethodKlarnaData
@@ -326,14 +316,12 @@ export interface CreatePaymentMethodP24Data extends PaymentMethodCreateParams {
   billing_details: PaymentMethodCreateParams.BillingDetails & {
     email: string;
   };
-  p24?:
-    | StripeP24BankElement
-    | {
-        /**
-         * The customer's bank.
-         */
-        bank?: string;
-      };
+  p24?: {
+    /**
+     * The customer's bank.
+     */
+    bank?: string;
+  };
 }
 
 export interface CreatePaymentMethodPayNowData
