@@ -557,7 +557,7 @@ export type StripeCheckoutRunServerUpdateResult =
   | {type: 'error'; error: AnyBuyerError};
 
 type LoadActionsError = {message: string; code: null};
-type LoadActionsSuccess = {
+export type LoadActionsSuccess = {
   applyPromotionCode: (
     promotionCode: string
   ) => Promise<StripeCheckoutApplyPromotionCodeResult>;
