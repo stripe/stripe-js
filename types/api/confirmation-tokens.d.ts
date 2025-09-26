@@ -87,6 +87,13 @@ export interface ConfirmationTokenCreateParams {
      * Specifies if the PaymentMethod should be redisplayed when using the Saved Payment Method feature
      */
     allow_redisplay?: 'always' | 'limited' | 'unspecified';
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     * Individual keys can be unset by posting an empty value to them
+     * @docs https://docs.stripe.com/metadata
+     */
+    metadata?: Record<string, string>;
   };
 
   /**
