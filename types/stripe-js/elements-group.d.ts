@@ -10,16 +10,8 @@ import {
   StripePaymentElementOptions,
   StripeLinkAuthenticationElement,
   StripeLinkAuthenticationElementOptions,
-  StripeIdealBankElement,
-  StripeIdealBankElementOptions,
   StripeIbanElement,
   StripeIbanElementOptions,
-  StripeP24BankElement,
-  StripeP24BankElementOptions,
-  StripeEpsBankElement,
-  StripeEpsBankElementOptions,
-  StripeFpxBankElement,
-  StripeFpxBankElementOptions,
   StripeCardCvcElement,
   StripeCardCvcElementOptions,
   StripeCardExpiryElement,
@@ -29,12 +21,8 @@ import {
   StripeCardElement,
   StripeCardElementOptions,
   StripeAuBankAccountElement,
-  StripeAfterpayClearpayMessageElementOptions,
-  StripeAffirmMessageElement,
-  StripeAffirmMessageElementOptions,
   StripePaymentMethodMessagingElementOptions,
   StripePaymentMethodMessagingElement,
-  StripeAfterpayClearpayMessageElement,
   StripeAuBankAccountElementOptions,
   StripeIssuingCardNumberDisplayElement,
   StripeIssuingCardNumberDisplayElementOptions,
@@ -118,42 +106,6 @@ export interface StripeElements {
   getElement(
     elementType: 'paymentMethodMessaging'
   ): StripePaymentMethodMessagingElement | null;
-
-  /////////////////////////////
-  /// affirmMessage
-  /////////////////////////////
-
-  /**
-   * Creates an `AffirmMessageElement`.
-   */
-  create(
-    elementType: 'affirmMessage',
-    options: StripeAffirmMessageElementOptions
-  ): StripeAffirmMessageElement;
-
-  /**
-   * Looks up a previously created `Element` by its type.
-   */
-  getElement(elementType: 'affirmMessage'): StripeAffirmMessageElement | null;
-
-  /////////////////////////////
-  /// afterpayClearpayMessage
-  /////////////////////////////
-
-  /**
-   * Creates an `AfterpayClearpayMessageElement`.
-   */
-  create(
-    elementType: 'afterpayClearpayMessage',
-    options: StripeAfterpayClearpayMessageElementOptions
-  ): StripeAfterpayClearpayMessageElement;
-
-  /**
-   * Looks up a previously created `Element` by its type.
-   */
-  getElement(
-    elementType: 'afterpayClearpayMessage'
-  ): StripeAfterpayClearpayMessageElement | null;
 
   /////////////////////////////
   /// auBankAccount
@@ -247,63 +199,6 @@ export interface StripeElements {
   getElement(elementType: 'cardCvc'): StripeCardCvcElement | null;
 
   /////////////////////////////
-  /// fpxBank
-  /////////////////////////////
-
-  /**
-   * Creates an `FpxBankElement`.
-   */
-  create(
-    elementType: 'fpxBank',
-    options: StripeFpxBankElementOptions
-  ): StripeFpxBankElement;
-
-  /**
-   * Looks up a previously created `Element` by its type.
-   */
-  getElement(elementType: 'fpxBank'): StripeFpxBankElement | null;
-
-  /////////////////////////////
-  /// epsBank
-  /////////////////////////////
-
-  /**
-   *
-   * Creates an `EpsBankElement`.
-   */
-  create(
-    elementType: 'epsBank',
-    options: StripeEpsBankElementOptions
-  ): StripeEpsBankElement;
-
-  /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   *
-   * Looks up a previously created `Element` by its type.
-   */
-  getElement(elementType: 'epsBank'): StripeEpsBankElement | null;
-
-  /////////////////////////////
-  /// p24Bank
-  /////////////////////////////
-
-  /**
-   *
-   * Creates an `P24BankElement`.
-   */
-  create(
-    elementType: 'p24Bank',
-    options: StripeP24BankElementOptions
-  ): StripeP24BankElement;
-
-  /**
-   *
-   * Looks up a previously created `Element` by its type.
-   */
-  getElement(elementType: 'p24Bank'): StripeP24BankElement | null;
-
-  /////////////////////////////
   /// iban
   /////////////////////////////
 
@@ -319,23 +214,6 @@ export interface StripeElements {
    * Looks up a previously created `Element` by its type.
    */
   getElement(elementType: 'iban'): StripeIbanElement | null;
-
-  /////////////////////////////
-  /// idealBank
-  /////////////////////////////
-
-  /**
-   * Creates an `IdealBankElement`.
-   */
-  create(
-    elementType: 'idealBank',
-    options?: StripeIdealBankElementOptions
-  ): StripeIdealBankElement;
-
-  /**
-   * Looks up a previously created `Element` by its type.
-   */
-  getElement(elementType: 'idealBank'): StripeIdealBankElement | null;
 
   /////////////////////////////
   /// linkAuthentication
@@ -497,20 +375,14 @@ export interface StripeElements {
 
 export type StripeElementType =
   | 'address'
-  | 'affirmMessage'
-  | 'afterpayClearpayMessage'
   | 'auBankAccount'
   | 'card'
   | 'cardNumber'
   | 'cardExpiry'
   | 'cardCvc'
   | 'currencySelector'
-  | 'epsBank'
   | 'expressCheckout'
-  | 'fpxBank'
   | 'iban'
-  | 'idealBank'
-  | 'p24Bank'
   | 'payment'
   | 'paymentMethodMessaging'
   | 'paymentRequestButton'
@@ -526,18 +398,12 @@ export type StripeElementType =
 
 export type StripeElement =
   | StripeAddressElement
-  | StripeAffirmMessageElement
-  | StripeAfterpayClearpayMessageElement
   | StripeAuBankAccountElement
   | StripeCardElement
   | StripeCardNumberElement
   | StripeCardExpiryElement
   | StripeCardCvcElement
-  | StripeEpsBankElement
-  | StripeFpxBankElement
   | StripeIbanElement
-  | StripeIdealBankElement
-  | StripeP24BankElement
   | StripeCurrencySelectorElement
   | StripeExpressCheckoutElement
   | StripePaymentElement
