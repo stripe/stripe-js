@@ -245,6 +245,11 @@ export interface ConfirmBancontactSetupData extends SetupIntentConfirmParams {
  */
 export interface ConfirmAcssDebitSetupData extends SetupIntentConfirmParams {
   /**
+   * Specifies which fields in the response should be expanded.
+   */
+  expand?: Array<string>;
+
+  /**
    * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
    * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
    *
