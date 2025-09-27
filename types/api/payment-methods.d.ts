@@ -15,6 +15,35 @@ export interface PaymentMethod {
    */
   object: 'payment_method';
 
+  affirm?: PaymentMethod.Affirm;
+
+  afterpay_clearpay?: PaymentMethod.AfterpayClearpay;
+
+  acss_debit?: PaymentMethod.AcssDebit;
+
+  alipay?: PaymentMethod.Alipay;
+
+  /**
+   * This field indicates whether this payment method can be shown again to its customer in a checkout flow. Stripe products such as Checkout and Elements use this field to determine whether a payment method can be shown as a saved payment method in a checkout flow. Can be `always`, `limited` or `unspecified`.
+   */
+  allow_redisplay: string | null;
+
+  alma?: PaymentMethod.Alma;
+
+  amazon_pay?: PaymentMethod.AmazonPay;
+
+  au_becs_debit?: PaymentMethod.AuBecsDebit;
+
+  bacs_debit?: PaymentMethod.BacsDebit;
+
+  bancontact?: PaymentMethod.Bancontact;
+
+  billie?: PaymentMethod.Billie;
+
+  blik?: PaymentMethod.Blik;
+
+  boleto?: PaymentMethod.Boleto;
+
   billing_details: PaymentMethod.BillingDetails;
 
   card?: PaymentMethod.Card;
@@ -25,6 +54,8 @@ export interface PaymentMethod {
    * Time at which the object was created. Measured in seconds since the Unix epoch.
    */
   created: number;
+
+  crypto?: PaymentMethod.Crypto;
 
   /**
    * The ID of the Customer to which this PaymentMethod is saved. This will not be set when the PaymentMethod has not been saved to a Customer.
@@ -39,7 +70,13 @@ export interface PaymentMethod {
 
   ideal?: PaymentMethod.Ideal;
 
-  p24?: PaymentMethod.P24;
+  kakao_pay?: PaymentMethod.KakaoPay;
+
+  klarna?: PaymentMethod.Klarna;
+
+  konbini?: PaymentMethod.Konbini;
+
+  link?: PaymentMethod.Link;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
@@ -51,25 +88,92 @@ export interface PaymentMethod {
    */
   metadata: Metadata;
 
+  mobile_pay?: PaymentMethod.MobilePay;
+
+  multibanco?: PaymentMethod.Multibanco;
+
+  naver_pay?: PaymentMethod.NaverPay;
+
+  nz_bank_account?: PaymentMethod.NzBankAccount;
+
+  oxxo?: PaymentMethod.Oxxo;
+
+  p24?: PaymentMethod.P24;
+
+  pay_by_bank?: PaymentMethod.PayByBank;
+
+  payco?: PaymentMethod.Payco;
+
+  paynow?: PaymentMethod.Paynow;
+
+  paypal?: PaymentMethod.Paypal;
+
+  pix?: PaymentMethod.Pix;
+
+  promptpay?: PaymentMethod.PromptPay;
+
+  revolut_pay?: PaymentMethod.RevolutPay;
+
+  samsun_pay?: PaymentMethod.SamsungPay;
+
+  satispay?: PaymentMethod.Satispay;
+
   sepa_debit?: PaymentMethod.SepaDebit;
+
+  swish?: PaymentMethod.Swish;
+
+  twint?: PaymentMethod.Twint;
 
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
    */
   type: string;
 
-  affirm?: PaymentMethod.Affirm;
-
-  afterpay_clearpay?: PaymentMethod.AfterpayClearpay;
-
-  acss_debit?: PaymentMethod.AcssDebit;
-
-  au_becs_debit?: PaymentMethod.AuBecsDebit;
-
   us_bank_account?: PaymentMethod.UsBankAccount;
+
+  wechat_pay?: PaymentMethod.WechatPay;
+
+  zip?: PaymentMethod.Zip;
 }
 
 export namespace PaymentMethod {
+  export interface AcssDebit {
+    /**
+     * The name of the bank.
+     */
+    bank_name: string;
+
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+     */
+    fingerprint: string | null;
+
+    /**
+     * Institution number of the customer’s bank.
+     */
+    institution_number: string;
+
+    /**
+     * Last four digits of the bank account number.
+     */
+    last4: string;
+
+    /**
+     * Transit number of the customer’s bank.
+     */
+    transit_number: string;
+  }
+
+  export interface Affirm {}
+
+  export interface AfterpayClearpay {}
+
+  export interface Alipay {}
+
+  export interface Alma {}
+
+  export interface AmazonPay {}
+
   export interface AuBecsDebit {
     /**
      * Bank State Branch
@@ -86,6 +190,22 @@ export namespace PaymentMethod {
      */
     last4: string | null;
   }
+
+  export interface BacsDebit {
+    /**
+     * Last four characters of the account number.
+     */
+    last4: string | null;
+
+    /**
+     * Sort code of the bank account. (e.g., 10-20-30).
+     */
+    sort_code: string | null;
+  }
+
+  export interface Bancontact {}
+
+  export interface Billie {}
 
   export interface BillingDetails {
     /**
@@ -109,6 +229,10 @@ export namespace PaymentMethod {
     phone: string | null;
   }
 
+  export interface Blik {}
+
+  export interface Boleto {}
+
   export interface Card {
     /**
      * Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
@@ -124,6 +248,11 @@ export namespace PaymentMethod {
      * Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
      */
     country: string | null;
+
+    /**
+     * The brand to use when displaying the card, this accounts for customer’s brand choice on dual-branded cards. Can be `american_express`, `cartes_bancaires`, `diners_club`, `discover`, `eftpos_australia`, `interac`, `jcb`, `mastercard`, `union_pay`, `visa`, or other and may contain more values in the future.
+     */
+    display_brand: string | null;
 
     /**
      * Two-digit number representing the card's expiration month.
@@ -166,6 +295,11 @@ export namespace PaymentMethod {
     } | null;
 
     /**
+     * Status of a card based on the card issuer. Can be `regulated` or `unregulated`.
+     */
+    regulated_status: string | null;
+
+    /**
      * Contains details on how this Card maybe be used for 3D Secure authentication.
      */
     three_d_secure_usage: Card.ThreeDSecureUsage | null;
@@ -204,6 +338,20 @@ export namespace PaymentMethod {
 
   export interface CardPresent {}
 
+  export interface CashApp {
+    /**
+     * A unique and immutable identifier assigned by Cash App to every buyer.
+     */
+    buyer_id: string | null;
+
+    /**
+     * A public identifier for buyers using Cash App.
+     */
+    cashtag: string | null;
+  }
+
+  export interface Crypto {}
+
   export interface Eps {
     /**
      * The customer's bank.
@@ -232,12 +380,110 @@ export namespace PaymentMethod {
     bic: string | null;
   }
 
+  export interface KakaoPay {}
+
+  export interface Klarna {}
+
+  export interface Konbini {}
+
+  export interface KrCard {
+    /**
+     * The local credit or debit card brand.
+     */
+    brand: string | null;
+
+    /**
+     * Last four characters of the IBAN.
+     */
+    last4: string | null;
+  }
+
+  export interface Link {
+    /**
+     * Account owner’s email address.
+     */
+    email: string | null;
+  }
+
+  export interface MobilePay {}
+
+  export interface Multibanco {}
+
+  export interface NaverPay {}
+
+  export interface NzBankAccount {
+    /**
+     * The name on the bank account. Only present if the account holder name is different from the name of the authorized signatory collected in the PaymentMethod’s billing details.
+     */
+    account_holder_name: string | null;
+
+    /**
+     * The numeric code for the bank account’s bank.
+     */
+    bank_code: string | null;
+
+    /**
+     * The name of the bank.
+     */
+    bank_name: string | null;
+
+    /**
+     * Branch code of bank associated with the bank account.
+     */
+    branch_code: string | null;
+
+    /**
+     * Last four digits of the bank account number.
+     */
+    last4: string | null;
+
+    /**
+     * The suffix of the bank account number.
+     */
+    suffix: string | null;
+  }
+
+  export interface Oxxo {}
+
   export interface P24 {
     /**
      * The customer's bank.
      */
     bank: string;
   }
+
+  export interface PayByBank {}
+
+  export interface Payco {}
+
+  export interface Paynow {}
+
+  export interface Paypal {
+    /**
+     * Two-letter ISO code representing the buyer’s country. Values are provided by PayPal directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+     */
+    country: string | null;
+
+    /**
+     * Owner’s email. Values are provided by PayPal directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+     */
+    payer_name: string | null;
+
+    /**
+     * PayPal account PayerID. This identifier uniquely identifies the PayPal customer.
+     */
+    payer_id: string | null;
+  }
+
+  export interface Pix {}
+
+  export interface PromptPay {}
+
+  export interface RevolutPay {}
+
+  export interface SamsungPay {}
+
+  export interface Satispay {}
 
   export interface SepaDebit {
     /**
@@ -266,26 +512,9 @@ export namespace PaymentMethod {
     last4: string | null;
   }
 
-  export interface Affirm {}
+  export interface Swish {}
 
-  export interface AfterpayClearpay {}
-
-  export interface AcssDebit {
-    /**
-     * Customer’s bank account number.
-     */
-    account_number: string;
-
-    /**
-     * Institution number of the customer’s bank.
-     */
-    institution_number: string;
-
-    /**
-     * Transit number of the customer’s bank.
-     */
-    transit_number: string;
-  }
+  export interface Twint {}
 
   export interface UsBankAccount {
     /**
@@ -343,6 +572,10 @@ export namespace PaymentMethod {
       supported: string[];
     };
   }
+
+  export interface WechatPay {}
+
+  export interface Zip {}
 }
 
 export interface PaymentMethodCreateParams {
