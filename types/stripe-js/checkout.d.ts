@@ -342,7 +342,7 @@ export interface StripeCheckoutSession {
 export type StripeCheckoutPaymentElementOptions = {
   layout?: Layout | LayoutObject;
   paymentMethodOrder?: Array<string>;
-  readonly?: boolean;
+  readOnly?: boolean;
   terms?: TermsOption;
   fields?: FieldsOption;
 };
