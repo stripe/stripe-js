@@ -25,17 +25,10 @@ import {
   PaymentRequestShippingOption,
   CustomFontSource,
   StripeIbanElement,
-  StripeIdealBankElement,
-  StripeEpsBankElement,
-  StripeP24BankElement,
-  StripeFpxBankElement,
-  StripeFpxBankElementChangeEvent,
   StripeAuBankAccountElement,
   StripeAuBankAccountElementChangeEvent,
   StripePaymentRequestButtonElement,
   StripePaymentElement,
-  StripeAffirmMessageElement,
-  StripeAfterpayClearpayMessageElement,
   StripePaymentMethodMessagingElement,
   StripeLinkAuthenticationElementChangeEvent,
   StripeLinkAuthenticationElement,
@@ -365,39 +358,10 @@ const retrievedCardCvcElement: StripeCardCvcElement | null = elements.getElement
   'cardCvc'
 );
 
-const fpxBankElement = elements.create('fpxBank', {
-  style: MY_STYLE,
-  value: '',
-  accountHolderType: 'individual',
-  classes: {webkitAutofill: ''},
-});
-
-elements.create('fpxBank', {
-  style: {base: {fontWeight: 500}},
-  accountHolderType: 'individual',
-});
-
-const retrievedFpxBankElement: StripeFpxBankElement | null = elements.getElement(
-  'fpxBank'
-);
-
 const ibanElement = elements.create('iban', {supportedCountries: ['']});
 
 const retrievedIbanElement: StripeIbanElement | null = elements.getElement(
   'iban'
-);
-
-const idealBankElement = elements.create('idealBank', {
-  style: MY_STYLE,
-  value: '',
-  hideIcon: false,
-  classes: {webkitAutofill: ''},
-});
-
-elements.create('idealBank', {style: {base: {fontWeight: 500}}});
-
-const retrievedIdealBankElement: StripeIdealBankElement | null = elements.getElement(
-  'idealBank'
 );
 
 const paymentRequestButtonElement = elements.create('paymentRequestButton', {
@@ -426,19 +390,6 @@ const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | 
 
 // Make sure that `paymentRequest` is at least optional;
 retrievedPaymentRequestButtonElement!.update({});
-
-const affirmMessageElement = elements.create('affirmMessage', {
-  amount: 50000,
-  currency: 'USD',
-});
-
-const afterpayClearpayMessageElement = elements.create(
-  'afterpayClearpayMessage',
-  {
-    amount: 2000,
-    currency: 'USD',
-  }
-);
 
 const paymentMethodMessagingElement = elements.create(
   'paymentMethodMessaging',
@@ -663,27 +614,6 @@ paymentElement
 
 paymentElement.collapse();
 
-// Test Affirm Messaging Element
-affirmMessageElement.on('ready', (e: {elementType: 'affirmMessage'}) => {});
-
-const retrievedAffirmMessageElement: StripeAffirmMessageElement | null = elements.getElement(
-  'affirmMessage'
-);
-
-retrievedAffirmMessageElement!.update({amount: 10000});
-
-// Test Afterpay Messaging Element
-afterpayClearpayMessageElement.on(
-  'ready',
-  (e: {elementType: 'afterpayClearpayMessage'}) => {}
-);
-
-const retrievedAfterpayClearpayMessageElement: StripeAfterpayClearpayMessageElement | null = elements.getElement(
-  'afterpayClearpayMessage'
-);
-
-retrievedAfterpayClearpayMessageElement!.update({currency: 'GBP'});
-
 // Test Payment Method Messaging Element
 paymentMethodMessagingElement.on(
   'ready',
@@ -695,40 +625,6 @@ const retrievedPaymentMethodMessagingElement: StripePaymentMethodMessagingElemen
 );
 
 retrievedPaymentMethodMessagingElement!.update({amount: 10000});
-
-const epsBankElement = elements.create('epsBank', {
-  style: MY_STYLE,
-  value: '',
-  classes: {webkitAutofill: ''},
-});
-
-elements.create('epsBank', {style: {base: {fontWeight: 500}}});
-
-const retrievedEpsBankElement: StripeEpsBankElement | null = elements.getElement(
-  'epsBank'
-);
-
-epsBankElement
-  .on('ready', (e: {elementType: 'epsBank'}) => {})
-  .on('focus', (e: {elementType: 'epsBank'}) => {})
-  .on('blur', (e: {elementType: 'epsBank'}) => {});
-
-const p24BankElement = elements.create('p24Bank', {
-  style: MY_STYLE,
-  value: '',
-  classes: {webkitAutofill: ''},
-});
-
-p24BankElement
-  .on('ready', (e: {elementType: 'p24Bank'}) => {})
-  .on('focus', (e: {elementType: 'p24Bank'}) => {})
-  .on('blur', (e: {elementType: 'p24Bank'}) => {});
-
-elements.create('p24Bank', {style: {base: {fontWeight: 500}}});
-
-const retrievedP24BankElement: StripeP24BankElement | null = elements.getElement(
-  'p24Bank'
-);
 
 type StripePaymentRequestButtonElementUpdateOptions = Parameters<
   StripePaymentRequestButtonElement['update']
@@ -744,7 +640,6 @@ assert<
 
 const auBankElementType: StripeElementType = 'auBankAccount';
 const cardElementType: StripeElementType = 'card';
-const fpxElementType: StripeElementType = 'fpxBank';
 const ibanElementType: StripeElementType = 'iban';
 
 cardElement.mount('#bogus-container');
@@ -796,13 +691,6 @@ auBankAccountElement
   .on('ready', (e: {elementType: 'auBankAccount'}) => {})
   .on('focus', (e: {elementType: 'auBankAccount'}) => {})
   .on('blur', (e: {elementType: 'auBankAccount'}) => {});
-
-fpxBankElement.on('change', (e: StripeFpxBankElementChangeEvent) => {});
-
-fpxBankElement
-  .on('ready', (e: {elementType: 'fpxBank'}) => {})
-  .on('focus', (e: {elementType: 'fpxBank'}) => {})
-  .on('blur', (e: {elementType: 'fpxBank'}) => {});
 
 ibanElement
   .on('ready', (e: {elementType: 'iban'}) => {})
@@ -1314,9 +1202,7 @@ cardNumberElement.destroy();
 cardCvcElement.destroy();
 cardExpiryElement.destroy();
 currencySelectorElement.destroy();
-fpxBankElement.destroy();
 ibanElement.destroy();
-idealBankElement.destroy();
 paymentRequestButtonElement.destroy();
 linkAuthenticationElement.destroy();
 shippingAddressElement.destroy();
@@ -1964,16 +1850,6 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
-  .confirmEpsPayment('', {
-    payment_method: {
-      eps: epsBankElement,
-      billing_details: {name: 'Jenny Rosen'},
-    },
-    return_url: window.location.href,
-  })
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
   .confirmEpsPayment('', {payment_method: ''})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
@@ -1983,13 +1859,6 @@ stripe
 
 stripe
   .confirmEpsPayment('')
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmFpxPayment('', {
-    payment_method: {fpx: fpxBankElement},
-    return_url: window.location.href,
-  })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
@@ -2045,13 +1914,6 @@ stripe
 
 stripe
   .confirmGrabPayPayment('', {payment_method: ''}, {handleActions: false})
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmIdealPayment('', {
-    payment_method: {ideal: idealBankElement},
-    return_url: window.location.href,
-  })
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
@@ -2235,32 +2097,7 @@ stripe
 stripe
   .confirmP24Payment('', {
     payment_method: {
-      p24: p24BankElement,
-      billing_details: {email: 'jenny@example.com'},
-    },
-    return_url: window.location.href,
-  })
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmP24Payment('', {
-    payment_method: {
       p24: {bank: 'ing'},
-      billing_details: {email: 'jenny@example.com'},
-    },
-    payment_method_options: {
-      p24: {
-        tos_shown_and_accepted: true,
-      },
-    },
-    return_url: window.location.href,
-  })
-  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmP24Payment('', {
-    payment_method: {
-      p24: p24BankElement,
       billing_details: {email: 'jenny@example.com'},
     },
     payment_method_options: {
@@ -2762,11 +2599,6 @@ stripe
 
 stripe.createPaymentMethod({
   type: 'fpx',
-  fpx: fpxBankElement,
-});
-
-stripe.createPaymentMethod({
-  type: 'fpx',
   fpx: {bank: ''},
 });
 
@@ -2777,11 +2609,6 @@ stripe.createPaymentMethod({
 stripe.createPaymentMethod({
   type: 'grabpay',
   grabpay: {},
-});
-
-stripe.createPaymentMethod({
-  type: 'ideal',
-  ideal: idealBankElement,
 });
 
 stripe.createPaymentMethod({
@@ -3024,18 +2851,6 @@ stripe
       handleActions: false,
     }
   )
-  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
-
-stripe
-  .confirmIdealSetup('', {
-    payment_method: {
-      ideal: idealBankElement,
-      billing_details: {
-        name: '',
-        email: '',
-      },
-    },
-  })
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
