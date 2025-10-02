@@ -31,7 +31,7 @@ const elements = stripe.elements(options);
 // @ts-expect-error mode must be one of payment, setup, or subscription
 stripe.elements({mode: 'test'});
 
-// @ts-expect-error: currency is required when using mode
+// @ts-expect-error: currency is required when using mode='payment'
 stripe.elements({mode: 'payment'});
 
 // @ts-expect-error: amount is required when using mode='payment'
@@ -39,6 +39,9 @@ stripe.elements({mode: 'payment', currency: 'usd'});
 
 // @ts-expect-error: amount is required when using mode='subscription'
 stripe.elements({mode: 'subscription', currency: 'usd'});
+
+// @ts-expect-error: currency is required when using mode='subscription'
+stripe.elements({mode: 'subscription', amount: 1000});
 
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
