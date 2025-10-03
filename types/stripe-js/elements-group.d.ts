@@ -735,7 +735,7 @@ type StripeElementsOptionsModeSetup = StripeElementsOptionsModeBase & {
   mode: 'setup';
   /**
    * Three character currency code (e.g., usd).
-   * 
+   *
    * Required when creating SetupIntents with dynamic payment methods.
    * Payment Element renders the payment methods enabled in the Stripe Dashboard that support the provided currency.
    */
