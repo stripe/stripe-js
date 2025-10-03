@@ -588,11 +588,6 @@ export interface StripeElementsOptionsClientSecret
 
 interface StripeElementsOptionsModeBase extends BaseStripeElementsOptions {
   /**
-   * Three character currency code (e.g., usd).
-   */
-  currency: string;
-
-  /**
    * Indicates that you intend to make future payments with this PaymentIntent’s payment method.
    *
    * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage
@@ -717,6 +712,10 @@ type StripeElementsOptionsModePayment = StripeElementsOptionsModeBase & {
    * The amount to be charged. Shown in Apple Pay, Google Pay, or Buy now pay later UIs, and influences available payment methods.
    */
   amount: number;
+  /**
+   * Three character currency code (e.g., usd).
+   */
+  currency: string;
 };
 
 type StripeElementsOptionsModeSubscription = StripeElementsOptionsModeBase & {
@@ -726,10 +725,21 @@ type StripeElementsOptionsModeSubscription = StripeElementsOptionsModeBase & {
    * The amount to be charged. Shown in Apple Pay, Google Pay, or Buy now pay later UIs, and influences available payment methods.
    */
   amount: number;
+  /**
+   * Three character currency code (e.g., usd).
+   */
+  currency: string;
 };
 
 type StripeElementsOptionsModeSetup = StripeElementsOptionsModeBase & {
   mode: 'setup';
+  /**
+   * Three character currency code (e.g., usd).
+   *
+   * Required when creating SetupIntents with dynamic payment methods.
+   * Payment Element renders the payment methods enabled in the Stripe Dashboard that support the provided currency.
+   */
+  currency?: string;
 };
 
 export type StripeElementsOptionsMode =

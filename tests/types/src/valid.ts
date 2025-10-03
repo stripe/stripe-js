@@ -160,6 +160,17 @@ stripe.elements({
 });
 
 stripe.elements({
+  mode: 'setup',
+  setup_future_usage: 'off_session',
+  capture_method: 'automatic',
+  payment_method_types: ['card'],
+  payment_method_options: {
+    us_bank_account: {financial_connections: {permissions: ['payment_method']}},
+  },
+  on_behalf_of: 'acct_id',
+});
+
+stripe.elements({
   mode: 'subscription',
   currency: 'usd',
   amount: 1000,
