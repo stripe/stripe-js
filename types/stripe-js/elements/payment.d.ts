@@ -227,6 +227,7 @@ export interface LayoutObject {
   radios?: boolean;
   spacedAccordionItems?: boolean;
   visibleAccordionItemsCount?: number;
+  paymentMethodLogoPosition?: 'start' | 'end';
 }
 
 export interface StripePaymentElementOptions {
