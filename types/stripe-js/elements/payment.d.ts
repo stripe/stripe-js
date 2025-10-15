@@ -229,7 +229,7 @@ export interface LayoutObject {
   visibleAccordionItemsCount?: number;
   /**
    * The position of the payment method logo in each accordion item.
-   * 
+   *
    * By default, the logo is displayed at the start of each accordion item.
    */
   paymentMethodLogoPosition?: 'start' | 'end';
