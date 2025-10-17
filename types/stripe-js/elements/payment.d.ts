@@ -227,6 +227,12 @@ export interface LayoutObject {
   radios?: boolean;
   spacedAccordionItems?: boolean;
   visibleAccordionItemsCount?: number;
+  /**
+   * The position of the payment method logo in each accordion item.
+   *
+   * By default, the logo is displayed at the start of each accordion item.
+   */
+  paymentMethodLogoPosition?: 'start' | 'end';
 }
 
 export interface StripePaymentElementOptions {

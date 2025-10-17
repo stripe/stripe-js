@@ -489,6 +489,7 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
     defaultCollapsed: true,
     radios: true,
     spacedAccordionItems: true,
+    paymentMethodLogoPosition: 'end',
   },
 });
 
