@@ -114,7 +114,8 @@ const options: StripeElementsOptions = {
   paymentMethodTypes: ['card'],
   paymentMethodCreation: 'manual',
   paymentMethodOptions: {
-    card: {require_cvc_recollection: true},
+    card: {require_cvc_recollection: true, setup_future_usage: 'none'},
+    amazon_pay: {setup_future_usage: 'none'},
   },
   appearance: {
     disableAnimations: false,
