@@ -66,7 +66,7 @@ export type StripeEmbeddedCheckoutAnalyticsItemsAndTotals = {
 
 export type StripeEmbeddedCheckoutAnalyticsEvent<
   EventType extends string,
-  EventDetails
+  EventDetails,
 > = {
   checkoutSession: string;
   eventType: EventType;
@@ -171,9 +171,7 @@ export interface StripeEmbeddedCheckoutOptions {
    * onAnalyticsEvent is called when analytics events occur during the checkout session.
    * You can use it to track customer behavior during the checkout session.
    */
-  onAnalyticsEvent?: (
-    event: StripeEmbeddedCheckoutAnalyticsEventUnion
-  ) => void;
+  onAnalyticsEvent?: (event: StripeEmbeddedCheckoutAnalyticsEventUnion) => void;
 }
 
 export interface StripeEmbeddedCheckout {
