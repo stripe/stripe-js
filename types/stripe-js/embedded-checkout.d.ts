@@ -72,7 +72,10 @@ export type StripeEmbeddedCheckoutAnalyticsEvent<
   eventType: EventType;
   details: EventDetails;
   clientMetadata: StripeEmbeddedCheckoutClientMetadata;
-  timestamp: number; // unix timestamp in seconds
+  /**
+   * The timestamp of the event in unix seconds
+   */
+  timestamp: number;
 };
 
 export type StripeEmbeddedCheckoutSubmittedDetails =
