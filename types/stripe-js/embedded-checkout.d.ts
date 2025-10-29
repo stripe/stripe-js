@@ -66,7 +66,7 @@ export type StripeEmbeddedCheckoutAnalyticsItemsAndTotals = {
 
 export type StripeEmbeddedCheckoutAnalyticsEvent<
   EventType extends string,
-  EventDetails,
+  EventDetails
 > = {
   checkoutSession: string;
   eventType: EventType;
@@ -78,13 +78,11 @@ export type StripeEmbeddedCheckoutAnalyticsEvent<
   timestamp: number;
 };
 
-export type StripeEmbeddedCheckoutSubmittedDetails =
-  StripeEmbeddedCheckoutAnalyticsItemsAndTotals & {
-    paymentMethodType: string;
-  };
+export type StripeEmbeddedCheckoutSubmittedDetails = StripeEmbeddedCheckoutAnalyticsItemsAndTotals & {
+  paymentMethodType: string;
+};
 
-export type StripeEmbeddedCheckoutRenderedDetails =
-  StripeEmbeddedCheckoutAnalyticsItemsAndTotals;
+export type StripeEmbeddedCheckoutRenderedDetails = StripeEmbeddedCheckoutAnalyticsItemsAndTotals;
 
 export type StripeEmbeddedCheckoutDeviceDataDetails = {
   device: {
@@ -99,35 +97,30 @@ export type StripeEmbeddedCheckoutPromotionCodeAppliedDetails = {
   code: string;
 };
 
-export type StripeEmbeddedCheckoutRenderedEvent =
-  StripeEmbeddedCheckoutAnalyticsEvent<
-    'checkoutRendered',
-    StripeEmbeddedCheckoutRenderedDetails
-  >;
+export type StripeEmbeddedCheckoutRenderedEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'checkoutRendered',
+  StripeEmbeddedCheckoutRenderedDetails
+>;
 
-export type StripeEmbeddedCheckoutDeviceDataEvent =
-  StripeEmbeddedCheckoutAnalyticsEvent<
-    'deviceData',
-    StripeEmbeddedCheckoutDeviceDataDetails
-  >;
+export type StripeEmbeddedCheckoutDeviceDataEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'deviceData',
+  StripeEmbeddedCheckoutDeviceDataDetails
+>;
 
-export type StripeEmbeddedCheckoutPromotionCodeAppliedEvent =
-  StripeEmbeddedCheckoutAnalyticsEvent<
-    'promotionCodeApplied',
-    StripeEmbeddedCheckoutPromotionCodeAppliedDetails
-  >;
+export type StripeEmbeddedCheckoutPromotionCodeAppliedEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'promotionCodeApplied',
+  StripeEmbeddedCheckoutPromotionCodeAppliedDetails
+>;
 
-export type StripeEmbeddedCheckoutLineItemChangeEvent =
-  StripeEmbeddedCheckoutAnalyticsEvent<
-    'lineItemChange',
-    StripeEmbeddedCheckoutAnalyticsItemsAndTotals
-  >;
+export type StripeEmbeddedCheckoutLineItemChangeEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'lineItemChange',
+  StripeEmbeddedCheckoutAnalyticsItemsAndTotals
+>;
 
-export type StripeEmbeddedCheckoutSubmittedEvent =
-  StripeEmbeddedCheckoutAnalyticsEvent<
-    'checkoutSubmitted',
-    StripeEmbeddedCheckoutSubmittedDetails
-  >;
+export type StripeEmbeddedCheckoutSubmittedEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'checkoutSubmitted',
+  StripeEmbeddedCheckoutSubmittedDetails
+>;
 
 export type StripeEmbeddedCheckoutAnalyticsEventUnion =
   | StripeEmbeddedCheckoutRenderedEvent
