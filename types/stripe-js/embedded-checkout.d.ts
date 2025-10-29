@@ -44,6 +44,91 @@ export type ResultAction =
   | {type: 'accept'}
   | {type: 'reject'; errorMessage?: string};
 
+/**
+ * Analytics types for Embedded Checkout events
+ */
+export type StripeEmbeddedCheckoutClientMetadata = {
+  [k: string]: string;
+};
+
+export type StripeEmbeddedCheckoutAnalyticsItemsAndTotals = {
+  items?: Array<{
+    quantity?: number;
+    product?: string;
+    amount?: number;
+    rateCard?: string;
+    pricingPlan?: string;
+    price?: string;
+  }>;
+  currency?: string;
+  amount?: number;
+};
+
+export type StripeEmbeddedCheckoutAnalyticsEvent<
+  EventType extends string,
+  EventDetails
+> = {
+  checkoutSession: string;
+  eventType: EventType;
+  details: EventDetails;
+  clientMetadata: StripeEmbeddedCheckoutClientMetadata;
+  /**
+   * The timestamp of the event in unix seconds
+   */
+  timestamp: number;
+};
+
+export type StripeEmbeddedCheckoutSubmittedDetails = StripeEmbeddedCheckoutAnalyticsItemsAndTotals & {
+  paymentMethodType: string;
+};
+
+export type StripeEmbeddedCheckoutRenderedDetails = StripeEmbeddedCheckoutAnalyticsItemsAndTotals;
+
+export type StripeEmbeddedCheckoutDeviceDataDetails = {
+  device: {
+    category: 'mobile' | 'tablet' | 'desktop';
+    language?: string;
+    platform?: string;
+    viewport?: {width: number; height: number};
+  };
+};
+
+export type StripeEmbeddedCheckoutPromotionCodeAppliedDetails = {
+  code: string;
+};
+
+export type StripeEmbeddedCheckoutRenderedEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'checkoutRendered',
+  StripeEmbeddedCheckoutRenderedDetails
+>;
+
+export type StripeEmbeddedCheckoutDeviceDataEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'deviceData',
+  StripeEmbeddedCheckoutDeviceDataDetails
+>;
+
+export type StripeEmbeddedCheckoutPromotionCodeAppliedEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'promotionCodeApplied',
+  StripeEmbeddedCheckoutPromotionCodeAppliedDetails
+>;
+
+export type StripeEmbeddedCheckoutLineItemChangeEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'lineItemChange',
+  StripeEmbeddedCheckoutAnalyticsItemsAndTotals
+>;
+
+export type StripeEmbeddedCheckoutSubmittedEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'checkoutSubmitted',
+  StripeEmbeddedCheckoutSubmittedDetails
+>;
+
+export type StripeEmbeddedCheckoutAnalyticsEventUnion =
+  | StripeEmbeddedCheckoutRenderedEvent
+  | StripeEmbeddedCheckoutDeviceDataEvent
+  | StripeEmbeddedCheckoutPromotionCodeAppliedEvent
+  | StripeEmbeddedCheckoutLineItemChangeEvent
+  | StripeEmbeddedCheckoutSubmittedEvent;
+
 export interface StripeEmbeddedCheckoutOptions {
   /**
    * The client secret of the [Checkout Session](https://stripe.com/docs/api/checkout/sessions).
@@ -75,6 +160,11 @@ export interface StripeEmbeddedCheckoutOptions {
   onLineItemsChange?: (
     event: StripeEmbeddedCheckoutLineItemsChangeEvent
   ) => Promise<ResultAction>;
+  /**
+   * onAnalyticsEvent is called when analytics events occur during the checkout session.
+   * You can use it to track customer behavior during the checkout session.
+   */
+  onAnalyticsEvent?: (event: StripeEmbeddedCheckoutAnalyticsEventUnion) => void;
 }
 
 export interface StripeEmbeddedCheckout {
