@@ -17,6 +17,7 @@ import {
   StripeExpressCheckoutElementReadyEvent,
   StripeTaxIdElement,
   StripeTaxIdElementOptions,
+  PaymentWalletsOption,
 } from './elements';
 
 type SavedPaymentMethodOption = {
@@ -345,6 +346,7 @@ export type StripeCheckoutPaymentElementOptions = {
   readOnly?: boolean;
   terms?: TermsOption;
   fields?: FieldsOption;
+  wallets?: PaymentWalletsOption;
 };
 
 export type StripeCheckoutAddressElementOptions = {
