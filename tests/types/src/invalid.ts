@@ -291,6 +291,11 @@ elements.create('taxId');
 // @ts-expect-error: TaxId cannot be retrieved from Elements
 elements.getElement('taxId');
 
+// @ts-expect-error: paymentForm cannot be created from Elements
+elements.create('paymentForm');
+// @ts-expect-error: paymentForm cannot be retrieved from Elements
+elements.getElement('paymentForm');
+
 // @ts-expect-error: redirectToCheckout is not a method on Stripe
 stripe.redirectToCheckout({sessionId: ''});
 

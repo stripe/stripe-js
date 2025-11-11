@@ -4,6 +4,7 @@ import {
   TermsOption,
   StripePaymentElement,
 } from './elements/payment';
+import {StripePaymentFormElement} from './elements/payment-form';
 import {ContactOption, StripeAddressElement} from './elements/address';
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
@@ -613,7 +614,10 @@ export interface StripeCheckout {
   /* Elements methods */
   changeAppearance: (appearance: Appearance) => void;
   loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
+
   getPaymentElement(): StripePaymentElement | null;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  getPaymentFormElement(): StripePaymentFormElement | null;
   getBillingAddressElement(): StripeAddressElement | null;
   getShippingAddressElement(): StripeAddressElement | null;
   getExpressCheckoutElement(): StripeCheckoutExpressCheckoutElement | null;
@@ -621,9 +625,12 @@ export interface StripeCheckout {
   getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
   /* Requires beta header when initializing Stripe: @docs https://docs.stripe.com/tax/advanced/tax-ids?payment-ui=embedded-components#render-tax-id-element */
   getTaxIdElement(): StripeTaxIdElement | null;
+
   createPaymentElement(
     options?: StripeCheckoutPaymentElementOptions
   ): StripePaymentElement;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  createPaymentFormElement(): StripePaymentFormElement;
   createBillingAddressElement(
     options?: StripeCheckoutAddressElementOptions
   ): StripeAddressElement;
