@@ -51,6 +51,7 @@ import {
   StripeTaxIdElement,
   ExternalTaxIdType,
   TaxIdType,
+  StripePaymentFormElement,
   StripeIssuingAddToWalletButtonElementOptions,
   StripeIssuingAddToWalletButtonElement,
 } from '../../../types';
@@ -1206,6 +1207,15 @@ taxIdElement
         externalTaxIdType: ExternalTaxIdType;
       };
     }) => {}
+  );
+
+declare const paymentFormElement: StripePaymentFormElement;
+
+paymentFormElement
+  .on('ready', (e: {elementType: 'paymentForm'}) => {})
+  .on(
+    'loaderror',
+    (e: {elementType: 'paymentForm'; error: {type: string}}) => {}
   );
 
 auBankAccountElement.destroy();
