@@ -1,4 +1,5 @@
 export * from './address';
+export * from './payment-form';
 export * from './payment-method-messaging';
 export * from './au-bank-account';
 export * from './base';

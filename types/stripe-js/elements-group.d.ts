@@ -21,6 +21,7 @@ import {
   StripeCardElement,
   StripeCardElementOptions,
   StripeAuBankAccountElement,
+  StripePaymentFormElement,
   StripePaymentMethodMessagingElementOptions,
   StripePaymentMethodMessagingElement,
   StripeAuBankAccountElementOptions,
@@ -407,6 +408,7 @@ export type StripeElement =
   | StripeCurrencySelectorElement
   | StripeExpressCheckoutElement
   | StripePaymentElement
+  | StripePaymentFormElement
   | StripePaymentMethodMessagingElement
   | StripePaymentRequestButtonElement
   | StripeIssuingCardNumberDisplayElement

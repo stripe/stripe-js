@@ -4,7 +4,6 @@ import {
   TermsOption,
   StripePaymentElement,
 } from './elements/payment';
-import {StripePaymentFormElement} from './elements/payment-form';
 import {ContactOption, StripeAddressElement} from './elements/address';
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
@@ -16,6 +15,7 @@ import {
   StripeExpressCheckoutElementConfirmEvent,
   StripeExpressCheckoutElementOptions,
   StripeExpressCheckoutElementReadyEvent,
+  StripePaymentFormElement,
   StripeTaxIdElement,
   StripeTaxIdElementOptions,
   PaymentWalletsOption,
