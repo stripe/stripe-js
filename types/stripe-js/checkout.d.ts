@@ -621,7 +621,6 @@ export interface StripeCheckout {
   getBillingAddressElement(): StripeAddressElement | null;
   getShippingAddressElement(): StripeAddressElement | null;
   getExpressCheckoutElement(): StripeCheckoutExpressCheckoutElement | null;
-  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
   /* Requires beta header when initializing Stripe: @docs https://docs.stripe.com/tax/advanced/tax-ids?payment-ui=embedded-components#render-tax-id-element */
   getTaxIdElement(): StripeTaxIdElement | null;
@@ -640,7 +639,6 @@ export interface StripeCheckout {
   createExpressCheckoutElement(
     options?: StripeCheckoutExpressCheckoutElementOptions
   ): StripeCheckoutExpressCheckoutElement;
-  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   createCurrencySelectorElement(): StripeCurrencySelectorElement;
   /* Requires beta header when initializing Stripe: @docs https://docs.stripe.com/tax/advanced/tax-ids?payment-ui=embedded-components#render-tax-id-element */
   createTaxIdElement(options?: StripeTaxIdElementOptions): StripeTaxIdElement;
