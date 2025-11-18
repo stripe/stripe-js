@@ -385,6 +385,7 @@ export type StripeElementType =
   | 'expressCheckout'
   | 'iban'
   | 'payment'
+  | 'paymentForm'
   | 'paymentMethodMessaging'
   | 'paymentRequestButton'
   | 'linkAuthentication'
