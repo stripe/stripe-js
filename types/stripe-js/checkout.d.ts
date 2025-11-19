@@ -597,6 +597,7 @@ type LoadActionsSuccess = {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
     expressCheckoutConfirmEvent?: StripeExpressCheckoutElementConfirmEvent;
+    onRequiresApproval?: () => Promise<void>;
   }) => Promise<StripeCheckoutConfirmResult>;
   getSession: () => StripeCheckoutSession;
   runServerUpdate: (
