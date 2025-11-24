@@ -335,6 +335,7 @@ export interface StripePaymentElementChangeEvent {
         phone: null | string;
       };
     };
+    blikCode?: null | string;
   };
 }
 
