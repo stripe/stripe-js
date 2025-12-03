@@ -494,6 +494,127 @@ export type CardNetworkBrand =
 
 type PaymentMethodOptions = {
   card?: {require_cvc_recollection?: boolean};
+  acss_debit?: {
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  affirm?: {
+    setup_future_usage?: 'none';
+  };
+  afterpay_clearpay?: {
+    setup_future_usage?: 'none';
+  };
+  alipay?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  amazon_pay?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  au_becs_debit?: {
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  bacs_debit?: {
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  bancontact?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  blik?: {
+    setup_future_usage?: 'none';
+  };
+  boleto?: {
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  card?: {
+    require_cvc_recollection?: boolean;
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  cashapp?: {
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  crypto?: {
+    setup_future_usage?: 'none';
+  };
+  customer_balance?: {
+    setup_future_usage?: 'none';
+  };
+  eps?: {
+    setup_future_usage?: 'none';
+  };
+  fpx?: {
+    setup_future_usage?: 'none';
+  };
+  giropay?: {
+    setup_future_usage?: 'none';
+  };
+  grabpay?: {
+    setup_future_usage?: 'none';
+  };
+  ideal?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  kakao_pay?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  klarna?: {
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  konbini?: {
+    setup_future_usage?: 'none';
+  };
+  kr_card?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  link?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  mb_way?: {
+    setup_future_usage?: 'none';
+  };
+  mobilepay?: {
+    setup_future_usage?: 'none';
+  };
+  multibanco?: {
+    setup_future_usage?: 'none';
+  };
+  naver_pay?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  nz_bank_account?: {
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  oxxo?: {
+    setup_future_usage?: 'none';
+  };
+  p24?: {
+    setup_future_usage?: 'none';
+  };
+  paynow?: {
+    setup_future_usage?: 'none';
+  };
+  paypal?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  pix?: {
+    setup_future_usage?: 'none';
+  };
+  promptpay?: {
+    setup_future_usage?: 'none';
+  };
+  revolut_pay?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  sepa_debit?: {
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  sofort?: {
+    setup_future_usage?: 'none' | 'off_session';
+  };
+  swish?: {
+    setup_future_usage?: 'none';
+  };
+  twint?: {
+    setup_future_usage?: 'none';
+  };
   us_bank_account?: {
     financial_connections?: {
       permissions?: Array<
@@ -501,6 +622,13 @@ type PaymentMethodOptions = {
       >;
     };
     verification_method?: 'automatic' | 'instant';
+    setup_future_usage?: 'none' | 'on_session' | 'off_session';
+  };
+  wechat_pay?: {
+    setup_future_usage?: 'none';
+  };
+  zip?: {
+    setup_future_usage?: 'none';
   };
 };
 
