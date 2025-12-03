@@ -493,7 +493,6 @@ export type CardNetworkBrand =
   | 'visa';
 
 type PaymentMethodOptions = {
-  card?: {require_cvc_recollection?: boolean};
   acss_debit?: {
     setup_future_usage?: 'none' | 'on_session' | 'off_session';
   };
