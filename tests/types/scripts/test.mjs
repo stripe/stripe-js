@@ -25,6 +25,10 @@ const VERSIONS = [
 
 const TYPE_TESTS_DIR = `${__dirname}/..`;
 
+const rootPackageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+
+const rootTypesNodeVersion = rootPackageJson.devDependencies?.['@types/node'];
+
 // Ensure working directory is test directory
 cd(TYPE_TESTS_DIR);
 
@@ -56,9 +60,16 @@ for (const version of VERSIONS) {
   // Definitely Typed only supports TS versions 2 years in the past.
   // To make this check more stable, install @types/node to match
   // the version we are testing.
-  const tag = ['next', 'beta', 'latest'].includes(version)
+  let tag = ['next', 'beta', 'latest'].includes(version)
     ? 'latest'
     : `ts${version.substring(0, 3)}`;
+
+  // Temporary fix for TS 5.2 as https://github.com/DefinitelyTyped/DefinitelyTyped/pull/73924/files
+  // actually breaks with TS 5.2 and their npm is marking it as the tag for ts5.2.
+  if (version === '5.2') {
+    tag = rootTypesNodeVersion;
+  }
+
   await $`yarn add -s --no-progress @types/node@${tag}`;
 
   let flags = ['--strict', '--noEmit'];
