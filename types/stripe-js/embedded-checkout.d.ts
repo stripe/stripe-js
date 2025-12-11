@@ -97,6 +97,17 @@ export type StripeEmbeddedCheckoutPromotionCodeAppliedDetails = {
   code: string;
 };
 
+export type StripeEmbeddedCheckoutSubmitFailureReason =
+  | 'api_error'
+  | 'user_cancelled'
+  | 'reverification'
+  | 'unexpected';
+
+export type StripeEmbeddedCheckoutSubmitFailedDetails = StripeEmbeddedCheckoutAnalyticsItemsAndTotals & {
+  paymentMethodType: string;
+  failureReason: StripeEmbeddedCheckoutSubmitFailureReason;
+};
+
 export type StripeEmbeddedCheckoutRenderedEvent = StripeEmbeddedCheckoutAnalyticsEvent<
   'checkoutRendered',
   StripeEmbeddedCheckoutRenderedDetails
@@ -122,12 +133,18 @@ export type StripeEmbeddedCheckoutSubmittedEvent = StripeEmbeddedCheckoutAnalyti
   StripeEmbeddedCheckoutSubmittedDetails
 >;
 
+export type StripeEmbeddedCheckoutSubmitFailedEvent = StripeEmbeddedCheckoutAnalyticsEvent<
+  'checkoutSubmitFailed',
+  StripeEmbeddedCheckoutSubmitFailedDetails
+>;
+
 export type StripeEmbeddedCheckoutAnalyticsEventUnion =
   | StripeEmbeddedCheckoutRenderedEvent
   | StripeEmbeddedCheckoutDeviceDataEvent
   | StripeEmbeddedCheckoutPromotionCodeAppliedEvent
   | StripeEmbeddedCheckoutLineItemChangeEvent
-  | StripeEmbeddedCheckoutSubmittedEvent;
+  | StripeEmbeddedCheckoutSubmittedEvent
+  | StripeEmbeddedCheckoutSubmitFailedEvent;
 
 export interface StripeEmbeddedCheckoutOptions {
   /**
