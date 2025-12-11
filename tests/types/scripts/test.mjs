@@ -25,10 +25,6 @@ const VERSIONS = [
 
 const TYPE_TESTS_DIR = `${__dirname}/..`;
 
-const rootPackageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-
-const rootTypesNodeVersion = rootPackageJson.devDependencies?.['@types/node'];
-
 // Ensure working directory is test directory
 cd(TYPE_TESTS_DIR);
 
@@ -66,8 +62,9 @@ for (const version of VERSIONS) {
 
   // Temporary fix for TS 5.2 as https://github.com/DefinitelyTyped/DefinitelyTyped/pull/73924/files
   // actually breaks with TS 5.2 and their npm is marking it as the tag for ts5.2.
+  // pin to latest working version of @types/node for TS 5.2.
   if (version === '5.2') {
-    tag = rootTypesNodeVersion;
+    tag = '24.10.3';
   }
 
   await $`yarn add -s --no-progress @types/node@${tag}`;
