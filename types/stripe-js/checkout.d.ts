@@ -36,6 +36,10 @@ export interface StripeCheckoutElementsOptions {
 export interface StripeCheckoutOptions {
   clientSecret: Promise<string> | string;
   elementsOptions?: StripeCheckoutElementsOptions;
+  defaultValues?: {
+    billingAddress?: StripeCheckoutContact;
+    shippingAddress?: StripeCheckoutContact;
+  };
 }
 
 /* Elements with CheckoutSessions API types */
