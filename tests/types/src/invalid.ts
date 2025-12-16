@@ -255,8 +255,8 @@ elements.create('issuingCardExpiryDisplay');
 // @ts-expect-error: No overload matches this call
 elements.create('issuingCardPinDisplay');
 
+// @ts-expect-error: No overload matches this call
 elements.create('issuingCardCopyButton', {
-  // @ts-expect-error: Type '"non_existent"' is not assignable to type '"number" | "expiry" | "cvc" | "pin"'
   toCopy: 'non_existent',
 });
 
@@ -286,10 +286,18 @@ elements.create('expressCheckout', {
   },
 });
 
-// @ts-expect-error: TaxId cannot be created from Elements
-elements.create('taxId');
-// @ts-expect-error: TaxId cannot be retrieved from Elements
-elements.getElement('taxId');
+// invalid TaxIdElement option values
+// @ts-expect-error: visibility must be 'always' | 'never' | 'auto'
+elements.create('taxId', {visibility: 'sometimes'});
+
+// @ts-expect-error: businessName field visibility must be 'always' | 'never' | 'auto'
+elements.create('taxId', {fields: {businessName: 'sometimes'}});
+
+// @ts-expect-error: required must be 'always' | 'never' | 'auto'
+elements.create('taxId', {validation: {taxId: {required: 'sometimes'}}});
+
+// @ts-expect-error: invalid default taxIdType
+elements.create('taxId', {defaultValues: {taxIdType: 'not_a_type'}});
 
 // @ts-expect-error: paymentForm cannot be created from Elements
 elements.create('paymentForm');
