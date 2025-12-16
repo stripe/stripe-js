@@ -39,6 +39,7 @@ import {
   StripeExpressCheckoutElementOptions,
   StripeAddressElementGetElementOptions,
   StripeTaxIdElement,
+  StripeTaxIdElementOptions,
 } from './elements';
 import {StripeError} from './stripe';
 
@@ -372,6 +373,29 @@ export interface StripeElements {
     elementType: 'issuingCardCopyButton',
     options: StripeIssuingCardCopyButtonElementOptions
   ): StripeIssuingCardCopyButtonElement;
+
+  /////////////////////////////
+  /// taxId
+  /////////////////////////////
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Creates a `TaxIdElement`.
+   */
+  create(
+    elementType: 'taxId',
+    options?: StripeTaxIdElementOptions
+  ): StripeTaxIdElement;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(elementType: 'taxId'): StripeTaxIdElement | null;
 }
 
 export type StripeElementType =

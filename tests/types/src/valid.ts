@@ -1210,6 +1210,43 @@ taxIdElement
     }) => {}
   );
 
+const createdTaxIdElement: StripeTaxIdElement = elements.create('taxId', {
+  visibility: 'always',
+  fields: {
+    businessName: 'auto',
+  },
+  validation: {
+    businessName: {required: 'auto'},
+    taxId: {required: 'always'},
+  },
+  defaultValues: {
+    businessName: 'Acme, Inc.',
+    taxIdType: 'de_vat',
+    taxId: 'DE123456789',
+  },
+});
+
+const retrievedTaxIdElement: StripeTaxIdElement | null = elements.getElement(
+  'taxId'
+);
+
+createdTaxIdElement.mount('#bogus-container');
+retrievedTaxIdElement?.mount('#bogus-container');
+
+createdTaxIdElement.update({
+  visibility: 'auto',
+  validation: {
+    taxId: {required: 'never'},
+  },
+});
+
+createdTaxIdElement.getValue().then((res) => {
+  if (res.complete) {
+    const {taxIdType, externalTaxIdType} = res.value;
+    console.log(taxIdType, externalTaxIdType);
+  }
+});
+
 declare const paymentFormElement: StripePaymentFormElement;
 
 paymentFormElement
