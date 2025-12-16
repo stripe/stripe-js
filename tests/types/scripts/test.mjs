@@ -2,26 +2,12 @@
 
 import fs from 'fs';
 import {spawn} from 'child_process';
+import path from 'path';
 import 'zx/globals';
 
-const VERSIONS = [
-  'next',
-  'beta',
-  'latest',
-  '5.2',
-  '5.1.6',
-  '5.0.4',
-  '4.9.5',
-  '4.8.4',
-  '4.7.4',
-  '4.6.4',
-  '4.5.5',
-  '4.4.4',
-  '4.3.5',
-  '4.2.4',
-  '4.1.6',
-  '4.0.6',
-];
+const versionSnapshot = JSON.parse(
+  fs.readFileSync(path.join(__dirname, 'ts-version-snapshot.json'), 'utf8')
+);
 
 const TYPE_TESTS_DIR = `${__dirname}/..`;
 
@@ -49,37 +35,36 @@ function runTsc(filename, flags) {
   });
 }
 
-for (const version of VERSIONS) {
-  console.log(`--- Testing with TypeScript version ${version}`);
-  await $`yarn add -s --no-progress typescript@${version}`;
+const serializeVersion = ({major, minor, patch}) =>
+  [major, minor, patch].join('.');
 
-  // Definitely Typed only supports TS versions 2 years in the past.
-  // To make this check more stable, install @types/node to match
-  // the version we are testing.
-  let tag = ['next', 'beta', 'latest'].includes(version)
-    ? 'latest'
-    : `ts${version.substring(0, 3)}`;
-
+let isFailure = false;
+for (const {typescript, nodeTypes} of versionSnapshot) {
   // Temporary fix for TS 5.2 as https://github.com/DefinitelyTyped/DefinitelyTyped/pull/73924/files
   // actually breaks with TS 5.2 and their npm is marking it as the tag for ts5.2.
   // pin to latest working version of @types/node for TS 5.2.
-  if (version === '5.2') {
-    tag = '24.10.3';
-  }
+  const patchedNodeTypes =
+    typescript.major === 5 && typescript.minor >= 2 && typescript.minor <= 5
+      ? '24.10.3'
+      : serializeVersion(nodeTypes);
 
-  await $`yarn add -s --no-progress @types/node@${tag}`;
+  const typescriptVersion = `typescript@${serializeVersion(typescript)}`;
+  const nodeTypesVersion = `@types/node@${patchedNodeTypes}`;
+
+  console.log(`--- Testing with ${typescriptVersion} and ${nodeTypesVersion}`);
+
+  await $`yarn add -s --no-progress ${typescriptVersion}`;
+  await $`yarn add -s --no-progress ${nodeTypesVersion}`;
 
   let flags = ['--strict', '--noEmit'];
 
-  // This option was introduced in Nov 2025 and will be required for versions
-  // from here forward. This was the implicit behavior before, but now it is required
-  // to maintain the same behavior. Eventually, we will be able to to set a version
-  // boundary and add this flag in for all versions newer than that, but for now we'll
-  // need to add `beta` then the version this actually lands in to this check.
-  if (version === 'next') {
-    flags.unshift('--ignoreConfig');
+  try {
+    await runTsc('src/valid.ts', flags);
+    await runTsc('src/invalid.ts', flags);
+  } catch (e) {
+    console.error(e);
+    isFailure = true;
   }
-
-  await runTsc('src/valid.ts', flags);
-  await runTsc('src/invalid.ts', flags);
 }
+
+if (isFailure) process.exit(1);
