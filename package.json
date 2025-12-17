@@ -14,6 +14,7 @@
     "test:unit": "jest",
     "test:package-types": "attw --pack . --entrypoints ./lib ./pure",
     "test:types": "zx ./tests/types/scripts/test.mjs",
+    "update-ts-snapshot": "zx ./tests/types/scripts/update-ts-snapshot.mjs",
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-check",
     "typecheck": "tsc",
     "copy-types": "./scripts/copy-types",

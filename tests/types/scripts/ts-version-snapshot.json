@@ -1,0 +1,134 @@
+[
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 9,
+      "patch": 3
+    },
+    "nodeTypes": {
+      "major": 25,
+      "minor": 0,
+      "patch": 3
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 8,
+      "patch": 3
+    },
+    "nodeTypes": {
+      "major": 25,
+      "minor": 0,
+      "patch": 3
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 7,
+      "patch": 3
+    },
+    "nodeTypes": {
+      "major": 25,
+      "minor": 0,
+      "patch": 3
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 6,
+      "patch": 3
+    },
+    "nodeTypes": {
+      "major": 25,
+      "minor": 0,
+      "patch": 3
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 5,
+      "patch": 4
+    },
+    "nodeTypes": {
+      "major": 25,
+      "minor": 0,
+      "patch": 3
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 4,
+      "patch": 5
+    },
+    "nodeTypes": {
+      "major": 25,
+      "minor": 0,
+      "patch": 3
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 3,
+      "patch": 3
+    },
+    "nodeTypes": {
+      "major": 25,
+      "minor": 0,
+      "patch": 3
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 2,
+      "patch": 2
+    },
+    "nodeTypes": {
+      "major": 25,
+      "minor": 0,
+      "patch": 3
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 1,
+      "patch": 6
+    },
+    "nodeTypes": {
+      "major": 24,
+      "minor": 1,
+      "patch": 0
+    }
+  },
+  {
+    "typescript": {
+      "major": 5,
+      "minor": 0,
+      "patch": 4
+    },
+    "nodeTypes": {
+      "major": 22,
+      "minor": 13,
+      "patch": 14
+    }
+  },
+  {
+    "typescript": {
+      "major": 4,
+      "minor": 9,
+      "patch": 5
+    },
+    "nodeTypes": {
+      "major": 22,
+      "minor": 9,
+      "patch": 3
+    }
+  }
+]
