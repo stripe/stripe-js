@@ -13,10 +13,10 @@ import {
   StripeElementsOptionsClientSecret,
   StripeElementsOptionsMode,
 } from './elements-group';
-import {CheckoutLocale} from './hosted-checkout';
-import {PaymentRequestOptions, PaymentRequest} from './payment-request';
-import {StripeElement, StripeElementLocale} from './elements-group';
-import {StripeCheckoutOptions, StripeCheckout} from './checkout';
+import { CheckoutLocale } from './hosted-checkout';
+import { PaymentRequestOptions, PaymentRequest } from './payment-request';
+import { StripeElement, StripeElementLocale } from './elements-group';
+import { StripeCheckoutOptions, StripeCheckout } from './checkout';
 import {
   StripeEmbeddedCheckoutOptions,
   StripeEmbeddedCheckout,
@@ -95,7 +95,7 @@ export interface Stripe {
     elements: StripeElements;
     confirmParams: paymentIntents.ConfirmPaymentData;
     redirect?: 'always';
-  }): Promise<never | {error: StripeError}>;
+  }): Promise<never | { error: StripeError }>;
 
   /**
    * Use `stripe.confirmPayment` to confirm a PaymentIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
@@ -109,7 +109,7 @@ export interface Stripe {
     clientSecret: string;
     confirmParams: paymentIntents.ConfirmPaymentData;
     redirect?: 'always';
-  }): Promise<never | {error: StripeError}>;
+  }): Promise<never | { error: StripeError }>;
 
   /**
    * Use `stripe.confirmAcssDebitPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow when the customer submits your payment form.
@@ -793,7 +793,7 @@ export interface Stripe {
     elements: StripeElements;
     confirmParams: setupIntents.ConfirmSetupData;
     redirect?: 'always';
-  }): Promise<never | {error: StripeError}>;
+  }): Promise<never | { error: StripeError }>;
 
   /**
    * Use `stripe.confirmSetup` to confirm a SetupIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
@@ -807,7 +807,7 @@ export interface Stripe {
     clientSecret: string;
     confirmParams: setupIntents.ConfirmSetupData;
     redirect?: 'always';
-  }): Promise<never | {error: StripeError}>;
+  }): Promise<never | { error: StripeError }>;
 
   /**
    * Use `stripe.confirmAcssDebitSetup` to [save details for future payments with pre-authorized debit in Canada](https://stripe.com/docs/payments/acss-debit/set-up-payment).
@@ -824,6 +824,19 @@ export interface Stripe {
     clientSecret: string,
     data?: setupIntents.ConfirmAcssDebitSetupData,
     options?: setupIntents.ConfirmAcssDebitSetupOptions
+  ): Promise<SetupIntentResult>;
+
+  /**
+   * Use `stripe.confirmAmazonPaySetup` in the [Amazon Pay](https://stripe.com/docs/payments/amazon-pay) flow when the customer submits your payment form.
+   * When called, it will confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) with `data` you provide.
+   * Refer to our [integration guide](https://stripe.com/docs/payments/amazon-pay) for more details.
+   *
+   * @docs https://stripe.com/docs/js/setup_intents/confirm_amazon_pay_setup
+   */
+  confirmAmazonPaySetup(
+    clientSecret: string,
+    data?: setupIntents.ConfirmAmazonPaySetupData,
+    options?: setupIntents.ConfirmAmazonPaySetupOptions
   ): Promise<SetupIntentResult>;
 
   /**
@@ -1087,7 +1100,7 @@ export interface Stripe {
     elements: StripeElements;
     confirmParams: orders.ProcessOrderParams;
     redirect?: 'always';
-  }): Promise<never | {error: StripeError}>;
+  }): Promise<never | { error: StripeError }>;
 
   /**
    * Retrieve an [Order](https://stripe.com/docs/api/orders_v2) using its [client secret](https://stripe.com/docs/api/orders_v2/object#order_v2_object-client_secret).
@@ -1283,81 +1296,81 @@ export interface Stripe {
 }
 
 export type PaymentIntentResult =
-  | {paymentIntent: api.PaymentIntent; error?: undefined}
-  | {paymentIntent?: undefined; error: StripeError};
+  | { paymentIntent: api.PaymentIntent; error?: undefined }
+  | { paymentIntent?: undefined; error: StripeError };
 
 export type SetupIntentResult =
-  | {setupIntent: api.SetupIntent; error?: undefined}
-  | {setupIntent?: undefined; error: StripeError};
+  | { setupIntent: api.SetupIntent; error?: undefined }
+  | { setupIntent?: undefined; error: StripeError };
 
 export type PaymentIntentOrSetupIntentResult =
   | {
-      paymentIntent: api.PaymentIntent;
-      setupIntent?: undefined;
-      error?: undefined;
-    }
-  | {paymentIntent?: undefined; setupIntent: api.SetupIntent; error?: undefined}
-  | {paymentIntent?: undefined; setupIntent?: undefined; error: StripeError};
+    paymentIntent: api.PaymentIntent;
+    setupIntent?: undefined;
+    error?: undefined;
+  }
+  | { paymentIntent?: undefined; setupIntent: api.SetupIntent; error?: undefined }
+  | { paymentIntent?: undefined; setupIntent?: undefined; error: StripeError };
 
 export type ProcessOrderResult =
-  | {paymentIntent: api.PaymentIntent; order: api.Order; error?: undefined}
-  | {paymentIntent?: undefined; order: api.Order; error?: undefined}
-  | {paymentIntent?: undefined; order?: undefined; error: StripeError};
+  | { paymentIntent: api.PaymentIntent; order: api.Order; error?: undefined }
+  | { paymentIntent?: undefined; order: api.Order; error?: undefined }
+  | { paymentIntent?: undefined; order?: undefined; error: StripeError };
 
 export type RetrieveOrderResult =
-  | {order: api.Order; error?: undefined}
-  | {order?: undefined; error: StripeError};
+  | { order: api.Order; error?: undefined }
+  | { order?: undefined; error: StripeError };
 
 export type PaymentMethodResult =
-  | {paymentMethod: api.PaymentMethod; error?: undefined}
-  | {paymentMethod?: undefined; error: StripeError};
+  | { paymentMethod: api.PaymentMethod; error?: undefined }
+  | { paymentMethod?: undefined; error: StripeError };
 
 export type ConfirmationTokenResult =
-  | {confirmationToken: api.ConfirmationToken; error?: undefined}
-  | {confirmationToken?: undefined; error: StripeError};
+  | { confirmationToken: api.ConfirmationToken; error?: undefined }
+  | { confirmationToken?: undefined; error: StripeError };
 
 export type SourceResult =
-  | {source: api.Source; error?: undefined}
-  | {source?: undefined; error: StripeError};
+  | { source: api.Source; error?: undefined }
+  | { source?: undefined; error: StripeError };
 
 export type TokenResult =
-  | {token: api.Token; error?: undefined}
-  | {token?: undefined; error: StripeError};
+  | { token: api.Token; error?: undefined }
+  | { token?: undefined; error: StripeError };
 
 export type VerificationSessionResult =
-  | {verificationSession: api.VerificationSession; error?: undefined}
-  | {verificationSession?: undefined; error: StripeError};
+  | { verificationSession: api.VerificationSession; error?: undefined }
+  | { verificationSession?: undefined; error: StripeError };
 
 export type FinancialConnectionsSessionResult =
   | {
-      financialConnectionsSession: api.FinancialConnectionsSession;
-      error?: undefined;
-    }
-  | {financialConnectionsSession: undefined; error: StripeError};
+    financialConnectionsSession: api.FinancialConnectionsSession;
+    error?: undefined;
+  }
+  | { financialConnectionsSession: undefined; error: StripeError };
 
 export type CollectBankAccountTokenResult =
   | {
-      financialConnectionsSession: api.FinancialConnectionsSession;
-      token: api.BankAccountToken;
-      error?: undefined;
-    }
+    financialConnectionsSession: api.FinancialConnectionsSession;
+    token: api.BankAccountToken;
+    error?: undefined;
+  }
   | {
-      financialConnectionsSession: undefined;
-      token: undefined;
-      error: StripeError;
-    };
+    financialConnectionsSession: undefined;
+    token: undefined;
+    error: StripeError;
+  };
 
 export type EphemeralKeyNonceResult =
-  | {nonce: string; error?: undefined}
-  | {nonce?: undefined; error: StripeError};
+  | { nonce: string; error?: undefined }
+  | { nonce?: undefined; error: StripeError };
 
 /* A Radar Session is a snapshot of the browser metadata and device details that helps Radar make more accurate predictions on your payments.
   This metadata includes information like IP address, browser, screen or device information, and other device characteristics.
   You can find more details about how Radar uses this data by reading about how Radar performs [advanced fraud detection](https://stripe.com/docs/disputes/prevention/advanced-fraud-detection).
   */
 export type RadarSessionPayload =
-  | {radarSession: Record<any, any>; error?: undefined}
-  | {radarSession?: undefined; error: StripeError};
+  | { radarSession: Record<any, any>; error?: undefined }
+  | { radarSession?: undefined; error: StripeError };
 
 export interface WrapperLibrary {
   /**
