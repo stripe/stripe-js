@@ -210,6 +210,7 @@ const elementsClientSecret: StripeElements = stripe.elements({
     },
   ],
   syncAddressCheckbox: 'shipping',
+  paymentMethodCreation: 'manual',
 });
 
 const elementsPMCProvided = stripe.elements({

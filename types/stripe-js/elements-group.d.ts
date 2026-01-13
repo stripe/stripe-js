@@ -715,6 +715,13 @@ interface BaseStripeElementsOptions {
    * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-syncAddressCheckbox
    */
   syncAddressCheckbox?: 'billing' | 'shipping' | 'none';
+
+  /**
+   * Allows PaymentMethods to be created from the Elements instance.
+   *
+   * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-paymentMethodCreation
+   */
+  paymentMethodCreation?: 'manual';
 }
 
 export interface StripeElementsOptionsClientSecret
@@ -826,11 +833,6 @@ interface StripeElementsOptionsModeBase extends BaseStripeElementsOptions {
    * @docs https://stripe.com/docs/connect/payment-method-configurations
    */
   payment_method_configuration?: string;
-
-  /**
-   * Allows PaymentMethods to be created from the Elements instance.
-   */
-  paymentMethodCreation?: 'manual';
 
   /**
    * Additional payment-method-specific options for configuring Payment Element behavior.
