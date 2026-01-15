@@ -169,6 +169,13 @@ export const initStripe = (
   }
 
   const pk = args[0];
+
+  if (typeof pk !== 'string') {
+    throw new Error(
+      `Expected publishable key to be of type string, got type ${typeof pk} instead.`
+    );
+  }
+
   const isTestKey = pk.match(/^pk_test/);
 
   // @ts-expect-error this is not publicly typed
