@@ -39,6 +39,8 @@ export interface StripeCheckoutOptions {
   defaultValues?: {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
+    email?: string;
+    phoneNumber?: string;
   };
 }
 
