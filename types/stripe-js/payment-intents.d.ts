@@ -5,14 +5,15 @@ import {
   StripeCardElement,
   StripeAuBankAccountElement,
 } from './elements';
-import {PaymentMethodCreateParams, PaymentIntentConfirmParams} from '../api';
-import {Omit} from '../utils';
+import { PaymentMethodCreateParams, PaymentIntentConfirmParams } from '../api';
+import { Omit } from '../utils';
 
 export type CreatePaymentMethodData =
   | CreatePaymentMethodAcssDebitData
   | CreatePaymentMethodAffirmData
   | CreatePaymentMethodAfterpayClearpayData
   | CreatePaymentMethodAlipayData
+  | CreatePaymentMethodAmazonPayData
   | CreatePaymentMethodAuBecsDebitData
   | CreatePaymentMethodBacsDebitData
   | CreatePaymentMethodBancontactData
@@ -56,6 +57,12 @@ export interface CreatePaymentMethodWechatPayData
    * Contact [Stripe support](https://support.stripe.com/) for more information.
    */
   type: 'wechat_pay';
+}
+
+export interface CreatePaymentMethodAmazonPayData
+  extends PaymentMethodCreateParams {
+  type: 'amazon_pay';
+  amazon_pay?: {}; // eslint-disable-line @typescript-eslint/ban-types
 }
 
 export interface CreatePaymentMethodAffirmData
@@ -146,7 +153,7 @@ export interface CreatePaymentMethodBoletoData
 export interface CreatePaymentMethodCardData extends PaymentMethodCreateParams {
   type: 'card';
 
-  card: StripeCardElement | StripeCardNumberElement | {token: string};
+  card: StripeCardElement | StripeCardNumberElement | { token: string };
 }
 
 export interface CreatePaymentMethodCashappData
@@ -348,13 +355,13 @@ export interface CreatePaymentMethodSepaDebitData
   type: 'sepa_debit';
 
   sepa_debit:
-    | StripeIbanElement
-    | {
-        /**
-         * An IBAN account number.
-         */
-        iban: string;
-      };
+  | StripeIbanElement
+  | {
+    /**
+     * An IBAN account number.
+     */
+    iban: string;
+  };
 
   /**
    * The customer's billing details.
@@ -406,18 +413,18 @@ export interface CreatePaymentMethodAuBecsDebitData
    * Contact [Stripe support](https://support.stripe.com/) for more information.
    */
   au_becs_debit:
-    | StripeAuBankAccountElement
-    | {
-        /**
-         * A BSB number.
-         */
-        bsb_number: string;
+  | StripeAuBankAccountElement
+  | {
+    /**
+     * A BSB number.
+     */
+    bsb_number: string;
 
-        /**
-         * An account number.
-         */
-        account_number: string;
-      };
+    /**
+     * An account number.
+     */
+    account_number: string;
+  };
 
   /**
    * The customer's billing details.
@@ -815,12 +822,12 @@ export interface ConfirmCustomerBalancePaymentData
       funding_type?: 'bank_transfer';
       bank_transfer?: {
         type:
-          | 'eu_bank_transfer'
-          | 'gb_bank_transfer'
-          | 'id_bank_transfer'
-          | 'jp_bank_transfer'
-          | 'mx_bank_transfer'
-          | 'us_bank_transfer';
+        | 'eu_bank_transfer'
+        | 'gb_bank_transfer'
+        | 'id_bank_transfer'
+        | 'jp_bank_transfer'
+        | 'mx_bank_transfer'
+        | 'us_bank_transfer';
         eu_bank_transfer?: {
           country: 'DE' | 'ES' | 'FR' | 'IE' | 'NL';
         };
@@ -1500,8 +1507,8 @@ export interface ConfirmAfterpayClearpayPaymentData
    * @recommended
    */
   payment_method?:
-    | string
-    | Omit<CreatePaymentMethodAfterpayClearpayData, 'type'>;
+  | string
+  | Omit<CreatePaymentMethodAfterpayClearpayData, 'type'>;
 
   /**
    * The url your customer will be directed to after they complete authentication.

@@ -1,7 +1,8 @@
-import {PaymentMethodCreateParams, SetupIntentConfirmParams} from '../api';
+import { PaymentMethodCreateParams, SetupIntentConfirmParams } from '../api';
 
 import {
   CreatePaymentMethodAcssDebitData,
+  CreatePaymentMethodAmazonPayData,
   CreatePaymentMethodAuBecsDebitData,
   CreatePaymentMethodBancontactData,
   CreatePaymentMethodCardData,
@@ -15,7 +16,7 @@ import {
   CollectBankAccountParams,
 } from './payment-intents';
 
-import {Omit} from '../utils';
+import { Omit } from '../utils';
 
 /**
  * Data to be sent with a `stripe.confirmSetup` request.
@@ -72,6 +73,32 @@ export interface ConfirmSetupData extends SetupIntentConfirmParams {
    * Specifies which fields in the response should be expanded.
    */
   expand?: Array<string>;
+}
+
+
+/**
+ * Data to be sent with a `stripe.confirmAmazonPaySetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmAmazonPaySetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodAmazonPayData, 'type'>;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmAmazonPaySetup`.
+ */
+export interface ConfirmAmazonPaySetupOptions {
+  /*
+   * Set this to `false` if you want to [manually handle the authorization redirect](https://docs.stripe.com/payments/amazon-pay/accept-a-payment?platform=web&ui=API#handle-redirect).
+   * Default is `true`.
+   */
+  handleActions?: boolean;
 }
 
 /**
