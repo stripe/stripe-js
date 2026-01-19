@@ -782,16 +782,7 @@ export interface Stripe {
     redirect: 'if_required';
   }): Promise<SetupIntentResult>;
 
-  /*
-   * Use `stripe.confirmAmazonPaySetup` in the [Amazon Pay](https://docs.stripe.com/payments/amazon-pay) flow to Setup intent.
-   *
-   * @docs https://stripe.com/docs/js/setup_intents/confirm_amazon_pay_setup
-   */
-  confirmAmazonPaySetup(
-    clientSecret: string,
-    data: setupIntents.ConfirmAmazonPaySetupData,
-    options?: setupIntents.ConfirmAmazonPaySetupOptions
-  ): Promise<SetupIntentResult>;
+
 
   /**
    * Use `stripe.confirmSetup` to confirm a SetupIntent using data collected by the [Payment Element](https://stripe.com/docs/js/element/payment_element).
