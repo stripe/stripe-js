@@ -4,9 +4,9 @@ import {
   TermsOption,
   StripePaymentElement,
 } from './elements/payment';
-import { ContactOption, StripeAddressElement } from './elements/address';
-import { Appearance, CssFontSource, CustomFontSource } from './elements-group';
-import { StripeError } from './stripe';
+import {ContactOption, StripeAddressElement} from './elements/address';
+import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
+import {StripeError} from './stripe';
 import {
   StripeCurrencySelectorElement,
   FieldsOption,
@@ -36,7 +36,7 @@ export interface StripeCheckoutElementsOptions {
 export interface StripeCheckoutOptions {
   clientSecret: Promise<string> | string;
   elementsOptions?: StripeCheckoutElementsOptions;
-  adaptivePricing?: { enabled?: boolean };
+  adaptivePricing?: {allowed?: boolean};
   defaultValues?: {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
@@ -70,15 +70,15 @@ export type StripeCheckoutDeliveryEstimate = {
   minimum: StripeCheckoutEstimate | null;
 };
 
-export type StripeCheckoutAmount = { minorUnitsAmount: number; amount: string };
+export type StripeCheckoutAmount = {minorUnitsAmount: number; amount: string};
 
 export type StripeCheckoutDiscountAmount = StripeCheckoutAmount & {
   displayName: string;
   promotionCode: string | null;
   recurring:
-  | { type: 'forever' }
-  | { type: 'repeating'; durationInMonths: number }
-  | null;
+    | {type: 'forever'}
+    | {type: 'repeating'; durationInMonths: number}
+    | null;
   percentOff: number | null;
 };
 
@@ -174,17 +174,17 @@ export type StripeCheckoutShippingOption = StripeCheckoutAmount & {
 };
 
 export type StripeCheckoutStatus =
-  | { type: 'open' }
-  | { type: 'expired' }
+  | {type: 'open'}
+  | {type: 'expired'}
   | {
-    type: 'complete';
-    paymentStatus: 'paid' | 'unpaid' | 'no_payment_required';
-  };
+      type: 'complete';
+      paymentStatus: 'paid' | 'unpaid' | 'no_payment_required';
+    };
 
 export type StripeCheckoutTaxStatus =
-  | { status: 'ready' }
-  | { status: 'requires_shipping_address' }
-  | { status: 'requires_billing_address' };
+  | {status: 'ready'}
+  | {status: 'requires_shipping_address'}
+  | {status: 'requires_billing_address'};
 
 export type StripeCheckoutTotalSummary = {
   appliedBalance: StripeCheckoutAmount;
@@ -204,7 +204,7 @@ export type StripeCheckoutTrial = {
 
 export type StripeCheckoutCurrencyOption = StripeCheckoutAmount & {
   currency: string;
-  currencyConversion?: { fxRate: number; sourceCurrency: string };
+  currencyConversion?: {fxRate: number; sourceCurrency: string};
 };
 
 export type StripeCheckoutTaxIdType =
@@ -397,15 +397,15 @@ export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
    */
   on(
     eventType: 'focus',
-    handler: (event: { elementType: 'expressCheckout' }) => any
+    handler: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'focus',
-    handler: (event: { elementType: 'expressCheckout' }) => any
+    handler: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'focus',
-    handler?: (event: { elementType: 'expressCheckout' }) => any
+    handler?: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
 
   /**
@@ -413,15 +413,15 @@ export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
    */
   on(
     eventType: 'blur',
-    handler: (event: { elementType: 'expressCheckout' }) => any
+    handler: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'blur',
-    handler: (event: { elementType: 'expressCheckout' }) => any
+    handler: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'blur',
-    handler?: (event: { elementType: 'expressCheckout' }) => any
+    handler?: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
 
   /**
@@ -429,15 +429,15 @@ export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
    */
   on(
     eventType: 'escape',
-    handler: (event: { elementType: 'expressCheckout' }) => any
+    handler: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'escape',
-    handler: (event: { elementType: 'expressCheckout' }) => any
+    handler: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'escape',
-    handler?: (event: { elementType: 'expressCheckout' }) => any
+    handler?: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
 
   /**
@@ -486,15 +486,15 @@ export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
    */
   on(
     eventType: 'cancel',
-    handler: (event: { elementType: 'expressCheckout' }) => any
+    handler: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
   once(
     eventType: 'cancel',
-    handler: (event: { elementType: 'expressCheckout' }) => any
+    handler: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
   off(
     eventType: 'cancel',
-    handler?: (event: { elementType: 'expressCheckout' }) => any
+    handler?: (event: {elementType: 'expressCheckout'}) => any
   ): StripeCheckoutExpressCheckoutElement;
 
   /**
@@ -504,67 +504,67 @@ export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
   update: StripeExpressCheckoutElement['update'];
 };
 
-type AnyBuyerError = { message: string; code: null };
+type AnyBuyerError = {message: string; code: null};
 type ApplyPromotionCodeError =
-  | { message: string; code: 'invalidCode' }
+  | {message: string; code: 'invalidCode'}
   | AnyBuyerError;
 export type StripeCheckoutApplyPromotionCodeResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: ApplyPromotionCodeError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: ApplyPromotionCodeError};
 
 export type StripeCheckoutRemovePromotionCodeResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: AnyBuyerError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
 
 export type StripeCheckoutUpdateAddressResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: AnyBuyerError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
 
 export type StripeCheckoutUpdatePhoneNumberResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: never };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: never};
 
 type UpdateEmailError =
-  | { message: string; code: 'incompleteEmail' }
-  | { message: string; code: 'invalidEmail' };
+  | {message: string; code: 'incompleteEmail'}
+  | {message: string; code: 'invalidEmail'};
 export type StripeCheckoutUpdateEmailResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: UpdateEmailError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: UpdateEmailError};
 
 export type StripeCheckoutUpdateLineItemQuantityResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: AnyBuyerError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
 
 export type StripeCheckoutUpdateShippingOptionResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: AnyBuyerError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
 
 type UpdateTaxIdInfoError =
-  | { message: string; code: 'invalidTaxId' }
+  | {message: string; code: 'invalidTaxId'}
   | AnyBuyerError;
 export type StripeCheckoutUpdateTaxIdInfoResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: UpdateTaxIdInfoError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: UpdateTaxIdInfoError};
 
 type ConfirmError =
   | {
-    message: string;
-    code: 'paymentFailed';
-    paymentFailed: {
-      declineCode: string | null;
-    };
-  }
+      message: string;
+      code: 'paymentFailed';
+      paymentFailed: {
+        declineCode: string | null;
+      };
+    }
   | AnyBuyerError;
 export type StripeCheckoutConfirmResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: ConfirmError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: ConfirmError};
 
 type RunServerUpdateFunction = () => Promise<unknown>;
 export type StripeCheckoutRunServerUpdateResult =
-  | { type: 'success'; session: StripeCheckoutSession }
-  | { type: 'error'; error: AnyBuyerError };
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: AnyBuyerError};
 
-type LoadActionsError = { message: string; code: null };
+type LoadActionsError = {message: string; code: null};
 type LoadActionsSuccess = {
   applyPromotionCode: (
     promotionCode: string
@@ -610,8 +610,8 @@ type LoadActionsSuccess = {
   ) => Promise<StripeCheckoutRunServerUpdateResult>;
 };
 export type StripeCheckoutLoadActionsResult =
-  | { type: 'success'; actions: LoadActionsSuccess }
-  | { type: 'error'; error: LoadActionsError };
+  | {type: 'success'; actions: LoadActionsSuccess}
+  | {type: 'error'; error: LoadActionsError};
 
 export interface StripeCheckout {
   on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
