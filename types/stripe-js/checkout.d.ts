@@ -36,6 +36,7 @@ export interface StripeCheckoutElementsOptions {
 export interface StripeCheckoutOptions {
   clientSecret: Promise<string> | string;
   elementsOptions?: StripeCheckoutElementsOptions;
+  adaptivePricing?: {allowed?: boolean};
   defaultValues?: {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
