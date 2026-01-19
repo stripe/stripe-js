@@ -55,6 +55,12 @@ export interface CreatePaymentMethodAmazonPayData
   type: 'amazon_pay';
 }
 
+export interface CreatePaymentMethodAmazonPayData
+  extends PaymentMethodCreateParams {
+  type: 'amazon_pay';
+  amazon_pay?: {}; // eslint-disable-line @typescript-eslint/ban-types
+}
+
 export interface CreatePaymentMethodWechatPayData
   extends PaymentMethodCreateParams {
   /**
