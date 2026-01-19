@@ -1548,5 +1548,10 @@ export interface StripeError {
   /**
    * The `Source` object for errors returned on a request involving a `Source`.
    */
+  /**
+   * The `Source` object for errors returned on a request involving a `Source`.
+   */
   source?: api.Source;
+
+  [key: string]: any;
 }
