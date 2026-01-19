@@ -50,10 +50,7 @@ export interface CreatePaymentMethodAlipayData
   type: 'alipay';
 }
 
-export interface CreatePaymentMethodAmazonPayData
-  extends PaymentMethodCreateParams {
-  type: 'amazon_pay';
-}
+
 
 export interface CreatePaymentMethodAmazonPayData
   extends PaymentMethodCreateParams {
