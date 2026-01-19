@@ -837,7 +837,7 @@ export interface Stripe {
    */
   confirmAmazonPaySetup(
     clientSecret: string,
-    data?: setupIntents.ConfirmAmazonPaySetupData,
+    data: setupIntents.ConfirmAmazonPaySetupData,
     options?: setupIntents.ConfirmAmazonPaySetupOptions
   ): Promise<SetupIntentResult>;
 
