@@ -1,10 +1,5 @@
 import {StripeElementBase} from './base';
-import {
-  BillingDetails,
-  ExpressPaymentType,
-  ShippingAddress,
-  ShippingRate,
-} from './express-checkout';
+import {StripeExpressCheckoutElementConfirmEvent} from './express-checkout';
 
 /**
  * Address type used in PaymentFormElement change events.
@@ -84,45 +79,29 @@ export interface StripePaymentFormElementChangeEvent {
 }
 
 /**
+ * Confirm event when user completes via Express Checkout (Apple Pay, Google Pay, etc.)
+ */
+interface StripePaymentFormExpressCheckoutConfirmEvent
+  extends StripeExpressCheckoutElementConfirmEvent {
+  source: 'payment-form-ece';
+}
+
+/**
+ * Confirm event when user clicks the Pay button.
+ * paymentMethodType is the selected payment method (e.g., 'card', 'sepa_debit')
+ * or null if payment collection is not needed.
+ */
+interface StripePaymentFormPayButtonConfirmEvent {
+  source: 'payment-form-pay-button';
+  paymentMethodType: string | null;
+}
+
+/**
  * The confirm event payload for the PaymentFormElement.
  */
-export interface StripePaymentFormElementConfirmEvent {
-  /**
-   * Callback when a payment is unsuccessful. Optionally, specifying a reason will show a more detailed error in the payment interface.
-   */
-  paymentFailed: (payload?: {
-    reason?:
-      | 'fail'
-      | 'invalid_shipping_address'
-      | 'invalid_billing_address'
-      | 'invalid_payment_data'
-      | 'address_unserviceable';
-    message?: string;
-  }) => void;
-
-  /**
-   * Optional callback when payment succeeds.
-   */
-  paymentSucceeded?: () => void;
-
-  billingDetails?: BillingDetails;
-
-  shippingAddress?: ShippingAddress;
-
-  shippingRate?: ShippingRate;
-
-  /**
-   * The express payment type. Only present when source is 'payment-form-ece'.
-   */
-  expressPaymentType?: ExpressPaymentType;
-
-  /**
-   * The source of the confirm event.
-   * - 'payment-form-pay-button': User clicked the Pay button
-   * - 'payment-form-ece': User completed via Express Checkout (Apple Pay, Google Pay, etc.)
-   */
-  source?: 'payment-form-pay-button' | 'payment-form-ece';
-}
+export type StripePaymentFormElementConfirmEvent =
+  | StripePaymentFormExpressCheckoutConfirmEvent
+  | StripePaymentFormPayButtonConfirmEvent;
 
 export type StripePaymentFormElement = StripeElementBase & {
   /**
