@@ -1259,10 +1259,7 @@ paymentFormElement
   .on('escape', (e: {elementType: 'paymentForm'}) => {})
   .on(
     'loaderror',
-    (e: {
-      elementType: 'paymentForm';
-      error: {type?: string; code?: string; message?: string};
-    }) => {}
+    (e: {elementType: 'paymentForm'; error: {type: string}}) => {}
   )
   .on('change', (e: StripePaymentFormElementChangeEvent) => {})
   .on('confirm', (e: StripePaymentFormElementConfirmEvent) => {})

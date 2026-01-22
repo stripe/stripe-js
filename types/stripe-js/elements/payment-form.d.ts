@@ -1,3 +1,4 @@
+import {StripeError} from '../stripe';
 import {StripeElementBase} from './base';
 import {StripeExpressCheckoutElementConfirmEvent} from './express-checkout';
 
@@ -173,24 +174,15 @@ export type StripePaymentFormElement = StripeElementBase & {
    */
   on(
     eventType: 'loaderror',
-    handler: (event: {
-      elementType: 'paymentForm';
-      error: {type?: string; code?: string; message?: string};
-    }) => any
+    handler: (event: {elementType: 'paymentForm'; error: StripeError}) => any
   ): StripePaymentFormElement;
   once(
     eventType: 'loaderror',
-    handler: (event: {
-      elementType: 'paymentForm';
-      error: {type?: string; code?: string; message?: string};
-    }) => any
+    handler: (event: {elementType: 'paymentForm'; error: StripeError}) => any
   ): StripePaymentFormElement;
   off(
     eventType: 'loaderror',
-    handler?: (event: {
-      elementType: 'paymentForm';
-      error: {type?: string; code?: string; message?: string};
-    }) => any
+    handler?: (event: {elementType: 'paymentForm'; error: StripeError}) => any
   ): StripePaymentFormElement;
 
   /**
