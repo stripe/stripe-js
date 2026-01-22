@@ -16,4 +16,3 @@ export * from './payment';
 export * from './shipping-address';
 export * from './issuing';
 export * from './tax-id';
-export * from './payment-form';

@@ -364,6 +364,38 @@ export type StripeCheckoutAddressElementOptions = {
   };
 };
 
+/**
+ * Wallet button theme options for PaymentFormElement.
+ */
+export type PaymentFormWalletButtonTheme = {
+  applePay?: 'black' | 'white' | 'white-outline';
+  googlePay?: 'black' | 'white';
+  paypal?: 'gold' | 'blue' | 'silver' | 'white' | 'black';
+  klarna?: 'dark' | 'light' | 'outlined';
+};
+
+export type StripeCheckoutPaymentFormElementOptions = {
+  /**
+   * The layout of the PaymentFormElement.
+   */
+  layout?: 'expanded' | 'compact';
+
+  /**
+   * An array of saved addresses to display in the PaymentFormElement.
+   */
+  contacts?: ContactOption[];
+
+  /**
+   * Wallet configuration options.
+   */
+  wallets?: {
+    /**
+     * Button theme options for wallet payment methods.
+     */
+    buttonTheme?: PaymentFormWalletButtonTheme;
+  };
+};
+
 export type StripeCheckoutExpressCheckoutElementOptions = {
   buttonHeight: StripeExpressCheckoutElementOptions['buttonHeight'];
   buttonTheme: StripeExpressCheckoutElementOptions['buttonTheme'];
@@ -637,7 +669,9 @@ export interface StripeCheckout {
     options?: StripeCheckoutPaymentElementOptions
   ): StripePaymentElement;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  createPaymentFormElement(): StripePaymentFormElement;
+  createPaymentFormElement(
+    options?: StripeCheckoutPaymentFormElementOptions
+  ): StripePaymentFormElement;
   createBillingAddressElement(
     options?: StripeCheckoutAddressElementOptions
   ): StripeAddressElement;
