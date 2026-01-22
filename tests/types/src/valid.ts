@@ -52,6 +52,8 @@ import {
   ExternalTaxIdType,
   TaxIdType,
   StripePaymentFormElement,
+  StripePaymentFormElementChangeEvent,
+  StripePaymentFormElementConfirmEvent,
   StripeIssuingAddToWalletButtonElementOptions,
   StripeIssuingAddToWalletButtonElement,
 } from '../../../types';
@@ -1252,10 +1254,34 @@ declare const paymentFormElement: StripePaymentFormElement;
 
 paymentFormElement
   .on('ready', (e: {elementType: 'paymentForm'}) => {})
+  .on('focus', (e: {elementType: 'paymentForm'}) => {})
+  .on('blur', (e: {elementType: 'paymentForm'}) => {})
+  .on('escape', (e: {elementType: 'paymentForm'}) => {})
   .on(
     'loaderror',
-    (e: {elementType: 'paymentForm'; error: {type: string}}) => {}
-  );
+    (e: {
+      elementType: 'paymentForm';
+      error: {type?: string; code?: string; message?: string};
+    }) => {}
+  )
+  .on('change', (e: StripePaymentFormElementChangeEvent) => {})
+  .on('confirm', (e: StripePaymentFormElementConfirmEvent) => {})
+  .on('cancel', (e: {elementType: 'paymentForm'}) => {});
+
+paymentFormElement.once('ready', (e: {elementType: 'paymentForm'}) => {});
+paymentFormElement.off('ready');
+paymentFormElement.once(
+  'change',
+  (e: StripePaymentFormElementChangeEvent) => {}
+);
+paymentFormElement.off('change');
+paymentFormElement.once(
+  'confirm',
+  (e: StripePaymentFormElementConfirmEvent) => {}
+);
+paymentFormElement.off('confirm');
+
+paymentFormElement.getValue().then((result) => {});
 
 auBankAccountElement.destroy();
 cardElement.destroy();
@@ -3703,6 +3729,62 @@ const checkoutPaymentElement: StripePaymentElement = checkout.createPaymentEleme
 checkout.getPaymentElement();
 const checkoutAddressElement: StripeAddressElement = checkout.createBillingAddressElement();
 checkout.getBillingAddressElement();
+
+const checkoutPaymentFormElement1: StripePaymentFormElement = checkout.createPaymentFormElement();
+checkout.createPaymentFormElement({});
+checkout.createPaymentFormElement({layout: 'expanded'});
+checkout.createPaymentFormElement({layout: 'compact'});
+checkout.createPaymentFormElement({
+  contacts: [
+    {
+      name: 'John Doe',
+      phone: '+1234567890',
+      address: {
+        line1: '123 Main St',
+        line2: 'Apt 4',
+        city: 'San Francisco',
+        state: 'CA',
+        postal_code: '94102',
+        country: 'US',
+      },
+    },
+  ],
+});
+checkout.createPaymentFormElement({
+  wallets: {
+    buttonTheme: {
+      applePay: 'black',
+      googlePay: 'white',
+      paypal: 'gold',
+      klarna: 'light',
+    },
+  },
+});
+checkout.createPaymentFormElement({
+  layout: 'compact',
+  contacts: [
+    {
+      name: 'Jane Doe',
+      address: {
+        line1: '456 Market St',
+        city: 'San Francisco',
+        state: 'CA',
+        postal_code: '94103',
+        country: 'US',
+      },
+    },
+  ],
+  wallets: {
+    buttonTheme: {
+      applePay: 'white-outline',
+      googlePay: 'black',
+      paypal: 'blue',
+      klarna: 'dark',
+    },
+  },
+});
+const retrievedPaymentFormElement: StripePaymentFormElement | null = checkout.getPaymentFormElement();
+
 checkout.loadFonts([
   {
     cssSrc: 'https://example.com/font.css',

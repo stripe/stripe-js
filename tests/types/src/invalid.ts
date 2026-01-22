@@ -564,3 +564,46 @@ checkout.loadActions().then((loadActionsResult) => {
     const {error} = loadActionsResult;
   }
 });
+
+// invalid PaymentFormElement option values
+// @ts-expect-error: layout must be 'expanded' | 'compact'
+checkout.createPaymentFormElement({layout: 'invalid'});
+
+checkout.createPaymentFormElement({
+  wallets: {
+    buttonTheme: {
+      // @ts-expect-error: applePay buttonTheme must be 'black' | 'white' | 'white-outline'
+      applePay: 'invalid',
+    },
+  },
+});
+
+checkout.createPaymentFormElement({
+  wallets: {
+    buttonTheme: {
+      // @ts-expect-error: googlePay buttonTheme must be 'black' | 'white'
+      googlePay: 'invalid',
+    },
+  },
+});
+
+checkout.createPaymentFormElement({
+  wallets: {
+    buttonTheme: {
+      // @ts-expect-error: paypal buttonTheme must be 'gold' | 'blue' | 'silver' | 'white' | 'black'
+      paypal: 'invalid',
+    },
+  },
+});
+
+checkout.createPaymentFormElement({
+  wallets: {
+    buttonTheme: {
+      // @ts-expect-error: klarna buttonTheme must be 'dark' | 'light' | 'outlined'
+      klarna: 'invalid',
+    },
+  },
+});
+
+// @ts-expect-error: contacts must be an array of ContactOption
+checkout.createPaymentFormElement({contacts: 'invalid'});
