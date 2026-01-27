@@ -45,8 +45,14 @@ export interface StripePaymentFormElementChangeEvent {
       displayName: string;
       amount: string;
     };
-    shippingAddress?: PaymentFormAddress;
-    billingAddress?: PaymentFormAddress;
+    shippingAddress?: {
+      name: string;
+      address: PaymentFormAddress;
+    };
+    billingAddress?: {
+      name: string;
+      address: PaymentFormAddress;
+    };
     tax?: {
       businessName: string;
       taxId: string;
