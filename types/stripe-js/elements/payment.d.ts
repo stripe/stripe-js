@@ -220,11 +220,12 @@ export interface PaymentWalletsOption {
 }
 
 export type Layout = 'tabs' | 'accordion' | 'auto';
+type RadiosOption = 'auto' | 'never' | 'always' | boolean;
 
 export interface LayoutObject {
   type: Layout;
   defaultCollapsed?: boolean;
-  radios?: boolean;
+  radios?: RadiosOption;
   spacedAccordionItems?: boolean;
   visibleAccordionItemsCount?: number;
   /**

@@ -498,6 +498,13 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
   },
 });
 
+const paymentElementWithRadiosEnum: StripePaymentElement = elements.create('payment', {
+  layout: {
+    type: 'accordion',
+    radios: 'auto',
+  },
+});
+
 paymentElement.update({
   applePay: {
     recurringPaymentRequest: {
