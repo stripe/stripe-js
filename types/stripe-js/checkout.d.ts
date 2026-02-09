@@ -19,6 +19,7 @@ import {
   StripeTaxIdElement,
   StripeTaxIdElementOptions,
   PaymentWalletsOption,
+  StripePaymentFormElementConfirmEvent,
 } from './elements';
 
 type SavedPaymentMethodOption = {
@@ -637,6 +638,7 @@ type LoadActionsSuccess = {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
     expressCheckoutConfirmEvent?: StripeExpressCheckoutElementConfirmEvent;
+    paymentFormConfirmEvent?: StripePaymentFormElementConfirmEvent;
     onRequiresApproval?: () => Promise<void>;
   }) => Promise<StripeCheckoutConfirmResult>;
   getSession: () => StripeCheckoutSession;
