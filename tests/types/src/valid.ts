@@ -3846,7 +3846,6 @@ stripe.initCheckout({
       enableSave: 'never',
       enableRedisplay: 'auto',
     },
-    syncAddressCheckbox: 'billing',
   },
 });
 
@@ -3857,7 +3856,6 @@ stripe.initCheckout({
     savedPaymentMethod: {
       enableSave: 'auto',
     },
-    syncAddressCheckbox: 'shipping',
   },
 });
 
@@ -3868,7 +3866,6 @@ stripe.initCheckout({
     savedPaymentMethod: {
       enableRedisplay: 'never',
     },
-    syncAddressCheckbox: 'none',
   },
 });
 
