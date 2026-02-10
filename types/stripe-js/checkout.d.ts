@@ -32,7 +32,6 @@ export interface StripeCheckoutElementsOptions {
   loader?: 'auto' | 'always' | 'never';
   fonts?: Array<CssFontSource | CustomFontSource>;
   savedPaymentMethod?: SavedPaymentMethodOption;
-  syncAddressCheckbox?: 'billing' | 'shipping' | 'none';
 }
 
 export interface StripeCheckoutOptions {
