@@ -167,3 +167,7 @@ The `loadStripe.setLoadParameters` function is only available when importing
 - [Stripe.js Docs](https://stripe.com/docs/stripe-js)
 - [Stripe.js Reference](https://stripe.com/docs/js)
 - [React Stripe.js Docs](https://stripe.com/docs/stripe-js/react)
+
+### LLM skills
+
+Additional skill-specific context for coding agents are available in the `.agents/skills/` directory. Coding assistants like Codex and Claude Code should refer to these when applicable.
