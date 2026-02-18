@@ -1,6 +1,7 @@
 import {StripeError} from '../stripe';
 import {StripeElementBase} from './base';
 import {StripeExpressCheckoutElementConfirmEvent} from './express-checkout';
+import {TaxIdType, ExternalTaxIdType} from './tax-id';
 
 /**
  * Address type used in PaymentFormElement change events.
@@ -56,8 +57,8 @@ export interface StripePaymentFormElementChangeEvent {
     tax?: {
       businessName: string;
       taxId: string;
-      taxIdType: string;
-      externalTaxIdType: string;
+      taxIdType: TaxIdType;
+      externalTaxIdType: ExternalTaxIdType;
     };
     customFields?: Record<string, string | number>;
     payment?: {
