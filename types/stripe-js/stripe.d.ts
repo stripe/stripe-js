@@ -875,6 +875,24 @@ export interface Stripe {
   ): Promise<SetupIntentResult>;
 
   /**
+   * Use `stripe.confirmAmazonPaySetup` in the [Set up future payments](https://stripe.com/docs/payments/amazon-pay/set-up-future-payments) flow when the customer submits your payment form.
+   * When called, it will confirm a `SetupIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
+   * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+   * Note that there are some additional requirements to this flow that are not covered in this reference.
+   * Refer to our [integration guide](https://stripe.com/docs/payments/amazon-pay/set-up-future-payments) for more details.
+   *
+   * When you confirm a `SetupIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * In addition to confirming the `SetupIntent`, this method can automatically create and attach a new `PaymentMethod` for you.
+   * It can also be called with an existing `PaymentMethod`, or if you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/setup_intents/confirm_amazon_pay_setup
+   */
+  confirmAmazonPaySetup(
+    clientSecret: string,
+    data?: setupIntents.ConfirmAmazonPaySetupData
+  ): Promise<SetupIntentResult>;
+
+  /**
    * Use `stripe.confirmPayPalSetup` in the [Set up future payments](https://stripe.com/docs/payments/paypal/set-up-future-payments) flow when the customer submits your payment form.
    * When called, it will confirm a `SetupIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
    * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
