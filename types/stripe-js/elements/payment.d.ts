@@ -312,6 +312,7 @@ export interface StripePaymentElementChangeEvent {
    */
   value: {
     type: string;
+    savePaymentMethod?: boolean;
     billingDetails?: {
       address: {
         country?: null | string;
