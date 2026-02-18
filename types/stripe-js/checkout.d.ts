@@ -268,6 +268,7 @@ export type StripeCheckoutTaxIdType =
   | 'kz_bin'
   | 'li_uid'
   | 'li_vat'
+  | 'lk_vat'
   | 'ma_vat'
   | 'md_vat'
   | 'me_pib'
