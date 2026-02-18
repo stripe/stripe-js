@@ -220,7 +220,7 @@ export interface PaymentWalletsOption {
 }
 
 export type Layout = 'tabs' | 'accordion' | 'auto';
-type RadiosOption = 'auto' | 'never' | 'always' | boolean;
+type RadiosOption = 'auto' | 'never' | 'always' | 'if_multiple' | boolean;
 
 export interface LayoutObject {
   type: Layout;
