@@ -40,6 +40,8 @@ export interface StripePaymentFormElementChangeEvent {
   value: {
     customerDetails: {
       email: string;
+      name?: string;
+      businessName?: string;
     };
     shippingOption?: {
       id: string;
@@ -55,7 +57,7 @@ export interface StripePaymentFormElementChangeEvent {
       address: PaymentFormAddress;
     };
     tax?: {
-      businessName: string;
+      businessName?: string;
       taxId: string;
       taxIdType: TaxIdType;
       externalTaxIdType: ExternalTaxIdType;
