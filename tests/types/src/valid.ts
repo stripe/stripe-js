@@ -2588,6 +2588,20 @@ stripe
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmAmazonPaySetup('{{SETUP_INTENT_CLIENT_SECRET}}', {
+    return_url: 'https://example.com/setup/complete',
+    mandate_data: {
+      customer_acceptance: {
+        type: 'online',
+        online: {
+          infer_from_client: true,
+        },
+      },
+    },
+  })
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
   .confirmPayPalSetup('', {return_url: 'https://example.com'})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
