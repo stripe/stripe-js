@@ -2,6 +2,7 @@ import {PaymentMethodCreateParams, SetupIntentConfirmParams} from '../api';
 
 import {
   CreatePaymentMethodAcssDebitData,
+  CreatePaymentMethodAmazonPayData,
   CreatePaymentMethodAuBecsDebitData,
   CreatePaymentMethodBancontactData,
   CreatePaymentMethodCardData,
@@ -137,6 +138,25 @@ export interface ConfirmIdealSetupData extends SetupIntentConfirmParams {
    * @recommended
    */
   payment_method?: string | Omit<CreatePaymentMethodIdealData, 'type'>;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmAmazonPaySetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmAmazonPaySetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodAmazonPayData, 'type'>;
+
+  /**
+   * The required url your customer will be directed to after they complete authentication.
+   */
+  return_url: string;
 }
 
 /**

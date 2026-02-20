@@ -13,6 +13,7 @@ export type CreatePaymentMethodData =
   | CreatePaymentMethodAffirmData
   | CreatePaymentMethodAfterpayClearpayData
   | CreatePaymentMethodAlipayData
+  | CreatePaymentMethodAmazonPayData
   | CreatePaymentMethodAuBecsDebitData
   | CreatePaymentMethodBacsDebitData
   | CreatePaymentMethodBancontactData
@@ -47,6 +48,11 @@ export {
 export interface CreatePaymentMethodAlipayData
   extends PaymentMethodCreateParams {
   type: 'alipay';
+}
+
+export interface CreatePaymentMethodAmazonPayData
+  extends PaymentMethodCreateParams {
+  type: 'amazon_pay';
 }
 
 export interface CreatePaymentMethodWechatPayData
