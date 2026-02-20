@@ -195,6 +195,22 @@ export type StripePaymentFormElement = StripeElementBase & {
   ): StripePaymentFormElement;
 
   /**
+   * Triggered when the loader UI is mounted to the DOM and ready to be displayed.
+   */
+  on(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'paymentForm'}) => any
+  ): StripePaymentFormElement;
+  once(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'paymentForm'}) => any
+  ): StripePaymentFormElement;
+  off(
+    eventType: 'loaderstart',
+    handler?: (event: {elementType: 'paymentForm'}) => any
+  ): StripePaymentFormElement;
+
+  /**
    * Triggered when the element's value changes.
    */
   on(
