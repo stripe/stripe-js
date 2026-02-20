@@ -40,6 +40,8 @@ export interface StripePaymentFormElementChangeEvent {
   value: {
     customerDetails: {
       email: string;
+      name?: string;
+      businessName?: string;
     };
     shippingOption?: {
       id: string;
@@ -55,7 +57,7 @@ export interface StripePaymentFormElementChangeEvent {
       address: PaymentFormAddress;
     };
     tax?: {
-      businessName: string;
+      businessName?: string;
       taxId: string;
       taxIdType: TaxIdType;
       externalTaxIdType: ExternalTaxIdType;
@@ -190,6 +192,22 @@ export type StripePaymentFormElement = StripeElementBase & {
   off(
     eventType: 'loaderror',
     handler?: (event: {elementType: 'paymentForm'; error: StripeError}) => any
+  ): StripePaymentFormElement;
+
+  /**
+   * Triggered when the loader UI is mounted to the DOM and ready to be displayed.
+   */
+  on(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'paymentForm'}) => any
+  ): StripePaymentFormElement;
+  once(
+    eventType: 'loaderstart',
+    handler: (event: {elementType: 'paymentForm'}) => any
+  ): StripePaymentFormElement;
+  off(
+    eventType: 'loaderstart',
+    handler?: (event: {elementType: 'paymentForm'}) => any
   ): StripePaymentFormElement;
 
   /**
