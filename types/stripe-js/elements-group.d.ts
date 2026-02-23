@@ -1139,6 +1139,10 @@ export interface Appearance {
     colorDanger?: string;
     colorWarning?: string;
 
+    // Button Colors
+    buttonColorBackground?: string;
+    buttonColorText?: string;
+
     // Text variations
     colorTextSecondary?: string;
     colorTextPlaceholder?: string;
