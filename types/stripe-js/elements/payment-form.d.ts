@@ -111,7 +111,8 @@ export interface StripePaymentFormElementChangeEvent {
 /**
  * Confirm event when user completes via Express Checkout (Apple Pay, Google Pay, etc.)
  */
-interface StripePaymentFormExpressCheckoutConfirmEvent extends StripeExpressCheckoutElementConfirmEvent {
+interface StripePaymentFormExpressCheckoutConfirmEvent
+  extends StripeExpressCheckoutElementConfirmEvent {
   source: 'payment-form-ece';
 }
 
