@@ -86,13 +86,32 @@ export interface StripePaymentFormElementChangeEvent {
       savePaymentMethod?: boolean;
     };
   };
+
+  /**
+   * Array of views in compact layout. Only defined for compact layout.
+   */
+  views?: {
+    /**
+     * Localized view name: "Express" | "Payment" | etc
+     * */
+    label: string;
+
+    /**
+     * Whether the user can currently navigate to this view
+     * */
+    canNavigate: boolean;
+
+    /**
+     * Whether this is the current view
+     * */
+    active: boolean;
+  }[];
 }
 
 /**
  * Confirm event when user completes via Express Checkout (Apple Pay, Google Pay, etc.)
  */
-interface StripePaymentFormExpressCheckoutConfirmEvent
-  extends StripeExpressCheckoutElementConfirmEvent {
+interface StripePaymentFormExpressCheckoutConfirmEvent extends StripeExpressCheckoutElementConfirmEvent {
   source: 'payment-form-ece';
 }
 
@@ -262,4 +281,9 @@ export type StripePaymentFormElement = StripeElementBase & {
    * Retrieves the current form values from the PaymentFormElement.
    */
   getValue(): Promise<StripePaymentFormElementChangeEvent>;
+
+  /**
+   * Navigates to the view at the given index (from the change event's views array).
+   */
+  setView(viewIndex: number): Promise<void>;
 };
