@@ -1297,6 +1297,7 @@ paymentFormElement.off('confirm');
 
 paymentFormElement.getValue().then((result) => {});
 
+paymentFormElement.setView(0);
 auBankAccountElement.destroy();
 cardElement.destroy();
 cardNumberElement.destroy();
