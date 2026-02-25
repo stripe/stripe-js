@@ -196,6 +196,7 @@ export interface StripeAddressElementOptions {
    */
   fields?: {
     phone?: 'always' | 'never' | 'auto';
+    name?: 'always' | 'never' | 'auto';
   };
 
   /**
@@ -203,6 +204,9 @@ export interface StripeAddressElementOptions {
    */
   validation?: {
     phone?: {
+      required: 'always' | 'never' | 'auto';
+    };
+    name?: {
       required: 'always' | 'never' | 'auto';
     };
   };
