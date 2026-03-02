@@ -4,7 +4,11 @@ import {
   TermsOption,
   StripePaymentElement,
 } from './elements/payment';
-import {ContactOption, StripeAddressElement} from './elements/address';
+import {
+  ContactOption,
+  StripeAddressElement,
+  StripeAddressElementOptions,
+} from './elements/address';
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
 import {StripeError} from './stripe';
 import {
@@ -39,6 +43,20 @@ export interface StripeCheckoutOptions {
   clientSecret: Promise<string> | string;
   elementsOptions?: StripeCheckoutElementsOptions;
   adaptivePricing?: {allowed?: boolean};
+  defaultValues?: {
+    billingAddress?: StripeCheckoutContact;
+    shippingAddress?: StripeCheckoutContact;
+    email?: string;
+    phoneNumber?: string;
+  };
+}
+
+export interface StripeCheckoutFormOptions {
+  clientSecret: Promise<string> | string;
+  appearance?: Omit<Appearance, 'rules'>;
+  loader?: 'auto' | 'always' | 'never';
+  fonts?: Array<CssFontSource | CustomFontSource>;
+  savedPaymentMethod?: SavedPaymentMethodOption;
   defaultValues?: {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
@@ -367,35 +385,11 @@ export type StripeCheckoutAddressElementOptions = {
   };
 };
 
-/**
- * Wallet button theme options for PaymentFormElement.
- */
-export type PaymentFormWalletButtonTheme = {
-  applePay?: 'black' | 'white' | 'white-outline';
-  googlePay?: 'black' | 'white';
-  paypal?: 'gold' | 'blue' | 'silver' | 'white' | 'black';
-  klarna?: 'dark' | 'light' | 'outlined';
-};
-
-export type StripeCheckoutPaymentFormElementOptions = {
-  /**
-   * The layout of the PaymentFormElement.
-   */
+export type StripeCheckoutPaymentFormOptions = {
   layout?: 'expanded' | 'compact';
-
-  /**
-   * An array of saved addresses to display in the PaymentFormElement.
-   */
-  contacts?: ContactOption[];
-
-  /**
-   * Wallet configuration options.
-   */
+  contacts?: StripeAddressElementOptions['contacts'];
   wallets?: {
-    /**
-     * Button theme options for wallet payment methods.
-     */
-    buttonTheme?: PaymentFormWalletButtonTheme;
+    buttonTheme?: StripeExpressCheckoutElementOptions['buttonTheme'];
   };
 };
 
@@ -651,17 +645,14 @@ export type StripeCheckoutLoadActionsResult =
   | {type: 'success'; actions: LoadActionsSuccess}
   | {type: 'error'; error: LoadActionsError};
 
-export interface StripeCheckout {
+export interface StripeCheckoutElements {
   on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
   loadActions: () => Promise<StripeCheckoutLoadActionsResult>;
 
-  /* Elements methods */
   changeAppearance: (appearance: Appearance) => void;
   loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
 
   getPaymentElement(): StripePaymentElement | null;
-  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  getPaymentFormElement(): StripePaymentFormElement | null;
   getBillingAddressElement(): StripeAddressElement | null;
   getShippingAddressElement(): StripeAddressElement | null;
   getExpressCheckoutElement(): StripeCheckoutExpressCheckoutElement | null;
@@ -672,10 +663,6 @@ export interface StripeCheckout {
   createPaymentElement(
     options?: StripeCheckoutPaymentElementOptions
   ): StripePaymentElement;
-  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  createPaymentFormElement(
-    options?: StripeCheckoutPaymentFormElementOptions
-  ): StripePaymentFormElement;
   createBillingAddressElement(
     options?: StripeCheckoutAddressElementOptions
   ): StripeAddressElement;
@@ -688,4 +675,20 @@ export interface StripeCheckout {
   createCurrencySelectorElement(): StripeCurrencySelectorElement;
   /* Requires beta header when initializing Stripe: @docs https://docs.stripe.com/tax/advanced/tax-ids?payment-ui=embedded-components#render-tax-id-element */
   createTaxIdElement(options?: StripeTaxIdElementOptions): StripeTaxIdElement;
+}
+
+export interface StripeCheckoutForm {
+  on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
+  loadActions: () => Promise<StripeCheckoutLoadActionsResult>;
+
+  changeAppearance: (appearance: Omit<Appearance, 'rules'>) => void;
+  loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
+
+  createPaymentForm(
+    options?: StripeCheckoutPaymentFormOptions
+  ): StripePaymentFormElement;
+  getPaymentForm(): StripePaymentFormElement | null;
+
+  createCurrencySelectorElement(): StripeCurrencySelectorElement;
+  getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
 }

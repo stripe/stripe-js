@@ -536,26 +536,28 @@ elements.create('paymentMethodMessaging', {
 });
 
 stripe
-  .initCheckout({
+  .initCheckoutElements({
     // @ts-expect-error Object literal may only specify known properties, and 'fetchClientSecret' does not exist in type 'StripeCheckoutOptions'.
     fetchClientSecret: () => Promise.resolve('cs_test_foo'),
   })
-  // @ts-expect-error Property 'then' does not exist on type 'StripeCheckout'.
+  // @ts-expect-error Property 'then' does not exist on type 'StripeCheckoutElements'.
   .then((checkout) => {});
 
-const checkout = stripe.initCheckout({clientSecret: 'cs_test_foo'});
-// @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckout'.
-checkout.createElement('payment');
+const checkoutElements = stripe.initCheckoutElements({
+  clientSecret: 'cs_test_foo',
+});
+// @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckoutElements'.
+checkoutElements.createElement('payment');
 // @ts-expect-error - doesn't take a number
-checkout.loadFonts(42);
-checkout.loadFonts([
+checkoutElements.loadFonts(42);
+checkoutElements.loadFonts([
   {
     cssSrc: 'https://example.com/font.css',
     // @ts-expect-error - this is not a valid field
     extraWrongField: false,
   },
 ]);
-checkout.loadActions().then((loadActionsResult) => {
+checkoutElements.loadActions().then((loadActionsResult) => {
   if (loadActionsResult.type === 'success') {
     const {actions} = loadActionsResult;
     // @ts-expect-error Type 'StripeCheckoutAmount' is not assignable to type 'number'.
@@ -565,11 +567,41 @@ checkout.loadActions().then((loadActionsResult) => {
   }
 });
 
-// invalid PaymentFormElement option values
-// @ts-expect-error: layout must be 'expanded' | 'compact'
-checkout.createPaymentFormElement({layout: 'invalid'});
+// StripeCheckoutElements does not have PaymentForm methods
+// @ts-expect-error Property 'createPaymentForm' does not exist on type 'StripeCheckoutElements'.
+checkoutElements.createPaymentForm();
+// @ts-expect-error Property 'getPaymentForm' does not exist on type 'StripeCheckoutElements'.
+checkoutElements.getPaymentForm();
 
-checkout.createPaymentFormElement({
+const checkoutForm = stripe.initCheckoutForm({clientSecret: 'cs_test_foo'});
+
+// StripeCheckoutForm does not have individual element methods
+// @ts-expect-error Property 'createPaymentElement' does not exist on type 'StripeCheckoutForm'.
+checkoutForm.createPaymentElement();
+// @ts-expect-error Property 'createBillingAddressElement' does not exist on type 'StripeCheckoutForm'.
+checkoutForm.createBillingAddressElement();
+// @ts-expect-error Property 'createExpressCheckoutElement' does not exist on type 'StripeCheckoutForm'.
+checkoutForm.createExpressCheckoutElement();
+
+// initCheckoutForm does not accept elementsOptions
+stripe.initCheckoutForm({
+  clientSecret: 'cs_test_foo',
+  // @ts-expect-error Object literal may only specify known properties, and 'elementsOptions' does not exist in type 'StripeCheckoutFormOptions'.
+  elementsOptions: {appearance: {}},
+});
+
+// initCheckoutForm appearance does not support rules
+stripe.initCheckoutForm({
+  clientSecret: 'cs_test_foo',
+  // @ts-expect-error Type '{ rules: {}; }' is not assignable to type 'Omit<Appearance, "rules">'.
+  appearance: {rules: {}},
+});
+
+// invalid PaymentForm option values
+// @ts-expect-error: layout must be 'expanded' | 'compact'
+checkoutForm.createPaymentForm({layout: 'invalid'});
+
+checkoutForm.createPaymentForm({
   wallets: {
     buttonTheme: {
       // @ts-expect-error: applePay buttonTheme must be 'black' | 'white' | 'white-outline'
@@ -578,7 +610,7 @@ checkout.createPaymentFormElement({
   },
 });
 
-checkout.createPaymentFormElement({
+checkoutForm.createPaymentForm({
   wallets: {
     buttonTheme: {
       // @ts-expect-error: googlePay buttonTheme must be 'black' | 'white'
@@ -587,7 +619,7 @@ checkout.createPaymentFormElement({
   },
 });
 
-checkout.createPaymentFormElement({
+checkoutForm.createPaymentForm({
   wallets: {
     buttonTheme: {
       // @ts-expect-error: paypal buttonTheme must be 'gold' | 'blue' | 'silver' | 'white' | 'black'
@@ -596,7 +628,7 @@ checkout.createPaymentFormElement({
   },
 });
 
-checkout.createPaymentFormElement({
+checkoutForm.createPaymentForm({
   wallets: {
     buttonTheme: {
       // @ts-expect-error: klarna buttonTheme must be 'dark' | 'light' | 'outlined'
@@ -606,4 +638,4 @@ checkout.createPaymentFormElement({
 });
 
 // @ts-expect-error: contacts must be an array of ContactOption
-checkout.createPaymentFormElement({contacts: 'invalid'});
+checkoutForm.createPaymentForm({contacts: 'invalid'});

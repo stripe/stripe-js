@@ -3752,69 +3752,25 @@ stripe.createEphemeralKeyNonce({
   issuingCard: '',
 });
 
-stripe.initCheckout({clientSecret: Promise.resolve('cs_test_foo')});
-const checkout = stripe.initCheckout({clientSecret: 'cs_test_foo'});
-const checkoutPaymentElement: StripePaymentElement = checkout.createPaymentElement();
-checkout.getPaymentElement();
-const checkoutAddressElement: StripeAddressElement = checkout.createBillingAddressElement();
-checkout.getBillingAddressElement();
+// initCheckoutElements
+stripe.initCheckoutElements({clientSecret: Promise.resolve('cs_test_foo')});
+const checkoutElements = stripe.initCheckoutElements({
+  clientSecret: 'cs_test_foo',
+});
+const checkoutPaymentElement: StripePaymentElement = checkoutElements.createPaymentElement();
+checkoutElements.getPaymentElement();
+const checkoutAddressElement: StripeAddressElement = checkoutElements.createBillingAddressElement();
+checkoutElements.getBillingAddressElement();
+checkoutElements.createShippingAddressElement();
+checkoutElements.getShippingAddressElement();
+checkoutElements.createExpressCheckoutElement();
+checkoutElements.getExpressCheckoutElement();
+checkoutElements.createCurrencySelectorElement();
+checkoutElements.getCurrencySelectorElement();
+checkoutElements.createTaxIdElement();
+checkoutElements.getTaxIdElement();
 
-const checkoutPaymentFormElement1: StripePaymentFormElement = checkout.createPaymentFormElement();
-checkout.createPaymentFormElement({});
-checkout.createPaymentFormElement({layout: 'expanded'});
-checkout.createPaymentFormElement({layout: 'compact'});
-checkout.createPaymentFormElement({
-  contacts: [
-    {
-      name: 'John Doe',
-      phone: '+1234567890',
-      address: {
-        line1: '123 Main St',
-        line2: 'Apt 4',
-        city: 'San Francisco',
-        state: 'CA',
-        postal_code: '94102',
-        country: 'US',
-      },
-    },
-  ],
-});
-checkout.createPaymentFormElement({
-  wallets: {
-    buttonTheme: {
-      applePay: 'black',
-      googlePay: 'white',
-      paypal: 'gold',
-      klarna: 'light',
-    },
-  },
-});
-checkout.createPaymentFormElement({
-  layout: 'compact',
-  contacts: [
-    {
-      name: 'Jane Doe',
-      address: {
-        line1: '456 Market St',
-        city: 'San Francisco',
-        state: 'CA',
-        postal_code: '94103',
-        country: 'US',
-      },
-    },
-  ],
-  wallets: {
-    buttonTheme: {
-      applePay: 'white-outline',
-      googlePay: 'black',
-      paypal: 'blue',
-      klarna: 'dark',
-    },
-  },
-});
-const retrievedPaymentFormElement: StripePaymentFormElement | null = checkout.getPaymentFormElement();
-
-checkout.loadFonts([
+checkoutElements.loadFonts([
   {
     cssSrc: 'https://example.com/font.css',
   },
@@ -3828,7 +3784,7 @@ checkout.loadFonts([
   },
 ]);
 
-checkout.loadActions().then((loadActionsResult) => {
+checkoutElements.loadActions().then((loadActionsResult) => {
   if (loadActionsResult.type === 'success') {
     const {actions} = loadActionsResult;
     actions.applyPromotionCode('code').then((result) => {
@@ -3870,8 +3826,8 @@ checkout.loadActions().then((loadActionsResult) => {
   }
 });
 
-// savedPaymentMethod variations for initCheckout:
-stripe.initCheckout({
+// savedPaymentMethod variations for initCheckoutElements:
+stripe.initCheckoutElements({
   clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
@@ -3882,8 +3838,7 @@ stripe.initCheckout({
   },
 });
 
-// only enableSave
-stripe.initCheckout({
+stripe.initCheckoutElements({
   clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
@@ -3893,8 +3848,7 @@ stripe.initCheckout({
   },
 });
 
-// only enableRedisplay
-stripe.initCheckout({
+stripe.initCheckoutElements({
   clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
@@ -3904,10 +3858,123 @@ stripe.initCheckout({
   },
 });
 
-// empty savedPaymentMethod object
-stripe.initCheckout({
+stripe.initCheckoutElements({
   clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {},
   },
+});
+
+// initCheckoutForm
+const checkoutForm = stripe.initCheckoutForm({
+  clientSecret: 'cs_test_foo',
+});
+
+stripe.initCheckoutForm({
+  clientSecret: Promise.resolve('cs_test_foo'),
+});
+
+stripe.initCheckoutForm({
+  clientSecret: 'cs_test_foo',
+  appearance: {theme: 'stripe'},
+  loader: 'auto',
+  fonts: [{cssSrc: 'https://example.com/font.css'}],
+  savedPaymentMethod: {
+    enableSave: 'auto',
+    enableRedisplay: 'never',
+  },
+  defaultValues: {
+    billingAddress: {
+      name: 'John Doe',
+      address: {
+        country: 'US',
+        line1: '123 Main St',
+        city: 'San Francisco',
+        state: 'CA',
+        postal_code: '94102',
+      },
+    },
+    shippingAddress: {
+      name: 'John Doe',
+      address: {
+        country: 'US',
+      },
+    },
+    email: 'test@example.com',
+    phoneNumber: '+1234567890',
+  },
+});
+
+const checkoutPaymentFormElement1: StripePaymentFormElement = checkoutForm.createPaymentForm();
+checkoutForm.createPaymentForm({});
+checkoutForm.createPaymentForm({layout: 'expanded'});
+checkoutForm.createPaymentForm({layout: 'compact'});
+checkoutForm.createPaymentForm({
+  contacts: [
+    {
+      name: 'John Doe',
+      phone: '+1234567890',
+      address: {
+        line1: '123 Main St',
+        line2: 'Apt 4',
+        city: 'San Francisco',
+        state: 'CA',
+        postal_code: '94102',
+        country: 'US',
+      },
+    },
+  ],
+});
+checkoutForm.createPaymentForm({
+  wallets: {
+    buttonTheme: {
+      applePay: 'black',
+      googlePay: 'white',
+      paypal: 'gold',
+      klarna: 'light',
+    },
+  },
+});
+checkoutForm.createPaymentForm({
+  layout: 'compact',
+  contacts: [
+    {
+      name: 'Jane Doe',
+      address: {
+        line1: '456 Market St',
+        city: 'San Francisco',
+        state: 'CA',
+        postal_code: '94103',
+        country: 'US',
+      },
+    },
+  ],
+  wallets: {
+    buttonTheme: {
+      applePay: 'white-outline',
+      googlePay: 'black',
+      paypal: 'blue',
+      klarna: 'dark',
+    },
+  },
+});
+const retrievedPaymentFormElement: StripePaymentFormElement | null = checkoutForm.getPaymentForm();
+
+checkoutForm.createCurrencySelectorElement();
+checkoutForm.getCurrencySelectorElement();
+
+checkoutForm.loadFonts([
+  {
+    cssSrc: 'https://example.com/font.css',
+  },
+]);
+
+checkoutForm.loadActions().then((loadActionsResult) => {
+  if (loadActionsResult.type === 'success') {
+    const {actions} = loadActionsResult;
+    actions.getSession();
+    actions.confirm();
+  } else {
+    const {error} = loadActionsResult;
+  }
 });
