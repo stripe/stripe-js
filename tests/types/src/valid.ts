@@ -843,6 +843,18 @@ addressElement.getValue().then((res) => {
   }
 });
 
+addressElement.getValue({format: 'latin'}).then((res) => {
+  if (res.complete && res.isNewAddress) {
+    const value = res.value;
+  }
+});
+
+addressElement.getValue({format: 'localized'}).then((res) => {
+  if (res.complete && res.isNewAddress) {
+    const value = res.value;
+  }
+});
+
 const retrievedAddressElement: StripeAddressElement | null = elements.getElement(
   'address'
 );
