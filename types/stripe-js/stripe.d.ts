@@ -15,7 +15,7 @@ import {
 } from './elements-group';
 import {CheckoutLocale} from './hosted-checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
-import {StripeElement, StripeElementLocale} from './elements-group';
+import {StripeElementLocale} from './elements-group';
 import {StripeCheckoutOptions, StripeCheckout} from './checkout';
 import {
   StripeEmbeddedCheckoutOptions,
@@ -1207,28 +1207,6 @@ export interface Stripe {
     data: api.TokenCreateParams.Person
   ): Promise<TokenResult>;
 
-  /**
-   * Use `stripe.createSource` to convert payment information collected by elements into a `Source` object that you safely pass to your server to use in an API call.
-   * See the [Sources documentation](https://stripe.com/docs/sources) for more information about sources.
-   */
-  createSource(
-    element: StripeElement,
-    sourceData: tokens.CreateSourceData
-  ): Promise<SourceResult>;
-
-  /**
-   * Use `stripe.createSource` to convert raw payment information into a `Source` object that you safely pass to your server to use in an API call.
-   * See the [Sources documentation](https://stripe.com/docs/sources) for more information about sources.
-   */
-  createSource(sourceData: tokens.CreateSourceData): Promise<SourceResult>;
-
-  /**
-   * Retrieve a [Source](https://stripe.com/docs/api#sources) using its unique ID and client secret.
-   *
-   * @docs https://stripe.com/docs/js/tokens_sources/retrieve_source
-   */
-  retrieveSource(source: tokens.RetrieveSourceParam): Promise<SourceResult>;
-
   /////////////////////////////
   /// Analytics
   ///
@@ -1333,10 +1311,6 @@ export type PaymentMethodResult =
 export type ConfirmationTokenResult =
   | {confirmationToken: api.ConfirmationToken; error?: undefined}
   | {confirmationToken?: undefined; error: StripeError};
-
-export type SourceResult =
-  | {source: api.Source; error?: undefined}
-  | {source?: undefined; error: StripeError};
 
 export type TokenResult =
   | {token: api.Token; error?: undefined}

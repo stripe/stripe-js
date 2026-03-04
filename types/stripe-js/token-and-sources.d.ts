@@ -1,22 +1,3 @@
-import {SourceCreateParams} from '../api';
-
-/**
- * An object containing the unique ID and client secret for a `Source`.
- *
- * You can use a `Source` object created with `stripe.createSource` as the argument to `stripe.retrieveSource`, as every `Source` object has both `id` and `client_secret` keys.
- */
-export interface RetrieveSourceParam {
-  /**
-   * Unique identifier of the `Source`.
-   */
-  id: string;
-
-  /**
-   * A secret available to the web client that created the `Source`, for purposes of retrieving the `Source` later from that same client.
-   */
-  client_secret: string;
-}
-
 /**
  * An object containing additional payment information you might have collected.
  *
@@ -83,28 +64,4 @@ export interface CreateTokenBankAccountData {
   account_holder_type: string;
 
   account_type?: string;
-}
-
-/**
- * A required object containing the `type` of `Source` you want to create, and any additional payment information that you have collected.
- * See the [Sources API](https://stripe.com/docs/api#create_source) reference for details.
- *
- * You cannot pass raw card information to `stripe.createSource(sourceData)`.
- * Instead, you must gather card information in an `Element` and use `stripe.createSource(element, sourceData)`.
- * You can also pass an existing card token to convert it into a `Source` object.
- */
-export interface CreateSourceData extends SourceCreateParams {
-  bancontact?: CreateSourceData.DeprecatedMethodData;
-
-  ideal?: CreateSourceData.DeprecatedMethodData;
-
-  klarna?: CreateSourceData.DeprecatedMethodData;
-
-  sepa_debit?: CreateSourceData.DeprecatedMethodData;
-
-  sofort?: CreateSourceData.DeprecatedMethodData;
-}
-
-export namespace CreateSourceData {
-  export type DeprecatedMethodData = Record<string, unknown>;
 }
