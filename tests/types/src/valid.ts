@@ -3911,3 +3911,12 @@ stripe.initCheckout({
     savedPaymentMethod: {},
   },
 });
+
+// initCheckoutElements is an alias for initCheckout
+stripe.initCheckoutElements({clientSecret: Promise.resolve('cs_test_foo')});
+const checkoutFromElements = stripe.initCheckoutElements({
+  clientSecret: 'cs_test_foo',
+});
+checkoutFromElements.createPaymentElement();
+checkoutFromElements.getPaymentElement();
+checkoutFromElements.loadActions();
