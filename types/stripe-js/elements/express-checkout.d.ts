@@ -276,10 +276,13 @@ export type GooglePayButtonTheme = 'black' | 'white';
 
 export type PayPalButtonTheme = 'gold' | 'blue' | 'silver' | 'white' | 'black';
 
+export type KlarnaButtonTheme = 'dark' | 'light' | 'outlined';
+
 export type ButtonThemeOption = {
   applePay?: ApplePayButtonTheme;
   googlePay?: GooglePayButtonTheme;
   paypal?: PayPalButtonTheme;
+  klarna?: KlarnaButtonTheme;
 };
 
 export type ApplePayButtonType =
