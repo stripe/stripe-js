@@ -47,8 +47,12 @@ export interface StripeElements {
   /**
    * Updates the options that `Elements` was initialized with.
    * Updates are shallowly merged into the existing configuration.
+   *
+   * Returns a `Promise` that resolves when the update has been applied to all
+   * rendered Elements. You can also listen for the `update-end` event as an
+   * alternative to awaiting the `Promise`.
    */
-  update(options: StripeElementsUpdateOptions): void;
+  update(options: StripeElementsUpdateOptions): Promise<void>;
 
   /**
    * Triggered when the call to elements.update() is complete.
