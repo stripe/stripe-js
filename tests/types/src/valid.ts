@@ -3911,3 +3911,12 @@ stripe.initCheckout({
     savedPaymentMethod: {},
   },
 });
+
+// initCheckoutElementsSdk is an alias for initCheckout
+stripe.initCheckoutElementsSdk({clientSecret: Promise.resolve('cs_test_foo')});
+const checkoutFromElementsSdk = stripe.initCheckoutElementsSdk({
+  clientSecret: 'cs_test_foo',
+});
+checkoutFromElementsSdk.createPaymentElement();
+checkoutFromElementsSdk.getPaymentElement();
+checkoutFromElementsSdk.loadActions();
