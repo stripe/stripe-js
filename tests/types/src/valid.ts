@@ -3912,11 +3912,11 @@ stripe.initCheckout({
   },
 });
 
-// initCheckoutElements is an alias for initCheckout
-stripe.initCheckoutElements({clientSecret: Promise.resolve('cs_test_foo')});
-const checkoutFromElements = stripe.initCheckoutElements({
+// initCheckoutElementsSdk is an alias for initCheckout
+stripe.initCheckoutElementsSdk({clientSecret: Promise.resolve('cs_test_foo')});
+const checkoutFromElementsSdk = stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
 });
-checkoutFromElements.createPaymentElement();
-checkoutFromElements.getPaymentElement();
-checkoutFromElements.loadActions();
+checkoutFromElementsSdk.createPaymentElement();
+checkoutFromElementsSdk.getPaymentElement();
+checkoutFromElementsSdk.loadActions();

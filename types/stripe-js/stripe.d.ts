@@ -1291,12 +1291,12 @@ export interface Stripe {
   initCheckout(options: StripeCheckoutOptions): StripeCheckout;
 
   /**
-   * Alias for `stripe.initCheckout`. Use `stripe.initCheckoutElements` to initialize
+   * Alias for `stripe.initCheckout`. Use `stripe.initCheckoutElementsSdk` to initialize
    * a Checkout instance for the Elements integration pattern (ui_mode: "elements").
    *
    * @docs https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-components
    */
-  initCheckoutElements(options: StripeCheckoutOptions): StripeCheckout;
+  initCheckoutElementsSdk(options: StripeCheckoutOptions): StripeCheckout;
 
   /**
    * Use `stripe.initEmbeddedCheckout` to initialize an embedded Checkout instance
