@@ -19,11 +19,11 @@ import {
   StripeExpressCheckoutElementConfirmEvent,
   StripeExpressCheckoutElementOptions,
   StripeExpressCheckoutElementReadyEvent,
-  StripePaymentFormElement,
+  StripeCheckoutForm,
   StripeTaxIdElement,
   StripeTaxIdElementOptions,
   PaymentWalletsOption,
-  StripePaymentFormElementConfirmEvent,
+  StripeCheckoutFormConfirmEvent,
 } from './elements';
 
 type SavedPaymentMethodOption = {
@@ -39,7 +39,7 @@ export interface StripeCheckoutElementsOptions {
   syncAddressCheckbox?: 'billing' | 'shipping' | 'none';
 }
 
-export interface StripeCheckoutOptions {
+export interface StripeCheckoutElementsSdkOptions {
   clientSecret: Promise<string> | string;
   elementsOptions?: StripeCheckoutElementsOptions;
   adaptivePricing?: {allowed?: boolean};
@@ -51,7 +51,7 @@ export interface StripeCheckoutOptions {
   };
 }
 
-export interface StripeCheckoutFormOptions {
+export interface StripeCheckoutFormSdkOptions {
   clientSecret: Promise<string> | string;
   appearance?: Omit<Appearance, 'rules'>;
   loader?: 'auto' | 'always' | 'never';
@@ -385,7 +385,7 @@ export type StripeCheckoutAddressElementOptions = {
   };
 };
 
-export type StripeCheckoutPaymentFormOptions = {
+export type StripeCheckoutFormOptions = {
   layout?: 'expanded' | 'compact';
   contacts?: StripeAddressElementOptions['contacts'];
   wallets?: {
@@ -633,7 +633,7 @@ type LoadActionsSuccess = {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
     expressCheckoutConfirmEvent?: StripeExpressCheckoutElementConfirmEvent;
-    paymentFormConfirmEvent?: StripePaymentFormElementConfirmEvent;
+    paymentFormConfirmEvent?: StripeCheckoutFormConfirmEvent;
     onRequiresApproval?: () => Promise<void>;
   }) => Promise<StripeCheckoutConfirmResult>;
   getSession: () => StripeCheckoutSession;
@@ -645,7 +645,7 @@ export type StripeCheckoutLoadActionsResult =
   | {type: 'success'; actions: LoadActionsSuccess}
   | {type: 'error'; error: LoadActionsError};
 
-export interface StripeCheckoutElements {
+export interface StripeCheckoutElementsSdk {
   on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
   loadActions: () => Promise<StripeCheckoutLoadActionsResult>;
 
@@ -677,17 +677,17 @@ export interface StripeCheckoutElements {
   createTaxIdElement(options?: StripeTaxIdElementOptions): StripeTaxIdElement;
 }
 
-export interface StripeCheckoutForm {
+export interface StripeCheckoutFormSdk {
   on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
   loadActions: () => Promise<StripeCheckoutLoadActionsResult>;
 
   changeAppearance: (appearance: Omit<Appearance, 'rules'>) => void;
   loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
 
-  createPaymentForm(
-    options?: StripeCheckoutPaymentFormOptions
-  ): StripePaymentFormElement;
-  getPaymentForm(): StripePaymentFormElement | null;
+  createForm(
+    options?: StripeCheckoutFormOptions
+  ): StripeCheckoutForm;
+  getForm(): StripeCheckoutForm | null;
 
   createCurrencySelectorElement(): StripeCurrencySelectorElement;
   getCurrencySelectorElement(): StripeCurrencySelectorElement | null;

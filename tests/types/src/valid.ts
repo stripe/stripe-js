@@ -51,9 +51,9 @@ import {
   StripeTaxIdElement,
   ExternalTaxIdType,
   TaxIdType,
-  StripePaymentFormElement,
-  StripePaymentFormElementChangeEvent,
-  StripePaymentFormElementConfirmEvent,
+  StripeCheckoutForm,
+  StripeCheckoutFormChangeEvent,
+  StripeCheckoutFormConfirmEvent,
   StripeIssuingAddToWalletButtonElementOptions,
   StripeIssuingAddToWalletButtonElement,
 } from '../../../types';
@@ -1267,9 +1267,9 @@ createdTaxIdElement.getValue().then((res) => {
   }
 });
 
-declare const paymentFormElement: StripePaymentFormElement;
+declare const checkoutForm: StripeCheckoutForm;
 
-paymentFormElement
+checkoutForm
   .on('ready', (e: {elementType: 'paymentForm'}) => {})
   .on('focus', (e: {elementType: 'paymentForm'}) => {})
   .on('blur', (e: {elementType: 'paymentForm'}) => {})
@@ -1278,26 +1278,26 @@ paymentFormElement
     'loaderror',
     (e: {elementType: 'paymentForm'; error: {type: string}}) => {}
   )
-  .on('change', (e: StripePaymentFormElementChangeEvent) => {})
-  .on('confirm', (e: StripePaymentFormElementConfirmEvent) => {})
+  .on('change', (e: StripeCheckoutFormChangeEvent) => {})
+  .on('confirm', (e: StripeCheckoutFormConfirmEvent) => {})
   .on('cancel', (e: {elementType: 'paymentForm'}) => {});
 
-paymentFormElement.once('ready', (e: {elementType: 'paymentForm'}) => {});
-paymentFormElement.off('ready');
-paymentFormElement.once(
+checkoutForm.once('ready', (e: {elementType: 'paymentForm'}) => {});
+checkoutForm.off('ready');
+checkoutForm.once(
   'change',
-  (e: StripePaymentFormElementChangeEvent) => {}
+  (e: StripeCheckoutFormChangeEvent) => {}
 );
-paymentFormElement.off('change');
-paymentFormElement.once(
+checkoutForm.off('change');
+checkoutForm.once(
   'confirm',
-  (e: StripePaymentFormElementConfirmEvent) => {}
+  (e: StripeCheckoutFormConfirmEvent) => {}
 );
-paymentFormElement.off('confirm');
+checkoutForm.off('confirm');
 
-paymentFormElement.getValue().then((result) => {});
+checkoutForm.getValue().then((result) => {});
 
-paymentFormElement.setView(0);
+checkoutForm.setView(0);
 auBankAccountElement.destroy();
 cardElement.destroy();
 cardNumberElement.destroy();
@@ -3752,9 +3752,9 @@ stripe.createEphemeralKeyNonce({
   issuingCard: '',
 });
 
-// initCheckoutElements
-stripe.initCheckoutElements({clientSecret: Promise.resolve('cs_test_foo')});
-const checkoutElements = stripe.initCheckoutElements({
+// initCheckoutElementsSdk
+stripe.initCheckoutElementsSdk({clientSecret: Promise.resolve('cs_test_foo')});
+const checkoutElements = stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
 });
 const checkoutPaymentElement: StripePaymentElement = checkoutElements.createPaymentElement();
@@ -3826,8 +3826,8 @@ checkoutElements.loadActions().then((loadActionsResult) => {
   }
 });
 
-// savedPaymentMethod variations for initCheckoutElements:
-stripe.initCheckoutElements({
+// savedPaymentMethod variations for initCheckoutElementsSdk:
+stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
@@ -3838,7 +3838,7 @@ stripe.initCheckoutElements({
   },
 });
 
-stripe.initCheckoutElements({
+stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
@@ -3848,7 +3848,7 @@ stripe.initCheckoutElements({
   },
 });
 
-stripe.initCheckoutElements({
+stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {
@@ -3858,23 +3858,23 @@ stripe.initCheckoutElements({
   },
 });
 
-stripe.initCheckoutElements({
+stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
   elementsOptions: {
     savedPaymentMethod: {},
   },
 });
 
-// initCheckoutForm
-const checkoutForm = stripe.initCheckoutForm({
+// initCheckoutFormSdk
+const checkoutFormSdk = stripe.initCheckoutFormSdk({
   clientSecret: 'cs_test_foo',
 });
 
-stripe.initCheckoutForm({
+stripe.initCheckoutFormSdk({
   clientSecret: Promise.resolve('cs_test_foo'),
 });
 
-stripe.initCheckoutForm({
+stripe.initCheckoutFormSdk({
   clientSecret: 'cs_test_foo',
   appearance: {theme: 'stripe'},
   loader: 'auto',
@@ -3905,11 +3905,11 @@ stripe.initCheckoutForm({
   },
 });
 
-const checkoutPaymentFormElement1: StripePaymentFormElement = checkoutForm.createPaymentForm();
-checkoutForm.createPaymentForm({});
-checkoutForm.createPaymentForm({layout: 'expanded'});
-checkoutForm.createPaymentForm({layout: 'compact'});
-checkoutForm.createPaymentForm({
+const createdCheckoutForm: StripeCheckoutForm = checkoutFormSdk.createForm();
+checkoutFormSdk.createForm({});
+checkoutFormSdk.createForm({layout: 'expanded'});
+checkoutFormSdk.createForm({layout: 'compact'});
+checkoutFormSdk.createForm({
   contacts: [
     {
       name: 'John Doe',
@@ -3925,7 +3925,7 @@ checkoutForm.createPaymentForm({
     },
   ],
 });
-checkoutForm.createPaymentForm({
+checkoutFormSdk.createForm({
   wallets: {
     buttonTheme: {
       applePay: 'black',
@@ -3935,7 +3935,7 @@ checkoutForm.createPaymentForm({
     },
   },
 });
-checkoutForm.createPaymentForm({
+checkoutFormSdk.createForm({
   layout: 'compact',
   contacts: [
     {
@@ -3958,18 +3958,18 @@ checkoutForm.createPaymentForm({
     },
   },
 });
-const retrievedPaymentFormElement: StripePaymentFormElement | null = checkoutForm.getPaymentForm();
+const retrievedCheckoutForm: StripeCheckoutForm | null = checkoutFormSdk.getForm();
 
-checkoutForm.createCurrencySelectorElement();
-checkoutForm.getCurrencySelectorElement();
+checkoutFormSdk.createCurrencySelectorElement();
+checkoutFormSdk.getCurrencySelectorElement();
 
-checkoutForm.loadFonts([
+checkoutFormSdk.loadFonts([
   {
     cssSrc: 'https://example.com/font.css',
   },
 ]);
 
-checkoutForm.loadActions().then((loadActionsResult) => {
+checkoutFormSdk.loadActions().then((loadActionsResult) => {
   if (loadActionsResult.type === 'success') {
     const {actions} = loadActionsResult;
     actions.getSession();

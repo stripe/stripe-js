@@ -17,10 +17,10 @@ import {CheckoutLocale} from './hosted-checkout';
 import {PaymentRequestOptions, PaymentRequest} from './payment-request';
 import {StripeElement, StripeElementLocale} from './elements-group';
 import {
-  StripeCheckoutOptions,
-  StripeCheckoutElements,
-  StripeCheckoutFormOptions,
-  StripeCheckoutForm,
+  StripeCheckoutElementsSdkOptions,
+  StripeCheckoutElementsSdk,
+  StripeCheckoutFormSdkOptions,
+  StripeCheckoutFormSdk,
 } from './checkout';
 import {
   StripeEmbeddedCheckoutOptions,
@@ -1289,22 +1289,22 @@ export interface Stripe {
   ): Promise<EphemeralKeyNonceResult>;
 
   /**
-   * Use `stripe.initCheckoutElements` to initialize a Checkout Elements instance
+   * Use `stripe.initCheckoutElementsSdk` to initialize a Checkout Elements SDK instance
    * for the Elements integration pattern (ui_mode: "elements").
    *
    * @docs https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-components
    */
-  initCheckoutElements(
-    options: StripeCheckoutOptions
-  ): StripeCheckoutElements;
+  initCheckoutElementsSdk(
+    options: StripeCheckoutElementsSdkOptions
+  ): StripeCheckoutElementsSdk;
 
   /**
-   * Use `stripe.initCheckoutForm` to initialize a Checkout Form instance
-   * for the Payment Form integration pattern (ui_mode: "form").
+   * Use `stripe.initCheckoutFormSdk` to initialize a Checkout form SDK instance
+   * for the Checkout form integration pattern (ui_mode: "form").
    *
    * @docs https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-components
    */
-  initCheckoutForm(options: StripeCheckoutFormOptions): StripeCheckoutForm;
+  initCheckoutFormSdk(options: StripeCheckoutFormSdkOptions): StripeCheckoutFormSdk;
 
   /**
    * Use `stripe.initEmbeddedCheckout` to initialize an embedded Checkout instance
