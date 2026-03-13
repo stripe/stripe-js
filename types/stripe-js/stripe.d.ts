@@ -1302,6 +1302,8 @@ export interface Stripe {
    * Use `stripe.initCheckoutFormSdk` to initialize a Checkout form SDK instance
    * for the Checkout form integration pattern (ui_mode: "form").
    *
+   * Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
    * @docs https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-components
    */
   initCheckoutFormSdk(options: StripeCheckoutFormSdkOptions): StripeCheckoutFormSdk;

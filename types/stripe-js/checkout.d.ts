@@ -684,6 +684,7 @@ export interface StripeCheckoutFormSdk {
   changeAppearance: (appearance: Omit<Appearance, 'rules'>) => void;
   loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
 
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   createForm(
     options?: StripeCheckoutFormOptions
   ): StripeCheckoutForm;
