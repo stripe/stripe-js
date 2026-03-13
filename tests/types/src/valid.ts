@@ -3754,23 +3754,23 @@ stripe.createEphemeralKeyNonce({
 
 // initCheckoutElementsSdk
 stripe.initCheckoutElementsSdk({clientSecret: Promise.resolve('cs_test_foo')});
-const checkoutElements = stripe.initCheckoutElementsSdk({
+const checkoutElementsSdk = stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
 });
-const checkoutPaymentElement: StripePaymentElement = checkoutElements.createPaymentElement();
-checkoutElements.getPaymentElement();
-const checkoutAddressElement: StripeAddressElement = checkoutElements.createBillingAddressElement();
-checkoutElements.getBillingAddressElement();
-checkoutElements.createShippingAddressElement();
-checkoutElements.getShippingAddressElement();
-checkoutElements.createExpressCheckoutElement();
-checkoutElements.getExpressCheckoutElement();
-checkoutElements.createCurrencySelectorElement();
-checkoutElements.getCurrencySelectorElement();
-checkoutElements.createTaxIdElement();
-checkoutElements.getTaxIdElement();
+const checkoutPaymentElement: StripePaymentElement = checkoutElementsSdk.createPaymentElement();
+checkoutElementsSdk.getPaymentElement();
+const checkoutAddressElement: StripeAddressElement = checkoutElementsSdk.createBillingAddressElement();
+checkoutElementsSdk.getBillingAddressElement();
+checkoutElementsSdk.createShippingAddressElement();
+checkoutElementsSdk.getShippingAddressElement();
+checkoutElementsSdk.createExpressCheckoutElement();
+checkoutElementsSdk.getExpressCheckoutElement();
+checkoutElementsSdk.createCurrencySelectorElement();
+checkoutElementsSdk.getCurrencySelectorElement();
+checkoutElementsSdk.createTaxIdElement();
+checkoutElementsSdk.getTaxIdElement();
 
-checkoutElements.loadFonts([
+checkoutElementsSdk.loadFonts([
   {
     cssSrc: 'https://example.com/font.css',
   },
@@ -3784,7 +3784,7 @@ checkoutElements.loadFonts([
   },
 ]);
 
-checkoutElements.loadActions().then((loadActionsResult) => {
+checkoutElementsSdk.loadActions().then((loadActionsResult) => {
   if (loadActionsResult.type === 'success') {
     const {actions} = loadActionsResult;
     actions.applyPromotionCode('code').then((result) => {

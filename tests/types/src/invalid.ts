@@ -543,21 +543,21 @@ stripe
   // @ts-expect-error Property 'then' does not exist on type 'StripeCheckoutElementsSdk'.
   .then((checkout) => {});
 
-const checkoutElements = stripe.initCheckoutElementsSdk({
+const checkoutElementsSdk = stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
 });
 // @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckoutElementsSdk'.
-checkoutElements.createElement('payment');
+checkoutElementsSdk.createElement('payment');
 // @ts-expect-error - doesn't take a number
-checkoutElements.loadFonts(42);
-checkoutElements.loadFonts([
+checkoutElementsSdk.loadFonts(42);
+checkoutElementsSdk.loadFonts([
   {
     cssSrc: 'https://example.com/font.css',
     // @ts-expect-error - this is not a valid field
     extraWrongField: false,
   },
 ]);
-checkoutElements.loadActions().then((loadActionsResult) => {
+checkoutElementsSdk.loadActions().then((loadActionsResult) => {
   if (loadActionsResult.type === 'success') {
     const {actions} = loadActionsResult;
     // @ts-expect-error Type 'StripeCheckoutAmount' is not assignable to type 'number'.
@@ -569,9 +569,9 @@ checkoutElements.loadActions().then((loadActionsResult) => {
 
 // StripeCheckoutElementsSdk does not have Checkout form methods
 // @ts-expect-error Property 'createForm' does not exist on type 'StripeCheckoutElementsSdk'.
-checkoutElements.createForm();
+checkoutElementsSdk.createForm();
 // @ts-expect-error Property 'getForm' does not exist on type 'StripeCheckoutElementsSdk'.
-checkoutElements.getForm();
+checkoutElementsSdk.getForm();
 
 const checkoutForm = stripe.initCheckoutFormSdk({clientSecret: 'cs_test_foo'});
 
