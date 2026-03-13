@@ -1299,11 +1299,11 @@ export interface Stripe {
   initCheckoutElementsSdk(options: StripeCheckoutOptions): StripeCheckout;
 
   /**
-   * Use `stripe.initEmbeddedCheckout` to initialize an embedded Checkout instance
+   * Use `stripe.createEmbeddedCheckoutPage` to create an embedded Checkout instance
    *
    * * @docs https://stripe.com/docs/payments/accept-a-payment?platform=web&ui=embedded-checkout
    */
-  initEmbeddedCheckout(
+  createEmbeddedCheckoutPage(
     options: StripeEmbeddedCheckoutOptions
   ): Promise<StripeEmbeddedCheckout>;
 }
