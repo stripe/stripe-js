@@ -3780,7 +3780,7 @@ checkout.createPaymentFormElement({
   ],
 });
 checkout.createPaymentFormElement({
-  wallets: {
+  expressCheckout: {
     buttonTheme: {
       applePay: 'black',
       googlePay: 'white',
@@ -3803,12 +3803,37 @@ checkout.createPaymentFormElement({
       },
     },
   ],
-  wallets: {
+  expressCheckout: {
     buttonTheme: {
       applePay: 'white-outline',
       googlePay: 'black',
       paypal: 'blue',
       klarna: 'dark',
+    },
+  },
+});
+checkout.createPaymentFormElement({
+  expressCheckout: {
+    paymentMethods: {
+      amazonPay: 'auto',
+      applePay: 'always',
+      googlePay: 'never',
+      link: 'auto',
+      paypal: 'never',
+      klarna: 'auto',
+    },
+  },
+});
+checkout.createPaymentFormElement({
+  expressCheckout: {
+    buttonTheme: {
+      applePay: 'black',
+      googlePay: 'white',
+    },
+    paymentMethods: {
+      applePay: 'auto',
+      googlePay: 'always',
+      link: 'never',
     },
   },
 });
