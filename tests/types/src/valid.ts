@@ -3921,7 +3921,7 @@ checkoutFromElementsSdk.createPaymentElement();
 checkoutFromElementsSdk.getPaymentElement();
 checkoutFromElementsSdk.loadActions();
 
-// createEmbeddedCheckoutPage is an alias for initCheckout
+// createEmbeddedCheckoutPage is an alias for initEmbeddedCheckout
 stripe.createEmbeddedCheckoutPage({
   fetchClientSecret: () => Promise.resolve('cs_test_foo'),
 });
