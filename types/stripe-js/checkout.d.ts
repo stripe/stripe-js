@@ -20,6 +20,7 @@ import {
   StripeTaxIdElementOptions,
   PaymentWalletsOption,
   StripePaymentFormElementConfirmEvent,
+  ExpressCheckoutPaymentMethodsOption,
 } from './elements';
 
 type SavedPaymentMethodOption = {
@@ -389,13 +390,17 @@ export type StripeCheckoutPaymentFormElementOptions = {
   contacts?: ContactOption[];
 
   /**
-   * Wallet configuration options.
+   * Express checkout configuration options.
    */
-  wallets?: {
+  expressCheckout?: {
     /**
-     * Button theme options for wallet payment methods.
+     * Button theme options for express checkout payment methods.
      */
     buttonTheme?: PaymentFormWalletButtonTheme;
+    /**
+     * Control payment method display for express checkout in the PaymentFormElement.
+     */
+    paymentMethods?: ExpressCheckoutPaymentMethodsOption;
   };
 };
 

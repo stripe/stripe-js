@@ -570,7 +570,7 @@ checkout.loadActions().then((loadActionsResult) => {
 checkout.createPaymentFormElement({layout: 'invalid'});
 
 checkout.createPaymentFormElement({
-  wallets: {
+  expressCheckout: {
     buttonTheme: {
       // @ts-expect-error: applePay buttonTheme must be 'black' | 'white' | 'white-outline'
       applePay: 'invalid',
@@ -579,7 +579,7 @@ checkout.createPaymentFormElement({
 });
 
 checkout.createPaymentFormElement({
-  wallets: {
+  expressCheckout: {
     buttonTheme: {
       // @ts-expect-error: googlePay buttonTheme must be 'black' | 'white'
       googlePay: 'invalid',
@@ -588,7 +588,7 @@ checkout.createPaymentFormElement({
 });
 
 checkout.createPaymentFormElement({
-  wallets: {
+  expressCheckout: {
     buttonTheme: {
       // @ts-expect-error: paypal buttonTheme must be 'gold' | 'blue' | 'silver' | 'white' | 'black'
       paypal: 'invalid',
@@ -597,10 +597,37 @@ checkout.createPaymentFormElement({
 });
 
 checkout.createPaymentFormElement({
-  wallets: {
+  expressCheckout: {
     buttonTheme: {
       // @ts-expect-error: klarna buttonTheme must be 'dark' | 'light' | 'outlined'
       klarna: 'invalid',
+    },
+  },
+});
+
+checkout.createPaymentFormElement({
+  expressCheckout: {
+    paymentMethods: {
+      // @ts-expect-error: applePay must be 'always' | 'auto' | 'never'
+      applePay: 'invalid',
+    },
+  },
+});
+
+checkout.createPaymentFormElement({
+  expressCheckout: {
+    paymentMethods: {
+      // @ts-expect-error: amazonPay must be 'auto' | 'never'
+      amazonPay: 'always',
+    },
+  },
+});
+
+checkout.createPaymentFormElement({
+  expressCheckout: {
+    paymentMethods: {
+      // @ts-expect-error: link must be 'auto' | 'never'
+      link: 'invalid',
     },
   },
 });
