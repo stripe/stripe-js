@@ -1296,15 +1296,9 @@ checkoutForm
 
 checkoutForm.once('ready', (e: {elementType: 'paymentForm'}) => {});
 checkoutForm.off('ready');
-checkoutForm.once(
-  'change',
-  (e: StripeCheckoutFormChangeEvent) => {}
-);
+checkoutForm.once('change', (e: StripeCheckoutFormChangeEvent) => {});
 checkoutForm.off('change');
-checkoutForm.once(
-  'confirm',
-  (e: StripeCheckoutFormConfirmEvent) => {}
-);
+checkoutForm.once('confirm', (e: StripeCheckoutFormConfirmEvent) => {});
 checkoutForm.off('confirm');
 
 checkoutForm.getValue().then((result) => {});

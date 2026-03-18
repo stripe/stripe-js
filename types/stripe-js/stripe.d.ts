@@ -1284,7 +1284,9 @@ export interface Stripe {
    *
    * @docs https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-components
    */
-  initCheckoutFormSdk(options: StripeCheckoutFormSdkOptions): StripeCheckoutFormSdk;
+  initCheckoutFormSdk(
+    options: StripeCheckoutFormSdkOptions
+  ): StripeCheckoutFormSdk;
 
   /**
    * Use `stripe.createEmbeddedCheckoutPage` to create an embedded Checkout instance

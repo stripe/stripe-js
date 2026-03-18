@@ -711,9 +711,7 @@ export interface StripeCheckoutFormSdk {
   loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
 
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  createForm(
-    options?: StripeCheckoutFormOptions
-  ): StripeCheckoutForm;
+  createForm(options?: StripeCheckoutFormOptions): StripeCheckoutForm;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   getForm(): StripeCheckoutForm | null;
 

@@ -550,7 +550,9 @@ stripe
   .then((checkout) => {});
 
 // initCheckoutElementsSdk
-const checkoutElementsSdk = stripe.initCheckoutElementsSdk({clientSecret: 'cs_test_foo'});
+const checkoutElementsSdk = stripe.initCheckoutElementsSdk({
+  clientSecret: 'cs_test_foo',
+});
 // @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckoutElementsSdk'.
 checkoutElementsSdk.createElement('payment');
 // @ts-expect-error - doesn't take a number
@@ -578,7 +580,9 @@ checkoutElementsSdk.createForm();
 // @ts-expect-error Property 'getForm' does not exist on type 'StripeCheckoutElementsSdk'.
 checkoutElementsSdk.getForm();
 
-const checkoutFormSdk = stripe.initCheckoutFormSdk({clientSecret: 'cs_test_foo'});
+const checkoutFormSdk = stripe.initCheckoutFormSdk({
+  clientSecret: 'cs_test_foo',
+});
 
 // StripeCheckoutFormSdk does not have individual element methods
 // @ts-expect-error Property 'createPaymentElement' does not exist on type 'StripeCheckoutFormSdk'.
