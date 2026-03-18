@@ -4,9 +4,9 @@ import {StripeExpressCheckoutElementConfirmEvent} from './express-checkout';
 import {TaxIdType, ExternalTaxIdType} from './tax-id';
 
 /**
- * Address type used in PaymentFormElement change events.
+ * Address type used in CheckoutForm change events.
  */
-export type PaymentFormAddress = {
+export type CheckoutFormAddress = {
   line1?: string | null;
   line2?: string | null;
   city?: string | null;
@@ -16,21 +16,21 @@ export type PaymentFormAddress = {
 };
 
 /**
- * The change event payload for the PaymentFormElement.
+ * The change event payload for the CheckoutForm.
  */
-export interface StripePaymentFormElementChangeEvent {
+export interface StripeCheckoutFormChangeEvent {
   /**
    * The type of element that emitted this event.
    */
   elementType: 'paymentForm';
 
   /**
-   * Whether all required fields in the PaymentFormElement are complete.
+   * Whether all required fields in the CheckoutForm are complete.
    */
   complete: boolean;
 
   /**
-   * Whether the PaymentFormElement is currently empty.
+   * Whether the CheckoutForm is currently empty.
    */
   empty: boolean;
 
@@ -50,11 +50,11 @@ export interface StripePaymentFormElementChangeEvent {
     };
     shippingAddress?: {
       name: string;
-      address: PaymentFormAddress;
+      address: CheckoutFormAddress;
     };
     billingAddress?: {
       name: string;
-      address: PaymentFormAddress;
+      address: CheckoutFormAddress;
     };
     tax?: {
       businessName?: string;
@@ -77,7 +77,7 @@ export interface StripePaymentFormElementChangeEvent {
         id: string;
         type: string;
         billing_details: {
-          address: PaymentFormAddress;
+          address: CheckoutFormAddress;
           name: string | null;
           email: string | null;
           phone: string | null;
@@ -111,7 +111,7 @@ export interface StripePaymentFormElementChangeEvent {
 /**
  * Confirm event when user completes via Express Checkout (Apple Pay, Google Pay, etc.)
  */
-interface StripePaymentFormExpressCheckoutConfirmEvent
+interface StripeCheckoutFormExpressCheckoutConfirmEvent
   extends StripeExpressCheckoutElementConfirmEvent {
   source: 'payment-form-ece';
 }
@@ -121,34 +121,34 @@ interface StripePaymentFormExpressCheckoutConfirmEvent
  * paymentMethodType is the selected payment method (e.g., 'card', 'sepa_debit')
  * or null if payment collection is not needed.
  */
-interface StripePaymentFormPayButtonConfirmEvent {
+interface StripeCheckoutFormPayButtonConfirmEvent {
   source: 'payment-form-pay-button';
   paymentMethodType: string | null;
 }
 
 /**
- * The confirm event payload for the PaymentFormElement.
+ * The confirm event payload for the CheckoutForm.
  */
-export type StripePaymentFormElementConfirmEvent =
-  | StripePaymentFormExpressCheckoutConfirmEvent
-  | StripePaymentFormPayButtonConfirmEvent;
+export type StripeCheckoutFormConfirmEvent =
+  | StripeCheckoutFormExpressCheckoutConfirmEvent
+  | StripeCheckoutFormPayButtonConfirmEvent;
 
-export type StripePaymentFormElement = StripeElementBase & {
+export type StripeCheckoutForm = StripeElementBase & {
   /**
    * Triggered when the element is fully rendered and can accept `element.focus` calls.
    */
   on(
     eventType: 'ready',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   once(
     eventType: 'ready',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   off(
     eventType: 'ready',
     handler?: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
 
   /**
    * Triggered when the element gains focus.
@@ -156,15 +156,15 @@ export type StripePaymentFormElement = StripeElementBase & {
   on(
     eventType: 'focus',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   once(
     eventType: 'focus',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   off(
     eventType: 'focus',
     handler?: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
 
   /**
    * Triggered when the element loses focus.
@@ -172,15 +172,15 @@ export type StripePaymentFormElement = StripeElementBase & {
   on(
     eventType: 'blur',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   once(
     eventType: 'blur',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   off(
     eventType: 'blur',
     handler?: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
 
   /**
    * Triggered when the escape key is pressed within the element.
@@ -188,15 +188,15 @@ export type StripePaymentFormElement = StripeElementBase & {
   on(
     eventType: 'escape',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   once(
     eventType: 'escape',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   off(
     eventType: 'escape',
     handler?: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
 
   /**
    * Triggered when the element fails to load.
@@ -204,15 +204,15 @@ export type StripePaymentFormElement = StripeElementBase & {
   on(
     eventType: 'loaderror',
     handler: (event: {elementType: 'paymentForm'; error: StripeError}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   once(
     eventType: 'loaderror',
     handler: (event: {elementType: 'paymentForm'; error: StripeError}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   off(
     eventType: 'loaderror',
     handler?: (event: {elementType: 'paymentForm'; error: StripeError}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
 
   /**
    * Triggered when the loader UI is mounted to the DOM and ready to be displayed.
@@ -220,47 +220,47 @@ export type StripePaymentFormElement = StripeElementBase & {
   on(
     eventType: 'loaderstart',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   once(
     eventType: 'loaderstart',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   off(
     eventType: 'loaderstart',
     handler?: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
 
   /**
    * Triggered when the element's value changes.
    */
   on(
     eventType: 'change',
-    handler: (event: StripePaymentFormElementChangeEvent) => any
-  ): StripePaymentFormElement;
+    handler: (event: StripeCheckoutFormChangeEvent) => any
+  ): StripeCheckoutForm;
   once(
     eventType: 'change',
-    handler: (event: StripePaymentFormElementChangeEvent) => any
-  ): StripePaymentFormElement;
+    handler: (event: StripeCheckoutFormChangeEvent) => any
+  ): StripeCheckoutForm;
   off(
     eventType: 'change',
-    handler?: (event: StripePaymentFormElementChangeEvent) => any
-  ): StripePaymentFormElement;
+    handler?: (event: StripeCheckoutFormChangeEvent) => any
+  ): StripeCheckoutForm;
 
   /**
    * Triggered when a buyer authorizes a payment within a supported payment method.
    */
   on(
     eventType: 'confirm',
-    handler: (event: StripePaymentFormElementConfirmEvent) => any
-  ): StripePaymentFormElement;
+    handler: (event: StripeCheckoutFormConfirmEvent) => any
+  ): StripeCheckoutForm;
   once(
     eventType: 'confirm',
-    handler: (event: StripePaymentFormElementConfirmEvent) => any
-  ): StripePaymentFormElement;
+    handler: (event: StripeCheckoutFormConfirmEvent) => any
+  ): StripeCheckoutForm;
   off(
     eventType: 'confirm',
-    handler?: (event: StripePaymentFormElementConfirmEvent) => any
-  ): StripePaymentFormElement;
+    handler?: (event: StripeCheckoutFormConfirmEvent) => any
+  ): StripeCheckoutForm;
 
   /**
    * Triggered when the payment interface is dismissed (e.g., a buyer closes the payment interface).
@@ -268,20 +268,20 @@ export type StripePaymentFormElement = StripeElementBase & {
   on(
     eventType: 'cancel',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   once(
     eventType: 'cancel',
     handler: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
   off(
     eventType: 'cancel',
     handler?: (event: {elementType: 'paymentForm'}) => any
-  ): StripePaymentFormElement;
+  ): StripeCheckoutForm;
 
   /**
-   * Retrieves the current form values from the PaymentFormElement.
+   * Retrieves the current form values from the CheckoutForm.
    */
-  getValue(): Promise<StripePaymentFormElementChangeEvent>;
+  getValue(): Promise<StripeCheckoutFormChangeEvent>;
 
   /**
    * Navigates to the view at the given index (from the change event's views array).
