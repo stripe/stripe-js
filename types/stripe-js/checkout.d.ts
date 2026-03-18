@@ -15,11 +15,11 @@ import {
   StripeExpressCheckoutElementConfirmEvent,
   StripeExpressCheckoutElementOptions,
   StripeExpressCheckoutElementReadyEvent,
-  StripePaymentFormElement,
+  StripeCheckoutForm,
   StripeTaxIdElement,
   StripeTaxIdElementOptions,
   PaymentWalletsOption,
-  StripePaymentFormElementConfirmEvent,
+  StripeCheckoutFormConfirmEvent,
   ExpressCheckoutPaymentMethodsOption,
 } from './elements';
 
@@ -36,10 +36,24 @@ export interface StripeCheckoutElementsOptions {
   syncAddressCheckbox?: 'billing' | 'shipping' | 'none';
 }
 
-export interface StripeCheckoutOptions {
+export interface StripeCheckoutElementsSdkOptions {
   clientSecret: Promise<string> | string;
   elementsOptions?: StripeCheckoutElementsOptions;
   adaptivePricing?: {allowed?: boolean};
+  defaultValues?: {
+    billingAddress?: StripeCheckoutContact;
+    shippingAddress?: StripeCheckoutContact;
+    email?: string;
+    phoneNumber?: string;
+  };
+}
+
+export interface StripeCheckoutFormSdkOptions {
+  clientSecret: Promise<string> | string;
+  appearance?: Omit<Appearance, 'rules'>;
+  loader?: 'auto' | 'always' | 'never';
+  fonts?: Array<CssFontSource | CustomFontSource>;
+  savedPaymentMethod?: SavedPaymentMethodOption;
   defaultValues?: {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
@@ -369,7 +383,7 @@ export type StripeCheckoutAddressElementOptions = {
 };
 
 /**
- * Wallet button theme options for PaymentFormElement.
+ * Wallet button theme options for CheckoutForm.
  */
 export type PaymentFormWalletButtonTheme = {
   applePay?: 'black' | 'white' | 'white-outline';
@@ -378,14 +392,14 @@ export type PaymentFormWalletButtonTheme = {
   klarna?: 'dark' | 'light' | 'outlined';
 };
 
-export type StripeCheckoutPaymentFormElementOptions = {
+export type StripeCheckoutFormOptions = {
   /**
-   * The layout of the PaymentFormElement.
+   * The layout of the CheckoutForm.
    */
   layout?: 'expanded' | 'compact';
 
   /**
-   * An array of saved addresses to display in the PaymentFormElement.
+   * An array of saved addresses to display in the CheckoutForm.
    */
   contacts?: ContactOption[];
 
@@ -398,7 +412,7 @@ export type StripeCheckoutPaymentFormElementOptions = {
      */
     buttonTheme?: PaymentFormWalletButtonTheme;
     /**
-     * Control payment method display for express checkout in the PaymentFormElement.
+     * Control payment method display for express checkout in the CheckoutForm.
      */
     paymentMethods?: ExpressCheckoutPaymentMethodsOption;
   };
@@ -644,7 +658,7 @@ type LoadActionsSuccess = {
     billingAddress?: StripeCheckoutContact;
     shippingAddress?: StripeCheckoutContact;
     expressCheckoutConfirmEvent?: StripeExpressCheckoutElementConfirmEvent;
-    paymentFormConfirmEvent?: StripePaymentFormElementConfirmEvent;
+    formConfirmEvent?: StripeCheckoutFormConfirmEvent;
     onRequiresApproval?: () => Promise<void>;
   }) => Promise<StripeCheckoutConfirmResult>;
   getSession: () => StripeCheckoutSession;
@@ -656,17 +670,14 @@ export type StripeCheckoutLoadActionsResult =
   | {type: 'success'; actions: LoadActionsSuccess}
   | {type: 'error'; error: LoadActionsError};
 
-export interface StripeCheckout {
+export interface StripeCheckoutElementsSdk {
   on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
   loadActions: () => Promise<StripeCheckoutLoadActionsResult>;
 
-  /* Elements methods */
   changeAppearance: (appearance: Appearance) => void;
   loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
 
   getPaymentElement(): StripePaymentElement | null;
-  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  getPaymentFormElement(): StripePaymentFormElement | null;
   getBillingAddressElement(): StripeAddressElement | null;
   getShippingAddressElement(): StripeAddressElement | null;
   getExpressCheckoutElement(): StripeCheckoutExpressCheckoutElement | null;
@@ -677,10 +688,6 @@ export interface StripeCheckout {
   createPaymentElement(
     options?: StripeCheckoutPaymentElementOptions
   ): StripePaymentElement;
-  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
-  createPaymentFormElement(
-    options?: StripeCheckoutPaymentFormElementOptions
-  ): StripePaymentFormElement;
   createBillingAddressElement(
     options?: StripeCheckoutAddressElementOptions
   ): StripeAddressElement;
@@ -693,4 +700,21 @@ export interface StripeCheckout {
   createCurrencySelectorElement(): StripeCurrencySelectorElement;
   /* Requires beta header when initializing Stripe: @docs https://docs.stripe.com/tax/advanced/tax-ids?payment-ui=embedded-components#render-tax-id-element */
   createTaxIdElement(options?: StripeTaxIdElementOptions): StripeTaxIdElement;
+}
+
+/* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+export interface StripeCheckoutFormSdk {
+  on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
+  loadActions: () => Promise<StripeCheckoutLoadActionsResult>;
+
+  changeAppearance: (appearance: Omit<Appearance, 'rules'>) => void;
+  loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
+
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  createForm(options?: StripeCheckoutFormOptions): StripeCheckoutForm;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  getForm(): StripeCheckoutForm | null;
+
+  createCurrencySelectorElement(): StripeCurrencySelectorElement;
+  getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
 }
