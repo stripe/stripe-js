@@ -1282,19 +1282,19 @@ createdTaxIdElement.getValue().then((res) => {
 declare const checkoutForm: StripeCheckoutForm;
 
 checkoutForm
-  .on('ready', (e: {elementType: 'paymentForm'}) => {})
-  .on('focus', (e: {elementType: 'paymentForm'}) => {})
-  .on('blur', (e: {elementType: 'paymentForm'}) => {})
-  .on('escape', (e: {elementType: 'paymentForm'}) => {})
+  .on('ready', (e: {elementType: 'checkoutForm'}) => {})
+  .on('focus', (e: {elementType: 'checkoutForm'}) => {})
+  .on('blur', (e: {elementType: 'checkoutForm'}) => {})
+  .on('escape', (e: {elementType: 'checkoutForm'}) => {})
   .on(
     'loaderror',
-    (e: {elementType: 'paymentForm'; error: {type: string}}) => {}
+    (e: {elementType: 'checkoutForm'; error: {type: string}}) => {}
   )
   .on('change', (e: StripeCheckoutFormChangeEvent) => {})
   .on('confirm', (e: StripeCheckoutFormConfirmEvent) => {})
-  .on('cancel', (e: {elementType: 'paymentForm'}) => {});
+  .on('cancel', (e: {elementType: 'checkoutForm'}) => {});
 
-checkoutForm.once('ready', (e: {elementType: 'paymentForm'}) => {});
+checkoutForm.once('ready', (e: {elementType: 'checkoutForm'}) => {});
 checkoutForm.off('ready');
 checkoutForm.once('change', (e: StripeCheckoutFormChangeEvent) => {});
 checkoutForm.off('change');

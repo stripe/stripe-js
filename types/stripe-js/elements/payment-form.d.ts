@@ -22,7 +22,7 @@ export interface StripeCheckoutFormChangeEvent {
   /**
    * The type of element that emitted this event.
    */
-  elementType: 'paymentForm';
+  elementType: 'checkoutForm';
 
   /**
    * Whether all required fields in the CheckoutForm are complete.
@@ -113,7 +113,7 @@ export interface StripeCheckoutFormChangeEvent {
  */
 interface StripeCheckoutFormExpressCheckoutConfirmEvent
   extends StripeExpressCheckoutElementConfirmEvent {
-  source: 'payment-form-ece';
+  source: 'checkout-form-ece';
 }
 
 /**
@@ -122,7 +122,7 @@ interface StripeCheckoutFormExpressCheckoutConfirmEvent
  * or null if payment collection is not needed.
  */
 interface StripeCheckoutFormPayButtonConfirmEvent {
-  source: 'payment-form-pay-button';
+  source: 'checkout-form-pay-button';
   paymentMethodType: string | null;
 }
 
@@ -139,15 +139,15 @@ export type StripeCheckoutForm = StripeElementBase & {
    */
   on(
     eventType: 'ready',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   once(
     eventType: 'ready',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   off(
     eventType: 'ready',
-    handler?: (event: {elementType: 'paymentForm'}) => any
+    handler?: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
 
   /**
@@ -155,15 +155,15 @@ export type StripeCheckoutForm = StripeElementBase & {
    */
   on(
     eventType: 'focus',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   once(
     eventType: 'focus',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   off(
     eventType: 'focus',
-    handler?: (event: {elementType: 'paymentForm'}) => any
+    handler?: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
 
   /**
@@ -171,15 +171,15 @@ export type StripeCheckoutForm = StripeElementBase & {
    */
   on(
     eventType: 'blur',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   once(
     eventType: 'blur',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   off(
     eventType: 'blur',
-    handler?: (event: {elementType: 'paymentForm'}) => any
+    handler?: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
 
   /**
@@ -187,15 +187,15 @@ export type StripeCheckoutForm = StripeElementBase & {
    */
   on(
     eventType: 'escape',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   once(
     eventType: 'escape',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   off(
     eventType: 'escape',
-    handler?: (event: {elementType: 'paymentForm'}) => any
+    handler?: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
 
   /**
@@ -203,15 +203,15 @@ export type StripeCheckoutForm = StripeElementBase & {
    */
   on(
     eventType: 'loaderror',
-    handler: (event: {elementType: 'paymentForm'; error: StripeError}) => any
+    handler: (event: {elementType: 'checkoutForm'; error: StripeError}) => any
   ): StripeCheckoutForm;
   once(
     eventType: 'loaderror',
-    handler: (event: {elementType: 'paymentForm'; error: StripeError}) => any
+    handler: (event: {elementType: 'checkoutForm'; error: StripeError}) => any
   ): StripeCheckoutForm;
   off(
     eventType: 'loaderror',
-    handler?: (event: {elementType: 'paymentForm'; error: StripeError}) => any
+    handler?: (event: {elementType: 'checkoutForm'; error: StripeError}) => any
   ): StripeCheckoutForm;
 
   /**
@@ -219,15 +219,15 @@ export type StripeCheckoutForm = StripeElementBase & {
    */
   on(
     eventType: 'loaderstart',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   once(
     eventType: 'loaderstart',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   off(
     eventType: 'loaderstart',
-    handler?: (event: {elementType: 'paymentForm'}) => any
+    handler?: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
 
   /**
@@ -267,15 +267,15 @@ export type StripeCheckoutForm = StripeElementBase & {
    */
   on(
     eventType: 'cancel',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   once(
     eventType: 'cancel',
-    handler: (event: {elementType: 'paymentForm'}) => any
+    handler: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
   off(
     eventType: 'cancel',
-    handler?: (event: {elementType: 'paymentForm'}) => any
+    handler?: (event: {elementType: 'checkoutForm'}) => any
   ): StripeCheckoutForm;
 
   /**
