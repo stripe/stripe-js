@@ -7,8 +7,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 0,
-      "patch": 3
+      "minor": 5,
+      "patch": 0
     }
   },
   {
@@ -19,8 +19,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 0,
-      "patch": 3
+      "minor": 5,
+      "patch": 0
     }
   },
   {
@@ -31,8 +31,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 0,
-      "patch": 3
+      "minor": 5,
+      "patch": 0
     }
   },
   {
@@ -43,8 +43,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 0,
-      "patch": 3
+      "minor": 5,
+      "patch": 0
     }
   },
   {
@@ -55,8 +55,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 0,
-      "patch": 3
+      "minor": 5,
+      "patch": 0
     }
   },
   {
@@ -67,8 +67,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 0,
-      "patch": 3
+      "minor": 5,
+      "patch": 0
     }
   },
   {
@@ -79,8 +79,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 0,
-      "patch": 3
+      "minor": 5,
+      "patch": 0
     }
   },
   {
@@ -91,8 +91,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 0,
-      "patch": 3
+      "minor": 5,
+      "patch": 0
     }
   },
   {
@@ -117,18 +117,6 @@
       "major": 22,
       "minor": 13,
       "patch": 14
-    }
-  },
-  {
-    "typescript": {
-      "major": 4,
-      "minor": 9,
-      "patch": 5
-    },
-    "nodeTypes": {
-      "major": 22,
-      "minor": 9,
-      "patch": 3
     }
   }
 ]
