@@ -318,6 +318,12 @@ stripe
     },
   });
 
+// @ts-expect-error: createSource is not a method on Stripe
+stripe.createSource({type: 'card'});
+
+// @ts-expect-error: retrieveSource is not a method on Stripe
+stripe.retrieveSource({id: 'src_123', client_secret: 'secret'});
+
 // @ts-expect-error at least one of elements or clientSecret is required
 stripe.confirmPayment({confirmParams: {return_url: ''}});
 
