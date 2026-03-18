@@ -123,7 +123,9 @@ export type StripeAddressElement = StripeElementBase & {
   /**
    * Validates and retrieves form values from the `AddressElement`.
    */
-  getValue(): Promise<
+  getValue(
+    options?: AddressElementGetValueOptions
+  ): Promise<
     Pick<StripeAddressElementChangeEvent, 'complete' | 'isNewAddress' | 'value'>
   >;
 };
@@ -258,6 +260,10 @@ export interface StripeAddressElementChangeEvent {
     };
     phone?: string;
   };
+}
+
+export interface AddressElementGetValueOptions {
+  format?: 'latin' | 'localized';
 }
 
 export interface StripeAddressElementGetElementOptions {
