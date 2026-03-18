@@ -3744,3 +3744,11 @@ const checkoutFromElementsSdk = stripe.initCheckoutElementsSdk({
 checkoutFromElementsSdk.createPaymentElement();
 checkoutFromElementsSdk.getPaymentElement();
 checkoutFromElementsSdk.loadActions();
+
+// createEmbeddedCheckoutPage is an alias for initEmbeddedCheckout
+stripe.createEmbeddedCheckoutPage({
+  fetchClientSecret: () => Promise.resolve('cs_test_foo'),
+});
+stripe.createEmbeddedCheckoutPage({
+  clientSecret: 'cs_test_foo',
+});
