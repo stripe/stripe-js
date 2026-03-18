@@ -492,7 +492,7 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
     type: 'accordion',
     visibleAccordionItemsCount: 2,
     defaultCollapsed: true,
-    radios: true,
+    radios: 'always',
     spacedAccordionItems: true,
     paymentMethodLogoPosition: 'end',
   },
