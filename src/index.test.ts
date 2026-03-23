@@ -137,6 +137,21 @@ describe('Stripe module loader', () => {
       );
     });
 
+    it('resolves with Stripe object when a single load failure is followed by a load success', async () => {
+      const {loadStripe} = require(requirePath);
+      const stripePromise = loadStripe('pk_test_foo');
+
+      await Promise.resolve();
+      dispatchScriptEvent('error');
+
+      // Wait for the retry attempt to set up a new script element
+      await new Promise((resolve) => setTimeout(resolve));
+      window.Stripe = jest.fn((key) => ({key})) as any;
+      dispatchScriptEvent('load');
+
+      await expect(stripePromise).resolves.toEqual({key: 'pk_test_foo'});
+    });
+
     it('rejects on first load, and succeeds on second load resolving with Stripe object', async () => {
       const {loadStripe} = require(requirePath);
 
