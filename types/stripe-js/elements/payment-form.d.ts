@@ -1,3 +1,4 @@
+import {Omit} from '../../utils';
 import {StripeError} from '../stripe';
 import {StripeElementBase} from './base';
 import {StripeExpressCheckoutElementConfirmEvent} from './express-checkout';
@@ -136,12 +137,10 @@ interface StripeCheckoutFormPayButtonConfirmEvent {
  * The value returned by `checkoutForm.getValue()`.
  * Same shape as the change event payload, but without `elementType`.
  */
-export interface StripeCheckoutFormValue {
-  complete: boolean;
-  empty: boolean;
-  value: StripeCheckoutFormChangeEvent['value'];
-  views?: StripeCheckoutFormChangeEvent['views'];
-}
+export type StripeCheckoutFormValue = Omit<
+  StripeCheckoutFormChangeEvent,
+  'elementType'
+>;
 
 /**
  * The confirm event payload for the CheckoutForm.
