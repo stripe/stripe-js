@@ -110,6 +110,10 @@ describe('Stripe module loader', () => {
       await Promise.resolve();
       dispatchScriptEvent('error');
 
+      // Wait for the retry attempt to set up a new script element
+      await new Promise((resolve) => setTimeout(resolve));
+      dispatchScriptEvent('error');
+
       await expect(stripePromise).rejects.toEqual(
         new Error('Failed to load Stripe.js')
       );
@@ -124,6 +128,10 @@ describe('Stripe module loader', () => {
       await Promise.resolve();
       dispatchScriptEvent('load');
 
+      // Wait for the retry attempt to set up a new script element
+      await new Promise((resolve) => setTimeout(resolve));
+      dispatchScriptEvent('load');
+
       return expect(stripePromise).rejects.toEqual(
         new Error('Stripe.js not available')
       );
@@ -132,10 +140,14 @@ describe('Stripe module loader', () => {
     it('rejects on first load, and succeeds on second load resolving with Stripe object', async () => {
       const {loadStripe} = require(requirePath);
 
-      // start of first load, expect load failure
+      // start of first load, expect load failure (both initial attempt and retry fail)
       let stripePromise = loadStripe('pk_test_foo');
 
       await Promise.resolve();
+      dispatchScriptEvent('error');
+
+      // Wait for the retry attempt to set up a new script element
+      await new Promise((resolve) => setTimeout(resolve));
       dispatchScriptEvent('error');
 
       await expect(stripePromise).rejects.toEqual(
@@ -157,10 +169,13 @@ describe('Stripe module loader', () => {
     it('rejects on first load and second load but succeeds on third load resolving with Stripe object', async () => {
       const {loadStripe} = require(requirePath);
 
-      // start of first load, expect load failure
+      // start of first load, expect load failure (both initial attempt and retry fail)
       let stripePromise = loadStripe('pk_test_foo');
 
       await Promise.resolve();
+      dispatchScriptEvent('error');
+
+      await new Promise((resolve) => setTimeout(resolve));
       dispatchScriptEvent('error');
 
       await expect(stripePromise).rejects.toEqual(
@@ -169,10 +184,13 @@ describe('Stripe module loader', () => {
 
       expect(console.warn).not.toHaveBeenCalled();
 
-      // start of second load, expect load failure
+      // start of second load, expect load failure (both initial attempt and retry fail)
       stripePromise = loadStripe('pk_test_foo');
 
       await Promise.resolve();
+      dispatchScriptEvent('error');
+
+      await new Promise((resolve) => setTimeout(resolve));
       dispatchScriptEvent('error');
 
       await expect(stripePromise).rejects.toEqual(
@@ -193,10 +211,18 @@ describe('Stripe module loader', () => {
   });
 
   describe('loadStripe (index.ts)', () => {
+    beforeEach(() => {
+      jest.spyOn(console, 'warn').mockReturnValue();
+    });
+
     it('does not cause unhandled rejects when the script fails', async () => {
       require('./index');
 
       await Promise.resolve();
+      dispatchScriptEvent('error');
+
+      // Wait for the retry attempt to set up a new script element
+      await new Promise((resolve) => setTimeout(resolve));
       dispatchScriptEvent('error');
 
       // Turn the task loop to make sure the internal promise handler has been invoked
