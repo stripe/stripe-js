@@ -85,6 +85,12 @@ export interface StripeCheckoutFormChangeEvent {
       } | null;
       savePaymentMethod?: boolean;
     };
+    adaptivePricing?: {
+      /**
+       * The currently selected local currency code (e.g. 'eur', 'gbp').
+       */
+      currency: string;
+    };
   };
 
   /**
@@ -124,6 +130,17 @@ interface StripeCheckoutFormExpressCheckoutConfirmEvent
 interface StripeCheckoutFormPayButtonConfirmEvent {
   source: 'checkout-form-pay-button';
   paymentMethodType: string | null;
+}
+
+/**
+ * The value returned by `checkoutForm.getValue()`.
+ * Same shape as the change event payload, but without `elementType`.
+ */
+export interface StripeCheckoutFormValue {
+  complete: boolean;
+  empty: boolean;
+  value: StripeCheckoutFormChangeEvent['value'];
+  views?: StripeCheckoutFormChangeEvent['views'];
 }
 
 /**
@@ -281,7 +298,7 @@ export type StripeCheckoutForm = StripeElementBase & {
   /**
    * Retrieves the current form values from the CheckoutForm.
    */
-  getValue(): Promise<StripeCheckoutFormChangeEvent>;
+  getValue(): Promise<StripeCheckoutFormValue>;
 
   /**
    * Navigates to the view at the given index (from the change event's views array).
