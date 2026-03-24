@@ -299,6 +299,9 @@ elements.create('taxId', {validation: {taxId: {required: 'sometimes'}}});
 // @ts-expect-error: invalid default taxIdType
 elements.create('taxId', {defaultValues: {taxIdType: 'not_a_type'}});
 
+// @ts-expect-error: verification mode must be 'if_supported' | 'never'
+elements.create('taxId', {verification: {taxId: {mode: 'always'}}});
+
 // @ts-expect-error: paymentForm cannot be created from Elements
 elements.create('paymentForm');
 // @ts-expect-error: paymentForm cannot be retrieved from Elements

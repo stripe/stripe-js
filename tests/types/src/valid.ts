@@ -1239,6 +1239,11 @@ taxIdElement
         taxIdType: TaxIdType;
         externalTaxIdType: ExternalTaxIdType;
       };
+      verification?: {
+        taxId?: {
+          status: 'pending' | 'verified' | 'unverified' | 'unavailable';
+        };
+      };
     }) => {}
   );
 
@@ -1250,6 +1255,9 @@ const createdTaxIdElement: StripeTaxIdElement = elements.create('taxId', {
   validation: {
     businessName: {required: 'auto'},
     taxId: {required: 'always'},
+  },
+  verification: {
+    taxId: {mode: 'if_supported'},
   },
   defaultValues: {
     businessName: 'Acme, Inc.',

@@ -339,6 +339,15 @@ export interface StripeTaxIdElementOptions {
   };
 
   /**
+   * Control verification behavior for the TaxIdElement.
+   */
+  verification?: {
+    taxId?: {
+      mode?: 'if_supported' | 'never';
+    };
+  };
+
+  /**
    * Default value for TaxIdElement fields
    */
   defaultValues?: {
@@ -377,5 +386,14 @@ export interface StripeTaxIdElementChangeEvent {
     taxId: string;
     taxIdType: TaxIdType;
     externalTaxIdType: ExternalTaxIdType;
+  };
+
+  /**
+   * Verification status for the TaxIdElement, if verification is enabled.
+   */
+  verification?: {
+    taxId?: {
+      status: 'pending' | 'verified' | 'unverified' | 'unavailable';
+    };
   };
 }
