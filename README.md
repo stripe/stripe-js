@@ -42,6 +42,7 @@ pinned versions are as follows:
 | v6                    | acacia        |
 | v7                    | basil         |
 | v8                    | clover        |
+| v9                    | dahlia        |
 
 ## Usage
 
@@ -124,7 +125,7 @@ one. When you call `loadStripe`, it will use the existing script tag.
 
 ```html
 <!-- Somewhere in your site's <head> -->
-<script src="https://js.stripe.com/clover/stripe.js" async></script>
+<script src="https://js.stripe.com/dahlia/stripe.js" async></script>
 ```
 
 ### Importing `loadStripe` without side effects
