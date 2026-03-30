@@ -205,6 +205,7 @@ export interface TermsOption {
   cashapp?: TermOption;
   googlePay?: TermOption;
   ideal?: TermOption;
+  klarna?: TermOption;
   paypal?: TermOption;
   sepaDebit?: TermOption;
   sofort?: TermOption;
