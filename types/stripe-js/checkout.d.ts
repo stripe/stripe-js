@@ -159,6 +159,7 @@ export type StripeCheckoutLineItem = {
   taxExclusive: StripeCheckoutAmount;
   taxInclusive: StripeCheckoutAmount;
   unitAmount: StripeCheckoutAmount;
+  unitAmountDecimal: StripeCheckoutAmount | null;
   description: string | null;
   quantity: number;
   discountAmounts: Array<StripeCheckoutDiscountAmount> | null;
