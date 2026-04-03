@@ -148,6 +148,7 @@ export type StripeCheckoutSavedPaymentMethod = {
 export type StripeCheckoutTaxAmount = StripeCheckoutAmount & {
   inclusive: boolean;
   displayName: string;
+  percentage?: number;
 };
 
 export type StripeCheckoutLineItem = {
