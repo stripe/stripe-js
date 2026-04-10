@@ -2312,6 +2312,18 @@ stripe.handleNextAction({clientSecret: ''}).then((res) => {
   }
 });
 
+stripe.handleNextAction({hashedValue: ''}).then((res) => {
+  if (res.paymentIntent) {
+    const paymentIntentId = res.paymentIntent.id;
+  }
+  if (res.setupIntent) {
+    const setupIntentId = res.setupIntent.id;
+  }
+  if (res.error) {
+    const errorType = res.error.type;
+  }
+});
+
 stripe
   .verifyMicrodepositsForPayment('', {amounts: [32, 45]})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => {
