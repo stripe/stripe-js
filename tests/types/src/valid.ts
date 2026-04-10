@@ -32,6 +32,8 @@ import {
   StripePaymentMethodMessagingElement,
   StripeLinkAuthenticationElementChangeEvent,
   StripeLinkAuthenticationElement,
+  StripeContactDetailsElement,
+  StripeContactDetailsElementChangeEvent,
   StripeShippingAddressElementChangeEvent,
   StripeShippingAddressElement,
   StripeAddressElementChangeEvent,
@@ -767,6 +769,35 @@ const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null
   'linkAuthentication'
 );
 
+let contactDetailsElementDefaults: StripeContactDetailsElement = elements.create(
+  'contactDetails'
+);
+contactDetailsElementDefaults = elements.create('contactDetails', {});
+
+const contactDetailsElement = elements.create('contactDetails', {
+  defaultValues: {email: 'foo@bar.com'},
+});
+
+contactDetailsElement
+  .on('ready', (e: {elementType: 'contactDetails'}) => {})
+  .on('focus', (e: {elementType: 'contactDetails'}) => {})
+  .on('blur', (e: {elementType: 'contactDetails'}) => {})
+  .on('change', (e: StripeContactDetailsElementChangeEvent) => {})
+  .on('loaderstart', (e: {elementType: 'contactDetails'}) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'contactDetails';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
+
+const retrievedContactDetailsElement: StripeContactDetailsElement | null = elements.getElement(
+  'contactDetails'
+);
+
 let addressElementDefaults: StripeAddressElement = elements.create('address', {
   mode: 'shipping',
 });
@@ -1317,6 +1348,7 @@ cardElement.destroy();
 cardNumberElement.destroy();
 cardCvcElement.destroy();
 cardExpiryElement.destroy();
+contactDetailsElement.destroy();
 currencySelectorElement.destroy();
 ibanElement.destroy();
 paymentRequestButtonElement.destroy();

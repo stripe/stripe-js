@@ -7,6 +7,7 @@ export * from './card-cvc';
 export * from './card-expiry';
 export * from './card-number';
 export * from './card';
+export * from './contact-details';
 export * from './currency-selector';
 export * from './express-checkout';
 export * from './iban';
