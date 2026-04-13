@@ -10,6 +10,8 @@ import {
   StripePaymentElementOptions,
   StripeLinkAuthenticationElement,
   StripeLinkAuthenticationElementOptions,
+  StripeContactDetailsElement,
+  StripeContactDetailsElementOptions,
   StripeIbanElement,
   StripeIbanElementOptions,
   StripeCardCvcElement,
@@ -241,6 +243,23 @@ export interface StripeElements {
   ): StripeLinkAuthenticationElement | null;
 
   /////////////////////////////
+  /// contactDetails
+  /////////////////////////////
+
+  /**
+   * Creates a `ContactDetailsElement`.
+   */
+  create(
+    elementType: 'contactDetails',
+    options?: StripeContactDetailsElementOptions
+  ): StripeContactDetailsElement;
+
+  /**
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(elementType: 'contactDetails'): StripeContactDetailsElement | null;
+
+  /////////////////////////////
   /// expressCheckout
   /////////////////////////////
 
@@ -409,6 +428,7 @@ export type StripeElementType =
   | 'cardNumber'
   | 'cardExpiry'
   | 'cardCvc'
+  | 'contactDetails'
   | 'currencySelector'
   | 'expressCheckout'
   | 'iban'
@@ -434,6 +454,7 @@ export type StripeElement =
   | StripeCardExpiryElement
   | StripeCardCvcElement
   | StripeIbanElement
+  | StripeContactDetailsElement
   | StripeCurrencySelectorElement
   | StripeExpressCheckoutElement
   | StripePaymentElement
@@ -685,7 +706,7 @@ interface BaseStripeElementsOptions {
 
   /**
    * Display skeleton loader UI while waiting for Elements to be fully loaded, after they are mounted.
-   * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
+   * Supported for the `payment`, `shippingAddress`, `linkAuthentication`, and `contactDetails` Elements.
    * Default is `'auto'` (Stripe determines if a loader UI should be shown).
    */
   loader?: 'auto' | 'always' | 'never';
@@ -695,7 +716,7 @@ interface BaseStripeElementsOptions {
    * Contact [Stripe support](https://support.stripe.com/) for more information.
    *
    * Display saved PaymentMethods and Customer information.
-   * Supported for the `payment`, `shippingAddress`, and `linkAuthentication` Elements.
+   * Supported for the `payment`, `shippingAddress`, `linkAuthentication`, and `contactDetails` Elements.
    */
   customerOptions?: CustomerOptions;
 

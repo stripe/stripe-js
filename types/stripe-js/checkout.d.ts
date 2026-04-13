@@ -21,6 +21,7 @@ import {
   PaymentWalletsOption,
   StripeCheckoutFormConfirmEvent,
   ExpressCheckoutPaymentMethodsOption,
+  StripeContactDetailsElement,
 } from './elements';
 
 type SavedPaymentMethodOption = {
@@ -384,6 +385,8 @@ export type StripeCheckoutAddressElementOptions = {
   };
 };
 
+export type StripeCheckoutContactDetailsElementOptions = Record<string, never>;
+
 /**
  * Wallet button theme options for CheckoutForm.
  */
@@ -702,6 +705,9 @@ export interface StripeCheckoutElementsSdk {
   createCurrencySelectorElement(): StripeCurrencySelectorElement;
   /* Requires beta header when initializing Stripe: @docs https://docs.stripe.com/tax/advanced/tax-ids?payment-ui=embedded-components#render-tax-id-element */
   createTaxIdElement(options?: StripeTaxIdElementOptions): StripeTaxIdElement;
+  createContactDetailsElement(
+    options?: StripeCheckoutContactDetailsElementOptions
+  ): StripeContactDetailsElement;
 }
 
 /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
