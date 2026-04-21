@@ -1028,6 +1028,22 @@ export interface StripeElementsUpdateOptions {
   allowedPaymentMethodTypes?: string[];
 
   /**
+   * When using automatic payment methods (omitting paymentMethodTypes), provide a
+   * payment method configuration ID for deriving payment methods.
+   *
+   * @docs https://stripe.com/docs/connect/payment-method-configurations
+   */
+  paymentMethodConfiguration?: string;
+
+  /**
+   * When using automatic payment methods (omitting payment_method_types), provide a
+   * payment method configuration ID for deriving payment methods.
+   *
+   * @docs https://stripe.com/docs/connect/payment-method-configurations
+   */
+  payment_method_configuration?: string;
+
+  /**
    * The Stripe account ID which is the business of record.
    *
    * @docs https://stripe.com/docs/js/elements_object/create_without_intent#stripe_elements_no_intent-options-onBehalfOf
