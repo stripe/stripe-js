@@ -43,6 +43,7 @@ export interface StripeCheckoutFormChangeEvent {
       email: string;
       name?: string;
       businessName?: string;
+      phone?: string;
     };
     shippingOption?: {
       id: string;
