@@ -120,6 +120,25 @@ export interface ApplePayDeferredPaymentRequest {
   freeCancellationDateTimeZone?: string;
 }
 
+/**
+ * @remarks
+ * **WebKit/Safari `InvalidAccessError` warning:** On iOS 18+ and certain Safari
+ * versions, Apple Pay capability detection may throw an unhandled
+ * `InvalidAccessError` when Stripe.js initializes inside a nested iframe. To
+ * handle this gracefully and treat Apple Pay as unavailable, add a global
+ * listener before calling `loadStripe`:
+ *
+ * ```ts
+ * window.addEventListener('unhandledrejection', (event) => {
+ *   if (event.reason?.name === 'InvalidAccessError') {
+ *     event.preventDefault(); // suppress console noise
+ *     // Apple Pay is unavailable — hide the Apple Pay button or fall back
+ *   }
+ * });
+ * ```
+ *
+ * See https://github.com/stripe/stripe-js/issues/909 for details.
+ */
 export type ApplePayOption =
   | {
       recurringPaymentRequest: ApplePayRecurringPaymentRequest;

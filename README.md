@@ -17,6 +17,13 @@ of features of Stripe.js.
 
 [![npm version](https://img.shields.io/npm/v/@stripe/stripe-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/stripe-js)
 
+## Security
+
+For details on Stripe.js security design — including why SRI hashes are not
+supported and why the `__stripe_mid`/`__stripe_sid` cookies lack `HttpOnly` —
+see [SECURITY.md](SECURITY.md) and
+[Stripe's security guide](https://stripe.com/docs/security/guide).
+
 ## Minimum requirements
 
 - Node.js: v12.16
@@ -162,6 +169,25 @@ const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 The `loadStripe.setLoadParameters` function is only available when importing
 `loadStripe` from `@stripe/stripe-js/pure`.
+
+### Apple Pay on Safari/WebKit
+
+On iOS 18+ and certain Safari versions, Apple Pay capability detection may
+trigger an unhandled promise rejection (`InvalidAccessError`) originating from
+Stripe's internal iframe. This does not affect non-Apple Pay payment methods.
+To prevent the error from surfacing and degrade gracefully when Apple Pay is
+unavailable, add a global listener before calling `loadStripe`:
+
+```js
+window.addEventListener('unhandledrejection', (event) => {
+  if (event.reason?.name === 'InvalidAccessError') {
+    event.preventDefault(); // suppress the unhandled rejection
+    // treat Apple Pay as unavailable and hide related UI
+  }
+});
+```
+
+See [issue #909](https://github.com/stripe/stripe-js/issues/909) for context.
 
 ## Stripe.js Documentation
 
