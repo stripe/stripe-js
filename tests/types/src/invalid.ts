@@ -678,3 +678,21 @@ checkoutFormSdk.createForm({
 
 // @ts-expect-error: contacts must be an array of ContactOption
 checkoutFormSdk.createForm({contacts: 'invalid'});
+
+// StripeCheckoutFormSdk.loadActions() omits client-only update methods that
+// are driven by the CheckoutForm UI rather than imperative calls.
+checkoutFormSdk.loadActions().then((loadActionsResult) => {
+  if (loadActionsResult.type === 'success') {
+    const {actions} = loadActionsResult;
+    // @ts-expect-error Property 'updateEmail' does not exist on StripeCheckoutFormLoadActionsSuccess.
+    actions.updateEmail('test@example.com');
+    // @ts-expect-error Property 'updatePhoneNumber' does not exist on StripeCheckoutFormLoadActionsSuccess.
+    actions.updatePhoneNumber('+1234567890');
+    // @ts-expect-error Property 'updateShippingAddress' does not exist on StripeCheckoutFormLoadActionsSuccess.
+    actions.updateShippingAddress(null);
+    // @ts-expect-error Property 'updateBillingAddress' does not exist on StripeCheckoutFormLoadActionsSuccess.
+    actions.updateBillingAddress(null);
+    // @ts-expect-error Property 'updateTaxIdInfo' does not exist on StripeCheckoutFormLoadActionsSuccess.
+    actions.updateTaxIdInfo(null);
+  }
+});

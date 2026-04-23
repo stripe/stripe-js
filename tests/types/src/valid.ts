@@ -3832,6 +3832,11 @@ checkoutFormSdk.loadActions().then((loadActionsResult) => {
     const {actions} = loadActionsResult;
     actions.getSession();
     actions.confirm();
+    actions.applyPromotionCode('code');
+    actions.removePromotionCode();
+    actions.updateLineItemQuantity({lineItem: 'li_1', quantity: 2});
+    actions.updateShippingOption('so_1');
+    actions.runServerUpdate(() => Promise.resolve());
   } else {
     const {error} = loadActionsResult;
   }

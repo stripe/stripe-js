@@ -626,7 +626,7 @@ export type StripeCheckoutRunServerUpdateResult =
   | {type: 'error'; error: AnyBuyerError};
 
 type LoadActionsError = {message: string; code: null};
-type LoadActionsSuccess = {
+export type StripeCheckoutLoadActionsSuccess = {
   applyPromotionCode: (
     promotionCode: string
   ) => Promise<StripeCheckoutApplyPromotionCodeResult>;
@@ -672,7 +672,24 @@ type LoadActionsSuccess = {
   ) => Promise<StripeCheckoutRunServerUpdateResult>;
 };
 export type StripeCheckoutLoadActionsResult =
-  | {type: 'success'; actions: LoadActionsSuccess}
+  | {type: 'success'; actions: StripeCheckoutLoadActionsSuccess}
+  | {type: 'error'; error: LoadActionsError};
+
+/**
+ * Form SDK actions omit the client-only update methods that are handled
+ * internally by the CheckoutForm UI. Merchants using `initCheckoutFormSdk`
+ * should drive these fields via the form, not via imperative action calls.
+ */
+export type StripeCheckoutFormLoadActionsSuccess = Omit<
+  StripeCheckoutLoadActionsSuccess,
+  | 'updateEmail'
+  | 'updatePhoneNumber'
+  | 'updateShippingAddress'
+  | 'updateBillingAddress'
+  | 'updateTaxIdInfo'
+>;
+export type StripeCheckoutFormLoadActionsResult =
+  | {type: 'success'; actions: StripeCheckoutFormLoadActionsSuccess}
   | {type: 'error'; error: LoadActionsError};
 
 export interface StripeCheckoutElementsSdk {
@@ -713,7 +730,7 @@ export interface StripeCheckoutElementsSdk {
 /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
 export interface StripeCheckoutFormSdk {
   on: (event: 'change', handler: StripeCheckoutUpdateHandler) => void;
-  loadActions: () => Promise<StripeCheckoutLoadActionsResult>;
+  loadActions: () => Promise<StripeCheckoutFormLoadActionsResult>;
 
   changeAppearance: (appearance: Omit<Appearance, 'rules'>) => void;
   loadFonts: (fonts: Array<CssFontSource | CustomFontSource>) => void;
