@@ -670,18 +670,13 @@ export interface Stripe {
   }): Promise<PaymentIntentOrSetupIntentResult>;
 
   /**
-   * Use `stripe.handleNextAction` in the [finalizing payments on the server](https://stripe.com/docs/payments/finalize-payments-on-the-server) flow to finish confirmation of a [PaymentIntent](https://stripe.com/docs/api/payment_intents) or [SetupIntent](https://stripe.com/docs/api/setup_intents) with the `requires_action` status.
-   * It will throw an error if the `PaymentIntent` or `SetupIntent` has a different status.
+   * On your client, display the next action flow. Stripe automatically displays the authentication
+   * user interface in a pop-up modal when you call `handleNextAction`.
    *
-   * Note that `stripe.handleNextAction` may take several seconds to complete.
-   * During that time, you should disable your form from being resubmitted and show a waiting indicator like a spinner.
-   * If you receive an error result, you should be sure to show that error to the customer, re-enable the form, and hide the waiting indicator.
+   * Use `stripe.handleNextAction` to handle the required next action when a SharedPaymentToken
+   * has a `requires_action` status.
    *
-   * Additionally, `stripe.handleNextAction` may trigger a [3D Secure](https://stripe.com/docs/payments/3d-secure) authentication challenge.
-   * The authentication challenge requires a context switch that can be hard to follow on a screen-reader.
-   * Ensure that your form is accessible by ensuring that success or error messages are clearly read out.
-   *
-   * @docs https://stripe.com/docs/js/payment_intents/handle_next_action
+   * @docs https://docs.stripe.com/agentic-commerce/concepts/shared-payment-tokens?agent-seller=agent#handle-next-actions
    */
   handleNextAction(options: {
     hashedValue: string;
