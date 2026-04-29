@@ -675,6 +675,19 @@ export interface Stripe {
   }): Promise<PaymentIntentOrSetupIntentResult>;
 
   /**
+   * On your client, display the next action flow. Stripe automatically displays the authentication
+   * user interface in a pop-up modal when you call `handleNextAction`.
+   *
+   * Use `stripe.handleNextAction` to handle the required next action when a SharedPaymentToken
+   * has a `requires_action` status.
+   *
+   * @docs https://docs.stripe.com/agentic-commerce/concepts/shared-payment-tokens?agent-seller=agent#handle-next-actions
+   */
+  handleNextAction(options: {
+    hashedValue: string;
+  }): Promise<PaymentIntentOrSetupIntentResult>;
+
+  /**
    * Use `stripe.verifyMicrodepositsForPayment` in the [Accept a Canadian pre-authorized debit payment](https://stripe.com/docs/payments/acss-debit/accept-a-payment) flow
    * to verify a customer's bank account with micro-deposits.
    *
