@@ -3,7 +3,7 @@ export * from './stripe-js';
 
 import {StripeConstructor} from './stripe-js';
 
-export {loadStripe} from './shared';
+export {loadStripe, ReleaseTrain} from './shared';
 
 declare global {
   interface Window {

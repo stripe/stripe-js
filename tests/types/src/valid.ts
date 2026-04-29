@@ -58,6 +58,7 @@ import {
   StripeCheckoutFormConfirmEvent,
   StripeIssuingAddToWalletButtonElementOptions,
   StripeIssuingAddToWalletButtonElement,
+  ReleaseTrain,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -3849,3 +3850,6 @@ stripe.createEmbeddedCheckoutPage({
 stripe.createEmbeddedCheckoutPage({
   clientSecret: 'cs_test_foo',
 });
+
+// ReleaseTrain type
+const releaseTrain: ReleaseTrain = 'dahlia';
