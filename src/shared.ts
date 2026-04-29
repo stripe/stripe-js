@@ -12,9 +12,7 @@ export interface LoadParams {
 // containing the package.json version
 declare const _VERSION: string;
 
-export type ReleaseTrain = 'dahlia';
-
-export const RELEASE_TRAIN: ReleaseTrain = 'dahlia';
+export const RELEASE_TRAIN = 'dahlia';
 
 const runtimeVersionToUrlVersion = (version: string | number) =>
   version === 3 ? 'v3' : version;
