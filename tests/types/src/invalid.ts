@@ -7,6 +7,7 @@ import {
   StripeExpressCheckoutElement,
   StripeElementsOptions,
   StripeCurrencySelectorElement,
+  ReleaseTrain,
 } from '../../../types';
 import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay';
 
@@ -696,3 +697,6 @@ checkoutFormSdk.loadActions().then((loadActionsResult) => {
     actions.updateTaxIdInfo(null);
   }
 });
+
+// @ts-expect-error: Type '"clover"' is not assignable to type '"dahlia"'.
+const releaseTrain: ReleaseTrain = 'clover';
