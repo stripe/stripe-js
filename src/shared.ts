@@ -1,4 +1,4 @@
-import {Stripe, StripeConstructor} from '../types';
+import {Stripe, StripeConstructor, ReleaseTrain} from '../types';
 
 export type LoadStripe = (
   ...args: Parameters<StripeConstructor>
@@ -12,7 +12,7 @@ export interface LoadParams {
 // containing the package.json version
 declare const _VERSION: string;
 
-export const RELEASE_TRAIN = 'dahlia';
+export const RELEASE_TRAIN: ReleaseTrain = 'dahlia';
 
 const runtimeVersionToUrlVersion = (version: string | number) =>
   version === 3 ? 'v3' : version;
