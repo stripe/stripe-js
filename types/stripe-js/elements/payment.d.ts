@@ -146,11 +146,15 @@ export type StripePaymentElement = StripeElementBase & {
    */
   on(
     eventType: 'availablepaymentmethodschange',
-    handler: (event: StripePaymentElementAvailablePaymentMethodsChangeEvent) => any
+    handler: (
+      event: StripePaymentElementAvailablePaymentMethodsChangeEvent
+    ) => any
   ): StripePaymentElement;
   once(
     eventType: 'availablepaymentmethodschange',
-    handler: (event: StripePaymentElementAvailablePaymentMethodsChangeEvent) => any
+    handler: (
+      event: StripePaymentElementAvailablePaymentMethodsChangeEvent
+    ) => any
   ): StripePaymentElement;
   off(
     eventType: 'availablepaymentmethodschange',
@@ -467,7 +471,6 @@ export interface StripePaymentElementSavedPaymentMethodRemoveEvent {
     };
   };
 }
-
 
 export interface StripePaymentElementAvailablePaymentMethodsChangeEvent {
   elementType: 'payment';
