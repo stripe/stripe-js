@@ -203,6 +203,11 @@ export type StripeCheckoutStatus =
       paymentStatus: 'paid' | 'unpaid' | 'no_payment_required';
     };
 
+export type StripeCheckoutSurchargeStatus =
+  | {status: 'requires_input'}
+  | {status: 'complete'}
+  | {status: 'failed'};
+
 export type StripeCheckoutTaxStatus =
   | {status: 'ready'}
   | {status: 'requires_shipping_address'}
@@ -214,6 +219,7 @@ export type StripeCheckoutTotalSummary = {
   discount: StripeCheckoutAmount;
   shippingRate: StripeCheckoutAmount;
   subtotal: StripeCheckoutAmount;
+  surcharge: StripeCheckoutAmount;
   taxExclusive: StripeCheckoutAmount;
   taxInclusive: StripeCheckoutAmount;
   total: StripeCheckoutAmount;
@@ -363,6 +369,7 @@ export interface StripeCheckoutSession {
   shippingAddress: StripeCheckoutContact | null;
   shippingOptions: Array<StripeCheckoutShippingOption>;
   status: StripeCheckoutStatus;
+  surcharge: StripeCheckoutSurchargeStatus | null;
   tax: StripeCheckoutTaxStatus;
   taxAmounts: Array<StripeCheckoutTaxAmount> | null;
   taxIdInfo: StripeCheckoutTaxIdInfo | null;
