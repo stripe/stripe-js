@@ -181,6 +181,28 @@ export type StripeExpressCheckoutElement = StripeElementBase & {
   ): StripeExpressCheckoutElement;
 
   /**
+   * Triggered when the available payment methods change.
+   */
+  on(
+    eventType: 'availablepaymentmethodschange',
+    handler: (
+      event: StripeExpressCheckoutElementAvailablePaymentMethodsChangeEvent
+    ) => any
+  ): StripeExpressCheckoutElement;
+  once(
+    eventType: 'availablepaymentmethodschange',
+    handler: (
+      event: StripeExpressCheckoutElementAvailablePaymentMethodsChangeEvent
+    ) => any
+  ): StripeExpressCheckoutElement;
+  off(
+    eventType: 'availablepaymentmethodschange',
+    handler?: (
+      event: StripeExpressCheckoutElementAvailablePaymentMethodsChangeEvent
+    ) => any
+  ): StripeExpressCheckoutElement;
+
+  /**
    * Updates the options the `ExpressCheckoutElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
@@ -573,4 +595,18 @@ export interface StripeExpressCheckoutElementShippingRateChangeEvent {
   shippingRate: ShippingRate;
   resolve: (resolveDetails?: ChangeResolveDetails) => void;
   reject: () => void;
+}
+
+export interface StripeExpressCheckoutElementAvailablePaymentMethodsChangeEvent {
+  elementType: 'expressCheckout';
+  paymentMethods:
+    | {
+        link?: {available: boolean};
+        applePay?: {available: boolean};
+        googlePay?: {available: boolean};
+        paypal?: {available: boolean};
+        amazonPay?: {available: boolean};
+        klarna?: {available: boolean};
+      }
+    | undefined;
 }

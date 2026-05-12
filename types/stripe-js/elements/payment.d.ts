@@ -142,6 +142,28 @@ export type StripePaymentElement = StripeElementBase & {
   ): StripePaymentElement;
 
   /**
+   * Triggered when the available payment methods change.
+   */
+  on(
+    eventType: 'availablepaymentmethodschange',
+    handler: (
+      event: StripePaymentElementAvailablePaymentMethodsChangeEvent
+    ) => any
+  ): StripePaymentElement;
+  once(
+    eventType: 'availablepaymentmethodschange',
+    handler: (
+      event: StripePaymentElementAvailablePaymentMethodsChangeEvent
+    ) => any
+  ): StripePaymentElement;
+  off(
+    eventType: 'availablepaymentmethodschange',
+    handler?: (
+      event: StripePaymentElementAvailablePaymentMethodsChangeEvent
+    ) => any
+  ): StripePaymentElement;
+
+  /**
    * Updates the options the `PaymentElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
@@ -448,4 +470,9 @@ export interface StripePaymentElementSavedPaymentMethodRemoveEvent {
       phone: null | string;
     };
   };
+}
+
+export interface StripePaymentElementAvailablePaymentMethodsChangeEvent {
+  elementType: 'payment';
+  paymentMethods: Record<string, {available: boolean}> | undefined;
 }
