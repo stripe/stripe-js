@@ -677,6 +677,13 @@ checkoutFormSdk.createForm({
   },
 });
 
+checkoutFormSdk.createForm({
+  expressCheckout: {
+    // @ts-expect-error: buttonHeight must be number
+    buttonHeight: 'invalid',
+  },
+});
+
 // @ts-expect-error: contacts must be an array of ContactOption
 checkoutFormSdk.createForm({contacts: 'invalid'});
 

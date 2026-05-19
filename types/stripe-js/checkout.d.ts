@@ -420,6 +420,11 @@ export type StripeCheckoutFormOptions = {
    */
   expressCheckout?: {
     /**
+     * By default, the height of the buttons are 44px.
+     * You can override this to specify a custom button height in the range of 40px-55px.
+     */
+    buttonHeight?: number;
+    /**
      * Button theme options for express checkout payment methods.
      */
     buttonTheme?: PaymentFormWalletButtonTheme;
