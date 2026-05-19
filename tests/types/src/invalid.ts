@@ -679,6 +679,7 @@ checkoutFormSdk.createForm({
 
 checkoutFormSdk.createForm({
   expressCheckout: {
+    // @ts-expect-error: buttonHeight must be number
     buttonHeight: 'invalid',
   },
 });
