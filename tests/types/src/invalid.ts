@@ -679,7 +679,7 @@ checkoutFormSdk.createForm({
 
 checkoutFormSdk.createForm({
   expressCheckout: {
-    buttonHeight: 'invalid'
+    buttonHeight: 'invalid',
   },
 });
 

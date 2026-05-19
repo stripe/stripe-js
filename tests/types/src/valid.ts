@@ -3827,7 +3827,7 @@ checkoutFormSdk.createForm({
       googlePay: 'always',
       link: 'never',
     },
-    buttonHeight: 50
+    buttonHeight: 50,
   },
 });
 const retrievedCheckoutForm: StripeCheckoutForm | null = checkoutFormSdk.getForm();
