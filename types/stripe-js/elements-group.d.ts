@@ -749,10 +749,8 @@ interface BaseStripeElementsOptions {
   paymentMethodCreation?: 'manual';
 
   /**
-   * Configure [Adaptive Pricing](https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing) behavior.
-   * Set `allowed: true` to enable Adaptive Pricing for this Elements instance.
-   *
-   * @docs https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=payment-element#mark-integration-ready
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
    */
   adaptivePricing?: {allowed?: boolean};
 }
