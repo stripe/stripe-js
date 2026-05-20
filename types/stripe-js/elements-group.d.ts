@@ -747,6 +747,14 @@ interface BaseStripeElementsOptions {
    * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-paymentMethodCreation
    */
   paymentMethodCreation?: 'manual';
+
+  /**
+   * Configure [Adaptive Pricing](https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing) behavior.
+   * Set `allowed: true` to enable Adaptive Pricing for this Elements instance.
+   *
+   * @docs https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=payment-element#mark-integration-ready
+   */
+  adaptivePricing?: {allowed?: boolean};
 }
 
 export interface StripeElementsOptionsClientSecret
