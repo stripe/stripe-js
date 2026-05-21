@@ -747,12 +747,6 @@ interface BaseStripeElementsOptions {
    * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-paymentMethodCreation
    */
   paymentMethodCreation?: 'manual';
-
-  /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   */
-  adaptivePricing?: {allowed?: boolean};
 }
 
 export interface StripeElementsOptionsClientSecret
@@ -890,6 +884,12 @@ interface StripeElementsOptionsModeBase extends BaseStripeElementsOptions {
    * @docs https://stripe.com/docs/js/elements_object/create#stripe_elements-options-externalPaymentMethodTypes
    */
   externalPaymentMethodTypes?: string[];
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   */
+  adaptivePricing?: {allowed?: boolean};
 }
 
 type StripeElementsOptionsModePayment = StripeElementsOptionsModeBase & {
