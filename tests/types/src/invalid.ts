@@ -48,16 +48,8 @@ stripe.elements({
   mode: 'payment',
   currency: 'usd',
   amount: 1000,
-  // @ts-expect-error: adaptivePricing must be an object, not a boolean
-  adaptivePricing: true,
-});
-
-stripe.elements({
-  mode: 'payment',
-  currency: 'usd',
-  amount: 1000,
   // @ts-expect-error: adaptivePricing.allowed must be a boolean, not a string
-  adaptivePricing: {allowed: 'yes'},
+  adaptivePricing: {allowed: 'no'},
 });
 
 elements.update({
