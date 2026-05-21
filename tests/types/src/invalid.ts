@@ -44,6 +44,22 @@ stripe.elements({mode: 'subscription', currency: 'usd'});
 // @ts-expect-error: currency is required when using mode='subscription'
 stripe.elements({mode: 'subscription', amount: 1000});
 
+stripe.elements({
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1000,
+  // @ts-expect-error: adaptivePricing must be an object, not a boolean
+  adaptivePricing: true,
+});
+
+stripe.elements({
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1000,
+  // @ts-expect-error: adaptivePricing.allowed must be a boolean, not a string
+  adaptivePricing: {allowed: 'yes'},
+});
+
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
   clientSecret: 'pk_foo_secret_bar',

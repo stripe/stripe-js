@@ -183,6 +183,21 @@ stripe.elements({
   amount: 1000,
 });
 
+// adaptivePricing 
+stripe.elements({
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1000,
+  adaptivePricing: {allowed: true},
+});
+
+stripe.elements({
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1000,
+  adaptivePricing: {},
+});
+
 const elementsClientSecret: StripeElements = stripe.elements({
   fonts: [OPEN_SANS, AVENIR],
   locale: 'auto',
