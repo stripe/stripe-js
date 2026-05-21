@@ -44,6 +44,12 @@ stripe.elements({mode: 'subscription', currency: 'usd'});
 // @ts-expect-error: currency is required when using mode='subscription'
 stripe.elements({mode: 'subscription', amount: 1000});
 
+// @ts-expect-error: Type 'boolean' is not assignable to type '{ allowed?: boolean | undefined; }'
+stripe.elements({mode: 'payment', adaptivePricing: true});
+
+// @ts-expect-error: Type 'string' is not assignable to type 'boolean | undefined'
+stripe.elements({mode: 'payment', adaptivePricing: {allowed: 'no'}});
+
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
   clientSecret: 'pk_foo_secret_bar',
