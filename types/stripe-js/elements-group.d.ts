@@ -747,12 +747,6 @@ interface BaseStripeElementsOptions {
    * @docs https://docs.stripe.com/js/elements_object/create#stripe_elements-options-paymentMethodCreation
    */
   paymentMethodCreation?: 'manual';
-
-  /**
-   * Requires beta access:
-   * Contact [Stripe support](https://support.stripe.com/) for more information.
-   */
-  adaptivePricing?: {allowed?: boolean};
 }
 
 export interface StripeElementsOptionsClientSecret

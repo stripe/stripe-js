@@ -327,8 +327,9 @@ const handleSubmit = async () => {
 
 const auBankAccountElement = elements.create('auBankAccount', {});
 
-const retrievedAuBankAccountElement: StripeAuBankAccountElement | null =
-  elements.getElement('auBankAccount');
+const retrievedAuBankAccountElement: StripeAuBankAccountElement | null = elements.getElement(
+  'auBankAccount'
+);
 
 const cardElement: StripeCardElement = elements.create('card', {
   classes: {base: '', focus: ''},
@@ -348,8 +349,9 @@ elements.create('card', {style: {base: {fontWeight: 500}}});
 
 const cardElementDefaults: StripeCardElement = elements.create('card');
 
-const retrievedCardElement: StripeCardElement | null =
-  elements.getElement('card');
+const retrievedCardElement: StripeCardElement | null = elements.getElement(
+  'card'
+);
 
 const cardNumberElement: StripeCardNumberElement = elements.create(
   'cardNumber',
@@ -371,26 +373,30 @@ elements.create('cardNumber', {style: {base: {fontWeight: 500}}});
 elements.create('cardCvc', {style: {base: {fontWeight: 500}}});
 elements.create('cardExpiry', {style: {base: {fontWeight: 500}}});
 
-const retrievedCardNumberElement: StripeCardNumberElement | null =
-  elements.getElement('cardNumber');
+const retrievedCardNumberElement: StripeCardNumberElement | null = elements.getElement(
+  'cardNumber'
+);
 
 const cardExpiryElement: StripeCardExpiryElement = elements.create(
   'cardExpiry',
   {style: MY_STYLE}
 );
 
-const retrievedCardExpiryElement: StripeCardExpiryElement | null =
-  elements.getElement('cardExpiry');
+const retrievedCardExpiryElement: StripeCardExpiryElement | null = elements.getElement(
+  'cardExpiry'
+);
 
 const cardCvcElement: StripeCardCvcElement = elements.create('cardCvc');
 
-const retrievedCardCvcElement: StripeCardCvcElement | null =
-  elements.getElement('cardCvc');
+const retrievedCardCvcElement: StripeCardCvcElement | null = elements.getElement(
+  'cardCvc'
+);
 
 const ibanElement = elements.create('iban', {supportedCountries: ['']});
 
-const retrievedIbanElement: StripeIbanElement | null =
-  elements.getElement('iban');
+const retrievedIbanElement: StripeIbanElement | null = elements.getElement(
+  'iban'
+);
 
 const paymentRequestButtonElement = elements.create('paymentRequestButton', {
   style: {
@@ -412,8 +418,9 @@ const paymentRequestButtonElement = elements.create('paymentRequestButton', {
   disableMultipleButtons: false,
 });
 
-const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | null =
-  elements.getElement('paymentRequestButton');
+const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | null = elements.getElement(
+  'paymentRequestButton'
+);
 
 // Make sure that `paymentRequest` is at least optional;
 retrievedPaymentRequestButtonElement!.update({});
@@ -542,8 +549,9 @@ paymentElement.update({
 let paymentElementDefaults: StripePaymentElement = elements.create('payment');
 paymentElementDefaults = elements.create('payment', {});
 
-const retrievedPaymentElement: StripePaymentElement | null =
-  elements.getElement('payment');
+const retrievedPaymentElement: StripePaymentElement | null = elements.getElement(
+  'payment'
+);
 
 paymentElement
   .on('ready', (e: {elementType: 'payment'}) => {})
@@ -664,8 +672,9 @@ paymentMethodMessagingElement.on(
   (e: {elementType: 'paymentMethodMessaging'}) => {}
 );
 
-const retrievedPaymentMethodMessagingElement: StripePaymentMethodMessagingElement | null =
-  elements.getElement('paymentMethodMessaging');
+const retrievedPaymentMethodMessagingElement: StripePaymentMethodMessagingElement | null = elements.getElement(
+  'paymentMethodMessaging'
+);
 
 retrievedPaymentMethodMessagingElement!.update({amount: 10000});
 
@@ -747,8 +756,9 @@ paymentRequestButtonElement.on(
   }
 );
 
-let linkAuthenticationElementDefaults: StripeLinkAuthenticationElement =
-  elements.create('linkAuthentication');
+let linkAuthenticationElementDefaults: StripeLinkAuthenticationElement = elements.create(
+  'linkAuthentication'
+);
 linkAuthenticationElementDefaults = elements.create('linkAuthentication', {});
 
 const linkAuthenticationElement = elements.create('linkAuthentication', {
@@ -771,11 +781,13 @@ linkAuthenticationElement
     }) => {}
   );
 
-const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null =
-  elements.getElement('linkAuthentication');
+const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null = elements.getElement(
+  'linkAuthentication'
+);
 
-let contactDetailsElementDefaults: StripeContactDetailsElement =
-  elements.create('contactDetails');
+let contactDetailsElementDefaults: StripeContactDetailsElement = elements.create(
+  'contactDetails'
+);
 contactDetailsElementDefaults = elements.create('contactDetails', {});
 
 const contactDetailsElement = elements.create('contactDetails', {
@@ -798,8 +810,9 @@ contactDetailsElement
     }) => {}
   );
 
-const retrievedContactDetailsElement: StripeContactDetailsElement | null =
-  elements.getElement('contactDetails');
+const retrievedContactDetailsElement: StripeContactDetailsElement | null = elements.getElement(
+  'contactDetails'
+);
 
 let addressElementDefaults: StripeAddressElement = elements.create('address', {
   mode: 'shipping',
@@ -889,11 +902,13 @@ addressElement.getValue({format: 'localized'}).then((res) => {
   }
 });
 
-const retrievedAddressElement: StripeAddressElement | null =
-  elements.getElement('address');
+const retrievedAddressElement: StripeAddressElement | null = elements.getElement(
+  'address'
+);
 
-let shippingAddressElementDefaults: StripeShippingAddressElement =
-  elements.create('shippingAddress');
+let shippingAddressElementDefaults: StripeShippingAddressElement = elements.create(
+  'shippingAddress'
+);
 shippingAddressElementDefaults = elements.create('shippingAddress', {});
 
 const shippingAddressElement = elements.create('shippingAddress', {
@@ -943,8 +958,9 @@ shippingAddressElement.update({
   },
 });
 
-const retrievedShippingAddressElement: StripeShippingAddressElement | null =
-  elements.getElement('shippingAddress');
+const retrievedShippingAddressElement: StripeShippingAddressElement | null = elements.getElement(
+  'shippingAddress'
+);
 
 const expressCheckoutElementDefault = elements.create('expressCheckout');
 
@@ -1297,8 +1313,9 @@ const createdTaxIdElement: StripeTaxIdElement = elements.create('taxId', {
   },
 });
 
-const retrievedTaxIdElement: StripeTaxIdElement | null =
-  elements.getElement('taxId');
+const retrievedTaxIdElement: StripeTaxIdElement | null = elements.getElement(
+  'taxId'
+);
 
 createdTaxIdElement.mount('#bogus-container');
 retrievedTaxIdElement?.mount('#bogus-container');
@@ -3366,7 +3383,7 @@ paymentRequest.update({
   },
 });
 
-paymentRequest.on('paymentmethod', function (ev) {
+paymentRequest.on('paymentmethod', function(ev) {
   console.log(ev.paymentMethod.id);
   ev.complete('success');
   ev.complete('fail');
@@ -3376,13 +3393,13 @@ paymentRequest.on('paymentmethod', function (ev) {
   ev.complete('invalid_shipping_address');
 });
 
-paymentRequest.on('token', function (ev) {
+paymentRequest.on('token', function(ev) {
   console.log(ev.token.id);
   console.log(ev.payerEmail);
   ev.complete('success');
 });
 
-paymentRequest.on('source', function (ev) {
+paymentRequest.on('source', function(ev) {
   console.log(ev.source.id);
   console.log(ev.walletName);
   console.log(ev.methodName);
@@ -3402,17 +3419,17 @@ paymentRequest.on('source', function (ev) {
   } = ev.shippingAddress!;
 });
 
-paymentRequest.on('shippingaddresschange', function (ev) {
+paymentRequest.on('shippingaddresschange', function(ev) {
   if (ev.shippingAddress.country !== 'US') {
     ev.updateWith({status: 'invalid_shipping_address'});
   } else {
     fetch('/calculateShipping', {
       body: JSON.stringify({shippingAddress: ev.shippingAddress}),
     })
-      .then(function (response) {
+      .then(function(response) {
         return response.json();
       })
-      .then(function (result) {
+      .then(function(result) {
         ev.updateWith({
           status: 'success',
           shippingOptions: result.supportedShippingOptions,
@@ -3467,8 +3484,13 @@ paymentRequest.on(
 declare const issuingAddToWalletButtonElement: StripeIssuingAddToWalletButtonElement;
 declare const issuingAddToWalletButtonOptions: StripeIssuingAddToWalletButtonElementOptions;
 
-const {buttonHeight, wallet, issuingCard, nonce, ephemeralKeySecret} =
-  issuingAddToWalletButtonOptions;
+const {
+  buttonHeight,
+  wallet,
+  issuingCard,
+  nonce,
+  ephemeralKeySecret,
+} = issuingAddToWalletButtonOptions;
 
 issuingAddToWalletButtonElement.mount('#bogus-container');
 issuingAddToWalletButtonElement.update({
@@ -3596,11 +3618,9 @@ stripe.initCheckoutElementsSdk({clientSecret: Promise.resolve('cs_test_foo')});
 const checkoutElementsSdk = stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
 });
-const checkoutPaymentElement: StripePaymentElement =
-  checkoutElementsSdk.createPaymentElement();
+const checkoutPaymentElement: StripePaymentElement = checkoutElementsSdk.createPaymentElement();
 checkoutElementsSdk.getPaymentElement();
-const checkoutAddressElement: StripeAddressElement =
-  checkoutElementsSdk.createBillingAddressElement();
+const checkoutAddressElement: StripeAddressElement = checkoutElementsSdk.createBillingAddressElement();
 checkoutElementsSdk.getBillingAddressElement();
 checkoutElementsSdk.createShippingAddressElement();
 checkoutElementsSdk.getShippingAddressElement();
@@ -3825,8 +3845,7 @@ checkoutFormSdk.createForm({
     buttonHeight: 50,
   },
 });
-const retrievedCheckoutForm: StripeCheckoutForm | null =
-  checkoutFormSdk.getForm();
+const retrievedCheckoutForm: StripeCheckoutForm | null = checkoutFormSdk.getForm();
 
 checkoutFormSdk.createCurrencySelectorElement();
 checkoutFormSdk.getCurrencySelectorElement();
