@@ -195,7 +195,7 @@ stripe.elements({
   mode: 'payment',
   currency: 'usd',
   amount: 1000,
-  adaptivePricing: {},
+  adaptivePricing: {allowed: false},
 });
 
 const elementsClientSecret: StripeElements = stripe.elements({
