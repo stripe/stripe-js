@@ -164,6 +164,7 @@ export type StripeCheckoutLineItem = {
   unitAmountDecimal: StripeCheckoutAmount | null;
   description: string | null;
   quantity: number;
+  unitLabel: string | null;
   discountAmounts: Array<StripeCheckoutDiscountAmount> | null;
   taxAmounts: Array<StripeCheckoutTaxAmount> | null;
   recurring: {

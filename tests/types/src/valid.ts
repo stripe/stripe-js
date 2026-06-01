@@ -3673,7 +3673,11 @@ checkoutElementsSdk.loadActions().then((loadActionsResult) => {
     } = session;
     const {
       subtotal: {amount: _, minorUnitsAmount: __},
+      unitLabel,
     } = lineItems[0];
+    if (unitLabel) {
+      const label: string = unitLabel;
+    }
 
     actions.confirm().then((result) => {
       if (result.type === 'success') {
