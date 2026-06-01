@@ -2,6 +2,7 @@ import {
   StripeAddressElement,
   StripeAddressElementOptions,
   StripeCurrencySelectorElement,
+  StripeCurrencySelectorElementOptions,
   StripeShippingAddressElement,
   StripeShippingAddressElementOptions,
   StripePaymentRequestButtonElement,
@@ -419,6 +420,29 @@ export interface StripeElements {
    * Looks up a previously created `Element` by its type.
    */
   getElement(elementType: 'taxId'): StripeTaxIdElement | null;
+
+  /////////////////////////////
+  /// currencySelector
+  /////////////////////////////
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Creates a `CurrencySelectorElement`.
+   */
+  create(
+    elementType: 'currencySelector',
+    options?: StripeCurrencySelectorElementOptions
+  ): StripeCurrencySelectorElement;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(elementType: 'currencySelector'): StripeCurrencySelectorElement | null;
 }
 
 export type StripeElementType =

@@ -240,10 +240,6 @@ expressCheckoutElement.on('click', ({resolve}) => {
   });
 });
 
-// @ts-expect-error: CurrencySelector cannot be created from Elements
-elements.create('currencySelector');
-// @ts-expect-error: CurrencySelector cannot be retrieved from Elements
-elements.getElement('currencySelector');
 // @ts-expect-error: CurrencySelector cannot be updated
 currencySelectorElement.update({});
 
