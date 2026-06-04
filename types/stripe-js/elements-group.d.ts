@@ -1178,6 +1178,13 @@ export interface Appearance {
     /** @deprecated Use accordionItemSpacing instead. */
     spacingAccordionItem?: string;
 
+    // AccordionItem labels
+    accordionItemLabelColorText?: string;
+    accordionItemLabelFontSize?: string;
+    accordionItemLabelFontWeight?: string;
+    accordionItemLabelSelectedColorText?: string;
+    accordionItemLabelSelectedFontWeight?: string;
+
     // Colors
     colorPrimary?: string;
     colorBackground?: string;
@@ -1186,9 +1193,12 @@ export interface Appearance {
     colorDanger?: string;
     colorWarning?: string;
 
-    // Button Colors
+    // Buttons
     buttonColorBackground?: string;
     buttonColorText?: string;
+    buttonFontSize?: string;
+    buttonFontWeight?: string;
+    buttonPadding?: string;
 
     // Text variations
     colorTextSecondary?: string;
@@ -1283,8 +1293,21 @@ export interface Appearance {
     focusBoxShadow?: string;
     focusOutline?: string;
 
+    // Inputs
+    inputBoxShadow?: string;
+    inputColorBorder?: string;
+    inputFocusBoxShadow?: string;
+    inputFocusColorBorder?: string;
+
+    // Labels
+    labelColorText?: string;
+    labelFontSize?: string;
+    labelFontWeight?: string;
+    labelSpacing?: string;
+
     // Radius
     buttonBorderRadius?: string;
+    buttonExpressCheckoutBorderRadius?: string;
     borderRadius?: string;
   };
 
