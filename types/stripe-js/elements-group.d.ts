@@ -442,7 +442,9 @@ export interface StripeElements {
    *
    * Looks up a previously created `Element` by its type.
    */
-  getElement(elementType: 'currencySelector'): StripeCurrencySelectorElement | null;
+  getElement(
+    elementType: 'currencySelector'
+  ): StripeCurrencySelectorElement | null;
 }
 
 export type StripeElementType =

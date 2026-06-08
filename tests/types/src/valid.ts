@@ -184,9 +184,9 @@ stripe.elements({
 });
 
 // adaptivePricing
-elements.create('currencySelector')
+elements.create('currencySelector');
 
-elements.getElement('currencySelector')
+elements.getElement('currencySelector');
 
 stripe.elements({
   mode: 'payment',
