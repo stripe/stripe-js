@@ -91,3 +91,5 @@ export type StripeCurrencySelectorElement = StripeElementBase & {
     }) => any
   ): StripeCurrencySelectorElement;
 };
+
+export interface StripeCurrencySelectorElementOptions {}

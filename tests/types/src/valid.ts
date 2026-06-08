@@ -184,6 +184,10 @@ stripe.elements({
 });
 
 // adaptivePricing
+elements.create('currencySelector');
+
+elements.getElement('currencySelector');
+
 stripe.elements({
   mode: 'payment',
   currency: 'usd',
