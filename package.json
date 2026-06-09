@@ -32,6 +32,9 @@
   "author": "Stripe (https://www.stripe.com)",
   "license": "MIT",
   "homepage": "https://stripe.com/docs/js",
+  "bugs": {
+    "url": "https://github.com/stripe/stripe-js/issues"
+  },
   "files": [
     "dist",
     "lib",
