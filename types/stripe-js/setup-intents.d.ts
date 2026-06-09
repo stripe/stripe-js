@@ -1,0 +1,332 @@
+import {PaymentMethodCreateParams, SetupIntentConfirmParams} from '../api';
+
+import {
+  CreatePaymentMethodAcssDebitData,
+  CreatePaymentMethodAmazonPayData,
+  CreatePaymentMethodAuBecsDebitData,
+  CreatePaymentMethodBancontactData,
+  CreatePaymentMethodCardData,
+  CreatePaymentMethodCashappData,
+  CreatePaymentMethodIdealData,
+  CreatePaymentMethodSepaDebitData,
+  CreatePaymentMethodSofortData,
+  CreatePaymentMethodPayPalData,
+  CreatePaymentMethodBacsDebitData,
+  CreatePaymentMethodUsBankAccountData,
+  CollectBankAccountParams,
+} from './payment-intents';
+
+import {Omit} from '../utils';
+
+/**
+ * Data to be sent with a `stripe.confirmSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmSetupData extends SetupIntentConfirmParams {
+  /**
+   * The url your customer will be directed to after they complete payment.
+   */
+  return_url: string;
+
+  /**
+   * An object to attach additional billing_details to the PaymentMethod created via Elements.
+   *
+   * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data
+   */
+  payment_method_data?: {
+    /**
+     * The customer's billing details. Details collected by Elements will override values passed here.
+     * Billing fields that are omitted in the Payment Element via the `fields` option required.
+     *
+     * @docs https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_data-billing_details
+     */
+    billing_details?: PaymentMethodCreateParams.BillingDetails;
+
+    /**
+     * Specifies if the PaymentMethod should be redisplayed when using the Saved Payment Method feature
+     */
+    allow_redisplay?: 'always' | 'limited' | 'unspecified';
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     * Individual keys can be unset by posting an empty value to them
+     * @docs https://docs.stripe.com/metadata
+     */
+    metadata?: Record<string, string>;
+  };
+
+  /**
+   * Optional `id` of an existing [ConfirmationToken](https://stripe.com/docs/api/confirmation_tokens).
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_payment#confirm_payment_intent-options-confirmParams-confirmation_token
+   */
+  confirmation_token?: string;
+
+  /**
+   * Optional `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_payment#confirm_payment_intent-options-confirmParams-payment_method
+   */
+  payment_method?: string;
+
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
+  expand?: Array<string>;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmCardSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmCardSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodCardData, 'type'>;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmCardSetup`.
+ */
+export interface ConfirmCardSetupOptions {
+  /*
+   * Set this to `false` if you want to [handle next actions yourself](https://stripe.com/docs/payments/payment-intents/verifying-status#next-actions), or if you want to defer next action handling until later (e.g. for use in the [PaymentRequest API](https://stripe.com/docs/stripe-js/elements/payment-request-button#complete-payment-intents)).
+   * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+export interface ConfirmCashappSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodCashappData, 'type'>;
+
+  /**
+   * The url your customer will be directed to after they complete authentication.
+   */
+  return_url?: string;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmCashappSetup`.
+ */
+export interface ConfirmCashappSetupOptions {
+  /*
+   * Set this to `false` if you want to [manually handle the authorization QR code or redirect](https://stripe.com/docs/payments/cash-app-pay/set-up-payment?platform=web&ui=API#web-create-setup-intent).
+   * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmIdealSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmIdealSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodIdealData, 'type'>;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmAmazonPaySetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmAmazonPaySetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodAmazonPayData, 'type'>;
+
+  /**
+   * The required url your customer will be directed to after they complete authentication.
+   */
+  return_url: string;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmIdealSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmPayPalSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodPayPalData, 'type'>;
+
+  /**
+   * The required url your customer will be directed to after they complete authentication.
+   */
+  return_url: string;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmSepaDebitSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmSepaDebitSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodSepaDebitData, 'type'>;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmSofortSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmSofortSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodSofortData, 'type'>;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmSofortSetup`.
+ */
+export interface ConfirmSofortSetupOptions {
+  /**
+   * Set this to `false` if you want to [manually handle the authorization redirect](https://stripe.com/docs/payments/sofort/accept-a-payment?platform=web#handle-redirect).
+   * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmAuBecsDebitSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmAuBecsDebitSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodAuBecsDebitData, 'type'>;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmBacsDebitSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmBacsDebitSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodBacsDebitData, 'type'>;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmBancontactSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmBancontactSetupData extends SetupIntentConfirmParams {
+  /*
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodBancontactData, 'type'>;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmAcssDebitSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmAcssDebitSetupData extends SetupIntentConfirmParams {
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
+  expand?: Array<string>;
+
+  /**
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodAcssDebitData, 'type'>;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmAcssDebitSetup`.
+ */
+export interface ConfirmAcssDebitSetupOptions {
+  /**
+   * Set this to true if you want to skip displaying the mandate confirmation.
+   */
+  skipMandate?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.verifyMicrodepositsForSetup` request.
+ */
+export interface VerifyMicrodepositsForSetupData {
+  /**
+   * An array of two positive integers, in cents, equal to the values of the microdeposits sent to the bank account.
+   */
+  amounts?: Array<number>;
+
+  /**
+   * A six-character code starting with SM present in the microdeposit sent to the bank account.
+   */
+  descriptor_code?: string;
+}
+
+export interface ConfirmUsBankAccountSetupData
+  extends SetupIntentConfirmParams {
+  /**
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodUsBankAccountData, 'type'>;
+}
+
+/**
+ * Data to be sent with a `stripe.collectBankAccountForSetup` request.
+ */
+export interface CollectBankAccountForSetupOptions {
+  /**
+   * The client secret of the SetupIntent.
+   */
+  clientSecret: string;
+
+  params: CollectBankAccountParams;
+
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
+  expand?: Array<string>;
+}

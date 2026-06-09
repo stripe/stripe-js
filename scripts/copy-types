@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Sets the source and destination directories
+SRC_DIR="./types"
+DEST_DIR="./dist"
+
+# Finds all .d.ts files in the source directory and copies them
+find "$SRC_DIR" -type f -name '*.d.ts' | while read -r src_file; do
+    # Constructs the destination file path
+    dest_file="${src_file/$SRC_DIR/$DEST_DIR}"
+    dest_file_mts="${dest_file/%.d.ts/.d.mts}"
+
+    # Creates the destination directory if it doesn't exist
+    mkdir -p "$(dirname "$dest_file")"
+
+    # Copys the .d.ts file to the destination directory
+    cp "$src_file" "$dest_file"
+    cp "$src_file" "$dest_file_mts"
+done
+
+echo "All .d.ts files have been copied from $SRC_DIR to $DEST_DIR."

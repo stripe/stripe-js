@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    // Let Babel deal with transpiling new language features
+    "target": "esnext",
+
+    // These are overridden by the Rollup plugin, but are left here in case you
+    // run `tsc` directly for typechecking or debugging purposes
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "allowJs": false,
+    "declaration": false,
+    "removeComments": false,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
+}

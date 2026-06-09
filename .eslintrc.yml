@@ -1,0 +1,31 @@
+---
+root: true
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+parser: '@typescript-eslint/parser'
+plugins:
+  - jest
+  - '@typescript-eslint'
+env:
+  jest/globals: true
+  browser: true
+rules:
+  no-console: 0
+  func-style: 2
+  prefer-spread: 0
+  consistent-return: 2
+  prefer-arrow-callback:
+    - 2
+    - allowNamedFunctions: false
+      allowUnboundThis: false
+  no-unused-vars: 0
+  jest/no-disabled-tests: 2
+  jest/no-focused-tests: 2
+  '@typescript-eslint/no-explicit-any': 0
+  '@typescript-eslint/no-empty-interface': 0
+  '@typescript-eslint/triple-slash-reference': 0
+  '@typescript-eslint/no-unused-vars':
+    - 2
+    - ignoreRestSiblings: true
