@@ -170,7 +170,6 @@ export type StripeCheckoutLineItem = {
   recurring: {
     interval: StripeCheckoutBillingInterval;
     intervalCount: number;
-    isProrated: boolean;
     usageType: 'metered' | 'licensed';
   } | null;
   adjustableQuantity: StripeCheckoutAdjustableQuantity | null;
@@ -180,6 +179,7 @@ export type StripeCheckoutLineItem = {
 export type StripeCheckoutRecurring = {
   interval: StripeCheckoutBillingInterval;
   intervalCount: number;
+  isProrated: boolean;
   dueNext: StripeCheckoutDueNext;
   trial: StripeCheckoutTrial | null;
 };
