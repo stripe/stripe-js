@@ -1,6 +1,7 @@
 # Contributing to Stripe.js
 
-Thanks for contributing to Stripe.js!
+This project is maintained by Stripe and does not accept external pull requests.
+We welcome bug reports and feature requests as issues.
 
 ## Issues
 
@@ -14,14 +15,8 @@ come chat with us on the [Stripe Discord server][developer-chat]. We're very
 proud of our level of service, and we're more than happy to help you out with
 your integration.
 
-If you've found a bug in Stripe.js loading wrapper, please [let us know][issue]!
-
-## Code review
-
-All pull requests will be reviewed by someone from Stripe before merging. At
-Stripe, we believe that code review is for explaining and having a discussion
-around code. For those new to code review, we strongly recommend [this
-video][code-review] on "code review culture."
+If you've found a bug in the Stripe.js loading wrapper, please [let us
+know][issue]!
 
 ## Developing
 
@@ -43,6 +38,5 @@ We use a number of automated checks:
 You might want to configure your editor to automatically run these checks. Not
 passing any of these checks will cause the CI build to fail.
 
-[code-review]: https://www.youtube.com/watch?v=PJjmw9TRB7s
 [issue]: https://github.com/stripe/stripe-js/issues/new/choose
 [developer-chat]: https://stripe.com/go/developer-chat

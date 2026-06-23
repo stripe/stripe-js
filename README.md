@@ -171,5 +171,6 @@ The `loadStripe.setLoadParameters` function is only available when importing
 
 ## Contributing
 
-If you would like to contribute to Stripe.js, please make sure to read our
-[contributor guidelines](CONTRIBUTING.md).
+This project is maintained by Stripe and does not accept external pull requests.
+If you have feedback or ideas, please
+[open an issue](https://github.com/stripe/stripe-js/issues/new/choose).
