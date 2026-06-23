@@ -472,9 +472,39 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
   },
   fields: {
     billingDetails: {
+      name: 'always',
       email: 'never',
       phone: 'auto',
       address: 'if_required',
+    },
+    card: {
+      billingDetails: {
+        name: 'never',
+        email: 'auto',
+      },
+    },
+    klarna: {
+      billingDetails: {
+        name: 'always',
+      },
+    },
+    apple_pay: {
+      billingDetails: {
+        name: 'always',
+      },
+    },
+    pay_by_bank: {
+      billingDetails: {
+        name: 'always',
+        address: {
+          line1: 'auto',
+          line2: 'never',
+          postalCode: 'auto',
+        },
+      },
+    },
+    sepa_debit: {
+      billingDetails: 'auto',
     },
   },
   terms: {

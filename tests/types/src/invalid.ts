@@ -124,6 +124,48 @@ elements.create('payment', {
   },
 });
 
+// invalid value for billing details fields
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  fields: {
+    billingDetails: 'always',
+  },
+});
+
+// invalid value for billing details subfield
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  fields: {
+    billingDetails: {
+      email: 'always',
+    },
+  },
+});
+
+// invalid value for per-payment-method billing details subfield
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  fields: {
+    klarna: {
+      billingDetails: {
+        phone: 'always',
+      },
+    },
+  },
+});
+
+// invalid payment method for fields
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  fields: {
+    not_a_payment_method: {
+      billingDetails: {
+        name: 'always',
+      },
+    },
+  },
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {

@@ -195,27 +195,114 @@ export interface DefaultValuesOption {
 }
 
 export type FieldOption = 'auto' | 'never';
+export type FieldOptionWithAlways = FieldOption | 'always';
 
-export interface FieldsOption {
-  billingDetails?:
-    | FieldOption
-    | {
-        name?: FieldOption;
-        email?: FieldOption;
-        phone?: FieldOption;
-        address?:
-          | FieldOption
-          | 'if_required'
-          | {
-              country?: FieldOption;
-              postalCode?: FieldOption;
-              state?: FieldOption;
-              city?: FieldOption;
-              line1?: FieldOption;
-              line2?: FieldOption;
-            };
-      };
-}
+export type BillingDetailsFieldsOption =
+  | FieldOption
+  | {
+      name?: FieldOptionWithAlways;
+      email?: FieldOption;
+      phone?: FieldOption;
+      address?:
+        | FieldOption
+        | 'if_required'
+        | {
+            country?: FieldOption;
+            postalCode?: FieldOption;
+            state?: FieldOption;
+            city?: FieldOption;
+            line1?: FieldOption;
+            line2?: FieldOption;
+          };
+    };
+
+export type PaymentElementPaymentMethodType =
+  | 'acss_debit'
+  | 'affirm'
+  | 'afterpay_clearpay'
+  | 'alipay'
+  | 'alma'
+  | 'amazon_pay'
+  | 'apple_pay'
+  | 'au_becs_debit'
+  | 'bacs_debit'
+  | 'bancontact'
+  | 'billie'
+  | 'bizum'
+  | 'blik'
+  | 'boleto'
+  | 'capchase_pay'
+  | 'card'
+  | 'cashapp'
+  | 'crypto'
+  | 'customer_balance'
+  | 'eps'
+  | 'fpx'
+  | 'gcash'
+  | 'giropay'
+  | 'google_pay'
+  | 'grabpay'
+  | 'gopay'
+  | 'id_bank_transfer'
+  | 'ideal'
+  | 'kakao_pay'
+  | 'klarna'
+  | 'konbini'
+  | 'kr_card'
+  | 'kr_market'
+  | 'kriya'
+  | 'link'
+  | 'mb_way'
+  | 'mobilepay'
+  | 'momo'
+  | 'mondu'
+  | 'multibanco'
+  | 'naver_pay'
+  | 'ng_bank'
+  | 'ng_bank_transfer'
+  | 'ng_card'
+  | 'ng_market'
+  | 'ng_ussd'
+  | 'ng_wallet'
+  | 'nz_bank_account'
+  | 'oxxo'
+  | 'p24'
+  | 'pay_by_bank'
+  | 'payco'
+  | 'paynow'
+  | 'paypay'
+  | 'paypal'
+  | 'payto'
+  | 'pix'
+  | 'promptpay'
+  | 'qris'
+  | 'rechnung'
+  | 'revolut_pay'
+  | 'satispay'
+  | 'samsung_pay'
+  | 'scalapay'
+  | 'sepa_debit'
+  | 'sequra'
+  | 'shopeepay'
+  | 'sofort'
+  | 'south_korea_market'
+  | 'sunbit'
+  | 'swish'
+  | 'twint'
+  | 'upi'
+  | 'vipps'
+  | 'us_bank_account'
+  | 'wero'
+  | 'wechat_pay'
+  | 'zip';
+
+export type FieldsOption = {
+  billingDetails?: BillingDetailsFieldsOption;
+} & {
+  [K in PaymentElementPaymentMethodType]?: {
+    billingDetails?: BillingDetailsFieldsOption;
+  };
+};
 
 export type TermOption = 'auto' | 'always' | 'never';
 
