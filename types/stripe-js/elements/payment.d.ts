@@ -195,6 +195,11 @@ export interface DefaultValuesOption {
 }
 
 export type FieldOption = 'auto' | 'never';
+
+/**
+ * Requires beta access:
+ * Contact [Stripe support](https://support.stripe.com/) for more information.
+ */
 export type FieldOptionWithAlways = FieldOption | 'always';
 
 export type BillingDetailsFieldsOption =
