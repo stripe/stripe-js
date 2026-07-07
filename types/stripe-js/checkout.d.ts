@@ -638,6 +638,26 @@ export type StripeCheckoutRunServerUpdateResult =
   | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
+type ValidateElementsValidationError = {
+  message: string;
+  element:
+    | 'payment'
+    | 'checkoutForm'
+    | 'contactDetails'
+    | 'shippingAddress'
+    | 'billingAddress'
+    | 'taxId'
+    | 'linkAuthentication';
+};
+type ValidateElementsError = {
+  code: 'validation_error' | 'no_elements' | null;
+  message: string;
+  validation_errors: ValidateElementsValidationError[];
+};
+export type StripeCheckoutValidateElementsResult =
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: ValidateElementsError};
+
 type LoadActionsError = {message: string; code: null};
 export type StripeCheckoutLoadActionsSuccess = {
   applyPromotionCode: (
@@ -683,6 +703,7 @@ export type StripeCheckoutLoadActionsSuccess = {
   runServerUpdate: (
     userFunction: RunServerUpdateFunction
   ) => Promise<StripeCheckoutRunServerUpdateResult>;
+  validateElements: () => Promise<StripeCheckoutValidateElementsResult>;
 };
 export type StripeCheckoutLoadActionsResult =
   | {type: 'success'; actions: StripeCheckoutLoadActionsSuccess}
