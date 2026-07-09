@@ -17,6 +17,88 @@ export type CheckoutFormAddress = {
 };
 
 /**
+ * The `value` payload returned in the change event and getValue() method.
+ */
+export type CheckoutFormValues = {
+  customerDetails: {
+    email: string;
+    name?: string;
+    businessName?: string;
+    phone?: string;
+  };
+  shippingOption?: {
+    id: string;
+    displayName: string;
+    amount: string;
+  };
+  shippingAddress?: {
+    name: string;
+    address: CheckoutFormAddress;
+  };
+  billingAddress?: {
+    name: string;
+    address: CheckoutFormAddress;
+  };
+  tax?: {
+    businessName?: string;
+    taxId: string;
+    taxIdType: TaxIdType;
+    externalTaxIdType: ExternalTaxIdType;
+  };
+  payment?: {
+    collapsed: boolean;
+    type: string;
+    country?: string | null;
+    billingDetails?: {
+      address?: {
+        country?: string;
+        postal_code?: string;
+      };
+    } | null;
+    payment_method?: {
+      id: string;
+      type: string;
+      billing_details: {
+        address: CheckoutFormAddress;
+        name: string | null;
+        email: string | null;
+        phone: string | null;
+      };
+    } | null;
+    savePaymentMethod?: boolean;
+  };
+  adaptivePricing?: {
+    /**
+     * The currently selected local currency code (e.g. 'eur', 'gbp').
+     */
+    currency: string;
+  };
+  customFields?: Record<string, string | number>;
+  customComponents?: Record<string, string | number>;
+};
+
+/**
+ * The items in the `value` object that have a corresponding status object.
+ */
+type CheckoutFormValueSectionsWithStatuses = Omit<
+  CheckoutFormValues,
+  'adaptivePricing' | 'shippingOption'
+>;
+
+type SectionStatus = {complete: boolean; empty: boolean};
+
+/**
+ * The `status` payload returned in the change event and getValue() method.
+ * - each section in the values object has a corresponding status object: {complete: boolean, empty: boolean}.
+ * - customComponents includes the status of each component: {"id of custom component": {complete: boolean, empty: boolean}} .
+ */
+export type CheckoutFormStatus = {
+  [K in keyof CheckoutFormValueSectionsWithStatuses]: K extends 'customComponents'
+    ? Record<string, SectionStatus>
+    : SectionStatus;
+};
+
+/**
  * The change event payload for the CheckoutForm.
  */
 export interface StripeCheckoutFormChangeEvent {
@@ -38,62 +120,18 @@ export interface StripeCheckoutFormChangeEvent {
   /**
    * An object containing the current form values.
    */
-  value: {
-    customerDetails: {
-      email: string;
-      name?: string;
-      businessName?: string;
-      phone?: string;
-    };
-    shippingOption?: {
-      id: string;
-      displayName: string;
-      amount: string;
-    };
-    shippingAddress?: {
-      name: string;
-      address: CheckoutFormAddress;
-    };
-    billingAddress?: {
-      name: string;
-      address: CheckoutFormAddress;
-    };
-    tax?: {
-      businessName?: string;
-      taxId: string;
-      taxIdType: TaxIdType;
-      externalTaxIdType: ExternalTaxIdType;
-    };
-    customFields?: Record<string, string | number>;
-    payment?: {
-      collapsed: boolean;
-      type: string;
-      country?: string | null;
-      billingDetails?: {
-        address?: {
-          country?: string;
-          postal_code?: string;
-        };
-      } | null;
-      payment_method?: {
-        id: string;
-        type: string;
-        billing_details: {
-          address: CheckoutFormAddress;
-          name: string | null;
-          email: string | null;
-          phone: string | null;
-        };
-      } | null;
-      savePaymentMethod?: boolean;
-    };
-    adaptivePricing?: {
-      /**
-       * The currently selected local currency code (e.g. 'eur', 'gbp').
-       */
-      currency: string;
-    };
-  };
+  value: CheckoutFormValues;
+
+  /**
+   * An object containing the current status (complete/empty) of each section in the values object.
+   *
+   * Ex.
+   *  - when all values in the `values.customerDetails` object are empty,
+   *    `status.customerDetails.empty` will be true.
+   *  - when all values in the `values.customerDetails` object are complete,
+   *     `status.customerDetails.complete` will be true.
+   */
+  status: CheckoutFormStatus;
 
   /**
    * Array of views in compact layout. Only defined for compact layout.
