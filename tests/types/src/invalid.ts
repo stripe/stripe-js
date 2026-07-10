@@ -288,6 +288,13 @@ currencySelectorElement.update({});
 // @ts-expect-error: AddressElement requires a mode
 elements.create('address');
 
+// @ts-expect-error: name must be "never" | "auto"
+elements.create('address', {
+  fields: {
+    name: 'always',
+  },
+});
+
 // @ts-expect-error: No overload matches this call
 elements.create('issuingCardNumberDisplay');
 
@@ -627,6 +634,20 @@ checkoutElementsSdk.loadActions().then((loadActionsResult) => {
 checkoutElementsSdk.createForm();
 // @ts-expect-error Property 'getForm' does not exist on type 'StripeCheckoutElementsSdk'.
 checkoutElementsSdk.getForm();
+
+checkoutElementsSdk.createBillingAddressElement({
+  fields: {
+    // @ts-expect-error name must be "never" | "auto"
+    name: 'always',
+  },
+});
+
+checkoutElementsSdk.createShippingAddressElement({
+  fields: {
+    // @ts-expect-error name must be "never" | "auto"
+    name: 'always',
+  },
+});
 
 const checkoutFormSdk = stripe.initCheckoutFormSdk({
   clientSecret: 'cs_test_foo',

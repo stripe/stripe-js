@@ -391,6 +391,17 @@ export type StripeCheckoutAddressElementOptions = {
   display?: {
     name?: 'full' | 'split' | 'organization';
   };
+  /**
+   * Control which additional fields to display in the AddressElement.
+   */
+  fields?: {
+    phone?: 'always' | 'never' | 'auto';
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
+    name?: 'never' | 'auto';
+  };
 };
 
 export type StripeCheckoutContactDetailsElementOptions = Record<string, never>;

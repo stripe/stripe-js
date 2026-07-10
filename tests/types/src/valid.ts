@@ -968,6 +968,20 @@ const shippingAddressElement = elements.create('shippingAddress', {
   },
 });
 
+elements.create('address', {
+  mode: 'shipping',
+  fields: {
+    name: 'never',
+  },
+});
+
+elements.create('address', {
+  mode: 'shipping',
+  fields: {
+    name: 'auto',
+  },
+});
+
 shippingAddressElement
   .on('ready', (e: {elementType: 'shippingAddress'}) => {})
   .on('focus', (e: {elementType: 'shippingAddress'}) => {})
@@ -3664,6 +3678,30 @@ checkoutElementsSdk.createCurrencySelectorElement();
 checkoutElementsSdk.getCurrencySelectorElement();
 checkoutElementsSdk.createTaxIdElement();
 checkoutElementsSdk.getTaxIdElement();
+
+checkoutElementsSdk.createShippingAddressElement({
+  fields: {
+    name: 'never',
+  },
+});
+
+checkoutElementsSdk.createShippingAddressElement({
+  fields: {
+    name: 'auto',
+  },
+});
+
+checkoutElementsSdk.createBillingAddressElement({
+  fields: {
+    name: 'never',
+  },
+});
+
+checkoutElementsSdk.createBillingAddressElement({
+  fields: {
+    name: 'auto',
+  },
+});
 
 checkoutElementsSdk.loadFonts([
   {

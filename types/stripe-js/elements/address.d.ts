@@ -198,6 +198,11 @@ export interface StripeAddressElementOptions {
    */
   fields?: {
     phone?: 'always' | 'never' | 'auto';
+    /**
+     * Requires beta access:
+     * Contact [Stripe support](https://support.stripe.com/) for more information.
+     */
+    name?: 'never' | 'auto';
   };
 
   /**
