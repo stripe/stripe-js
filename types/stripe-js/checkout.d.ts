@@ -22,6 +22,7 @@ import {
   StripeCheckoutFormConfirmEvent,
   ExpressCheckoutPaymentMethodsOption,
   StripeContactDetailsElement,
+  StripeTermsElement,
 } from './elements';
 
 type SavedPaymentMethodOption = {
@@ -406,6 +407,8 @@ export type StripeCheckoutAddressElementOptions = {
 
 export type StripeCheckoutContactDetailsElementOptions = Record<string, never>;
 
+export type StripeCheckoutTermsElementOptions = Record<string, never>;
+
 /**
  * Wallet button theme options for CheckoutForm.
  */
@@ -658,6 +661,7 @@ type ValidateElementsValidationError = {
     | 'shippingAddress'
     | 'billingAddress'
     | 'taxId'
+    | 'terms'
     | 'linkAuthentication';
 };
 type ValidateElementsError = {
@@ -751,6 +755,8 @@ export interface StripeCheckoutElementsSdk {
   getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
   /* Requires beta header when initializing Stripe: @docs https://docs.stripe.com/tax/advanced/tax-ids?payment-ui=embedded-components#render-tax-id-element */
   getTaxIdElement(): StripeTaxIdElement | null;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  getTermsElement(): StripeTermsElement | null;
 
   createPaymentElement(
     options?: StripeCheckoutPaymentElementOptions
@@ -770,6 +776,10 @@ export interface StripeCheckoutElementsSdk {
   createContactDetailsElement(
     options?: StripeCheckoutContactDetailsElementOptions
   ): StripeContactDetailsElement;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  createTermsElement(
+    options?: StripeCheckoutTermsElementOptions
+  ): StripeTermsElement;
 }
 
 /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */

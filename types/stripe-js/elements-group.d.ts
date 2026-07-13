@@ -43,6 +43,8 @@ import {
   StripeAddressElementGetElementOptions,
   StripeTaxIdElement,
   StripeTaxIdElementOptions,
+  StripeTermsElement,
+  StripeTermsElementOptions,
 } from './elements';
 import {StripeError} from './stripe';
 
@@ -445,6 +447,29 @@ export interface StripeElements {
   getElement(
     elementType: 'currencySelector'
   ): StripeCurrencySelectorElement | null;
+
+  /////////////////////////////
+  /// terms
+  /////////////////////////////
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Creates a `TermsElement`.
+   */
+  create(
+    elementType: 'terms',
+    options?: StripeTermsElementOptions
+  ): StripeTermsElement;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(elementType: 'terms'): StripeTermsElement | null;
 }
 
 export type StripeElementType =
@@ -470,6 +495,7 @@ export type StripeElementType =
   | 'issuingCardPinDisplay'
   | 'issuingCardCopyButton'
   | 'taxId'
+  | 'terms'
   | 'issuingAddToWalletButton';
 
 export type StripeElement =
@@ -493,7 +519,8 @@ export type StripeElement =
   | StripeIssuingCardPinDisplayElement
   | StripeIssuingCardCopyButtonElement
   | StripeShippingAddressElement
-  | StripeTaxIdElement;
+  | StripeTaxIdElement
+  | StripeTermsElement;
 
 export type StripeElementLocale =
   | 'auto'

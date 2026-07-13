@@ -34,6 +34,7 @@ import {
   StripeLinkAuthenticationElement,
   StripeContactDetailsElement,
   StripeContactDetailsElementChangeEvent,
+  StripeTermsElement,
   StripeShippingAddressElementChangeEvent,
   StripeShippingAddressElement,
   StripeAddressElementChangeEvent,
@@ -848,6 +849,30 @@ const retrievedContactDetailsElement: StripeContactDetailsElement | null = eleme
   'contactDetails'
 );
 
+let termsElementDefaults: StripeTermsElement = elements.create('terms');
+termsElementDefaults = elements.create('terms', {});
+
+const termsElement = elements.create('terms');
+
+termsElement
+  .on('ready', (e: {elementType: 'terms'}) => {})
+  .on('focus', (e: {elementType: 'terms'}) => {})
+  .on('blur', (e: {elementType: 'terms'}) => {})
+  .on('loaderstart', (e: {elementType: 'terms'}) => {})
+  .on(
+    'loaderror',
+    (e: {
+      elementType: 'terms';
+      error: {
+        type: string;
+      };
+    }) => {}
+  );
+
+const retrievedTermsElement: StripeTermsElement | null = elements.getElement(
+  'terms'
+);
+
 let addressElementDefaults: StripeAddressElement = elements.create('address', {
   mode: 'shipping',
 });
@@ -1413,6 +1438,7 @@ cardNumberElement.destroy();
 cardCvcElement.destroy();
 cardExpiryElement.destroy();
 contactDetailsElement.destroy();
+termsElement.destroy();
 currencySelectorElement.destroy();
 ibanElement.destroy();
 paymentRequestButtonElement.destroy();
@@ -3678,6 +3704,8 @@ checkoutElementsSdk.createCurrencySelectorElement();
 checkoutElementsSdk.getCurrencySelectorElement();
 checkoutElementsSdk.createTaxIdElement();
 checkoutElementsSdk.getTaxIdElement();
+checkoutElementsSdk.createTermsElement();
+checkoutElementsSdk.getTermsElement();
 
 checkoutElementsSdk.createShippingAddressElement({
   fields: {
