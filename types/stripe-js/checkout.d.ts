@@ -175,6 +175,8 @@ export type StripeCheckoutLineItem = {
   } | null;
   adjustableQuantity: StripeCheckoutAdjustableQuantity | null;
   images: string[];
+  priceId?: string | null;
+  isRemovable?: boolean;
 };
 
 export type StripeCheckoutRecurring = {
@@ -230,6 +232,23 @@ export type StripeCheckoutTotalSummary = {
 export type StripeCheckoutTrial = {
   trialEnd: number;
   trialPeriodDays: number;
+};
+
+export type StripeCheckoutOptionalItem = {
+  priceId: string;
+  name: string;
+  description: string | null;
+  unitAmount: StripeCheckoutAmount;
+  unitAmountDecimal: StripeCheckoutAmount | null;
+  unitLabel: string | null;
+  quantity: number;
+  adjustableQuantity: StripeCheckoutAdjustableQuantity | null;
+  recurring: {
+    interval: StripeCheckoutBillingInterval;
+    intervalCount: number;
+  } | null;
+  images: string[];
+  isSelected: boolean;
 };
 
 export type StripeCheckoutCurrencyOption = StripeCheckoutAmount & {
@@ -376,6 +395,7 @@ export interface StripeCheckoutSession {
   taxAmounts: Array<StripeCheckoutTaxAmount> | null;
   taxIdInfo: StripeCheckoutTaxIdInfo | null;
   total: StripeCheckoutTotalSummary;
+  optionalItems: Array<StripeCheckoutOptionalItem> | null;
 }
 
 export type StripeCheckoutPaymentElementOptions = {
@@ -623,6 +643,27 @@ export type StripeCheckoutUpdateLineItemQuantityResult =
   | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
 
+export type StripeCheckoutAddOptionalLineItemResult =
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: {message: string; code: null}};
+
+export type StripeCheckoutRemoveOptionalLineItemResult =
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {
+      type: 'error';
+      error:
+        | {
+            message: string;
+            code: 'promotionCodeAmountInsufficient';
+            promotionCodeAmountInsufficient: {
+              minimumAmount: number;
+              minimumAmountCurrency: string;
+            };
+          }
+        | {message: string; code: 'couponAppliesToNothing'}
+        | {message: string; code: null};
+    };
+
 export type StripeCheckoutUpdateShippingOptionResult =
   | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: AnyBuyerError};
@@ -719,6 +760,12 @@ export type StripeCheckoutLoadActionsSuccess = {
     userFunction: RunServerUpdateFunction
   ) => Promise<StripeCheckoutRunServerUpdateResult>;
   validateElements: () => Promise<StripeCheckoutValidateElementsResult>;
+  addOptionalLineItem: (
+    priceId: string
+  ) => Promise<StripeCheckoutAddOptionalLineItemResult>;
+  removeOptionalLineItem: (
+    priceId: string
+  ) => Promise<StripeCheckoutRemoveOptionalLineItemResult>;
 };
 export type StripeCheckoutLoadActionsResult =
   | {type: 'success'; actions: StripeCheckoutLoadActionsSuccess}
