@@ -175,7 +175,7 @@ export type StripeCheckoutLineItem = {
   } | null;
   adjustableQuantity: StripeCheckoutAdjustableQuantity | null;
   images: string[];
-  priceId?: string | null;
+  priceId?: string;
   isRemovable?: boolean;
 };
 
