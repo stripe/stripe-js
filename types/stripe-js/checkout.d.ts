@@ -175,8 +175,8 @@ export type StripeCheckoutLineItem = {
   } | null;
   adjustableQuantity: StripeCheckoutAdjustableQuantity | null;
   images: string[];
-  priceId?: string;
-  isRemovable?: boolean;
+  priceId: string;
+  isRemovable: boolean;
 };
 
 export type StripeCheckoutRecurring = {
