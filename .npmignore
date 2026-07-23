@@ -10,6 +10,7 @@
 !/VERSION
 !/OPENAPI_VERSION
 !/package.json
+!/scripts/postinstall.js
 !/cjs/**/*
 !/esm/**/*
 !/types/**/*

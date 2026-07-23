@@ -65,7 +65,8 @@
   "license": "MIT",
   "scripts": {
     "test": "tsc -p tsconfig.cjs.json && mocha",
-    "prepack": "just install && just build"
+    "prepack": "just install && just build",
+    "postinstall": "node scripts/postinstall.js"
   },
   "exports": {
     "browser": {
