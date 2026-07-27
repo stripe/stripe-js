@@ -167,7 +167,7 @@ export type StripePaymentElement = StripeElementBase & {
    * Updates the options the `PaymentElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
-  update(options: Partial<StripePaymentElementOptions>): StripePaymentElement;
+  update(options: Partial<StripePaymentElementUpdateOptions>): StripePaymentElement;
 
   /**
    * Collapses the Payment Element into a row of payment method tabs.
@@ -400,6 +400,24 @@ export interface StripePaymentElementOptions {
    */
   applePay?: ApplePayOption;
 }
+
+/**
+ * The subset of `StripePaymentElementOptions` that can be updated after the
+ * `PaymentElement` has been created.
+ *
+ * @see https://docs.stripe.com/js/elements_object/update_payment_element
+ */
+export type StripePaymentElementUpdateOptions = Pick<
+  StripePaymentElementOptions,
+  | 'defaultValues'
+  | 'business'
+  | 'paymentMethodOrder'
+  | 'fields'
+  | 'readOnly'
+  | 'terms'
+  | 'layout'
+  | 'applePay'
+>;
 
 export interface StripePaymentElementChangeEvent {
   /**

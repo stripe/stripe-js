@@ -166,6 +166,13 @@ elements.create('payment', {
   },
 });
 
+paymentElement.update({
+  // @ts-expect-error: `wallets` option can't be updated
+  wallets: {
+    applePay: 'never',
+  },
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {
