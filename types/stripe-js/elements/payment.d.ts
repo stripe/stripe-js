@@ -167,7 +167,9 @@ export type StripePaymentElement = StripeElementBase & {
    * Updates the options the `PaymentElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
-  update(options: Partial<StripePaymentElementUpdateOptions>): StripePaymentElement;
+  update(
+    options: Partial<StripePaymentElementUpdateOptions>
+  ): StripePaymentElement;
 
   /**
    * Collapses the Payment Element into a row of payment method tabs.
