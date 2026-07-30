@@ -759,6 +759,13 @@ checkoutFormSdk.createForm({
 // @ts-expect-error: contacts must be an array of ContactOption
 checkoutFormSdk.createForm({contacts: 'invalid'});
 
+checkoutFormSdk.createForm({
+  features: {
+    // @ts-expect-error: promotionCodeCollection must be 'auto' | 'never'
+    promotionCodeCollection: 'invalid',
+  },
+});
+
 // StripeCheckoutFormSdk.loadActions() omits client-only update methods that
 // are driven by the CheckoutForm UI rather than imperative calls.
 checkoutFormSdk.loadActions().then((loadActionsResult) => {

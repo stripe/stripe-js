@@ -3949,6 +3949,16 @@ checkoutFormSdk.createForm({
     buttonHeight: 50,
   },
 });
+checkoutFormSdk.createForm({
+  features: {
+    promotionCodeCollection: 'auto',
+  },
+});
+checkoutFormSdk.createForm({
+  features: {
+    promotionCodeCollection: 'never',
+  },
+});
 const retrievedCheckoutForm: StripeCheckoutForm | null = checkoutFormSdk.getForm();
 
 checkoutFormSdk.createCurrencySelectorElement();
