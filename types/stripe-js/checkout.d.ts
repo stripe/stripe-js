@@ -468,6 +468,21 @@ export type StripeCheckoutFormOptions = {
      */
     paymentMethods?: ExpressCheckoutPaymentMethodsOption;
   };
+
+  /**
+   * Client-side feature configuration for the CheckoutForm.
+   */
+  features?: {
+    /**
+     * Control whether the promotion code collection UI is displayed in the CheckoutForm.
+     *
+     * Only applies when `allow_promotion_codes`is enabled on the Checkout Session.
+     *
+     * @default 'auto'
+     * @docs https://stripe.com/docs/checkout/promotion-codes
+     */
+    promotionCodeCollection?: 'auto' | 'never';
+  };
 };
 
 export type StripeCheckoutExpressCheckoutElementOptions = {
