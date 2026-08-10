@@ -541,6 +541,10 @@ const paymentElement: StripePaymentElement = elements.create('payment', {
     googlePay: 'auto',
     link: 'auto',
   },
+  walletOptions: {
+    emailRequired: true,
+    phoneNumberRequired: true,
+  },
   layout: {
     type: 'accordion',
     visibleAccordionItemsCount: 2,
@@ -578,6 +582,13 @@ paymentElement.update({
       },
       managementURL: 'https://atnnews.com/manage-subscription',
     },
+  },
+});
+
+paymentElement.update({
+  walletOptions: {
+    emailRequired: true,
+    phoneNumberRequired: false,
   },
 });
 
@@ -3693,6 +3704,12 @@ const checkoutElementsSdk = stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
 });
 const checkoutPaymentElement: StripePaymentElement = checkoutElementsSdk.createPaymentElement();
+checkoutElementsSdk.createPaymentElement({
+  walletOptions: {
+    emailRequired: true,
+    phoneNumberRequired: true,
+  },
+});
 checkoutElementsSdk.getPaymentElement();
 const checkoutAddressElement: StripeAddressElement = checkoutElementsSdk.createBillingAddressElement();
 checkoutElementsSdk.getBillingAddressElement();
