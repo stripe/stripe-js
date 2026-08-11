@@ -162,6 +162,10 @@ export interface StripeEmbeddedCheckoutOptions {
    */
   onComplete?: () => void;
   /**
+   * @deprecated `onShippingDetailsChange` is deprecated for Embedded Checkout.
+   * For dynamic shipping logic, use the Checkout Form SDK with
+   * `stripe.initCheckoutFormSdk()` instead.
+   *
    * onShippingDetailsChange is called when the customer completes the shipping details form.
    *
    * The callback is required when [permissions.update.shipping_details](https://docs.stripe.com/api/checkout/sessions/create#create_checkout_session-permissions-update-shipping_details) is set to `server_only`.
