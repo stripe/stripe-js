@@ -182,6 +182,13 @@ elements.create('payment', {
   },
 });
 
+paymentElement.update({
+  // @ts-expect-error: `wallets` option can't be updated
+  wallets: {
+    applePay: 'never',
+  },
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {
@@ -783,6 +790,13 @@ checkoutFormSdk.createForm({
 
 // @ts-expect-error: contacts must be an array of ContactOption
 checkoutFormSdk.createForm({contacts: 'invalid'});
+
+checkoutFormSdk.createForm({
+  features: {
+    // @ts-expect-error: promotionCodeCollection must be 'auto' | 'never'
+    promotionCodeCollection: 'invalid',
+  },
+});
 
 // StripeCheckoutFormSdk.loadActions() omits client-only update methods that
 // are driven by the CheckoutForm UI rather than imperative calls.
