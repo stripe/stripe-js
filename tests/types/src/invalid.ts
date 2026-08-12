@@ -166,6 +166,22 @@ elements.create('payment', {
   },
 });
 
+// invalid type for walletOptions.emailRequired
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  walletOptions: {
+    emailRequired: 'yes',
+  },
+});
+
+// invalid type for walletOptions.phoneNumberRequired
+// @ts-expect-error: No overload matches this call
+elements.create('payment', {
+  walletOptions: {
+    phoneNumberRequired: 'yes',
+  },
+});
+
 paymentElement.update({
   // @ts-expect-error: `wallets` option can't be updated
   wallets: {
@@ -653,6 +669,22 @@ checkoutElementsSdk.createShippingAddressElement({
   fields: {
     // @ts-expect-error name must be "never" | "auto"
     name: 'always',
+  },
+});
+
+// invalid type for walletOptions.emailRequired in EwCS
+checkoutElementsSdk.createPaymentElement({
+  walletOptions: {
+    // @ts-expect-error: Type 'string' is not assignable to type 'boolean | undefined'
+    emailRequired: 'yes',
+  },
+});
+
+// invalid type for walletOptions.phoneNumberRequired in EwCS
+checkoutElementsSdk.createPaymentElement({
+  walletOptions: {
+    // @ts-expect-error: Type 'string' is not assignable to type 'boolean | undefined'
+    phoneNumberRequired: 'yes',
   },
 });
 

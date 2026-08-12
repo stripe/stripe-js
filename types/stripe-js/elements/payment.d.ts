@@ -336,6 +336,11 @@ export interface PaymentWalletsOption {
   link?: PaymentWalletOption;
 }
 
+export interface PaymentWalletOptionsOption {
+  emailRequired?: boolean;
+  phoneNumberRequired?: boolean;
+}
+
 export type Layout = 'tabs' | 'accordion' | 'auto';
 type RadiosOption = 'auto' | 'never' | 'always' | 'if_multiple';
 
@@ -393,6 +398,11 @@ export interface StripePaymentElementOptions {
   wallets?: PaymentWalletsOption;
 
   /**
+   * Control wallet behavior options in the Payment Element.
+   */
+  walletOptions?: PaymentWalletOptionsOption;
+
+  /**
    * Specify a layout to use when rendering a Payment Element.
    */
   layout?: Layout | LayoutObject;
@@ -419,6 +429,7 @@ export type StripePaymentElementUpdateOptions = Pick<
   | 'terms'
   | 'layout'
   | 'applePay'
+  | 'walletOptions'
 >;
 
 export interface StripePaymentElementChangeEvent {

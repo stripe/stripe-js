@@ -3,6 +3,7 @@ import {
   Layout,
   TermsOption,
   StripePaymentElement,
+  PaymentWalletOptionsOption,
 } from './elements/payment';
 import {ContactOption, StripeAddressElement} from './elements/address';
 import {Appearance, CssFontSource, CustomFontSource} from './elements-group';
@@ -405,6 +406,7 @@ export type StripeCheckoutPaymentElementOptions = {
   terms?: TermsOption;
   fields?: FieldsOption;
   wallets?: PaymentWalletsOption;
+  walletOptions?: PaymentWalletOptionsOption;
 };
 
 export type StripeCheckoutAddressElementOptions = {
