@@ -162,10 +162,7 @@ export interface StripeEmbeddedCheckoutOptions {
    */
   onComplete?: () => void;
   /**
-   * onShippingDetailsChange is called when the customer completes the shipping details form.
-   *
-   * The callback is required when [permissions.update.shipping_details](https://docs.stripe.com/api/checkout/sessions/create#create_checkout_session-permissions-update-shipping_details) is set to `server_only`.
-   * For a step-by-step guide on using this callback to customize shipping options during checkout, see [Customize Shipping Options](https://docs.stripe.com/payments/checkout/custom-shipping-options).
+   * @deprecated Dynamic shipping updates are deprecated in Embedded Checkout.
    */
   onShippingDetailsChange?: (
     event: StripeEmbeddedCheckoutShippingDetailsChangeEvent
