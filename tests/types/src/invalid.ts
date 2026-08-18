@@ -596,6 +596,16 @@ stripe
     result.confirmationToken.mandate_data;
   });
 
+stripe.createConfirmationToken({
+  elements,
+  params: {
+    metadata: {
+      // @ts-expect-error metadata values must be string, number, or null
+      order_id: true,
+    },
+  },
+});
+
 const paymentRequest = stripe.paymentRequest({
   country: 'US',
   currency: 'usd',
