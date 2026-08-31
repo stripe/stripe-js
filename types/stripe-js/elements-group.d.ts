@@ -1247,6 +1247,7 @@ export interface Appearance {
     colorWarning?: string;
 
     // Buttons
+    buttonBoxShadow?: string;
     buttonColorBackground?: string;
     buttonColorText?: string;
     buttonFontSize?: string;
