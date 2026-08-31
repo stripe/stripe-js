@@ -1,5 +1,5 @@
 import {StripeElements} from '../stripe-js';
-import {Address} from './shared';
+import {Address, MetadataParam} from './shared';
 import {PaymentMethod, PaymentMethodCreateParams} from './payment-methods';
 import {PaymentIntent} from './payment-intents';
 
@@ -105,6 +105,15 @@ export interface ConfirmationTokenCreateParams {
    * The url your customer will be directed to after they complete authentication.
    */
   return_url?: string | null;
+
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   *
+   * This can be a maximum of 50 keys.
+   *
+   * @docs https://docs.stripe.com/js/confirmation_tokens/create_confirmation_token#create_confirmation_token-options-params-metadata
+   */
+  metadata?: MetadataParam;
 }
 
 export interface CreateConfirmationToken {

@@ -2538,6 +2538,9 @@ stripe
         name: 'Jenny Rosen',
       },
       return_url: 'https://shop.example.com/success.html',
+      metadata: {
+        order_id: '6735',
+      },
     },
   })
   .then((result) => {
