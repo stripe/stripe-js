@@ -178,10 +178,7 @@ export type StripeCheckoutLineItem = {
   images: string[];
   priceId: string;
   isRemovable: boolean;
-  pricing:
-    | StripeCheckoutGraduatedPricing
-    | StripeCheckoutVolumePricing
-    | null;
+  pricing: StripeCheckoutGraduatedPricing | StripeCheckoutVolumePricing | null;
   transformQuantity: StripeCheckoutTransformQuantity | null;
 };
 
