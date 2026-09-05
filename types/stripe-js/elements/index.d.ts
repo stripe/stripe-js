@@ -12,6 +12,7 @@ export * from './currency-selector';
 export * from './express-checkout';
 export * from './iban';
 export * from './link-authentication';
+export * from './link-signup';
 export * from './payment-request-button';
 export * from './payment';
 export * from './shipping-address';
