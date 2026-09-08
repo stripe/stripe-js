@@ -178,6 +178,36 @@ export type StripeCheckoutLineItem = {
   images: string[];
   priceId: string;
   isRemovable: boolean;
+  pricing: StripeCheckoutGraduatedPricing | StripeCheckoutVolumePricing | null;
+  transformQuantity: StripeCheckoutTransformQuantity | null;
+};
+
+export type StripeCheckoutTransformQuantity = {
+  divideBy: number;
+  round: 'up' | 'down';
+  packageCount: number;
+};
+
+export type StripeCheckoutGraduatedPricing = {
+  tiersMode: 'graduated';
+  tiers: Array<StripeCheckoutTierBreakdown>;
+  recurringTiers: Array<StripeCheckoutTierBreakdown> | null;
+};
+
+export type StripeCheckoutVolumePricing = {
+  tiersMode: 'volume';
+  tiers: Array<StripeCheckoutTierBreakdown>;
+  recurringTiers: Array<StripeCheckoutTierBreakdown> | null;
+};
+
+export type StripeCheckoutTierBreakdown = {
+  upTo: number | null;
+  unitAmount: StripeCheckoutAmount | null;
+  unitAmountDecimal: StripeCheckoutAmount | null;
+  flatAmount: StripeCheckoutAmount | null;
+  flatAmountDecimal: StripeCheckoutAmount | null;
+  quantity: number;
+  total: StripeCheckoutAmount | null;
 };
 
 export type StripeCheckoutRecurring = {
