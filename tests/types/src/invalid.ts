@@ -7,6 +7,7 @@ import {
   StripeExpressCheckoutElement,
   StripeElementsOptions,
   StripeCurrencySelectorElement,
+  StripeLinkSignupElement,
   ReleaseTrain,
 } from '../../../types';
 import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay';
@@ -18,6 +19,7 @@ declare const ibanElement: StripeIbanElement;
 declare const paymentElement: StripePaymentElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
 declare const currencySelectorElement: StripeCurrencySelectorElement;
+declare const linkSignupElement: StripeLinkSignupElement;
 
 const options: StripeElementsOptions = {
   clientSecret: '',
@@ -307,6 +309,30 @@ expressCheckoutElement.on('click', ({resolve}) => {
 
 // @ts-expect-error: CurrencySelector cannot be updated
 currencySelectorElement.update({});
+
+// @ts-expect-error: LinkSignupElement options do not accept unknown fields
+elements.create('linkSignup', {unknownOption: true});
+
+// @ts-expect-error: LinkSignupElement default values do not accept unknown fields
+elements.create('linkSignup', {defaultValues: {unknownField: 'value'}});
+
+// @ts-expect-error: LinkSignupElement email must be a string
+elements.create('linkSignup', {defaultValues: {email: 123}});
+
+// @ts-expect-error: LinkSignupElement name must be a string
+elements.create('linkSignup', {defaultValues: {name: 123}});
+
+// @ts-expect-error: LinkSignupElement phone must be a string
+elements.create('linkSignup', {defaultValues: {phone: 123}});
+
+// @ts-expect-error: LinkSignupElement does not emit change events
+linkSignupElement.on('change', () => {});
+
+// @ts-expect-error: LinkSignupElement cannot be updated
+linkSignupElement.update({});
+
+// @ts-expect-error: LinkSignupElement does not expose its value
+linkSignupElement.getValue();
 
 // @ts-expect-error: AddressElement requires a mode
 elements.create('address');
@@ -641,6 +667,14 @@ stripe
 const checkoutElementsSdk = stripe.initCheckoutElementsSdk({
   clientSecret: 'cs_test_foo',
 });
+// @ts-expect-error: LinkSignupElement options do not accept unknown fields
+checkoutElementsSdk.createLinkSignupElement({unknownOption: true});
+checkoutElementsSdk.createLinkSignupElement({
+  // @ts-expect-error: LinkSignupElement default values do not accept unknown fields
+  defaultValues: {unknownField: 'value'},
+});
+// @ts-expect-error: LinkSignupElement email must be a string
+checkoutElementsSdk.createLinkSignupElement({defaultValues: {email: 123}});
 // @ts-expect-error Property 'createElement' does not exist on type 'StripeCheckoutElementsSdk'.
 checkoutElementsSdk.createElement('payment');
 // @ts-expect-error - doesn't take a number

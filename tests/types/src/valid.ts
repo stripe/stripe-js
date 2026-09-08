@@ -32,6 +32,7 @@ import {
   StripePaymentMethodMessagingElement,
   StripeLinkAuthenticationElementChangeEvent,
   StripeLinkAuthenticationElement,
+  StripeLinkSignupElement,
   StripeContactDetailsElement,
   StripeContactDetailsElementChangeEvent,
   StripeTermsElement,
@@ -739,6 +740,7 @@ assert<
 const auBankElementType: StripeElementType = 'auBankAccount';
 const cardElementType: StripeElementType = 'card';
 const ibanElementType: StripeElementType = 'iban';
+const linkSignupElementType: StripeElementType = 'linkSignup';
 
 cardElement.mount('#bogus-container');
 ibanElement.mount('#bogus-container');
@@ -829,6 +831,36 @@ linkAuthenticationElement
 
 const retrievedLinkAuthenticationElement: StripeLinkAuthenticationElement | null = elements.getElement(
   'linkAuthentication'
+);
+
+let linkSignupElementDefaults: StripeLinkSignupElement = elements.create(
+  'linkSignup'
+);
+linkSignupElementDefaults = elements.create('linkSignup', {});
+
+const linkSignupElement = elements.create('linkSignup', {
+  defaultValues: {
+    email: 'foo@bar.com',
+    name: 'Jenny Rosen',
+    phone: '+15555555555',
+  },
+});
+
+linkSignupElement
+  .on('ready', (e: {elementType: 'linkSignup'}) => {})
+  .on('focus', (e: {elementType: 'linkSignup'}) => {})
+  .on('blur', (e: {elementType: 'linkSignup'}) => {})
+  .on('escape', (e: {elementType: 'linkSignup'}) => {})
+  .on('loaderstart', (e: {elementType: 'linkSignup'}) => {})
+  .on('loaderror', (e: {elementType: 'linkSignup'; error: StripeError}) => {});
+
+linkSignupElement
+  .once('ready', (e: {elementType: 'linkSignup'}) => {})
+  .off('ready')
+  .on('ready', (e: {elementType: 'linkSignup'}) => {});
+
+const retrievedLinkSignupElement: StripeLinkSignupElement | null = elements.getElement(
+  'linkSignup'
 );
 
 let contactDetailsElementDefaults: StripeContactDetailsElement = elements.create(
@@ -1454,6 +1486,9 @@ currencySelectorElement.destroy();
 ibanElement.destroy();
 paymentRequestButtonElement.destroy();
 linkAuthenticationElement.destroy();
+linkSignupElementDefaults.destroy();
+linkSignupElement.destroy();
+retrievedLinkSignupElement?.destroy();
 shippingAddressElement.destroy();
 expressCheckoutElementDefault.destroy();
 expressCheckoutElement.destroy();
@@ -3726,6 +3761,15 @@ checkoutElementsSdk.createTaxIdElement();
 checkoutElementsSdk.getTaxIdElement();
 checkoutElementsSdk.createTermsElement();
 checkoutElementsSdk.getTermsElement();
+const checkoutLinkSignupElement: StripeLinkSignupElement = checkoutElementsSdk.createLinkSignupElement();
+checkoutElementsSdk.createLinkSignupElement({
+  defaultValues: {
+    email: 'foo@bar.com',
+    name: 'Jenny Rosen',
+    phone: '+15555555555',
+  },
+});
+const retrievedCheckoutLinkSignupElement: StripeLinkSignupElement | null = checkoutElementsSdk.getLinkSignupElement();
 
 checkoutElementsSdk.createShippingAddressElement({
   fields: {
