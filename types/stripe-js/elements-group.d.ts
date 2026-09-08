@@ -10,6 +10,8 @@ import {
   StripePaymentElementOptions,
   StripeLinkAuthenticationElement,
   StripeLinkAuthenticationElementOptions,
+  StripeLinkSignupElement,
+  StripeLinkSignupElementOptions,
   StripeIdealBankElement,
   StripeIdealBankElementOptions,
   StripeIbanElement,
@@ -357,6 +359,29 @@ export interface StripeElements {
   ): StripeLinkAuthenticationElement | null;
 
   /////////////////////////////
+  /// linkSignup
+  /////////////////////////////
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Creates a `LinkSignupElement`.
+   */
+  create(
+    elementType: 'linkSignup',
+    options?: StripeLinkSignupElementOptions
+  ): StripeLinkSignupElement;
+
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Looks up a previously created `Element` by its type.
+   */
+  getElement(elementType: 'linkSignup'): StripeLinkSignupElement | null;
+
+  /////////////////////////////
   /// expressCheckout
   /////////////////////////////
 
@@ -515,6 +540,7 @@ export type StripeElementType =
   | 'paymentMethodMessaging'
   | 'paymentRequestButton'
   | 'linkAuthentication'
+  | 'linkSignup'
   | 'shippingAddress'
   | 'issuingCardNumberDisplay'
   | 'issuingCardCvcDisplay'
@@ -537,6 +563,7 @@ export type StripeElement =
   | StripeFpxBankElement
   | StripeIbanElement
   | StripeIdealBankElement
+  | StripeLinkSignupElement
   | StripeP24BankElement
   | StripeCurrencySelectorElement
   | StripeExpressCheckoutElement

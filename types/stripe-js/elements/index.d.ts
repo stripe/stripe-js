@@ -15,6 +15,7 @@ export * from './fpx-bank';
 export * from './iban';
 export * from './ideal-bank';
 export * from './link-authentication';
+export * from './link-signup';
 export * from './p24-bank';
 export * from './payment-request-button';
 export * from './payment';

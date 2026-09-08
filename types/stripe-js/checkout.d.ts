@@ -15,6 +15,7 @@ import {
   StripeExpressCheckoutElementConfirmEvent,
   StripeExpressCheckoutElementOptions,
   StripeExpressCheckoutElementReadyEvent,
+  StripeLinkSignupElement,
   StripeTaxIdElement,
   StripeTaxIdElementOptions,
 } from './elements';
@@ -354,6 +355,14 @@ export type StripeCheckoutAddressElementOptions = {
   };
 };
 
+export type StripeCheckoutLinkSignupElementOptions = {
+  defaultValues?: {
+    email?: string;
+    name?: string;
+    phone?: string;
+  };
+};
+
 export type StripeCheckoutExpressCheckoutElementOptions = {
   buttonHeight: StripeExpressCheckoutElementOptions['buttonHeight'];
   buttonTheme: StripeExpressCheckoutElementOptions['buttonTheme'];
@@ -607,6 +616,8 @@ export interface StripeCheckout {
   getShippingAddressElement(): StripeAddressElement | null;
   getExpressCheckoutElement(): StripeCheckoutExpressCheckoutElement | null;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  getLinkSignupElement(): StripeLinkSignupElement | null;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   getTaxIdElement(): StripeTaxIdElement | null;
@@ -622,6 +633,10 @@ export interface StripeCheckout {
   createExpressCheckoutElement(
     options?: StripeCheckoutExpressCheckoutElementOptions
   ): StripeCheckoutExpressCheckoutElement;
+  /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
+  createLinkSignupElement(
+    options?: StripeCheckoutLinkSignupElementOptions
+  ): StripeLinkSignupElement;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
   createCurrencySelectorElement(): StripeCurrencySelectorElement;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */
