@@ -189,8 +189,8 @@ GIT_STATUS=$(git status)
 #   exit 1
 # fi
 
-if ! grep -q "Your branch is up to date with 'cbala/7.10.0'." <<< "$GIT_STATUS"; then
-  echo "Error! Must be up to date with cbala/7.10.0 to publish"
+if ! grep -q "Your branch is up to date with 'origin/cbala/7.10.0'." <<< "$GIT_STATUS"; then
+  echo "Error! Must be up to date with origin/cbala/7.10.0 to publish"
   exit 1
 fi
 
