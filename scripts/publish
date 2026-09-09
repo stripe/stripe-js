@@ -85,17 +85,25 @@ create_github_release() {
     return
   fi
 
-  # Get the last two non-release-candidate releases. For example, `("v1.3.1" "v1.3.2")`
-  local versions=($(git tag --sort version:refname | grep '^v' | grep -v "rc" | tail -n 2))
+  # The version we just bumped and tagged. Don't infer this from the highest tag
+  # in the repo: for a backport release (e.g. cutting 7.10.0 while master is on
+  # 9.x) the highest tag belongs to a different release line, and creating a
+  # release for it fails with `Duplicate value for "tag_name"`.
+  local current_version="v$(node -p "require('./package.json').version")"
 
-  # If we didn't find exactly two previous version versions, give up
-  if [ ${#versions[@]} -ne 2 ]; then
+  # The non-release-candidate release immediately preceding this one, e.g.
+  # `v1.3.1` when releasing `v1.3.2`
+  local previous_version=$(
+    git tag --sort version:refname | grep '^v' | grep -v "rc" |
+      grep -x -B 1 "$current_version" | head -n 1
+  )
+
+  # If the current tag is missing, or nothing precedes it, give up
+  if [ -z "$previous_version" ] || [ "$previous_version" = "$current_version" ]; then
     create_github_release_fallback
     return
   fi
 
-  local previous_version="${versions[0]}"
-  local current_version="${versions[1]}"
   local commit_titles=$(git log --pretty=format:"- %s" "$previous_version".."$current_version"^)
   local release_notes="$(cat << EOF
 $current_version
