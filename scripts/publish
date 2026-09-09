@@ -192,13 +192,13 @@ git fetch
 
 GIT_STATUS=$(git status)
 
-if ! grep -q 'On branch master' <<< "$GIT_STATUS"; then
-  echo "Error! Must be on master branch to publish"
-  exit 1
-fi
+# if ! grep -q 'On branch master' <<< "$GIT_STATUS"; then
+#   echo "Error! Must be on master branch to publish"
+#   exit 1
+# fi
 
-if ! grep -q "Your branch is up to date with 'origin/master'." <<< "$GIT_STATUS"; then
-  echo "Error! Must be up to date with origin/master to publish"
+if ! grep -q "Your branch is up to date with 'dhsing/signup-element-legacy-v7'." <<< "$GIT_STATUS"; then
+  echo "Error! Must be up to date with dhsing/signup-element-legacy-v7 to publish"
   exit 1
 fi
 
