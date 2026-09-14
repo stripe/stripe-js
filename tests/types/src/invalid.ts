@@ -6,6 +6,7 @@ import {
   StripePaymentElement,
   StripeExpressCheckoutElement,
   StripeElementsOptions,
+  StripeElementsOptionsMode,
   StripeCurrencySelectorElement,
   StripeLinkSignupElement,
   ReleaseTrain,
@@ -33,6 +34,24 @@ const elements = stripe.elements(options);
 
 // @ts-expect-error mode must be one of payment, setup, or subscription
 stripe.elements({mode: 'test'});
+
+const removedPaymentMethodTypesOptions: StripeElementsOptionsMode = {
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1000,
+  // @ts-expect-error: paymentMethodTypes is not supported for deferred-intent Elements options
+  paymentMethodTypes: ['card'],
+};
+stripe.elements(removedPaymentMethodTypesOptions);
+
+const removedPaymentMethodTypesAliasOptions: StripeElementsOptionsMode = {
+  mode: 'payment',
+  currency: 'usd',
+  amount: 1000,
+  // @ts-expect-error: payment_method_types is not supported for deferred-intent Elements options
+  payment_method_types: ['card'],
+};
+stripe.elements(removedPaymentMethodTypesAliasOptions);
 
 // @ts-expect-error: currency is required when using mode='payment'
 stripe.elements({mode: 'payment'});
@@ -68,6 +87,16 @@ elements.update({
     customer: 'cus_foo',
     ephemeralKey: 'ek_test_foo',
   },
+});
+
+elements.update({
+  // @ts-expect-error: `paymentMethodTypes` is not updatable
+  paymentMethodTypes: ['card'],
+});
+
+elements.update({
+  // @ts-expect-error: `payment_method_types` is not updatable
+  payment_method_types: ['card'],
 });
 
 // invalid value for 'preferredNetwork'
