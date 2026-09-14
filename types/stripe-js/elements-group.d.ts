@@ -896,20 +896,6 @@ interface StripeElementsOptionsModeBase extends BaseStripeElementsOptions {
   on_behalf_of?: string;
 
   /**
-   * Instead of using automatic payment methods, declare specific payment methods to enable.
-   *
-   * @docs https://stripe.com/docs/payments/payment-methods/overview
-   */
-  paymentMethodTypes?: string[];
-
-  /**
-   * Instead of using automatic payment methods, declare specific payment methods to enable.
-   *
-   * @docs https://stripe.com/docs/payments/payment-methods/overview
-   */
-  payment_method_types?: string[];
-
-  /**
    * The list of payment method types to exclude from use with this payment.
    *
    * @docs https://stripe.com/docs/payments/payment-methods/overview
@@ -924,7 +910,7 @@ interface StripeElementsOptionsModeBase extends BaseStripeElementsOptions {
   allowedPaymentMethodTypes?: string[];
 
   /**
-   * When using automatic payment methods (omitting paymentMethodTypes), provide a
+   * When using automatic payment methods, provide a
    * payment method configuration ID for deriving payment methods.
    *
    * @docs https://stripe.com/docs/connect/payment-method-configurations
@@ -932,7 +918,7 @@ interface StripeElementsOptionsModeBase extends BaseStripeElementsOptions {
   paymentMethodConfiguration?: string;
 
   /**
-   * When using automatic payment methods (omitting payment_method_types), provide a
+   * When using automatic payment methods, provide a
    * payment method configuration ID for deriving payment methods.
    *
    * @docs https://stripe.com/docs/connect/payment-method-configurations
@@ -1086,20 +1072,6 @@ export interface StripeElementsUpdateOptions {
   capture_method?: 'manual' | 'automatic' | 'automatic_async';
 
   /**
-   * Instead of using automatic payment methods, declare specific payment methods to enable.
-   *
-   * @docs https://stripe.com/docs/payments/payment-methods/overview
-   */
-  payment_method_types?: string[];
-
-  /**
-   * Instead of using automatic payment methods, declare specific payment methods to enable.
-   *
-   * @docs https://stripe.com/docs/payments/payment-methods/overview
-   */
-  paymentMethodTypes?: string[];
-
-  /**
    * The list of payment method types to exclude from use with this payment.
    *
    * @docs https://stripe.com/docs/payments/payment-methods/overview
@@ -1114,7 +1086,7 @@ export interface StripeElementsUpdateOptions {
   allowedPaymentMethodTypes?: string[];
 
   /**
-   * When using automatic payment methods (omitting paymentMethodTypes), provide a
+   * When using automatic payment methods, provide a
    * payment method configuration ID for deriving payment methods.
    *
    * @docs https://stripe.com/docs/connect/payment-method-configurations
@@ -1122,7 +1094,7 @@ export interface StripeElementsUpdateOptions {
   paymentMethodConfiguration?: string;
 
   /**
-   * When using automatic payment methods (omitting payment_method_types), provide a
+   * When using automatic payment methods, provide a
    * payment method configuration ID for deriving payment methods.
    *
    * @docs https://stripe.com/docs/connect/payment-method-configurations
