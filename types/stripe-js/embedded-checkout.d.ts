@@ -161,20 +161,6 @@ export interface StripeEmbeddedCheckoutOptions {
    * You can use it to unmount Embedded Checkout and render a custom success UI.
    */
   onComplete?: () => void;
-  /**
-   * @deprecated Dynamic shipping updates are deprecated in Embedded Checkout.
-   */
-  onShippingDetailsChange?: (
-    event: StripeEmbeddedCheckoutShippingDetailsChangeEvent
-  ) => Promise<ResultAction>;
-  /**
-   * onLineItemsChange is called when the customer adds, removes, or modifies a line item.
-   * The callback is required when [permissions.update.line_items](https://docs.stripe.com/api/checkout/sessions/create#create_checkout_session-permissions-update-line_items) is set to `server_only`.
-   */
-  onLineItemsChange?: (
-    event: StripeEmbeddedCheckoutLineItemsChangeEvent
-  ) => Promise<ResultAction>;
-  /**
    * onAnalyticsEvent is called when analytics events occur during the checkout session.
    * You can use it to track customer behavior during the checkout session.
    */
