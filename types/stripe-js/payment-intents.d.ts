@@ -6,6 +6,7 @@ import {
   StripeAuBankAccountElement,
 } from './elements';
 import {PaymentMethodCreateParams, PaymentIntentConfirmParams} from '../api';
+import {PreCollectedConsent} from './financial-connections';
 import {Omit} from '../utils';
 
 export type CreatePaymentMethodData =
@@ -1637,6 +1638,8 @@ export interface CollectBankAccountForPaymentOptions {
    * The client secret of the PaymentIntent.
    */
   clientSecret: string;
+
+  preCollectedConsent?: PreCollectedConsent;
 
   params: CollectBankAccountParams;
 

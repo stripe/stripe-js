@@ -1,4 +1,5 @@
 import {PaymentMethodCreateParams, SetupIntentConfirmParams} from '../api';
+import {PreCollectedConsent} from './financial-connections';
 
 import {
   CreatePaymentMethodAcssDebitData,
@@ -322,6 +323,8 @@ export interface CollectBankAccountForSetupOptions {
    * The client secret of the SetupIntent.
    */
   clientSecret: string;
+
+  preCollectedConsent?: PreCollectedConsent;
 
   params: CollectBankAccountParams;
 

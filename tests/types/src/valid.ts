@@ -2603,6 +2603,10 @@ stripe
 stripe
   .collectBankAccountForPayment({
     clientSecret: '',
+    preCollectedConsent: {
+      consent: 'fccons_123',
+      collectedAt: 1788397200,
+    },
     params: {
       payment_method_type: '',
       payment_method_data: {
@@ -3053,6 +3057,10 @@ stripe
 stripe
   .collectBankAccountForSetup({
     clientSecret: '',
+    preCollectedConsent: {
+      consent: 'fccons_123',
+      collectedAt: 1788397200,
+    },
     params: {
       payment_method_type: '',
       payment_method_data: {
@@ -3358,6 +3366,10 @@ stripe.retrieveOrder('{ORDER_CLIENT_SECRET}').then((res) => {
 stripe
   .collectFinancialConnectionsAccounts({
     clientSecret: '{FINANCIAL_CONNECTIONS_CLIENT_SECRET}',
+    preCollectedConsent: {
+      consent: 'fccons_123',
+      collectedAt: 1788397200,
+    },
   })
   .then((result) => {
     if (result.error) {
@@ -3431,6 +3443,10 @@ stripe
 stripe
   .collectBankAccountToken({
     clientSecret: '{FINANCIAL_CONNECTIONS_CLIENT_SECRET}',
+    preCollectedConsent: {
+      consent: 'fccons_123',
+      collectedAt: 1788397200,
+    },
   })
   .then((result) => {
     if (result.error) {
