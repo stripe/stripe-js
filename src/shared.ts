@@ -103,60 +103,65 @@ export const loadScript = (
     return stripePromise;
   }
 
-  stripePromise = new Promise((resolve, reject) => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
-      // Resolve to null when imported server side. This makes the module
-      // safe to import in an isomorphic code base.
-      resolve(null);
-      return;
-    }
-
-    if (window.Stripe && params) {
-      console.warn(EXISTING_SCRIPT_MESSAGE);
-    }
-
-    if (window.Stripe) {
-      resolve(window.Stripe);
-      return;
-    }
-
-    try {
-      let script = findScript();
-
-      if (script && params) {
-        console.warn(EXISTING_SCRIPT_MESSAGE);
-      } else if (!script) {
-        script = injectScript(params);
-      } else if (
-        script &&
-        onLoadListener !== null &&
-        onErrorListener !== null
-      ) {
-        // remove event listeners
-        script.removeEventListener('load', onLoadListener);
-        script.removeEventListener('error', onErrorListener);
-
-        // if script exists, but we are reloading due to an error,
-        // reload script to trigger 'load' event
-        script.parentNode?.removeChild(script);
-        script = injectScript(params);
+  const load = () =>
+    new Promise<StripeConstructor | null>((resolve, reject) => {
+      if (typeof window === 'undefined' || typeof document === 'undefined') {
+        // Resolve to null when imported server side. This makes the module
+        // safe to import in an isomorphic code base.
+        resolve(null);
+        return;
       }
 
-      onLoadListener = onLoad(resolve, reject);
-      onErrorListener = onError(reject);
-      script.addEventListener('load', onLoadListener);
+      if (window.Stripe && params) {
+        console.warn(EXISTING_SCRIPT_MESSAGE);
+      }
 
-      script.addEventListener('error', onErrorListener);
-    } catch (error) {
-      reject(error);
-      return;
-    }
-  });
+      if (window.Stripe) {
+        resolve(window.Stripe);
+        return;
+      }
+
+      try {
+        let script = findScript();
+
+        if (script && params) {
+          console.warn(EXISTING_SCRIPT_MESSAGE);
+        } else if (!script) {
+          script = injectScript(params);
+        } else if (
+          script &&
+          onLoadListener !== null &&
+          onErrorListener !== null
+        ) {
+          // remove event listeners
+          script.removeEventListener('load', onLoadListener);
+          script.removeEventListener('error', onErrorListener);
+
+          // if script exists, but we are reloading due to an error,
+          // reload script to trigger 'load' event
+          script.parentNode?.removeChild(script);
+          script = injectScript(params);
+        }
+
+        onLoadListener = onLoad(resolve, reject);
+        onErrorListener = onError(reject);
+        script.addEventListener('load', onLoadListener);
+
+        script.addEventListener('error', onErrorListener);
+      } catch (error) {
+        reject(error);
+        return;
+      }
+    });
+
+  const retryableLoad = async () =>
+    load().catch((error) => {
+      stripePromise = null;
+      return Promise.reject(error);
+    });
+
   // Resets stripePromise on error
-  return stripePromise.catch((error) => {
-    stripePromise = null;
-    return Promise.reject(error);
-  });
+  return retryableLoad().catch(() => retryableLoad());
 };
 
 export const initStripe = (
