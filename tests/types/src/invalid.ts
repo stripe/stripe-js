@@ -9,6 +9,7 @@ import {
   StripeCurrencySelectorElement,
   StripeLinkSignupElement,
   ReleaseTrain,
+  PreCollectedConsent,
 } from '../../../types';
 import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay';
 
@@ -862,3 +863,30 @@ checkoutFormSdk.loadActions().then((loadActionsResult) => {
 
 // @ts-expect-error: Type '"clover"' is not assignable to type '"dahlia"'.
 const releaseTrain: ReleaseTrain = 'clover';
+
+// @ts-expect-error: consent is required
+const missingConsent: PreCollectedConsent = {collectedAt: 1788397200};
+
+const invalidConsent: PreCollectedConsent = {
+  // @ts-expect-error: consent must be a string
+  consent: 123,
+  collectedAt: 1788397200,
+};
+
+// @ts-expect-error: collectedAt is required
+const missingCollectedAt: PreCollectedConsent = {consent: 'fccons_123'};
+
+const invalidCollectedAt: PreCollectedConsent = {
+  consent: 'fccons_123',
+  // @ts-expect-error: collectedAt must be a number
+  collectedAt: '1788397200',
+};
+
+stripe.confirmPayment({
+  clientSecret: '',
+  // @ts-expect-error: preCollectedConsent is only supported by Financial Connections launch methods
+  preCollectedConsent: {
+    consent: 'fccons_123',
+    collectedAt: 1788397200,
+  },
+});
