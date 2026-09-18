@@ -119,7 +119,6 @@ const options: StripeElementsOptions = {
   amount: 1099,
   setupFutureUsage: 'off_session',
   captureMethod: 'automatic',
-  paymentMethodTypes: ['card'],
   paymentMethodCreation: 'manual',
   paymentMethodOptions: {
     card: {require_cvc_recollection: true, setup_future_usage: 'none'},
@@ -161,7 +160,6 @@ stripe.elements({
   currency: 'usd',
   setup_future_usage: 'off_session',
   capture_method: 'automatic',
-  payment_method_types: ['card'],
   payment_method_options: {
     us_bank_account: {financial_connections: {permissions: ['payment_method']}},
   },
@@ -172,7 +170,6 @@ stripe.elements({
   mode: 'setup',
   setup_future_usage: 'off_session',
   capture_method: 'automatic',
-  payment_method_types: ['card'],
   payment_method_options: {
     us_bank_account: {financial_connections: {permissions: ['payment_method']}},
   },
@@ -300,7 +297,6 @@ elements.update({
   amount: 1099,
   setupFutureUsage: 'off_session',
   captureMethod: 'automatic_async',
-  paymentMethodTypes: ['card'],
   on_behalf_of: 'acct_id',
 });
 
@@ -310,7 +306,6 @@ elements.update({
   amount: 1099,
   setup_future_usage: 'off_session',
   capture_method: 'automatic',
-  payment_method_types: ['card'],
   customPaymentMethods: [
     {
       id: 'cpmt_123',
