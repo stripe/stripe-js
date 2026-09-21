@@ -4074,4 +4074,4 @@ stripe.createEmbeddedCheckoutPage({
 });
 
 // ReleaseTrain type
-const releaseTrain: ReleaseTrain = 'dahlia';
+const releaseTrain: ReleaseTrain = 'endive';

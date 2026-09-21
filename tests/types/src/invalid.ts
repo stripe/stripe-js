@@ -861,7 +861,7 @@ checkoutFormSdk.loadActions().then((loadActionsResult) => {
   }
 });
 
-// @ts-expect-error: Type '"clover"' is not assignable to type '"dahlia"'.
+// @ts-expect-error: Type '"clover"' is not assignable to type '"endive"'.
 const releaseTrain: ReleaseTrain = 'clover';
 
 // @ts-expect-error: consent is required
