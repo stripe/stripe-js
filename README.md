@@ -43,6 +43,7 @@ pinned versions are as follows:
 | v7                    | basil         |
 | v8                    | clover        |
 | v9                    | dahlia        |
+| v10                   | endive        |
 
 ## Usage
 
