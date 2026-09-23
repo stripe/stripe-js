@@ -1,6 +1,6 @@
 import {StripeConstructorOptions, Stripe} from './stripe-js';
 
-export type ReleaseTrain = 'dahlia';
+export type ReleaseTrain = 'endive';
 
 export const loadStripe: (
   publishableKey: string,
