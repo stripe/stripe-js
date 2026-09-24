@@ -58,6 +58,13 @@ for (const {typescript, nodeTypes} of versionSnapshot) {
 
   let flags = ['--strict', '--noEmit'];
 
+  // TS 6+ requires --ignoreConfig to allow running tsc with specific files
+  // when tsconfig.json exists
+  // See https://github.com/microsoft/TypeScript/issues/54500, related to `--ignore-config`
+  if (typescript.major >= 6) {
+    flags.unshift('--ignoreConfig');
+  }
+
   try {
     await runTsc('src/valid.ts', flags);
     await runTsc('src/invalid.ts', flags);
