@@ -4,14 +4,27 @@ import 'zx/globals';
 import fs from 'fs';
 import path from 'path';
 
-const allVersions = JSON.parse(await $`yarn info typescript versions --json`)
-  .data;
-const timestamps = JSON.parse(await $`yarn info typescript time --json`).data;
+const allVersions = JSON.parse(
+  (await $`yarn info typescript versions --json`).stdout
+).data;
+const timestamps = JSON.parse(
+  (await $`yarn info typescript time --json`).stdout
+).data;
 const nodeTypesTags = JSON.parse(
-  await $`yarn info @types/node dist-tags --json`
+  (await $`yarn info @types/node dist-tags --json`).stdout
 ).data;
 
 const threeYearsAgo = Date.now() - 3 * 365 * 24 * 60 * 60 * 1000;
+
+const filteredVersions = allVersions
+  .filter((el) => el.match(/^\d+\.\d+\.\d+$/))
+  .reverse()
+  .filter((version) => {
+    const releaseDate = new Date(timestamps[version]).getTime();
+    return releaseDate > threeYearsAgo;
+  });
+
+console.log({filteredVersions, nodeTypesTags});
 
 const selectedVersions = allVersions
   .filter((el) => el.match(/^\d+\.\d+\.\d+$/))
@@ -33,6 +46,14 @@ const selectedVersions = allVersions
     const typescript = parseVersion(tsVersion);
 
     const nodeTypesTag = `ts${typescript.major}.${typescript.minor}`;
+
+    const nodeTypesVersion = nodeTypesTags[nodeTypesTag];
+
+    // return null if @types/node has not yet published a version for this TS version
+    if (!nodeTypesVersion) {
+      return null;
+    }
+
     const nodeTypes = parseVersion(nodeTypesTags[nodeTypesTag]);
 
     return {
@@ -41,6 +62,10 @@ const selectedVersions = allVersions
     };
   })
   .reduce((acc, release) => {
+    // skip releases where @types/node has not yet published a version for this TS version
+    if (!release) {
+      return acc;
+    }
     const {typescript} = release;
     const key = `${typescript.major}.${typescript.minor}`;
     if (!acc.has(key) || acc.get(key).patch < typescript.patch) {

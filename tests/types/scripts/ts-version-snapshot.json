@@ -1,14 +1,26 @@
 [
   {
     "typescript": {
+      "major": 6,
+      "minor": 0,
+      "patch": 3
+    },
+    "nodeTypes": {
+      "major": 26,
+      "minor": 6,
+      "patch": 2
+    }
+  },
+  {
+    "typescript": {
       "major": 5,
       "minor": 9,
       "patch": 3
     },
     "nodeTypes": {
-      "major": 25,
-      "minor": 5,
-      "patch": 0
+      "major": 26,
+      "minor": 6,
+      "patch": 2
     }
   },
   {
@@ -18,9 +30,9 @@
       "patch": 3
     },
     "nodeTypes": {
-      "major": 25,
-      "minor": 5,
-      "patch": 0
+      "major": 26,
+      "minor": 6,
+      "patch": 2
     }
   },
   {
@@ -30,9 +42,9 @@
       "patch": 3
     },
     "nodeTypes": {
-      "major": 25,
-      "minor": 5,
-      "patch": 0
+      "major": 26,
+      "minor": 6,
+      "patch": 2
     }
   },
   {
@@ -42,9 +54,9 @@
       "patch": 3
     },
     "nodeTypes": {
-      "major": 25,
-      "minor": 5,
-      "patch": 0
+      "major": 26,
+      "minor": 6,
+      "patch": 2
     }
   },
   {
@@ -55,8 +67,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 5,
-      "patch": 0
+      "minor": 9,
+      "patch": 3
     }
   },
   {
@@ -67,8 +79,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 5,
-      "patch": 0
+      "minor": 9,
+      "patch": 3
     }
   },
   {
@@ -79,44 +91,8 @@
     },
     "nodeTypes": {
       "major": 25,
-      "minor": 5,
-      "patch": 0
-    }
-  },
-  {
-    "typescript": {
-      "major": 5,
-      "minor": 2,
-      "patch": 2
-    },
-    "nodeTypes": {
-      "major": 25,
-      "minor": 5,
-      "patch": 0
-    }
-  },
-  {
-    "typescript": {
-      "major": 5,
-      "minor": 1,
-      "patch": 6
-    },
-    "nodeTypes": {
-      "major": 24,
-      "minor": 1,
-      "patch": 0
-    }
-  },
-  {
-    "typescript": {
-      "major": 5,
-      "minor": 0,
-      "patch": 4
-    },
-    "nodeTypes": {
-      "major": 22,
-      "minor": 13,
-      "patch": 14
+      "minor": 9,
+      "patch": 3
     }
   }
 ]
