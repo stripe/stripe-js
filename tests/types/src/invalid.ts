@@ -32,6 +32,18 @@ const options: StripeElementsOptions = {
 // @ts-expect-error: Passing `clientSecret` or `mode` implies different integration paths which cannot be combined
 const elements = stripe.elements(options);
 
+// @ts-expect-error: `paymentRequestButton` is no longer a supported Element
+elements.create('paymentRequestButton', {
+  paymentRequest: stripe.paymentRequest({
+    country: 'US',
+    currency: 'usd',
+    total: {
+      label: 'Demo total',
+      amount: 1000,
+    },
+  }),
+});
+
 // @ts-expect-error mode must be one of payment, setup, or subscription
 stripe.elements({mode: 'test'});
 

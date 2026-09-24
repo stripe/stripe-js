@@ -5,8 +5,6 @@ import {
   StripeCurrencySelectorElementOptions,
   StripeShippingAddressElement,
   StripeShippingAddressElementOptions,
-  StripePaymentRequestButtonElement,
-  StripePaymentRequestButtonElementOptions,
   StripePaymentElement,
   StripePaymentElementOptions,
   StripeLinkAuthenticationElement,
@@ -326,27 +324,6 @@ export interface StripeElements {
   getElement(elementType: 'payment'): StripePaymentElement | null;
 
   /////////////////////////////
-  /// paymentRequestButton
-  /////////////////////////////
-
-  /**
-   * Creates a `PaymentRequestButtonElement`.
-   *
-   * @docs https://stripe.com/docs/stripe-js/elements/payment-request-button
-   */
-  create(
-    elementType: 'paymentRequestButton',
-    options: StripePaymentRequestButtonElementOptions
-  ): StripePaymentRequestButtonElement;
-
-  /**
-   * Looks up a previously created `Element` by its type.
-   */
-  getElement(
-    elementType: 'paymentRequestButton'
-  ): StripePaymentRequestButtonElement | null;
-
-  /////////////////////////////
   /// shippingAddress
   /////////////////////////////
 
@@ -511,7 +488,6 @@ export type StripeElementType =
   | 'payment'
   | 'paymentForm'
   | 'paymentMethodMessaging'
-  | 'paymentRequestButton'
   | 'linkAuthentication'
   | 'linkSignup'
   | 'shippingAddress'
@@ -539,7 +515,6 @@ export type StripeElement =
   | StripePaymentElement
   | StripeCheckoutForm
   | StripePaymentMethodMessagingElement
-  | StripePaymentRequestButtonElement
   | StripeIssuingCardNumberDisplayElement
   | StripeIssuingCardCvcDisplayElement
   | StripeIssuingCardExpiryDisplayElement

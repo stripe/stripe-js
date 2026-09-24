@@ -10,7 +10,6 @@ export interface PaymentRequest {
 
   /**
    * Shows the browser’s payment interface.
-   * When using the `PaymentRequestButtonElement`, this is called for you automatically.
    * This method must be called as the result of a user interaction (for example, in a click handler).
    */
   show(): void;
@@ -22,7 +21,6 @@ export interface PaymentRequest {
 
   /**
    * `true` if the browser’s payment interface is showing.
-   * When using the `PaymentRequestButtonElement`, this is called for you automatically.
    */
   isShowing: () => boolean;
 
