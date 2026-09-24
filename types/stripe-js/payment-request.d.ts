@@ -28,8 +28,7 @@ export interface PaymentRequest {
    * `PaymentRequest` instances can be updated with an options object.
    *
    * `paymentRequest.update` can only be called when the browser payment interface is not showing.
-   * Listen to the [click](https://stripe.com/docs/js/element/events) and [cancel](https://stripe.com/docs/js/element/events) events to detect if the payment interface has been initiated.
-   * To update the `PaymentRequest` right before the payment interface is initiated, call `paymentRequest.update` in your click event handler.
+   * To update the `PaymentRequest` right before the payment interface is initiated, call `paymentRequest.update` in your user-interaction handler immediately before calling `paymentRequest.show`.
    */
   update(options: PaymentRequestUpdateOptions): void;
 
