@@ -523,6 +523,20 @@ export type StripeCheckoutFormOptions = {
      * @docs https://stripe.com/docs/checkout/promotion-codes
      */
     promotionCodeCollection?: 'auto' | 'never';
+    /**
+     * Control whether the amount summary can be collapsed in the CheckoutForm.
+     *
+     * By default, the amount summary starts collapsed when it has expandable
+     * content, and the customer can expand or collapse it.
+     *
+     * Set to `'always'` to keep the amount summary expanded and prevent it from
+     * being collapsed.
+     *
+     * @default 'auto'
+     */
+    amountSummary?: {
+      expanded?: 'auto' | 'always';
+    };
   };
 };
 

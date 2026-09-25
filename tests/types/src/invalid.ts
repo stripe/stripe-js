@@ -884,6 +884,15 @@ checkoutFormSdk.createForm({
   },
 });
 
+checkoutFormSdk.createForm({
+  features: {
+    amountSummary: {
+      // @ts-expect-error: expanded must be 'auto' | 'always'
+      expanded: 'invalid',
+    },
+  },
+});
+
 // StripeCheckoutFormSdk.loadActions() omits client-only update methods that
 // are driven by the CheckoutForm UI rather than imperative calls.
 checkoutFormSdk.loadActions().then((loadActionsResult) => {
