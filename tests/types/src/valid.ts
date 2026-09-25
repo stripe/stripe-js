@@ -15,7 +15,6 @@ import {
   StripeCardExpiryElement,
   StripeCardCvcElement,
   StripeCardElementChangeEvent,
-  StripePaymentRequestButtonElementClickEvent,
   PaymentIntent,
   Token,
   StripeError,
@@ -27,7 +26,6 @@ import {
   StripeIbanElement,
   StripeAuBankAccountElement,
   StripeAuBankAccountElementChangeEvent,
-  StripePaymentRequestButtonElement,
   StripePaymentElement,
   StripePaymentMethodMessagingElement,
   StripeLinkAuthenticationElementChangeEvent,
@@ -399,33 +397,6 @@ const retrievedIbanElement: StripeIbanElement | null = elements.getElement(
   'iban'
 );
 
-const paymentRequestButtonElement = elements.create('paymentRequestButton', {
-  style: {
-    paymentRequestButton: {
-      theme: 'light',
-      height: '21px',
-      type: 'donate',
-      buttonSpacing: '8px',
-    },
-  },
-  paymentRequest: stripe.paymentRequest({
-    country: 'US',
-    currency: 'usd',
-    total: {label: 'Demo total', amount: 1000},
-    requestPayerName: true,
-    requestPayerEmail: true,
-    disableWallets: ['googlePay', 'link'],
-  }),
-  disableMultipleButtons: false,
-});
-
-const retrievedPaymentRequestButtonElement: StripePaymentRequestButtonElement | null = elements.getElement(
-  'paymentRequestButton'
-);
-
-// Make sure that `paymentRequest` is at least optional;
-retrievedPaymentRequestButtonElement!.update({});
-
 const paymentMethodMessagingElement = elements.create(
   'paymentMethodMessaging',
   {
@@ -720,18 +691,6 @@ const retrievedPaymentMethodMessagingElement: StripePaymentMethodMessagingElemen
 
 retrievedPaymentMethodMessagingElement!.update({amount: 10000});
 
-type StripePaymentRequestButtonElementUpdateOptions = Parameters<
-  StripePaymentRequestButtonElement['update']
->[0];
-
-// Check that giving `paymentRequest` options is not allowed
-assert<
-  Has<
-    Required<StripePaymentRequestButtonElementUpdateOptions>,
-    {paymentRequest: PaymentRequest}
-  >
->(false);
-
 const auBankElementType: StripeElementType = 'auBankAccount';
 const cardElementType: StripeElementType = 'card';
 const ibanElementType: StripeElementType = 'iban';
@@ -791,13 +750,6 @@ ibanElement
   .on('ready', (e: {elementType: 'iban'}) => {})
   .on('focus', (e: {elementType: 'iban'}) => {})
   .on('blur', (e: {elementType: 'iban'}) => {});
-
-paymentRequestButtonElement.on(
-  'click',
-  (e: StripePaymentRequestButtonElementClickEvent) => {
-    e.preventDefault();
-  }
-);
 
 let linkAuthenticationElementDefaults: StripeLinkAuthenticationElement = elements.create(
   'linkAuthentication'
@@ -1479,7 +1431,6 @@ contactDetailsElement.destroy();
 termsElement.destroy();
 currencySelectorElement.destroy();
 ibanElement.destroy();
-paymentRequestButtonElement.destroy();
 linkAuthenticationElement.destroy();
 linkSignupElementDefaults.destroy();
 linkSignupElement.destroy();

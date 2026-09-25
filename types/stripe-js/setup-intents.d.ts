@@ -95,7 +95,7 @@ export interface ConfirmCardSetupData extends SetupIntentConfirmParams {
  */
 export interface ConfirmCardSetupOptions {
   /*
-   * Set this to `false` if you want to [handle next actions yourself](https://stripe.com/docs/payments/payment-intents/verifying-status#next-actions), or if you want to defer next action handling until later (e.g. for use in the [PaymentRequest API](https://stripe.com/docs/stripe-js/elements/payment-request-button#complete-payment-intents)).
+   * Set this to `false` if you want to [handle next actions yourself](https://stripe.com/docs/payments/payment-intents/verifying-status#next-actions), or if you want to defer next action handling until later (e.g. for use in the [PaymentRequest API](https://stripe.com/docs/js/payment_request)).
    * Default is `true`.
    */
   handleActions?: boolean;

@@ -82,9 +82,6 @@ export interface StripeElementStyleVariant extends StripeElementCSSProperties {
 
   ':-webkit-autofill'?: StripeElementCSSProperties;
 
-  /**
-   * Available for all elements except the `paymentRequestButton` element
-   */
   ':disabled'?: StripeElementCSSProperties;
 
   /**
