@@ -6,6 +6,7 @@ import {
   CreatePaymentMethodAmazonPayData,
   CreatePaymentMethodAuBecsDebitData,
   CreatePaymentMethodBancontactData,
+  CreatePaymentMethodBlikData,
   CreatePaymentMethodCardData,
   CreatePaymentMethodCashappData,
   CreatePaymentMethodIdealData,
@@ -123,6 +124,45 @@ export interface ConfirmCashappSetupOptions {
   /*
    * Set this to `false` if you want to [manually handle the authorization QR code or redirect](https://stripe.com/docs/payments/cash-app-pay/set-up-payment?platform=web&ui=API#web-create-setup-intent).
    * Default is `true`.
+   */
+  handleActions?: boolean;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmBlikSetup` request.
+ * Refer to the [Setup Intents API](https://stripe.com/docs/api/setup_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmBlikSetupData extends SetupIntentConfirmParams {
+  /**
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `SetupIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodBlikData, 'type'>;
+
+  /**
+   * An object containing payment-method-specific configuration to confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) with.
+   */
+  payment_method_options: {
+    /**
+     * A configuration for this BLIK setup.
+     */
+    blik: {
+      /**
+       * Your customer's 6-digit BLIK code.
+       */
+      code: string;
+    };
+  };
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmBlikSetup`.
+ */
+export interface ConfirmBlikSetupOptions {
+  /**
+   * Set this to `false` if you want to manually determine if the confirmation has succeeded or failed.
    */
   handleActions?: boolean;
 }

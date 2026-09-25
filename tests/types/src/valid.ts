@@ -2939,6 +2939,26 @@ stripe
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmBlikSetup(
+    '',
+    {
+      payment_method: {
+        blik: {},
+        billing_details: {
+          email: 'jenny@example.com',
+        },
+      },
+      payment_method_options: {
+        blik: {
+          code: '123456',
+        },
+      },
+    },
+    {handleActions: false}
+  )
+  .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
+
+stripe
   .confirmIdealSetup('', {payment_method: ''})
   .then((result: {setupIntent?: SetupIntent; error?: StripeError}) => null);
 
