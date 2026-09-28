@@ -2181,6 +2181,33 @@ stripe
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 
 stripe
+  .confirmPayByBankPayment('')
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPayByBankPayment('', {
+    payment_method: '',
+    return_url: window.location.href,
+  })
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmPayByBankPayment(
+    '',
+    {
+      payment_method: {
+        billing_details: {
+          name: '',
+          email: '',
+        },
+      },
+      return_url: window.location.href,
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
   .confirmPayNowPayment('', {})
   .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
 

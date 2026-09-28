@@ -429,6 +429,20 @@ stripe.createSource({type: 'card'});
 // @ts-expect-error: retrieveSource is not a method on Stripe
 stripe.retrieveSource({id: 'src_123', client_secret: 'secret'});
 
+stripe.confirmPayByBankPayment('', {
+  payment_method: {
+    // @ts-expect-error: Inline Pay by Bank payment method data must not specify type
+    type: 'pay_by_bank',
+  },
+});
+
+stripe.confirmPayByBankPayment(
+  '',
+  {},
+  // @ts-expect-error: handleActions must be a boolean
+  {handleActions: 'false'}
+);
+
 // @ts-expect-error at least one of elements or clientSecret is required
 stripe.confirmPayment({confirmParams: {return_url: ''}});
 
@@ -606,6 +620,9 @@ stripe.createPaymentMethod({
     },
   },
 });
+
+// @ts-expect-error: pay_by_bank is not in CreatePaymentMethodData
+stripe.createPaymentMethod({type: 'pay_by_bank'});
 
 stripe
   .createConfirmationToken({
