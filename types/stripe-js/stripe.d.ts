@@ -497,6 +497,24 @@ export interface Stripe {
   ): Promise<PaymentIntentResult>;
 
   /**
+   * Use `stripe.confirmPayByBankPayment` in the [Pay by Bank Payments](https://docs.stripe.com/payments/pay-by-bank) with Payment Methods flow when the customer submits your payment form.
+   * When called, it will confirm the `PaymentIntent` with `data` you provide, and it will automatically redirect the customer to authorize the transaction.
+   * Once authorization is complete, the customer will be redirected back to your specified `return_url`.
+   * Refer to our [integration guide](https://docs.stripe.com/payments/pay-by-bank) for more details.
+   *
+   * When you confirm a `PaymentIntent`, it needs to have an attached [PaymentMethod](https://stripe.com/docs/api/payment_methods).
+   * In addition to confirming the `PaymentIntent`, this method can automatically create and attach a new PaymentMethod for you.
+   * If you have already attached a `PaymentMethod` you can call this method without needing to provide any additional data.
+   *
+   * @docs https://stripe.com/docs/js/payment_intents/confirm_pay_by_bank_payment
+   */
+  confirmPayByBankPayment(
+    clientSecret: string,
+    data?: paymentIntents.ConfirmPayByBankPaymentData,
+    options?: paymentIntents.ConfirmPayByBankPaymentOptions
+  ): Promise<PaymentIntentResult>;
+
+  /**
    * Requires beta access:
    * Contact [Stripe support](https://support.stripe.com/) for more information.
    *

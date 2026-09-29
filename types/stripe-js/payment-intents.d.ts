@@ -331,6 +331,11 @@ export interface CreatePaymentMethodP24Data extends PaymentMethodCreateParams {
   };
 }
 
+export interface CreatePaymentMethodPayByBankData
+  extends PaymentMethodCreateParams {
+  type: 'pay_by_bank';
+}
+
 export interface CreatePaymentMethodPayNowData
   extends PaymentMethodCreateParams {
   type: 'paynow';
@@ -1230,6 +1235,39 @@ export interface ConfirmP24PaymentData extends PaymentIntentConfirmParams {
    * @recommended
    */
   return_url?: string;
+}
+
+/**
+ * Data to be sent with a `stripe.confirmPayByBankPayment` request.
+ * Refer to the [Payment Intents API](https://stripe.com/docs/api/payment_intents/confirm) for a full list of parameters.
+ */
+export interface ConfirmPayByBankPaymentData
+  extends PaymentIntentConfirmParams {
+  /**
+   * Either the `id` of an existing [PaymentMethod](https://stripe.com/docs/api/payment_methods), or an object containing data to create a `PaymentMethod` with.
+   * This field is optional if a `PaymentMethod` has already been attached to this `PaymentIntent`.
+   *
+   * @recommended
+   */
+  payment_method?: string | Omit<CreatePaymentMethodPayByBankData, 'type'>;
+
+  /**
+   * The url your customer will be directed to after they complete authentication.
+   *
+   * @recommended
+   */
+  return_url?: string;
+}
+
+/**
+ * An options object to control the behavior of `stripe.confirmPayByBankPayment`.
+ */
+export interface ConfirmPayByBankPaymentOptions {
+  /**
+   * Set this to `false` if you want to manually handle the authorization redirect.
+   * Default is `true`.
+   */
+  handleActions?: boolean;
 }
 
 /**
