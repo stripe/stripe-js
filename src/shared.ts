@@ -154,7 +154,7 @@ export const loadScript = (
       }
     });
 
-  const retryableLoad = async () =>
+  const retryableLoad = () =>
     load().catch((error) => {
       stripePromise = null;
       return Promise.reject(error);
