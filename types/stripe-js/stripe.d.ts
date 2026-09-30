@@ -931,6 +931,18 @@ export interface Stripe {
   ): Promise<SetupIntentResult>;
 
   /**
+   * Use `stripe.confirmBlikSetup` when the customer submits a custom BLIK setup form.
+   * When called, it confirms the [SetupIntent](https://stripe.com/docs/api/setup_intents) with the BLIK code and billing details in `data`, then waits for the customer to authorize the mandate in their banking app.
+   *
+   * @docs https://stripe.com/docs/js/setup_intents/confirm_blik_setup
+   */
+  confirmBlikSetup(
+    clientSecret: string,
+    data: setupIntents.ConfirmBlikSetupData,
+    options?: setupIntents.ConfirmBlikSetupOptions
+  ): Promise<SetupIntentResult>;
+
+  /**
    * Use `stripe.confirmCardSetup` in the [Setup Intents API flow](https://stripe.com/docs/payments/save-and-reuse) when the customer submits your payment form.
    * When called, it will confirm the [SetupIntent](https://stripe.com/docs/api/setup_intents) with `data` you provide and carry out 3DS or other next actions if they are required.
    *
