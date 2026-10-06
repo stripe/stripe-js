@@ -1212,6 +1212,11 @@ export interface Appearance {
     accordionItemLabelSelectedColorText?: string;
     accordionItemLabelSelectedFontWeight?: string;
 
+    // AccordionItem triggers
+    accordionItemTriggerColor?: string;
+    accordionItemTriggerSelectedColor?: string;
+    accordionItemTriggerHoverColor?: string;
+
     // Colors
     colorPrimary?: string;
     colorBackground?: string;

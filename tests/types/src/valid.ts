@@ -127,6 +127,9 @@ const options: StripeElementsOptions = {
     theme: 'night',
     variables: {
       iconColor: 'blue',
+      accordionItemTriggerColor: '#30313d',
+      accordionItemTriggerSelectedColor: '#0570de',
+      accordionItemTriggerHoverColor: '#0055a8',
     },
     rules: {
       '.Tab--selected': {

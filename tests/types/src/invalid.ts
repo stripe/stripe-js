@@ -90,6 +90,19 @@ elements.update({
 });
 
 elements.update({
+  appearance: {
+    variables: {
+      // @ts-expect-error: accordionItemTriggerColor must be a string
+      accordionItemTriggerColor: 123,
+      // @ts-expect-error: accordionItemTriggerSelectedColor must be a string
+      accordionItemTriggerSelectedColor: true,
+      // @ts-expect-error: accordionItemTriggerHoverColor must be a string
+      accordionItemTriggerHoverColor: 123,
+    },
+  },
+});
+
+elements.update({
   // @ts-expect-error: `loader` is not updatable
   loader: 'auto',
 });
