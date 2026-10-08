@@ -154,14 +154,17 @@ export const loadScript = (
       }
     });
 
-  const retryableLoad = () =>
-    load().catch((error) => {
+  // Cache the in-flight load (including its single retry) so that concurrent
+  // calls share it, and only clear the cache once the load has finally failed
+  // so that a later call can try again.
+  stripePromise = load()
+    .catch(() => load())
+    .catch((error) => {
       stripePromise = null;
       return Promise.reject(error);
     });
 
-  // Resets stripePromise on error
-  return retryableLoad().catch(() => retryableLoad());
+  return stripePromise;
 };
 
 export const initStripe = (

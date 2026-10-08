@@ -225,6 +225,32 @@ describe('Stripe module loader', () => {
     });
   });
 
+  describe.each(['./index', './pure'])(
+    'concurrent loadStripe calls (%s.ts)',
+    (requirePath) => {
+      beforeEach(() => {
+        jest.spyOn(console, 'warn').mockReturnValue();
+      });
+
+      it('resolves every call made while Stripe.js is loading', async () => {
+        const {loadStripe} = require(requirePath);
+        const first = loadStripe('pk_test_foo');
+        const second = loadStripe('pk_test_bar');
+
+        await new Promise((resolve) => setTimeout(resolve));
+        expect(
+          document.querySelectorAll(`script[src="${SCRIPT_SRC}"]`)
+        ).toHaveLength(1);
+
+        window.Stripe = jest.fn((key) => ({key})) as any;
+        dispatchScriptEvent('load');
+
+        await expect(second).resolves.toEqual({key: 'pk_test_bar'});
+        await expect(first).resolves.toEqual({key: 'pk_test_foo'});
+      });
+    }
+  );
+
   describe('loadStripe (index.ts)', () => {
     beforeEach(() => {
       jest.spyOn(console, 'warn').mockReturnValue();
