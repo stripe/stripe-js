@@ -4035,6 +4035,20 @@ checkoutFormSdk.createForm({
     promotionCodeCollection: 'never',
   },
 });
+checkoutFormSdk.createForm({
+  features: {
+    amountSummary: {
+      expanded: 'auto',
+    },
+  },
+});
+checkoutFormSdk.createForm({
+  features: {
+    amountSummary: {
+      expanded: 'always',
+    },
+  },
+});
 const retrievedCheckoutForm: StripeCheckoutForm | null = checkoutFormSdk.getForm();
 
 checkoutFormSdk.createCurrencySelectorElement();
