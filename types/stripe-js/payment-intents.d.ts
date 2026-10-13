@@ -1466,7 +1466,7 @@ export interface ConfirmWechatPayPaymentData
      * Configuration for this wechat payment.
      */
     wechat_pay: {
-      client?: 'web';
+      client?: 'web' | 'mobile_web';
     };
   };
 }

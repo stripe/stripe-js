@@ -2382,6 +2382,20 @@ stripe
   .confirmWechatPayPayment(
     '',
     {
+      payment_method_options: {
+        wechat_pay: {
+          client: 'mobile_web',
+        },
+      },
+    },
+    {handleActions: false}
+  )
+  .then((result: {paymentIntent?: PaymentIntent; error?: StripeError}) => null);
+
+stripe
+  .confirmWechatPayPayment(
+    '',
+    {
       payment_method: {
         billing_details: {
           name: '',
