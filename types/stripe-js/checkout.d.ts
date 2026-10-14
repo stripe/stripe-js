@@ -405,6 +405,10 @@ export type StripeCheckoutTaxIdInfo = {
 export interface StripeCheckoutSession {
   billingAddress: StripeCheckoutContact | null;
   businessName: string | null;
+  nameCollection: {
+    individualName: string | null;
+    businessName: string | null;
+  } | null;
   canConfirm: boolean;
   currency: string;
   currencyOptions: Array<StripeCheckoutCurrencyOption> | null;
@@ -671,6 +675,7 @@ export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
 type AnyBuyerError = {message: string; code: null};
 type ApplyPromotionCodeError =
   | {message: string; code: 'invalidCode'}
+  | {message: string; code: 'promotionCodeAmountInsufficient'}
   | AnyBuyerError;
 export type StripeCheckoutApplyPromotionCodeResult =
   | {type: 'success'; session: StripeCheckoutSession}
@@ -685,6 +690,14 @@ export type StripeCheckoutUpdateAddressResult =
   | {type: 'error'; error: AnyBuyerError};
 
 export type StripeCheckoutUpdatePhoneNumberResult =
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: never};
+
+export type StripeCheckoutUpdateIndividualNameResult =
+  | {type: 'success'; session: StripeCheckoutSession}
+  | {type: 'error'; error: never};
+
+export type StripeCheckoutUpdateBusinessNameResult =
   | {type: 'success'; session: StripeCheckoutSession}
   | {type: 'error'; error: never};
 
@@ -789,6 +802,12 @@ export type StripeCheckoutLoadActionsSuccess = {
   updateEmail: (
     email: string | null
   ) => Promise<StripeCheckoutUpdateEmailResult>;
+  updateIndividualName: (
+    individualName: string | null
+  ) => Promise<StripeCheckoutUpdateIndividualNameResult>;
+  updateBusinessName: (
+    businessName: string | null
+  ) => Promise<StripeCheckoutUpdateBusinessNameResult>;
   updateLineItemQuantity: (args: {
     lineItem: string;
     quantity: number;
@@ -837,6 +856,8 @@ export type StripeCheckoutFormLoadActionsSuccess = Omit<
   StripeCheckoutLoadActionsSuccess,
   | 'updateEmail'
   | 'updatePhoneNumber'
+  | 'updateIndividualName'
+  | 'updateBusinessName'
   | 'updateShippingAddress'
   | 'updateBillingAddress'
   | 'updateTaxIdInfo'
@@ -857,6 +878,7 @@ export interface StripeCheckoutElementsSdk {
   getShippingAddressElement(): StripeAddressElement | null;
   getExpressCheckoutElement(): StripeCheckoutExpressCheckoutElement | null;
   getCurrencySelectorElement(): StripeCurrencySelectorElement | null;
+  getContactDetailsElement(): StripeContactDetailsElement | null;
   /* Requires beta header when initializing Stripe: @docs https://docs.stripe.com/tax/advanced/tax-ids?payment-ui=embedded-components#render-tax-id-element */
   getTaxIdElement(): StripeTaxIdElement | null;
   /* Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information. */

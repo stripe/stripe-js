@@ -779,10 +779,31 @@ checkoutElementsSdk.loadActions().then((loadActionsResult) => {
     const {actions} = loadActionsResult;
     // @ts-expect-error Type 'StripeCheckoutAmount' is not assignable to type 'number'.
     const subtotal: number = actions.getSession().total.subtotal;
+
+    // @ts-expect-error Argument of type 'number' is not assignable to parameter of type 'string | null'.
+    actions.updateIndividualName(42);
+    // @ts-expect-error Argument of type '{}' is not assignable to parameter of type 'string | null'.
+    actions.updateIndividualName({});
+    // @ts-expect-error Expected 1 arguments, but got 0.
+    actions.updateIndividualName();
+
+    // @ts-expect-error Argument of type 'number' is not assignable to parameter of type 'string | null'.
+    actions.updateBusinessName(42);
+    // @ts-expect-error Argument of type '{}' is not assignable to parameter of type 'string | null'.
+    actions.updateBusinessName({});
+    // @ts-expect-error Expected 1 arguments, but got 0.
+    actions.updateBusinessName();
+
+    const session = actions.getSession();
+    // @ts-expect-error Object is possibly 'null'.
+    const individualName: string | null = session.nameCollection.individualName;
   } else {
     const {error} = loadActionsResult;
   }
 });
+
+// @ts-expect-error Property 'getContactDetailsElement' does not exist on type 'StripeCheckoutFormSdk'.
+checkoutFormSdk.getContactDetailsElement();
 
 // StripeCheckoutElementsSdk does not have form methods
 // @ts-expect-error Property 'createForm' does not exist on type 'StripeCheckoutElementsSdk'.
@@ -939,6 +960,10 @@ checkoutFormSdk.loadActions().then((loadActionsResult) => {
     actions.updateEmail('test@example.com');
     // @ts-expect-error Property 'updatePhoneNumber' does not exist on StripeCheckoutFormLoadActionsSuccess.
     actions.updatePhoneNumber('+1234567890');
+    // @ts-expect-error Property 'updateIndividualName' does not exist on StripeCheckoutFormLoadActionsSuccess.
+    actions.updateIndividualName('Jane Doe');
+    // @ts-expect-error Property 'updateBusinessName' does not exist on StripeCheckoutFormLoadActionsSuccess.
+    actions.updateBusinessName('Acme Inc');
     // @ts-expect-error Property 'updateShippingAddress' does not exist on StripeCheckoutFormLoadActionsSuccess.
     actions.updateShippingAddress(null);
     // @ts-expect-error Property 'updateBillingAddress' does not exist on StripeCheckoutFormLoadActionsSuccess.
