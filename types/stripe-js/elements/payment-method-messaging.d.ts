@@ -40,6 +40,7 @@ export interface StripePaymentMethodMessagingElementOptions {
 
   /**
    * The currency to display.
+   * @docs https://docs.stripe.com/js/elements_object/create_element?type=paymentMethodMessaging#elements_create-options-currency
    */
   currency:
     | 'AUD'
@@ -52,6 +53,7 @@ export interface StripePaymentMethodMessagingElementOptions {
     | 'NOK'
     | 'NZD'
     | 'PLN'
+    | 'RON'
     | 'SEK'
     | 'USD';
 
