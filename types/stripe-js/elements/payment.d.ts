@@ -413,6 +413,11 @@ export interface StripePaymentElementOptions {
   applePay?: ApplePayOption;
 }
 
+type PaymentElementLayoutObjectUpdateOptions = Omit<
+  LayoutObject,
+  'defaultCollapsed' | 'paymentMethodLogoPosition'
+>;
+
 /**
  * The subset of `StripePaymentElementOptions` that can be updated after the
  * `PaymentElement` has been created.
@@ -427,10 +432,15 @@ export type StripePaymentElementUpdateOptions = Pick<
   | 'fields'
   | 'readOnly'
   | 'terms'
-  | 'layout'
   | 'applePay'
   | 'walletOptions'
->;
+> & {
+  /**
+   * Specify a layout to use when rendering a Payment Element.
+   * `defaultCollapsed` and `paymentMethodLogoPosition` can't be updated.
+   */
+  layout?: Layout | PaymentElementLayoutObjectUpdateOptions;
+};
 
 export interface StripePaymentElementChangeEvent {
   /**

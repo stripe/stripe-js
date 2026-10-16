@@ -246,6 +246,22 @@ paymentElement.update({
   },
 });
 
+paymentElement.update({
+  layout: {
+    type: 'accordion',
+    // @ts-expect-error: `layout.defaultCollapsed` option can't be updated
+    defaultCollapsed: true,
+  },
+});
+
+paymentElement.update({
+  layout: {
+    type: 'accordion',
+    // @ts-expect-error: `layout.paymentMethodLogoPosition` option can't be updated
+    paymentMethodLogoPosition: 'end',
+  },
+});
+
 paymentElement.on('change', (e) => {
   // @ts-expect-error: `error` is not present on PaymentElement "change" event.
   if (e.error) {
