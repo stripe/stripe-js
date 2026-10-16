@@ -562,6 +562,15 @@ paymentElement.update({
   },
 });
 
+paymentElement.update({
+  layout: {
+    type: 'accordion',
+    visibleAccordionItemsCount: 2,
+    radios: 'always',
+    spacedAccordionItems: true,
+  },
+});
+
 let paymentElementDefaults: StripePaymentElement = elements.create('payment');
 paymentElementDefaults = elements.create('payment', {});
 
