@@ -1366,10 +1366,7 @@ taxIdElement
           status: 'pending' | 'verified' | 'unverified' | 'unavailable';
         };
       };
-    }) => {
-      const taxIdType: typeof e.value.taxIdType = 'ic_nif';
-      const externalTaxIdType: typeof e.value.externalTaxIdType = 'ic_nif';
-    }
+    }) => {}
   );
 
 const createdTaxIdElement: StripeTaxIdElement = elements.create('taxId', {
@@ -1400,11 +1397,6 @@ retrievedTaxIdElement?.mount('#bogus-container');
 
 createdTaxIdElement.update({
   visibility: 'auto',
-  defaultValues: {
-    businessName: 'Acme, Inc.',
-    taxIdType: 'ic_nif',
-    taxId: 'B12345678',
-  },
   validation: {
     taxId: {required: 'never'},
   },
@@ -1413,7 +1405,7 @@ createdTaxIdElement.update({
 createdTaxIdElement.getValue().then((res) => {
   if (res.complete) {
     const {taxIdType, externalTaxIdType} = res.value;
-    console.log(taxIdType === 'ic_nif', externalTaxIdType === 'ic_nif');
+    console.log(taxIdType, externalTaxIdType);
   }
 });
 
@@ -3907,20 +3899,6 @@ checkoutElementsSdk.loadActions().then((loadActionsResult) => {
       }
     });
     actions.updateBusinessName(null);
-
-    actions
-      .updateTaxIdInfo({
-        businessName: 'Acme, Inc.',
-        taxId: {type: 'ic_nif', value: 'B12345678'},
-      })
-      .then((result) => {
-        if (
-          result.type === 'success' &&
-          result.session.taxIdInfo?.taxId.type === 'ic_nif'
-        ) {
-          const taxId: string = result.session.taxIdInfo.taxId.value;
-        }
-      });
 
     // nameCollection on session
     const session2 = actions.getSession();
