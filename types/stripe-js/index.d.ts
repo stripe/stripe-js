@@ -8,6 +8,7 @@ export * from './financial-connections';
 export * from './orders';
 export * from './payment-intents';
 export * from './payment-request';
+export * from './pricing';
 export * from './setup-intents';
 export * from './token-and-sources';
 export * from './stripe';
