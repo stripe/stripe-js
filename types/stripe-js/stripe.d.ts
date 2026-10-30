@@ -26,6 +26,7 @@ import {
   StripeEmbeddedCheckoutOptions,
   StripeEmbeddedCheckout,
 } from './embedded-checkout';
+import {InitializePricingOptions, Pricing} from './pricing';
 
 export interface Stripe {
   /////////////////////////////
@@ -1339,6 +1340,14 @@ export interface Stripe {
   createEmbeddedCheckoutPage(
     options: StripeEmbeddedCheckoutOptions
   ): Promise<StripeEmbeddedCheckout>;
+
+  /**
+   * Use `stripe.initializePricing` to initialize a Pricing SDK instance for price localization
+   * and currency selection.
+   *
+   * Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information.
+   */
+  initializePricing(options: InitializePricingOptions): Promise<Pricing>;
 }
 
 export type PaymentIntentResult =

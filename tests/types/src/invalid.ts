@@ -11,6 +11,11 @@ import {
   StripeLinkSignupElement,
   ReleaseTrain,
   PreCollectedConsent,
+  Pricing,
+  PricingCurrency,
+  ResolvedPrice,
+  PricingToken,
+  PricingChangeEvent,
 } from '../../../types';
 import {ApplePayUpdateOption} from '../../../types/stripe-js/elements/apple-pay';
 
@@ -22,6 +27,7 @@ declare const paymentElement: StripePaymentElement;
 declare const expressCheckoutElement: StripeExpressCheckoutElement;
 declare const currencySelectorElement: StripeCurrencySelectorElement;
 declare const linkSignupElement: StripeLinkSignupElement;
+declare const pricing: Pricing;
 
 const options: StripeElementsOptions = {
   clientSecret: '',
@@ -1001,4 +1007,67 @@ stripe.confirmPayment({
     consent: 'fccons_123',
     collectedAt: 1788397200,
   },
+});
+
+// Pricing SDK
+// @ts-expect-error: initialization options are required
+stripe.initializePricing();
+// @ts-expect-error: pricingPolicy is required
+stripe.initializePricing({});
+// @ts-expect-error: pricingPolicy is required even when overriding currency
+stripe.initializePricing({detectedCurrencyOverride: 'gbp'});
+// @ts-expect-error: pricingPolicy must be a string
+stripe.initializePricing({pricingPolicy: 123});
+stripe.initializePricing({
+  pricingPolicy: 'prcpol_123',
+  // @ts-expect-error: detectedCurrencyOverride must be a string
+  detectedCurrencyOverride: 123,
+});
+// @ts-expect-error: currency must be a string
+pricing.setSelectedCurrency(123);
+// @ts-expect-error: price must be a string
+pricing.resolvePrice(123);
+// @ts-expect-error: only change events are supported
+pricing.on('ready', () => {});
+// @ts-expect-error: only change events are supported
+pricing.once('ready', () => {});
+// @ts-expect-error: only change events are supported
+pricing.off('ready');
+// @ts-expect-error: the handler is required
+pricing.on('change');
+// @ts-expect-error: the handler must accept an empty change event
+pricing.on('change', (event: {selectedCurrency: PricingCurrency}) => {});
+// @ts-expect-error: the handler must accept an empty change event
+pricing.once('change', (event: {selectedCurrency: PricingCurrency}) => {});
+// @ts-expect-error: the handler must accept an empty change event
+pricing.off('change', (event: {selectedCurrency: PricingCurrency}) => {});
+const populatedPricingEvent: PricingChangeEvent = {
+  // @ts-expect-error: the change event does not contain selectedCurrency
+  selectedCurrency: {currency: 'gbp'},
+};
+// @ts-expect-error: currency must be a string
+const invalidPricingCurrency: PricingCurrency = {currency: 123};
+// @ts-expect-error: the token ID must be a string
+const invalidPricingToken: PricingToken = {id: 123};
+// @ts-expect-error: minorUnitsAmountDivisor is required
+const missingPricingDivisor: ResolvedPrice = {
+  currency: 'gbp',
+  unitAmount: null,
+  unitAmountDecimal: null,
+};
+
+const invalidResolvedPrice: ResolvedPrice = {
+  currency: 'gbp',
+  // @ts-expect-error: the formatted amount must be a string
+  unitAmount: {amount: 1000, minorUnitsAmount: 1000},
+  // @ts-expect-error: minorUnitsAmount must be a number
+  unitAmountDecimal: {amount: '£10.005', minorUnitsAmount: '1000.5'},
+  // @ts-expect-error: minorUnitsAmountDivisor must be a number
+  minorUnitsAmountDivisor: '100',
+};
+pricing.resolvePrice('price_123').then((price) => {
+  // @ts-expect-error: unitAmount can be null
+  const amount = price.unitAmount.amount;
+  // @ts-expect-error: unitAmountDecimal can be null
+  const decimalAmount = price.unitAmountDecimal.amount;
 });

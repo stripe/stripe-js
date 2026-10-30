@@ -59,6 +59,12 @@ import {
   StripeIssuingAddToWalletButtonElementOptions,
   StripeIssuingAddToWalletButtonElement,
   ReleaseTrain,
+  Pricing,
+  InitializePricingOptions,
+  PricingCurrency,
+  ResolvedPrice,
+  PricingToken,
+  PricingChangeEvent,
 } from '../../../types';
 
 const stripePromise: Promise<Stripe | null> = loadStripe('');
@@ -4134,3 +4140,59 @@ stripe.createEmbeddedCheckoutPage({
 
 // ReleaseTrain type
 const releaseTrain: ReleaseTrain = 'endive';
+
+// Pricing SDK
+const pricingOptions: InitializePricingOptions = {pricingPolicy: 'prcpol_123'};
+const pricingPromise: Promise<Pricing> = stripe.initializePricing(
+  pricingOptions
+);
+stripe.initializePricing({
+  pricingPolicy: 'prcpol_123',
+  detectedCurrencyOverride: 'gbp',
+});
+
+const pricingChangeHandler = (event: PricingChangeEvent): void => {};
+const pricingChangeEvent: PricingChangeEvent = {};
+const pricingCurrency: PricingCurrency = {currency: 'gbp'};
+const pricingToken: PricingToken = {id: 'prctok_123'};
+const resolvedPrice: ResolvedPrice = {
+  currency: 'gbp',
+  unitAmount: {amount: '£10.00', minorUnitsAmount: 1000},
+  unitAmountDecimal: {amount: '£10.005', minorUnitsAmount: 1000.5},
+  minorUnitsAmountDivisor: 100,
+};
+const nullableResolvedPrice: ResolvedPrice = {
+  currency: 'gbp',
+  unitAmount: null,
+  unitAmountDecimal: null,
+  minorUnitsAmountDivisor: 100,
+};
+
+pricingPromise.then((pricing) => {
+  const availableCurrencies: Promise<PricingCurrency[]> = pricing.getAvailableCurrencies();
+  const selectedCurrency: Promise<PricingCurrency> = pricing.getSelectedCurrency();
+  const currencyUpdate: Promise<void> = pricing.setSelectedCurrency('gbp');
+  const price: Promise<ResolvedPrice> = pricing.resolvePrice('price_123');
+  const token: Promise<PricingToken> = pricing.createPricingToken();
+  const chainedPricing: Pricing = pricing
+    .on('change', pricingChangeHandler)
+    .once('change', pricingChangeHandler)
+    .off('change', pricingChangeHandler)
+    .off('change')
+    .off('change', null);
+  pricing.on('change', async (event) => {
+    const changeEvent: PricingChangeEvent = event;
+    const {currency} = await pricing.getSelectedCurrency();
+    const resolved = await pricing.resolvePrice('price_123');
+    if (resolved.unitAmount !== null) {
+      const amount: string = resolved.unitAmount.amount;
+      const minorUnitsAmount: number = resolved.unitAmount.minorUnitsAmount;
+    }
+    if (resolved.unitAmountDecimal !== null) {
+      const amount: string = resolved.unitAmountDecimal.amount;
+      const minorUnitsAmount: number =
+        resolved.unitAmountDecimal.minorUnitsAmount;
+    }
+    const divisor: number = resolved.minorUnitsAmountDivisor;
+  });
+});
