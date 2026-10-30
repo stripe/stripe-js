@@ -61,7 +61,7 @@ import {
   ReleaseTrain,
   Pricing,
   InitializePricingOptions,
-  PricingCurrency,
+  CurrencyInfo,
   ResolvedPrice,
   PricingToken,
   PricingChangeEvent,
@@ -4153,7 +4153,7 @@ stripe.initializePricing({
 
 const pricingChangeHandler = (event: PricingChangeEvent): void => {};
 const pricingChangeEvent: PricingChangeEvent = {};
-const pricingCurrency: PricingCurrency = {currency: 'gbp'};
+const pricingCurrency: CurrencyInfo = {currency: 'gbp'};
 const pricingToken: PricingToken = {id: 'prctok_123'};
 const resolvedPrice: ResolvedPrice = {
   currency: 'gbp',
@@ -4169,8 +4169,8 @@ const nullableResolvedPrice: ResolvedPrice = {
 };
 
 pricingPromise.then((pricing) => {
-  const availableCurrencies: Promise<PricingCurrency[]> = pricing.getAvailableCurrencies();
-  const selectedCurrency: Promise<PricingCurrency> = pricing.getSelectedCurrency();
+  const availableCurrencies: Promise<CurrencyInfo[]> = pricing.getAvailableCurrencies();
+  const selectedCurrency: Promise<CurrencyInfo> = pricing.getSelectedCurrency();
   const currencyUpdate: Promise<void> = pricing.setSelectedCurrency('gbp');
   const price: Promise<ResolvedPrice> = pricing.resolvePrice('price_123');
   const token: Promise<PricingToken> = pricing.createPricingToken();

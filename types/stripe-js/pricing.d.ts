@@ -1,4 +1,4 @@
-export type PricingCurrency = {
+export type CurrencyInfo = {
   currency: string;
 };
 
@@ -26,9 +26,9 @@ export type InitializePricingOptions = {
  * Requires beta access: Contact [Stripe support](https://support.stripe.com/) for more information.
  */
 export interface Pricing {
-  getAvailableCurrencies(): Promise<PricingCurrency[]>;
+  getAvailableCurrencies(): Promise<CurrencyInfo[]>;
 
-  getSelectedCurrency(): Promise<PricingCurrency>;
+  getSelectedCurrency(): Promise<CurrencyInfo>;
 
   setSelectedCurrency(currency: string): Promise<void>;
 

@@ -12,7 +12,7 @@ import {
   ReleaseTrain,
   PreCollectedConsent,
   Pricing,
-  PricingCurrency,
+  CurrencyInfo,
   ResolvedPrice,
   PricingToken,
   PricingChangeEvent,
@@ -1036,17 +1036,17 @@ pricing.off('ready');
 // @ts-expect-error: the handler is required
 pricing.on('change');
 // @ts-expect-error: the handler must accept an empty change event
-pricing.on('change', (event: {selectedCurrency: PricingCurrency}) => {});
+pricing.on('change', (event: {selectedCurrency: CurrencyInfo}) => {});
 // @ts-expect-error: the handler must accept an empty change event
-pricing.once('change', (event: {selectedCurrency: PricingCurrency}) => {});
+pricing.once('change', (event: {selectedCurrency: CurrencyInfo}) => {});
 // @ts-expect-error: the handler must accept an empty change event
-pricing.off('change', (event: {selectedCurrency: PricingCurrency}) => {});
+pricing.off('change', (event: {selectedCurrency: CurrencyInfo}) => {});
 const populatedPricingEvent: PricingChangeEvent = {
   // @ts-expect-error: the change event does not contain selectedCurrency
   selectedCurrency: {currency: 'gbp'},
 };
 // @ts-expect-error: currency must be a string
-const invalidPricingCurrency: PricingCurrency = {currency: 123};
+const invalidCurrencyInfo: CurrencyInfo = {currency: 123};
 // @ts-expect-error: the token ID must be a string
 const invalidPricingToken: PricingToken = {id: 123};
 // @ts-expect-error: minorUnitsAmountDivisor is required
