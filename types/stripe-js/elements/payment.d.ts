@@ -117,6 +117,26 @@ export type StripePaymentElement = StripeElementBase & {
   ): StripePaymentElement;
 
   /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * Triggered when a field within the Payment Element changes state,
+   * for example becoming displayed, focused, completed, or errored.
+   */
+  on(
+    eventType: 'fieldchange',
+    handler: (event: StripePaymentElementFieldChangeEvent) => any
+  ): StripePaymentElement;
+  once(
+    eventType: 'fieldchange',
+    handler: (event: StripePaymentElementFieldChangeEvent) => any
+  ): StripePaymentElement;
+  off(
+    eventType: 'fieldchange',
+    handler?: (event: StripePaymentElementFieldChangeEvent) => any
+  ): StripePaymentElement;
+
+  /**
    * The change event is triggered when the `Element`'s value changes.
    * Represents the details of a selected Card payment method.
    */
@@ -493,6 +513,86 @@ export interface StripePaymentElementChangeEvent {
         phone: null | string;
       };
     };
+  };
+}
+
+/**
+ * Requires beta access:
+ * Contact [Stripe support](https://support.stripe.com/) for more information.
+ */
+export interface StripePaymentElementFieldChangeEvent {
+  /**
+   * The type of element that emitted this event.
+   */
+  elementType: 'payment';
+
+  /**
+   * The ID of the field whose state changed.
+   */
+  fieldId: string;
+
+  /**
+   * The type of state change that occurred on the field.
+   */
+  type: // displayed false -> true
+  | 'displayed'
+    // displayed true -> false
+    | 'hidden'
+    // focused false -> true
+    | 'focused'
+    // focused true -> false
+    | 'blurred'
+    // autofilled false -> true
+    | 'autofilled'
+    // autofilled true -> false
+    | 'autofill_overwritten'
+    // complete false -> true
+    | 'completed'
+    // complete true -> false
+    | 'completion_lost'
+    // empty false -> true
+    | 'value_cleared'
+    // empty true -> false
+    | 'value_entered'
+    // disabled false -> true
+    | 'disabled'
+    // disabled true -> false
+    | 'enabled'
+    // error null -> non-null
+    | 'errored'
+    // error non-null -> null
+    | 'corrected';
+
+  /**
+   * The payment method type that the field belongs to.
+   */
+  paymentMethodType: PaymentElementPaymentMethodType;
+
+  /**
+   * The current state of the field.
+   */
+  state: {
+    displayed: boolean;
+    focused: boolean;
+    autofilled: boolean;
+    complete: boolean;
+    empty: boolean;
+    disabled: boolean;
+    error: {
+      code: // The field is required or has not been completed
+      | 'incomplete'
+        // The field’s value is not valid. This is the fallback when no more specific public code applies
+        | 'invalid'
+        // The value represents an expired date or credential
+        | 'expired'
+        // The value does not match another corresponding field
+        | 'mismatch'
+        // The value is structurally valid but is not supported for the current flow
+        | 'unsupported'
+        // Stripe or the merchant has explicitly disallowed the value’s category
+        | 'blocked';
+      message: string;
+    } | null;
   };
 }
 

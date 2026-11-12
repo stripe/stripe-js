@@ -645,6 +645,47 @@ paymentElement
     }) => {}
   )
   .on(
+    'fieldchange',
+    (e: {
+      elementType: 'payment';
+      fieldId: string;
+      type:
+        | 'displayed'
+        | 'hidden'
+        | 'focused'
+        | 'blurred'
+        | 'autofilled'
+        | 'autofill_overwritten'
+        | 'completed'
+        | 'completion_lost'
+        | 'value_cleared'
+        | 'value_entered'
+        | 'disabled'
+        | 'enabled'
+        | 'errored'
+        | 'corrected';
+      paymentMethodType: string;
+      state: {
+        displayed: boolean;
+        focused: boolean;
+        autofilled: boolean;
+        complete: boolean;
+        empty: boolean;
+        disabled: boolean;
+        error: {
+          code:
+            | 'incomplete'
+            | 'invalid'
+            | 'expired'
+            | 'mismatch'
+            | 'unsupported'
+            | 'blocked';
+          message: string;
+        } | null;
+      };
+    }) => {}
+  )
+  .on(
     'savedpaymentmethodupdate',
     (e: {
       elementType: 'payment';
