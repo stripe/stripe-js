@@ -27,6 +27,7 @@ import {
   StripeAuBankAccountElement,
   StripeAuBankAccountElementChangeEvent,
   StripePaymentElement,
+  StripePaymentElementChangeEvent,
   StripePaymentMethodMessagingElement,
   StripeLinkAuthenticationElementChangeEvent,
   StripeLinkAuthenticationElement,
@@ -737,6 +738,20 @@ paymentElement
   );
 
 paymentElement.collapse();
+
+// billingDetails.name on the Payment Element change event's value
+paymentElement.on('change', (e: StripePaymentElementChangeEvent) => {
+  const billingName: string | undefined = e.value.billingDetails?.name;
+  // address remains required whenever billingDetails is present, so no
+  // extra optional chain is needed before `.country`.
+  const billingCountry: string | null | undefined =
+    e.value.billingDetails?.address.country;
+});
+
+const paymentElementBillingDetails: StripePaymentElementChangeEvent['value']['billingDetails'] = {
+  name: '',
+  address: {},
+};
 
 // Test Payment Method Messaging Element
 paymentMethodMessagingElement.on(
@@ -1467,7 +1482,10 @@ checkoutForm
     'loaderror',
     (e: {elementType: 'checkoutForm'; error: {type: string}}) => {}
   )
-  .on('change', (e: StripeCheckoutFormChangeEvent) => {})
+  .on('change', (e: StripeCheckoutFormChangeEvent) => {
+    const billingName: string | undefined =
+      e.value.payment?.billingDetails?.name;
+  })
   .on('confirm', (e: StripeCheckoutFormConfirmEvent) => {})
   .on('cancel', (e: {elementType: 'checkoutForm'}) => {});
 
@@ -1478,7 +1496,10 @@ checkoutForm.off('change');
 checkoutForm.once('confirm', (e: StripeCheckoutFormConfirmEvent) => {});
 checkoutForm.off('confirm');
 
-checkoutForm.getValue().then((result) => {});
+checkoutForm.getValue().then((result) => {
+  const billingName: string | undefined =
+    result.value.payment?.billingDetails?.name;
+});
 
 checkoutForm.setView(0);
 auBankAccountElement.destroy();
