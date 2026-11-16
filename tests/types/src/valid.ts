@@ -3835,7 +3835,25 @@ const checkoutAddressElement: StripeAddressElement = checkoutElementsSdk.createB
 checkoutElementsSdk.getBillingAddressElement();
 checkoutElementsSdk.createShippingAddressElement();
 checkoutElementsSdk.getShippingAddressElement();
-checkoutElementsSdk.createExpressCheckoutElement();
+const checkoutExpressCheckoutElement = checkoutElementsSdk.createExpressCheckoutElement();
+checkoutExpressCheckoutElement.on(
+  'availablepaymentmethodschange',
+  (e: {
+    elementType: 'expressCheckout';
+    paymentMethods:
+      | Record<string, {available: boolean} | undefined>
+      | undefined;
+  }) => {}
+);
+checkoutExpressCheckoutElement.once('availablepaymentmethodschange', () => {});
+checkoutExpressCheckoutElement.off('availablepaymentmethodschange');
+checkoutPaymentElement.on(
+  'availablepaymentmethodschange',
+  (e: {
+    elementType: 'payment';
+    paymentMethods: Record<string, {available: boolean}> | undefined;
+  }) => {}
+);
 checkoutElementsSdk.getExpressCheckoutElement();
 checkoutElementsSdk.createCurrencySelectorElement();
 checkoutElementsSdk.getCurrencySelectorElement();

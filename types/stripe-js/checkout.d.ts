@@ -13,6 +13,7 @@ import {
   FieldsOption,
   StripeElementBase,
   StripeExpressCheckoutElement,
+  StripeExpressCheckoutElementAvailablePaymentMethodsChangeEvent,
   StripeExpressCheckoutElementConfirmEvent,
   StripeExpressCheckoutElementOptions,
   StripeExpressCheckoutElementReadyEvent,
@@ -664,6 +665,28 @@ export type StripeCheckoutExpressCheckoutElement = StripeElementBase & {
   off(
     eventType: 'cancel',
     handler?: (event: {elementType: 'expressCheckout'}) => any
+  ): StripeCheckoutExpressCheckoutElement;
+
+  /**
+   * Triggered when the available payment methods change.
+   */
+  on(
+    eventType: 'availablepaymentmethodschange',
+    handler: (
+      event: StripeExpressCheckoutElementAvailablePaymentMethodsChangeEvent
+    ) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  once(
+    eventType: 'availablepaymentmethodschange',
+    handler: (
+      event: StripeExpressCheckoutElementAvailablePaymentMethodsChangeEvent
+    ) => any
+  ): StripeCheckoutExpressCheckoutElement;
+  off(
+    eventType: 'availablepaymentmethodschange',
+    handler?: (
+      event: StripeExpressCheckoutElementAvailablePaymentMethodsChangeEvent
+    ) => any
   ): StripeCheckoutExpressCheckoutElement;
 
   /**
