@@ -93,8 +93,8 @@ stripe.elements({mode: 'payment', adaptivePricing: {allowed: 'no'}});
 const updateElements = async () => {
   const {error} = await elements.update({amount: 1099});
   if (error) {
-    // @ts-expect-error: update Promise errors do not expose StripeError codes
-    const code = error.code;
+    // @ts-expect-error: StripeError does not expose an intent status
+    const status = error.status;
   }
 };
 

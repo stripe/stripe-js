@@ -49,10 +49,7 @@ import {
 import {StripeError} from './stripe';
 
 export interface StripeElementsUpdateResult {
-  error?: {
-    message: string;
-    status?: string;
-  };
+  error?: StripeError;
 }
 
 export interface StripeElementsUpdateEndEvent {

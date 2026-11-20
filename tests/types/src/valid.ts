@@ -331,8 +331,9 @@ const updateElements = async () => {
   const result = await elements.update({amount: 1099});
   const updateResult: StripeElementsUpdateResult = result;
   if (result.error) {
-    const message: string = result.error.message;
-    const status: string | undefined = result.error.status;
+    const type: StripeError['type'] = result.error.type;
+    const code: string | undefined = result.error.code;
+    const message: string | undefined = result.error.message;
   }
 };
 
