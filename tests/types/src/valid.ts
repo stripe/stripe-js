@@ -8,6 +8,8 @@ import {
   loadStripe,
   Stripe,
   StripeElements,
+  StripeElementsUpdateResult,
+  StripeElementsUpdateEndEvent,
   StripeElementStyle,
   CssFontSource,
   StripeCardElement,
@@ -324,6 +326,25 @@ elements.update({
 });
 
 elements.on('update-end', () => {});
+
+const updateElements = async () => {
+  const result = await elements.update({amount: 1099});
+  const updateResult: StripeElementsUpdateResult = result;
+  if (result.error) {
+    const type: StripeError['type'] = result.error.type;
+    const code: string | undefined = result.error.code;
+    const message: string | undefined = result.error.message;
+  }
+};
+
+elements.on('update-end', (event) => {
+  const updateEndEvent: StripeElementsUpdateEndEvent = event;
+  if (event.error) {
+    const type: StripeError['type'] = event.error.type;
+    const code: string | undefined = event.error.code;
+    const message: string | undefined = event.error.message;
+  }
+});
 
 const fetchUpdates = async () => {
   const {error} = await elements.fetchUpdates();

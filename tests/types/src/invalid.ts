@@ -90,6 +90,14 @@ stripe.elements({mode: 'payment', adaptivePricing: true});
 // @ts-expect-error: Type 'string' is not assignable to type 'boolean | undefined'
 stripe.elements({mode: 'payment', adaptivePricing: {allowed: 'no'}});
 
+const updateElements = async () => {
+  const {error} = await elements.update({amount: 1099});
+  if (error) {
+    // @ts-expect-error: StripeError does not expose an intent status
+    const status = error.status;
+  }
+};
+
 elements.update({
   // @ts-expect-error: `clientSecret` is not updatable
   clientSecret: 'pk_foo_secret_bar',
