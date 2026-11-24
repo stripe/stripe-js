@@ -50,6 +50,7 @@ export type CheckoutFormValues = {
     type: string;
     country?: string | null;
     billingDetails?: {
+      name?: string;
       address?: {
         country?: string;
         postal_code?: string;
