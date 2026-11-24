@@ -16,6 +16,7 @@ import {
   StripeCardCvcElement,
   StripeCardElementChangeEvent,
   PaymentIntent,
+  PaymentMethod,
   Token,
   StripeError,
   SetupIntent,
@@ -2665,6 +2666,8 @@ stripe
     const c = result.confirmationToken.shipping;
     const d = result.confirmationToken.payment_intent;
     const e = result.confirmationToken.use_stripe_sdk;
+    const walletType: PaymentMethod.Card.Wallet.Type | undefined =
+      result.confirmationToken.payment_method_preview.card?.wallet?.type;
   });
 
 stripe

@@ -719,6 +719,10 @@ stripe
     }
     // @ts-expect-error mandate_data is not a valid parameter
     result.confirmationToken.mandate_data;
+
+    const wallet = result.confirmationToken.payment_method_preview.card?.wallet;
+    // @ts-expect-error 'paypal' is not a card wallet type
+    wallet?.type === 'paypal';
   });
 
 stripe.createConfirmationToken({
