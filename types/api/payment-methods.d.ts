@@ -307,7 +307,7 @@ export namespace PaymentMethod {
     /**
      * If this Card is part of a card wallet, this contains the details of the card wallet.
      */
-    wallet: null | {[k: string]: any};
+    wallet: Card.Wallet | null;
   }
 
   export namespace Card {
@@ -333,6 +333,29 @@ export namespace PaymentMethod {
        * Whether 3D Secure is supported on this card.
        */
       supported: boolean;
+    }
+
+    export interface Wallet {
+      /**
+       * The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `link`, `masterpass`, `samsung_pay`, or `visa_checkout`.
+       */
+      type: Wallet.Type;
+
+      /**
+       * (For tokenized numbers only.) The last four digits of the device account number.
+       */
+      dynamic_last4: string | null;
+    }
+
+    export namespace Wallet {
+      export type Type =
+        | 'amex_express_checkout'
+        | 'apple_pay'
+        | 'google_pay'
+        | 'link'
+        | 'masterpass'
+        | 'samsung_pay'
+        | 'visa_checkout';
     }
   }
 
