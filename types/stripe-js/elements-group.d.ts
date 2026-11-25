@@ -48,21 +48,35 @@ import {
 } from './elements';
 import {StripeError} from './stripe';
 
+export interface StripeElementsUpdateResult {
+  error?: StripeError;
+}
+
+export interface StripeElementsUpdateEndEvent {
+  error?: StripeError;
+}
+
 export interface StripeElements {
   /**
    * Updates the options that `Elements` was initialized with.
    * Updates are shallowly merged into the existing configuration.
    *
-   * Returns a `Promise` that resolves when the update has been applied to all
-   * rendered Elements. You can also listen for the `update-end` event as an
-   * alternative to awaiting the `Promise`.
+   * Returns a `Promise` that resolves with an empty object on success, or with
+   * an `error` property when an update fails. You can also listen for the
+   * `update-end` event as an alternative to awaiting the `Promise`.
    */
-  update(options: StripeElementsUpdateOptions): Promise<void>;
+  update(
+    options: StripeElementsUpdateOptions
+  ): Promise<StripeElementsUpdateResult>;
 
   /**
    * Triggered when the call to elements.update() is complete.
+   * The event includes an optional `error` property when an update fails.
    */
-  on(eventType: 'update-end', handler: () => void): void;
+  on(
+    eventType: 'update-end',
+    handler: (event: StripeElementsUpdateEndEvent) => void
+  ): void;
 
   /**
    * Fetches updates from the associated PaymentIntent or SetupIntent on an existing
